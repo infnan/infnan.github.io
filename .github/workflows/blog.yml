@@ -1,0 +1,34 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: 'dev'
+
+    - name: Build
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Env
+      env:
+        HEXO_DEPLOY_KEY: ${{secrets.HEXO_DEPLOY_KEY}}
+      run: |
+          mkdir -p ~/.ssh/
+          echo "$HEXO_DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+    - name: Deploy
+      run: |
+          yarn
+          yarn run deploy

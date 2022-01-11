@@ -32,7 +32,9 @@
     "preserver": "hexo clean && node tools/preview.js",
     "postserver": "rm _config.tmp.yml",
     "deploy": "hexo d",
-    "predeploy": "hexo clean && hexo g"
+    "predeploy": "hexo clean && hexo g",
+    "clean": "hexo clean",
+    "generate": "hexo g"
   },
   "devDependencies": {
     "hexo-cli": "^3.1.0",
