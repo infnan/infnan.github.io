@@ -1,0 +1,170 @@
+header.header {
+  aside.sidebar {
+    div.sidebar-inner.sidebar-toc-active {
+      background-color: transparent;
+      text-align: left;
+      padding: 0;
+
+      ul.sidebar-nav {
+        padding-bottom: 10px;
+
+        li.sidebar-nav-toc {
+          color: $text-color;
+          cursor: auto;
+          border: none;
+          font-weight: 600;
+          font-size: 0.9rem;
+          padding-left: 20px;
+        }
+
+        li.sidebar-nav-overview {
+          display: none;
+        }
+      }
+
+      div.sidebar-panel-container {
+        div.post-toc {
+          ol.nav {
+            padding-left: 0;
+
+            a.nav-link {
+              border-bottom: none;
+              color: $grey-dark;
+              padding: 7px 0 7px 20px;
+              transition: none;
+
+              &:hover {
+                color: $text-color;
+                border-left: 2px solid $grey-light;
+                padding-left: 18px;
+              }
+            }
+
+            .nav-item {
+              line-height: 30px;
+            }
+
+            li.active > a.nav-link {
+              color: $blue;
+              border-left: 2px solid $blue;
+              font-weight: 500;
+              padding-left: 18px;
+            }
+
+            ol.nav-child {
+              padding: 0;
+
+              a.nav-link {
+                padding-left: 40px;
+
+                &:hover {
+                  padding-left: 38px;
+                }
+              }
+
+              li.active > a.nav-link {
+                padding-left: 38px;
+              }
+
+              ol.nav-child {
+                padding: 0;
+
+                a.nav-link {
+                  padding-left: 60px;
+
+                  &:hover {
+                    padding-left: 58px;
+                  }
+                }
+
+                li.active > a.nav-link {
+                  padding-left: 58px;
+                }
+              }
+            }
+          }
+        }
+
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: #f3f3f3;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: #ccc;
+        }
+
+        &::-webkit-scrollbar-thumb:window-inactive {
+          background-color: #eee;
+        }
+      }
+    }
+
+    div.sidebar-inner.sidebar-overview-active {
+      padding: 0;
+      background-color: transparent;
+
+      div.sidebar-panel-container {
+        border-radius: 15px;
+        border: 1px solid #ddd;
+        box-shadow: 1px 1px 5px #f0f0f0;
+
+        div.site-overview {
+          padding: 25px 0 15px 0;
+
+          p.site-author-name {
+            margin-top: 10px;
+            font-weight: 500;
+            font-size: 1.2rem;
+          }
+
+          .site-overview-item:not(:first-child) {
+            margin-top: 15px;
+          }
+
+          nav.site-state {
+            .site-state-item {
+              padding: 0 20px;
+            }
+
+            span.site-state-item-count {
+              font-weight: 300;
+              font-size: 1.5rem;
+            }
+          }
+
+          // font-awesome 修正
+          div.links-of-author {
+            i.fa-fw {
+              font-family: 'Font Awesome 5 Free';
+              -moz-osx-font-smoothing: grayscale;
+              -webkit-font-smoothing: antialiased;
+              display: inline-block;
+              font-style: normal;
+              font-variant: normal;
+              text-rendering: auto;
+              line-height: 1;
+            }
+
+            i.github:before {
+              font-family: 'Font Awesome 5 Brands';
+              content: '\f09b';
+            }
+
+            i.envelope:before {
+              content: '\f0e0';
+            }
+
+            i.rss:before {
+              font-weight: 900;
+              content: '\f09e';
+            }
+          }
+        }
+      }
+    }
+  }
+}

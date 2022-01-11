@@ -1,0 +1,41 @@
+@media (min-width: 991px) {
+  header.header div.header-inner {
+    nav.site-nav {
+      li.menu-item-search {
+        a.popup-trigger {
+          font-family: 'Font Awesome 5 Free';
+          font-weight: 900;
+          -moz-osx-font-smoothing: grayscale;
+          -webkit-font-smoothing: antialiased;
+          display: inline-block;
+          font-style: normal;
+          font-variant: normal;
+          text-rendering: auto;
+          visibility: hidden;
+          font-size: 1.2rem;
+          padding: 0 0 0 15px;
+        }
+
+        a:before {
+          content: '\f002';
+          visibility: visible;
+        }
+      }
+    }
+
+    div.search-pop-overlay {
+      justify-content: center;
+      padding-top: 3px;
+
+      div.search-popup {
+        margin: initial;
+        transform-origin: top;
+        transform: scale(1, 0);
+      }
+    }
+  }
+
+  body.search-active .search-popup {
+    transform: scale(1) !important;
+  }
+}

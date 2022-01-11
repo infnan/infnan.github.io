@@ -1,0 +1,135 @@
+avatar:
+  url: /img/avatar.png
+creative_commons:
+  license: by-nc-sa
+  sidebar: true
+  post: true
+custom_logo: /img/logo.png
+
+favicon:
+  small: /img/favicon/favicon-16x16.png
+  medium: /img/favicon/favicon-32x32.png
+  apple_touch_icon: /img/favicon/apple-touch-icon.png
+  safari_pinned_tab: /img/favicon/safari-pinned-tab.svg
+  android_manifest: /img/favicon/manifest.json
+
+scheme: Pisces
+fancybox: false
+pangu: true
+
+darkmode: true
+
+preconnect: true
+
+gitalk:
+  enable: true
+  github_id: infnan
+  repo: infnan.github.io
+  client_id: 67600d122bef1671bee9
+  client_secret: e61cb1649d584b128b694aacd0e860ea9f41ed3c
+  admin_user: infnan
+  distraction_free_mode: true
+  language: zh-CN
+  labels: Gitalk
+
+#disqus:
+#  enable: true
+#  shortname: plusnan
+#  count: true
+disqusjs:
+  enable: false
+  # API Endpoint of Disqus API (https://disqus.com/api/)
+  # leave api empty if you are able to connect to Disqus API
+  # otherwise you need a reverse proxy for Disqus API
+  # For example:
+  # api: https://disqus.skk.moe/disqus/
+  api: https://api.plusnan.me/disqus/
+  apikey: sFepWzyVneUjG9XYJBAD5vGwBDuY2xvmf09d6cXO0aNxDrCPi9ZfjpAQ1B2UZ6Sg
+  shortname: plusnan
+
+menu:
+  home: / || fa fa-home
+  tags: /tags/ || fa fa-tags
+  categories: /categories/ || fa fa-th
+  archives: /archives/ || fa fa-archive
+
+menu_settings:
+  icons: false
+  badges: false
+
+footer:
+  since: 2018
+  powered:
+    enable: true
+  theme:
+    enable: true
+
+motion:
+  enable: false
+
+tabs:
+  enable: true
+  transition:
+    tabs: false
+    labels: false
+  border_radius: 0
+
+site_state: true
+
+sidebar:
+  position: right
+  display: always
+
+social:
+  GitHub: https://github.com/infnan || github
+  E-Mail: mailto:me@plusnan.me || envelope
+  RSS: /rss.xml || rss
+
+social_icons:
+  enable: true
+
+codeblock:
+  theme:
+    light: default
+    dark: tomorrow-night
+  prism:
+    light: prism-nord
+    dark: prism-nord
+  copy_button:
+    enable: true
+
+exturl: true
+
+font:
+  enable: true
+  url: https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;500&display=swap
+  global:
+    external: true
+    family: Ubuntu
+
+note:
+  style: simple
+  icons: true
+  border_radius: 3
+  light_bg_offset: 0
+
+custom_file_path:
+  variable: source/_data/variables.styl
+  style: source/_data/styles.styl
+
+google_analytics:
+  tracking_id: UA-134391990-1
+
+# Local search
+# Dependencies: https://github.com/next-theme/hexo-generator-searchdb
+local_search:
+  enable: true
+  # If auto, trigger search by changing input.
+  # If manual, trigger search by pressing enter key or search button.
+  trigger: auto
+  # Show top n results per article, show all results by setting to -1
+  top_n_per_article: 1
+  # Unescape html strings to the readable one.
+  unescape: false
+  # Preload the search data when the page loads.
+  preload: false

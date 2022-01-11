@@ -1,0 +1,120 @@
+@media (min-width: 991px) {
+  body {
+    padding-top: 50px;
+  }
+
+  div.headband {
+    display: none;
+  }
+
+  header.header {
+    div.header-inner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: calc(100vw - 20px);
+      height: 50px;
+      display: flex;
+      background-color: #2C2C32;
+      box-shadow: 0 1px 3px #666;
+      padding: 0 10px;
+      z-index: 10;
+
+      div.site-brand-container {
+        background-color: transparent;
+        padding: 0;
+        flex: 0 1 auto;
+        align-items: center;
+
+        div.site-meta {
+          padding: 0;
+          display: flex;
+          align-items: center;
+
+          h1.site-title {
+            padding: 8px 15px;
+          }
+
+          p.site-subtitle {
+            display: none;
+          }
+
+          img.custom-logo-image {
+            height: 40px;
+            margin-top: 0;
+            order: -1;
+            padding-left: 25px;
+          }
+        }
+      }
+
+      nav.site-nav {
+        flex: 0 1 auto;
+        align-items: center;
+        display: flex;
+        margin-left: auto;
+
+        ul.main-menu {
+          display: flex;
+          padding: 0;
+          align-items: center;
+
+          a {
+            color: #ccc;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            padding: 10px 15px;
+          }
+
+          a.menu-item-active::after, a:hover::after {
+            content: ' ';
+            position: absolute;
+            left: 50%;
+            bottom: 8px;
+            margin-left: -15%;
+            width: 30%;
+            border: 1px solid #fff;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+            top: initial;
+            right: initial;
+            margin-top: initial;
+            border-radius: initial;
+            height: initial;
+            background-color: transparent;
+          }
+
+          a.menu-item-active, a:hover {
+            background-color: transparent;
+            color: white;
+          }
+        }
+      }
+    }
+
+    aside.sidebar {
+      margin-top: 12px;
+      top: 110px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  header.header {
+    div.header-inner {
+      padding: 0 calc(((100vw - 1160px) / 2));
+      width: 1160px;
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  header.header {
+    div.header-inner {
+      padding: 0 calc(10vw);
+      width: 80%;
+    }
+  }
+}

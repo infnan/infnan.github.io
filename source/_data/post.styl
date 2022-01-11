@@ -1,0 +1,161 @@
+header.post-header {
+  & > h1.post-title, & > h2.post-title {
+    text-align: left;
+    font-size: 1.8rem;
+    margin-bottom: 0.5em;
+
+    .post-title-link {
+      color: $text-color;
+    }
+
+    .post-title-link::before {
+      transition: none;
+    }
+  }
+
+  & > div.post-meta-container > div.post-meta {
+    justify-content: left;
+
+    span.post-meta-item-text {
+      display: none;
+    }
+
+    span.post-meta-item {
+      time {
+        border-bottom: none;
+        cursor: auto;
+      }
+    }
+  }
+}
+
+div.post-block:first-of-type {
+  padding-top: 30px;
+}
+
+article {
+  letter-spacing: -0.2px;
+  word-break: break-all;
+
+  div.post-body {
+    div.note {
+      & > h2, & > h3, & > h4, & > h5, & > h6 {
+        margin-bottom: 0.5em;
+      }
+    }
+
+    .tabs ul.nav-tabs li.tab.active {
+      border-top-color: $link-color-article;
+
+      +mobile-smallest() {
+        border-top-color: $table-border-color;
+        border-left-color: $link-color-article;
+      }
+    }
+
+    & > h1, & > h2, & > h3, & > h4 {
+      font-weight: 500;
+    }
+
+    & > h1:before {
+      content: '# ';
+      color: $border-color;
+      opacity: 0.75;
+    }
+
+    & > h2:before {
+      content: '## ';
+      color: $border-color;
+      opacity: 0.75;
+    }
+
+    & > h3:before {
+      content: '### ';
+      color: $border-color;
+      opacity: 0.75;
+    }
+
+    & > h4:before {
+      content: '#### ';
+      color: $border-color;
+      opacity: 0.75;
+    }
+
+    a:not(.btn), article.post div.post-body span.exturl {
+      color: $link-color-article;
+      border-bottom: 1px solid $link-decoration-color-article;
+
+      &:hover {
+        color: $link-hover-color-article;
+        border-bottom-color: $link-decoration-hover-color-article;
+      }
+    }
+
+    & > div.post-button {
+      text-align: right;
+
+      & > a.btn {
+        border-radius: 5px;
+        border: 1px solid $btn-default-border-color;
+      }
+    }
+
+    div.category-all-page > div.category-all-title {
+      text-align: left;
+    }
+
+    div.tag-cloud {
+      text-align: left;
+    }
+  }
+
+  footer.post-footer {
+    & > div.post-copyright {
+      ul {
+        background-color: transparent;
+        border: 1px solid $grey-light;
+        border-left: 3px solid $blue;
+        border-radius: 5px;
+        font-size: 0.9rem;
+      }
+    }
+
+    & > div.post-tags {
+      text-align: left;
+
+      a {
+        border: 1px solid $blue;
+        border-radius: 3px;
+        padding: 0 5px;
+        color: $blue;
+
+        &:hover {
+          background-color: $blue;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+nav.pagination {
+  border-top: none;
+
+  .page-number, .prev, .next {
+    border-top: none;
+    border-radius: 3px;
+  }
+
+  .page-number.current, a:hover {
+    background: $text-color;
+    border-color: $text-color;
+    color: $content-bg-color;
+  }
+}
+
+// 字号
+@media (min-width: 1200px) {
+  article div.post-body {
+    font-size: 1em;
+  }
+}
