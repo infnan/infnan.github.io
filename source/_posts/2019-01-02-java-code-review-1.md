@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Java代码审查（一）：代码审查问题
-category: 项目开发经验
+category: 项目管理
 tags: 
 - Java
 ---

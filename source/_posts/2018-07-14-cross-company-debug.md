@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 接口设计与联调经验
-category: 项目开发经验
+category: 项目管理
 tags: 
 - Web
 - 项目实施

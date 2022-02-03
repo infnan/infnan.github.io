@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 并不简单的基础开发工作（一）：登录页面
-category: 项目开发经验
+category: 项目管理
 tags:
 - 功能设计
 ---

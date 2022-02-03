@@ -101,9 +101,16 @@ const downloadFile = async (browser, url, filename) => {
  */
 const processSingleManga = async (page, url, options) => {
     // 跳转到页面
-    await page.goto(url);
-    // 刷新一次，免得进去之后漫画出不来
-    await page.reload();
+    try {
+        await page.goto(url, { timeout: 10000 });
+    } catch {
+        try {
+            await page.evaluate((_) => window.stop());
+        } catch (e) {
+            logger.error('下载错误', e);
+            return;
+        }
+    }
 
     // 借助页面本身的jQuery取漫画名称和第几话
     const title = await page.evaluate(`$('div.w980.title h1 a').text()`);

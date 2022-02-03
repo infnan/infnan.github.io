@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 风险提示：请使用正版！
-category: 项目开发经验
+category: 项目管理
 ---
 道理大家都懂，其中的坑大家却不一定都清楚。
 

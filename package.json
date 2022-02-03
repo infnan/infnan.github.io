@@ -31,6 +31,7 @@
     "server": "hexo --config=_config.tmp.yml server",
     "preserver": "hexo clean && node tools/preview.js",
     "postserver": "rm _config.tmp.yml",
+    "start": "npm run server",
     "deploy": "hexo d",
     "predeploy": "hexo clean && hexo g",
     "clean": "hexo clean",

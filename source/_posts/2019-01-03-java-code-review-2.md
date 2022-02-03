@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Java代码审查（二）：应用安全问题
-category: 项目开发经验
+category: 项目管理
 tags: 
 - Java
 - 安全

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Java代码审查（三）：关于编程习惯的要求
-category: 项目开发经验
+category: 项目管理
 tags: 
 - Java
 ---

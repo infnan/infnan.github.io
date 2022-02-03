@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 那些容易遗忘的非功能性需求
-category: 项目开发经验
+category: 项目管理
 tags:
   - 需求分析
 ---

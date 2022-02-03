@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MySQL数据库设计规范（一）：表结构设计
-category: 项目开发经验
+category: 项目管理
 tags:
 - 规范
 - MySQL

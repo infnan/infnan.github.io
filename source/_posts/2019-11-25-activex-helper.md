@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 在Web开发中，如果无法回避ActiveX控件——一种让用户在非IE浏览器调用控件的思路
-category: 项目开发经验
+category: 技术思考
 tags:
 - ActiveX
 ---
