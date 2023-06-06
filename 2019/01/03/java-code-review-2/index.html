@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="由于安全问题经常被忽视与无视，因此有必要专门指出一些常见的安全隐患以及预防措施。不过Web安全问题已是老生常谈，网上资料也非常丰富，故本文仅仅点到为止，不再详细解释。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java代码审查（二）：应用安全问题">
+<meta property="og:url" content="https://plusnan.me/2019/01/03/java-code-review-2/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="由于安全问题经常被忽视与无视，因此有必要专门指出一些常见的安全隐患以及预防措施。不过Web安全问题已是老生常谈，网上资料也非常丰富，故本文仅仅点到为止，不再详细解释。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-01-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-03T04:35:50.224Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="安全">
+<meta property="article:tag" content="注入">
+<meta property="article:tag" content="越权">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2019/01/03/java-code-review-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2019/01/03/java-code-review-2/","path":"2019/01/03/java-code-review-2/","title":"Java代码审查（二）：应用安全问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java代码审查（二）：应用安全问题 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E4%BD%93%E5%8E%9F%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">总体原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E5%85%A5%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">注入类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB%EF%BC%88XSS%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">跨站脚本攻击（XSS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="nav-number">2.2.</span> <span class="nav-text">SQL注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E6%B3%A8%E5%85%A5"><span class="nav-number">2.3.</span> <span class="nav-text">路径注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%B6%E6%84%8F%E6%96%87%E4%BB%B6%E6%89%A7%E8%A1%8C"><span class="nav-number">2.4.</span> <span class="nav-text">恶意文件执行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSRF"><span class="nav-number">3.</span> <span class="nav-text">CSRF</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B6%8A%E6%9D%83%E8%AE%BF%E9%97%AE"><span class="nav-number">4.</span> <span class="nav-text">越权访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E5%AF%B9%E8%B1%A1%E5%BC%95%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">直接对象引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A4%E8%AF%81%E4%B8%8D%E5%85%A8"><span class="nav-number">4.2.</span> <span class="nav-text">认证不全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E5%B0%91%E5%90%8E%E5%8F%B0%E6%A0%A1%E9%AA%8C"><span class="nav-number">4.3.</span> <span class="nav-text">缺少后台校验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">信息泄漏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1"><span class="nav-number">6.</span> <span class="nav-text">拒绝服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">7.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB"><span class="nav-number">8.</span> <span class="nav-text">扩展阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E7%B3%BB%E5%88%97%E7%9B%AE%E5%BD%95"><span class="nav-number">9.</span> <span class="nav-text">本系列目录</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/03/java-code-review-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java代码审查（二）：应用安全问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-01-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-03T00:00:00+08:00">2019-01-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-03 12:35:50" itemprop="dateModified" datetime="2022-02-03T12:35:50+08:00">2022-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>由于安全问题经常被忽视与无视，因此有必要专门指出一些常见的安全隐患以及预防措施。不过Web安全问题已是老生常谈，网上资料也非常丰富，故本文仅仅点到为止，不再详细解释。</p>
+<span id="more"></span>
+
+<h1 id="总体原则"><a href="#总体原则" class="headerlink" title="总体原则"></a>总体原则</h1><ul>
+<li>开发人员要了解各类攻击方式</li>
+<li>绝不信任用户输入，开发时要假设用户的输入存在各种攻击</li>
+</ul>
+<h1 id="注入类"><a href="#注入类" class="headerlink" title="注入类"></a>注入类</h1><h2 id="跨站脚本攻击（XSS）"><a href="#跨站脚本攻击（XSS）" class="headerlink" title="跨站脚本攻击（XSS）"></a>跨站脚本攻击（XSS）</h2><ul>
+<li>示例：在填写信息时，在正常内容中夹带<code>&lt;script&gt;alert(1);&lt;/script&gt;</code>。如展示信息时弹出一个对话框，上面写着“1”，那么说明注入成功。假如代码不是弹框而是后台偷偷执行一段恶意脚本……<ul>
+<li>对策<ul>
+<li>优雅的做法：如无特殊需要，页面上的动态输出均要对HTML字符进行转义。</li>
+<li>简单粗暴的做法：控制用户输入，设置XSS相关敏感词清单，发现之后拦截或清理。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><ul>
+<li><p>示例：假如用以下SQL进行登录信息校验</p>
+  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isValidLogin</span><span class="token punctuation">(</span><span class="token class-name">String</span> username<span class="token punctuation">,</span> <span class="token class-name">String</span> password<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span> sql <span class="token operator">=</span> <span class="token string">"SELECT 1 FROM users WHERE username='"</span> <span class="token operator">+</span> username <span class="token operator">+</span> <span class="token string">"' AND password='"</span> <span class="token operator">+</span> password <span class="token operator">+</span> <span class="token string">"'"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  那么登录时在密码中输入<code>&#39; or &#39;&#39;=&#39;</code>，SQL就会变成</p>
+  <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token number">1</span> <span class="token keyword">FROM</span> users <span class="token keyword">WHERE</span> username<span class="token operator">=</span><span class="token string">'admin'</span> <span class="token operator">AND</span> password<span class="token operator">=</span><span class="token string">''</span> <span class="token operator">OR</span> <span class="token string">''</span><span class="token operator">=</span><span class="token string">''</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  结果就会变成不知道密码也能直接进去了。</p>
+<p>  另外，假如密码输入的是<code>&#39;; drop table users; --</code>……</p>
+<ul>
+<li>对策<ul>
+<li>优雅的做法：一律避免直接拼SQL，只用PreparedStatement这种能防止注入的方式。</li>
+<li>简单粗暴的做法：（1）控制用户输入，设置SQL注入相关敏感词清单，发现之后拦截或清理；（2）设置转义的公共函数，在拼接SQL时总是对来自用户的输入进行转义。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="路径注入"><a href="#路径注入" class="headerlink" title="路径注入"></a>路径注入</h2><ul>
+<li>示例：用户输入文件名，即可查询<code>/opt/data/info</code>目录中的文件。如果程序控制不严，而且用户输入了<code>../../../etc/passwd</code>，那么就能看到系统有哪些用户了。<ul>
+<li>对策：过滤敏感词，例如“./”、“../”等。</li>
+</ul>
+</li>
+</ul>
+<h2 id="恶意文件执行"><a href="#恶意文件执行" class="headerlink" title="恶意文件执行"></a>恶意文件执行</h2><ul>
+<li>示例：应用提供了文件上传功能，上传1.jpg之后可通过<code>http://www.xxx.com/files/1.jpg</code>网址访问。如果系统未进行控制，那么上传精心设计的a.jsp并访问<code>http://www.xxx.com/files/a.jsp</code>就可以控制服务器了。<ul>
+<li>对策<ul>
+<li>检查待上传文件的文件类型。</li>
+<li>对服务器进行设置，或者对目录加以处理，防止服务器执行存放目录下的文件。</li>
+<li>或者不要直接用路径访问文件，而是使用一个Web请求间接访问文件，例如<code>http://www.xxx.com/getfile.jsp?id=1056</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h1><ul>
+<li>示例：登录自己的A网站，然后在与其无关的B网站中对A网站的一个功能发POST请求，如A系统未做控制，那么表单会提交成功。假如B系统是背着用户偷偷发的……<ul>
+<li>对策<ul>
+<li>优雅的做法：每个form都配上随机产生的token，提交表单时后台校验token是否有效。</li>
+<li>简单粗暴的做法：校验HTTP请求中的Referer，白名单之外的域名一律拦截。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="越权访问"><a href="#越权访问" class="headerlink" title="越权访问"></a>越权访问</h1><h2 id="直接对象引用"><a href="#直接对象引用" class="headerlink" title="直接对象引用"></a>直接对象引用</h2><ul>
+<li>示例：自己的工作单是<code>http://www.xxx.com/business/view.jsp?id=1024</code>，将1024改成其他数字就看到了其他人的工作单。<ul>
+<li>对策：加入访问控制检测，只允许查询自己的工作单。例如校验工作单的办理者是否为本人，或者在SQL上面加入权限相关条件，使不具备访问权限的数据查不出来。</li>
+</ul>
+</li>
+</ul>
+<h2 id="认证不全"><a href="#认证不全" class="headerlink" title="认证不全"></a>认证不全</h2><ul>
+<li>示例：张三有敏感数据查看权限，而李四没有。李四发现张三查看敏感数据的网址是<code>http://www.xxx.com/business/viewsecret.jsp</code>，之后将其记录下来，并使用自己账号访问这个地址，结果也看到了敏感数据。<ul>
+<li>对策：实现一个用户访问控制框架，对于每个URL，先校验用户有没有访问权限，如果没有则拦截。</li>
+</ul>
+</li>
+</ul>
+<h2 id="缺少后台校验"><a href="#缺少后台校验" class="headerlink" title="缺少后台校验"></a>缺少后台校验</h2><ul>
+<li>示例：在业务申请页面上选择A，系统提示“不符合条件，无法保存”。通过浏览器的检查元素功能选中A，保存成功。<ul>
+<li>对策：无论前台是否有校验，后台务必进行校验。</li>
+<li>注意校验可以大致分为两类，一类是有效性校验，例如某个字段不能为空，另一类是业务层面的校验。建议后者设计统一的校验框架。</li>
+</ul>
+</li>
+</ul>
+<h1 id="信息泄漏"><a href="#信息泄漏" class="headerlink" title="信息泄漏"></a>信息泄漏</h1><ul>
+<li>示例1：登录系统，用户名错误时系统提示“用户名错误”，密码错误时系统提示“密码错误”。这样攻击者看到“密码错误”时便知道用户名是正确的。<ul>
+<li>对策1：模糊地提示“用户名或密码错误”，并且加入验证码，或者多次失败后锁定账号，以防暴力猜测密码。</li>
+</ul>
+</li>
+<li>示例2：在错误信息中出现SQL语句。这样攻击者一旦攻进数据库便会更加容易知道该查哪些表的哪些数据。<ul>
+<li>对策2：防范措施：检查报错内容，并且检查有没有关闭类似“Debug模式”的设置，不要暴露程序源代码或SQL这样的敏感信息。</li>
+</ul>
+</li>
+<li>示例3：直接展示用户身份证号、手机号等敏感数据。<ul>
+<li>对策3：如无必要展示则不展示，或者进行脱敏处理（138****1234、320101******121234）。</li>
+</ul>
+</li>
+</ul>
+<h1 id="拒绝服务"><a href="#拒绝服务" class="headerlink" title="拒绝服务"></a>拒绝服务</h1><ul>
+<li>示例1：查询功能未控制提交频率，也没有验证码，那么用户可以频繁查询，甚至使用机器人暴力地刷结果。<ul>
+<li>对策1：对于耗时的操作，控制用户提交的频率，或者引入验证码。</li>
+</ul>
+</li>
+<li>示例2：分页功能每页最多显示100条，如果程序未在后台进行限制，那么可以通过构造请求使每页查出10000条甚至更多，从而影响系统性能。<ul>
+<li>对策2：构造SQL时估计数据规模，并控制数据上限，防止查出过多记录。</li>
+</ul>
+</li>
+<li>示例3：查询功能要求用户必须填A、B、C中至少一个查询条件，如后台未做控制，那么用户可以构造请求，A、B、C三个条件都不填，从而拖累系统。<ul>
+<li>示例3：考虑到“什么条件都没有”情况下应当如何防止SQL查询结果爆炸。</li>
+</ul>
+</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li>示例1：用明文/用MD5保存密码。一旦数据库信息泄漏，密码就直接暴露了。<ul>
+<li>对策1：密码必须加密之后再存到数据库中，而且不能直接MD5或者MD5里面套MD5。</li>
+</ul>
+</li>
+<li>示例2：提交表单时未控制页面按钮与用户操作，使得用户可以容易地多次提交表单。<ul>
+<li>对策2：提交表单时将提交按钮变灰，增加动画反馈，使用户不会直接重复点按钮；提交完成之后重定向到编辑页面，而不是直接停留在POST提交的链接，以免用户因按F5而重复提交。</li>
+</ul>
+</li>
+<li>示例3：未使用HTTPS请求。<ul>
+<li>注意：HTTP请求内容可以很容易地监听和篡改，但HTTPS几乎不能。</li>
+</ul>
+</li>
+<li>示例4：正式环境忘记删除调试文件（例如.git、.svn、.DS_Store）</li>
+</ul>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cua2FuY2xvdWQuY24vd2l6YXJkZm9yY2VsL293YXNwLWNoZWF0LXNoZWV0LXpoLzEyMTk0Mw==">WEB应用安全测试备忘单<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ol>
+<li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
+<li><strong>应用安全问题</strong></li>
+<li><a href="/2019/01/04/java-code-review-3">关于编程习惯的要求</a></li>
+<li><a href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查</a></li>
+<li>使用FindBugs和SonarQube等工具进行扫描</li>
+<li>……</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2019/01/03/java-code-review-2/" title="Java代码审查（二）：应用安全问题">https://plusnan.me/2019/01/03/java-code-review-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/%E5%AE%89%E5%85%A8/" rel="tag"># 安全</a>
+              <a href="/tags/%E6%B3%A8%E5%85%A5/" rel="tag"># 注入</a>
+              <a href="/tags/%E8%B6%8A%E6%9D%83/" rel="tag"># 越权</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/02/java-code-review-1/" rel="prev" title="Java代码审查（一）：代码审查问题">
+                  <i class="fa fa-chevron-left"></i> Java代码审查（一）：代码审查问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/01/04/java-code-review-3/" rel="next" title="Java代码审查（三）：关于编程习惯的要求">
+                  Java代码审查（三）：关于编程习惯的要求 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"3d6faf7fd96f547810463c3eef2aca66"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

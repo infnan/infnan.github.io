@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="对于行业系统来说，如果开发人员水平一般，而且又忙于赶工期，Web安全问题就很容易抛到脑后。然而，在这类系统中，用户输入内容往往是业务相关的，范围可以预测，不会特意输入敏感词语，因此又可以用简单粗暴的方法挡住大部分常见攻击。 在Java应用中，页面加载之前会先经过过滤器（Filter），我们便可以设置一个安全过滤器SecurityFilter，以“宁可错杀一万，不可放过一个”的方式拦截常见攻击，满足">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现一个简单粗暴的Java Web安全过滤器">
+<meta property="og:url" content="https://plusnan.me/2019/08/25/security-filter/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="对于行业系统来说，如果开发人员水平一般，而且又忙于赶工期，Web安全问题就很容易抛到脑后。然而，在这类系统中，用户输入内容往往是业务相关的，范围可以预测，不会特意输入敏感词语，因此又可以用简单粗暴的方法挡住大部分常见攻击。 在Java应用中，页面加载之前会先经过过滤器（Filter），我们便可以设置一个安全过滤器SecurityFilter，以“宁可错杀一万，不可放过一个”的方式拦截常见攻击，满足">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-11T02:01:56.275Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="安全">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2019/08/25/security-filter/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2019/08/25/security-filter/","path":"2019/08/25/security-filter/","title":"实现一个简单粗暴的Java Web安全过滤器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>实现一个简单粗暴的Java Web安全过滤器 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">框架</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E8%A7%84%E5%88%99"><span class="nav-number">2.</span> <span class="nav-text">具体规则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5%E3%80%81%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB%EF%BC%88XSS%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">防止SQL注入、跨站脚本攻击（XSS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%EF%BC%88CSRF%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">防止跨站请求伪造（CSRF）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Host%E5%A4%B4%E6%94%BB%E5%87%BB"><span class="nav-number">2.3.</span> <span class="nav-text">Host头攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E5%87%BB%E5%8A%AB%E6%8C%81%EF%BC%88Clickjacking%EF%BC%89%E6%BC%8F%E6%B4%9E"><span class="nav-number">2.4.</span> <span class="nav-text">点击劫持（Clickjacking）漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E6%9C%AA%E7%99%BB%E5%BD%95%E8%AE%BF%E9%97%AE%E3%80%81%E9%98%B2%E6%AD%A2%E8%B6%8A%E6%9D%83%E8%AE%BF%E9%97%AE"><span class="nav-number">2.5.</span> <span class="nav-text">防止未登录访问、防止越权访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookie%E5%8A%A0%E5%9B%BA"><span class="nav-number">2.6.</span> <span class="nav-text">Cookie加固</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9C%E4%BD%BF%E7%94%A8HTTP%E5%8A%A8%E8%AF%8D%E7%AF%A1%E6%94%B9%E7%9A%84%E8%AE%A4%E8%AF%81%E6%97%81%E8%B7%AF%E2%80%9D"><span class="nav-number">2.7.</span> <span class="nav-text">“使用HTTP动词篡改的认证旁路”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E6%8C%87%E5%AE%9AIP%E8%AE%BF%E9%97%AE-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7IP%E5%9C%B0%E5%9D%80"><span class="nav-number">2.8.</span> <span class="nav-text">限制指定IP访问 &#x2F; 获取用户IP地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%90%E5%88%B6%E6%8C%87%E5%AE%9A%E6%B5%8F%E8%A7%88%E5%99%A8%E8%AE%BF%E9%97%AE"><span class="nav-number">2.9.</span> <span class="nav-text">限制指定浏览器访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%94%BE%E8%A1%8C"><span class="nav-number">2.10.</span> <span class="nav-text">直接放行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">完整代码</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/08/25/security-filter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          实现一个简单粗暴的Java Web安全过滤器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-25 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-25T00:00:00+08:00">2019-08-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>对于行业系统来说，如果开发人员水平一般，而且又忙于赶工期，Web安全问题就很容易抛到脑后。然而，在这类系统中，用户输入内容往往是业务相关的，范围可以预测，不会特意输入敏感词语，因此又可以用简单粗暴的方法挡住大部分常见攻击。</p>
+<p>在Java应用中，页面加载之前会先经过过滤器（Filter），我们便可以设置一个安全过滤器SecurityFilter，以“宁可错杀一万，不可放过一个”的方式拦截常见攻击，满足基本的安全需求。</p>
+<span id="more"></span>
+
+<h1 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h1><p>建立SecurityFilter类，假如包名称为com.testcompany.testapp.utils.filter，骨架如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>testcompany<span class="token punctuation">.</span>testapp<span class="token punctuation">.</span>utils</span><span class="token punctuation">;</span>
+
+<span class="token comment">//import org.springframework.stereotype.Component;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">Filter</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">FilterChain</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">FilterConfig</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">ServletException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">ServletRequest</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">ServletResponse</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpServletRequest</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpServletResponse</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span><span class="token punctuation">;</span>
+
+<span class="token comment">// @Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SecurityFilter</span> <span class="token keyword">implements</span> <span class="token class-name">Filter</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token class-name">FilterConfig</span> filterConfig<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doFilter</span><span class="token punctuation">(</span><span class="token class-name">ServletRequest</span> request<span class="token punctuation">,</span> <span class="token class-name">ServletResponse</span> response<span class="token punctuation">,</span> <span class="token class-name">FilterChain</span> chain<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">,</span> <span class="token class-name">ServletException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">HttpServletRequest</span> httpRequest <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span><span class="token punctuation">)</span> request<span class="token punctuation">;</span>
+        <span class="token class-name">HttpServletResponse</span> httpResponse <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HttpServletResponse</span><span class="token punctuation">)</span> response<span class="token punctuation">;</span>
+
+        <span class="token keyword">boolean</span> intercept <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> message <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 获取请求 URL 和 URI</span>
+        <span class="token class-name">String</span> url <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getRequestURL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> uri <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getRequestURI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        logger<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"url: "</span> <span class="token operator">+</span> url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        logger<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"uri: "</span> <span class="token operator">+</span> uri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 判断是否属于白名单，直接放行</span>
+
+        <span class="token comment">// 各种策略</span>
+
+        <span class="token comment">// 结果</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 正常请求</span>
+            chain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 被拦截，转发到报错页面</span>
+            request<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            request<span class="token punctuation">.</span><span class="token function">getRequestDispatcher</span><span class="token punctuation">(</span><span class="token string">"/error"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forward</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 安全过滤器销毁</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面代码未进行任何拦截，我们将在后面逐步完善拦截规则。</p>
+<p>如果你的项目有web.xml，那么需要加入以下内容：</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter-name</span><span class="token punctuation">></span></span>SecurityFilter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter-name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter-class</span><span class="token punctuation">></span></span>com.testcompany.testapp.utils.SecurityFilter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter-class</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>init-param</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-name</span><span class="token punctuation">></span></span>encoding<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-name</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>param-value</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>param-value</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>init-param</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter-mapping</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter-name</span><span class="token punctuation">></span></span>SecurityFilter<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter-name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>url-pattern</span><span class="token punctuation">></span></span>/*<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>url-pattern</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter-mapping</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果你的项目没有web.xml，例如SpringBoot项目，那么你需要给SecurityFilter增加相关注解（@Component）。</p>
+<h1 id="具体规则"><a href="#具体规则" class="headerlink" title="具体规则"></a>具体规则</h1><h2 id="防止SQL注入、跨站脚本攻击（XSS）"><a href="#防止SQL注入、跨站脚本攻击（XSS）" class="headerlink" title="防止SQL注入、跨站脚本攻击（XSS）"></a>防止SQL注入、跨站脚本攻击（XSS）</h2><p>可考虑采取敏感词的形式来预防SQL注入和XSS攻击。假设敏感词列表（具体词语参见文末）放在了<code>bannedKeywords</code>中，那么可提取GET/POST参数进行匹配：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 获取GET/POST参数</span>
+    <span class="token class-name">Map</span><span class="token operator">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> paramMap <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getParameterMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    post_filter<span class="token operator">:</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> param<span class="token operator">:</span> paramMap<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> keyword<span class="token operator">:</span> bannedKeywords<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>keyword<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                message <span class="token operator">=</span> <span class="token string">"检测到非法字符【"</span> <span class="token operator">+</span> keyword <span class="token operator">+</span> <span class="token string">"】，请重新输入！"</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span> post_filter<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> values <span class="token operator">=</span> paramMap<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>values <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> value<span class="token operator">:</span> values<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> keyword<span class="token operator">:</span> bannedKeywords<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>value<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>keyword<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                        message <span class="token operator">=</span> <span class="token string">"检测到非法字符【"</span> <span class="token operator">+</span> keyword <span class="token operator">+</span> <span class="token string">"】，请重新输入！"</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span> post_filter<span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>另外再通过设置安全相关HTTP Header来加强防御：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 浏览器拒绝响应MIME类型不正确的资源</span>
+httpResponse<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"X-Content-Type-Options"</span><span class="token punctuation">,</span> <span class="token string">"nosniff"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 内容安全策略（CSP）设置</span>
+<span class="token comment">// 参见：http://www.ruanyifeng.com/blog/2016/09/csp.html</span>
+<span class="token comment">// httpResponse.setHeader("Content-Security-Policy", "default-src 'self'");</span>
+
+<span class="token comment">// 浏览器防XSS设置</span>
+<span class="token comment">// 参见：https://www.freebuf.com/articles/web/138769.html</span>
+httpResponse<span class="token punctuation">.</span><span class="token function">addHeader</span><span class="token punctuation">(</span><span class="token string">"X-XSS-Protection"</span><span class="token punctuation">,</span> <span class="token string">"1; mode=block"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>需要注意的是：</p>
+<ol>
+<li>敏感词机制非常容易导致误判（例如拦截<code>AND</code>会把正常的英语内容也给拦截掉），需要增加例外机制，并结合业务进行充分测试。</li>
+<li>敏感词机制无法防止所有注入，例如攻击者仍然可以通过字符编码、加空格、加回车、加注释等方式来绕过拦截。</li>
+<li>上面GET/POST参数检测无法检测Restful API和JSON请求。如果业务有这两种请求，需另外写代码进行处理。</li>
+</ol>
+<h2 id="防止跨站请求伪造（CSRF）"><a href="#防止跨站请求伪造（CSRF）" class="headerlink" title="防止跨站请求伪造（CSRF）"></a>防止跨站请求伪造（CSRF）</h2><p>可以通过两种方式预防CSRF攻击，一个是校验Referer，另一个是在表单中设置并验证token。对于拦截器来说，前一种实现方式比较简单。</p>
+<p>假如Referer域名白名单为<code>hostWhiteList</code>，那么代码可以写成：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> referer <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"Referer"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept <span class="token operator">&amp;&amp;</span> referer <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span> domain <span class="token operator">=</span> referer<span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token string">"^https?:\\/\\/(.*?)\\/.*"</span><span class="token punctuation">,</span> <span class="token string">"$1"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>hostWhiteList<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>domain<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        message <span class="token operator">=</span> <span class="token string">"检测到未经授权的访问，请从官方网站登录系统，并检查操作是否正常！"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>为了防止非法提交，可进一步考虑限制POST请求中必须有合法Referer。</p>
+<h2 id="Host头攻击"><a href="#Host头攻击" class="headerlink" title="Host头攻击"></a>Host头攻击</h2><p>此攻击主要针对虚拟主机，换句话说，如果服务器上只有一个站点，Host头攻击实际上没有意义。然而，为了应付甲方检查，可能需要再加一遍限制：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> host <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"Host"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept <span class="token operator">&amp;&amp;</span> host <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>hostWhiteList<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>host<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    message <span class="token operator">=</span> <span class="token string">"检测到未授权访问，请重新从官方网站登录系统！"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="点击劫持（Clickjacking）漏洞"><a href="#点击劫持（Clickjacking）漏洞" class="headerlink" title="点击劫持（Clickjacking）漏洞"></a>点击劫持（Clickjacking）漏洞</h2><p>加一句话即可：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 避免点击劫持漏洞</span>
+httpResponse<span class="token punctuation">.</span><span class="token function">addHeader</span><span class="token punctuation">(</span><span class="token string">"X-Frame-Options"</span><span class="token punctuation">,</span> <span class="token string">"sameorigin"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="防止未登录访问、防止越权访问"><a href="#防止未登录访问、防止越权访问" class="headerlink" title="防止未登录访问、防止越权访问"></a>防止未登录访问、防止越权访问</h2><p>应用需要防止用户未登录就直接访问特定功能的URL。由于不同认证组件的管理方式不同，本文不再展开讨论。</p>
+<p>在校验Cookie和会话时，需留意生产环境是否为集群。若配置负载均衡等设备，同一用户的请求不见得会被同一台服务器接收，实现会话机制时要考虑会话共享问题（例如配置Redis服务器）。</p>
+<h2 id="Cookie加固"><a href="#Cookie加固" class="headerlink" title="Cookie加固"></a>Cookie加固</h2><p>Cookie需设置为HttpOnly、Secure，防止前台通过JavaScript获取到Cookie内容。</p>
+<p>使用比较新的中间件，Cookie应该已经是HttpOnly，或者可以很容易设置成HttpOnly。然而，如果Tomcat等软件太老，你需要手工修改Cookie：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">HttpSession</span> session <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>session <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span> sessionId <span class="token operator">=</span> session<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> header <span class="token operator">=</span> <span class="token string">"JSESSIONID="</span> <span class="token operator">+</span> sessionId <span class="token operator">+</span> <span class="token string">"; Secure; HttpOnly; Path=/"</span><span class="token punctuation">;</span>
+    httpResponse<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Set-Cookie"</span><span class="token punctuation">,</span> header<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="“使用HTTP动词篡改的认证旁路”"><a href="#“使用HTTP动词篡改的认证旁路”" class="headerlink" title="“使用HTTP动词篡改的认证旁路”"></a>“使用HTTP动词篡改的认证旁路”</h2><p>使用AppScan等扫描软件进行扫描，可能会出现这个问题。解决起来很简单，只留一些常用的动词（GET、POST、OPTIONS等），其余全部拦截。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> method <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token string">"GET,POST,HEAD,OPTIONS,PUT,DELETE"</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>method<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    message <span class="token operator">=</span> <span class="token string">"检测到未授权的请求方式！"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果你的系统使用了PUT、DELETE等浏览器不支持的动词，需要分两种情况讨论：</p>
+<ul>
+<li>浏览器页面：框架往往会进行一些特殊处理（例如将实际请求方式保存在name为_method的隐藏域中），使浏览器以POST方式提交用户请求。这样的话不需要特意放行PUT和DELETE。</li>
+<li>后台接口：由于调用方不是浏览器，可直接使用相应动词，此时过滤器需放行PUT和DELETE等动词。</li>
+</ul>
+<h2 id="限制指定IP访问-获取用户IP地址"><a href="#限制指定IP访问-获取用户IP地址" class="headerlink" title="限制指定IP访问 / 获取用户IP地址"></a>限制指定IP访问 / 获取用户IP地址</h2><p>不建议在Java层面进行控制。下面只给出获取用户IP的方法：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 获取用户 IP</span>
+<span class="token comment">// 注意：</span>
+<span class="token comment">// （1）X-Real-IP需要反向代理软件进行配合设置才能获取到。</span>
+<span class="token comment">//      如果反向代理软件配置正确，其值可被信任。</span>
+<span class="token comment">// （2）X-Forwarded-For记录了用户真实IP，但该Header能被用户伪造，不可信任。</span>
+<span class="token comment">// （3）getRemoteAddr返回的是直接访问服务器的IP地址。虽然取值可信，</span>
+<span class="token comment">//     但是配置反向代理、负载均衡等设备之后，getRemoteAddr将返回网络设备IP，而不是用户IP。</span>
+<span class="token comment">// 建议：设置nginx等软件，将用户真实IP记录在X-Real-IP头中。</span>
+<span class="token class-name">String</span> ip <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"X-Real-IP"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    ip <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"X-Forwarded-For"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// X-Forwarded-For中可能有多个IP地址，第一个IP是用户真实IP。</span>
+        ip <span class="token operator">=</span> ip<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        ip <span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getRemoteAddr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+logger<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"ip: "</span> <span class="token operator">+</span> ip<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="限制指定浏览器访问"><a href="#限制指定浏览器访问" class="headerlink" title="限制指定浏览器访问"></a>限制指定浏览器访问</h2><p>如果应用不应该直接通过浏览器访问，可对浏览器UA进行限制。例如仅允许微信浏览器访问：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 获取用户 User-Agent</span>
+<span class="token comment">// 注意：用户可以篡改User-Agent，伪装成各种浏览器</span>
+<span class="token class-name">String</span> ua <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"User-Agent"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+logger<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"ua: "</span> <span class="token operator">+</span> ua<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept <span class="token operator">&amp;&amp;</span> ua <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>ua<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token string">"MicroMessenger"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    message <span class="token operator">=</span> <span class="token string">"请使用微信访问本页面！"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>另外，出于友好性考虑，可将报错页面换成微信公众号二维码，以便用户扫描关注。</p>
+<h2 id="直接放行"><a href="#直接放行" class="headerlink" title="直接放行"></a>直接放行</h2><p>有些文件格式完全无害，例如服务器本身提供的js、css等静态资源，可考虑直接放行此类扩展名。</p>
+<p>由于重定向之后会再次经过SecurityFilter，而所有已经拦截的请求都重定向到了报错页面，所以报错页面也需要放行，不要再将报错页面forward到报错页面，导致死循环。</p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>本过滤器功能简单粗暴，然而仍然会有漏网之鱼，例如通过加注释符号便可绕过SQL注入拦截。</p>
+<p>最有效的解决方案，还是要求开发人员平时就注重安全（例如SQL使用参数绑定、页面渲染时进行HTML转义等），测试人员也针对安全问题进行测试，在上线之前就尽量消除隐患。</p>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><p>以Spring框架为例，将上述代码组合到一起，并加入yml配置文件支持，完整代码如下：</p>
+<p>SecurityFilter.java：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>testcompany<span class="token punctuation">.</span>testapp<span class="token punctuation">.</span>utils</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>commons<span class="token punctuation">.</span>lang3<span class="token punctuation">.</span></span><span class="token class-name">StringUtils</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">Logger</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span></span><span class="token class-name">LoggerFactory</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>core<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">ClassPathResource</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span></span><span class="token class-name">Component</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>yaml<span class="token punctuation">.</span>snakeyaml<span class="token punctuation">.</span></span><span class="token class-name">Yaml</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>yaml<span class="token punctuation">.</span>snakeyaml<span class="token punctuation">.</span>error<span class="token punctuation">.</span></span><span class="token class-name">YAMLException</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">Filter</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">FilterChain</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">FilterConfig</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">ServletException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">ServletRequest</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span></span><span class="token class-name">ServletResponse</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpServletRequest</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpServletResponse</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>http<span class="token punctuation">.</span></span><span class="token class-name">HttpSession</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">InputStream</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Map</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Set</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SecurityFilter</span> <span class="token keyword">implements</span> <span class="token class-name">Filter</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">Logger</span> logger <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">SecurityFilter</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 系统安全参数设置</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">SecurityConfig</span> config <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 从配置文件读取系统安全参数配置</span>
+    <span class="token keyword">static</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Yaml</span> yaml <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Yaml</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">InputStream</span> inputStream <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ClassPathResource</span><span class="token punctuation">(</span><span class="token string">"security.yml"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            config <span class="token operator">=</span> yaml<span class="token punctuation">.</span><span class="token function">loadAs</span><span class="token punctuation">(</span>inputStream<span class="token punctuation">,</span> <span class="token class-name">SecurityConfig</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// 报错页面加入安全白名单</span>
+            config<span class="token punctuation">.</span><span class="token function">getUriWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span><span class="token function">getErrorPageUrl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> <span class="token operator">|</span> <span class="token class-name">YAMLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            logger<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"加载安全设置失败"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token class-name">FilterConfig</span> filterConfig<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ServletException</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">doFilter</span><span class="token punctuation">(</span><span class="token class-name">ServletRequest</span> request<span class="token punctuation">,</span> <span class="token class-name">ServletResponse</span> response<span class="token punctuation">,</span> <span class="token class-name">FilterChain</span> chain<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span><span class="token punctuation">,</span> <span class="token class-name">ServletException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">HttpServletRequest</span> httpRequest <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span><span class="token punctuation">)</span> request<span class="token punctuation">;</span>
+        <span class="token class-name">HttpServletResponse</span> httpResponse <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">HttpServletResponse</span><span class="token punctuation">)</span> response<span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>config <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            request<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span> <span class="token string">"系统安全设置加载失败，请检查错误并重新启动系统！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            request<span class="token punctuation">.</span><span class="token function">getRequestDispatcher</span><span class="token punctuation">(</span><span class="token string">"/error"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forward</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 获取请求 URL 和 URI</span>
+        <span class="token class-name">String</span> url <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getRequestURL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> uri <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getRequestURI</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        logger<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"url: "</span> <span class="token operator">+</span> url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        logger<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"uri: "</span> <span class="token operator">+</span> uri<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 判断是否属于不过滤的白名单URI</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>config<span class="token punctuation">.</span><span class="token function">getUriWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>uri<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            chain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 判断是否为白名单扩展名</span>
+        <span class="token keyword">int</span> pos <span class="token operator">=</span> uri<span class="token punctuation">.</span><span class="token function">lastIndexOf</span><span class="token punctuation">(</span><span class="token string">"."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>pos <span class="token operator">></span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">String</span> extName <span class="token operator">=</span> uri<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>pos <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>config<span class="token punctuation">.</span>extWhiteList<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>extName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                chain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">boolean</span> intercept <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> message <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 指定输入/输出字符编码</span>
+        <span class="token class-name">String</span> encoding <span class="token operator">=</span> config<span class="token punctuation">.</span><span class="token function">getEncoding</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>encoding <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            httpRequest<span class="token punctuation">.</span><span class="token function">setCharacterEncoding</span><span class="token punctuation">(</span>encoding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            httpResponse<span class="token punctuation">.</span><span class="token function">setCharacterEncoding</span><span class="token punctuation">(</span>encoding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 判断用户是否登录（略）</span>
+
+        <span class="token comment">// 验证用户权限（略）</span>
+
+        <span class="token comment">// 增加Cookie安全性：添加HttpOnly和Secure属性，防止Cookie被通过js非法获取</span>
+        <span class="token comment">// 注意：一般是很老的中间件才需要手动设置</span>
+        <span class="token class-name">HttpSession</span> session <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>session <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">String</span> sessionId <span class="token operator">=</span> session<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">String</span> header <span class="token operator">=</span> <span class="token string">"JSESSIONID="</span> <span class="token operator">+</span> sessionId <span class="token operator">+</span> <span class="token string">"; Secure; HttpOnly; Path=/"</span><span class="token punctuation">;</span>
+            httpResponse<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Set-Cookie"</span><span class="token punctuation">,</span> header<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 避免点击劫持漏洞</span>
+        httpResponse<span class="token punctuation">.</span><span class="token function">addHeader</span><span class="token punctuation">(</span><span class="token string">"X-Frame-Options"</span><span class="token punctuation">,</span> <span class="token string">"sameorigin"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 跨域资源共享CORS</span>
+        <span class="token class-name">String</span> origin <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"Origin"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span>origin<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>config<span class="token punctuation">.</span><span class="token function">getCorsWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>origin<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                httpResponse<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Access-Control-Allow-Origin"</span><span class="token punctuation">,</span> origin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                httpResponse<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Access-Control-Allow-Methods"</span><span class="token punctuation">,</span> <span class="token string">"POST,GET,OPTIONS"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                httpResponse<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"Access-Control-Max-Age"</span><span class="token punctuation">,</span> <span class="token string">"86400"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 浏览器拒绝响应MIME类型不正确的资源</span>
+        httpResponse<span class="token punctuation">.</span><span class="token function">setHeader</span><span class="token punctuation">(</span><span class="token string">"X-Content-Type-Options"</span><span class="token punctuation">,</span> <span class="token string">"nosniff"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 内容安全策略（CSP）设置</span>
+        <span class="token comment">// 参见：http://www.ruanyifeng.com/blog/2016/09/csp.html</span>
+        <span class="token comment">// httpResponse.setHeader("Content-Security-Policy", "default-src 'self'");</span>
+
+        <span class="token comment">// 浏览器防XSS设置</span>
+        <span class="token comment">// 参见：https://www.freebuf.com/articles/web/138769.html</span>
+        httpResponse<span class="token punctuation">.</span><span class="token function">addHeader</span><span class="token punctuation">(</span><span class="token string">"X-XSS-Protection"</span><span class="token punctuation">,</span> <span class="token string">"1; mode=block"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// GET/POST请求参数过滤</span>
+        <span class="token comment">// 主要用于防止各类注入（XSS、SQL注入等）</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 获取GET参数，实际上不需要</span>
+            <span class="token comment">// String queryString = httpRequest.getQueryString();</span>
+            <span class="token comment">// MultiValueMap&lt;String, String> parameters = UriComponentsBuilder.fromUriString(uri).build().getQueryParams();</span>
+
+            <span class="token comment">// 获取GET/POST参数</span>
+            <span class="token class-name">Map</span><span class="token operator">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">></span> paramMap <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getParameterMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            post_filter<span class="token operator">:</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> param<span class="token operator">:</span> paramMap<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> keyword<span class="token operator">:</span> config<span class="token punctuation">.</span><span class="token function">getBannedKeywords</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>keyword<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                        message <span class="token operator">=</span> <span class="token string">"检测到非法字符【"</span> <span class="token operator">+</span> keyword <span class="token operator">+</span> <span class="token string">"】，请重新输入！"</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span> post_filter<span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+
+                <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> values <span class="token operator">=</span> paramMap<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>param<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>values <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> whiteList <span class="token operator">=</span> config<span class="token punctuation">.</span><span class="token function">getKeywordWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>param<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> value<span class="token operator">:</span> values<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> keyword<span class="token operator">:</span> config<span class="token punctuation">.</span><span class="token function">getBannedKeywords</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>value<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>keyword<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token punctuation">(</span>whiteList <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> whiteList<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>keyword<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                                intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                                message <span class="token operator">=</span> <span class="token string">"检测到非法字符【"</span> <span class="token operator">+</span> keyword <span class="token operator">+</span> <span class="token string">"】，请重新输入！"</span><span class="token punctuation">;</span>
+                                <span class="token keyword">break</span> post_filter<span class="token punctuation">;</span>
+                            <span class="token punctuation">&#125;</span>
+                        <span class="token punctuation">&#125;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+
+            <span class="token comment">// 注意：如使用Restful风格的URL，还需要考虑检查url本身，并需要防止误判</span>
+            <span class="token comment">// for (String keyword: config.getBannedKeywords()) &#123;</span>
+            <span class="token comment">//     if (uri.toLowerCase().contains(keyword)) &#123;</span>
+            <span class="token comment">//         intercept = true;</span>
+            <span class="token comment">//         message = "检测到非法字符【" + keyword + "】，请重新输入！";</span>
+            <span class="token comment">//         break;</span>
+            <span class="token comment">//     &#125;</span>
+            <span class="token comment">// &#125;</span>
+
+            <span class="token comment">// 注意：上面无法检查JSON格式内容，如有需要，可在下面代码基础上进行完善</span>
+            <span class="token comment">// String contentType = httpRequest.getHeader("Content-Type");</span>
+            <span class="token comment">// if (contentType != null &amp;&amp; contentType.toLowerCase().contains("json")) &#123;</span>
+            <span class="token comment">//     // 获取JSON提交内容</span>
+            <span class="token comment">//     StringBuilder jsonStr = new StringBuilder();</span>
+            <span class="token comment">//     try &#123;</span>
+            <span class="token comment">//         BufferedReader reader = request.getReader();</span>
+            <span class="token comment">//         String line;</span>
+            <span class="token comment">//         while ((line = reader.readLine()) != null) &#123;</span>
+            <span class="token comment">//             jsonStr.append(line);</span>
+            <span class="token comment">//         &#125;</span>
+            <span class="token comment">//     &#125; catch (IOException e) &#123;</span>
+            <span class="token comment">//         logger.error("JSON读取错误", e);</span>
+            <span class="token comment">//     &#125;</span>
+
+            <span class="token comment">//     // 测试是否为合法JSON对象</span>
+            <span class="token comment">//     String json = jsonStr.toString();</span>
+            <span class="token comment">//     try &#123;</span>
+            <span class="token comment">//         JSON.parse(json);</span>
+            <span class="token comment">//     &#125; catch (JSONException e) &#123;</span>
+            <span class="token comment">//         intercept = true;</span>
+            <span class="token comment">//         message = "无效JSON";</span>
+            <span class="token comment">//     &#125;</span>
+
+            <span class="token comment">//     // 检查是否包含敏感字符</span>
+            <span class="token comment">//     for (String keyword: config.getBannedKeywords()) &#123;</span>
+            <span class="token comment">//         if ("\"".equals(keyword) || "'".equals(keyword)) &#123;</span>
+            <span class="token comment">//             continue;</span>
+            <span class="token comment">//         &#125;</span>
+            <span class="token comment">//         if (json.toLowerCase().contains(keyword)) &#123;</span>
+            <span class="token comment">//             intercept = true;</span>
+            <span class="token comment">//             message = "检测到非法字符【" + keyword + "】，请重新输入！";</span>
+            <span class="token comment">//             break;</span>
+            <span class="token comment">//         &#125;</span>
+            <span class="token comment">//     &#125;</span>
+            <span class="token comment">// &#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// "使用HTTP动词篡改的认证旁路"</span>
+        <span class="token comment">// 该策略用于应对甲方的安全扫测，实际无安全风险。</span>
+        <span class="token class-name">String</span> method <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token string">"GET,POST,HEAD,OPTIONS,PUT,DELETE"</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>method<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            message <span class="token operator">=</span> <span class="token string">"检测到未授权的请求方式！"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// Host头攻击拦截</span>
+        <span class="token comment">// 该策略用于应对甲方的安全扫测，实际安全风险不大。</span>
+        <span class="token class-name">String</span> host <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"Host"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept <span class="token operator">&amp;&amp;</span> host <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>config<span class="token punctuation">.</span><span class="token function">getHostWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>host<span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            message <span class="token operator">=</span> <span class="token string">"检测到未授权访问，请重新从官方网站登录系统！"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// Referer拦截</span>
+        <span class="token comment">// 该策略主要用于预防CSRF攻击，并可在一定程度上预防盗链</span>
+        <span class="token comment">// 注意：</span>
+        <span class="token comment">// （1）Referer内容可被用户伪造</span>
+        <span class="token comment">// （2）仅凭Referer拦截的话，防盗链效果有限。如果想有效地防盗链，需要再采取其他措施，这里不再展开讨论。</span>
+        <span class="token class-name">String</span> referer <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span><span class="token string">"Referer"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>referer <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">String</span> domain <span class="token operator">=</span> referer<span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token string">"^https?:\\/\\/(.*?)\\/.*"</span><span class="token punctuation">,</span> <span class="token string">"$1"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toLowerCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>config<span class="token punctuation">.</span><span class="token function">getHostWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>domain<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                    message <span class="token operator">=</span> <span class="token string">"检测到未经授权的访问，请从官方网站登录系统，并检查操作是否正常！"</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// 要求POST请求中包含Referer，防止非法提交表单</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"POST"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>httpRequest<span class="token punctuation">.</span><span class="token function">getMethod</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    intercept <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                    message <span class="token operator">=</span> <span class="token string">"检测到未经授权的访问，请从官方网站登录系统，并检查操作是否正常！"</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 结果</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>intercept<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 正常请求</span>
+            chain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 被拦截，转发到报错页面</span>
+            request<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token string">"message"</span><span class="token punctuation">,</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            request<span class="token punctuation">.</span><span class="token function">getRequestDispatcher</span><span class="token punctuation">(</span>config<span class="token punctuation">.</span><span class="token function">getErrorPageUrl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forward</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 安全配置文件格式</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">SecurityConfig</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">private</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> uriWhiteList<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> extWhiteList<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> hostWhiteList<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> bannedKeywords<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span> keywordWhiteList<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> corsWhiteList<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token class-name">String</span> encoding<span class="token punctuation">;</span>
+        <span class="token keyword">private</span> <span class="token class-name">String</span> errorPageUrl<span class="token punctuation">;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">SecurityConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token function">getUriWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> uriWhiteList<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setUriWhiteList</span><span class="token punctuation">(</span><span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> uriWhiteList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>uriWhiteList <span class="token operator">=</span> uriWhiteList<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token function">getExtWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> extWhiteList<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setExtWhiteList</span><span class="token punctuation">(</span><span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> extWhiteList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>extWhiteList <span class="token operator">=</span> extWhiteList<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token function">getHostWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> hostWhiteList<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setHostWhiteList</span><span class="token punctuation">(</span><span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> hostWhiteList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>hostWhiteList <span class="token operator">=</span> hostWhiteList<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token function">getBannedKeywords</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> bannedKeywords<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setBannedKeywords</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> bannedKeywords<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>bannedKeywords <span class="token operator">=</span> bannedKeywords<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span> <span class="token function">getKeywordWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> keywordWhiteList<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setKeywordWhiteList</span><span class="token punctuation">(</span><span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span><span class="token punctuation">></span></span> keywordWhiteList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>keywordWhiteList <span class="token operator">=</span> keywordWhiteList<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> <span class="token function">getCorsWhiteList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> corsWhiteList<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setCorsWhiteList</span><span class="token punctuation">(</span><span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> corsWhiteList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>corsWhiteList <span class="token operator">=</span> corsWhiteList<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getEncoding</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> encoding<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setEncoding</span><span class="token punctuation">(</span><span class="token class-name">String</span> encoding<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>encoding <span class="token operator">=</span> encoding<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getErrorPageUrl</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> errorPageUrl<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setErrorPageUrl</span><span class="token punctuation">(</span><span class="token class-name">String</span> errorPageUrl<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>errorPageUrl <span class="token operator">=</span> errorPageUrl<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>security.yml:</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># 输入/输出字符编码</span>
+<span class="token key atrule">encoding</span><span class="token punctuation">:</span> UTF<span class="token punctuation">-</span><span class="token number">8</span>
+
+<span class="token comment"># 报错页面</span>
+<span class="token key atrule">errorPageUrl</span><span class="token punctuation">:</span> /error
+
+<span class="token comment"># 不拦截的URI的白名单</span>
+<span class="token key atrule">uriWhiteList</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> /error
+
+<span class="token comment"># 不拦截的扩展名</span>
+<span class="token key atrule">extWhiteList</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> jpg
+  <span class="token punctuation">-</span> gif
+  <span class="token punctuation">-</span> png
+  <span class="token punctuation">-</span> zip
+  <span class="token punctuation">-</span> rar
+  <span class="token punctuation">-</span> pdf
+  <span class="token punctuation">-</span> doc
+  <span class="token punctuation">-</span> docx
+  <span class="token punctuation">-</span> xls
+  <span class="token punctuation">-</span> xlsx
+  <span class="token punctuation">-</span> ppt
+  <span class="token punctuation">-</span> pptx
+  <span class="token punctuation">-</span> js
+  <span class="token punctuation">-</span> css
+
+<span class="token comment"># 可合法访问域名白名单（小写；不写协议；80和443不需要写端口）</span>
+<span class="token comment"># 用于Host和Referer校验</span>
+<span class="token comment"># 注意把自己电脑、测试环境、生产环境等都配置好</span>
+<span class="token key atrule">hostWhiteList</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> 127.0.0.1<span class="token punctuation">:</span><span class="token number">8080</span>
+  <span class="token punctuation">-</span> localhost<span class="token punctuation">:</span><span class="token number">8080</span>
+  <span class="token punctuation">-</span> www.yourdomain.com
+
+<span class="token comment"># XSS、SQL注入字符黑名单（小写）</span>
+<span class="token comment"># 注意：因绕过注入过滤方法很多，安全负责人需持续关注</span>
+<span class="token key atrule">bannedKeywords</span><span class="token punctuation">:</span>
+  <span class="token comment"># 防SQL注入</span>
+  <span class="token comment"># 各种引号</span>
+  <span class="token punctuation">-</span> <span class="token string">"'"</span>
+  <span class="token punctuation">-</span> <span class="token string">'"'</span>
+  <span class="token punctuation">-</span> <span class="token string">"%uff07"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%u0022"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%u0027"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%22"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%27"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%c0%a7"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%c0%27"</span>
+
+  <span class="token comment"># SQL关键字</span>
+  <span class="token punctuation">-</span> <span class="token string">"@@"</span>
+  <span class="token punctuation">-</span> <span class="token string">"select "</span>
+  <span class="token punctuation">-</span> <span class="token string">" from "</span>
+  <span class="token punctuation">-</span> <span class="token string">" where "</span>
+  <span class="token punctuation">-</span> <span class="token string">"delete "</span>
+  <span class="token punctuation">-</span> <span class="token string">"update "</span>
+  <span class="token punctuation">-</span> <span class="token string">"exec "</span>
+  <span class="token punctuation">-</span> <span class="token string">"drop "</span>
+  <span class="token punctuation">-</span> <span class="token string">"create "</span>
+  <span class="token punctuation">-</span> <span class="token string">"alter "</span>
+  <span class="token punctuation">-</span> <span class="token string">" union "</span>
+  <span class="token punctuation">-</span> <span class="token string">" or "</span>      <span class="token comment"># 注意容易误判</span>
+  <span class="token punctuation">-</span> <span class="token string">"+or+"</span>
+  <span class="token punctuation">-</span> <span class="token string">"+or "</span>
+  <span class="token punctuation">-</span> <span class="token string">" or+"</span>
+  <span class="token punctuation">-</span> <span class="token string">" and "</span>     <span class="token comment"># 注意容易误判</span>
+  <span class="token punctuation">-</span> <span class="token string">"+and+"</span>
+  <span class="token punctuation">-</span> <span class="token string">"+and "</span>
+  <span class="token punctuation">-</span> <span class="token string">" and+"</span>
+  <span class="token punctuation">-</span> <span class="token string">" having "</span>
+  <span class="token punctuation">-</span> <span class="token string">" sys"</span>
+  <span class="token punctuation">-</span> <span class="token string">" sp_"</span>
+  <span class="token punctuation">-</span> <span class="token string">"db_name"</span>
+  <span class="token punctuation">-</span> <span class="token string">"db_id"</span>
+  <span class="token punctuation">-</span> <span class="token string">"host_name"</span>
+  <span class="token punctuation">-</span> <span class="token string">"host_id"</span>
+
+  <span class="token comment"># 防XSS</span>
+  <span class="token comment"># 标签</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt;a"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt;audio"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt;iframe"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt;img"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt;input"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt;noscript"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt;object"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt;script"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt;style"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt;title"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt; a"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt; audio"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt; iframe"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt; img"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt; input"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt; noscript"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt; object"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt; script"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt; style"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&lt; title"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%3ca"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%3caudio"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%3ciframe"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%3cimg"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%3cinput"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%3cnoscript"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%3cobject"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%3cscript"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%3cstyle"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%3ctitle"</span>
+  <span class="token punctuation">-</span> <span class="token string">" src="</span>
+  <span class="token punctuation">-</span> <span class="token string">"%20src="</span>
+  <span class="token punctuation">-</span> <span class="token string">"style="</span>
+  <span class="token punctuation">-</span> <span class="token string">"style ="</span>
+  <span class="token punctuation">-</span> <span class="token string">"style%20="</span>
+  <span class="token punctuation">-</span> <span class="token string">"&amp;lt;"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&amp;gt;"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&amp;amp;lt;"</span>
+  <span class="token punctuation">-</span> <span class="token string">"&amp;amp;gt;"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%0a"</span>
+  <span class="token punctuation">-</span> <span class="token string">"%0d"</span>
+
+  <span class="token comment"># JavaScript</span>
+  <span class="token punctuation">-</span> <span class="token string">"onclick"</span>
+  <span class="token punctuation">-</span> <span class="token string">"ondblclick"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onmousedown"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onmousemove"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onmouseout"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onmouseover"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onmouseup"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onkeydown"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onkeyup"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onkeypress"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onchange"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onselect"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onfocus"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onblur"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onerror"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onhelp"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onload"</span>
+  <span class="token punctuation">-</span> <span class="token string">"onunload"</span>
+  <span class="token punctuation">-</span> <span class="token string">"javascript"</span>
+  <span class="token punctuation">-</span> <span class="token string">"vbscript"</span>
+  <span class="token punctuation">-</span> <span class="token string">"jscript"</span>
+  <span class="token punctuation">-</span> <span class="token string">"window."</span>
+  <span class="token punctuation">-</span> <span class="token string">"window["</span>
+  <span class="token punctuation">-</span> <span class="token string">"document."</span>
+  <span class="token punctuation">-</span> <span class="token string">".do("</span>
+  <span class="token punctuation">-</span> <span class="token string">".do ("</span>
+  <span class="token punctuation">-</span> <span class="token string">".do%20("</span>
+  <span class="token punctuation">-</span> <span class="token string">"expression("</span>
+  <span class="token punctuation">-</span> <span class="token string">"expression ("</span>
+  <span class="token punctuation">-</span> <span class="token string">"expression%20("</span>
+  <span class="token punctuation">-</span> <span class="token string">"eval("</span>
+  <span class="token punctuation">-</span> <span class="token string">"eval ("</span>
+  <span class="token punctuation">-</span> <span class="token string">"eval%20("</span>
+  <span class="token punctuation">-</span> <span class="token string">"function("</span>
+  <span class="token punctuation">-</span> <span class="token string">"function ("</span>
+  <span class="token punctuation">-</span> <span class="token string">"function%20("</span>
+  <span class="token punctuation">-</span> <span class="token string">"=>"</span>
+
+  <span class="token comment"># 恶意脚本（应付检查的成分更多一些）</span>
+  <span class="token punctuation">-</span> <span class="token string">".bak"</span>
+  <span class="token punctuation">-</span> <span class="token string">".php"</span>
+  <span class="token punctuation">-</span> <span class="token string">".asp"</span>
+  <span class="token punctuation">-</span> <span class="token string">".source"</span>
+
+  <span class="token comment"># 其他注入</span>
+  <span class="token punctuation">-</span> <span class="token string">"$&#123;"</span>
+  <span class="token punctuation">-</span> <span class="token string">"#&#123;"</span>
+
+
+<span class="token comment"># 防注入例外字段名单</span>
+<span class="token comment"># 例如公司英文名字段（company_name）中出现"联合跨国公司"，英文名中带有" UNION "，可加入例外）</span>
+<span class="token key atrule">keywordWhiteList</span><span class="token punctuation">:</span>
+  <span class="token key atrule">company_name</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token string">" union "</span>
+    <span class="token punctuation">-</span> <span class="token string">" and "</span>
+
+<span class="token comment"># 允许跨域资源共享白名单（需要完整URL）</span>
+<span class="token key atrule">corsWhiteList</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> https<span class="token punctuation">:</span>//www.theirdomain.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>pom.xml：</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.apache.commons<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>commons-lang3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>3.9<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.alibaba<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>fastjson<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.2.52<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.yaml<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>snakeyaml<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.25<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>build.gradle：</p>
+<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">dependencies <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ...</span>
+    implementation <span class="token string">'org.apache.commons:commons-lang3'</span>
+    implementation <span class="token string">'com.alibaba:fastjson:1.2.52'</span>
+    implementation <span class="token string">'org.yaml:snakeyaml:1.25'</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2019/08/25/security-filter/" title="实现一个简单粗暴的Java Web安全过滤器">https://plusnan.me/2019/08/25/security-filter/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+              <a href="/tags/%E5%AE%89%E5%85%A8/" rel="tag"># 安全</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/08/16/genius-software/" rel="prev" title="风险提示：请使用正版！">
+                  <i class="fa fa-chevron-left"></i> 风险提示：请使用正版！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/09/21/edit-page/" rel="next" title="并不简单的基础开发工作（三）：信息录入表单">
+                  并不简单的基础开发工作（三）：信息录入表单 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"fe6e299ab26e7cb93c56c2dff124bd9c"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

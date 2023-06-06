@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="本文继续以“学生信息管理系统”为例，讲述信息录入表单设计与开发中的一些问题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并不简单的基础开发工作（三）：信息录入表单">
+<meta property="og:url" content="https://plusnan.me/2019/09/21/edit-page/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="本文继续以“学生信息管理系统”为例，讲述信息录入表单设计与开发中的一些问题。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://plusnan.me/img/2019-09-21-edit-page/photo.png">
+<meta property="article:published_time" content="2019-09-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-03T04:35:50.224Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="功能设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plusnan.me/img/2019-09-21-edit-page/photo.png">
+
+
+<link rel="canonical" href="https://plusnan.me/2019/09/21/edit-page/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2019/09/21/edit-page/","path":"2019/09/21/edit-page/","title":"并不简单的基础开发工作（三）：信息录入表单"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>并不简单的基础开发工作（三）：信息录入表单 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%96%B9%E9%9D%A2%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">设计方面的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E7%94%B1%E8%BE%93%E5%85%A5"><span class="nav-number">3.1.</span> <span class="nav-text">自由输入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80"><span class="nav-number">3.2.</span> <span class="nav-text">页面布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E5%A1%AB%E4%B8%8E%E5%BF%85%E5%A1%AB"><span class="nav-number">3.3.</span> <span class="nav-text">选填与必填</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%BF%85%E8%A6%81%E7%9A%84%E5%AD%97%E6%AE%B5"><span class="nav-number">3.4.</span> <span class="nav-text">不必要的字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF"><span class="nav-number">3.5.</span> <span class="nav-text">提示信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9C%E4%B8%8B%E4%B8%80%E4%B8%AA%E2%80%9D"><span class="nav-number">3.6.</span> <span class="nav-text">“下一个”</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E9%9D%A2%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">实现方面的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E9%97%AE%E9%A2%98"><span class="nav-number">4.1.</span> <span class="nav-text">权限问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E6%8F%90%E4%BA%A4%E9%97%AE%E9%A2%98"><span class="nav-number">4.2.</span> <span class="nav-text">重复提交问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C%E9%97%AE%E9%A2%98"><span class="nav-number">4.3.</span> <span class="nav-text">校验问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B2%A1%E6%9C%89%E5%8F%8D%E9%A6%88"><span class="nav-number">4.4.</span> <span class="nav-text">没有反馈</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E7%B3%BB%E5%88%97%E7%9B%AE%E5%BD%95"><span class="nav-number">5.</span> <span class="nav-text">本系列目录</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/09/21/edit-page/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          并不简单的基础开发工作（三）：信息录入表单
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-09-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-09-21T00:00:00+08:00">2019-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-03 12:35:50" itemprop="dateModified" datetime="2022-02-03T12:35:50+08:00">2022-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文继续以“学生信息管理系统”为例，讲述信息录入表单设计与开发中的一些问题。</p>
+<span id="more"></span> 
+
+<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在<a href="/2019/02/09/list-page/">前一篇文章所需功能</a>的基础上，实现学生信息录入页面：</p>
+<table>
+    <tbody>
+        <tr>
+            <td>身份证号码：</td>
+            <td><input type="text"></td>
+            <td rowspan="5" style="text-align: center;">
+                <img width="150" src="/img/2019-09-21-edit-page/photo.png">
+                <a class="btn" href="#"><i class="fa fa-arrow-circle-up fa-fw"></i>&nbsp;上传照片</a>
+            </td>
+        </tr>
+        <tr>
+            <td>姓名：</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td>
+                <input type="radio" name="gender" id="male">
+                <label for="male">男</label>
+                <input type="radio" name="gender" id="female">
+                <label for="female">女</label>
+            </td>
+        </tr>
+        <tr>
+            <td>民族：</td>
+            <td><select><option>请选择</option></select></td>
+        </tr>
+        <tr>
+            <td>户籍地址：</td>
+            <td><select><option>请选择</option></select><select><option>--</option></select><select><option>--</option></select></td>
+        </tr>
+        <tr>
+            <td>出生日期：</td>
+            <td colspan="2"><input type="text">年<input type="text">月<input type="text">日</td>
+        </tr>
+        <tr>
+            <td>学院：</td>
+            <td colspan="2"><select><option>请选择</option></select></td>
+        </tr>
+        <tr>
+            <td>班级：</td>
+            <td colspan="2"><input type="text"></td>
+        </tr>
+        <tr>
+            <td>学号：</td>
+            <td colspan="2"><input type="text"></td>
+        </tr>
+        <tr>
+            <td>联系电话：</td>
+            <td colspan="2"><input type="text"></td>
+        </tr>
+        <tr>
+            <td>未来意向：</td>
+            <td colspan="2"><select><option>请选择</option></select></td>
+        </tr>
+        <tr>
+            <td>荣誉或奖励：</td>
+            <td colspan="2"><textarea></textarea></td>
+        </tr>
+        <tr>
+            <td>所受处分：</td>
+            <td colspan="2"><textarea></textarea></td>
+        </tr>
+    </tbody>
+</table>
+
+<p><button type="button">保存</button></p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>当用户点击“保存”按钮时，浏览器会将表单输入内容发送给后台，后台接收到数据（通常由框架实现）之后，需要进行一些校验，校验通过后，将输入内容INSERT到数据库中。</p>
+<p>除了新增内容，用户有时需要对现有内容进行修改。这时候需要由列表页面向表单页面传入现有内容的id。表单页面加载之前，需根据此id去数据库读取记录，并将数据库内容展示到用户页面中。当用户点击保存时，除了页面输入内容，此id也要传到后台，这样后台才能得知用户是修改已有记录并执行UPDATE操作，而不是增加新记录。</p>
+<h1 id="设计方面的问题"><a href="#设计方面的问题" class="headerlink" title="设计方面的问题"></a>设计方面的问题</h1><h2 id="自由输入"><a href="#自由输入" class="headerlink" title="自由输入"></a>自由输入</h2><p>能做成选择题的地方就不要做成填空题！</p>
+<p>如果把可以做成选择题的地方做成填空题，让用户自由输入，会难以规范输入内容，给后续统计、分析等工作带来麻烦。例如填写地址，同样是山东莱芜（莱芜已并入山东省会济南），用户可以填成：</p>
+<ul>
+<li>莱芜</li>
+<li>莱芜市</li>
+<li>山东莱芜</li>
+<li>山东省莱芜市</li>
+<li>山东莱芜市</li>
+<li>山东省莱芜</li>
+<li>山东省济南市莱芜区</li>
+<li>山东省济南市来无区（不小心打错字了）</li>
+<li>山东省济南市莱城区（写成了旧地名，还写错了）</li>
+<li>济南市莱芜区</li>
+<li>山东 莱芜</li>
+<li>山東省濟南市萊蕪區（忘把繁体字开关关掉了）</li>
+<li>……</li>
+</ul>
+<h2 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h2><p>录入表单是一件令人不爽的事情，操作时间长了，很容易陷入疲劳。</p>
+<p>如果页面摆放凌乱，该对齐的地方不对齐，字体、字号、间距不一致，用户肯定感到不爽。就算有对齐，各页面风格不一致（甚至同一页面内部风格就不一致）也会让人迷惑。</p>
+<p>如果需要录入的字段很多，页面应适当分组，让用户有“喘气”的时间，例如：</p>
+<table>
+    <tbody>
+        <tr>
+            <th colspan="2">基本信息</th>
+        </tr>
+        <tr>
+            <td>身份证号码：</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>姓名：</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td>
+                <input type="radio" name="gender" id="male">
+                <label for="male">男</label>
+                <input type="radio" name="gender" id="female">
+                <label for="female">女</label>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">...</td>
+        </tr>
+        <tr>
+            <th colspan="2">学籍信息</th>
+        </tr>
+        <tr>
+            <td>学院：</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>班级：</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>学号：</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td colspan="2">...</td>
+        </tr>
+        <tr>
+            <th colspan="2">学生个人发展信息</th>
+        </tr>
+        <tr>
+            <td>未来意向：</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td colspan="2">...</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>或者</p>
+<table>
+    <tbody>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <span style="border: 1px solid black; border-radius: 50px; width: 30px; height: 30px; display: inline-block; color: white; background-color: black;">1</span>
+                基本信息
+                →
+                <span style="border: 1px solid black; border-radius: 50px; width: 30px; height: 30px; display: inline-block;;">2</span>
+                学籍信息
+                →
+                <span style="border: 1px solid black; border-radius: 50px; width: 30px; height: 30px; display: inline-block;">3</span>
+                学生发展情况
+            </td>
+        </tr>
+        <tr>
+            <td>身份证号码：</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td>姓名：</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td colspan="2">...</td>
+        </tr>
+        <tr>
+            <th colspan="2" style="text-align: right;">
+                <a class="btn" href="#"><i class="fa fa-arrow-circle-right fa-fw"></i>&nbsp;下一步</a>
+            </th>
+        </tr>
+    </tbody>
+</table>
+
+<h2 id="选填与必填"><a href="#选填与必填" class="headerlink" title="选填与必填"></a>选填与必填</h2><p>如果页面既有必填项，也有选填项，应明确告知用户，这样用户就能及时把必填项填好。如果用户点提交按钮的时候才知道页面开头有个东西是必填项，而且需要自己翻到页面开头把东西填好，心情一定会非常差。</p>
+<p>区分必填和选填也有一些技巧，例如：</p>
+<ul>
+<li>全部为必填项时，不需要特意告知用户字段必填。可以用校验代替。</li>
+<li>必填项比选填项多时，选填项提示<code>（选填）</code>。</li>
+<li>选填项比必填项多时，必填项提示<code>(*)</code>。</li>
+<li>全部是选填项时，需要在业务层面考虑一下必要性。如果确实需要，在页面顶部显眼位置给出提示。</li>
+</ul>
+<p>排布字段时，尽量把必填项放前面，选填项放后面。</p>
+<h2 id="不必要的字段"><a href="#不必要的字段" class="headerlink" title="不必要的字段"></a>不必要的字段</h2><p>尽量减少字段数量。如果字段在业务上没有意义，而技术上又是必需的（例如id、数据有效性等），那么不要暴露给用户，放到后台处理。</p>
+<p>常用字段可以提供默认值，例如“民族”默认值可以设置成“汉族”（通常是汉族人多——如果不是民族学校的话）。能自动填写的字段也尽量做成自动填写，例如自动带出历史数据，或者在填好“身份证号”之后，由系统自动填写“生日”和“性别”。</p>
+<h2 id="提示信息"><a href="#提示信息" class="headerlink" title="提示信息"></a>提示信息</h2><p>提示信息应该简单、明确，并且措辞要考虑实际业务场景，避免产生歧义。举一些不好的例子：</p>
+<ul>
+<li><code>请输入姓名（必填）：[    ]</code>（啰嗦，<code>姓名(*)：</code>就够了）</li>
+<li><code>电话号（格式：xxx-xxxxxxx）：[     ]</code>（应当用input标签的placeholder代替）</li>
+<li><code>类型：[     ]</code>（“类型”、“情况”等词语语意含糊，容易产生歧义，除非业务本身就这么叫）</li>
+</ul>
+<p>对于用户容易犯错误的地方：</p>
+<ul>
+<li>如果能由程序“消化”，例如输入数据包含空格，那么默默地“消化”即可。</li>
+<li>否则给加个显眼的提示，例如提示“2019级”和“2019届”的区别。</li>
+</ul>
+<p>“表单填写注意事项”要放在醒目位置，用醒目的样式书写，以便引起用户重视。许多人经常不在乎注意事项，所以行文更要挑重点，避免占篇幅。值得注意但能让用户在填写时顺便留意的事情可以交给校验处理。</p>
+<h2 id="“下一个”"><a href="#“下一个”" class="headerlink" title="“下一个”"></a>“下一个”</h2><p>需要考虑一下业务场景：在实际操作时，用户需要录入的数据多吗？</p>
+<p>如果数据量比较多，那么建议给用户加个“下一个”按钮，录完一个就直接进下一个（当然别忘了把数据给保存好），节约时间。数量越多，节约效果越好。</p>
+<h1 id="实现方面的问题"><a href="#实现方面的问题" class="headerlink" title="实现方面的问题"></a>实现方面的问题</h1><h2 id="权限问题"><a href="#权限问题" class="headerlink" title="权限问题"></a>权限问题</h2><p>在读取数据和保存数据时应对用户权限进行验证，防止读取或修改无权操作的记录。</p>
+<p>假如编辑的URL是<code>http://127.0.0.1:8080/student/edit/3</code>，而数据库id=2的记录是其他人录入的，我们无权操作，那么在浏览器输入<code>http://127.0.0.1:8080/student/edit/2</code>之后就不应该把数据库里的数据查出来，否则就是一个严重的安全漏洞。</p>
+<h2 id="重复提交问题"><a href="#重复提交问题" class="headerlink" title="重复提交问题"></a>重复提交问题</h2><p>开发环境的网络往往非常好，点完按钮就能跳转到操作成功的页面。但是，用户的网络不一定非常好，他们可能急于操作，担心系统保存不上而反复点击提交按钮，这样会产生多条提交的请求，系统可能也会产生多条相同记录。</p>
+<p>这类问题有两种解决方法：</p>
+<p>一种是在表单中设置隐藏的token，每次进入表单都生成不同的token。一旦重复提交，系统会发现token已经无效而拒绝进一步操作。有一种常见的Web攻击方式是跨站请求伪造攻击（CSRF），Web框架通常会提供基于token的解决方案，顺便就把重复提交问题给解决了。</p>
+<p>还有一种简单粗暴却很有效果的方法：点击提交按钮之后，相关按钮立刻变灰，不允许用户点击，并且由页面给出“正在保存”的反馈信息，使用户能够耐心等待表单提交。当然，一旦保存失败，不要忘记让按钮变回原来可以点击的状态。</p>
+<h2 id="校验问题"><a href="#校验问题" class="headerlink" title="校验问题"></a>校验问题</h2><p>前台校验是不可信任的：如果只在前台进行校验，未在后台进行校验，那么用户就可以先进入浏览器控制台，再输入<code>document.forms[0].submit()</code>来绕过各类校验。出于安全考虑，即使赶工或偷懒，也要先把后台校验给做好。</p>
+<p>校验失败的错误提示不要含糊不清，不要只告诉用户“输入内容有误”，而是要告诉用户“手机号格式错误、学号格式错误”。除此之外，报错要避免像挤牙膏一样一次只提示一种错误，尽量一口气把所有错误都告诉用户，否则用户改了好几遍还提交不上去，心情就是崩溃的了。</p>
+<p>另外，各表单校验风格应当统一：A页面将所有错误用一个弹窗提示出来，而B页面将每个错误字段的提示信息都放在对应字段右边，这样也会让用户困扰。</p>
+<p>为了规避这些问题，建议使用（或自行实现专门的）校验框架来实现校验，既能统一行为，又能简化代码，让后续调整也变得方便些。</p>
+<h2 id="没有反馈"><a href="#没有反馈" class="headerlink" title="没有反馈"></a>没有反馈</h2><p>用户提交完成后，系统不要什么反馈都没有，否则用户容易认为系统有故障。系统要给用户一个明显的信号，例如提示“提交成功”，或者直接进入下一步操作页面。即使又回到了输入页面，也不要让用户输入数据发生变化甚至消失。</p>
+<h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ol>
+<li><a href="/2019/02/08/login-page/">登录页面</a></li>
+<li><a href="/2019/02/09/list-page/">信息展示列表</a></li>
+<li><strong>信息录入表单</strong></li>
+<li>业务申办-审批流程</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2019/09/21/edit-page/" title="并不简单的基础开发工作（三）：信息录入表单">https://plusnan.me/2019/09/21/edit-page/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/" rel="tag"># 功能设计</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/08/25/security-filter/" rel="prev" title="实现一个简单粗暴的Java Web安全过滤器">
+                  <i class="fa fa-chevron-left"></i> 实现一个简单粗暴的Java Web安全过滤器
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/11/25/activex-helper/" rel="next" title="在Web开发中，如果无法回避ActiveX控件——一种让用户在非IE浏览器调用控件的思路">
+                  在Web开发中，如果无法回避ActiveX控件——一种让用户在非IE浏览器调用控件的思路 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"b3b4ebe6e7b2b59890c40b60ad65539c"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

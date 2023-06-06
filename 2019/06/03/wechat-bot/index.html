@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="微信机器人是一个比较难搞的东西，因为微信登录比较麻烦，而且官方不仅不提供API，还积极封杀机器人和“非法登录”的途径，导致研发风险较大。目前比较成熟的两种方式是模拟微信网页版以及程序控制微信PC版应用。 本文采用Puppeteer框架，借助真实的浏览器访问微信网页版，模拟浏览器的正常操作，以降低被封杀的风险。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Puppeteer制作微信消息通知机器人">
+<meta property="og:url" content="https://plusnan.me/2019/06/03/wechat-bot/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="微信机器人是一个比较难搞的东西，因为微信登录比较麻烦，而且官方不仅不提供API，还积极封杀机器人和“非法登录”的途径，导致研发风险较大。目前比较成熟的两种方式是模拟微信网页版以及程序控制微信PC版应用。 本文采用Puppeteer框架，借助真实的浏览器访问微信网页版，模拟浏览器的正常操作，以降低被封杀的风险。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-06-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-11T02:01:56.272Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="Puppeteer">
+<meta property="article:tag" content="微信">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2019/06/03/wechat-bot/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2019/06/03/wechat-bot/","path":"2019/06/03/wechat-bot/","title":"使用Puppeteer制作微信消息通知机器人"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用Puppeteer制作微信消息通知机器人 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E6%80%9D%E8%B7%AF"><span class="nav-number">1.</span> <span class="nav-text">大致思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E5%8F%B7%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">保号注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C"><span class="nav-number">3.1.</span> <span class="nav-text">注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="nav-number">3.2.</span> <span class="nav-text">发送消息</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/06/03/wechat-bot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用Puppeteer制作微信消息通知机器人
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-06-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-03T00:00:00+08:00">2019-06-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%97%B2%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>微信机器人是一个比较难搞的东西，因为微信登录比较麻烦，而且官方不仅不提供API，还积极封杀机器人和“非法登录”的途径，导致研发风险较大。目前比较成熟的两种方式是模拟微信网页版以及程序控制微信PC版应用。</p>
+<p>本文采用Puppeteer框架，借助真实的浏览器访问微信网页版，模拟浏览器的正常操作，以降低被封杀的风险。</p>
+<span id="more"></span>
+
+<h2 id="大致思路"><a href="#大致思路" class="headerlink" title="大致思路"></a>大致思路</h2><ul>
+<li>使用Express框架提供对外接口，让其他程序能够调用。</li>
+<li>使用Puppeteer来访问微信网页版。由于微信网页版需要扫码登录，需要设计接口来暴露二维码（这里直接提供网页截图）。另外二维码会过期，因此需要刷新机制（本文程序的话，重启就行，不需要再另行实现）。</li>
+<li>通过操作DOM来判断页面的状态。</li>
+<li>通过模拟按键来寻找好友或群组、输入消息和发送消息。</li>
+<li>通过捕获浏览器AJAX请求来获取新消息内容（本文未实现）。</li>
+<li>实现敏感词和敏感言论过滤机制，以防无意或有意的攻击。</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>详细参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9TaW1wbGVOb3RpZnlCb3Q=">https://github.com/infnan/SimpleNotifyBot<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>开启浏览器：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 开启无头浏览器</span>
+<span class="token keyword">const</span> browser <span class="token operator">=</span> <span class="token keyword">await</span> puppeteer<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">headless</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> page <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> browser<span class="token punctuation">.</span><span class="token function">pages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>                 <span class="token comment">// 取浏览器第一个Tab页</span>
+<span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">setViewport</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token number">1366</span><span class="token punctuation">,</span> <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">768</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 浏览器窗口大小</span>
+
+<span class="token comment">// 使用简体中文界面</span>
+<span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">goto</span><span class="token punctuation">(</span><span class="token string">'https://wx.qq.com/?lang=zh_CN'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>发送消息的过程：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">sendMessage</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> message</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 判断是否登录</span>
+    <span class="token keyword">const</span> unloginTest <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'body.unlogin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>unloginTest<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Not login'</span><span class="token punctuation">,</span> <span class="token string">'NOLOGIN'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not found'</span><span class="token punctuation">,</span> <span class="token string">'NOTARGET'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 如果当前聊天就是目标，那么不用搜了，直接蹦到聊天框</span>
+    <span class="token keyword">const</span> testEle1 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#chatArea a.title_name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> test1 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> testEle1<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>test1 <span class="token operator">!==</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> searchEle <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar > input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 清空搜索框和搜索结果</span>
+        <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$eval</span><span class="token punctuation">(</span><span class="token string">'#search_bar input'</span><span class="token punctuation">,</span> <span class="token parameter">node</span> <span class="token operator">=></span> node<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Backspace'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 延时，使页面上原有的搜索结果消失</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">40</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> testEle2 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar div.mmpop'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>testEle2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 输入目标群组名称</span>
+        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 等待出现搜索结果，最长等待5秒</span>
+        <span class="token keyword">let</span> ok <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> testEle3 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar div.mmpop h4.contact_title'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>testEle3<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">const</span> test3 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> testEle3<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>test3 <span class="token operator">===</span> <span class="token string">'找不到匹配的结果'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not found'</span><span class="token punctuation">,</span> <span class="token string">'NOTARGET'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                    ok <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ok<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'WeChat not responding'</span><span class="token punctuation">,</span> <span class="token string">'NORESPONSE'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 遍历搜索结果</span>
+        <span class="token comment">// 由于overflow数字不大，且翻页需要消耗操作和等待网络请求的时间，建议目标名称独一无二，免得不好找。</span>
+        <span class="token keyword">const</span> pop <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar div.mmpop'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> lastname <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+        ok <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> overflow <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span> overflow <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> overflow<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> nowEle <span class="token operator">=</span> <span class="token keyword">await</span> pop<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'div.contact_item.on'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 说明正在loading</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>nowEle<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">let</span> currname <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> nowEle<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'h4'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>lastname <span class="token operator">===</span> currname<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// 未找到目标，结束</span>
+                ok <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            lastname <span class="token operator">=</span> currname<span class="token punctuation">;</span>
+
+            <span class="token comment">// 如果没找到而且能往下翻那么就继续往下翻</span>
+            <span class="token comment">// 找到的话按一下回车键，进入聊天界面</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>currname <span class="token operator">===</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                ok <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'ArrowDown'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 等待微信响应</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">const</span> nowEle2 <span class="token operator">=</span> <span class="token keyword">await</span> pop<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'div.contact_item.on'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>nowEle2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        <span class="token keyword">let</span> currname2 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> nowEle2<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'h4'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>currname <span class="token operator">!==</span> currname2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            <span class="token keyword">break</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">&#125;</span>
+                        <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                        <span class="token comment">// 暂时到底了，需要loading</span>
+                        <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ok<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not found'</span><span class="token punctuation">,</span> <span class="token string">'NOTARGET'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 等待进入聊天界面</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> titleEle <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#chatArea a.title_name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">const</span> title <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> titleEle<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>title <span class="token operator">===</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">const</span> testEle4 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#chatArea a.title_name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> test4 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> testEle4<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>test4 <span class="token operator">===</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 输入消息</span>
+        <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$eval</span><span class="token punctuation">(</span><span class="token string">'#editArea'</span><span class="token punctuation">,</span> <span class="token parameter">node</span> <span class="token operator">=></span> node<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">const</span> editEle <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#editArea'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">await</span> editEle<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token punctuation">[</span>i<span class="token punctuation">,</span> line<span class="token punctuation">]</span> <span class="token keyword">of</span> message<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// 发送多行消息时需要用 Ctrl+Enter 换行</span>
+                <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">down</span><span class="token punctuation">(</span><span class="token string">'Control'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">up</span><span class="token punctuation">(</span><span class="token string">'Control'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">await</span> editEle<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 按下发送按钮</span>
+        <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not confirmed'</span><span class="token punctuation">,</span> <span class="token string">'NORESPONSE'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="保号注意事项"><a href="#保号注意事项" class="headerlink" title="保号注意事项"></a>保号注意事项</h2><p>为确保安全，使用机器人时需要多加注意，以免封号甚至招致牢狱之灾。以下皆为网友经验，仅供参考。</p>
+<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><ul>
+<li>使用真实手机注册，避免用模拟器或双开软件。<ul>
+<li>使用模拟器的话需要先用xprivacy控制好微信的权限，否则会无法登录或被微信封禁。</li>
+<li>使用双开之前先调查靠不靠谱，例如有些双开会被微信识别，导致账号被封，而小米手机的双开就比较安全。</li>
+</ul>
+</li>
+<li>使用真实手机号注册，并进行实名认证，然后绑定一张银行卡，再往微信钱包里头存一块钱。</li>
+<li>手机和手机号尽量专用，一个设备或手机号不要拿着注册很多微信号，也不要拿着频繁登录注销。</li>
+<li>新注册的账号要在真实的手机上挂15至30天，然后再进行其他操作，以免让系统“大数据”识别。</li>
+<li>不要忘记设置昵称、地区和头像。</li>
+<li>至少保持三个真实好友。</li>
+<li>一天之内不要加太多好友。</li>
+<li>好友不要超过5000。</li>
+</ul>
+<h3 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h3><ul>
+<li>注意消息发送频率不要太高。几秒钟就发一大堆消息（例如像<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL2F2Mzk0MjgxLw==">脸滚键盘<i class="fa fa-external-link-alt"></i></span>那样），这样很容易被封号。</li>
+<li>不定期往“filehelper”或专用群发送keepalive消息，以防掉线。</li>
+<li>注意设计监控和报警机制，掉线之后能及时去恢复连接。</li>
+<li>要特别注意控制消息发送内容！尤其是接受用户输入的程序，一定要做好言论控制，以免他人无意或有意触发政治敏感话题，导致你的账号被封，甚至让你被警方请去喝茶。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2019/06/03/wechat-bot/" title="使用Puppeteer制作微信消息通知机器人">https://plusnan.me/2019/06/03/wechat-bot/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Puppeteer/" rel="tag"># Puppeteer</a>
+              <a href="/tags/%E5%BE%AE%E4%BF%A1/" rel="tag"># 微信</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/05/27/dbftp/" rel="prev" title="利用Oracle数据库进行文件传输">
+                  <i class="fa fa-chevron-left"></i> 利用Oracle数据库进行文件传输
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/25/non-functional-requirement/" rel="next" title="那些容易遗忘的非功能性需求">
+                  那些容易遗忘的非功能性需求 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"52622cc904c0996a10b74ef865d6cb9d"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

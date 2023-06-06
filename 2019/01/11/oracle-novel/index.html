@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="上班时间看小说有很多种方式，例如直接拿手机看，在浏览器上面看，用小说阅读器看，拷到Word里面看，甚至拷到Eclipse里面看……然而，这几种方式看起来都比较显眼，就算放在Eclipse上面看起来也不太自然（方块字又多又密，而且没有语法高亮，一看就不像程序代码）。在此，本文针对软件开发和运维人员介绍一种可以大大方方在上班时间看小说而且不会引起怀疑的方法——在数据库客户端里面看小说。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过数据库“阅读器”在上班时间看小说">
+<meta property="og:url" content="https://plusnan.me/2019/01/11/oracle-novel/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="上班时间看小说有很多种方式，例如直接拿手机看，在浏览器上面看，用小说阅读器看，拷到Word里面看，甚至拷到Eclipse里面看……然而，这几种方式看起来都比较显眼，就算放在Eclipse上面看起来也不太自然（方块字又多又密，而且没有语法高亮，一看就不像程序代码）。在此，本文针对软件开发和运维人员介绍一种可以大大方方在上班时间看小说而且不会引起怀疑的方法——在数据库客户端里面看小说。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://plusnan.me/img/2019-01-11-oracle-novel/preview.png">
+<meta property="article:published_time" content="2019-01-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-03T04:39:34.398Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="Cheatsheet">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plusnan.me/img/2019-01-11-oracle-novel/preview.png">
+
+
+<link rel="canonical" href="https://plusnan.me/2019/01/11/oracle-novel/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2019/01/11/oracle-novel/","path":"2019/01/11/oracle-novel/","title":"通过数据库“阅读器”在上班时间看小说"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>通过数据库“阅读器”在上班时间看小说 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BB%BA%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">建库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%B0%8F%E8%AF%B4"><span class="nav-number">2.</span> <span class="nav-text">导入小说</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.1.</span> <span class="nav-text">Java程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awk%E8%84%9A%E6%9C%AC%EF%BC%88Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">awk脚本（Linux服务器）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E8%BF%9E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B9%9F%E6%98%AFWindows%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">如果连数据库也是Windows服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E9%98%85%E8%AF%BB"><span class="nav-number">3.</span> <span class="nav-text">开始阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%93%E5%B1%95"><span class="nav-number">4.</span> <span class="nav-text">拓展</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/11/oracle-novel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          通过数据库“阅读器”在上班时间看小说
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-01-11 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-11T00:00:00+08:00">2019-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-03 12:39:34" itemprop="dateModified" datetime="2022-02-03T12:39:34+08:00">2022-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%80%E7%82%B9%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">一点人生的经验</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>上班时间看小说有很多种方式，例如直接拿手机看，在浏览器上面看，用小说阅读器看，拷到Word里面看，甚至拷到Eclipse里面看……然而，这几种方式看起来都比较显眼，就算放在Eclipse上面看起来也不太自然（方块字又多又密，而且没有语法高亮，一看就不像程序代码）。在此，本文针对软件开发和运维人员介绍一种可以大大方方在上班时间看小说而且不会引起怀疑的方法——在数据库客户端里面看小说。</p>
+<span id="more"></span>
+
+<h1 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h1><p>如果开发团队管得不严，那么使用团队正在使用的数据库就行，反正领导和人力部门又不可能专门登数据库去看你搞了什么东西。为了避免与其他同事产生误会，建议创建小说专用账号，例如OGGFORWARD（用这个名词也要小心，别让DBA误会）：</p>
+<p>Oracle范例：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 建立OGG传输专用账号</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">USER</span> OGGFORWARD IDENTIFIED <span class="token keyword">BY</span> eromanga<span class="token punctuation">;</span>
+<span class="token comment">-- 允许登录OGG账号</span>
+<span class="token keyword">GRANT</span> <span class="token keyword">CONNECT</span><span class="token punctuation">,</span> RESOURCE<span class="token punctuation">,</span> DBA <span class="token keyword">TO</span> OGGFORWARD<span class="token punctuation">;</span>
+<span class="token comment">-- 允许OGG账户访问当前账户所用表</span>
+<span class="token keyword">BEGIN</span>
+    <span class="token keyword">FOR</span> TAB <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> TABLE_NAME <span class="token keyword">FROM</span> USER_TABLES<span class="token punctuation">)</span> <span class="token keyword">LOOP</span>
+        <span class="token keyword">EXECUTE</span> IMMEDIATE <span class="token string">'GRANT SELECT, INSERT, UPDATE, DELETE ON '</span><span class="token operator">||</span>TAB<span class="token punctuation">.</span>TABLE_NAME<span class="token operator">||</span><span class="token string">' TO OGGFORWARD'</span><span class="token punctuation">;</span>
+    <span class="token keyword">END</span> <span class="token keyword">LOOP</span><span class="token punctuation">;</span>
+<span class="token keyword">END</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>MySQL范例：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 建立数据库</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> oggforward <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span> utf8<span class="token punctuation">;</span>
+<span class="token comment">-- 建立OGG传输专用账号</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">USER</span> oggforward<span class="token variable">@'%'</span> IDENTIFIED <span class="token keyword">BY</span> <span class="token string">'eromanga'</span><span class="token punctuation">;</span>
+<span class="token comment">-- 赋权</span>
+<span class="token keyword">GRANT</span> <span class="token keyword">ALL</span> <span class="token keyword">PRIVILEGES</span> <span class="token keyword">ON</span> oggforward<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">TO</span> oggforward<span class="token variable">@'%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>以上只是些普通的DBA操作，看起来没什么值得怀疑的。若你连DBA权限都没有，那么就需要自己搭数据库或者想办法骗DBA给你开个账号了。</p>
+<p>接下来用OGGFORWARD登录，建立表结构：</p>
+<p>Oracle范例：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）</span>
+<span class="token keyword">CREATE</span> SEQUENCE OGGFORWARD<span class="token punctuation">.</span>SEQ_TBL_EROMANGA <span class="token keyword">START</span> <span class="token keyword">WITH</span> <span class="token number">1</span> INCREMENT <span class="token keyword">BY</span> <span class="token number">1</span> NOMAXVALUE<span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> OGGFORWARD<span class="token punctuation">.</span>TBL_EROMANGA <span class="token punctuation">(</span>
+    ID NUMBER <span class="token operator">NOT</span> <span class="token boolean">NULL</span>        <span class="token comment">-- 主键</span>
+        <span class="token keyword">CONSTRAINT</span> PK_TBL_EROMANGA <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">,</span>
+    BOOK VARCHAR2<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>    <span class="token comment">-- 第几作</span>
+    CHAPTER VARCHAR2<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">,</span>           <span class="token comment">-- 章节</span>
+    <span class="token keyword">TEXT</span> VARCHAR2<span class="token punctuation">(</span><span class="token number">700</span><span class="token punctuation">)</span><span class="token punctuation">,</span>             <span class="token comment">-- 小说内容，为便于阅读，每行只留200字</span>
+    IS_READ <span class="token keyword">CHAR</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">DEFAULT</span> <span class="token string">'0'</span><span class="token punctuation">,</span>    <span class="token comment">-- 是否已经阅读</span>
+    ACCESS_TIME <span class="token keyword">DATE</span>                <span class="token comment">-- 阅读时间</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>MySQL范例：</p>
+<!-- tab MySQL -->
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> oggforward<span class="token punctuation">.</span>tbl_eromanga <span class="token punctuation">(</span>
+    id <span class="token keyword">INT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>     <span class="token comment">-- 主键</span>
+    book <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>         <span class="token comment">-- 第几作</span>
+    chapter <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                <span class="token comment">-- 章节</span>
+    <span class="token keyword">text</span> <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">700</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                  <span class="token comment">-- 小说内容，为便于阅读，每行只留200字</span>
+    is_read <span class="token keyword">CHAR</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">DEFAULT</span> <span class="token string">'0'</span><span class="token punctuation">,</span>        <span class="token comment">-- 是否已经阅读</span>
+    access_time <span class="token keyword">DATE</span><span class="token punctuation">,</span>                   <span class="token comment">-- 阅读时间</span>
+    <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>id<span class="token punctuation">)</span>
+<span class="token punctuation">)</span> <span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">InnoDB</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span><span class="token operator">=</span>utf8<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>毕竟是你自己看的，怎么建都无所谓，但是应该要有ID（便于定位和排序），要区分出是哪本小说，另外也可以加一些伪装用的字段，显得像是在操作自己项目中的表一样。</p>
+<h1 id="导入小说"><a href="#导入小说" class="headerlink" title="导入小说"></a>导入小说</h1><p>这一点比较关键，你需要先将小说下载下来，弄成TXT格式，然后编写一个导入程序，将其导入到数据库中。导入的时候需要注意字段长度和断行。建议在程序里面适当断行，不要一段话一口气写到底，这样查询的时候看起来方便。</p>
+<p>注意文件字符编码！下面程序默认文件采用GB2312/GBK编码。如果为UTF-8，需在命令行中手动传入编码。</p>
+<h2 id="Java程序"><a href="#Java程序" class="headerlink" title="Java程序"></a>Java程序</h2><p>ImportUtils.java：</p>
+<p>Oracle版本：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">Connection</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">DriverManager</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">PreparedStatement</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">ResultSet</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">SQLException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Scanner</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 文本导入工具
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ImportUtils</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">String</span> DB_CONNSTR <span class="token operator">=</span> <span class="token string">"jdbc:oracle:thin:@数据库IP地址:1521:数据库实例名"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">String</span> DB_USERNAME <span class="token operator">=</span> <span class="token string">"OGGFORWARD"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">String</span> DB_PASSWORD <span class="token operator">=</span> <span class="token string">"eromanga"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">String</span> INSERT_SQL <span class="token operator">=</span> <span class="token string">"INSERT INTO TBL_EROMANGA (ID, BOOK, CHAPTER, TEXT) VALUES (SEQ_TBL_EROMANGA.NEXTVAL, ?, ?, ?)"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">String</span> QUERY_SQL <span class="token operator">=</span> <span class="token string">"SELECT COUNT(1) FROM TBL_EROMANGA WHERE BOOK=? AND CHAPTER=?"</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 是否移除两段文字之间多出来的一个空行</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> REMOVE_EXTRA_BLANK_LINE <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token comment">// 每条记录最大字数</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">int</span> LINE_WIDTH <span class="token operator">=</span> <span class="token number">70</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 加载Oracle驱动</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"oracle.jdbc.OracleDriver"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ClassNotFoundException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"错误：未找到ojdbc.jar！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 获取参数</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"java ImportUtils &lt;BOOK> &lt;CHAPTER> &lt;FILENAME> [UTF-8]"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token class-name">String</span> book <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> chapter <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> fileName <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> encoding <span class="token operator">=</span> <span class="token string">"GBK"</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            encoding <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">Connection</span> conn <span class="token operator">=</span> <span class="token class-name">DriverManager</span><span class="token punctuation">.</span><span class="token function">getConnection</span><span class="token punctuation">(</span>DB_CONNSTR<span class="token punctuation">,</span> DB_USERNAME<span class="token punctuation">,</span> DB_PASSWORD<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 可选 - 检查是否重复导入</span>
+            <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">PreparedStatement</span> stmt <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">prepareStatement</span><span class="token punctuation">(</span>QUERY_SQL<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> book<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> chapter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">ResultSet</span> rs <span class="token operator">=</span> stmt<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>rs<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        <span class="token keyword">int</span> len <span class="token operator">=</span> rs<span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"您似乎已经导入过了，是否继续（Y/N）？"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token class-name">Scanner</span> cin <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token class-name">String</span> read <span class="token operator">=</span> cin<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token string">"Y"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>read<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                                <span class="token keyword">return</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">&#125;</span>
+                        <span class="token punctuation">&#125;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+
+            conn<span class="token punctuation">.</span><span class="token function">setAutoCommit</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">Scanner</span> scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">,</span> encoding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token class-name">PreparedStatement</span> stmt <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">prepareStatement</span><span class="token punctuation">(</span>INSERT_SQL<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">boolean</span> isLastEmptyLine <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span>scanner<span class="token punctuation">.</span><span class="token function">hasNextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token class-name">String</span> line <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>REMOVE_EXTRA_BLANK_LINE <span class="token operator">&amp;&amp;</span> line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isLastEmptyLine<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        isLastEmptyLine <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                        <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                    isLastEmptyLine <span class="token operator">=</span> <span class="token punctuation">(</span>line<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// 按长度分割并插入数据库</span>
+                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> line<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token operator">+=</span> LINE_WIDTH<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        <span class="token class-name">String</span> part <span class="token operator">=</span> line<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>i <span class="token operator">+</span> LINE_WIDTH<span class="token punctuation">,</span> line<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> book<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> chapter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> part<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        stmt<span class="token punctuation">.</span><span class="token function">addBatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+
+                stmt<span class="token punctuation">.</span><span class="token function">executeBatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> <span class="token operator">|</span> <span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                conn<span class="token punctuation">.</span><span class="token function">rollback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                conn<span class="token punctuation">.</span><span class="token function">setAutoCommit</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            conn<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            conn<span class="token punctuation">.</span><span class="token function">setAutoCommit</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"导入完成！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> <span class="token operator">|</span> <span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"导入时发生错误！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>MySQL版本：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">Connection</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">DriverManager</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">PreparedStatement</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">ResultSet</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">SQLException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Scanner</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 文本导入工具
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ImportUtils</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">String</span> DB_CONNSTR <span class="token operator">=</span> <span class="token string">"jdbc:mysql://数据库IP地址:3306/oggforward"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">String</span> DB_USERNAME <span class="token operator">=</span> <span class="token string">"oggforward"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">String</span> DB_PASSWORD <span class="token operator">=</span> <span class="token string">"eromanga"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">String</span> INSERT_SQL <span class="token operator">=</span> <span class="token string">"INSERT INTO tbl_eromanga (book, chapter, text) VALUES (?, ?, ?)"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token class-name">String</span> QUERY_SQL <span class="token operator">=</span> <span class="token string">"SELECT count(1) FROM tbl_eromanga WHERE book=? AND chapter=?"</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 是否移除两段文字之间多出来的一个空行</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">boolean</span> REMOVE_EXTRA_BLANK_LINE <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token comment">// 每条记录最大字数</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">int</span> LINE_WIDTH <span class="token operator">=</span> <span class="token number">70</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 加载Oracle驱动</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Class</span><span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"com.mysql.jdbc.Driver"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ClassNotFoundException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"错误：未找到mysql-connector-java.jar！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 获取参数</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"java ImportUtils &lt;BOOK> &lt;CHAPTER> &lt;FILENAME> [UTF-8]"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token class-name">String</span> book <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> chapter <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> fileName <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> encoding <span class="token operator">=</span> <span class="token string">"GBK"</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            encoding <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">Connection</span> conn <span class="token operator">=</span> <span class="token class-name">DriverManager</span><span class="token punctuation">.</span><span class="token function">getConnection</span><span class="token punctuation">(</span>DB_CONNSTR<span class="token punctuation">,</span> DB_USERNAME<span class="token punctuation">,</span> DB_PASSWORD<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 可选 - 检查是否重复导入</span>
+            <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">PreparedStatement</span> stmt <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">prepareStatement</span><span class="token punctuation">(</span>QUERY_SQL<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> book<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> chapter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">ResultSet</span> rs <span class="token operator">=</span> stmt<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>rs<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        <span class="token keyword">int</span> len <span class="token operator">=</span> rs<span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"您似乎已经导入过了，是否继续（Y/N）？"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token class-name">Scanner</span> cin <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token class-name">String</span> read <span class="token operator">=</span> cin<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token string">"Y"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>read<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                                <span class="token keyword">return</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">&#125;</span>
+                        <span class="token punctuation">&#125;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+
+            conn<span class="token punctuation">.</span><span class="token function">setAutoCommit</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">(</span><span class="token class-name">Scanner</span> scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">,</span> encoding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                 <span class="token class-name">PreparedStatement</span> stmt <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">prepareStatement</span><span class="token punctuation">(</span>INSERT_SQL<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">boolean</span> isLastEmptyLine <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">while</span> <span class="token punctuation">(</span>scanner<span class="token punctuation">.</span><span class="token function">hasNextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token class-name">String</span> line <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>REMOVE_EXTRA_BLANK_LINE <span class="token operator">&amp;&amp;</span> line<span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>isLastEmptyLine<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        isLastEmptyLine <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                        <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                    isLastEmptyLine <span class="token operator">=</span> <span class="token punctuation">(</span>line<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// 按长度分割并插入数据库</span>
+                    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> line<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i <span class="token operator">+=</span> LINE_WIDTH<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        <span class="token class-name">String</span> part <span class="token operator">=</span> line<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>i <span class="token operator">+</span> LINE_WIDTH<span class="token punctuation">,</span> line<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> book<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> chapter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> part<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        stmt<span class="token punctuation">.</span><span class="token function">addBatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+
+                stmt<span class="token punctuation">.</span><span class="token function">executeBatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> <span class="token operator">|</span> <span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                conn<span class="token punctuation">.</span><span class="token function">rollback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                conn<span class="token punctuation">.</span><span class="token function">setAutoCommit</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            conn<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            conn<span class="token punctuation">.</span><span class="token function">setAutoCommit</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"导入完成！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> <span class="token operator">|</span> <span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"导入时发生错误！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>运行之前需要下载JDBC驱动（<span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS90ZWNobmV0d29yay9kYXRhYmFzZS9hcHBsaWNhdGlvbi1kZXZlbG9wbWVudC9qZGJjL2Rvd25sb2Fkcy9pbmRleC5odG1s">Oracle<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kZXYubXlzcWwuY29tL2Rvd25sb2Fkcy9jb25uZWN0b3Ivai84LjAuaHRtbA==">MySQL<i class="fa fa-external-link-alt"></i></span>）。如果不使用Eclipse或IDEA等IDE，可以用以下命令编译：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">javac ImportUtils.java<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>为了方便阅读，我对小说按照章节进行了分割，文件名格式类似5_1.txt。预处理完成后运行（备注：这里是Linux/macOS）：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Oracle</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">CLASSPATH</span><span class="token operator">=</span>.:ojdbc6.jar
+<span class="token comment"># MySQL</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">CLASSPATH</span><span class="token operator">=</span>.:mysql-connector-java-8.0.13.jar
+
+<span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">`</span><span class="token function">seq</span> <span class="token number">1</span> <span class="token number">5</span><span class="token variable">`</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+    java ImportUtils <span class="token number">5</span> <span class="token number">1</span> 5_<span class="token variable">$i</span>.txt
+
+    <span class="token comment"># UTF-8编码则需要</span>
+    <span class="token comment"># java ImportUtils 5 1 5_$i.txt UTF-8</span>
+<span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="awk脚本（Linux服务器）"><a href="#awk脚本（Linux服务器）" class="headerlink" title="awk脚本（Linux服务器）"></a>awk脚本（Linux服务器）</h2><p>DBA们可能并没有在电脑上安装Java，不过没关系，我们也可以将小说上传到服务器上，通过下面的awk脚本生成SQL，然后通过sqlplus执行SQL，把将小说内容导入到数据库中：</p>
+<p>gen_sql.awk：</p>
+<p>Oracle版本：</p>
+<pre class="line-numbers language-awk" data-language="awk"><code class="language-awk">BEGIN &#123;
+    INSERT_SQL &#x3D; &quot;INSERT INTO OGGFORWARD.TBL_EROMANGA (ID, BOOK, CHAPTER, TEXT) VALUES (SEQ_TBL_EROMANGA.NEXTVAL, &#39;@1&#39;, &#39;@2&#39;, &#39;@3&#39;);&quot;;
+    if (!LINE_WIDTH) &#123;
+        LINE_WIDTH &#x3D; 70;
+    &#125;
+    if (!BOOK) &#123;
+        exit 1;
+    &#125;
+
+    print &quot;SET AUTOCOMMIT OFF;&quot;;
+
+    # 导入变量
+    gsub(&#x2F;@1&#x2F;, BOOK, INSERT_SQL);
+    gsub(&#x2F;@2&#x2F;, CHAPTER, INSERT_SQL);
+
+    # awk会直接忽略空行
+&#125;
+
+&#123;
+    gsub(&#x2F;&#39;&#x2F;, &quot;&#39;&#39;&quot;);
+
+    for (i&#x3D;1; i&lt;length; i+&#x3D;LINE_WIDTH) &#123;
+        part &#x3D; substr($0, i, LINE_WIDTH);
+        line &#x3D; INSERT_SQL;
+        gsub(&#x2F;@3&#x2F;, part, line);
+        print line;
+    &#125;
+&#125;
+
+END &#123;
+    print &quot;COMMIT;&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>MySQL版本：</p>
+<pre class="line-numbers language-awk" data-language="awk"><code class="language-awk">BEGIN &#123;
+    INSERT_SQL &#x3D; &quot;INSERT INTO oggforward.tbl_eromanga (book, chapter, text) VALUES (&#39;@1&#39;, &#39;@2&#39;, &#39;@3&#39;);&quot;;
+    if (!LINE_WIDTH) &#123;
+        LINE_WIDTH &#x3D; 70;
+    &#125;
+    if (!BOOK) &#123;
+        exit 1;
+    &#125;
+
+    print &quot;SET NAMES utf8;&quot;;
+    print &quot;BEGIN;&quot;;
+
+    # 导入变量
+    gsub(&#x2F;@1&#x2F;, BOOK, INSERT_SQL);
+    gsub(&#x2F;@2&#x2F;, CHAPTER, INSERT_SQL);
+
+    # awk会直接忽略空行
+&#125;
+
+&#123;
+    gsub(&#x2F;&#39;&#x2F;, &quot;&#39;&#39;&quot;);
+
+    for (i&#x3D;1; i&lt;length; i+&#x3D;LINE_WIDTH) &#123;
+        part &#x3D; substr($0, i, LINE_WIDTH);
+        line &#x3D; INSERT_SQL;
+        gsub(&#x2F;@3&#x2F;, part, line);
+        print line;
+    &#125;
+&#125;
+
+END &#123;
+    print &quot;COMMIT;&quot;;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>macOS系统需要注意，awk的length和substr无法正确识别中文；在Linux系统下面则需要正确设置LANG环境变量才能识别中文，例如在命令前面加<code>LANG=zh_CN.UTF-8</code>。</p>
+<p>假如小说文件名是5_1.txt至5_5.txt，那么导入时可以：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">`</span><span class="token function">seq</span> <span class="token number">1</span> <span class="token number">5</span><span class="token variable">`</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token comment"># Oracle</span>
+    <span class="token function">awk</span> -v <span class="token assign-left variable">BOOK</span><span class="token operator">=</span><span class="token number">5</span> -v <span class="token assign-left variable">CHAPTER</span><span class="token operator">=</span><span class="token variable">$i</span> -f gen_sql.awk 5_<span class="token variable">$i</span>.txt <span class="token operator">|</span> sqlplus oggforward/eromanga@你的数据库
+
+    <span class="token comment"># MySQL</span>
+    <span class="token function">awk</span> -v <span class="token assign-left variable">BOOK</span><span class="token operator">=</span><span class="token number">5</span> -v <span class="token assign-left variable">CHAPTER</span><span class="token operator">=</span><span class="token variable">$i</span> -f gen_sql.awk 5_<span class="token variable">$i</span>.txt <span class="token operator">|</span> mysql -u oggforward -h <span class="token number">0.0</span>.0.0 -peromanga
+<span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里需要再次注意文件字符编码，如果txt编码、LANG、NLS_LANG（Oracle）与数据库（Oracle）/表（MySQL）编码四者不一致也会乱码！</p>
+<p>假如txt文件是UTF-8，数据库是GBK，可以先用<code>iconv -f utf8 -t gbk -c 1.txt &gt; 1_gbk.txt</code>对文件转码，然后<code>export LANG=zh_CN.GBK</code>设置awk编码。</p>
+<p>另外也可以不改编码，管道到iconv：<code>awk ... | iconv -f utf8 -t gbk -c | sqlplus oggforward/eromanga</code></p>
+<h2 id="如果连数据库也是Windows服务器"><a href="#如果连数据库也是Windows服务器" class="headerlink" title="如果连数据库也是Windows服务器"></a>如果连数据库也是Windows服务器</h2><p>Windows系统自带VBScript，一样能生成SQL然后执行。不会写VBScript也没关系，把小说扔到Excel里面然后用公式拼接出SQL语句也行。</p>
+<h1 id="开始阅读"><a href="#开始阅读" class="headerlink" title="开始阅读"></a>开始阅读</h1><p>用你平常用的数据库工具登录，然后</p>
+<p>Oracle：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 阅读</span>
+<span class="token keyword">SELECT</span>
+    ID<span class="token punctuation">,</span> BOOK<span class="token punctuation">,</span> CHAPTER<span class="token punctuation">,</span> <span class="token keyword">TEXT</span><span class="token punctuation">,</span> IS_READ<span class="token punctuation">,</span> ACCESS_TIME 
+<span class="token keyword">FROM</span>
+    OGGFORWARD<span class="token punctuation">.</span>TBL_EROMANGA E
+<span class="token keyword">WHERE</span> E<span class="token punctuation">.</span>BOOK <span class="token operator">=</span> <span class="token string">'1'</span> <span class="token operator">AND</span> E<span class="token punctuation">.</span>CHAPTER <span class="token operator">=</span> <span class="token string">'1'</span>    <span class="token comment">-- 例如：第1卷第一章</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> E<span class="token punctuation">.</span>ID<span class="token punctuation">;</span>
+<span class="token comment">-- 阅读未看过的，加个WHERE条件IS_READ='0'</span>
+<span class="token comment">-- 标记已看过的部分</span>
+<span class="token keyword">UPDATE</span> OGGFORWARD<span class="token punctuation">.</span>TBL_EROMANGA <span class="token keyword">SET</span> IS_READ<span class="token operator">=</span><span class="token string">'1'</span><span class="token punctuation">,</span> ACCESS_TIME<span class="token operator">=</span>SYSDATE <span class="token keyword">WHERE</span> ID<span class="token operator">&lt;</span>你所看到的ID <span class="token operator">AND</span> IS_READ<span class="token operator">=</span><span class="token string">'0'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>MySQL：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 阅读</span>
+<span class="token keyword">SELECT</span>
+    id<span class="token punctuation">,</span> book<span class="token punctuation">,</span> chapter<span class="token punctuation">,</span> <span class="token keyword">text</span><span class="token punctuation">,</span> is_read<span class="token punctuation">,</span> access_time 
+<span class="token keyword">FROM</span>
+    oggforward<span class="token punctuation">.</span>tbl_eromanga e
+<span class="token keyword">WHERE</span> e<span class="token punctuation">.</span>book <span class="token operator">=</span> <span class="token string">'1'</span> <span class="token operator">AND</span> e<span class="token punctuation">.</span>chapter <span class="token operator">=</span> <span class="token string">'1'</span>    <span class="token comment">-- 例如：第1卷第一章</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> e<span class="token punctuation">.</span>id<span class="token punctuation">;</span>
+<span class="token comment">-- 阅读未看过的，加个WHERE条件IS_READ='0'</span>
+<span class="token comment">-- 标记已看过的部分</span>
+<span class="token keyword">UPDATE</span> oggforward<span class="token punctuation">.</span>tbl_eromanga <span class="token keyword">SET</span> is_read<span class="token operator">=</span><span class="token string">'1'</span><span class="token punctuation">,</span> access_time<span class="token operator">=</span>sysdate<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">WHERE</span> id<span class="token operator">&lt;</span>你所看到的ID <span class="token operator">AND</span> is_read<span class="token operator">=</span><span class="token string">'0'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意放一些有迷惑性的语句（相当于“老板键”），包装一下你的阅读器，例如：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- Oracle</span>
+
+<span class="token comment">-- 查看锁表情况并生成解锁语句</span>
+<span class="token keyword">SELECT</span>
+    b<span class="token punctuation">.</span>owner<span class="token punctuation">,</span>b<span class="token punctuation">.</span>object_name<span class="token punctuation">,</span>c<span class="token punctuation">.</span>sid<span class="token punctuation">,</span>c<span class="token punctuation">.</span><span class="token keyword">serial</span><span class="token comment">#,a.locked_mode,c.username,c.osuser,c.machine,c.module,c.logon_time,</span>
+    <span class="token string">'ALTER SYSTEM KILL SESSION '''</span><span class="token operator">||</span>c<span class="token punctuation">.</span>sid<span class="token operator">||</span><span class="token string">','</span><span class="token operator">||</span>c<span class="token punctuation">.</span><span class="token keyword">serial</span><span class="token comment">#||''';' cmd,</span>
+    s<span class="token punctuation">.</span>sql_text
+<span class="token keyword">FROM</span>
+    v$locked_object a<span class="token punctuation">,</span>dba_objects b<span class="token punctuation">,</span> v$<span class="token keyword">session</span> c<span class="token punctuation">,</span> v$<span class="token keyword">sql</span> s
+<span class="token keyword">WHERE</span>
+    b<span class="token punctuation">.</span>object_id <span class="token operator">=</span> a<span class="token punctuation">.</span>object_id <span class="token operator">AND</span> a<span class="token punctuation">.</span>session_id <span class="token operator">=</span> c<span class="token punctuation">.</span>sid <span class="token operator">AND</span> s<span class="token punctuation">.</span>address <span class="token operator">=</span> c<span class="token punctuation">.</span>PREV_SQL_ADDR <span class="token operator">AND</span> s<span class="token punctuation">.</span>hash_value <span class="token operator">=</span> c<span class="token punctuation">.</span>PREV_HASH_VALUE
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> c<span class="token punctuation">.</span>logon_time<span class="token punctuation">;</span>
+
+<span class="token comment">-- 查看连接数</span>
+<span class="token keyword">SELECT</span> machine<span class="token punctuation">,</span> <span class="token keyword">status</span><span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">FROM</span> v$<span class="token keyword">session</span> <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> machine<span class="token punctuation">,</span> <span class="token keyword">status</span> <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">DESC</span><span class="token punctuation">;</span>
+
+<span class="token comment">-- 查看表空间使用情况</span>
+<span class="token keyword">SELECT</span>
+    a<span class="token punctuation">.</span>tablespace_name<span class="token punctuation">,</span>
+    <span class="token function">round</span><span class="token punctuation">(</span>total_bytes <span class="token operator">/</span> <span class="token number">1048576</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> total_mb<span class="token punctuation">,</span>
+    <span class="token function">round</span><span class="token punctuation">(</span><span class="token punctuation">(</span>total_bytes <span class="token operator">-</span> free_bytes<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">1048576</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> used_mb<span class="token punctuation">,</span>
+    <span class="token function">round</span><span class="token punctuation">(</span>free_bytes <span class="token operator">/</span> <span class="token number">1048576</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> free_mb<span class="token punctuation">,</span>
+    <span class="token function">round</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> free_bytes <span class="token operator">/</span> total_bytes<span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> used_ratio
+<span class="token keyword">FROM</span>
+    <span class="token punctuation">(</span><span class="token keyword">SELECT</span> tablespace_name<span class="token punctuation">,</span> <span class="token function">sum</span><span class="token punctuation">(</span>bytes<span class="token punctuation">)</span> free_bytes <span class="token keyword">FROM</span> dba_free_space <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> tablespace_name<span class="token punctuation">)</span> a<span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token keyword">SELECT</span> tablespace_name<span class="token punctuation">,</span> <span class="token function">sum</span><span class="token punctuation">(</span>bytes<span class="token punctuation">)</span> total_bytes <span class="token keyword">FROM</span> dba_data_files <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> tablespace_name<span class="token punctuation">)</span> b
+<span class="token keyword">WHERE</span> a<span class="token punctuation">.</span>tablespace_name <span class="token operator">=</span> b<span class="token punctuation">.</span>tablespace_name
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> a<span class="token punctuation">.</span>tablespace_name<span class="token punctuation">;</span>
+
+<span class="token comment">-- 查看占资源的SQL</span>
+<span class="token comment">-- 最耗时的SQL</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> v$sqlstats <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> elapsed_time <span class="token keyword">DESC</span><span class="token punctuation">;</span>
+<span class="token comment">-- 执行次数最多的SQL</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> v$sqlstats <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> executions <span class="token keyword">DESC</span><span class="token punctuation">;</span>
+<span class="token comment">-- 读磁盘最多的SQL</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> v$sqlstats <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> disk_reads <span class="token keyword">DESC</span><span class="token punctuation">;</span>
+<span class="token comment">-- 耗CPU最多的SQL</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> v$sqlstats <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> buffer_gets <span class="token keyword">DESC</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果在IDEA等环境操作数据库，可以再打开一些平日工作用的程序代码。</p>
+<p><img src="/img/2019-01-11-oracle-novel/preview.png" alt="看不出什么问题"></p>
+<p>嗯，看不出什么问题（如果不看<a href="/img/2019-01-11-oracle-novel/eromanga.jpg">插画</a>的话），而且领导来了也不怕，大大方方地继续执行附近SQL就行了——没准领导还会以为你热爱钻研数据库技术呢。</p>
+<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><p>如果公司网络管的不严，而且自己电脑或数据库服务器能访问互联网，那么也可以继续拓展，通过Oracle或MySQL刷新闻、贴吧或微博之类的东西。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2019/01/11/oracle-novel/" title="通过数据库“阅读器”在上班时间看小说">https://plusnan.me/2019/01/11/oracle-novel/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/Cheatsheet/" rel="tag"># Cheatsheet</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/04/java-code-review-3/" rel="prev" title="Java代码审查（三）：关于编程习惯的要求">
+                  <i class="fa fa-chevron-left"></i> Java代码审查（三）：关于编程习惯的要求
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/01/13/how-to-learn-c/" rel="next" title="作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言">
+                  作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"fe687a7d8fb034b8c46e3bb05a23ab93"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="还有不到一年就要毕业，自身水平一般般，BAT大厂无望，如何去找普通一些的Java Web工作？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 校招（一）：如何找工作">
+<meta property="og:url" content="https://plusnan.me/2018/09/12/find-jobs/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="还有不到一年就要毕业，自身水平一般般，BAT大厂无望，如何去找普通一些的Java Web工作？">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-09-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-03T04:39:34.334Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="工作">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2018/09/12/find-jobs/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2018/09/12/find-jobs/","path":"2018/09/12/find-jobs/","title":"Java 校招（一）：如何找工作"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java 校招（一）：如何找工作 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8B%E8%A1%8C%E4%B8%9A"><span class="nav-number">2.</span> <span class="nav-text">了解一下行业</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E5%9C%B0%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">工作地点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E5%88%86%E9%82%A3%E4%BA%9B%E5%85%AC%E5%8F%B8"><span class="nav-number">2.2.</span> <span class="nav-text">区分那些公司</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%90%A5%E4%B8%9A%E5%8A%A1"><span class="nav-number">2.2.1.</span> <span class="nav-text">主营业务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BD%E4%BC%81%E3%80%81%E6%B0%91%E4%BC%81%E3%80%81%E5%A4%96%E4%BC%81%EF%BC%9F"><span class="nav-number">2.2.2.</span> <span class="nav-text">国企、民企、外企？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%90%E7%AB%8B%E6%97%B6%E9%97%B4"><span class="nav-number">2.2.3.</span> <span class="nav-text">成立时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E7%8F%AD%E6%83%85%E5%86%B5"><span class="nav-number">2.2.4.</span> <span class="nav-text">加班情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E5%B7%AE%E6%83%85%E5%86%B5"><span class="nav-number">2.2.5.</span> <span class="nav-text">出差情况</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%90%E5%89%8D%E5%BC%BA%E5%8C%96%E5%B7%A5%E4%BD%9C%E6%8A%80%E8%83%BD"><span class="nav-number">3.</span> <span class="nav-text">提前强化工作技能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%83%B3%E5%A5%BD%E5%A4%A7%E5%9B%9B%E8%A6%81%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">3.1.</span> <span class="nav-text">想好大四要做什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E7%A7%91%E7%8F%AD%E5%87%BA%E8%BA%AB"><span class="nav-number">3.2.</span> <span class="nav-text">非科班出身</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%9F%B9%E8%AE%AD"><span class="nav-number">3.3.</span> <span class="nav-text">关于培训</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%AE%9E%E4%B9%A0"><span class="nav-number">3.4.</span> <span class="nav-text">关于实习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E6%89%BE%E5%B7%A5%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">准备找工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8E%86"><span class="nav-number">4.1.</span> <span class="nav-text">简历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86"><span class="nav-number">4.1.1.</span> <span class="nav-text">项目经历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%88%86%E9%A1%B9"><span class="nav-number">4.1.2.</span> <span class="nav-text">加分项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%8F%E5%88%86%E9%A1%B9"><span class="nav-number">4.1.3.</span> <span class="nav-text">减分项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%95%E9%80%92%E7%AE%80%E5%8E%86"><span class="nav-number">4.2.</span> <span class="nav-text">投递简历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%8F%B8%E8%83%8C%E6%99%AF%E8%B0%83%E6%9F%A5"><span class="nav-number">4.2.1.</span> <span class="nav-text">公司背景调查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">4.2.2.</span> <span class="nav-text">注意事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95"><span class="nav-number">4.3.</span> <span class="nav-text">面试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E9%AA%97%E5%B1%80"><span class="nav-number">5.</span> <span class="nav-text">常见骗局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E9%94%80"><span class="nav-number">5.1.</span> <span class="nav-text">传销</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AA%97%E9%92%B1"><span class="nav-number">5.2.</span> <span class="nav-text">骗钱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%A2%E5%BB%BA"><span class="nav-number">5.3.</span> <span class="nav-text">团建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%9B%E8%81%98%E9%BB%91%E8%AF%9D"><span class="nav-number">5.4.</span> <span class="nav-text">招聘黑话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A6%8F%E5%88%A9"><span class="nav-number">5.5.</span> <span class="nav-text">福利</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%8E%E5%BA%95%E8%96%AA%E9%AB%98%E5%A5%96%E9%87%91"><span class="nav-number">5.6.</span> <span class="nav-text">低底薪高奖金</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E7%8F%AD%E8%B4%B9"><span class="nav-number">5.7.</span> <span class="nav-text">加班费</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E9%99%A9%E4%B8%80%E9%87%91"><span class="nav-number">5.8.</span> <span class="nav-text">五险一金</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%BC%E6%80%A7-%E6%9C%AB%E4%BD%8D%E6%B7%98%E6%B1%B0%E5%88%B6"><span class="nav-number">5.9.</span> <span class="nav-text">狼性 &#x2F; 末位淘汰制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E5%8C%85%E8%BD%AC%E6%AD%A3"><span class="nav-number">5.10.</span> <span class="nav-text">外包转正</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E4%B8%9A"><span class="nav-number">5.11.</span> <span class="nav-text">创业</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%BE%E5%88%B0%E5%B7%A5%E4%BD%9C%E4%B9%8B%E5%90%8E"><span class="nav-number">6.</span> <span class="nav-text">找到工作之后</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="nav-number">8.</span> <span class="nav-text">本系列文章</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/09/12/find-jobs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java 校招（一）：如何找工作
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-09-12 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-12T00:00:00+08:00">2018-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-03 12:39:34" itemprop="dateModified" datetime="2022-02-03T12:39:34+08:00">2022-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%80%E7%82%B9%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">一点人生的经验</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>还有不到一年就要毕业，自身水平一般般，BAT大厂无望，如何去找普通一些的Java Web工作？</p>
+<span id="more"></span>
+
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ul>
+<li>本文纯属个人意见，仅供参考。</li>
+<li>本文是给普通人写的。如果你是大佬，人在国外，或者刚下飞机，或者家里有矿，或者上头有人，或者情况稍微差点，只能去BAT那种公司，那么请直接忽略本文。</li>
+</ul>
+<h1 id="了解一下行业"><a href="#了解一下行业" class="headerlink" title="了解一下行业"></a>了解一下行业</h1><h2 id="工作地点"><a href="#工作地点" class="headerlink" title="工作地点"></a>工作地点</h2><p>优先选择北京、上海、深圳与杭州。虽然北京、上海、深圳房价太高，就算跑远郊买房也很费劲，但是城市大、机会多，技能提升相对较快。前期省吃俭用、认真攒钱的话，会比直接去二线城市攒得多。</p>
+<p>次优选择是成都、南京、武汉、厦门等，这些城市有软件行业，但并不太“互联网”。工资比一线城市低，而生活成本也相对低些（而且至少能够得到郊区的房子），生活质量相对高些。<strong>推荐一线城市打拼，二线城市安家</strong>。</p>
+<p>如果你老家在北方，或者远一点，在东北或西北，而且不想再往南走，那么济南、青岛、大连和西安是北方最不差的选择。与北方其他地方比，至少还能找些工作养家糊口。由于这四个地方IT行业环境比较差，不在乎地域的话就不要考虑了。</p>
+<p>至于天津和广州——你确定你买得起房子吗？</p>
+<h2 id="区分那些公司"><a href="#区分那些公司" class="headerlink" title="区分那些公司"></a>区分那些公司</h2><p>以我个人的理解，可以从以下几个角度来为软件公司分类。</p>
+<h3 id="主营业务"><a href="#主营业务" class="headerlink" title="主营业务"></a>主营业务</h3><p>进公司之前，要了解公司的主营业务，分析它的领域是否宽广，行业前途是否光明。起始平台很重要，选错起点，你的职业生涯就是一步错、步步错：</p>
+<ul>
+<li>互联网：你手机上那些APP的开发商基本上都是。这类公司的产品、服务竞争激烈，用户量极大，面临的技术问题极多，有动力培养专业技术团队，比较靠谱。</li>
+<li>传统产品/服务：针对特定行业开发产品/服务，然后拿去卖。这类产品通常不针对具体个人或实体，定制化内容较少，产品较为通用，存在一些竞争，技术提升的动力稍微大些。不过也有不少只吃老本不创新的。</li>
+<li>传统项目（项目外包）：项目制则是跑项目签合同，给甲方（例如政府、事业单位、企业等）定制化开发，优先实现特定需求。有活干就挣钱，没活干就赔钱。</li>
+<li>人力外包（“外包”一词通常指这个）：像建筑队一样，招一批人，有活之后就去工地干活，干完了换下一家工地继续干，没活就呆着，或者解散。由于通常去甲方现场工作，地点、工资待遇、工作内容都不固定，而且容易受歧视，不建议去做外包。</li>
+<li>建站：公司主业与软件无关（例如电子商务），也不太需要专业团队，只是招些技术人员进行基本的系统开发。</li>
+</ul>
+<p>建议优先去互联网公司，避免去为政府服务的公司，不要去外包公司和建站公司。互联网起点高，成长也快，而外包或建站工作通常比较无聊，且职业发展空间有限。若是找不到工作，不得不去做外包，那么你需要主动在工作中积累工作技能，对照招聘网站内容，学习行业前沿的东西，然后<strong>在一到两年之内跳槽</strong>。垃圾地方停留时间越长，找工作时越没有竞争力。</p>
+<p>以上各种性质并不矛盾。比方说，有些公司做了一些项目之后，将业务抽象出通用框架然后再拿去卖（或者再去别的地方跑相似业务的合同），这样就有了产品；有些公司既给自己做项目，也做人力外包；有些公司为了提升竞争力，按互联网公司模式转型，最后成为了互联网公司。</p>
+<h3 id="国企、民企、外企？"><a href="#国企、民企、外企？" class="headerlink" title="国企、民企、外企？"></a>国企、民企、外企？</h3><p>软件行业大部分是民企和外企。</p>
+<p>在软件行业，这个身份并没有多大意义：通常人们觉得国企工作效率低、私企工作效率高，实际上，私企也可以比国企低效，“没有国企的命，得了国企的病”，而国企的人也可以忘我工作、舍得投入，把工作做得比私企还好。</p>
+<p>如果感觉自己水平能说得过去，也可以考虑去外企。不过不太建议去株式会社（日韩企业），株式会社干活死板，不利于提高水平。</p>
+<h3 id="成立时间"><a href="#成立时间" class="headerlink" title="成立时间"></a>成立时间</h3><p>我个人分为以下三类：</p>
+<ul>
+<li>老公司：至少成立4年或以上，可以认为基本上站住脚了。</li>
+<li>创业公司：根据创始人背景，可以再往下细分<ul>
+<li>从头创业：没有背景自己干，倒闭的可能性很大。</li>
+<li>分公司：因为业务扩张需要，前往某地开分公司、子公司或办事处。在创业之初，母公司可以提供支持，风险相对小些。</li>
+</ul>
+</li>
+</ul>
+<p>创业公司视融资情况，可继续分为种子期、天使期、A轮、B轮、C轮等等。建议只去B轮或以上（C或更高）的公司。种子期、天使期、A轮通常都不太靠谱。</p>
+<h3 id="加班情况"><a href="#加班情况" class="headerlink" title="加班情况"></a>加班情况</h3><p>完全不加班是不现实的，如果碰到系统上线、系统紧急维护等情况，即使平时从来不加班的公司，可能也不得不安排加班来处理问题。加班多少要看具体的工作部门、工作内容与团队文化，即便同一公司也可能完全不一样，不能一概而论。</p>
+<p>关于加班，个人看法如下：</p>
+<ul>
+<li>加晚班与不加晚班、一周上五天班与上六天班，看起来差别不大，但对你身心带来的影响非常明显，即使加班工资高，建议尽量也选择原则上不加班的公司与开发团队。不信的话你算算时薪（月薪除以实际工作小时数）哪个高。</li>
+<li>加班过重的话，会严重损害身体健康，严重影响日常生活，而且严重影响自我提升。除非工资给得特别高，或者是顶尖大厂（华为），抱着必死的决心去攒一点钱，要不然别去这种公司，浪费生命。</li>
+<li>对于原则上不加班的公司，则是稍微加一点班——抱着自我学习、提高领导好感度等目的主动加些班。当然如果领导要求无意义加班而且你有信心能找到下一家合适工作的话你也可以考虑离开，不过将来一定是越来越难找工作。</li>
+</ul>
+<p>强制加班就能提高工作效率了吗？并不会！在强制加班的公司里，老员工们会故意放慢工作节奏（当然不会让人看出来），延长工作时间，把活拖到晚上干完，既能显得自己勤奋，又能避免让领导给自己加码。</p>
+<p>后续：2019年，有程序员在GitHub设置了一个<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tLzk5NmljdS85OTYuSUNV">996.icu<i class="fa fa-external-link-alt"></i></span>的项目，列出了一些长期严重加班的公司，可供参考。</p>
+<h3 id="出差情况"><a href="#出差情况" class="headerlink" title="出差情况"></a>出差情况</h3><p>完全不出差也是不现实的。出差情况要看工作内容，例如需求调研可能是中短差，驻场开发可能是持续数月甚至长达一两年的长差，运维实施可能要全国各地跑。</p>
+<p>个人建议：</p>
+<ul>
+<li>身体不适合出差的话要早点跟直属领导说，免得同时耽误自己和领导。</li>
+<li>如果公司有出差补助，可以接受短差，别太频繁就好。</li>
+<li>避免出长差——如果长差是去三四线城市甚至偏远地方，你觉得在当地能积累到什么东西呢？如果长差是去一线城市，而且单位不能有效解决食宿问题，那么为什么不直接去一线城市找工作呢？另外，当你有了老婆孩子，你还继续出长差，那么谁照顾老婆孩子呢？领导还是隔壁老王？</li>
+<li>绝对不出外国差！所谓的外国，通常都是些穷破地方，甚至是那种需要招<span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3F1ZXN0aW9uLzMzNTI5OTc2Mg==">暑假工<i class="fa fa-external-link-alt"></i></span>当保安的地方。工作内容基本上就是苦力，干得不爽，你没地方跑，干得爽，也不可能留下定居。在法治环境不好的地方（例如东南亚），被黑帮当成奴隶也无处求救；要是到了非洲，你甚至还得关心一下自己能不能活着回国。至于西装革履、欧美风范、国际旅游，那些是高层领导的事，轮不到你。</li>
+</ul>
+<h1 id="提前强化工作技能"><a href="#提前强化工作技能" class="headerlink" title="提前强化工作技能"></a>提前强化工作技能</h1><p>找一家招聘网站，例如<span class="exturl" data-url="aHR0cHM6Ly93d3cuemhhb3Bpbi5jb20v">智联招聘<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly93d3cuNTFqb2IuY29tLw==">前程无忧<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly93d3cuemhpcGluLmNvbS8=">BOSS直聘<i class="fa fa-external-link-alt"></i></span>等。先看，不用急着投简历。在网站中，选择一个城市，然后将“Java”作为关键词，再多挑一些工资高的校招或社招工作，关注他们对候选人的需求。</p>
+<p>需求看得越多，你会越清楚社会需要什么东西，例如SpringBoot、SpringCloud、ElasticSearch、React或Vue之类的。了解业界大体情况之后，你就可以去图书馆借书（图书馆的书通常会比较旧），或者去网上找教程，挨个练习Hello, Happy World程序。</p>
+<p>大学学的东西跟实际工作是脱钩的，数据结构算法之类的基础知识要学好，某些东西（当然是思修、毛概、马原、近代史了）用不着上心，不挂科就够了。如果你还在上大二、大三，那么别等大四才开始为了找工作而学习。上边那堆东西不可能几天就学会。</p>
+<h2 id="想好大四要做什么"><a href="#想好大四要做什么" class="headerlink" title="想好大四要做什么"></a>想好大四要做什么</h2><p>找工作、考研、考公务员不可兼得，你只能忙其中一个事情。</p>
+<p>保研了？保研就别找工作了，浪费名额！</p>
+<h2 id="非科班出身"><a href="#非科班出身" class="headerlink" title="非科班出身"></a>非科班出身</h2><p>非计算机专业，只要你对编程感兴趣，想找这方面工作，尽管投简历就是，不必担心工作要求中的“计算机专业”。但是，在找工作之前，你需要主动补一些基础知识：</p>
+<ul>
+<li>计算机科学<ul>
+<li>数据结构与算法</li>
+<li>设计模式</li>
+</ul>
+</li>
+<li>软件工程基础</li>
+<li>Java<ul>
+<li>《Java编程思想》（Java装逼思想）</li>
+<li>《Effective Java》</li>
+</ul>
+</li>
+<li>Web开发：HTML/CSS/JavaScript，了解一些常用的框架如jQuery等</li>
+<li>数据库：MySQL，基本的DML与DDL操作。</li>
+<li>开发工具<ul>
+<li>Eclipse/IntelliJ IDEA</li>
+<li>MySQL客户端</li>
+</ul>
+</li>
+</ul>
+<p>趁自己没毕业、图书馆可以免费借书的时候，赶紧多看书，上班之后你肯定就没心思看了——我们办公室好几本《Java装逼思想》，然而每一部装逼思想都暗淡无光。</p>
+<p>用人单位要是严格按要求卡人，他们就招不到人了。再说了，真拿专业卡你的话，说明他们的水平也好不到哪里去，你正好躲过一个坑。</p>
+<p>对于转行的人来说，起始平台更加重要。起点低了，跳槽时容易吃亏，“一步赶不上，步步赶不上”，除非个人能力极强。</p>
+<h2 id="关于培训"><a href="#关于培训" class="headerlink" title="关于培训"></a>关于培训</h2><p><strong>不要参加培训班！</strong>不仅白花冤枉钱，而且培训班经历会让简历减分。真想学东西，不如自己去图书馆借书，或者上网搜索教程自学。软件这东西，还是得自己亲自动手开发才行。</p>
+<p>另外，有些培训机构会伪装成公司的样子来骗你的钱，本文后面会讲如何躲开这类骗子。</p>
+<h2 id="关于实习"><a href="#关于实习" class="headerlink" title="关于实习"></a>关于实习</h2><p>不要太期待实习。公司的目的是赚钱，不是培训，不会特意专门给你安排培训工作。所谓的实习生不过是低成本劳动力罢了。赶上开发任务，你就是个容易埋雷的开发，否则主要还是打杂。</p>
+<p>实习不要拘泥于手头工作。留意一下公司用的什么技术栈，用什么开发工具，向前辈请教有哪些技术问题、如何解决，这样写简历和面试的时候就有装逼的资本了。</p>
+<p>实习之前一定要和自己的家长、同学、辅导员和其他老师打招呼，而且在学校安排与实习安排产生冲突时要优先选择学校，这样公司不会为难你，而且在发生一些事情的时候（例如论文和答辩），老师也不会太为难你。</p>
+<h1 id="准备找工作"><a href="#准备找工作" class="headerlink" title="准备找工作"></a>准备找工作</h1><p>大学生基本上都是新手，什么都不会很正常。那么为什么还招大学生呢？因为有些工作不是那么难，大学生稍微学学也能做了，而且公司还能省不少钱。另外年轻人学习能力强，单位也可以来培养新生力量。</p>
+<p>如果严格按招聘要求卡人，企业是招不到人的，无论校招还是社招都是如此——不管是人挑工作，还是工作挑人，双方实际上都是在找个差不多的平衡点。</p>
+<p>所以，找工作就变成了：用简历、面试与一点运气来证明自己能力比别人强。</p>
+<h2 id="简历"><a href="#简历" class="headerlink" title="简历"></a>简历</h2><p>原则上讲，简历上应该只写个人联系方式，以及值得让HR召唤你面试的东西，与工作本身无关的东西一个字都别写。简历应该包含以下内容：</p>
+<ul>
+<li>你的姓名</li>
+<li>个人电话、邮箱</li>
+<li>学历：入学与毕业时间、学校、专业、学位。从本科开始写，高中或更低的学历不要写，而且千万别造假，学信网一查就能查得到。</li>
+<li>工作经历：社招才会有，校招不可能有，所以不要写。</li>
+<li>项目经历：同样是社招才会有的东西，而且这是社招简历的重点内容。校招的话，不用写了，除非你真的给老师或社团或社团组织做过什么投入了实际应用的软件。</li>
+<li>实习经历：有的话可以写。</li>
+<li>与工作相关、值得炫耀、能吸引HR召唤你面试的东西：例如你开发过什么实用程序、参加过（有含金量的）程序设计竞赛，等等。这也相当于是社招的项目经历了。</li>
+</ul>
+<p>有些人会建议写上工作技能（例如“熟悉SpringBoot”等等）。这类东西可以写，不过通常只会用于HR筛选简历。如果写，面试的时候可能也会拿这些东西说事，所以千万别写“精通”，也不要写自己完全不懂的东西。会的多可以写“熟悉”，会的少可以写“了解”，完全不会的话就别提。</p>
+<p>HR不是技术人员。社招的话，他们通常只能筛掉不靠谱的简历，然后再让技术部门作进一步的判断。校招的话，因为大家都是白纸，有些HR自己就能分辨是否靠谱。</p>
+<p>HR通常很忙，一天要看一大堆简历，既有校招的，也有社招的。每份简历只能大概扫一扫，没兴趣的话就不会再细看，直接扔到垃圾桶。所以，简历要格式简洁、内容清晰、直奔主题，而且（校招简历）只写一页内容，别写出第二页。</p>
+<h3 id="项目经历"><a href="#项目经历" class="headerlink" title="项目经历"></a>项目经历</h3><p>社招才会有项目经历，学生不太可能做过正式的商业项目，所以校招简历上通常不会有项目经历。</p>
+<p>这里简单介绍一下社招的项目经历写法，供做过“项目”的同学们参考：</p>
+<p>项目按时间倒序排列，新项目写前头，因为时间越近经验往往越丰富。有很多项目的话，挑一些重点项目、重点工作写。</p>
+<p>写项目时，可以先用简单的几句话介绍一下项目，让HR和面试官了解项目大概是做什么事情的。</p>
+<p>接下来就要根据“STAR法则”（情境、任务、行动、结果）来介绍自己做过哪些事情了：</p>
+<ul>
+<li>情境：需要解决什么问题，或者遇到了什么事情</li>
+<li>任务：你的目标是什么</li>
+<li>行动：你做了什么事情</li>
+<li>结果：最后达到了什么效果。如果能量化，那么务必提供一个有说服力的数字，例如系统响应时间从2s降低到200ms。</li>
+</ul>
+<p>项目经历可以稍微吹吹牛，或者把别人劳动成果说成是自己的（只要你确实能独立开发出来），反正其他公司又不可能查程序代码来确认是不是你本人写的。然而，你写的东西都会成为面试提问的内容，所以牛皮也别吹太大，否则的话，一旦穿帮，就直接失去本公司的工作机会了。</p>
+<h3 id="加分项"><a href="#加分项" class="headerlink" title="加分项"></a>加分项</h3><ul>
+<li>技术博客</li>
+<li>GitHub：当然博客与GitHub账号要认真活动，而且别一股脑地Fork别人项目，否则看起来就像是为找工作而临时拼凑东西。</li>
+<li>ACM竞赛获奖：当然要有含金量才行</li>
+<li>项目经历：商业项目是不可能的了——你写的东西，不管是课程设计，还是真正的项目，跟商业项目比，基本上都是一坨屎。但是呢，如果你的东西投入实际使用（例如给老师、社团或学校什么组织制作的），或者能体现出你对项目的思考（例如安全优化、考虑代码质量、版本迭代等），那么就能加分了。</li>
+<li>其他工作技能：例如英语能力强、热爱钻研Linux等，这些东西都可以适当地提一提。当然，一定要和工作相关。</li>
+</ul>
+<p>如果你自认为能力很强，但是确实没做过项目，（如果博客计划没咕的话）后续会讲讲如何假装自己做过项目。</p>
+<h3 id="减分项"><a href="#减分项" class="headerlink" title="减分项"></a>减分项</h3><p>简历不要有以下内容。减分项越多，你的简历越没人接：</p>
+<ul>
+<li>错别字、语病、英语名称拼错：直接枪毙</li>
+<li>从第二页开始的所有内容：大佬去社招的话写两三页还行，你个萌新一页就够了，多了都是注水。</li>
+<li>凌乱/优雅的格式<ul>
+<li>Word格式：请用PDF格式。HR有可能拿手机或别的软件看，看完之后直接用微信推给开发部门，Word格式排版会全部乱掉。</li>
+<li>PowerPoint格式：PowerPoint是用来在投影上展示的。你应聘的是程序员，不是美工设计，HR不可能拿个投影仪挨个页面播放你的大作。</li>
+<li>招聘网站模板/表格：花哨的格式会导致审美疲劳，影响观感。简单地排好版，在必要地方加黑体字，用你的文字打动人，这样就够了。</li>
+</ul>
+</li>
+<li>无关信息<ul>
+<li>照片：除非招聘要求附带照片，你的照片只会让他们觉得恶心。<span class="exturl" data-url="aHR0cDovL3B1dGluLmtyZW1saW4ucnUvYmlvL3BhZ2UtMA==">超级帅哥<i class="fa fa-external-link-alt"></i></span>或超级美女除外。</li>
+<li>籍贯、民族、党员身份等：除非单位明确要求，否则别写，在软件行业没什么用。</li>
+<li>QQ、微信、微博等联系方式：请只用电话和邮件联系，不要用别的方式。</li>
+<li>高中及以前的经历：没人在乎你的黑历史（OI系列竞赛大奖除外）。而且，就算你过去是名人，大学四年过去，基本上只剩下人名了吧。</li>
+<li>大学与工作技能无关的经历：HR想知道你能不能胜任工作，别的事情没心思了解。</li>
+<li>与工作技能无关的证书、奖项：从事软件开发工作，要“新媒体投稿大赛一等奖”（与软件开发无关）、“大学生创新比赛参与奖”有什么用？</li>
+<li>兴趣爱好：喜欢打球跟软件工作有什么关系呢？要说，就说自己喜欢研究技术，或者喜欢<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2tvbWVpamktc2F0b3JpL0RyZXNz">穿女装<i class="fa fa-external-link-alt"></i></span>，而且在GitHub上发过自己女装照，这样才算跟技术有关系吧。</li>
+</ul>
+</li>
+<li>一看就知道在注水<ul>
+<li>门槛太低的证书、奖项：例如计算机二级基本上都能过，校级程序竞赛参与奖也没什么价值，别写。</li>
+<li>“精通”：敢说自己“精通”，你算老几啊？</li>
+<li>一点人生的经验：你个大学生哪里来的工作？要是实习经历，为什么不说是“实习经验”？</li>
+<li>培训班经历：就算有，也要说是自学成才，千万别说自己去过培训班。</li>
+<li>自我评价：评价是你未来的领导的事情，你自己怎么评价都会有雷，所以干脆别评价了。</li>
+</ul>
+</li>
+</ul>
+<p>当然以上不是绝对的，有些事情完全是看运气，例如，某公司平时气氛活泼，HR收到两份简历，对内容犹豫不决，发现其中一个人爱表演节目，想着年终晚会可以让他出个节目，于是另一份简历被PASS了。</p>
+<h2 id="投递简历"><a href="#投递简历" class="headerlink" title="投递简历"></a>投递简历</h2><p>上半学期（秋招）就要开始积极找工作，主动出击，不要等到下半学期马上毕业了才行动。拖得越晚，公司和候选人质量越差。等到开大型招聘会的时候，你就只能看到垃圾公司、垃圾岗位以及那些岗位需要处理的垃圾了。</p>
+<p>大中型企业经常会到学校组织宣讲会，介绍自己公司，并且会立刻收简历、组织面试（毕竟出差要花钱，所以会“速战速决”）。平时要多关注学校就业中心或就业网站，提前了解公司，靠谱的话，就在正式宣讲会之前把简历和面试准备好，去宣讲会时候把简历带上，开完直接投。而且，无论你的简历是不是垃圾，在进垃圾桶之前肯定被HR看过（而其他途径就不一定了）。</p>
+<p>如果有认识的学长学姐，可以问问他们去了哪些地方。合适的话可以让他们帮忙内推，增加找到工作的机率。但是，既然找熟人帮忙，那么你自己也要给力，别坑学长学姐。</p>
+<h3 id="公司背景调查"><a href="#公司背景调查" class="headerlink" title="公司背景调查"></a>公司背景调查</h3><p>如何判断一家公司靠不靠谱呢？</p>
+<ul>
+<li>了解公司概况<ul>
+<li>进入公司官网：了解公司主要业务。如果<span class="exturl" data-url="aHR0cDovL3N0Y21jdS5jb20v">连官网做得都很糟糕<i class="fa fa-external-link-alt"></i></span>，你觉得公司靠谱吗？</li>
+<li>使用<span class="exturl" data-url="aHR0cHM6Ly93d3cudGlhbnlhbmNoYS5jb20v">天眼查<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly93d3cucWNjLmNvbS8=">企查查<i class="fa fa-external-link-alt"></i></span>检查：关注企业注册情况、是否有经营风险等。不必付费，看个大概，知道公司不是官司缠身、不是劳动仲裁常客，也不会欠一屁股债欠到发不出工资就行。</li>
+<li>确认工作性质：互联网？自己做项目？从外头拉项目？外包？</li>
+<li>确认创立时间：成熟公司？创业公司？创业公司的话，融资情况如何？</li>
+<li>确认公司规模：太小（只有几个人）或太大（超过上千人）都有坑。前者是平台小，后者外包可能性大。</li>
+<li>确认办公地点：如果连个靠谱的办公室都没有，那别想了，不是培训机构就是传销。另外需要注意，由于有些工作要出差、驻场，所以办公地点并不一定是办公室地点。</li>
+</ul>
+</li>
+<li>了解招聘岗位<ul>
+<li>技术栈要求如何？是不是业界较新的标准？</li>
+<li>“全栈工程师”：这是公司想让你一人多役、节省工资的意思，慎投。</li>
+<li>加班、出差情况：有些岗位会明确告知要出差。如果招聘岗位需求中没有体现，你可以在面试时候主动问。</li>
+<li>登录招聘网站，查看该公司社招的情况：如果社招岗位常年招人（例如岗位挂了好几个月，而且也没有什么新开设的岗位），说明员工流失严重，呆不下去。</li>
+</ul>
+</li>
+<li>了解员工对公司的负面评价<ul>
+<li>知乎、<span class="exturl" data-url="aHR0cHM6Ly9rYW56aHVuLmNvbS8=">看准网<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly93d3cuam9idWkuY29tLw==">职友集<i class="fa fa-external-link-alt"></i></span>：重点关注其他员工的负面评价（2021年更新：看准网已经没有员工评论了，可以去脉脉上看）</li>
+<li>注意有些公司规模很大，会分出很多部门或团队，有些人会赶巧遇到合适岗位，而有些人会倒霉碰到垃圾团队，所以个别员工评价不见得能代表整个公司的情况。</li>
+<li>如果有人指出不能按时发工资，可能公司差不多要黄了，别去。</li>
+</ul>
+</li>
+<li>了解面试经验：登录<span class="exturl" data-url="aHR0cHM6Ly9rYW56aHVuLmNvbS8=">看准网<i class="fa fa-external-link-alt"></i></span>，关注其他人应聘的面试经验。不过这些面试经验通常是针对社招的，仅供参考，只能说，如果连社招面试都特别水的话，可能是公司有坑，慎投。</li>
+</ul>
+<p>按照以上方式操作，你可能仍然会进入一家不靠谱的公司，但是你至少把更不靠谱的公司给筛掉了。</p>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>检查简历上的联系方式，电话别打不通，邮箱别收不到邮件。</li>
+<li>一家公司不要投多个岗位：投多了正好说明你是投机分子，各方面能力都不行，直接PASS。</li>
+<li>一家公司不要投多遍：只要你没往垃圾箱投，也没用扔垃圾的方式投，那么HR肯定收到了你的简历。投次数多了，会让人反感，然后你就PASS了。</li>
+<li>关于纸质简历：普通地拿A4打印就行了，这样的话被HR扔掉也不可惜。</li>
+<li>关于电子邮件简历：<ul>
+<li>给你的邮箱名称设置为你自己的名字。给自己发封邮件测试一下，看发件人写的是“℡ぐ㈨9б情怀 <span class="exturl" data-url="bWFpbHRvOiYjMTIwOyYjMTIwOyYjeDc4OyYjMTIwOyYjNjQ7JiMxMDM7JiN4NmQ7JiM5NzsmI3g2OTsmI3g2YzsmIzQ2OyYjOTk7JiN4NmY7JiN4NmQ7">&#120;&#120;&#x78;&#120;&#64;&#103;&#x6d;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#x6d;<i class="fa fa-external-link-alt"></i></span>”还是“张三 <span class="exturl" data-url="bWFpbHRvOiYjeDc4OyYjMTIwOyYjeDc4OyYjeDc4OyYjNjQ7JiN4Njc7JiMxMDk7JiN4NjE7JiMxMDU7JiN4NmM7JiM0NjsmI3g2MzsmIzExMTsmI3g2ZDs=">&#x78;&#120;&#x78;&#x78;&#64;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span>”</li>
+<li>邮件使用类似<code>【校招应聘】张三_Java开发工程师_XXX大学_本科</code>的标题，让HR一看就能看到是你想找工作。否则的话，你的邮件会随着各种垃圾埋没于HR邮箱之中。</li>
+<li>邮件正文要写内容，例如尊敬的HR怎么怎么地。邮件正文是写给人看的，而且HR不会认真看，所以只要说清自己是投简历的，言语礼貌就行了。</li>
+<li>别忘了加附件。附件也要按类似邮件标题的格式起名字。</li>
+<li>简历务必使用PDF格式，而且别打压缩包。万一HR用手机看，别的格式都看不了。</li>
+</ul>
+</li>
+<li>关于BOSS直聘简历：简历使用PDF格式，起好文件名。道理同上。</li>
+</ul>
+<h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><p>通知面试之后不要失约。实在去不了，一定要提前打电话告知面试官，不要玩失踪，否则你容易进HR圈子的黑名单，去别处找工作也吃亏。</p>
+<p>不要把面试当成接受审问，你可以尽量把面试场景转变成你与面试官之间相互交流、沟通。而且，面试的目的是双向选择，一方面，你要突出自己的优点，回避自己的缺点，让面试官觉得你多少懂些技术、学习能力强、热爱思考，而且愿意主动为公司付出。另一方面，你也要在交流中去了解一下公司，例如在面试官说“还有什么要问的吗”时主动询问公司的职业发展。</p>
+<p>有些面试官经验一般，会直接挑一些套路问题来问，你可以提前去知乎搜搜面试套路问题，提前准备一些答案，主动躲掉一些坑。有经验的面试官则会根据你的简历内容来灵活提问，所以你还要了解简历上面写的那些词语，了解基本的原理、用法、常见问题。如果你能体现出“自己有所思考”，那么就更好了。</p>
+<p>在交流时不要说负面内容，也不要说“虽然我不会但是我愿意学习”，这些都是减分项。面试官不一是未来工作的上级，所以不要主动问面试过没过、工资多少钱、加班多少、出差多不多这样比较“俗”的问题。</p>
+<p>不要干等结果，面试不通过的话一般不会主动通知你。另外交流过程中感觉良好不代表一定就要招，所以，面完一家，无论结果如何，尽快去找下一家。如果真被好几家公司录用了，只要你还没签协议，主动通知公司放弃机会就OK了。</p>
+<p>如果需要多次面试，那么技术面的可能性很大。外地公司的话，还会涉及去外地面试。去外地面试，务必自行前往公司办公室，绝对不要接受“接站”，而且要和家长、同学、老师打好招呼，随时保持联系。如果地点可疑，或者对方坚持“接站”，那么肯定是骗子，不要去了。</p>
+<h1 id="常见骗局"><a href="#常见骗局" class="headerlink" title="常见骗局"></a>常见骗局</h1><p>大学生没有社会经验，最好骗，所以要主动了解一些常见骗局。</p>
+<h2 id="传销"><a href="#传销" class="headerlink" title="传销"></a>传销</h2><p>以下几个现象，匹配条数越多，越需要加小心：</p>
+<ul>
+<li>薪水比行业平均水平高，工作要求却非常低，而且没什么技术方面的要求</li>
+<li>公司资料不详</li>
+<li>天眼查、企查查等网站查不到公司信息</li>
+<li>公司介绍含糊不清，看不出公司主营业务是什么</li>
+<li>公司什么职位都招，这些职位之间的关系还不大</li>
+<li>熟人（例如学长）突然找你，说要一起拼事业挣大钱</li>
+<li>问你老家在哪里，是不是某地人，在某地有没有亲戚朋友</li>
+<li>在非工作时间（周末）联系你</li>
+<li>还没认真笔试、面试就直接录用了</li>
+<li>用163、qq等非工作邮箱联系你<ul>
+<li><em>正规公司有自己工作邮箱、公司域名，照着域名登进去之后应该是公司官方网站。</em></li>
+</ul>
+</li>
+<li>需要提交健康证明，特别是乙肝<ul>
+<li><em>正规公司通常不会要求在入职之前体检，就算需要，也会专门组织体检。</em></li>
+<li><em>查乙肝是因为怕你把整个出租屋里的传销分子都给感染，浪费他们的钱。</em></li>
+</ul>
+</li>
+<li>需要预交费用<ul>
+<li><em>正规招聘不会收费！</em></li>
+</ul>
+</li>
+<li>让你去外地面试、培训</li>
+<li>到外地面试或培训时，主动派人接站</li>
+<li>问公司具体办公地点时，回答含糊不清</li>
+<li>工作地点远离市区与开发区</li>
+<li>需要前往<strong>天津静海</strong>、天津武清、北京通州、北京大兴、北京房山、北京燕郊/河北燕郊（实际上是河北的）、河北廊坊、河北沧州等地区。具体可见<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29odS5jb20vYS8xMzQ1NTI1MjlfNjE3NzE3">传销高发地图<i class="fa fa-external-link-alt"></i></span>。</li>
+</ul>
+<h2 id="骗钱"><a href="#骗钱" class="headerlink" title="骗钱"></a>骗钱</h2><ol>
+<li><strong>正规招聘不会收费！</strong><ul>
+<li>公司是给员工发钱的，即便入职，除了（在单位）食宿以外，通常也不会向员工收什么费用。</li>
+<li>去公司面试时的路费、住宿费和饭钱可能要自己掏。但是这笔钱明显没有进公司口袋中。</li>
+<li>如果外出食宿，公司甚至会给你报销和补贴，虽然补贴可能起不到多大作用。</li>
+</ul>
+</li>
+<li><strong>绝不要接受收费培训！</strong><ul>
+<li>这类骗局有个通用套路：面试时说你能力不行，但是公司愿意培养你，给你机会提供培训，然后收取费用。交不起费用的话也可以帮你解决费用问题。这些都是骗钱，甚至是“套路贷”！</li>
+<li>正规公司通常会有入职培训，但是肯定不收钱，而且企业文化方面内容会多一些。</li>
+<li>不要签长期培训和保证长期工作的协议，现在的人们真不一定会长期工作，签这类协议会影响以后辞职。</li>
+<li>工作技能还是要在实际项目中锻炼。</li>
+</ul>
+</li>
+</ol>
+<p>这类骗子“公司”本来就没打算真正录用你，所以遇到的话要赶紧换下一家。</p>
+<h2 id="团建"><a href="#团建" class="headerlink" title="团建"></a>团建</h2><p>团建活动（集体“娱乐”活动）通常是领导自我感觉良好、员工感觉恶心的东西，而公司职工之间通常是钱的关系。钱给够、分配公平、领导靠谱、行业前途光明、劳逸结合，员工自然就会认真工作；钱给不够、分配不公、领导不靠谱、行业前景黯淡、强制加班，员工自然就会消极工作。钱给不到位还搞团建，只会起反作用。</p>
+<p>如果提前了解到公司经常搞团建，而且经常占用休息日搞，那么就别去了。</p>
+<h2 id="招聘黑话"><a href="#招聘黑话" class="headerlink" title="招聘黑话"></a>招聘黑话</h2><p>仅供参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZG91YmFuLmNvbS9ncm91cC90b3BpYy85NTQyNDUxMy8=">招聘黑话大全<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="福利"><a href="#福利" class="headerlink" title="福利"></a>福利</h2><p>根据<span class="exturl" data-url="aHR0cDovL3d3dy5nb3YuY24vYmFuc2hpLzIwMDUtMDUvMjUvY29udGVudF85MDUuaHRt">劳动法<i class="fa fa-external-link-alt"></i></span>，以下待遇都是你应得的，根本不是福利：</p>
+<ul>
+<li>五险一金 = 社保 + 公积金 = 养老保险、医疗保险、生育保险、失业保险、工伤保险 + 公积金</li>
+<li>加班费1.5倍、周末加班2倍、法定节假日三薪（一般公司只给法假三薪，别的加班费不给）</li>
+<li>带薪年休假</li>
+<li>定期体检</li>
+</ul>
+<p>如果公司缺少以上内容，说明他们不正规，别去了。如果公司强调有这些“福利”，说明他们确实正规，但根本没有福利。</p>
+<h2 id="低底薪高奖金"><a href="#低底薪高奖金" class="headerlink" title="低底薪高奖金"></a>低底薪高奖金</h2><p>如果HR说工资高，但是你发现底薪比同行低（即使HR承诺奖金高），那么要加点小心。月薪不按时发或者发少了，你还可以告劳动仲裁，而奖金不给你发，就算告法院也没用，因为法律根本不管奖金如何。</p>
+<h2 id="加班费"><a href="#加班费" class="headerlink" title="加班费"></a>加班费</h2><p>大多数公司不会发加班费，大家也默认了这个事实。某些外企会发，所以他们经常禁止员工加班。</p>
+<p>如果很在乎这个东西，那么可以研究研究如何告劳动仲裁，以及后续如何防止被公司报复（这一点很重要，当你决定告劳动仲裁时，稍微懂一点法律的公司当然会研究如何报复你）。或者，如果你不在乎涨工资受阻的话，也可以考虑在非工作时间玩失踪。</p>
+<h2 id="五险一金"><a href="#五险一金" class="headerlink" title="五险一金"></a>五险一金</h2><p>只要正常工作，公司必须给员工交五险一金，所以这是你应得的，不叫福利。然而五险一金是按基本工资交的，为了节省成本，公司通常会把工资明细分得很细，尽可能压低基本工资，从而少交五险一金，这是普遍现象，不要太在意。</p>
+<p>少交还可以理解，毕竟公司都会想办法省钱。但是，如果连交都不交，那么务必拒绝签约，而且只要你还没签字，你就不需要赔偿任何费用。如果已不幸入职，那么尽快辞职，因为不交五险一金的话你会惹上麻烦（例如影响落户），而且你还不能自己掏腰包补齐。</p>
+<h2 id="狼性-末位淘汰制"><a href="#狼性-末位淘汰制" class="headerlink" title="狼性 / 末位淘汰制"></a>狼性 / 末位淘汰制</h2><p>除非公司平台很好，否则慎重。在这种公司，同事们为了不被淘汰，通常不得不去坑其他同事，结果往往是内斗严重，谁的日子都过不安宁。</p>
+<h2 id="外包转正"><a href="#外包转正" class="headerlink" title="外包转正"></a>外包转正</h2><p>有些外包公司是给大厂（例如腾讯）做外包的，然后领导会承诺说表现得好可以“转正”，进入甲方。不要相信这种话，外包本身就是为了省钱和省指标，这种“转正”机会连你未来的领导都没轮到，怎么可能轮到你？</p>
+<p>如果不得不进入外包公司，而且遇到了一个能力比较强的领导或同事，倒是可以考虑跟他们处好关系（不过你自己的工作能力也要给力才行），将来找准机会跟着他们一块儿跳槽。</p>
+<h2 id="创业"><a href="#创业" class="headerlink" title="创业"></a>创业</h2><p><strong>不要自己去创业！</strong>理由如下：</p>
+<ol>
+<li>你还是学生，无论能力水平、社会经验，或者人脉方面，你都达不到创业合伙人的水准。老板就更不用说了。</li>
+<li>创业公司人手少，你可能不得不做很多开发工作之外的事情，甚至可能要当秘书、会计、HR、后勤、保安……反正除了老总以外什么工作都做一遍。</li>
+<li>即使你能力够强，撑满三年也不是件容易的事情。经营困难、资金链断裂、法律纠纷、内部矛盾，这些事情都足以让公司立刻倒闭。</li>
+<li>万一公司倒闭，再找工作的话，你的简历通常也不太好看。有几个能做出成绩的呢？</li>
+</ol>
+<p>总之，创业只是“延迟失业”而已。</p>
+<h1 id="找到工作之后"><a href="#找到工作之后" class="headerlink" title="找到工作之后"></a>找到工作之后</h1><ul>
+<li>如果投了多家单位，或者有希望拿多个offer，那么先别急着签三方协议，可以先拖两天考虑考虑然后再签。</li>
+<li>一定要把三方协议签好，否则被耍了也没处维权。</li>
+<li>签了三方协议之后就不要毁约了，除非你想赔违约金。</li>
+<li>入职之后会有试用期，别好不容易找到工作又把工作丢了。</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8xMjcwNDEyMzc=">给刚毕业的大学生（找工作）的建议<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cDovL2ptLnRhb2Jhby5vcmcvMjAxOC8wNy8wOS8lRTglODElOEElRTglODElOEElRTklOTglQkYlRTklODclOEMlRTclQTQlQkUlRTYlOEIlOUIlRTklOUQlQTIlRTglQUYlOTUlRUYlQkMlOEMlRTglQjAlODglRTglQjAlODglRTIlODAlOUMlRTklODclOEUlRTclOTQlOUYlRTIlODAlOURKYXZhJUU3JUE4JThCJUU1JUJBJThGJUU1JTkxJTk4JUU1JUFEJUE2JUU0JUI5JUEwJUU3JTlBJTg0JUU5JTgxJTkzJUU4JUI3JUFGLw==">聊聊阿里社招面试，谈谈“野生”Java程序员学习的道路<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h1 id="本系列文章"><a href="#本系列文章" class="headerlink" title="本系列文章"></a>本系列文章</h1><ul>
+<li><strong>校招如何找工作</strong></li>
+<li>校招装逼教程：博客</li>
+<li>校招装逼教程：学生信息管理系统</li>
+<li>校招装逼教程：微信公众号（Java）</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2018/09/12/find-jobs/" title="Java 校招（一）：如何找工作">https://plusnan.me/2018/09/12/find-jobs/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E4%BD%9C/" rel="tag"># 工作</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/07/15/to-new-employee/" rel="prev" title="给校招新员工分享的一点人生的经验">
+                  <i class="fa fa-chevron-left"></i> 给校招新员工分享的一点人生的经验
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/11/02/weblogic-caution/" rel="next" title="WebLogic踩坑记录">
+                  WebLogic踩坑记录 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"e4a90f92327b54686cee719ded9859e3"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

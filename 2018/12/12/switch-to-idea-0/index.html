@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ IDEA。本系列文章面向Eclipse使用者，讲述IDEA的一些基本操作，以便平稳地进行切换。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从Eclipse切换到IDEA">
+<meta property="og:url" content="https://plusnan.me/2018/12/12/switch-to-idea-0/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ IDEA。本系列文章面向Eclipse使用者，讲述IDEA的一些基本操作，以便平稳地进行切换。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-12-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-11T02:01:56.262Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="IDEA">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2018/12/12/switch-to-idea-0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2018/12/12/switch-to-idea-0/","path":"2018/12/12/switch-to-idea-0/","title":"从Eclipse切换到IDEA"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>从Eclipse切换到IDEA | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E7%B3%BB%E5%88%97%E5%86%85%E5%AE%B9"><span class="nav-number">1.</span> <span class="nav-text">本系列内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E5%88%B0IDEA%E7%9A%84%E7%90%86%E7%94%B1"><span class="nav-number">2.</span> <span class="nav-text">切换到IDEA的理由</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%AE%E5%BC%82"><span class="nav-number">3.</span> <span class="nav-text">差异</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%95%E5%BE%8B%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">法律问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/12/12/switch-to-idea-0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从Eclipse切换到IDEA
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-12-12 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-12T00:00:00+08:00">2018-12-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ IDEA。本系列文章面向Eclipse使用者，讲述IDEA的一些基本操作，以便平稳地进行切换。</p>
+<span id="more"></span>
+
+<h1 id="本系列内容"><a href="#本系列内容" class="headerlink" title="本系列内容"></a>本系列内容</h1><ul>
+<li><strong>为什么进行切换</strong></li>
+<li><a href="/2018/12/13/switch-to-idea-1/">切换的基本操作</a></li>
+<li><a href="/2019/01/27/switch-to-idea-2">传统Web项目在IDEA的Project Structure</a></li>
+<li><a href="/2019/08/03/switch-to-idea-3/">传统Web项目转为Gradle项目</a></li>
+</ul>
+<h1 id="切换到IDEA的理由"><a href="#切换到IDEA的理由" class="headerlink" title="切换到IDEA的理由"></a>切换到IDEA的理由</h1><p>下面是我向同事推荐使用IDEA（商业版）的一些理由：</p>
+<ol>
+<li>公司版本管理软件从ClearCase切换到了SVN，这意味着开发工作不再受ClearCase拖累，开发工具也可以随意换成更好用的了。</li>
+<li>公司电脑配置不高，而且项目文件非常多，Eclipse用起来很卡。虽然IDEA资源消耗比较高，但是用起来比Eclipse顺畅得多（备注：对于内存只有4GB的电脑，要么加条，要么换旧版IDEA，否则会很糟糕）。</li>
+<li>IDEA的搜索比Eclipse快得多，按全项目搜索的话，Eclipse要等把所有文件都过一遍，而IDEA可以一下子搜出来。</li>
+<li>IDEA的SVN支持非常好，可以很方便地检查自己修改的代码、查询同事修改、对比文件版本，虽然TortoiseSVN和Eclipse也有类似功能，但是IDEA用起来更舒服。</li>
+</ol>
+<p>以下也是IDEA的长处，不过有些是个人体验，或者未作为推销的内容向同事介绍：</p>
+<ol>
+<li>IDEA的工作空间对版本控制友好，只要我把项目配置好，加到版本库中，其他人就可以直接用IDEA打开项目，等IDEA把文件索引完，然后再配一下JDK和Tomcat路径就能投入开发了。Eclipse的话每次全新checkout都要从头开始配置，而且我们项目组有时也会出现因工作安排变动或电脑难用而重新搭环境甚至重装系统的情况。</li>
+<li>IDEA集成了数据库插件，代码提示比其他数据库软件好一些。另外修改数据时PL/SQL Developer需要附上FOR UPDATE，Toad需要用EDIT语句，SQL Developer需要自己写UPDATE语句，而IDEA可以直接在查询结果上面改。</li>
+<li>IDEA对代码风格方面的提示和警告比Eclipse丰富，例如IDEA可以检测出哪些代码是一模一样的，或者哪些类与函数根本没有人使用。</li>
+<li>IDEA自带反编译工具，可以方便地反编译代码，以分析一些jar包的原理。</li>
+</ol>
+<p>当然，Eclipse的用户和插件也不少，对于爱搞配置的人来说应该也比较好用。</p>
+<h1 id="差异"><a href="#差异" class="headerlink" title="差异"></a>差异</h1><p>Eclipse和IDEA的界面与操作方法有些区别。概念上的重大差异主要是“Project Structure”，即项目文件结构的管理，不过如果有人把项目配置好并提交版本控制之后，其他成员反倒不太需要关注这些东西，因此我会另外写一篇文章进行叙述。</p>
+<h1 id="法律问题"><a href="#法律问题" class="headerlink" title="法律问题"></a>法律问题</h1><p>IDEA分免费的社区版（Community Edition）和收费的商业版（Ultimate Edition），前者不支持Web开发，只能选用商业版。商业版需要激活，大家往往会用注册码、注册机来进行破解。这当然是违法的，而且比起个人，公司更容易陷入诉讼（告赢了就是一大笔钱），因此有条件的话务必买正版。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2018/12/12/switch-to-idea-0/" title="从Eclipse切换到IDEA">https://plusnan.me/2018/12/12/switch-to-idea-0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/IDEA/" rel="tag"># IDEA</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/11/02/weblogic-caution/" rel="prev" title="WebLogic踩坑记录">
+                  <i class="fa fa-chevron-left"></i> WebLogic踩坑记录
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/12/13/switch-to-idea-1/" rel="next" title="从Eclipse切换到IDEA（一）：切换操作">
+                  从Eclipse切换到IDEA（一）：切换操作 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"d1f873afeb4ba9e2b84847ccec4fcb0a"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

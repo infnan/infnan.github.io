@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="由于武汉肺炎疫情原因，随时可能会封城，导致无法前往办公室办公。如果公司没有提供VPN，为了在居家办公时能有一个连接办公室资源的方法，可以考虑自己搭一个简易的VPN。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Docker快速为办公室搭建VPN">
+<meta property="og:url" content="https://plusnan.me/2021/09/10/remote-vpn/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="由于武汉肺炎疫情原因，随时可能会封城，导致无法前往办公室办公。如果公司没有提供VPN，为了在居家办公时能有一个连接办公室资源的方法，可以考虑自己搭一个简易的VPN。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-06T02:37:08.017Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="VPN">
+<meta property="article:tag" content="远程办公">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2021/09/10/remote-vpn/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2021/09/10/remote-vpn/","path":"2021/09/10/remote-vpn/","title":"用Docker快速为办公室搭建VPN"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>用Docker快速为办公室搭建VPN | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAVPN"><span class="nav-number">1.</span> <span class="nav-text">搭建VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">服务器准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AE%B9%E5%99%A8%E5%92%8CVPN%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">安装容器和VPN配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8VPN"><span class="nav-number">1.3.</span> <span class="nav-text">启动VPN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%85%8D%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81"><span class="nav-number">1.4.</span> <span class="nav-text">分配账号密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AC%E7%BD%91%E6%98%A0%E5%B0%84"><span class="nav-number">2.</span> <span class="nav-text">公网映射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VPN%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">3.</span> <span class="nav-text">VPN客户端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%80%9D%E8%80%83%EF%BC%9A%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%E6%9D%A5%E7%BF%BB%E5%A2%99%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">扩展思考：能不能用来翻墙？</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2021/09/10/remote-vpn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用Docker快速为办公室搭建VPN
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-10 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-10T00:00:00+08:00">2021-09-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-06-06 10:37:08" itemprop="dateModified" datetime="2023-06-06T10:37:08+08:00">2023-06-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>由于武汉肺炎疫情原因，随时可能会封城，导致无法前往办公室办公。如果公司没有提供VPN，为了在居家办公时能有一个连接办公室资源的方法，可以考虑自己搭一个简易的VPN。</p>
+<span id="more"></span>
+
+<h1 id="搭建VPN"><a href="#搭建VPN" class="headerlink" title="搭建VPN"></a>搭建VPN</h1><h2 id="服务器准备"><a href="#服务器准备" class="headerlink" title="服务器准备"></a>服务器准备</h2><p>准备一个服务器，能够访问公司办公室各资源，而且能连接互联网。配置好之后，安装Docker，并开放服务器443端口。</p>
+<h2 id="安装容器和VPN配置"><a href="#安装容器和VPN配置" class="headerlink" title="安装容器和VPN配置"></a>安装容器和VPN配置</h2><p>前往<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dwcHVya2luZy9vY3NlcnYtZG9ja2Vy">https://github.com/wppurking/ocserv-docker<i class="fa fa-external-link-alt"></i></span>，将内容全部下载。也可以直接输入命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/wppurking/ocserv-docker.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>进入<code>ocserv-docker/ocserv</code>目录，清空<code>ocpasswd</code>文件内容，删除默认账号。</p>
+<p>再修改<code>ocserv.conf</code>，在结尾增加：</p>
+<pre class="line-numbers language-none"><code class="language-none">route &#x3D; 192.168.0.0&#x2F;255.255.255.0
+
+custom-header &#x3D; &quot;X-CSTP-Client-Bypass-Protocol: true&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>route后面的IP需要根据实际情况配置。例如公司内网采用192.168网段，那么就是<code>192.168.0.0/255.255.255.0</code>。如果不确定，也可以不增加route这行配置，这样连上VPN后所有流量都会通过VPN访问。</p>
+<h2 id="启动VPN"><a href="#启动VPN" class="headerlink" title="启动VPN"></a>启动VPN</h2><p>下载完成后，进入该目录并启动容器：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ocserv-docker
+<span class="token function">docker</span> run -d --privileged --restart unless-stopped --name ocserv-docker -v ~/ocserv-docker/ocserv:/etc/ocserv -p <span class="token number">443</span>:443/tcp wppurking/ocserv
+
+<span class="token comment"># 查看日志，检查是否正常运行</span>
+<span class="token function">docker</span> logs ocserv-docker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="分配账号密码"><a href="#分配账号密码" class="headerlink" title="分配账号密码"></a>分配账号密码</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> -it ocserv-docker ocpasswd 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>输入两遍密码，修改立即生效，无需重启VPN服务器。</p>
+<h1 id="公网映射"><a href="#公网映射" class="headerlink" title="公网映射"></a>公网映射</h1><p>VPN搭好之后，需要将该VPN的端口映射到公网上面。如果公司有公网IP，而且能够进行配置，可找相应部门把端口配置好。如果没有相应资源，可参考<a href="/2018/07/14/tunnel/">内网穿透教程</a>进行配置。</p>
+<h1 id="VPN客户端"><a href="#VPN客户端" class="headerlink" title="VPN客户端"></a>VPN客户端</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2lzY28uY29tL2MvZW4vdXMvc3VwcG9ydC9zZWN1cml0eS9hbnljb25uZWN0LXNlY3VyZS1tb2JpbGl0eS1jbGllbnQtdjQteC9tb2RlbC5odG1sI350YWItZG93bmxvYWRz">下载Cisco AnyConnect客户端<i class="fa fa-external-link-alt"></i></span>，下载完成后进行安装。</p>
+<p>第一次启动时，需要进入设置页面，将“Block connections to untrusted servers”前面的勾取消。</p>
+<p>输入VPN公网映射之后的地址和端口，点击Connect即可连接。启动后会出现安全提示，点击“Connect Anyway”连接，然后输入账号密码即可连接VPN。</p>
+<h1 id="扩展思考：能不能用来翻墙？"><a href="#扩展思考：能不能用来翻墙？" class="headerlink" title="扩展思考：能不能用来翻墙？"></a>扩展思考：能不能用来翻墙？</h1><p>当然可以，在国外服务器上用相同方式部署一套VPN软件即可，但是由于Cisco AnyConnect的流量特征太明显，所以建议用其他更可靠的方式翻墙。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2021/09/10/remote-vpn/" title="用Docker快速为办公室搭建VPN">https://plusnan.me/2021/09/10/remote-vpn/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/VPN/" rel="tag"># VPN</a>
+              <a href="/tags/%E8%BF%9C%E7%A8%8B%E5%8A%9E%E5%85%AC/" rel="tag"># 远程办公</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/15/buy-house-8/" rel="prev" title="买房避坑指南（八）：要不要买车位">
+                  <i class="fa fa-chevron-left"></i> 买房避坑指南（八）：要不要买车位
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/24/centos-security/" rel="next" title="CentOS 7安全等保整改记录">
+                  CentOS 7安全等保整改记录 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"7674f52fff2cb87ba26f158d5f9ac51a"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="做软件项目，为了不被甲方拖入无尽的深渊，在初期需求工作上就要稳扎稳打，躲避陷阱。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件工程避坑指南（一）——需求调研">
+<meta property="og:url" content="https://plusnan.me/2021/03/06/requirement-trap-1/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="做软件项目，为了不被甲方拖入无尽的深渊，在初期需求工作上就要稳扎稳打，躲避陷阱。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-15T02:00:15.196Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="需求">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2021/03/06/requirement-trap-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2021/03/06/requirement-trap-1/","path":"2021/03/06/requirement-trap-1/","title":"软件工程避坑指南（一）——需求调研"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>软件工程避坑指南（一）——需求调研 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E5%81%9A%E8%AE%A1%E5%88%92%E5%86%8D%E5%8E%BB%E8%B0%83%E7%A0%94"><span class="nav-number">1.</span> <span class="nav-text">先做计划再去调研</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E6%8F%90%E6%96%B9%E6%A1%88%E5%86%8D%E5%81%9A%E7%A1%AE%E8%AE%A4"><span class="nav-number">2.</span> <span class="nav-text">先提方案再做确认</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E5%9C%BA%E7%95%99%E8%AF%81%E6%8D%AE%EF%BC%81"><span class="nav-number">3.</span> <span class="nav-text">现场留证据！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E7%A0%B4%E7%A5%9E%E8%AF%9D"><span class="nav-number">4.</span> <span class="nav-text">打破神话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E8%A6%81%E9%9A%8F%E6%84%8F%E6%89%BF%E8%AF%BA"><span class="nav-number">5.</span> <span class="nav-text">不要随意承诺</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%BF%85%E5%AE%8C%E5%85%A8%E6%BB%A1%E8%B6%B3%E7%94%A8%E6%88%B7%E9%9C%80%E6%B1%82"><span class="nav-number">6.</span> <span class="nav-text">不必完全满足用户需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A6%E5%AE%9A%E5%A5%BD%E5%A6%82%E4%BD%95%E5%8F%98%E6%9B%B4%E9%9C%80%E6%B1%82"><span class="nav-number">7.</span> <span class="nav-text">约定好如何变更需求</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2021/03/06/requirement-trap-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          软件工程避坑指南（一）——需求调研
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-06 00:00:00" itemprop="dateCreated datePublished" datetime="2021-03-06T00:00:00+08:00">2021-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-15 10:00:15" itemprop="dateModified" datetime="2022-02-15T10:00:15+08:00">2022-02-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>做软件项目，为了不被甲方拖入无尽的深渊，在初期需求工作上就要稳扎稳打，躲避陷阱。</p>
+<span id="more"></span>
+
+<h2 id="先做计划再去调研"><a href="#先做计划再去调研" class="headerlink" title="先做计划再去调研"></a>先做计划再去调研</h2><p>调研之前，要了解目标用户的群体类型、组织架构、主要业务职责，确定系统建设需要哪些群体参与，同时在沟通过程中要了解用户的信息化经验。</p>
+<p>需求调研，应该要求用户选择一段相对集中的时间。制定需求调研计划时，应当包含计划调研时间、地点、调研单位/部门、主题等，而且计划要留有一定的灵活性，以便用户协调安排。</p>
+<p>调研时要重点记录用户的组织架构、工作流程、现有信息化系统使用情况、现有业务痛点、工作关注点，以及用户自己提出的有效需求。</p>
+<h2 id="先提方案再做确认"><a href="#先提方案再做确认" class="headerlink" title="先提方案再做确认"></a>先提方案再做确认</h2><p>如果用户信息化经验丰富，能够提出一套实施方案，那么可让业主先梳理系统总体需求、主要功能模块，并且与开发单位进行一次或多次沟通，确定主体框架，然后以此为基础，组织后续需求调研工作。</p>
+<p>对于几乎没有信息化经验的用户，即便去现场进行调研，可能也得不到多少有价值的信息。对于这种情况，可以先按自己的理解，提前制定一套或多套方案，启发用户思路，从而主动引导用户需求。</p>
+<h2 id="现场留证据！"><a href="#现场留证据！" class="headerlink" title="现场留证据！"></a>现场留证据！</h2><p>每一次调研都应当进行记录，保留证据，证明需求工作翔实有效。</p>
+<p>前往调研时，应派人保留现场照片、录音，并用签到表完整记录在场人员（含单位部门、职务、联系方式等）。</p>
+<p>每次调研要立即形成现场记录，记录当次调研工作的主要调研内容，为后续需求分析工作提供有效依据。不要拖到第二天或更长时间以后才整理，否则容易丢三落四。</p>
+<h2 id="打破神话"><a href="#打破神话" class="headerlink" title="打破神话"></a>打破神话</h2><p>对于缺乏信息化经验的用户，对软件工程会有以下几个常见的误解：</p>
+<ul>
+<li>软件系统可以解决一切问题！</li>
+<li>软件开发又不像硬件那样大张旗鼓，根本不需要那么多费用。</li>
+<li>增加某某某功能，不就是加个按钮的事儿吗？</li>
+<li>系统原型都做好了，开发应该很快了吧。</li>
+<li>……</li>
+</ul>
+<p>因此，在与用户交流的时候，既要让他们相信开发人员有能力解决问题，又要向用户讲明实际情况，让用户意识到软件虽然看不见、摸不着，其复杂度不亚于硬件或其他类型的工程。</p>
+<h2 id="不要随意承诺"><a href="#不要随意承诺" class="headerlink" title="不要随意承诺"></a>不要随意承诺</h2><p>在调研期间，不要随意答应用户的需求，哪怕是看起来很容易解决的问题，或者群众意见强烈的问题，也只是先将他们的需求记录下来，回去再对用户提出的需求进行评估，因为其中有可能会涉及到利益问题甚至体制问题，并不能靠软件解决。承诺一件事情，后面却发现做不到，这样会失信于人，而且硬着头皮干，轻则提高无效成本，重则卷入复杂利益关系，解决不了问题还要得罪用户。</p>
+<p>基于同样道理，不要随意答应在系统中预留东西，以免因标准模糊导致后续扯皮。</p>
+<h2 id="不必完全满足用户需求"><a href="#不必完全满足用户需求" class="headerlink" title="不必完全满足用户需求"></a>不必完全满足用户需求</h2><p>如果能当场判断出用户需求不合理，就应当现场积极回应，有理有据地否决用户需求，或要求用户将需求调整至合理范围。例如：</p>
+<ol>
+<li>性价比低（对用户而言作用不大，但开发成本过高）：否决——软件工程是工程，所以也受“项目铁三角”质量、进度、成本三要素制约。</li>
+<li>用户管理方式问题：系统顶多是在现有制度框架下稍作优化，根本问题需要用户自行解决——软件系统是管理方式的体现，所以优化系统之前要先优化管理流程。</li>
+<li>含糊的需求：引导用户将需求具体化，例如提供详细的业务资料，进一步明确用户群体、系统输入、系统输出。如果用户无法提供更详细的信息，则进行否决——软件系统无法实现一个模糊的东西。</li>
+<li>未确定的需求：要求用户尽快确定需求，如果在指定期限内无法确定，系统只能先不实现，后续根据成本选择补充开发或走需求变更流程——软件系统无法实现一个未确定的东西。</li>
+<li>将简单问题复杂化的需求：分析用户的实际痛点，引导用户以解决问题为目标，要求用户做出一些妥协，采用更加合适的方案来解决问题——软件系统的根本目的是解决问题，而不是制造新的问题。</li>
+</ol>
+<p>对于有一定意义，但仍然存在风险的需求，可以要求用户进一步提供支持，例如二次调研、提供指定资料、提供人员参与需求过程等。同时也要让用户意识到，只有用户充分配合开发人员，软件开发人员才能确定系统需求。</p>
+<h2 id="约定好如何变更需求"><a href="#约定好如何变更需求" class="headerlink" title="约定好如何变更需求"></a>约定好如何变更需求</h2><p>没有不变的需求，哪怕你“干一票就走”，也不一定能躲掉用户的需求变更。需求变更控制得不好，后面容易卷入到无限的事务之中，难以脱身。</p>
+<p>为了将需求变更控制在可接受范围内，必须和用户建立一套明确的、规范的需求变更流程，强化需求变更控制，让用户为需求变更承担成本。只要超过特定时间节点（需求评审通过），需求就处于冻结状态，后续的需求变更无论大小，必须走约定的流程，以此让用户意识到，软件工程与其他工程一样，需求变更也会产生成本，影响交付进度和交付质量，而且提出需求变更的节点越晚，变更代价越大，由此产生的费用绝不可能是捞钱骗钱。</p>
+<p>需求变更的管理是一项复杂而细致的工作，后面将进行专题讨论。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2021/03/06/requirement-trap-1/" title="软件工程避坑指南（一）——需求调研">https://plusnan.me/2021/03/06/requirement-trap-1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E9%9C%80%E6%B1%82/" rel="tag"># 需求</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/02/12/hiring-test-paper/" rel="prev" title="浅谈社招招聘（四）：笔试的设计">
+                  <i class="fa fa-chevron-left"></i> 浅谈社招招聘（四）：笔试的设计
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/04/01/expression-control/" rel="next" title="控制团队内部的负面言论">
+                  控制团队内部的负面言论 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"73faabbc2cdd6882da26e553bc84bef6"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

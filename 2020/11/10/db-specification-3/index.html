@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="本文为我们项目中所采用的数据库文档的设计规范。 计划分为三篇文章，第一篇为数据库的表结构设计，第二篇为SQL语句的书写，本篇为PDM文档规范。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL数据库设计规范（三）：PDM文档">
+<meta property="og:url" content="https://plusnan.me/2020/11/10/db-specification-3/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="本文为我们项目中所采用的数据库文档的设计规范。 计划分为三篇文章，第一篇为数据库的表结构设计，第二篇为SQL语句的书写，本篇为PDM文档规范。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-03T04:35:50.224Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="规范">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2020/11/10/db-specification-3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2020/11/10/db-specification-3/","path":"2020/11/10/db-specification-3/","title":"MySQL数据库设计规范（三）：PDM文档"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MySQL数据库设计规范（三）：PDM文档 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%91%BD%E5%90%8D"><span class="nav-number">2.</span> <span class="nav-text">命名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5"><span class="nav-number">3.</span> <span class="nav-text">字段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A%E7%BB%9F%E4%B8%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.</span> <span class="nav-text">附录：统一数据类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="nav-number">6.</span> <span class="nav-text">本系列文章</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2020/11/10/db-specification-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySQL数据库设计规范（三）：PDM文档
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-10 00:00:00" itemprop="dateCreated datePublished" datetime="2020-11-10T00:00:00+08:00">2020-11-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-03 12:35:50" itemprop="dateModified" datetime="2022-02-03T12:35:50+08:00">2022-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文为我们项目中所采用的数据库文档的设计规范。</p>
+<p>计划分为三篇文章，<a href="/2020/11/01/db-specification/">第一篇</a>为数据库的表结构设计，<a href="/2020/11/07/db-specification-2/">第二篇</a>为SQL语句的书写，本篇为PDM文档规范。</p>
+<span id="more"></span>
+
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p>本文以<span class="exturl" data-url="aHR0cDovL3d3dy5wZG1hbi5jbi8=">PDMan<i class="fa fa-external-link-alt"></i></span>为数据库模型设计工具。其他工具可适当参考。</p>
+<h1 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h1><ul>
+<li>表格应按业务域进行归类。字典及系统通用（例如用户）则分别放在“字典”与“系统通用”类别中。</li>
+<li>命名统一用小写字母。</li>
+<li>“数据域”一栏的“数据类型”中，将名称和代码统一改成实际类型，例如<code>VARCHAR(32)</code>，并采用大写字母，方便不同成员合并。团队所有人可直接复制粘贴附录中的代码。</li>
+<li>数据表命名<ul>
+<li>模块名采用<code>B-SYS-系统基础</code>格式</li>
+<li>中文表名采用<code>01-用户信息</code>格式（因为已经有分组，名称太长的话会影响展示）</li>
+<li>英文表名<code>t_dynamic_xxx</code>，长度不要超过25（在oracle标识符不能超过30，考虑到主键前缀<code>pk_</code>，表名就不能卡着30起了）</li>
+<li>显示方式<code>&#123;name&#125;[&#123;code&#125;]</code>（正好跟默认值颠倒，以方便浏览）</li>
+<li>英文单词使用名词、单数</li>
+</ul>
+</li>
+</ul>
+<h1 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h1><ul>
+<li>系统默认字段按以下设置：<ul>
+<li>版本，<code>version</code>，<code>INT</code>，非空，默认值0</li>
+<li>创建人，<code>created_by</code>，<code>INT</code>，非空，无默认值</li>
+<li>创建时间，<code>created_at</code>，<code>TIMESTAMP</code>，非空，默认值<code>CURRENT_TIMESTAMP</code></li>
+<li>更新人，<code>updated_by</code>，<code>INT</code>，非空，无默认值</li>
+<li>更新时间，<code>updated_at</code>，<code>TIMESTAMP</code>，非空，默认值<code>CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</code></li>
+</ul>
+</li>
+<li>字段信息<ul>
+<li>名称长度不超过25</li>
+<li>字段尽量非空，并尽量指定默认值</li>
+<li><code>VARCHAR</code>、<code>CHAR</code>必须非空，如需可空，说明中要明确体现<code>可空</code>二字</li>
+<li>只允许使用以下数据类型：<ul>
+<li>CHAR</li>
+<li>VARCHAR，长度从10、20、32、50、64、255、512、1024里面取。</li>
+<li>TINYINT</li>
+<li>INT</li>
+<li>BIGINT</li>
+<li>DATETIME</li>
+<li>DECIMAL（必须指定长度，建议默认取<code>DECIMAL(10,2)</code>）</li>
+<li>BLOB、TEXT（应避免使用）</li>
+</ul>
+</li>
+<li>禁止使用FLOAT、DOUBLE</li>
+</ul>
+</li>
+<li>字段的说明<ul>
+<li>字段名的含义不能一望而知时，必须在说明进行解释。</li>
+<li>标志项必须指明取值，例如<code>0-否，1-是</code>，或者<code>参见GB/T 2260-2007</code>。</li>
+<li>数据使用分隔符分隔（例如<code>1,2,4</code>）、JSON串等非标准数据，必须在说明中解释。</li>
+<li>取值有国家标准、行业标准的，应优先采用国家标准及行业标准。实在搜不到再自创值域。</li>
+</ul>
+</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li>必须设置索引，除非没有任何需要建索引的字段。另外主键自带索引，因此不要再给主键建立索引。</li>
+<li>除表结构外，每个模块中应绘制关系图。</li>
+</ul>
+<h1 id="附录：统一数据类型"><a href="#附录：统一数据类型" class="headerlink" title="附录：统一数据类型"></a>附录：统一数据类型</h1><pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span><span class="token property">"database"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">"datatype"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR2(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CLOB"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NTEXT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(12,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(24,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(8,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(2,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"TINYINT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"TINYINT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"TINYINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Integer"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Integer"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Long"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DATETIME"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DATETIME"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Date"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATETIME"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATE"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATE"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATE"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="本系列文章"><a href="#本系列文章" class="headerlink" title="本系列文章"></a>本系列文章</h1><ul>
+<li><a href="/2020/11/01/db-specification/">MySQL数据库设计规范（一）：表结构设计</a></li>
+<li><a href="/2020/11/07/db-specification-2/">MySQL数据库设计规范（二）：SQL语句</a></li>
+<li><strong>MySQL数据库设计规范（三）：PDM文档</strong></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2020/11/10/db-specification-3/" title="MySQL数据库设计规范（三）：PDM文档">https://plusnan.me/2020/11/10/db-specification-3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/%E8%A7%84%E8%8C%83/" rel="tag"># 规范</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/11/07/db-specification-2/" rel="prev" title="MySQL数据库设计规范（二）：SQL语句">
+                  <i class="fa fa-chevron-left"></i> MySQL数据库设计规范（二）：SQL语句
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/11/22/buy-house-0/" rel="next" title="买房避坑指南：总述">
+                  买房避坑指南：总述 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"872007fa05d4b9fe7edeafb7bd551405"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

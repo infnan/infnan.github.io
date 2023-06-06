@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g（10.3.6）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebLogic踩坑记录">
+<meta property="og:url" content="https://plusnan.me/2018/11/02/weblogic-caution/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g（10.3.6）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-11-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-11T02:01:56.262Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="WebLogic">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2018/11/02/weblogic-caution/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2018/11/02/weblogic-caution/","path":"2018/11/02/weblogic-caution/","title":"WebLogic踩坑记录"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>WebLogic踩坑记录 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E9%98%B6%E6%AE%B5"><span class="nav-number">1.</span> <span class="nav-text">开发阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E6%B5%8B%E8%AF%95%E5%8C%BA"><span class="nav-number">1.1.</span> <span class="nav-text">准备测试区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDK%E7%89%88%E6%9C%AC"><span class="nav-number">1.2.</span> <span class="nav-text">JDK版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAR%E5%8C%85%E5%86%B2%E7%AA%81%EF%BC%88%E5%BE%85%E6%92%B0%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">JAR包冲突（待撰）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.4.</span> <span class="nav-text">路径问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%90%E5%90%8D%E7%A7%B0"><span class="nav-number">1.5.</span> <span class="nav-text">数据源名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%86%E7%BE%A4Session%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98"><span class="nav-number">1.6.</span> <span class="nav-text">集群Session丢失问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BF%E9%97%AEHTTPS%E7%BD%91%E7%AB%99%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.7.</span> <span class="nav-text">访问HTTPS网站的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cacerts"><span class="nav-number">1.7.1.</span> <span class="nav-text">cacerts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E8%AF%81%E4%B9%A6"><span class="nav-number">1.7.2.</span> <span class="nav-text">导证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8D%E8%A6%81%E6%89%93%E5%88%B0WAR%E5%8C%85%E4%B8%AD"><span class="nav-number">1.8.</span> <span class="nav-text">大文件不要打到WAR包中</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E9%98%B6%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">部署阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4"><span class="nav-number">2.1.</span> <span class="nav-text">操作系统时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E5%90%8D%E4%B8%8Ehosts"><span class="nav-number">2.2.</span> <span class="nav-text">主机名与hosts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%94%BE%E5%A4%9A%E5%A5%97Java-WebLogic"><span class="nav-number">2.3.</span> <span class="nav-text">避免放多套Java&#x2F;WebLogic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E9%85%8D%E7%BD%AE"><span class="nav-number">2.4.</span> <span class="nav-text">防火墙配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E8%A6%81%E7%BB%99%E6%8E%A7%E5%88%B6%E5%8F%B0%E9%85%8D%E7%BD%AE%E6%88%90HTTPS"><span class="nav-number">2.5.</span> <span class="nav-text">不要给控制台配置成HTTPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9B%E8%A1%8C%E7%BD%91%E7%BB%9C%E7%AD%96%E7%95%A5%E6%B5%8B%E8%AF%95"><span class="nav-number">2.6.</span> <span class="nav-text">进行网络策略测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9java-security%EF%BC%88JDK6%EF%BC%89"><span class="nav-number">2.7.</span> <span class="nav-text">修改java.security（JDK6）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E9%80%9A%E8%BF%87%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%B6%E8%B5%B7%E4%B8%8D%E6%9D%A5"><span class="nav-number">2.8.</span> <span class="nav-text">如果通过控制台启动服务器时起不来</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E9%87%8D%E6%96%B0%E8%AE%BE%E7%BD%AE%E8%AF%81%E4%B9%A6"><span class="nav-number">2.8.1.</span> <span class="nav-text">方法一：重新设置证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E4%B8%8D%E4%BD%BF%E7%94%A8SSL"><span class="nav-number">2.8.2.</span> <span class="nav-text">方法二：不使用SSL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%BB%BA%E9%9B%86%E7%BE%A4"><span class="nav-number">2.9.</span> <span class="nav-text">组建集群</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9B%91%E5%90%AC%E5%9C%B0%E5%9D%80%E4%B8%8D%E8%A6%81%E5%86%99%E6%88%900-0-0-0"><span class="nav-number">2.9.1.</span> <span class="nav-text">服务器监听地址不要写成0.0.0.0</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%A4%A7%E5%86%85%E5%AD%98"><span class="nav-number">2.10.</span> <span class="nav-text">扩大内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E7%BA%BF%E7%A8%8B%E6%95%B0"><span class="nav-number">2.11.</span> <span class="nav-text">增加线程数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%8A%A5%E9%94%99%E2%80%9CAssertion-ia-addressID%E2%80%99-failed%E2%80%9D"><span class="nav-number">2.12.</span> <span class="nav-text">启动报错“Assertion &#96;ia_addressID’ failed”</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%BB%B4%E9%98%B6%E6%AE%B5"><span class="nav-number">3.</span> <span class="nav-text">运维阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%8D%87%E7%BA%A7"><span class="nav-number">3.1.</span> <span class="nav-text">应用升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">重启服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E8%A1%A5%E4%B8%81"><span class="nav-number">3.3.</span> <span class="nav-text">打补丁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AC%E5%AE%B6-%E8%BF%81%E7%A7%BB"><span class="nav-number">3.4.</span> <span class="nav-text">搬家&#x2F;迁移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%B9%E5%AF%86%E7%A0%81"><span class="nav-number">3.5.</span> <span class="nav-text">改密码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebLogic%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%AF%86%E7%A0%81"><span class="nav-number">3.5.1.</span> <span class="nav-text">WebLogic控制台密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93-%E6%95%B0%E6%8D%AE%E6%BA%90%E5%AF%86%E7%A0%81"><span class="nav-number">3.5.2.</span> <span class="nav-text">数据库&#x2F;数据源密码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E6%8E%A7"><span class="nav-number">3.6.</span> <span class="nav-text">监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%AB%E5%90%8D%E5%85%B6%E5%A6%99%E7%99%BD%E9%A1%B5%EF%BC%88%E5%8A%A0%E8%BD%BDJSP%E9%A1%B5%E9%9D%A2%E6%97%B6%E6%8F%90%E7%A4%BAClassNotFoundException%EF%BC%89"><span class="nav-number">3.7.</span> <span class="nav-text">莫名其妙白页（加载JSP页面时提示ClassNotFoundException）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/11/02/weblogic-caution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WebLogic踩坑记录
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-11-02 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-02T00:00:00+08:00">2018-11-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">系统运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g（10.3.6）。</p>
+<span id="more"></span>
+<style>
+#post-content table {
+    word-break: break-all;
+}
+
+code {
+    word-break: break-all;
+}
+</style>
+
+<h1 id="开发阶段"><a href="#开发阶段" class="headerlink" title="开发阶段"></a>开发阶段</h1><h2 id="准备测试区"><a href="#准备测试区" class="headerlink" title="准备测试区"></a>准备测试区</h2><p>务必准备一个和生产环境架构接近的测试环境，而且开发环境、测试环境和生产环境的JDK与中间件版本应该保持一致，如果条件不够，至少测试环境和生产环境要一致。开发时用某个版本JDK和Tomcat，部署到生产环境时用另一个版本的JDK和WebLogic，这样很容易遭遇意外。</p>
+<p>举一些例子，以下几个就属于Tomcat上面测不出来，挪到WebLogic上面就可能会暴露出来的错误，好在下表这些错误通过修改WebLogic服务器启动参数就能在一定程度上解决了：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>错误信息</th>
+<th>启动参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>生成图片</td>
+<td>java.awt.HeadlessException</td>
+<td>-Djava.awt.headless=true</td>
+</tr>
+<tr>
+<td>访问HTTPS网站</td>
+<td>javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: No trusted certificate found exception</td>
+<td>-DUseSunHttpHandler=true</td>
+</tr>
+<tr>
+<td>Apache CXF提供WebService服务</td>
+<td>javax.xml.ws.soap.SOAPFaultException: Cannot create a secure XMLInputFactory</td>
+<td>-Dorg.apache.cxf.stax.allowInsecureParser=1</td>
+</tr>
+<tr>
+<td>启动报错，提示无法加载config.xml</td>
+<td><code>Server failed. Reason: [Management:141266]Parsing Failure in config.xml: failed to find method MethodName</code></td>
+<td>-Dweblogic.configuration.schemaValidationEnabled=false</td>
+</tr>
+</tbody></table>
+<p>如何修改WebLogic的启动参数？</p>
+<ul>
+<li>AdminServer启动参数：找到类似于<code>/u01/Oracle/Middleware/user_projects/domains/base_domain/bin/setDomainEnv.sh</code>的文件，找到倒数第一个<code>JAVA_OPTIONS=...</code>，在它的后面追加参数。</li>
+<li>修改其他节点的启动参数：进入WebLogic控制台，点击服务器→你的服务器（例如app_server1）→配置→服务器启动，然后往下翻，找到“参数”项。</li>
+</ul>
+<h2 id="JDK版本"><a href="#JDK版本" class="headerlink" title="JDK版本"></a>JDK版本</h2><p>如需使用JDK8或更高版本，需要更换新版WebLogic，将版本升级至12.1.3或以上。</p>
+<p>如需升级至JDK7：</p>
+<ul>
+<li>需排查程序代码，改写所有涉及<code>sun.*</code>包的程序，否则升级后会报错。</li>
+<li>安装完成后，需要进入WebLogic安装目录的<code>modules</code>目录中，将<code>javax.annotation_1.0.0.0_1-0.jar</code>、<code>javax.xml.bind_2.1.1.jar</code>、<code>javax.xml.ws_2.1.1.jar</code>三个文件拷到<code>$JAVA_HOME/jre/lib/endorsed</code>中（如果没有此目录，新建一个即可）。</li>
+</ul>
+<h2 id="JAR包冲突（待撰）"><a href="#JAR包冲突（待撰）" class="headerlink" title="JAR包冲突（待撰）"></a>JAR包冲突（待撰）</h2><p>TODO</p>
+<h2 id="路径问题"><a href="#路径问题" class="headerlink" title="路径问题"></a>路径问题</h2><p>假设程序部署在服务器的<code>/home/weblogic/project</code>中，WebLogic安装在<code>/u01/Oracle/Middleware</code>下面，而且程序会动态生成文件，实际上文件会放在类似于<code>/u01/Oracle/Middleware/user_projects/domains/base_domain/servers/app_server1/stage/project</code>的对应位置中，而且激活更新时候文件会丢失，需要重新生成。</p>
+<p>避免使用中文文件名和中文路径，以免因字符编码问题导致部署或升级失败。举个例子，如果文件里有中文名，打包并解压之后文件名变成了乱码，那么更新的时候WebLogic会提示<code>Error occurred while downloading files from admin server for deployment request &quot;xxx,xxx,xxx&quot;. Underlying error is: &quot;null&quot;</code>。</p>
+<h2 id="数据源名称"><a href="#数据源名称" class="headerlink" title="数据源名称"></a>数据源名称</h2><p>假如JNDI数据源名称为dataSource，在Tomcat中运行时，需要写成<code>java:comp/env/dataSource</code>，但是在WebLogic中运行时要把<code>java:comp/env/</code>去掉，直接写成dataSource。</p>
+<h2 id="集群Session丢失问题"><a href="#集群Session丢失问题" class="headerlink" title="集群Session丢失问题"></a>集群Session丢失问题</h2><p>生产环境通常会架设集群，通过负载均衡进行访问。如果负载均衡未按照Cookie进行分配，或者分配策略不完全正确，那么这样的话很可能会存在串Session的问题，例如登录成功之后进的是节点1，稍微做点操作后默默地跳到了节点3，导致会话丢失，系统提示重新登录。因为平时开发不会去使用负载均衡，所以可能注意不到这个问题。</p>
+<p>这个问题可以通过以下几种方法解决：</p>
+<ol>
+<li>正确地配置负载均衡，保证同一会话（JSESSIONID）的流量只分配到同一节点上；</li>
+<li>使用WebLogic的“会话复制”功能（这个比较正统）；</li>
+<li>通过Redis等实现会话共享（比较复杂）。</li>
+</ol>
+<p>会话复制的操作方法可以用Google搜索。</p>
+<h2 id="访问HTTPS网站的问题"><a href="#访问HTTPS网站的问题" class="headerlink" title="访问HTTPS网站的问题"></a>访问HTTPS网站的问题</h2><p>如果程序涉及访问HTTPS网站（包括接口），那么JDK最低要1.7。其实并不是说JDK1.6不行，而是碰到问题的话会非常麻烦，解决起来不如升JDK靠谱。</p>
+<p>配置新环境时建议用一个小程序来验证HTTPS是否能正常访问：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>net<span class="token punctuation">.</span></span>URL<span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>net<span class="token punctuation">.</span></span><span class="token class-name">URLConnection</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HttpsTest</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">String</span> url <span class="token operator">=</span> <span class="token string">"https://www.baidu.com"</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                url <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>url<span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">"http://"</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>url<span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">"https://"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                url <span class="token operator">=</span> <span class="token string">"https://"</span> <span class="token operator">+</span> url<span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+
+            <span class="token class-name">URL</span> u <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">URL</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">URLConnection</span> conn <span class="token operator">=</span> u<span class="token punctuation">.</span><span class="token function">openConnection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            conn<span class="token punctuation">.</span><span class="token function">setConnectTimeout</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            conn<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"连接成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"连接失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用方法：</p>
+<pre class="line-numbers language-none"><code class="language-none">javac HttpsTest.java
+java HttpsTest www.baidu.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>假如报<code>sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</code>错，说明证书验证未通过，Java主动拒绝访问目标网站。这时候需要检查：</p>
+<ol>
+<li>目标网站的HTTPS证书是否有效。可以用Chrome或Firefox浏览器测试一下。</li>
+<li>如果目标网站证书有效，你需要检查JDK的根证书库是否正确。</li>
+<li>如果目标网站证书无效，你需要将证书加入信任才行。</li>
+</ol>
+<h3 id="cacerts"><a href="#cacerts" class="headerlink" title="cacerts"></a>cacerts</h3><p>如果证书有效，但是Java还是报错，可能是JDK本身没有正确加载根证书库。你需要检查<code>$JAVA_HOME/jre/lib/security/cacerts</code>存不存在，没有的话，可以从其他装Java 8或10的机器上拷一份。</p>
+<p>拷完之后注意检查一下JDK有没有把cacerts文件认出来，命令<code>keytool -list -storepass changeit</code>。有的JDK会在其他位置保存根证书库，这样的话你即使拷到security目录也是没用，需要再用<code>keytool -importkeystore -srckeystore 你的cacerts -srcstorepass changeit -deststorepass changeit</code>把你的cacerts文件导一遍（如果你知道正确的位置和文件名，直接把cacerts文件扔到正确位置也行）。</p>
+<p>另外如果目标网站采用Let’s Encrypt证书，那么你需要检查一下JDK版本，7u111+（需要掏钱买才能弄到）、8u101+，因为对Let’s Encrypt的信任是后加的，所以低于这个版本的话需要手动导证书，否则还是会报错，跟使用自签名证书没啥区别。</p>
+<h3 id="导证书"><a href="#导证书" class="headerlink" title="导证书"></a>导证书</h3><p>HTTPS证书通常需要花钱，所以开发阶段多会考虑自行签发证书，即自签名证书。系统不信任这种证书，所以你必然要用keytool命令来导证书。操作方法大致是先用浏览器把证书文件保存下来，再运行<code>keytool -trustcacerts -storepass changeit -importcert -alias zhengshu -file 证书文件.cer</code>命令加入信任。</p>
+<p>除此之外还要注意三个问题：</p>
+<ol>
+<li>证书不能过期。过期证书即使设置信任，运行时候也会报错，你必须要求目标网站更换未过期的证书。</li>
+<li>若域名与证书的Common Name不一致，那么会报类似<code>java.security.cert.CertificateException: No name matching xxx found</code>的错。你可以要求目标换用合法证书或修改域名，调不了域名的话也可以在本地修改hosts。</li>
+<li>操作系统时间要正确，不管用北京、南京、东京还是西京的时间，别和地球时间差太多。</li>
+</ol>
+<h2 id="大文件不要打到WAR包中"><a href="#大文件不要打到WAR包中" class="headerlink" title="大文件不要打到WAR包中"></a>大文件不要打到WAR包中</h2><p>如果网站提供了软件、视频等体积较大文件的下载，尽量不要把它们打到应用的WAR包中。部署大文件容易导致超时（<code>Timed out while activating</code>），而且如果WAR包解压之后体积太大的话，WebLogic部署会失败。</p>
+<p>建议将此类额外下载文件放到专门的文件服务器中。</p>
+<h1 id="部署阶段"><a href="#部署阶段" class="headerlink" title="部署阶段"></a>部署阶段</h1><h2 id="操作系统时间"><a href="#操作系统时间" class="headerlink" title="操作系统时间"></a>操作系统时间</h2><p>用date命令检查一下系统时间是否正确，不对的话要调成正确时间。</p>
+<h2 id="主机名与hosts"><a href="#主机名与hosts" class="headerlink" title="主机名与hosts"></a>主机名与hosts</h2><p>给服务器设置一个固定IP和固定的主机名，然后将服务器的IP与主机名加入到<code>/etc/hosts</code>中。对于Oracle厂的产品，即便后续设置用不到主机名，设置好之后也可以避免一些不必要的麻烦。</p>
+<h2 id="避免放多套Java-WebLogic"><a href="#避免放多套Java-WebLogic" class="headerlink" title="避免放多套Java/WebLogic"></a>避免放多套Java/WebLogic</h2><p>Java也好，WebLogic也好，应用也好，要避免在同一服务器放好几份。如果换了新版本，但旧版本没改名、移走或删除，你有可能会坑了你自己：最典型的例子就是在A目录修改配置文件，怎么改都不生效，仔细看进程列表之后才发现实际启动的是B目录里的程序。</p>
+<p>及时清理临时文件。如果处理故障时建立了一些临时配置文件，观察一段时间之后发现系统能够稳定运行，那么你需要找时间用已启用的临时配置文件把未启用的正式配置文件换掉，以免造成误导。</p>
+<h2 id="防火墙配置"><a href="#防火墙配置" class="headerlink" title="防火墙配置"></a>防火墙配置</h2><p>默认情况下，管理控制台的端口是7001，应用是7003，节点管理器是5556，初次部署时需要注意让防火墙放行这三个端口。</p>
+<p>为了安全，需要仔细控制防火墙的放行范围，不要让7001和5556暴露到互联网上面。</p>
+<p>另外不要把应用部署到AdminServer上面，否则封锁7001端口之后应用就无法访问了。</p>
+<h2 id="不要给控制台配置成HTTPS"><a href="#不要给控制台配置成HTTPS" class="headerlink" title="不要给控制台配置成HTTPS"></a>不要给控制台配置成HTTPS</h2><p>虽然HTTPS很安全，然而给控制台配置成HTTPS容易产生问题，例如更新部署时节点无响应。建议采用设置强密码与配置防火墙的方式来加固控制台。</p>
+<h2 id="进行网络策略测试"><a href="#进行网络策略测试" class="headerlink" title="进行网络策略测试"></a>进行网络策略测试</h2><p>在开始部署之前，建议在应用服务器上测试一下能否访问数据库等资源。如果网络不通，那么改WebLogic设置时可能会无响应，卡了半天之后才蹦出一句<code>The Network adapter could not establish the connection</code>，白白耽误时间。</p>
+<p>如果系统没装telnet，可以简单地测试一下能不能ping通，或者通过以下Java程序来测一下端口通不通（有些机房可能会出现IP能ping通但是端口被拦截的情况）：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>net<span class="token punctuation">.</span></span><span class="token class-name">InetSocketAddress</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>net<span class="token punctuation">.</span></span><span class="token class-name">Socket</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">IpTest</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">Socket</span> connect <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Socket</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">String</span> ip <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> port <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> timeout <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"用法：java IpTest &lt;IP地址> &lt;端口号> [超时时间]"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                ip <span class="token operator">=</span> args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                port <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>args<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                timeout <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"正在连接 "</span> <span class="token operator">+</span> ip <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token class-name">InetSocketAddress</span> addr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">InetSocketAddress</span><span class="token punctuation">(</span>ip<span class="token punctuation">,</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            connect<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span>addr<span class="token punctuation">,</span> timeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>connect<span class="token punctuation">.</span><span class="token function">isConnected</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"连接成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"连接失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+                connect<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>使用方法：</p>
+<pre class="line-numbers language-none"><code class="language-none">javac IpTest.java
+java IpTest 10.15.2.9 1521<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>涉及HTTPS时建议再对HTTPS网站做个访问测试，具体程序见前文。</p>
+<h2 id="修改java-security（JDK6）"><a href="#修改java-security（JDK6）" class="headerlink" title="修改java.security（JDK6）"></a>修改java.security（JDK6）</h2><p>Java 6存在一个关于随机数的bug，如果不Hack，在Linux系统下面WebLogic建域和启动时会特别慢，需要卡很长时间（15分钟左右），因此建议装完Java之后立刻去修改java.security。</p>
+<p>假设$JAVA_HOME为<code>/opt/jdk1.6.0_145</code>，也就是说JDK装在了这个地方，那么需要修改<code>$JAVA_HOME/jre/lib/security/java.security</code>文件，找到</p>
+<pre class="line-numbers language-none"><code class="language-none">securerandom.source&#x3D;file:&#x2F;dev&#x2F;urandom<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改成</p>
+<pre class="line-numbers language-none"><code class="language-none">securerandom.source&#x3D;file:&#x2F;dev&#x2F;.&#x2F;urandom<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>之后建域和起停之类操作就不需要再等待十多分钟了。</p>
+<h2 id="如果通过控制台启动服务器时起不来"><a href="#如果通过控制台启动服务器时起不来" class="headerlink" title="如果通过控制台启动服务器时起不来"></a>如果通过控制台启动服务器时起不来</h2><p>如果WebLogic各节点已正确设置，各服务器的防火墙已经开放5556端口，NodeManager也已经启动，但是仍然无法通过控制台启动节点，提示“不兼容的状态”，而且在startNodeManager.sh的输出中出现<code>javax.net.ssl.SSLKeyException: [Security:090482]BAD_CERTIFICATE alert was received from ...</code>：</p>
+<h3 id="方法一：重新设置证书"><a href="#方法一：重新设置证书" class="headerlink" title="方法一：重新设置证书"></a>方法一：重新设置证书</h3><p>在集群的每台服务器上面设置一下证书（如果执行第一行命令就报错的话，请把$WL_HOME换成实际安装目录）：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">.</span> <span class="token variable">$WL_HOME</span>/server/bin/setWLSEnv.sh
+<span class="token builtin class-name">cd</span> <span class="token variable">$WL_HOME</span>/server/lib
+java utils.CertGen -keyfilepass DemoIdentityPassPhrase -certfile newcert -keyfile newkey
+java utils.ImportPrivateKey -keystore DemoIdentity.jks -storepass DemoIdentityKeyStorePassPhrase -keyfile newkey.pem -keyfilepass DemoIdentityPassPhrase -certfile newcert.pem -alias demoidentity<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="方法二：不使用SSL"><a href="#方法二：不使用SSL" class="headerlink" title="方法二：不使用SSL"></a>方法二：不使用SSL</h3><p>除此以外，还有一种做法是不使用SSL通信以避免出现证书问题：修改<code>$WL_HOME/common/nodemanager/nodemanager.properties</code>文件，将其中的</p>
+<pre class="line-numbers language-none"><code class="language-none">SecureListener &#x3D; true<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>改成</p>
+<pre class="line-numbers language-none"><code class="language-none">SecureListener &#x3D; false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后重新启动NodeManager。另外在控制台上建立“计算机”时，类型就不再是“SSL”，而是“普通”（Plain）。</p>
+<h2 id="组建集群"><a href="#组建集群" class="headerlink" title="组建集群"></a>组建集群</h2><p>我们并不需要每一台机器都执行一遍建域之类的操作，而且在每一台机器上都手动建域，即使域的名字相同也不一定能正确连接。</p>
+<p>更好的做法是：保证各服务器JDK路径和WebLogic安装路径一致，在主节点上面把WebLogic的各种参数都配置好，然后将user_projects目录打包（或者干脆把整个Middleware打包），复制到其他各服务器的相应位置。</p>
+<p>由于NodeManager配置文件不在user_projects目录中，因此前文提到的“NodeManager证书”需要在每台服务器上都配置一遍。</p>
+<h3 id="服务器监听地址不要写成0-0-0-0"><a href="#服务器监听地址不要写成0-0-0-0" class="headerlink" title="服务器监听地址不要写成0.0.0.0"></a>服务器监听地址不要写成0.0.0.0</h3><p>服务器监听地址使用固定IP，不要填0.0.0.0。虽然0.0.0.0也是一个有效的监听地址，但是如此配置之后，AdminServer与各节点之间的通信会出现问题，例如服务器状态变成UNKNOWN，或者部署应用无响应。</p>
+<h2 id="扩大内存"><a href="#扩大内存" class="headerlink" title="扩大内存"></a>扩大内存</h2><p>默认的Xmx和MaxPermSize比较小，建议在setDomainEnv.sh中把这两个参数适当调大一些。</p>
+<p>如果采用32位的JDK（Java6/7/8的测试命令：<code>java -d64 -version</code>，如果报错说明是32位的），那么可以设置的最大内存不会超过4GB，想继续扩大的话只能换成64位JDK。</p>
+<h2 id="增加线程数"><a href="#增加线程数" class="headerlink" title="增加线程数"></a>增加线程数</h2><p>如果预计并发数比较高，可以增加应用线程池的线程数。修改config.xml配置文件（例如<code>/u01/Oracle/Middleware/user_projects/base_domain/config/config.xml</code>）。假如应用服务器叫app_server1，那么需要找到类似以下的代码</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>server</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>app_server1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>修改成</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>server</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>app_server1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>self-tuning-thread-pool-size-min</span><span class="token punctuation">></span></span>1000<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>self-tuning-thread-pool-size-min</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>self-tuning-thread-pool-size-max</span><span class="token punctuation">></span></span>1000<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>self-tuning-thread-pool-size-max</span><span class="token punctuation">></span></span>
+    ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>需要注意的是，如果数值改得太大，启动时可能会出现以下错误：</p>
+<pre class="line-numbers language-none"><code class="language-none">[ERROR][thread ] Could not start thread [ACTIVE] ExecuteThread: &#39;977&#39; for queue: &#39;weblogic.kernel.Default (self-tuning)&#39;. Resource temporarily unavailable
+
+
+Attempting to allocate 8192M bytes
+
+There is insufficient native memory for the Java
+Runtime Environment to continue.
+
+Possible reasons:
+  The system is out of physical RAM or swap space
+  In 32 bit mode, the process size limit was hit
+
+Possible solutions:
+  Reduce memory load on the system
+  Increase physical memory or swap space
+  Check if swap backing store is full
+  Use 64 bit Java on a 64 bit OS
+  Decrease Java heap size (-Xmx&#x2F;-Xms)
+  Decrease number of Java threads
+  Decrease Java thread stack sizes (-Xss)
+  Disable compressed references (-XXcompressedRefs&#x3D;false)
+
+java.lang.OutOfMemoryError: Resource temporarily unavailable in tsStartJavaThread (lifecycle.c:1097).<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>报错信息看起来像是内存不足，实际上不是内存不足，而是Linux系统默认情况下限制了最大线程数，需要进行修改。</p>
+<p>如果使用CentOS 6或RHEL6，可以按照以下方法进行修改：</p>
+<p>首先修改/etc/security/limits.conf，加入</p>
+<pre class="line-numbers language-none"><code class="language-none">* hard nofile 1048576
+* soft nofile 1048576<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>然后修改/etc/security/limits.d/90-nproc.conf，加入</p>
+<pre class="line-numbers language-none"><code class="language-none">weblogic   soft    nproc     655350<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>最后修改/etc/pam.d/login，加入</p>
+<pre class="line-numbers language-none"><code class="language-none">session required &#x2F;lib64&#x2F;security&#x2F;pam_limits.so<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改完成后不要马上退出shell，要开个新窗口测试各账号能否登进去。如果登不进去（例如提示<code>could not open session</code>），说明参数改得太大，需要适当往小调。</p>
+<p>另外如果线程数改大了，内存也应当适当调大，因为每个线程都会占一些内存空间。</p>
+<h2 id="启动报错“Assertion-ia-addressID’-failed”"><a href="#启动报错“Assertion-ia-addressID’-failed”" class="headerlink" title="启动报错“Assertion `ia_addressID’ failed”"></a>启动报错“Assertion `ia_addressID’ failed”</h2><p>如果提示<code>java: Net.c:229: Java_com_bea_wcp_sctp_Net_initIDs: Assertion &#39;ia_addressID&#39; failed.</code>，可尝试删除<code>/u01/Oracle/Middleware/wlserver_10.3/sip/server/native/linux/x86_64/libsctpwrapper.so</code>文件。</p>
+<h1 id="运维阶段"><a href="#运维阶段" class="headerlink" title="运维阶段"></a>运维阶段</h1><h2 id="应用升级"><a href="#应用升级" class="headerlink" title="应用升级"></a>应用升级</h2><p>改完文件之后要在控制台的“部署”里面进行更新，否则内容不会生效。改静态文件也是。</p>
+<p>每次更新的时候，JVM会把Class信息保存到内存的永久保留区域中，而旧的内容不会释放。如果WebLogic启动参数中的-XX:MaxPermSize比较小，那么更新几次可能就会卡死挂掉，而且应用日志会显示<code>java.lang.OutOfMemoryError: PermGen space</code>。在这种情况下，把WebLogic里面的服务器停掉然后再启动一次就好了。</p>
+<p>建议每升两三次级就彻底重启一次受管节点，避免出现用一阵子之后莫名其妙死掉的问题。</p>
+<p>在开始更新到更新结束，应用会出现短暂的中断，因此要注意选择合适的时间进行操作。另外在业务繁忙时进行更新，不但会影响用户，而且容易因为WebLogic繁忙而导致更新无响应或失败。</p>
+<p>建议编写一份升级检查表，将准备工作、实施工作和收尾工作全部列入，以免因漏项导致升级出现问题。</p>
+<p>如果更新时遭遇<code>Error occurred while downloading files from admin server for deployment request &quot;xxx,xxx,xxx&quot;. Underlying error is: &quot;null&quot;</code>，那么需要去检查AdminServer.log的日志（例如<code>/u01/Oracle/Middleware/user_projects/base_domain/servers/AdminServer/logs/AdminServer.log</code>）。我碰到过两种会出现这种错误的情况，一种是文件名乱码，另一种是文件权限不正确（例如服务以weblogic用户运行，但是文件所有者是root，WebLogic访问不了）。假如权限不正确，可以<code>chown -R weblogic:weblogic 存放程序的目录</code>。</p>
+<p>我们部分应用服务器安装了WAF并配置了防篡改，如果升级之前忘记关闭防护功能，在控制台上激活时会报错，提示无法“remove staged files”。</p>
+<p>另外建议在系统中加入可配置参数的系统公告功能，这样在升级或者维护之前可以通知用户，使用户及时做好准备。</p>
+<h2 id="重启服务器"><a href="#重启服务器" class="headerlink" title="重启服务器"></a>重启服务器</h2><p>如果只是重启应用节点，操作就比较简单，直接在控制台上操作即可。不过，在WebLogic控制台重启服务的时候不要点完“启动”就不管了，一定要等到状态显示为“RUNNING”之后再收工。如果变成“ADMIN”，那么可能是有报错，需要去应用服务器日志检查一下。若确认不耽误事（例如<code>java.lang.NoClassDefFoundError: com/ctc/wstx/stax/WstxInputFactory</code>）那么在控制台点一下“恢复”就好了。</p>
+<p>有时观察服务器状态，可以看到状态是“RUNNING”，然而健康状况没有内容，这说明节点可能死了，你可以试一下重启复活。</p>
+<p>如果不慎关掉AdminServer，或者打算整个重启，那么操作会比较麻烦，大体上要按以下思路操作：</p>
+<ol>
+<li>在管理节点上启动AdminServer（startWebLogic.sh）。</li>
+<li>在每个节点上都启动一遍NodeManager（startNodeManager.sh）。</li>
+<li>进入管理控制台，启动各应用节点。</li>
+<li>启动完成后确认“部署”里面各应用是否启动。</li>
+</ol>
+<h2 id="打补丁"><a href="#打补丁" class="headerlink" title="打补丁"></a>打补丁</h2><p>WebLogic打补丁速度比较慢，在打补丁过程中你需要干等，所以要多留一些操作时间。建议白天操作，晚上就可以少加班了。</p>
+<p>安装补丁之前，必须先检查bsu.sh文件（例如<code>/u01/Oracle/Middleware/utils/bsu/bsu.sh</code>），将其中的最大内存Xmx改大些，例如-Xmx2048m。因为打补丁实在太慢，等了半天出来的却是java.lang.OutOfMemoryError的话实在太憋屈。</p>
+<p>打补丁对业务影响不大，可以随时操作，但是打完之后需要彻底重启WebLogic才能生效。AdminServer也要重启，否则后面容易碰到莫名其妙的问题。</p>
+<h2 id="搬家-迁移"><a href="#搬家-迁移" class="headerlink" title="搬家/迁移"></a>搬家/迁移</h2><p>尽量不要搬家，因为WebLogic安装和建域之后会产生很多已经写好了路径的配置文件。Middleware目录中有个registry.dat，此文件记录了WebLogic的安装情况，而且已经加密，如果贸然搬家会在升级等方面遇到麻烦。确实要进行迁移的话，新服务器WebLogic路径务必与旧服务器相同，想不同就去建立软链接。</p>
+<h2 id="改密码"><a href="#改密码" class="headerlink" title="改密码"></a>改密码</h2><h3 id="WebLogic控制台密码"><a href="#WebLogic控制台密码" class="headerlink" title="WebLogic控制台密码"></a>WebLogic控制台密码</h3><p>修改密码之前先观察系统有没有相关监控或管理软件，例如Oracle Enterprise Manager。假如WebLogic控制台密码改了，依赖控制台的监控软件的密码没改，那么你可能会把自己锁在外面。</p>
+<p>找个方便重启的时间来修改WebLogic控制台密码。在控制台修改完成之后，你需要试探性地重启各应用服务器节点，确保各节点不会因密码错误而无法启动。</p>
+<p>假如应用节点真的因控制台密码错误而无法启动，你需要在WebLogic“服务器”页面中找到该节点，进入详细设置，在页面上方找到“服务器启动”页面，并在里面（最下方）输入正确的用户密码。</p>
+<h3 id="数据库-数据源密码"><a href="#数据库-数据源密码" class="headerlink" title="数据库/数据源密码"></a>数据库/数据源密码</h3><p>修改数据库密码会造成应用短暂停摆。你需要找个方便关停应用系统的时间来进行操作，或者提前通知系统维护。</p>
+<p>在正式修改数据库密码之前，你需要确认数据库账户锁定阈值，或者能够以sysdba身份（Oracle数据库）操作。无论是先改WebLogic数据源密码，还是先修改数据库密码，只要WebLogic连接池尝试以旧密码建立连接，数据库账号就有可能会立刻锁定。</p>
+<h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2><p>建议在服务器上面安装专门的监控软件。像我们项目组那种服务器由用户管理，应用由项目组自行运维的情况，更要有自己的监控程序，这样在出现问题时也好及时定位，以免一塌糊涂。</p>
+<p>目前我们项目组自己写了一个监控脚本，在繁忙时期每隔10分钟、空闲时期每隔半小时把WebLogic控制台的一些常用指标记录到日志文件中（通过cron控制），<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9zY3JpcHRzL2Jsb2IvbWFzdGVyLyVFOSU4MyVBOCVFNyVCRCVCMiVFNSU5MiU4QyVFOCVCRiU5MCVFNyVCQiVCNC9XZWJMb2dpYy1tb25pdG9yLnNo">代码见此<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="莫名其妙白页（加载JSP页面时提示ClassNotFoundException）"><a href="#莫名其妙白页（加载JSP页面时提示ClassNotFoundException）" class="headerlink" title="莫名其妙白页（加载JSP页面时提示ClassNotFoundException）"></a>莫名其妙白页（加载JSP页面时提示ClassNotFoundException）</h2><p>系统运行一段时间之后，有用户反馈系统部分页面莫名其妙白页，没有任何内容，也没有错误信息。</p>
+<p>查日志，发现报错信息类似：</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;Jan 1, 2019 1:23:45 PM CST&gt; &lt;Error&gt; &lt;HTTP&gt; &lt;BEA-101249&gt; &lt;[ServletContext@1302345678[app:appname module:appname path:&#x2F;appname spec-version:null]]: Servlet
+class jsp_servlet._somepackage.__somejsppage for servlet &#x2F;somepackage&#x2F;somejsppage.jsp could not be loaded because the requested cl
+ass was not found in the classpath &#x2F;u01&#x2F;Oracle&#x2F;Middleware&#x2F;user_projects&#x2F;domains&#x2F;app_domain&#x2F;servers&#x2F;app_server1&#x2F;stage&#x2F;appname&#x2F;appname&#x2F;WEB-INF&#x2F;classes:&#x2F;u01
+&#x2F;app&#x2F;Oracle&#x2F;Middleware&#x2F;user_projects&#x2F;domains&#x2F;app_domain&#x2F;servers&#x2F;app_server1&#x2F;stage&#x2F;appname&#x2F;appname&#x2F;WEB-INF&#x2F;lib&#x2F;……（一大堆jar包的文件名）:&#x2F;u01&#x2F;Oracle&#x2F;Middleware&#x2F;user_projects&#x2F;domains&#x2F;app_domain&#x2F;servers&#x2F;app_server1&#x2F;tmp&#x2F;_WL_user&#x2F;appname&#x2F;wekfjq.
+java.lang.ClassNotFoundException: jsp_servlet._somepackage.__somejsppage.&gt;
+javax.servlet.ServletException: [HTTP:101249][ServletContext@1302345678[app:appname module:appname path:&#x2F;appname spec-version:null]]: Servlet class jsp_servlet._somepackage.__somejsppage for servlet &#x2F;somepackage&#x2F;somejsppage.jsp could not be loaded because the requested class was not found in the classpath .
+java.lang.ClassNotFoundException: jsp_servlet._somepackage.__somejsppage.
+        at weblogic.servlet.internal.ServletStubImpl.prepareServlet(ServletStubImpl.java:551)
+        at weblogic.servlet.jsp.JspStub.prepareServlet(JspStub.java:283)
+        at weblogic.servlet.jsp.JspStub.prepareServlet(JspStub.java:218)
+        at weblogic.servlet.internal.ServletStubImpl.execute(ServletStubImpl.java:244)
+        at weblogic.servlet.internal.TailFilter.doFilter(TailFilter.java:26)
+        at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:60)
+        at com.xxx.xxx.xxx.XXXXXFilter.doFilter(XXXXXFilter.java:123)
+        at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:60)
+        at weblogic.servlet.internal.RequestDispatcherImpl.invokeServlet(RequestDispatcherImpl.java:527)
+        at weblogic.servlet.internal.RequestDispatcherImpl.forward(RequestDispatcherImpl.java:253)
+        ......（与我们应用完全无关的堆栈）
+        at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:60)
+        at weblogic.servlet.internal.RequestEventsFilter.doFilter(RequestEventsFilter.java:27)
+        at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:60)
+        at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.wrapRun(WebAppServletContext.java:3748)
+        at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.run(WebAppServletContext.java:3714)
+        at weblogic.security.acl.internal.AuthenticatedSubject.doAs(AuthenticatedSubject.java:321)
+        at weblogic.security.service.SecurityManager.runAs(SecurityManager.java:120)
+        at weblogic.servlet.internal.WebAppServletContext.securedExecute(WebAppServletContext.java:2283)
+        at weblogic.servlet.internal.WebAppServletContext.execute(WebAppServletContext.java:2182)
+        at weblogic.servlet.internal.ServletRequestImpl.run(ServletRequestImpl.java:1499)
+        at weblogic.work.ExecuteThread.execute(ExecuteThread.java:263)
+        at weblogic.work.ExecuteThread.run(ExecuteThread.java:221)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>因为我们的JSP页面是正常的，程序也未进行改动，最初认为是WebLogic内部错误，重启了WebLogic。重启之后，页面能够正常显示，然而过一段时间之后还是莫名其妙白页，而且本来已经变好的页面也坏掉了。重新部署应用、重新建域，甚至重装WebLogic之后仍然白页。</p>
+<p>后来在WEB-INF目录放了一个weblogic.xml，内容如下</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>weblogic-web-app</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://xmlns.oracle.com/weblogic/weblogic-web-app<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd http://xmlns.oracle.com/weblogic/weblogic-web-app http://xmlns.oracle.com/weblogic/weblogic-web-app/1.2/weblogic-web-app.xsd<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>context-root</span><span class="token punctuation">></span></span>appname<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>context-root</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>jsp-descriptor</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>keepgenerated</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>keepgenerated</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>precompile</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>precompile</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>precompile-continue</span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>precompile-continue</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>page-check-seconds</span><span class="token punctuation">></span></span>-1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>page-check-seconds</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>verbose</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>verbose</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>debug</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>debug</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>jsp-descriptor</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>container-descriptor</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>servlet-reload-check-secs</span><span class="token punctuation">></span></span>-1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>servlet-reload-check-secs</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>container-descriptor</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>weblogic-web-app</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>要求WebLogic对JSP预编译。重新部署之后，莫名其妙白页的问题解决了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2018/11/02/weblogic-caution/" title="WebLogic踩坑记录">https://plusnan.me/2018/11/02/weblogic-caution/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/WebLogic/" rel="tag"># WebLogic</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/09/12/find-jobs/" rel="prev" title="Java 校招（一）：如何找工作">
+                  <i class="fa fa-chevron-left"></i> Java 校招（一）：如何找工作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/12/12/switch-to-idea-0/" rel="next" title="从Eclipse切换到IDEA">
+                  从Eclipse切换到IDEA <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"6eaaf3d6692e99d47cd65be6fc85033e"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>

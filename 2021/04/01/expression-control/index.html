@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="在开发团队中，不当的负面言论很容易打击成员的积极性，降低生产力，甚至对团队文化造成不可逆的破坏。因此需要对负面言论进行识别和判断，过滤掉有害言论，调整本质上有益但形式上不恰当的言论。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="控制团队内部的负面言论">
+<meta property="og:url" content="https://plusnan.me/2021/04/01/expression-control/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="在开发团队中，不当的负面言论很容易打击成员的积极性，降低生产力，甚至对团队文化造成不可逆的破坏。因此需要对负面言论进行识别和判断，过滤掉有害言论，调整本质上有益但形式上不恰当的言论。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-06T00:29:40.356Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="团队建设">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2021/04/01/expression-control/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2021/04/01/expression-control/","path":"2021/04/01/expression-control/","title":"控制团队内部的负面言论"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>控制团队内部的负面言论 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E4%B8%8D%E6%98%AF%E2%80%A6%E2%80%A6"><span class="nav-number">1.</span> <span class="nav-text">本文不是……</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%9F%E9%9D%A2%E8%A8%80%E8%AE%BA%E7%9A%84%E5%8D%B1%E5%AE%B3"><span class="nav-number">2.</span> <span class="nav-text">负面言论的危害</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%86%E5%88%AB%E4%B8%8E%E5%A4%84%E7%90%86%E8%B4%9F%E9%9D%A2%E8%A8%80%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">识别与处理负面言论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%9F%E9%9D%A2%E8%AF%AD%E6%B0%94-%E2%86%92-%E6%AD%A3%E9%9D%A2%E8%AF%AD%E6%B0%94"><span class="nav-number">3.1.</span> <span class="nav-text">负面语气 → 正面语气</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E9%94%85%E3%80%81%E8%BF%BD%E8%B4%A3-%E2%86%92-%E8%A7%A3%E5%86%B3%E3%80%81%E9%A2%84%E9%98%B2%E9%97%AE%E9%A2%98"><span class="nav-number">3.2.</span> <span class="nav-text">背锅、追责 → 解决、预防问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%8F%E8%94%BD%E6%97%A0%E6%84%8F%E4%B9%89%E8%A8%80%E8%AE%BA"><span class="nav-number">3.3.</span> <span class="nav-text">屏蔽无意义言论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%A4%E4%BA%86%E5%A4%84%E7%90%86%E8%A8%80%E8%AE%BA%EF%BC%8C%E8%BF%98%E5%BA%94%E5%BD%93%E6%9B%B4%E8%BF%9B%E4%B8%80%E6%AD%A5"><span class="nav-number">4.</span> <span class="nav-text">除了处理言论，还应当更进一步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%92%E7%9B%B8%E5%B0%8A%E9%87%8D"><span class="nav-number">4.1.</span> <span class="nav-text">互相尊重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%80%E8%80%8C%E6%9C%89%E4%BF%A1"><span class="nav-number">4.2.</span> <span class="nav-text">言而有信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E5%BD%93%E6%BF%80%E5%8A%B1"><span class="nav-number">4.3.</span> <span class="nav-text">适当激励</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">反例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2021/04/01/expression-control/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          控制团队内部的负面言论
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-01 00:00:00" itemprop="dateCreated datePublished" datetime="2021-04-01T00:00:00+08:00">2021-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-06-06 08:29:40" itemprop="dateModified" datetime="2023-06-06T08:29:40+08:00">2023-06-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在开发团队中，不当的负面言论很容易打击成员的积极性，降低生产力，甚至对团队文化造成不可逆的破坏。因此需要对负面言论进行识别和判断，过滤掉有害言论，调整本质上有益但形式上不恰当的言论。</p>
+<span id="more"></span>
+
+<h2 id="本文不是……"><a href="#本文不是……" class="headerlink" title="本文不是……"></a>本文不是……</h2><p>本文目标读者主要为软件开发团队的管理者，因此本文不是：</p>
+<ul>
+<li>本文不是介绍（政府）如何言论审查。</li>
+<li>本文不是介绍如何应对（来自用户的）负面舆情。</li>
+</ul>
+<h2 id="负面言论的危害"><a href="#负面言论的危害" class="headerlink" title="负面言论的危害"></a>负面言论的危害</h2><p>没有人喜欢被责骂、被否定，即使是个M（受虐狂），也得是被自己喜欢的异性施虐才能兴奋，所以不要随便对员工讲负面的话。</p>
+<p>负面言论的影响包括以下几个方面：</p>
+<ul>
+<li>员工经常被上级训的话，容易消极怠工，或者“破罐子破摔”。</li>
+<li>员工经常被同级训的话，容易成为团队内的“背锅侠”，从而心灰意冷。</li>
+<li>团队/部门/公司经常被说坏话的话，员工会质疑自己工作的意义，然后选择混日子，“反正好好干活也没用”。如果一半以上的人都开始混日子，这个团队恐怕就没救了。</li>
+</ul>
+<p>不同年龄层的承受能力是不一样的。一般来讲，80后或者年龄更大的员工，可能会因为要养家糊口而选择忍耐一时，但是对于90后甚至未来的00后员工，他们很可能会直接撂挑子走人，“老子不伺候你了”。</p>
+<h2 id="识别与处理负面言论"><a href="#识别与处理负面言论" class="headerlink" title="识别与处理负面言论"></a>识别与处理负面言论</h2><p>管理者要调整自己的心态，通过以下三个思路来处理负面言论：</p>
+<ol>
+<li>将负面语气转变正面语气</li>
+<li>将“背锅”、“追责”转变为“解决/预防问题”</li>
+<li>屏蔽掉不解决问题的言论</li>
+</ol>
+<h3 id="负面语气-→-正面语气"><a href="#负面语气-→-正面语气" class="headerlink" title="负面语气 → 正面语气"></a>负面语气 → 正面语气</h3><p>即使你的本意是为了改善员工工作方式，提升员工个人能力，也不要用否定、反问的语气与同事或下属说话。用微信、钉钉等文字聊天工具时，要更加注意措辞，以免被误认为是责备。例如：</p>
+<ul>
+<li>员工开发了一个功能，却延期了一两天才完成。这时候不要训“你怎么做的这么慢”、“怎么才干完”，而是从两方面入手，一方面是调整任务排期（例如安排加班），尽量抵消延期的影响，另一方面，管理者要帮他分析延期的原因，然后提醒他，“你在xxx方面应该再努力/注意一下”。</li>
+<li>员工开发了一个功能，但是性能很差，而且还有SQL注入问题，这时候不要说“你怎么连这么低级的错误都犯”，而是直接点明问题，让他们“继续优化完善”。</li>
+<li>员工提出了一个idea，但是不符合实际情况，或者实现的代价太大，这时候不要说“你的想法不行”，而是先顺着他的idea，代入到项目中进行分析，逐步推导出“不合适”的结论（如果结论正好相反，也可以考虑采用，然后公开表扬奖励），从而使员工信服。</li>
+<li>员工认为应该按A方案工作，而管理者认为应该按B方案工作，并且经验证明B确实可行而A确实不可行，这时候不要说“你就是不行，就是得听我的”，而是要稍微解释一下，“以我的实践经验，B方案是更加合适的，我们应该先尝试B”。</li>
+</ul>
+<p>说话要给员工留面子，员工做了好事则要给他们挣面子。纯负面的话不讲，批评的话私下讲，表扬的话公开讲。</p>
+<p>不要因为员工做得不好，就把员工的活抢过来亲自去做（除非任务非常紧急），一方面会让员工觉得自己不受信任，尊严受到打击，另一方面会让自己变得很忙很累。这种情况下，还是应该审视他们的工作，哪怕自己做起来效率更高、质量更好，也要把该做的事情指出来，交给员工自己完成改进，实在不行再考虑换人。</p>
+<h3 id="背锅、追责-→-解决、预防问题"><a href="#背锅、追责-→-解决、预防问题" class="headerlink" title="背锅、追责 → 解决、预防问题"></a>背锅、追责 → 解决、预防问题</h3><p>发生事故的时候，不要追问或暗示“是哪个混蛋干的好事”，而是要尽快定位问题、解决问题，先把窟窿堵上再说。</p>
+<p>如果追责，肯定是先追究领导责任，所以领导也应当先背锅，而不是把责任推给下属。就算是下属故意搞破坏，领导责任也只能说是减轻而不是完全消失。如果坚持找个人毛病，以后团队成员做事会变得畏手畏脚，担心惹事生非，与他人沟通也会采取踢皮球的策略，这就是一种无形之中的打击。</p>
+<p>除了不轻易追究个人责任，更重要的还是分析如何预防问题，让同样的问题不再发生，这才是领导应该做的事情。</p>
+<h3 id="屏蔽无意义言论"><a href="#屏蔽无意义言论" class="headerlink" title="屏蔽无意义言论"></a>屏蔽无意义言论</h3><p>什么算是无意义言论呢？光抱怨不努力，光提问题不解决，光制造矛盾不收拾，这样的言论都是无意义言论。</p>
+<p>应该通过适当的管理来屏蔽这类言论，例如：</p>
+<ul>
+<li>管理者应该对经常发牢骚的人提出要求，要么闭嘴好好干活，要么找个没人的地方随便发泄，不要在工作场合影响其他人工作。</li>
+<li>管理者应当要求，无论是谁，如果想否定他人观点、推翻他人工作，那么就必须提出一套可行的解决方案，否则就视为不尊重他人。</li>
+<li>管理者应该私下提醒说闲话的人，不要评论跟本职工作无关的事情，例如公司高层内斗、市场机会丢失、xx领导是傻逼等等。如果是自己听到了，就当作没听见，还能保平安。</li>
+</ul>
+<h2 id="除了处理言论，还应当更进一步"><a href="#除了处理言论，还应当更进一步" class="headerlink" title="除了处理言论，还应当更进一步"></a>除了处理言论，还应当更进一步</h2><p>处理言论是“治标不治本”的方式。为了使团队可持续地走下去，管理者最终还是要从团队文化建设方面下手，建设积极正向的氛围，使成员自发地朝着目标努力，这样负面言论自然而然就少了。</p>
+<p>团队文化建设是一个复杂的问题，本文只挑几个方面进行讨论：</p>
+<h3 id="互相尊重"><a href="#互相尊重" class="headerlink" title="互相尊重"></a>互相尊重</h3><p>在建设团队文化过程中，一个简单而重要的做法是彼此之间互信尊重、坦诚相待，不要用斗争哲学来处事。</p>
+<p>可以不定期分批次地、小范围地、非正式地与员工进行一些交流，交换彼此的看法，增强互信，减少误判。特别是90后甚至即将步入职场的00后年轻员工，斗争哲学容易把他们赶跑，而坦诚相待可以使他们主动靠过来。谁都不用防备谁，工作可以更轻松。</p>
+<h3 id="言而有信"><a href="#言而有信" class="headerlink" title="言而有信"></a>言而有信</h3><p>大家都知道“狼来了”的故事。如果管理者屡次失信，那么大家就不会再相信你了，而且这种信任危机是很难挽救的。</p>
+<p>言而有信就是说到做到，但是，换个角度来想，也可以是“做不到就不说”，不要提出无法兑现的承诺，不要给员工画吃不到的饼。</p>
+<h3 id="适当激励"><a href="#适当激励" class="headerlink" title="适当激励"></a>适当激励</h3><p>激励是促使员工积极工作的有效手段。鉴于激励的复杂性，以及很多公司事实上难以落实物质激励，本文就不再详细讨论了。</p>
+<h2 id="反例"><a href="#反例" class="headerlink" title="反例"></a>反例</h2><p>控制负面言论，不代表不能进行批评，例如员工经常消极工作，领导仍然应该及时“敲打敲打”（为了留面子，可以私下敲打）。如果严重违背原则，甚至违反了法律法规，这时候还是要公开批评，防止更多人走歪路。</p>
+<p>负面言论虽然不适合对员工讲，但是适合自己对自己讲，自我批评，鞭策自己进步。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5uZXRraWxsZXIuY24vbWFuYWdlbWVudA==">Netkiller管理手札<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2021/04/01/expression-control/" title="控制团队内部的负面言论">https://plusnan.me/2021/04/01/expression-control/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%9B%A2%E9%98%9F%E5%BB%BA%E8%AE%BE/" rel="tag"># 团队建设</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/06/requirement-trap-1/" rel="prev" title="软件工程避坑指南（一）——需求调研">
+                  <i class="fa fa-chevron-left"></i> 软件工程避坑指南（一）——需求调研
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/05/12/interview/" rel="next" title="浅谈社招招聘（四）：面试的安排">
+                  浅谈社招招聘（四）：面试的安排 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"ad3c254d4fc860c22bd8073f58e050d5"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
