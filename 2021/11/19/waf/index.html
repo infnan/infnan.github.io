@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="有些时候，你的Web应用明明正常，但是突然有一天，它出现了莫名其妙的问题，无法定位到是哪一行代码错误，而且检查服务器配置也没有问题。这种情况下，可能是WAF安全设备在作怪。 本文用几个案例，讲一讲这种“莫名其妙”问题的现象如何，以及如何定位到WAF。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如果你的Web应用出现了莫名其妙的问题，你可以怀疑是否被WAF设备拦截">
+<meta property="og:url" content="https://plusnan.me/2021/11/19/waf/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="有些时候，你的Web应用明明正常，但是突然有一天，它出现了莫名其妙的问题，无法定位到是哪一行代码错误，而且检查服务器配置也没有问题。这种情况下，可能是WAF安全设备在作怪。 本文用几个案例，讲一讲这种“莫名其妙”问题的现象如何，以及如何定位到WAF。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://plusnan.me/img/2021-11-19-waf/a-1.png">
+<meta property="og:image" content="https://plusnan.me/img/2021-11-19-waf/a-2.png">
+<meta property="og:image" content="https://plusnan.me/img/2021-11-19-waf/b.png">
+<meta property="article:published_time" content="2021-11-18T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-07T02:26:01.722Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="WAF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plusnan.me/img/2021-11-19-waf/a-1.png">
+
+
+<link rel="canonical" href="https://plusnan.me/2021/11/19/waf/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2021/11/19/waf/","path":"2021/11/19/waf/","title":"如果你的Web应用出现了莫名其妙的问题，你可以怀疑是否被WAF设备拦截"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如果你的Web应用出现了莫名其妙的问题，你可以怀疑是否被WAF设备拦截 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%8E%B0%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">问题现象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">系统部署架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">检查过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1A"><span class="nav-number">3.1.</span> <span class="nav-text">业务A</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1B"><span class="nav-number">3.2.</span> <span class="nav-text">业务B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1C"><span class="nav-number">3.3.</span> <span class="nav-text">业务C</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E4%BC%BC%E4%BA%8B%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">类似事件</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2021/11/19/waf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如果你的Web应用出现了莫名其妙的问题，你可以怀疑是否被WAF设备拦截
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-19 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-19T00:00:00+08:00">2021-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-06-07 10:26:01" itemprop="dateModified" datetime="2023-06-07T10:26:01+08:00">2023-06-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">系统运维</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>有些时候，你的Web应用明明正常，但是突然有一天，它出现了莫名其妙的问题，无法定位到是哪一行代码错误，而且检查服务器配置也没有问题。这种情况下，可能是WAF安全设备在作怪。</p>
+<p>本文用几个案例，讲一讲这种“莫名其妙”问题的现象如何，以及如何定位到WAF。</p>
+<span id="more"></span>
+
+<h1 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h1><ul>
+<li>业务操作A从某时起突然开始提示“操作失败”，且更换账号、清理缓存、更换浏览器等方案皆无效，用户反馈显示所有人都无法成功办理业务。</li>
+<li>业务操作B从差不多的时间开始出故障，点击按钮没有反应，更换账号或浏览器同样无效。</li>
+<li>业务操作C也没有反应，后台抓包显示发生HTTP 418错误，而且有一个错误页面。跟开发人员确认，页面不是他们系统的。</li>
+<li>其他业务未反馈异常。</li>
+<li>询问实施与运维人员，确认近期没有碰过生产应用、生产数据库或其他相关服务器。</li>
+</ul>
+<h1 id="系统部署架构"><a href="#系统部署架构" class="headerlink" title="系统部署架构"></a>系统部署架构</h1><p>业务系统采用了既经典又传统的Web应用部署架构：</p>
+<pre class="line-numbers language-none"><code class="language-none">  Internet     |                    机房
+               |
+用户 ← CDN ← 网关 ← 负载均衡 ← 应用服务器（集群） ← 数据库服务器
+               |                     ↑
+               |                 Redis服务器
+               |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>根据架构图，询问各环节是否靠谱：</p>
+<ul>
+<li>用户经常“出故障”，然而本次已确认是系统问题，不是用户环境或操作问题。</li>
+<li>CDN由一家比较靠谱的第三方公司提供，出故障机率不大。</li>
+<li>负载均衡设备由一家比较靠谱的厂商生产，没有故障记录。</li>
+<li>Redis服务器、数据库服务器偶尔出故障，但本次业务问题应该与数据库无关（猜测，需要进一步确认）。</li>
+<li>应用服务器集群，每个节点部署的应用完全相同。应用服务器有故障记录，而且有些不靠谱的开发人员会把bug带到生产系统。</li>
+</ul>
+<h1 id="检查过程"><a href="#检查过程" class="headerlink" title="检查过程"></a>检查过程</h1><p>因故障发生前后未对生产系统服务器进行操作，首先排除自己人操作导致故障的可能性。</p>
+<p>接下来排除集群节点故障，因为集群各节点应用相同，且只有特定功能失败，其他功能正常，不会是节点卡死导致的。</p>
+<p>然后又排除了CDN的原因——通过修改自己电脑的hosts文件绕过了CDN，直接与服务器原始IP连接，问题依旧。</p>
+<p>向开发人员确认两业务的代码：操作A是Ajax请求，操作B是普通的form表单提交。</p>
+<p>下面分别分析A与B两个业务的情况。</p>
+<h2 id="业务A"><a href="#业务A" class="headerlink" title="业务A"></a>业务A</h2><p>使用浏览器控制台观察请求，发现业务A在Networks页面现象如下：</p>
+<p><img src="/img/2021-11-19-waf/a-1.png" alt="a-1"></p>
+<p>其他请求正常，说明应用服务器没挂，唯独这个个别业务可能有bug。需要登录服务器检查应用后台日志。</p>
+<p>登录到服务器，对每个节点的应用日志进行检查，未发现报错。重复操作几遍之后再检查日志，仍然未发现报错。我们怀疑程序未打错误日志。</p>
+<p>然而再仔细观察浏览器抓包的内容：</p>
+<p><img src="/img/2021-11-19-waf/a-2.png" alt="a-2"></p>
+<p>从图中可以发现，在Header里面未找到“Response Headers”，没有返回内容，“General”中也没有找到“Status Code”，说明甚至没有HTTP状态码。看来连接可能是被“掐断”了。</p>
+<p>再用curl测试一下。本地调用的话是：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ curl -v -X POST -H &quot;Content-Type: application&#x2F;json&quot; -b &quot;JSESSIONID&#x3D;从服务器拷过来的cookie&quot; -d &quot;从浏览器抓到的AJAX提交的内容&quot; http:&#x2F;&#x2F;www.xxx.com&#x2F;business&#x2F;submit
+*   Trying xxx.xxx.xxx.xxx...
+* TCP_NODELAY set
+* Connected to www.xxx.com (xxx.xxx.xxx.xxx) port 80 (#0)
+&gt; POST &#x2F;business&#x2F;submit HTTP&#x2F;1.1
+&gt; Host: www.xxx.com
+&gt; User-Agent: curl&#x2F;7.58.0
+&gt; Accept: *&#x2F;*
+&gt; Cookie: JSESSIONID&#x3D;xxxxxxx
+&gt; Content-Type: application&#x2F;json
+&gt; Content-Length: xxx
+&gt;
+* upload completely sent off: xxx out of xxx bytes
+* Empty reply from server
+* Connection #0 to host xxx.xxx.xxx.xxx left intact
+curl: (52) Empty reply from server
+* Closing connection 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>未返回任何数据。</p>
+<p>但登录到服务器里面操作就能返回HTTP 200 OK，还能看到JSON串，说明应用能正常响应：</p>
+<pre class="line-numbers language-none"><code class="language-none"># curl -v -X POST -H &quot;Content-Type: application&#x2F;json&quot; -b &quot;JSESSIONID&#x3D;从服务器拷过来的cookie&quot; -d &quot;从浏览器抓到的AJAX提交的内容&quot; http:&#x2F;&#x2F;127.0.0.1:8080&#x2F;business&#x2F;submit
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 port 8080 (#0)
+&gt; POST &#x2F;business&#x2F;submit HTTP&#x2F;1.1
+&gt; Host: 127.0.0.1:8080
+&gt; User-Agent: curl&#x2F;7.58.0
+&gt; Accept: *&#x2F;*
+&gt; Cookie: JSESSIONID&#x3D;xxxxxxx
+&gt; Content-Type: application&#x2F;json
+&gt; Content-Length: xxx
+&gt;
+&lt; HTTP&#x2F;1.1 200 OK
+&lt; Cache-Control: no-cache
+&lt; Connection: keep-alive
+&lt; Content-Length: xxx
+&lt; Content-Type: application&#x2F;json
+&lt; Date: xxx, xx xxx xxxx xx:xx:xx GMT
+&lt;
+一个乱七八糟的JSON串
+
+* Connection #0 to host 127.0.0.1 left intact
+* Closing connection 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将127.0.0.1:1080换成负载均衡地址，重复操作几遍，仍然返回200 OK，说明负载均衡设备应该没有问题。另外对JSON串的内容进行检查，发现提示“办理“成功”或“办理失败！请勿重复办理！”，说明数据库也是正常的，否则不可能校验出“重复办理”。</p>
+<h2 id="业务B"><a href="#业务B" class="headerlink" title="业务B"></a>业务B</h2><p>在进入B业务页面时，浏览器控制台显示oper.js有JavaScript语法错误：</p>
+<p><img src="/img/2021-11-19-waf/b.png" alt="oper.js"></p>
+<p>直接用浏览器查看oper.js内容，发现JavaScript脚本并未完整加载。分别在本地和服务器上使用curl命令获取oper.js内容：</p>
+<pre class="line-numbers language-none"><code class="language-none">在本地操作：
+$ curl http:&#x2F;&#x2F;www.xxx.com&#x2F;static&#x2F;js&#x2F;oper.js
+curl: (18) transfer closed with outstanding read data remaining
+一堆不完整的js代码
+
+登录到服务器：
+# curl http:&#x2F;&#x2F;127.0.0.1:8080&#x2F;static&#x2F;js&#x2F;oper.js
+一堆完整的js代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>发现：在我们电脑上执行curl，脚本还没加载完整，网络连接就被“掐断”了；在服务器上执行curl（域名分别使用127.0.0.1:8080与负载均衡地址），脚本内容能完整加载。</p>
+<h2 id="业务C"><a href="#业务C" class="headerlink" title="业务C"></a>业务C</h2><p>跟开发人员确认，他们的系统不会返回HTTP 418错误，而且错误页面与他们系统设计风格不符。说明错误页面不是该系统产生，而是由其他系统产生，例如CDN，但CDN表示这个错误页面也不是他们产生的。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>根据上面一系列现象判断，我们确认现有系统与设备未发生故障，可能某个环节调整了安全策略，导致正常请求被错误拦截。</p>
+<p>和甲方负责人员沟通之后，得知机房近期部署了WAF，但甲方既未通知各相关单位，也未派人观察WAF拦截记录。我们直接和WAF负责人员沟通，维护白名单之后问题解决。</p>
+<h1 id="类似事件"><a href="#类似事件" class="headerlink" title="类似事件"></a>类似事件</h1><p>到了另一个项目，该项目使用HTTPS网站。证书即将过期时，登录到nginx服务器替换新证书，浏览器验证时却发现证书有效期未更新，仍为原证书的有效期。</p>
+<p>仔细检查服务器，发现证书文件已正确替换、nginx配置正确，而且服务器内只有一个nginx实例，并已正确重启。</p>
+<p>但是在测试时意外发现，在服务器上使用<code>curl -vIk https://127.0.0.1</code>查看证书有效期已经更新，但是使用<code>curl -vIk https://xxx.xxx.xxx.xxx</code>（外网地址）时证书有效期未更新，说明服务器和外网之间应该有某类设备。</p>
+<p>经确认，该项目服务器与外网之间也是有一个WAF，联系相应部门在WAF上配置新证书，证书有效期问题就解决了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2021/11/19/waf/" title="如果你的Web应用出现了莫名其妙的问题，你可以怀疑是否被WAF设备拦截">https://plusnan.me/2021/11/19/waf/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/WAF/" rel="tag"># WAF</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/24/centos-security/" rel="prev" title="CentOS 7安全等保整改记录">
+                  <i class="fa fa-chevron-left"></i> CentOS 7安全等保整改记录
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/15/ruoyi-fix/" rel="next" title="若依（芋道）框架完善记录">
+                  若依（芋道）框架完善记录 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"4d6f3027a6cc8811e3613469cc5044f9"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
