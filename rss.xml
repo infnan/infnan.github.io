@@ -6,7 +6,7 @@
   <link href="https://plusnan.me/rss.xml" rel="self"/>
   
   <link href="https://plusnan.me/"/>
-  <updated>2023-07-19T14:09:18.149Z</updated>
+  <updated>2023-07-24T06:30:49.648Z</updated>
   <id>https://plusnan.me/</id>
   
   <author>
@@ -21,12 +21,12 @@
     <link href="https://plusnan.me/2022/05/06/tianditu-cache/"/>
     <id>https://plusnan.me/2022/05/06/tianditu-cache/</id>
     <published>2022-05-05T16:00:00.000Z</published>
-    <updated>2023-07-19T14:09:18.149Z</updated>
+    <updated>2023-07-24T06:30:49.648Z</updated>
     
-    <content type="html"><![CDATA[<p>由于天地图有时访问速度缓慢，加上接口访问数量限制，可借助nginx对天地图进行缓存。</p><span id="more"></span><h1 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h1><pre class="line-numbers language-conf" data-language="conf"><code class="language-conf"># ...http &#123;    # ...    resolver 114.114.114.114 ipv6&#x3D;off;    # 此处换成实际的缓存路径    proxy_temp_path &#x2F;var&#x2F;cache&#x2F;tianditu_temp;    proxy_cache_path &#x2F;var&#x2F;cache&#x2F;tianditu levels&#x3D;1:2 keys_zone&#x3D;cache_one:200m inactive&#x3D;1d max_size&#x3D;30g;    upstream tianditu_server &#123;        server t0.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t1.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t2.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t3.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t4.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t5.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t6.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;    &#125;    server &#123;        # 此处需修改成实际端口        listen 5000 default_server;        server_name _;        location &#x2F; &#123;            add_header Access-Control-Allow-Origin *;            add_header Access-Control-Allow-Headers X-Requested-With;            add_header Access-Control-Allow-Methods GET,POST,OPTIONS;            proxy_ssl_name t0.tianditu.gov.cn;            proxy_ssl_server_name on;                        proxy_cache cache_one;            proxy_cache_key $uri$is_args$args;                        proxy_pass https:&#x2F;&#x2F;tianditu_server;            proxy_set_header Host t0.tianditu.gov.cn;            proxy_set_header User-Agent &quot;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;103.0.0.0 Safari&#x2F;537.36&quot;;            proxy_ignore_headers Set-Cookie;            proxy_ignore_headers Cache-Control;            proxy_cache_valid 200 302 7d;                        expires 7d;                    add_header X-Proxy-Cache $upstream_cache_status;        &#125;    &#125;    # ...&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>将天地图域名换成服务器地址即可，例如将<code>https://t0.tianditu.gov.cn/img_w/wmts</code>替换成<code>http://172.16.0.100:5000/img_w/wmts</code>。</p>]]></content>
+    <content type="html"><![CDATA[<p>由于天地图有时访问速度缓慢，加上接口访问数量限制，可借助nginx对天地图进行缓存，提高访问速度。</p><span id="more"></span><h1 id="配置文件内容"><a href="#配置文件内容" class="headerlink" title="配置文件内容"></a>配置文件内容</h1><pre class="line-numbers language-conf" data-language="conf"><code class="language-conf"># ...http &#123;    # ...    resolver 114.114.114.114 ipv6&#x3D;off;    # 此处换成实际的缓存路径    proxy_temp_path &#x2F;var&#x2F;cache&#x2F;tianditu_temp;    proxy_cache_path &#x2F;var&#x2F;cache&#x2F;tianditu levels&#x3D;1:2 keys_zone&#x3D;cache_one:200m inactive&#x3D;1d max_size&#x3D;30g;    upstream tianditu_server &#123;        server t0.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t1.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t2.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t3.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t4.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t5.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;        server t6.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;    &#125;    server &#123;        # 此处需修改成实际端口        listen 5000 default_server;        server_name _;        location &#x2F; &#123;            add_header Access-Control-Allow-Origin *;            add_header Access-Control-Allow-Headers X-Requested-With;            add_header Access-Control-Allow-Methods GET,POST,OPTIONS;            proxy_ssl_name t0.tianditu.gov.cn;            proxy_ssl_server_name on;                        proxy_cache cache_one;            proxy_cache_key $uri$is_args$args;                        proxy_pass https:&#x2F;&#x2F;tianditu_server;            proxy_set_header Host t0.tianditu.gov.cn;            proxy_set_header User-Agent &quot;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;103.0.0.0 Safari&#x2F;537.36&quot;;            proxy_ignore_headers Set-Cookie;            proxy_ignore_headers Cache-Control;            proxy_cache_valid 200 302 7d;                        expires 7d;                    add_header X-Proxy-Cache $upstream_cache_status;        &#125;    &#125;    # ...&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>将天地图域名换成服务器地址即可，例如将<code>https://t0.tianditu.gov.cn/img_w/wmts</code>替换成<code>http://172.16.0.100:5000/img_w/wmts</code>。</p>]]></content>
     
     
-    <summary type="html">&lt;p&gt;由于天地图有时访问速度缓慢，加上接口访问数量限制，可借助nginx对天地图进行缓存。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;由于天地图有时访问速度缓慢，加上接口访问数量限制，可借助nginx对天地图进行缓存，提高访问速度。&lt;/p&gt;</summary>
     
     
     
@@ -64,6 +64,49 @@
     <category term="若依" scheme="https://plusnan.me/tags/%E8%8B%A5%E4%BE%9D/"/>
     
     <category term="芋道" scheme="https://plusnan.me/tags/%E8%8A%8B%E9%81%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何正确使用信用卡</title>
+    <link href="https://plusnan.me/2022/02/22/credit-card/"/>
+    <id>https://plusnan.me/2022/02/22/credit-card/</id>
+    <published>2022-02-21T16:00:00.000Z</published>
+    <updated>2023-07-24T07:08:09.098Z</updated>
+    
+    <content type="html"><![CDATA[<p>学会正确使用信用卡，让自己不会成为“卡奴”。</p><span id="more"></span><h1 id="如果你不知道信用卡能做什么事情，那么不要办信用卡"><a href="#如果你不知道信用卡能做什么事情，那么不要办信用卡" class="headerlink" title="如果你不知道信用卡能做什么事情，那么不要办信用卡"></a>如果你不知道信用卡能做什么事情，那么不要办信用卡</h1><p>信用卡能做什么事情呢？</p><p><strong>如果你不清楚这个问题，那么说明你完全不需要信用卡。</strong>这种情况下，即使银行会给你各种好处，你也不应该去办理任何信用卡，而且应该抓紧去银行把已经办过的信用卡全部注销。</p><p>如果你还是想了解信用卡的作用，这里可以简单解释一下：</p><ul><li>在国内，有支付宝和微信支付就足够了，缺钱的话，你还可以用花呗和借呗，所以你不需要信用卡。</li><li>在国外，以及需要支付的国外网站，你需要指定标志（例如Visa、Mastercard）的信用卡，所以你不需要纯银联的信用卡。</li></ul><h1 id="如果你要办信用卡，那么要熟悉信用卡的一些概念"><a href="#如果你要办信用卡，那么要熟悉信用卡的一些概念" class="headerlink" title="如果你要办信用卡，那么要熟悉信用卡的一些概念"></a>如果你要办信用卡，那么要熟悉信用卡的一些概念</h1><p>很多人都有储蓄卡，规范说法叫做借记卡。储蓄卡的用法很简单，需要存钱时可以直接往里面存钱，需要消费或取钱时可以往外取钱，而且只要卡片和密码不丢，钱就不会丢，也不会产生额外费用。</p><p>但信用卡不同于借记卡，信用卡有一系列麻烦的概念。如果你不清楚这些词语的含义，不能正确使用卡片，轻者增加花销，重者影响征信。</p><ul><li>额度：额度指信用卡最多能花多少钱。额度是银行的钱，不是你的钱，所以额度高只是表示你能多借点钱，该还的钱还是要还的。假如你的额度是10000元，查询到当前额度是3000元，说明你现在欠银行7000元。</li><li>年费：<strong>持有信用卡，每年会产生一笔持有的费用，所以办卡时务必和银行确认年费金额</strong>。虽然有些卡片是免年费的，或者带条件免年费，例如消费满多少之后免年费，但你也不要直接拿剪刀把卡片“咔嚓”掉，而是及时去银行注销不再使用的卡片，彻底消除隐患。</li><li>账单日和还款日：<ul><li>账单日：到账单日时，银行会把上一个月的消费记录固定下来，形成账单，并且告诉你欠了多少钱。这个时候你还有大约半个月的准备时间，在此期间并不需要急着还款，也不会产生利息。</li><li>还款日：账单日过了大约半个月时间以后，会到达还款日，这是你还钱的最后期限。<strong>如果你过了还款日还没还钱，那么会影响征信，而且银行会开始收利息。</strong></li><li>每张卡的账单日和还款日可能都不一样，具体日期需要和银行确认。另外建议开启自动还款功能，以免因为不小心忘记还款而影响征信。</li></ul></li><li>最低还款：在账单日之后，除了全额还款，你也可以只还一部分。例如账单金额是欠1000元，最低还款额是100元，你只要还款超过100元，就不会影响征信。但是需要注意，<strong>最低还款只是不影响征信，剩下的钱还是要还的，而且过了还款日之后，银行也会开始计算利息</strong>。</li><li>CVV（安全码）：指卡片背后的数字。信用卡和储蓄卡不一样，只要知道正面的卡号与日期，以及背面的安全码，无需密码也可以消费。因此<strong>不要随意让别人看到你的信用卡卡面</strong>。</li><li>人民币账单和美元账单：如果是外币卡，会产生两种账单，人民币账单和美元账单要分别用两种货币还款。如果你不介意汇率问题，而且觉得购汇还款麻烦，可以开通美元账单用人民币记账，这样的话，到账单日的时候，直接用人民币就能把两种欠款还清。</li><li>银联、Visa、Mastercard等：卡面上的标志决定了它能在哪里使用。例如带Visa或Mastercard标志的，可以在国外很多国家使用，但是只有银联一种标志的，基本上只能在国内使用了。</li></ul><h1 id="无论什么情况，都要量力而行"><a href="#无论什么情况，都要量力而行" class="headerlink" title="无论什么情况，都要量力而行"></a>无论什么情况，都要量力而行</h1><p>信用卡的本质是向银行借钱，是你的债务之一。既然是欠别人的钱，那么你迟早要还钱，因此，你手头应该准备比账单支出还要多的存款，不然的话，你拿什么去还呢？</p><p>如果你没有足够的存款，那么你需要评估自己的收入情况，保证剩余存款加上本月的收入能还得上信用卡和其他债务的支出。</p><p>在疫情两年折腾之下，很多单位已经不能正常发放工资。如果你背上了房贷车贷，收入开始变得不稳定，又没有足够的存款，那么即使靠信用卡做资金周转，也改变不了它是压垮你的众多石头之一的事实。</p><h1 id="有些操作，这辈子永远都不要碰"><a href="#有些操作，这辈子永远都不要碰" class="headerlink" title="有些操作，这辈子永远都不要碰"></a>有些操作，这辈子永远都不要碰</h1><h2 id="最低还款和分期还款"><a href="#最低还款和分期还款" class="headerlink" title="最低还款和分期还款"></a>最低还款和分期还款</h2><p>最低还款和分期还款，因为你的欠款没有还清，所以都会计算利息。利息的计算方式比较复杂，而且利息是按照账单金额而非实际欠款计算的，也就是说，你欠了1000，还了900，利息还是用1000来计算的。</p><p>那么如何规避这里面的陷阱呢？</p><p>很简单，只要你每次都是全额还款，也永远不做分期还款，你就永远不需要关心这个问题了。</p><h2 id="取现"><a href="#取现" class="headerlink" title="取现"></a>取现</h2><p>信用卡可以合法地取现，但是银行会收取手续费，并且利息从取现开始就立即计算，而不是等到取款日才计算。因此不要使用信用卡取现。</p><h2 id="套现"><a href="#套现" class="headerlink" title="套现"></a>套现</h2><p>很多人申请信用卡其实是为了能周转资金。由于信用卡取现手续费和利息都比较高，而刷POS机会被视为消费，手续费低，而且还款日之前没有利息，所以你会发现街头到处都有办POS机的小广告。</p><p>然而信用卡套现是违法的，而且错误地刷POS机容易触发银行风控，导致锁卡。出现问题时，你也不能用合法途径来维护自己的权益，因为这样做等于投案自首。</p><p>如果你现在经济状况还能说得过去，在大额消费（例如贷款）之前，你就应该思考一下，是不是本可以降低杠杆率（少贷款），或者暂缓消费计划，减少不必要的支出，从而避免把自己逼到需要靠信用卡套现周转的绝境呢？</p><p>如果已经山穷水尽，沦落到不得不靠信用卡套现的程度，你需要思考，能不能选择割肉，先变卖手中的一些资产，哪怕亏本卖掉，先把总负债降下去再说？</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;学会正确使用信用卡，让自己不会成为“卡奴”。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="一点人生的经验" scheme="https://plusnan.me/categories/%E4%B8%80%E7%82%B9%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+    <category term="信用卡" scheme="https://plusnan.me/tags/%E4%BF%A1%E7%94%A8%E5%8D%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>小心你的数据库查询窗口，以免误操作</title>
+    <link href="https://plusnan.me/2021/12/16/db-console/"/>
+    <id>https://plusnan.me/2021/12/16/db-console/</id>
+    <published>2021-12-15T16:00:00.000Z</published>
+    <updated>2023-07-24T15:08:15.777Z</updated>
+    
+    <content type="html"><![CDATA[<p>如果你的数据库查询窗口的第一行是<code>DROP DATABASE</code>，你又不小心点击了执行按钮……</p><p>有些数据库软件能够智能地执行光标所在行的指令，但有些数据库软件没那么智能，或者需要配置才能变聪明，一不小心，就会把窗口里面的所有SQL都执行一遍，所以使用数据库软件时要注意防范误操作。</p><span id="more"></span><h1 id="先检查再操作"><a href="#先检查再操作" class="headerlink" title="先检查再操作"></a>先检查再操作</h1><ul><li>执行UPDATE和DELETE之前，检查是否写了WHERE条件，并用同样条件执行一遍SELECT查询，检查条件是否正确。</li><li>执行选择或光标处SQL语句时，检查SQL语句是否选择完整。</li></ul><h1 id="及时清理破坏性SQL"><a href="#及时清理破坏性SQL" class="headerlink" title="及时清理破坏性SQL"></a>及时清理破坏性SQL</h1><p>在操作数据库时，如果需要执行有副作用的指令，例如DROP、DELETE、INSERT、UPDATE、TRUNCATE等，记得在执行完成后及时清理掉这些语句。可以用以下方式操作：</p><ul><li>每执行完一个SQL，就立刻把它删掉。</li><li>为了方便查找或记录，不希望把SQL删掉，可以在执行完SQL之后立刻把它注释掉。</li><li>在SQL窗口第一行放一个会报错的SQL，如果不小心点了执行，可以让数据库客户端在第一行就停下来。需要注意，有些数据库客户端在失败后会继续执行后面的指令，所以还要慎重。</li></ul><h1 id="连接生产系统，不要图方便"><a href="#连接生产系统，不要图方便" class="headerlink" title="连接生产系统，不要图方便"></a>连接生产系统，不要图方便</h1><p>生产系统权限意味着巨大的责任，而连接生产系统的方式越容易，犯错误的几率就越大，所以不要为了图方便把自己置于危险境地。可以用以下方法来防范：</p><ul><li>不要在同一个系统、同一个数据库软件中同时连接开发系统和生产系统，避免弄错环境。</li><li>连接生产系统之前总是手工输入账号密码，不要自动连接，使自己清晰地意识到自己在连接生产系统，同时防止无关人员盗用。</li><li>批量执行语句，或导入SQL文件时，先检查SQL内容，确认是否有破坏性指令（例如有些软件生成的导入SQL会先删表），确认无误后再执行。</li><li>把在生产系统执行的每条SQL都做好记录，包括执行时间、执行人、操作目的，以备事后追溯。</li><li>及时清理生产系统的数据库操作界面里的SQL。</li><li>操作完成后及时关闭数据库软件。</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;如果你的数据库查询窗口的第一行是&lt;code&gt;DROP DATABASE&lt;/code&gt;，你又不小心点击了执行按钮……&lt;/p&gt;
+&lt;p&gt;有些数据库软件能够智能地执行光标所在行的指令，但有些数据库软件没那么智能，或者需要配置才能变聪明，一不小心，就会把窗口里面的所有SQL都执行一遍，所以使用数据库软件时要注意防范误操作。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="一点人生的经验" scheme="https://plusnan.me/categories/%E4%B8%80%E7%82%B9%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/"/>
+    
+    
+    <category term="数据库" scheme="https://plusnan.me/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
@@ -409,51 +452,6 @@
     
     
     <summary type="html">&lt;p&gt;在决定买房之前，应该对地产项目有一个基本的了解。本文对项目中的一些坑进行梳理。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="楼市" scheme="https://plusnan.me/categories/%E6%A5%BC%E5%B8%82/"/>
-    
-    
-    <category term="买房" scheme="https://plusnan.me/tags/%E4%B9%B0%E6%88%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>买房避坑指南（一）：购房资格</title>
-    <link href="https://plusnan.me/2020/11/29/buy-house-1/"/>
-    <id>https://plusnan.me/2020/11/29/buy-house-1/</id>
-    <published>2020-11-28T16:00:00.000Z</published>
-    <updated>2023-06-05T03:31:09.062Z</updated>
-    
-    <content type="html"><![CDATA[<p>为稳定房地产，避免炒作，各大城市相继出台了限购政策，有些城市的限购甚至会影响刚需或刚改的购房，因此要先确认自己是否有购房资格。</p><p>由于不同城市限购政策不同，本文仅进行一些提醒，能否购买应向当地专业人士咨询和确认。</p><span id="more"></span><h1 id="明确大方向"><a href="#明确大方向" class="headerlink" title="明确大方向"></a>明确大方向</h1><p>国家反复强调“房住不炒”，多地尝试放松限购，政策却都遭遇“一日游”，说明国家更加重视维稳，既不会让房价大涨，也不会让房价大跌，而是慢慢地挤泡沫，后面不排除用定向暴雷的方式来打压投资者（为了维持稳定，国家可以不惜一切代价，而投资者很容易成为这个“代价”之一），因此建议只出于居住目的买房，而且要走合法程序、办合法手续，以免自己成为被维稳者。</p><h1 id="购房资格"><a href="#购房资格" class="headerlink" title="购房资格"></a>购房资格</h1><h2 id="留意限制内容"><a href="#留意限制内容" class="headerlink" title="留意限制内容"></a>留意限制内容</h2><ul><li>需留意限制范围，例如哪些区县存在限购。</li><li>有些城市的限购范围不光包括行政区，还包括高新区、经济开发区等非行政区划，而这类开发区范围在百度地图是查不到的，因此需要搜索一下资料，或者给相应区域内的街道社区打电话咨询，确认目标楼盘是否位于这些开发区范围内。</li><li>需留意对户口、学历等限制，例如本地户口如何限制，外地户口如何限制。对于除北上广深以外的城市，如果选择通过落户或连续缴交社保满足限制，需了解门槛如何。</li><li>需留意限购针对个人还是针对家庭，夫妻名下有房产，新房子只写一方姓名是否会被限制。</li><li>有些城市，离婚也会按离婚之前计数，需要留意是否有类似限制。</li><li>如果已经有房子，公寓是否计入数量，居住公寓是否计入数量，已网签未办房产证是否计入数量，等等。</li></ul><h2 id="你贷得起款吗？"><a href="#你贷得起款吗？" class="headerlink" title="你贷得起款吗？"></a>你贷得起款吗？</h2><p>有些城市不仅限制购买资格，还限制贷款规模，因此在凑首付时也要多加留意。</p><ul><li>贷款对户口、学历是否有要求？</li><li>如果在外地有贷款，在本地贷款是否有额外要求？</li><li>如果征信存在不良记录（例如有逾期记录，或使用借呗借钱），贷款审批会受到何种限制？</li><li>你的银行流水（主要是收入）能支撑贷款吗？</li><li>按照限购政策，可以贷几成房款？</li><li>2020年12月31日，央行发文要求收紧房贷。<span class="exturl" data-url="aHR0cHM6Ly9maW5hbmNlLnNpbmEuY29tLmNuL3dtLzIwMjEtMDEtMDkvZG9jLWlpem5jdGtmMTAzMTEyMy5zaHRtbA==">收紧房贷<i class="fa fa-external-link-alt"></i></span>的话，你的贷款还能不能批下来？</li></ul><h2 id="不要尝试突破限购限贷"><a href="#不要尝试突破限购限贷" class="headerlink" title="不要尝试突破限购限贷"></a>不要尝试突破限购限贷</h2><p>不要尝试突破限购限贷，例如伪造证明材料、假离婚。因为这已经是违反法律法规的行为，一旦事情暴露或产生纠纷，不仅贷款会被拒绝，还得不到任何法律保障。</p><p>伪造材料的风险就不用细说了，只要被发现，抽贷（要求立刻还清全款）就已经算是比较轻的后果了。</p><p>假离婚风险如下：</p><ol><li>如果夫妻有一方假戏真做，趁机抛弃对方，那么另一方将无法维权。即便是“离婚”前制定的书面“复婚”约定，也不具备法律效力。</li><li>如果在假离婚之后突然颁布新政（例如上海在2021年1月21日颁发《<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29odS5jb20vYS80NDYwMTgwNjNfMjYwNjE2">关于促进本市房地产市场平稳健康发展的意见<i class="fa fa-external-link-alt"></i></span>》），限购按离异前套数进行计数，那么假离婚将失去意义。</li></ol><p>另外还有一种突破限购的方式——以公司名义买房，但是注册公司本身就要花费很多时间精力与金钱（公司不能放着不管，必须进行经营），转让时还要承担高额交易税，所以普通人不要考虑这种途径。2021年开始，经营贷政策收紧，假如你使用这种途径贷款，银行随时可以抽贷，还不清贷款就直接没收你家房子，而且他们这样做还是合法行为，你连维权的机会都没有。</p><h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ul><li><a href="/2020/11/22/buy-house-0/">总述</a></li><li><strong>购房资格</strong></li><li><a href="/2020/12/05/buy-house-2/">地产项目情况</a></li><li><a href="/2020/12/12/buy-house-3/">项目周围环境</a></li><li><a href="/2020/12/19/buy-house-4/">售楼处里的套路</a></li><li><a href="/2020/12/26/buy-house-5">关于合同</a></li><li><a href="/2020/12/28/buy-house-6/">不要买公寓！</a></li><li><a href="/2021/07/12/buy-house-7/">房贷贷多少合适</a></li><li><a href="/2021/08/15/buy-house-8/">要不要买车位</a></li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;为稳定房地产，避免炒作，各大城市相继出台了限购政策，有些城市的限购甚至会影响刚需或刚改的购房，因此要先确认自己是否有购房资格。&lt;/p&gt;
-&lt;p&gt;由于不同城市限购政策不同，本文仅进行一些提醒，能否购买应向当地专业人士咨询和确认。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="楼市" scheme="https://plusnan.me/categories/%E6%A5%BC%E5%B8%82/"/>
-    
-    
-    <category term="买房" scheme="https://plusnan.me/tags/%E4%B9%B0%E6%88%BF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>买房避坑指南：总述</title>
-    <link href="https://plusnan.me/2020/11/22/buy-house-0/"/>
-    <id>https://plusnan.me/2020/11/22/buy-house-0/</id>
-    <published>2020-11-21T16:00:00.000Z</published>
-    <updated>2023-06-05T03:31:11.459Z</updated>
-    
-    <content type="html"><![CDATA[<p>现在普通的年轻人已经很难通过个人奋斗来攒一套房了，不仅要掏光四个甚至六个钱包，还要背负巨额贷款。不光如此，由于各种原因，购房者草率地决定买房，之后遭遇了各种问题，“交房即维权”，甚至因自己一时头脑发热而懊悔不已。</p><p>为了避免不必要的损失，我们有必要了解买房过程中的各种坑。即便预算不足，无法完全避免这些坑，至少也不能因为本来可以避免的损失而稀里糊涂地把三代人辛辛苦苦挣到的钱随便交给开发商。</p><p>本系列文章内容较多，但是，面临着几百万甚至几千万的交易，多花一些时间来冷静分析，这完全是有必要而且是有益的。</p><span id="more"></span><h1 id="本系列文章的假设"><a href="#本系列文章的假设" class="headerlink" title="本系列文章的假设"></a>本系列文章的假设</h1><p>为了不让讨论太发散，本系列文章假设：</p><ul><li>你不是土豪：大部分人不得不掏光几个钱包还要背负贷款才能勉强凑出一个房子。</li><li>你要买新房：新房有新房的坑，二手房有二手房的坑，虽然个人更推荐考虑一下二手房，但这不在本文讨论范围内。</li><li>你要买普通住宅，也就是房产证为70年产权，性质为“住宅”或“居住公寓”的房子：<a href="/2020/12/28/buy-house-6/">公寓的坑</a>比住宅多，而且坑的性质也很恶劣，所以很多人都强烈建议公寓不能买，只能租。</li><li>你买房是为了居住，不是为了投资：投资有投资的坑，二者不能一概而论。</li></ul><h1 id="总行动方针"><a href="#总行动方针" class="headerlink" title="总行动方针"></a>总行动方针</h1><p>不要追求完美，有那种房子肯定也买不起，只求少被开发商忽悠。为此需要提前收集情报，获取足够的信息，并识别出各种坑，然后再分析利弊。只要没有无法接受的硬伤，就可以考虑放到候选名单了。</p><p>一般人没有那么多钱，能作出的选择有限，而且每个楼盘都有硬伤，那么你需要对这些硬伤排序，排除掉最不能忍的事情。例如楼盘挨着墓地，但你是无神论者，虽然看墓地感觉不舒服，但并不害怕，但你对噪音比较介意，稍微过个火车就睡不着觉，那么在挨着铁路和挨着墓地的楼盘中，就可以优先选择挨着墓地的楼盘。</p><p>在产生买房想法之前，应当先熟悉自己所在城市和片区，因为城市东西南北发展情况不同，在熟悉自己所处片区的发展情况之前不要轻易买房。如果考虑跨片区买房（例如城西工作城东居住），或者考虑双城生活（例如上海工作昆山居住），那么应当找些时间请假，在早晚高峰时间实地体验通勤，确认有稳定的通勤方式之后再继续决策。</p><p>在考虑新房的同时，也要考虑一下二手房！对于新房来说，一方面近两年房价暴涨，开发商却讲究高周转，所以新房质量越来越差，暴雷的案例也实在太多，而二手房的质量是看得见摸得着的；另一方面，如果房市下行，新房卖不动，那么二手房肯定更难卖（学区房除外）。你要是擅长讲价，砍个几十万大概不是问题。本系列文章针对新房，就不再详细讲二手房了。</p><p>最后，绝对不要轻信置业顾问，他们的话只能当做参考，实际情况还要你自己亲自核实。在没有100%决定买房之前，不要给开发商付任何钱，否则，付钱之前他们像大爷一样伺候你，付钱之后你可以像孙子一样被他们欺负！</p><h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ul><li><strong>总述</strong></li><li><a href="/2020/11/29/buy-house-1/">购房资格</a></li><li><a href="/2020/12/05/buy-house-2/">地产项目情况</a></li><li><a href="/2020/12/12/buy-house-3/">项目周围环境</a></li><li><a href="/2020/12/19/buy-house-4/">售楼处里的套路</a></li><li><a href="/2020/12/26/buy-house-5">关于合同</a></li><li><a href="/2020/12/28/buy-house-6/">不要买公寓！</a></li><li><a href="/2021/07/12/buy-house-7/">房贷贷多少合适</a></li><li><a href="/2021/08/15/buy-house-8/">要不要买车位</a></li></ul>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;现在普通的年轻人已经很难通过个人奋斗来攒一套房了，不仅要掏光四个甚至六个钱包，还要背负巨额贷款。不光如此，由于各种原因，购房者草率地决定买房，之后遭遇了各种问题，“交房即维权”，甚至因自己一时头脑发热而懊悔不已。&lt;/p&gt;
-&lt;p&gt;为了避免不必要的损失，我们有必要了解买房过程中的各种坑。即便预算不足，无法完全避免这些坑，至少也不能因为本来可以避免的损失而稀里糊涂地把三代人辛辛苦苦挣到的钱随便交给开发商。&lt;/p&gt;
-&lt;p&gt;本系列文章内容较多，但是，面临着几百万甚至几千万的交易，多花一些时间来冷静分析，这完全是有必要而且是有益的。&lt;/p&gt;</summary>
     
     
     
