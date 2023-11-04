@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
+<meta name="generator" content="Hexo 5.4.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="很多业务都是以增删改查为基础，利用若依框架，已经能够实现代码的快速生成，但需要在后端部署一些VO、Controller和Service，如需维护，依然要修改多个文件，而且要升级和重启后端系统。 如果业务只是简单的SQL或脚本，我们能否进一步简化，实现接口动态维护，不停机就能快速配置好系统接口呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Spring Boot和若依框架实现可灵活配置的动态接口">
+<meta property="og:url" content="https://plusnan.me/2022/06/08/dynamic-controller/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="很多业务都是以增删改查为基础，利用若依框架，已经能够实现代码的快速生成，但需要在后端部署一些VO、Controller和Service，如需维护，依然要修改多个文件，而且要升级和重启后端系统。 如果业务只是简单的SQL或脚本，我们能否进一步简化，实现接口动态维护，不停机就能快速配置好系统接口呢？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://plusnan.me/img/2022-06-08-dynamic-controller/1.png">
+<meta property="og:image" content="https://plusnan.me/img/2022-06-08-dynamic-controller/2.png">
+<meta property="article:published_time" content="2022-06-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-04T09:33:13.488Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="接口">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://plusnan.me/img/2022-06-08-dynamic-controller/1.png">
+
+
+<link rel="canonical" href="https://plusnan.me/2022/06/08/dynamic-controller/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2022/06/08/dynamic-controller/","path":"2022/06/08/dynamic-controller/","title":"基于Spring Boot和若依框架实现可灵活配置的动态接口"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>基于Spring Boot和若依框架实现可灵活配置的动态接口 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">功能设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">数据库设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">核心代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E5%8A%A8%E6%80%81SQL"><span class="nav-number">3.1.</span> <span class="nav-text">解析动态SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96SQL%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E4%B8%AD%E7%9A%84%E5%AD%97%E6%AE%B5%E5%90%8D"><span class="nav-number">3.2.</span> <span class="nav-text">获取SQL执行结果中的字段名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%BF%90%E8%A1%8CJavaScript%E4%BB%A3%E7%A0%81"><span class="nav-number">3.3.</span> <span class="nav-text">动态运行JavaScript代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E5%92%8C%E6%9D%83%E9%99%90%E6%A0%A1%E9%AA%8C"><span class="nav-number">3.4.</span> <span class="nav-text">身份和权限校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%A4%9A%E7%A7%8D%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="nav-number">3.5.</span> <span class="nav-text">支持多种请求方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="nav-number">3.6.</span> <span class="nav-text">切换数据源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">3.7.</span> <span class="nav-text">JavaScript工具类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">接口设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">SQL配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript%E9%85%8D%E7%BD%AE"><span class="nav-number">4.3.</span> <span class="nav-text">JavaScript配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">进一步思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TODO"><span class="nav-number">6.</span> <span class="nav-text">TODO</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2022/06/08/dynamic-controller/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于Spring Boot和若依框架实现可灵活配置的动态接口
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-08 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-08T00:00:00+08:00">2022-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-11-04 17:33:13" itemprop="dateModified" datetime="2023-11-04T17:33:13+08:00">2023-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>很多业务都是以增删改查为基础，利用若依框架，已经能够实现代码的快速生成，但需要在后端部署一些VO、Controller和Service，如需维护，依然要修改多个文件，而且要升级和重启后端系统。</p>
+<p>如果业务只是简单的SQL或脚本，我们能否进一步简化，实现接口动态维护，不停机就能快速配置好系统接口呢？</p>
+<span id="more"></span>
+
+<p>下面以若依的<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20veV9wcm9qZWN0L1J1b1lpLVZ1ZQ==">前后分离版本<i class="fa fa-external-link-alt"></i></span>为例来实现这个功能。</p>
+<h1 id="功能设计"><a href="#功能设计" class="headerlink" title="功能设计"></a>功能设计</h1><p>系统主要实现以下功能：</p>
+<ol>
+<li>接口管理：向开发者提供接口信息管理功能，能够创建和维护接口，动态管理接口名称、接口URL、接口类型、输入参数、代码等信息。当接口数量较多时，可通过整理分组来保持可维护性。</li>
+<li>接口调用：在接口管理功能设置好接口后，开发者无需重启后端应用，即可调用相应接口。调用时，系统后台对调用者身份和权限进行校验，校验通过后执行相应代码，返回运行结果。</li>
+</ol>
+<p>接口支持以下技术特性：</p>
+<ol>
+<li>快速配置，保存即更新，无需停机维护。</li>
+<li>可根据需要设置或更改接口URL。</li>
+<li>可设置或限制接口的访问方式，如GET、POST。</li>
+<li>支持提供输入参数，并支持通过URL、JSON、form等多种方式传入参数。</li>
+<li>支持SQL和JavaScript（要求Java版本小于15）两种类型的代码。SQL支持MyBatis的动态标签，JavaScript可获取Spring对象。</li>
+<li>支持授权和权限验证。</li>
+<li>支持切换数据源。</li>
+</ol>
+<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><p>设计两张表，一个为接口内容（interface_item），存储所有接口的代码；另一个为接口分组（interface_group），便于归类管理所有接口。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> interface_item
+<span class="token punctuation">(</span>
+    id          <span class="token keyword">BIGINT</span> <span class="token keyword">AUTO_INCREMENT</span> <span class="token keyword">COMMENT</span> <span class="token string">'主键'</span>
+        <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">,</span>
+    name        <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>  <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'名称'</span><span class="token punctuation">,</span>
+    code        <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>  <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'接口名'</span><span class="token punctuation">,</span>
+    <span class="token keyword">type</span>        <span class="token keyword">TINYINT</span>       <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'类型，1-sql，2-js'</span><span class="token punctuation">,</span>
+    description <span class="token keyword">TEXT</span>          <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'描述'</span><span class="token punctuation">,</span>
+    method      <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>  <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token string">'GET'</span> <span class="token keyword">COMMENT</span> <span class="token string">'请求方式,GET/POST'</span><span class="token punctuation">,</span>
+    group_id    <span class="token keyword">BIGINT</span>        <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'分组'</span><span class="token punctuation">,</span>
+    group_code  <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>  <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'分组'</span><span class="token punctuation">,</span>
+    datasource  <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>  <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'数据源'</span><span class="token punctuation">,</span>
+    is_enable   <span class="token keyword">TINYINT</span>       <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token number">1</span> <span class="token keyword">COMMENT</span> <span class="token string">'是否启用'</span><span class="token punctuation">,</span>
+    is_log      <span class="token keyword">TINYINT</span>       <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token number">0</span> <span class="token keyword">COMMENT</span> <span class="token string">'是否记录调用日志'</span><span class="token punctuation">,</span>
+    permission  <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>  <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'权限标识,*表示免登录'</span><span class="token punctuation">,</span>
+    param       <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span> <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'输入参数'</span><span class="token punctuation">,</span>
+    program        <span class="token keyword">TEXT</span>       <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'代码内容'</span><span class="token punctuation">,</span>
+    create_by   <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>  <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'创建人'</span><span class="token punctuation">,</span>
+    create_time <span class="token keyword">DATETIME</span>      <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CURRENT_TIMESTAMP</span> <span class="token keyword">COMMENT</span> <span class="token string">'创建时间'</span><span class="token punctuation">,</span>
+    update_by   <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>  <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'更新人'</span><span class="token punctuation">,</span>
+    update_time <span class="token keyword">DATETIME</span>      <span class="token boolean">NULL</span> <span class="token keyword">ON</span> <span class="token keyword">UPDATE</span> <span class="token keyword">CURRENT_TIMESTAMP</span> <span class="token keyword">COMMENT</span> <span class="token string">'更新时间'</span>
+<span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'接口项目'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> interface_group
+<span class="token punctuation">(</span>
+    id          <span class="token keyword">BIGINT</span> <span class="token keyword">AUTO_INCREMENT</span> <span class="token keyword">COMMENT</span> <span class="token string">'主键'</span>
+        <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">,</span>
+    name        <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>                       <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'名称'</span><span class="token punctuation">,</span>
+    code        <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>                       <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'url'</span><span class="token punctuation">,</span>
+    icon        <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>                       <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'图标'</span><span class="token punctuation">,</span>
+    description <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>                       <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'描述'</span><span class="token punctuation">,</span>
+    parent_id   <span class="token keyword">BIGINT</span>                             <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'上级节点id'</span><span class="token punctuation">,</span>
+    create_by   <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>                       <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'创建人'</span><span class="token punctuation">,</span>
+    create_time <span class="token keyword">DATETIME</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CURRENT_TIMESTAMP</span> <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'创建时间'</span><span class="token punctuation">,</span>
+    update_by   <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>                       <span class="token boolean">NULL</span> <span class="token keyword">COMMENT</span> <span class="token string">'更新人'</span><span class="token punctuation">,</span>
+    update_time <span class="token keyword">DATETIME</span>                           <span class="token boolean">NULL</span> <span class="token keyword">ON</span> <span class="token keyword">UPDATE</span> <span class="token keyword">CURRENT_TIMESTAMP</span> <span class="token keyword">COMMENT</span> <span class="token string">'更新时间'</span>
+<span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'接口分组'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>设计完成后，可使用平台的“代码生成”功能生成相应的VO、Vue等文件，并将菜单权限导入到数据库中。</p>
+<h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><p>下面介绍核心部分代码，完整代码参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9keW5hbWljLWNvbnRyb2xsZXItZGVtbw==">GitHub<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="解析动态SQL"><a href="#解析动态SQL" class="headerlink" title="解析动态SQL"></a>解析动态SQL</h2><p>利用MyBatis的相应方法，可解析MyBatis标签：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 将SQL中的绑定参数传入到该paramMap中</span>
+<span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> paramMap<span class="token punctuation">;</span>
+
+<span class="token comment">// 解析SQL</span>
+<span class="token class-name">SqlSource</span> sqlSource <span class="token operator">=</span> sqlSessionTemplate<span class="token punctuation">.</span><span class="token function">getConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getLanguageDriver</span><span class="token punctuation">(</span><span class="token class-name">XMLLanguageDriver</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">createSqlSource</span><span class="token punctuation">(</span>sqlSessionTemplate<span class="token punctuation">.</span><span class="token function">getConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> rawSql<span class="token punctuation">,</span> <span class="token class-name">Map</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">BoundSql</span> boundSql <span class="token operator">=</span> sqlSource<span class="token punctuation">.</span><span class="token function">getBoundSql</span><span class="token punctuation">(</span>paramMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> parsedSql <span class="token operator">=</span> boundSql<span class="token punctuation">.</span><span class="token function">getSql</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// SQL语句解析完成</span>
+ptst <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">prepareStatement</span><span class="token punctuation">(</span>parsedSql<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 传入参数</span>
+<span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">ParameterMapping</span><span class="token punctuation">></span></span> parameterMappings <span class="token operator">=</span> boundSql<span class="token punctuation">.</span><span class="token function">getParameterMappings</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>parameterMappings <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> parameterMappings<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ParameterMapping</span> parameterMapping <span class="token operator">=</span> parameterMappings<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>parameterMapping<span class="token punctuation">.</span><span class="token function">getMode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token class-name">ParameterMode</span><span class="token punctuation">.</span>OUT<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">String</span> propertyName <span class="token operator">=</span> parameterMapping<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">Object</span> value <span class="token operator">=</span> paramMap<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>propertyName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token class-name">TypeHandler</span> typeHandler <span class="token operator">=</span> parameterMapping<span class="token punctuation">.</span><span class="token function">getTypeHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">JdbcType</span> jdbcType <span class="token operator">=</span> parameterMapping<span class="token punctuation">.</span><span class="token function">getJdbcType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>value <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> jdbcType <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                jdbcType <span class="token operator">=</span> sqlSessionTemplate<span class="token punctuation">.</span><span class="token function">getConfiguration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getJdbcTypeForNull</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            typeHandler<span class="token punctuation">.</span><span class="token function">setParameter</span><span class="token punctuation">(</span>ptst<span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> value<span class="token punctuation">,</span> jdbcType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 准备完成，执行SQL</span>
+<span class="token class-name">ResultSet</span> result <span class="token operator">=</span> ptst<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// ...</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="获取SQL执行结果中的字段名"><a href="#获取SQL执行结果中的字段名" class="headerlink" title="获取SQL执行结果中的字段名"></a>获取SQL执行结果中的字段名</h2><p>ResultSet中有一个getMetaData函数，通过该函数可获取到查询结果中的各字段名：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">ResultSet</span> result <span class="token operator">=</span> ptst<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">ResultSetMetaData</span> md <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">getMetaData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> columnCount <span class="token operator">=</span> md<span class="token punctuation">.</span><span class="token function">getColumnCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span>result<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> rowData <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> columnCount<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 获取字段名称和结果</span>
+        rowData<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>md<span class="token punctuation">.</span><span class="token function">getColumnLabel</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">,</span> result<span class="token punctuation">.</span><span class="token function">getObject</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>rowData<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="动态运行JavaScript代码"><a href="#动态运行JavaScript代码" class="headerlink" title="动态运行JavaScript代码"></a>动态运行JavaScript代码</h2><p>Java自带一个名为Nashorn的JavaScript引擎（备注：从Java 15开始已经移除），可通过以下代码运行：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> code<span class="token punctuation">;</span>                        <span class="token comment">// 代码</span>
+<span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> paramMap<span class="token punctuation">;</span>       <span class="token comment">// 用户传入的参数</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token class-name">ScriptEngine</span> engine <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ScriptEngineManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getEngineByName</span><span class="token punctuation">(</span><span class="token string">"JavaScript"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 将一些Java对象传入到JS引擎中，以便在JS代码内直接调用</span>
+engine<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"xxx"</span><span class="token punctuation">,</span> xxxObj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ...</span>
+
+<span class="token comment">// 将代码封装至 Main 函数中，在JS代码中可通过 paramMap 获取参数。</span>
+code <span class="token operator">=</span> <span class="token string">"load(\"nashorn:mozilla_compat.js\"); function Main(paramMap) &#123;\n"</span> <span class="token operator">+</span> code <span class="token operator">+</span> <span class="token string">"\n&#125;"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 编译并运行脚本</span>
+<span class="token class-name">CompiledScript</span> script <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">Compilable</span><span class="token punctuation">)</span> engine<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span>
+script<span class="token punctuation">.</span><span class="token function">eval</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">Invocable</span> inv2 <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">Invocable</span><span class="token punctuation">)</span> engine<span class="token punctuation">;</span>
+<span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 调用函数并传入参数</span>
+    <span class="token keyword">return</span> inv2<span class="token punctuation">.</span><span class="token function">invokeFunction</span><span class="token punctuation">(</span><span class="token string">"Main"</span><span class="token punctuation">,</span> paramMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NoSuchMethodException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ScriptException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="身份和权限校验"><a href="#身份和权限校验" class="headerlink" title="身份和权限校验"></a>身份和权限校验</h2><p>若依已经将身份和权限校验封装为两个Service，引用即可：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 定义部分</span>
+<span class="token annotation punctuation">@Resource</span>
+<span class="token keyword">private</span> <span class="token class-name">TokenService</span> tokenService<span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Resource</span>
+<span class="token keyword">private</span> <span class="token class-name">PermissionService</span> ss<span class="token punctuation">;</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token comment">// 校验是否登录</span>
+<span class="token class-name">HttpServletRequest</span> request <span class="token operator">=</span> <span class="token class-name">ServletUtils</span><span class="token punctuation">.</span><span class="token function">getRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">LoginUser</span> user <span class="token operator">=</span> tokenService<span class="token punctuation">.</span><span class="token function">getLoginUser</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>user <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 设置为当前用户</span>
+    tokenService<span class="token punctuation">.</span><span class="token function">setLoginUser</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ServiceException</span><span class="token punctuation">(</span><span class="token string">"认证失败"</span><span class="token punctuation">,</span> <span class="token class-name">HttpStatus</span><span class="token punctuation">.</span>UNAUTHORIZED<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 接口限制权限</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span>permission<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 进行校验</span>
+    <span class="token keyword">boolean</span> hasPermission <span class="token operator">=</span> ss<span class="token punctuation">.</span><span class="token function">hasPermi</span><span class="token punctuation">(</span>permission<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>hasPermission<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ServiceException</span><span class="token punctuation">(</span><span class="token string">"无访问权限"</span><span class="token punctuation">,</span> <span class="token class-name">HttpStatus</span><span class="token punctuation">.</span>FORBIDDEN<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 未抛出异常则校验成功</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="支持多种请求方式"><a href="#支持多种请求方式" class="headerlink" title="支持多种请求方式"></a>支持多种请求方式</h2><p>很简单，在Controller中把各种请求方式都写上即可。如果限定了请求方式，可以在调用invoke之后再进行校验：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/&#123;code&#125;"</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@ResponseBody</span>
+<span class="token keyword">public</span> <span class="token class-name">AjaxResult</span> <span class="token function">processGet</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">"code"</span><span class="token punctuation">)</span> <span class="token class-name">String</span> code<span class="token punctuation">,</span> <span class="token annotation punctuation">@RequestParam</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> paramMap<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// GET方式</span>
+    <span class="token keyword">return</span> <span class="token function">invoke</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">,</span> code<span class="token punctuation">,</span> paramMap<span class="token punctuation">,</span> <span class="token string">"GET"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"/&#123;code&#125;"</span><span class="token punctuation">,</span>
+        consumes <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token class-name">MediaType</span><span class="token punctuation">.</span>APPLICATION_JSON_VALUE<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        produces <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token class-name">MediaType</span><span class="token punctuation">.</span>APPLICATION_JSON_VALUE<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@ResponseBody</span>
+<span class="token keyword">public</span> <span class="token class-name">AjaxResult</span> <span class="token function">processPost</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">"code"</span><span class="token punctuation">)</span> <span class="token class-name">String</span> code<span class="token punctuation">,</span> <span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">JSONObject</span> body<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// POST json</span>
+    <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> params <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> key <span class="token operator">:</span> body<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        params<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> body<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token function">invoke</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">,</span> code<span class="token punctuation">,</span> params<span class="token punctuation">,</span> <span class="token string">"POST+json"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"/&#123;code&#125;"</span><span class="token punctuation">,</span>
+        consumes <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token class-name">MediaType</span><span class="token punctuation">.</span>APPLICATION_FORM_URLENCODED_VALUE<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        produces <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token class-name">MediaType</span><span class="token punctuation">.</span>APPLICATION_JSON_VALUE<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@ResponseBody</span>
+<span class="token keyword">public</span> <span class="token class-name">AjaxResult</span> <span class="token function">processPost</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">"code"</span><span class="token punctuation">)</span> <span class="token class-name">String</span> code<span class="token punctuation">,</span> <span class="token annotation punctuation">@RequestParam</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> params<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// POST x-www-form-urlencoded</span>
+    <span class="token keyword">return</span> <span class="token function">invoke</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">,</span> code<span class="token punctuation">,</span> params<span class="token punctuation">,</span> <span class="token string">"POST+form"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// ...</span>
+
+<span class="token keyword">private</span> <span class="token class-name">AjaxResult</span> <span class="token function">invoke</span><span class="token punctuation">(</span><span class="token class-name">String</span> group<span class="token punctuation">,</span> <span class="token class-name">String</span> subgroup<span class="token punctuation">,</span> <span class="token class-name">String</span> code<span class="token punctuation">,</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> params<span class="token punctuation">,</span> <span class="token class-name">String</span> method<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Object</span> result <span class="token operator">=</span> interfaceService<span class="token punctuation">.</span><span class="token function">invokeInterface</span><span class="token punctuation">(</span>group<span class="token punctuation">,</span> subgroup<span class="token punctuation">,</span> code<span class="token punctuation">,</span> params<span class="token punctuation">,</span> method<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">success</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="切换数据源"><a href="#切换数据源" class="headerlink" title="切换数据源"></a>切换数据源</h2><p>一句话：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 数据源名称参见 application.yaml 配置</span>
+<span class="token class-name">DynamicDataSourceContextHolder</span><span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">"数据源名称"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="JavaScript工具类"><a href="#JavaScript工具类" class="headerlink" title="JavaScript工具类"></a>JavaScript工具类</h2><p>为使JavaScript代码能够操作数据库或其他目标，需将常用函数封装到一个工具类中，并暴露给JavaScript运行环境。具体代码参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9keW5hbWljLWNvbnRyb2xsZXItZGVtby9ibG9iL21hc3Rlci9ydW95aS1zeXN0ZW0vc3JjL21haW4vamF2YS9jb20vcnVveWkvc3lzdGVtL3NlcnZpY2UvaW1wbC9JbnRlcmZhY2VVdGlsSW1wbC5qYXZh">InterfaceUtilImpl<i class="fa fa-external-link-alt"></i></span>。</p>
+<h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><h2 id="接口设置"><a href="#接口设置" class="headerlink" title="接口设置"></a>接口设置</h2><p>接口设置界面如下：</p>
+<p><img src="/img/2022-06-08-dynamic-controller/1.png" alt="接口列表"></p>
+<p>当接口数量较多时，为便于维护，可先设置分组，将不同业务的接口组织到不同分组中。</p>
+<p>选择分组，点击添加按钮，录入接口信息：</p>
+<p><img src="/img/2022-06-08-dynamic-controller/2.png" alt="接口信息"></p>
+<p>主要参数说明：</p>
+<ul>
+<li>接口分组、接口代号：决定接口的URL</li>
+<li>请求方式：限制GET、POST（JSON格式）、POST（x-www-form-urlencoded），或不限制请求方式</li>
+<li>输入参数：如接口需要输入参数，可在此处设置。例如输入参数为<code>name,id</code>，那么前端调用时需要传入name和id两个参数，在SQL中则需要通过<code>#&#123;name&#125;</code>和<code>#&#123;id&#125;</code>进行引用。</li>
+<li>权限标识：校验接口调用者是否具有权限，即“菜单管理”中的权限标志。<code>*</code>表示无需token，留空表示需要验证Token但不限制权限。</li>
+<li>数据源：即<code>application.yaml</code>中配置的数据源。</li>
+</ul>
+<p>系统提供测试功能，方便开发人员调试接口。接口的返回值为JSON，以便前端使用，具体格式类似：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"msg"</span><span class="token operator">:</span> <span class="token string">"操作成功"</span><span class="token punctuation">,</span>
+    <span class="token property">"code"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+    <span class="token property">"data"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+            <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"test"</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="SQL配置"><a href="#SQL配置" class="headerlink" title="SQL配置"></a>SQL配置</h2><p>像MyBatis一样配置即可。纯SQL可直接输入，带逻辑的SQL则需要用<code>&lt;script&gt;</code>包围，例如：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token operator">&lt;</span>script<span class="token operator">></span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> <span class="token number">1</span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token operator">&lt;</span><span class="token keyword">if</span> test<span class="token operator">=</span><span class="token string">'name != ""'</span><span class="token operator">></span>
+<span class="token operator">AND</span> name <span class="token operator">LIKE</span> CONCAT<span class="token punctuation">(</span><span class="token comment">#&#123;name&#125;, '%')</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">if</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="JavaScript配置"><a href="#JavaScript配置" class="headerlink" title="JavaScript配置"></a>JavaScript配置</h2><p>Nashorn引擎支持ES5的大部分特性，可通过ES5语法编程。其代码差异之处，以及Java代码调用方法，可参见<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vZW4vamF2YS9qYXZhc2UvMTQvc2NyaXB0aW5nL2luZGV4Lmh0bWw=">Oracle手册<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>Java的包和类可用JS代码直接导入并调用，例如：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 导入包</span>
+<span class="token function">importPackage</span><span class="token punctuation">(</span>com<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>service<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 导入类</span>
+<span class="token function">importClass</span><span class="token punctuation">(</span>com<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>service<span class="token punctuation">.</span>TabService<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> serv <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TabService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 导入后，可以像Java一样new实例，或者在JS环境中调用Java方法与函数</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在本系统中，可通过<code>paramMap</code>获取用户的请求参数，通过<code>AppUtil</code>来调用Java函数，例如：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 获取请求参数</span>
+<span class="token keyword">var</span> name <span class="token operator">=</span> paramMap<span class="token punctuation">.</span>name <span class="token operator">||</span> <span class="token string">'未命名'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 执行SQL</span>
+<span class="token keyword">var</span> list <span class="token operator">=</span> AppUtil<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span><span class="token string">'select * from sys_user'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+AppUtil<span class="token punctuation">.</span><span class="token function">executeSql</span><span class="token punctuation">(</span><span class="token string">'update tab set name = ? where id = ?'</span><span class="token punctuation">,</span> name<span class="token punctuation">,</span> id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 获取Spring Bean并调用</span>
+<span class="token keyword">var</span> tabService <span class="token operator">=</span> AppUtil<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">'tabService'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> list <span class="token operator">=</span> tabService<span class="token punctuation">.</span><span class="token function">getList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="进一步思考"><a href="#进一步思考" class="headerlink" title="进一步思考"></a>进一步思考</h1><p>由于接口配置功能可以输入任意代码，因此当然不能向一般用户开放，否则系统会被恶意代码损毁。</p>
+<p>输入参数往往是由用户提供的，因此应当假定每个输入参数都带有恶意，例如SQL注入、超出长度范围、超出权限范围（例如将URL中的<code>?id=3</code>改为<code>?id=4</code>）等等，。SQL或JavaScript代码也应注意限制执行时间和查询结果数量，以免数据溢出或造成阻塞。</p>
+<p>动态的接口维护功能主要目的是便利开发人员，降低维护成本，但是本代码缺少对高并发的优化，因此不建议在高并发情况下使用。</p>
+<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1><ol>
+<li>查阅接口调用日志</li>
+<li>Swagger接口文档</li>
+<li>Kotlin语言支持</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2022/06/08/dynamic-controller/" title="基于Spring Boot和若依框架实现可灵活配置的动态接口">https://plusnan.me/2022/06/08/dynamic-controller/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+              <a href="/tags/%E6%8E%A5%E5%8F%A3/" rel="tag"># 接口</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/06/tianditu-cache/" rel="prev" title="使用nginx配置天地图缓存">
+                  <i class="fa fa-chevron-left"></i> 使用nginx配置天地图缓存
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/20/expression/" rel="next" title="见人说人话，见鬼说鬼话">
+                  见人说人话，见鬼说鬼话 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">plusNaN</span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"2202c5d84a22b055d3c8a7d84d2b843f"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
