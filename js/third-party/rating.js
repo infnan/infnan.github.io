@@ -1,1 +1,0 @@
-!function(){const a=[{widget:"Rating",id:CONFIG.rating.id,el:"wpac-rating",color:CONFIG.rating.color}];document.addEventListener("page:loaded",()=>{var i;CONFIG.page.isPost&&(i=a.map(i=>({...i})),window.WPac?WPac.init(i):window.wpac_init=i)})}();

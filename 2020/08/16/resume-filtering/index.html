@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="因公司业务发展，需要招聘一些初、中级Java开发人员。本系列文章将面向求职者，以招聘者的视角来进行讨论，希望能为疫情期间苦于找工作的求职者带来一些启发。 由于不同公司情况不同，有着急的，有不着急的，有舍得花钱的，有比周扒皮还抠门的，因此本系列文章意见仅供参考。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="因公司业务发展，需要招聘一些初、中级Java开发人员。本系列文章将面向求职者，以招聘者的视角来进行讨论，希望能为疫情期间苦于找工作的求职者带来一些启发。 由于不同公司情况不同，有着急的，有不着急的，有舍得花钱的，有比周扒皮还抠门的，因此本系列文章意见仅供参考。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈社招招聘（一）：作为招聘者，筛选简历的关注点">
 <meta property="og:url" content="https://plusnan.me/2020/08/16/resume-filtering/index.html">
@@ -49,8 +48,12 @@
 <title>浅谈社招招聘（一）：作为招聘者，筛选简历的关注点 | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -65,8 +68,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -86,7 +89,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -95,11 +98,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -132,15 +131,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -161,17 +154,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -182,47 +175,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -240,11 +221,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="浅谈社招招聘（一）：作为招聘者，筛选简历的关注点 | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -287,8 +273,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>因公司业务发展，需要招聘一些初、中级Java开发人员。本系列文章将面向求职者，以招聘者的视角来进行讨论，希望能为疫情期间苦于找工作的求职者带来一些启发。</p>
+    <div class="post-body" itemprop="articleBody"><p>因公司业务发展，需要招聘一些初、中级Java开发人员。本系列文章将面向求职者，以招聘者的视角来进行讨论，希望能为疫情期间苦于找工作的求职者带来一些启发。</p>
 <p>由于不同公司情况不同，有着急的，有不着急的，有舍得花钱的，有比周扒皮还抠门的，因此本系列文章意见仅供参考。</p>
 <span id="more"></span>
 
@@ -334,7 +319,7 @@
 <p>建议邮件标题采用“【应聘】姓名-岗位名-3年工作经验”之类的格式，让我们一眼就能看出你是在应聘，而且能够一眼看出你的基本情况。附件文件名也采用类似格式，方便我们保存和查找。</p>
 <p>发送邮件之前，请检查邮件发件人姓名，不要使用乱七八糟的网名，并且确认邮件中确实包含了简历附件。如果你害怕邮件内容有误，你可以先给自己发一封邮件，检查邮件内容是否正确，然后再发给HR。</p>
 <p>邮件正文实际上是无所谓的。收到邮件，我们至少要看一下简历内容，不会单纯因为你没写正文或者在正文中又写了一遍简历内容就把你Pass掉。</p>
-<h2 id="BOSS直聘-拉勾网"><a href="#BOSS直聘-拉勾网" class="headerlink" title="BOSS直聘 / 拉勾网"></a>BOSS直聘 / 拉勾网</h2><p>BOSS直聘 / 拉勾网的特殊之处在于你可以提前与HR（当然不是BOSS）进行一些简单的交流。建议维护一份在线简历，让招聘者能够简单地了解你的基本情况，然后决定收简历。</p>
+<h2 id="BOSS直聘-拉勾网"><a href="#BOSS直聘-拉勾网" class="headerlink" title="BOSS直聘 &#x2F; 拉勾网"></a>BOSS直聘 &#x2F; 拉勾网</h2><p>BOSS直聘 &#x2F; 拉勾网的特殊之处在于你可以提前与HR（当然不是BOSS）进行一些简单的交流。建议维护一份在线简历，让招聘者能够简单地了解你的基本情况，然后决定收简历。</p>
 <p>招聘经常是人力资源部门的人来做，所以请避免问工作细节，因为他们也不见得知道。</p>
 <h2 id="内推"><a href="#内推" class="headerlink" title="内推"></a>内推</h2><p>如果你为人靠谱，而且有熟人，可以考虑走内推去他们的公司，省去一切麻烦事情。</p>
 <p>注意，即便是内推，甚至内定入职，简历也要好好写，否则的话，轻则给人留下负面印象，重则容易失去面试和入职机会（到时你还有何面目去见替你内推的人？）</p>
@@ -357,19 +342,19 @@
 <p>其他信息例如籍贯、政治面貌、民族等，没有特殊要求的话不用写，我们不关心这些事情。如果应聘国企或事业单位，而且是党员或预备党员的话，可以把党员身份写上。</p>
 <p>如果有软件开发相关的社交媒体账号，例如GitHub账号、CSDN账号、个人博客，而且有一定的成果，那么请务必写到简历中，这会成为一个重大加分项。但是，如果没有，千万别拿这些东西装X——我们会核实你的账号，发现没有什么实质内容的话，例如只有helloworld，或者只是些fork仓库或转载文章，那么社交媒体账号会成为扣分项。</p>
 <h2 id="照片"><a href="#照片" class="headerlink" title="照片"></a>照片</h2><p>建议不要放照片，因为脸不是判断你适不适合工作的因素。</p>
-<p>如果放照片，请放一张好看的照片。假如照片很难看，或者PS/美颜痕迹明显，那么你的第一印象就会崩坏，甚至会直接把我们“劝退”。</p>
+<p>如果放照片，请放一张好看的照片。假如照片很难看，或者PS&#x2F;美颜痕迹明显，那么你的第一印象就会崩坏，甚至会直接把我们“劝退”。</p>
 <h2 id="年龄"><a href="#年龄" class="headerlink" title="年龄"></a>年龄</h2><p>注意：“不限年龄”或者不提年龄限制，不代表没有年龄限制。为规避法律风险，避免被举报就业歧视，招聘者往往会采用更加隐蔽的手段来进行限制，例如把年龄不合适的人直接筛掉。</p>
 <p>软件行业是青春饭，30岁以下的年轻人，人傻、肯干、学习能力强，可以少发工资，而且简单工作的话年轻人稍微学习学习就能掌握，所以初中级岗位倾向于招年轻人。为了省钱，很多公司还会设法逼走年龄较大的员工，也就是所谓的“35岁危机”。</p>
-<p>如果年龄超过30还想投递简历，除非应聘高级岗位，或者有稀缺技能，或者项目/行业经验非常出色，而且愿意少挣钱，否则没戏。在初中级岗位中，年长者比不过年轻人的。如果已经有10年或以上经验，建议找熟人内推，或者让猎头挖，不要再用普通招聘形式找工作。</p>
+<p>如果年龄超过30还想投递简历，除非应聘高级岗位，或者有稀缺技能，或者项目&#x2F;行业经验非常出色，而且愿意少挣钱，否则没戏。在初中级岗位中，年长者比不过年轻人的。如果已经有10年或以上经验，建议找熟人内推，或者让猎头挖，不要再用普通招聘形式找工作。</p>
 <h2 id="性别"><a href="#性别" class="headerlink" title="性别"></a>性别</h2><p>注意：“不招女性”也是就业歧视行为，而且明显违反劳动法，只要去劳动仲裁挥一挥女拳，公司必输。因此有些招聘者不会直说“不招女性”，而是把女性投递的简历直接筛掉，避免引来女拳麻烦。</p>
 <p>因为人们对女性有着刻板印象，加上害怕女性怀孕（已经有孩子？那还要二胎吗？）、休产假影响团队整体工作，女性找工作本身就吃亏，所以要更加注意简历中项目经验的优化。</p>
-<h2 id="教育信息"><a href="#教育信息" class="headerlink" title="教育信息"></a>教育信息</h2><p>请正确填写教育信息。学历从大专/大本开始往上写。虽然你学过的大学知识已经还给了老师，但是你的两个证（毕业证、学位证）还是有用的，不要弄丢。</p>
+<h2 id="教育信息"><a href="#教育信息" class="headerlink" title="教育信息"></a>教育信息</h2><p>请正确填写教育信息。学历从大专&#x2F;大本开始往上写。虽然你学过的大学知识已经还给了老师，但是你的两个证（毕业证、学位证）还是有用的，不要弄丢。</p>
 <h3 id="学历"><a href="#学历" class="headerlink" title="学历"></a>学历</h3><p>学历歧视也是存在的。通常情况下，不仅只接受本科生或研究生（博士生年龄太大，除非算法岗位，否则对应聘者和招聘者来说都不划算），而且只接受重点大学毕业生。本科还得是全日制的，因为光是本科生就够HR忍受的了。尽管大专、专升本或非全日制学生也有工作能力强的，但通常会被无视，而且应聘要求不会说得太明确，免得被举报。</p>
 <p>从统计学意义上讲，学生个人素质通常是“重点大学&gt;普通大学&gt;三本专科”，从个人言谈举止方面也能看出比较明显的区别。当然，这只是一般规律：我们也认识到，即便是二本、三本、专科学校的毕业生，也能成为公司的业务或技术骨干，而985学校毕业生也有工作不认真、爱给同事挖坑的。所以，我们会考虑学校，但不会把学校当作唯一考察因素。</p>
 <p>我们招聘时不太考虑专业，无论是否计算机软件专业都可以考虑。有些学生虽然非计算机专业毕业，但他们出于个人兴趣爱好选择了软件行业，这类人的个人能力往往比科班出身的人还强。但是，由于非计算机专业学生可能只学过写代码，底子较差，工程意识薄弱，在面试时要注意考察数据结构与算法之类的基础知识。相对的，这类人找工作之前也要补一下相关知识。</p>
 <p>最后学历千万不要隐瞒或造假，如果背景调查时发现实际学历与简历内容不一致，那么不好意思，拜拜。就算你工作确实出色，被争取挽留了下来，我们也不敢再提拔你了，连入职都敢违法，谁敢保证你以后不去犯别的法呢？</p>
 <h3 id="培训班"><a href="#培训班" class="headerlink" title="培训班"></a>培训班</h3><p>如果参加过社会培训班，建议调整一下工作的时间节点，把这段经历隐藏掉。如果只参加过社会培训班，没有实际经验，那么请节哀，因为有经验的招聘者能看出来你只去过培训班，没有实际工作经历。</p>
-<p>由于培训班培训内容经常与行业实际脱节，而且我们认为花钱进补习班=学习能力差，所以我们不喜欢招参加过培训班的人，甚至会直接将有培训班经历的人给Pass掉。</p>
+<p>由于培训班培训内容经常与行业实际脱节，而且我们认为花钱进补习班&#x3D;学习能力差，所以我们不喜欢招参加过培训班的人，甚至会直接将有培训班经历的人给Pass掉。</p>
 <h3 id="在校期间表现"><a href="#在校期间表现" class="headerlink" title="在校期间表现"></a>在校期间表现</h3><p>如果毕业时间不长，而且在大学期间拿过ACM区域赛、全国数学建模竞赛、美国数学建模比赛、飞思卡尔智能车大赛等含金量较高的奖项，或者已经通过英语六级与更高水平的考试，建议将其写到简历上。我们会认为这类人比较有潜力。</p>
 <p>其他表现没必要往简历上写。走向社会，学校期间的表现都是浮云了。</p>
 <h2 id="工作单位"><a href="#工作单位" class="headerlink" title="工作单位"></a>工作单位</h2><p>在工作单位方面，我们关心：</p>
@@ -397,7 +382,7 @@
 <li>独立完成，还是团队协作完成？</li>
 <li>在项目中是凑数、普通成员，还是核心成员或救火队员？</li>
 <li>曾经参与过哪些行业，是否与本公司一致？</li>
-<li>实践过哪些技术栈（Vue/React，Spring Boot……）？只是肤浅地增删改查，还是深入研究、优化完善？</li>
+<li>实践过哪些技术栈（Vue&#x2F;React，Spring Boot……）？只是肤浅地增删改查，还是深入研究、优化完善？</li>
 <li>只做过开发工作，还是做过管理工作，或是多面手？</li>
 <li>有没有个人思考？</li>
 <li>……</li>
@@ -479,7 +464,7 @@
       <a href="https://plusnan.me/2020/08/16/resume-filtering/" title="浅谈社招招聘（一）：作为招聘者，筛选简历的关注点">https://plusnan.me/2020/08/16/resume-filtering/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -494,12 +479,12 @@
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2020/03/02/quick-replace-file/" rel="prev" title="使用脚本快速从本地提取、替换生产服务器class文件">
-                  <i class="fa fa-chevron-left"></i> 使用脚本快速从本地提取、替换生产服务器class文件
+                  <i class="fa fa-angle-left"></i> 使用脚本快速从本地提取、替换生产服务器class文件
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2020/08/20/resume-improvement/" rel="next" title="浅谈社招招聘（二）：来自招聘者的建议——如何优化简历">
-                  浅谈社招招聘（二）：来自招聘者的建议——如何优化简历 <i class="fa fa-chevron-right"></i>
+                  浅谈社招招聘（二）：来自招聘者的建议——如何优化简历 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -519,15 +504,14 @@
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -535,26 +519,38 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"5097d6f58b64ec33e0342fb83e6fffe5"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"5097d6f58b64ec33e0342fb83e6fffe5"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

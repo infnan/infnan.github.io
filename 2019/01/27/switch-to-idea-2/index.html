@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="本文主要介绍如何将传统Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA。主要内容为传统项目的Project Structure配置。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文主要介绍如何将传统Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA。主要内容为传统项目的Project Structure配置。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从Eclipse切换到IDEA（二）：传统Web项目的Project Structure">
 <meta property="og:url" content="https://plusnan.me/2019/01/27/switch-to-idea-2/index.html">
@@ -67,8 +66,12 @@
 <title>从Eclipse切换到IDEA（二）：传统Web项目的Project Structure | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -83,8 +86,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -104,7 +107,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -113,11 +116,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -150,15 +149,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -179,17 +172,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -200,47 +193,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -258,11 +239,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="从Eclipse切换到IDEA（二）：传统Web项目的Project Structure | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -305,8 +291,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>本文主要介绍如何将传统Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA。主要内容为传统项目的Project Structure配置。</p>
+    <div class="post-body" itemprop="articleBody"><p>本文主要介绍如何将传统Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA。主要内容为传统项目的Project Structure配置。</p>
 <span id="more"></span>
 
 <h1 id="关于IDEA中的Project-Structure和Run-Configuration"><a href="#关于IDEA中的Project-Structure和Run-Configuration" class="headerlink" title="关于IDEA中的Project Structure和Run Configuration"></a>关于IDEA中的Project Structure和Run Configuration</h1><p>Project Structure即项目结构。配置Project Structure大体上就是在告诉IDEA以下几件事：</p>
@@ -320,30 +305,7 @@
 <p>Project Structure配置好之后就可以进行编译。</p>
 <p>Run Configuration则是启动配置。它在告诉IDEA编译完成之后如何运行那些代码，所以在编译时不是必需的，但运行时是必需的。</p>
 <h1 id="简单工程的Project-Structure"><a href="#简单工程的Project-Structure" class="headerlink" title="简单工程的Project Structure"></a>简单工程的Project Structure</h1><p>以一个Helloworld级的SpringMVC项目为例。</p>
-<pre class="line-numbers language-none"><code class="language-none">&gt; HelloSpringMVC
-    &gt; src                       ----&gt; Java源代码
-    .   &gt; com
-    .       &gt; example
-    .           &gt; hello
-    .               &gt; controller
-    .                   HelloController.java
-    .               ...
-    &gt; config                    ----&gt; 公共配置文件
-    .   SpringMVC-servlet.xml
-    .   ...
-    &gt; WebContent                ----&gt; Web文件目录
-        &gt; components
-        .   &gt; jquery
-        .   ...
-        &gt; WEB-INF
-        .   &gt; lib
-        .   .   commons-logging-1.2.jar
-        .   .   ...
-        .   &gt; page
-        .   .   init.jsp
-        .   .   ...
-        .   web.xml
-        ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt; HelloSpringMVC</span><br><span class="line">    &gt; src                       ----&gt; Java源代码</span><br><span class="line">    .   &gt; com</span><br><span class="line">    .       &gt; example</span><br><span class="line">    .           &gt; hello</span><br><span class="line">    .               &gt; controller</span><br><span class="line">    .                   HelloController.java</span><br><span class="line">    .               ...</span><br><span class="line">    &gt; config                    ----&gt; 公共配置文件</span><br><span class="line">    .   SpringMVC-servlet.xml</span><br><span class="line">    .   ...</span><br><span class="line">    &gt; WebContent                ----&gt; Web文件目录</span><br><span class="line">        &gt; components</span><br><span class="line">        .   &gt; jquery</span><br><span class="line">        .   ...</span><br><span class="line">        &gt; WEB-INF</span><br><span class="line">        .   &gt; lib</span><br><span class="line">        .   .   commons-logging-1.2.jar</span><br><span class="line">        .   .   ...</span><br><span class="line">        .   &gt; page</span><br><span class="line">        .   .   init.jsp</span><br><span class="line">        .   .   ...</span><br><span class="line">        .   web.xml</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
 
 <p>直接用IDEA打开项目所在目录（HelloSpringMVC），它会尝试将Eclipse项目转化为IDEA项目（两IDE的配置文件可以同时存在，不会相互冲突），但是自动识别的文件结构并不正确，所以我们仍然需要通过“File”下面的“Project Structure”菜单重新配置项目。</p>
 <p><img src="/img/2019-01-27-switch-to-idea-2/project-structure-0.png" alt="Project Structure对话框"></p>
@@ -351,7 +313,7 @@
 <h2 id="Project"><a href="#Project" class="headerlink" title="Project"></a>Project</h2><p>这一页内容比较简单，需要设置项目名称、JDK路径、支持的Java版本以及编译输出文件路径。其中Project compiler output放在哪里都行，只是不要不小心把编译出来的垃圾提交到代码库中。</p>
 <h2 id="Libraries"><a href="#Libraries" class="headerlink" title="Libraries"></a>Libraries</h2><p>本页管理的是“应用使用了哪些jar包”。这里相当于把应用所需jar包“打了个捆”来管理，以便后面配置工程依赖项。</p>
 <p><img src="/img/2019-01-27-switch-to-idea-2/idea-libraries.png" alt="Libraries"></p>
-<p>没有特殊需求的话，将装jar包的目录（WebContent/WEB-INF/lib）添加成lib即可。</p>
+<p>没有特殊需求的话，将装jar包的目录（WebContent&#x2F;WEB-INF&#x2F;lib）添加成lib即可。</p>
 <h2 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h2><p>IDEA没有Workspace的概念。和Eclipse中Project差不多的东西叫“Module”。一堆Module组成了一个Project。因为两边都有Project这个词语，所以小心不要把自己绕进去。</p>
 <p>本页的作用是指出“项目由哪些模块构成”，有点像Eclipse里头的Build Path设置。另外Sources、Dependencies两个子页面也需要关注。</p>
 <h3 id="Sources"><a href="#Sources" class="headerlink" title="Sources"></a>Sources</h3><p>Sources子页面的作用是指出“哪些是Java代码，哪些是资源文件，哪些是垃圾”。</p>
@@ -404,39 +366,7 @@
 <p>如不熟悉配置，建议参照Eclipse的Deployment Assembly配置，并对比两个IDE生成出来的文件的结构。另外建议仔细检查和测试WEB-INF下面的配置，以免遗漏文件或者文件不更新（即第一次启动时复制过来了，后续这些文件即使修改过也未同步）。</p>
 <p>截至这里，Project Structure就大体上配置好了。可以检查项目结构是否正确识别，然后准备配置Run Configuration并启动项目。</p>
 <h1 id="稍微复杂一点"><a href="#稍微复杂一点" class="headerlink" title="稍微复杂一点"></a>稍微复杂一点</h1><p>以上是单模块的简单项目。下面让我们把项目结构弄复杂一点，使用两个Web项目和一个公共代码项目：</p>
-<pre class="line-numbers language-none"><code class="language-none">&gt; WebProj1                      ----&gt; Web项目1
-    &gt; src                       ----&gt; Java源代码1
-    .   ...
-    &gt; config                    ----&gt; 项目配置文件1
-    .   SpringMVC-servlet.xml
-    .   ...
-    &gt; WebContent                ----&gt; Web文件目录
-        &gt; WEB-INF
-        .   &gt; lib
-        .       ...
-        .   web.xml
-        .   ...
-        ...
-
-&gt; WebProj2                      ----&gt; Web项目2
-    &gt; src                       ----&gt; Java源代码2
-    .   ...
-    &gt; config                    ----&gt; 项目配置文件2
-    .   SpringMVC-servlet.xml
-    .   ...
-    &gt; WebContent                ----&gt; Web文件目录
-        &gt; WEB-INF
-        .   &gt; lib
-        .       ...
-        .   web.xml
-        .   ...
-        ...
-
-&gt; CommonProj                    ----&gt; 公共代码
-    &gt; src                       ----&gt; Java源代码
-    .   ...
-    &gt; commonConfig              ----&gt; 全局配置文件
-        ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&gt; WebProj1                      ----&gt; Web项目1</span><br><span class="line">    &gt; src                       ----&gt; Java源代码1</span><br><span class="line">    .   ...</span><br><span class="line">    &gt; config                    ----&gt; 项目配置文件1</span><br><span class="line">    .   SpringMVC-servlet.xml</span><br><span class="line">    .   ...</span><br><span class="line">    &gt; WebContent                ----&gt; Web文件目录</span><br><span class="line">        &gt; WEB-INF</span><br><span class="line">        .   &gt; lib</span><br><span class="line">        .       ...</span><br><span class="line">        .   web.xml</span><br><span class="line">        .   ...</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">&gt; WebProj2                      ----&gt; Web项目2</span><br><span class="line">    &gt; src                       ----&gt; Java源代码2</span><br><span class="line">    .   ...</span><br><span class="line">    &gt; config                    ----&gt; 项目配置文件2</span><br><span class="line">    .   SpringMVC-servlet.xml</span><br><span class="line">    .   ...</span><br><span class="line">    &gt; WebContent                ----&gt; Web文件目录</span><br><span class="line">        &gt; WEB-INF</span><br><span class="line">        .   &gt; lib</span><br><span class="line">        .       ...</span><br><span class="line">        .   web.xml</span><br><span class="line">        .   ...</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">&gt; CommonProj                    ----&gt; 公共代码</span><br><span class="line">    &gt; src                       ----&gt; Java源代码</span><br><span class="line">    .   ...</span><br><span class="line">    &gt; commonConfig              ----&gt; 全局配置文件</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
 
 <p>因为原理实际上是一样的，下面直接给出参考配置。</p>
 <h2 id="Project-1"><a href="#Project-1" class="headerlink" title="Project"></a>Project</h2><p><img src="/img/2019-01-27-switch-to-idea-2/example2-1.png" alt="1"></p>
@@ -489,7 +419,7 @@
       <a href="https://plusnan.me/2019/01/27/switch-to-idea-2/" title="从Eclipse切换到IDEA（二）：传统Web项目的Project Structure">https://plusnan.me/2019/01/27/switch-to-idea-2/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -503,12 +433,12 @@
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2019/01/13/how-to-learn-c/" rel="prev" title="作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言">
-                  <i class="fa fa-chevron-left"></i> 作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言
+                  <i class="fa fa-angle-left"></i> 作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2019/01/29/equals/" rel="next" title="批量将&#34;&#34;.equals()替换成StringUtils.isEmpty()">
-                  批量将&#34;&#34;.equals()替换成StringUtils.isEmpty() <i class="fa fa-chevron-right"></i>
+                  批量将&#34;&#34;.equals()替换成StringUtils.isEmpty() <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -528,15 +458,14 @@
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -544,26 +473,38 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"2973bad09d1374582d51ae7e5d3dbfef"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"2973bad09d1374582d51ae7e5d3dbfef"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

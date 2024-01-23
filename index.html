@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="我为长者续NaN秒">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="我为长者续NaN秒">
 <meta property="og:type" content="website">
 <meta property="og:title" content="plusNaN">
 <meta property="og:url" content="https://plusnan.me/index.html">
@@ -43,8 +42,12 @@
 <title>plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -59,8 +62,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -80,7 +83,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -89,11 +92,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -126,15 +125,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-overview-active">
@@ -154,17 +147,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,49 +168,683 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2023/02/16/emergency-walkie-talkie/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/02/16/emergency-walkie-talkie/" class="post-title-link" itemprop="url">科普文：家庭应急储备之对讲机</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-02-16 00:00:00" itemprop="dateCreated datePublished" datetime="2023-02-16T00:00:00+08:00">2023-02-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-23 15:05:30" itemprop="dateModified" datetime="2024-01-23T15:05:30+08:00">2024-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>对讲机，看起来是个很简单的东西，但是，自从考了业余无线电操作证之后，才会意识到，对讲机不仅要考证，而且还有很多讲究。本文讲一讲，当家庭为了应急储备而购买对讲机时，需要考虑什么事情。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/02/16/emergency-walkie-talkie/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2023/01/20/new-year/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/01/20/new-year/" class="post-title-link" itemprop="url">2023新年注意事项</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-01-20 00:00:00" itemprop="dateCreated datePublished" datetime="2023-01-20T00:00:00+08:00">2023-01-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-23 14:16:38" itemprop="dateModified" datetime="2024-01-23T14:16:38+08:00">2024-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%97%B2%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>疫情结束了，可是疫情还有后遗症，不仅对个人身体有影响，对经济环境也会有影响。作为普通人，在新的一年里，我们还要注意什么呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/01/20/new-year/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2022/12/30/why-not-gpt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/12/30/why-not-gpt/" class="post-title-link" itemprop="url">为什么不使用GPT</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-12-30 00:00:00" itemprop="dateCreated datePublished" datetime="2022-12-30T00:00:00+08:00">2022-12-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-23 14:17:59" itemprop="dateModified" datetime="2024-01-23T14:17:59+08:00">2024-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%97%B2%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>ChatGPT火了，业界甚至直呼，再不掌握人工智能，就要被时代淘汰了。</p>
+<p>身边已经有人开始使用GPT来作为信息检索工具，并且享受到了这种有问必答的便利，那么为什么还要等着被“淘汰”呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/12/30/why-not-gpt/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2022/11/05/how-to-make-ppt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/11/05/how-to-make-ppt/" class="post-title-link" itemprop="url">如何做PPT</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-11-05 00:00:00" itemprop="dateCreated datePublished" datetime="2022-11-05T00:00:00+08:00">2022-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-21 17:49:58" itemprop="dateModified" datetime="2024-01-21T17:49:58+08:00">2024-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%80%E7%82%B9%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">一点人生的经验</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>做PPT还不简单吗？拿PowerPoint（WPS演示）捅一捅，PPT不就出来了吗？</p>
+<p>如果阅读过本系列前两篇文章《<a href="/2020/02/20/how-to-write-document/">如何写好软件文档</a>》和《<a href="/2020/10/24/how-to-draw-graph/">如何画架构图</a>》，肯定就知道把PPT做好还是需要一点经验的。下面就是PPT的经验分享。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/11/05/how-to-make-ppt/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2022/10/16/archive/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/10/16/archive/" class="post-title-link" itemprop="url">养成随手存档的习惯！</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-10-16 00:00:00" itemprop="dateCreated datePublished" datetime="2022-10-16T00:00:00+08:00">2022-10-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-21 10:56:04" itemprop="dateModified" datetime="2024-01-21T10:56:04+08:00">2024-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%80%E7%82%B9%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">一点人生的经验</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>网上的东西很容易消失，而中国网站的东西更容易“404”（“被”消失），虽然我们无法改变中国“404”的制度，但是我们仍然可以学习一些存档与找回存档的操作方法，养成随手存档的习惯，及时备份对自己有意义的内容，尽量降低损失。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/16/archive/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2022/09/11/meeting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/11/meeting/" class="post-title-link" itemprop="url">外出开个小会，领导不会教你的事情</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-11 00:00:00" itemprop="dateCreated datePublished" datetime="2022-09-11T00:00:00+08:00">2022-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-21 23:42:48" itemprop="dateModified" datetime="2024-01-21T23:42:48+08:00">2024-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>当你作为小工，跟着领导外出开个小会，或者你成为领导，带着一个小弟出去开会，那个当小弟的要注意什么事情呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/09/11/meeting/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2022/08/15/get-information/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/08/15/get-information/" class="post-title-link" itemprop="url">如何避免被假资讯蒙蔽</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-15 00:00:00" itemprop="dateCreated datePublished" datetime="2022-08-15T00:00:00+08:00">2022-08-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-21 18:04:33" itemprop="dateModified" datetime="2024-01-21T18:04:33+08:00">2024-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%B8%80%E7%82%B9%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">一点人生的经验</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>互联网每时每刻都有海量信息，有的是真实信息，有的是虚假信息。而虚假信息又有很多类别，例如博取流量、误导他人、设置骗局、发动信息战，等等，轻者影响我们的正常认知，重者让我们蒙受各种损失。我们如何来辨别其中的虚假信息，避免自己受蒙蔽呢？</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/15/get-information/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -232,11 +859,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -258,7 +890,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-02 08:42:55" itemprop="dateModified" datetime="2023-11-02T08:42:55+08:00">2023-11-02</time>
+      <time title="修改时间：2024-01-21 23:43:50" itemprop="dateModified" datetime="2024-01-21T23:43:50+08:00">2024-01-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,7 +898,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%80%E7%82%B9%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">一点人生的经验</span></a>
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
         </span>
     </span>
 
@@ -323,11 +955,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -349,7 +986,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-04 17:33:13" itemprop="dateModified" datetime="2023-11-04T17:33:13+08:00">2023-11-04</time>
+      <time title="修改时间：2023-11-13 21:45:38" itemprop="dateModified" datetime="2023-11-13T21:45:38+08:00">2023-11-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -411,11 +1048,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -485,620 +1127,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2022/04/15/ruoyi-fix/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/15/ruoyi-fix/" class="post-title-link" itemprop="url">若依（芋道）框架完善记录</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-04-15 00:00:00" itemprop="dateCreated datePublished" datetime="2022-04-15T00:00:00+08:00">2022-04-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-06 11:53:38" itemprop="dateModified" datetime="2023-06-06T11:53:38+08:00">2023-06-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">记录</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>版本：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1l1bmFpVg==">芋道源码<i class="fa fa-external-link-alt"></i></span> 2022年4月15日</p>
-<p>由于芋道基于若依修改，所以此处改动可能也适用于若依。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/04/15/ruoyi-fix/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2022/02/22/credit-card/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/22/credit-card/" class="post-title-link" itemprop="url">如何正确使用信用卡</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-02-22 00:00:00" itemprop="dateCreated datePublished" datetime="2022-02-22T00:00:00+08:00">2022-02-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-08-30 16:49:26" itemprop="dateModified" datetime="2023-08-30T16:49:26+08:00">2023-08-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%80%E7%82%B9%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">一点人生的经验</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>学会正确使用信用卡，让自己不会成为“卡奴”。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/22/credit-card/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2021/12/16/db-console/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/12/16/db-console/" class="post-title-link" itemprop="url">小心你的数据库查询窗口，以免误操作</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-12-16 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-16T00:00:00+08:00">2021-12-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-24 23:08:15" itemprop="dateModified" datetime="2023-07-24T23:08:15+08:00">2023-07-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%80%E7%82%B9%E4%BA%BA%E7%94%9F%E7%9A%84%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index"><span itemprop="name">一点人生的经验</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如果你的数据库查询窗口的第一行是<code>DROP DATABASE</code>，你又不小心点击了执行按钮……</p>
-<p>有些数据库软件能够智能地执行光标所在行的指令，但有些数据库软件没那么智能，或者需要配置才能变聪明，一不小心，就会把窗口里面的所有SQL都执行一遍，所以使用数据库软件时要注意防范误操作。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/12/16/db-console/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2021/11/19/waf/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/11/19/waf/" class="post-title-link" itemprop="url">如果你的Web应用出现了莫名其妙的问题，你可以怀疑是否被WAF设备拦截</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-11-19 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-19T00:00:00+08:00">2021-11-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-07 10:26:01" itemprop="dateModified" datetime="2023-06-07T10:26:01+08:00">2023-06-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">系统运维</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>有些时候，你的Web应用明明正常，但是突然有一天，它出现了莫名其妙的问题，无法定位到是哪一行代码错误，而且检查服务器配置也没有问题。这种情况下，可能是WAF安全设备在作怪。</p>
-<p>本文用几个案例，讲一讲这种“莫名其妙”问题的现象如何，以及如何定位到WAF。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/11/19/waf/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2021/10/24/centos-security/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/24/centos-security/" class="post-title-link" itemprop="url">CentOS 7安全等保整改记录</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-10-24 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-24T00:00:00+08:00">2021-10-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-06 11:32:47" itemprop="dateModified" datetime="2023-06-06T11:32:47+08:00">2023-06-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>为满足等保测评要求，对CentOS 7服务器进行了统一整改，整改命令记录如下。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/24/centos-security/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2021/09/10/remote-vpn/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/10/remote-vpn/" class="post-title-link" itemprop="url">用Docker快速为办公室搭建VPN</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-10 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-10T00:00:00+08:00">2021-09-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-06-06 20:38:13" itemprop="dateModified" datetime="2023-06-06T20:38:13+08:00">2023-06-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>由于武汉肺炎疫情原因，随时可能会封城，导致无法前往办公室办公。如果公司没有提供VPN，为了在居家办公时能有一个连接办公室资源的方法，可以考虑自己搭一个简易的VPN。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/10/remote-vpn/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2021/08/15/buy-house-8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/08/15/buy-house-8/" class="post-title-link" itemprop="url">买房避坑指南（八）：要不要买车位</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-08-15 00:00:00" itemprop="dateCreated datePublished" datetime="2021-08-15T00:00:00+08:00">2021-08-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-18 10:17:06" itemprop="dateModified" datetime="2023-07-18T10:17:06+08:00">2023-07-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%A5%BC%E5%B8%82/" itemprop="url" rel="index"><span itemprop="name">楼市</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>买个房子都很费劲了，要不要继续出血，花几十万买那个只有2.5x5m=12.5m²的小方格？</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/08/15/buy-house-8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
@@ -1107,15 +1137,14 @@
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -1123,26 +1152,38 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"d1546d731a9f30cc80127d57142a482b"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"d1546d731a9f30cc80127d57142a482b"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

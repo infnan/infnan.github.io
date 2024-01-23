@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏（例如GTA5），准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏（例如GTA5），准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在2018版MacBook Pro手工安装Windows 10，以及分区扩容">
 <meta property="og:url" content="https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/index.html">
@@ -47,8 +46,12 @@
 <title>在2018版MacBook Pro手工安装Windows 10，以及分区扩容 | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -63,8 +66,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -84,7 +87,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -93,11 +96,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -130,15 +129,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -159,17 +152,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -180,47 +173,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -238,11 +219,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="在2018版MacBook Pro手工安装Windows 10，以及分区扩容 | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -285,8 +271,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏（例如GTA5），准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。</p>
+    <div class="post-body" itemprop="articleBody"><p>几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏（例如GTA5），准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。</p>
 <span id="more"></span>
 
 <h1 id="坑的要点"><a href="#坑的要点" class="headerlink" title="坑的要点"></a>坑的要点</h1><ul>
@@ -316,7 +301,7 @@
 <p>以这种方式进行安装，除了有点麻烦以及不能在macOS的Boot Camp界面进行管理（即删除Windows）以外，其他基本上没什么区别。</p>
 <h1 id="调整分区容量"><a href="#调整分区容量" class="headerlink" title="调整分区容量"></a>调整分区容量</h1><p>一旦Windows系统用起来了，调整容量将是极其麻烦的事情。如果非扩容不可，建议先备份数据，然后删掉Windows分区，全部重来。</p>
 <p>但是，如果Mac分区剩余空间比Windows系统盘大，那么还可以以一种麻烦的方式完成扩容：将Windows系统盘备份到映像，删除Windows盘并重新分区，然后恢复备份，修正分区表。如果操作成功，那么就不需要重装系统和各软件，也不需要再调系统设置了。</p>
-<p>注意，操作有风险！如果不熟悉装机以及Linux/Unix操作，请不要继续，以免造成系统损坏或数据丢失！</p>
+<p>注意，操作有风险！如果不熟悉装机以及Linux&#x2F;Unix操作，请不要继续，以免造成系统损坏或数据丢失！</p>
 <p>建议在操作时使各分区容量不相同，而且进行每一步破坏性操作之前确认目标分区容量，以避免误操作。</p>
 <p>按以下步骤操作：</p>
 <ol>
@@ -327,21 +312,15 @@
 </ul>
 </li>
 <li>按住Command+R开机，进入Recovery模式。</li>
-<li>进入磁盘工具，确认Windows安装盘的位置（例如/dev/disk0s2）以及Mac系统盘的名称（例如Macintosh HD）。如果还是拿不准的话，可以在终端里用“diskutil info /dev/disk0s2”这种命令来确认。</li>
-<li>退出磁盘工具，进入终端。假如Mac系统盘叫做Macintosh HD，Windows系统盘是/dev/disk0s2，那么需要输入以下命令进行备份： <pre class="line-numbers language-none"><code class="language-none">cd &quot;&#x2F;Volumes&#x2F;Macintosh HD&quot;
-dd if&#x3D;&#x2F;dev&#x2F;disk0s2 of&#x3D;backup.img bs&#x3D;1m<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>进入磁盘工具，确认Windows安装盘的位置（例如&#x2F;dev&#x2F;disk0s2）以及Mac系统盘的名称（例如Macintosh HD）。如果还是拿不准的话，可以在终端里用“diskutil info &#x2F;dev&#x2F;disk0s2”这种命令来确认。</li>
+<li>退出磁盘工具，进入终端。假如Mac系统盘叫做Macintosh HD，Windows系统盘是&#x2F;dev&#x2F;disk0s2，那么需要输入以下命令进行备份： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &quot;/Volumes/Macintosh HD&quot;</span><br><span class="line">dd if=/dev/disk0s2 of=backup.img bs=1m</span><br></pre></td></tr></table></figure></li>
 <li>完成后重新进入磁盘工具，删除Windows分区，重新调整分区，不要格式化。Windows分区格式化工作交给Windows来做。</li>
 <li>重启，从U盘启动Windows安装程序，接上鼠标，在Windows安装程序界面上进行格式化。</li>
 <li>回到Mac的Recovery模式，确认新分区的位置是disk几s几（例如disk0s4）。</li>
-<li>重新进入终端，恢复映像： <pre class="line-numbers language-none"><code class="language-none">cd &quot;&#x2F;Volumes&#x2F;Macintosh HD&quot;
-dd if&#x3D;backup.img of&#x3D;&#x2F;dev&#x2F;disk0s4 bs&#x3D;1m<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>重新进入终端，恢复映像： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &quot;/Volumes/Macintosh HD&quot;</span><br><span class="line">dd if=backup.img of=/dev/disk0s4 bs=1m</span><br></pre></td></tr></table></figure></li>
 <li>这时候Windows应该可以重新进入了。但是，dd并非那种专业Windows分区备份还原软件，所以Windows分区的容量和剩余空间还是错的，需要修正。再次用Windows安装盘启动，接上键盘和鼠标，这次按Shift+F10进入命令提示符，然后输入diskpart，进入分区工具。</li>
-<li>在diskpart里输入以下命令（注意命令中的“0”和“4”要根据实际情况填写）：<pre class="line-numbers language-none"><code class="language-none">list disk
-sel disk 0
-list volume
-sel volume 4
-extend<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>检查两个系统能否正常启动。如果没问题就可以删掉苹果系统里的/backup.img了。</li>
+<li>在diskpart里输入以下命令（注意命令中的“0”和“4”要根据实际情况填写）：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">list disk</span><br><span class="line">sel disk 0</span><br><span class="line">list volume</span><br><span class="line">sel volume 4</span><br><span class="line">extend</span><br></pre></td></tr></table></figure></li>
+<li>检查两个系统能否正常启动。如果没问题就可以删掉苹果系统里的&#x2F;backup.img了。</li>
 </ol>
 <h1 id="后续（2019年）"><a href="#后续（2019年）" class="headerlink" title="后续（2019年）"></a>后续（2019年）</h1><p>实际上大多数ISO是可以借助Boot Camp安装的，可以去<span class="exturl" data-url="aHR0cHM6Ly9tc2RuLml0ZWxseW91LmNuLw==">MSDN I Tell You<i class="fa fa-external-link-alt"></i></span>多试几个版本，总有一个能用的。如果版本比较老，装好之后再去Windows Update里头做个升级就行了。</p>
 <h1 id="后续二（2020年）"><a href="#后续二（2020年）" class="headerlink" title="后续二（2020年）"></a>后续二（2020年）</h1><p>Parallels Desktop 15优化了苹果电脑显卡支持。对于MacBook Pro来说，只要不是特别现代的游戏，虚拟机也能带得动了。例如本人试验，在虚拟机里（Windows 10，分配6GB内存），2019年发布的DOA6把电脑像挖矿一样卡崩了，同年发布的AI少女卡成了幻灯片，而2012年的CSGO就没有什么大毛病。</p>
@@ -365,7 +344,7 @@ extend<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
       <a href="https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/" title="在2018版MacBook Pro手工安装Windows 10，以及分区扩容">https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -380,12 +359,12 @@ extend<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2018/12/13/switch-to-idea-1/" rel="prev" title="从Eclipse切换到IDEA（一）：切换操作">
-                  <i class="fa fa-chevron-left"></i> 从Eclipse切换到IDEA（一）：切换操作
+                  <i class="fa fa-angle-left"></i> 从Eclipse切换到IDEA（一）：切换操作
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2018/12/20/deploy-checklist/" rel="next" title="升级发版检查表">
-                  升级发版检查表 <i class="fa fa-chevron-right"></i>
+                  升级发版检查表 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -405,15 +384,14 @@ extend<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -421,26 +399,38 @@ extend<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"e6febce0c081c91075c300c5a1bd777b"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"e6febce0c081c91075c300c5a1bd777b"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

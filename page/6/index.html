@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="我为长者续NaN秒">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="我为长者续NaN秒">
 <meta property="og:type" content="website">
 <meta property="og:title" content="plusNaN">
 <meta property="og:url" content="https://plusnan.me/page/6/index.html">
@@ -43,8 +42,12 @@
 <title>plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -59,8 +62,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -80,7 +83,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -89,11 +92,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -126,15 +125,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-overview-active">
@@ -154,17 +147,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -175,49 +168,683 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/04/06/manga-downloader/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/04/06/manga-downloader/" class="post-title-link" itemprop="url">用Puppeteer扒漫画</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-04-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-04-06T00:00:00+08:00">2019-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-01 11:36:33" itemprop="dateModified" datetime="2022-02-01T11:36:33+08:00">2022-02-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%97%B2%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0dvb2dsZUNocm9tZS9wdXBwZXRlZXI=">Puppeteer<i class="fa fa-external-link-alt"></i></span>是Google搞的爬虫框架，其特点就是我们可以直接通过程序来操作Google浏览器（服务器没装图形界面也没关系，这个Google浏览器不需要图形界面）。通过这个框架，我们就可以像正常使用浏览器一样爬网站，并且像进控制台那样操作页面获取信息，甚至还可以截图。只要网站不使用验证码或reCAPTCHA之类的大杀器，而且运营者不希望正常使用浏览器的用户也无法访问页面，那么我们就可以随便扒网站了。例如本文从<a href="tw.manhuagui.com">https://tw.manhuagui.com</a>网站扒漫画。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/06/manga-downloader/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/02/09/list-page/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/02/09/list-page/" class="post-title-link" itemprop="url">并不简单的基础开发工作（二）：信息展示列表</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-09 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-09T00:00:00+08:00">2019-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-02-03 12:35:50" itemprop="dateModified" datetime="2022-02-03T12:35:50+08:00">2022-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/02/09/list-page/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/02/08/login-page/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/02/08/login-page/" class="post-title-link" itemprop="url">并不简单的基础开发工作（一）：登录页面</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-08 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-08T00:00:00+08:00">2019-02-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-06-06 20:35:50" itemprop="dateModified" datetime="2023-06-06T20:35:50+08:00">2023-06-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>开发业务系统，虽然原理非常简单，就是数据库的增删改查，而且业务规则也不过是一堆if-else判断，但是想要做好其实并不容易。本系列文章旨在说明：即使是看起来非常简单的基础开发工作，在设计和实现上也会有很多陷阱，需要非常认真和细心才行。</p>
+<p>本文以简单的登录页面为例，为了突出问题，假设系统只有两个页面：一个登录页面，另一个是登录成功之后显示的“Hello world”。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/02/08/login-page/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/02/06/java-code-review-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/02/06/java-code-review-4/" class="post-title-link" itemprop="url">Java代码审查（四）：使用Phabricator进行代码审计</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-06 00:00:00" itemprop="dateCreated datePublished" datetime="2019-02-06T00:00:00+08:00">2019-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-07-21 10:17:14" itemprop="dateModified" datetime="2023-07-21T10:17:14+08:00">2023-07-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文介绍如何使用Phabricator进行人工代码审查（实际上是审计），以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。</p>
+<p>Phabricator是一个在浏览器上操作的开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经提交到代码库中。考虑我们自身实际情况（事前审查成本比较高），我们采用了“事后审查”的方式，本文也将讲述事后审查的操作。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/02/06/java-code-review-4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/29/equals/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/29/equals/" class="post-title-link" itemprop="url">批量将&#34;&#34;.equals()替换成StringUtils.isEmpty()</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-01-29 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-29T00:00:00+08:00">2019-01-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%97%B2%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>甲方前一段时间使用360代码卫士对我们项目进行了“代码审计”，其中一个问题是“使用equals()来判断字符串是否为空”。由于甲方只关心问题数量，不关心问题性质（甚至连算不算问题都不在乎），我们只能硬着头皮去按甲方要求修改。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/29/equals/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/27/switch-to-idea-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/27/switch-to-idea-2/" class="post-title-link" itemprop="url">从Eclipse切换到IDEA（二）：传统Web项目的Project Structure</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-01-27 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-27T00:00:00+08:00">2019-01-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文主要介绍如何将传统Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA。主要内容为传统项目的Project Structure配置。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/27/switch-to-idea-2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/13/how-to-learn-c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/01/13/how-to-learn-c/" class="post-title-link" itemprop="url">作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-01-13 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-13T00:00:00+08:00">2019-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%97%B2%E8%B0%88/" itemprop="url" rel="index"><span itemprop="name">闲谈</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在学校上学的时候，曾经就这个问题专门给学弟们做过讲座，并且总结成了一篇文章。为了造福后辈，帮助后辈争取早日脱单，这里把以前写的内容修改一下发表出来，毕竟C语言课通常大一开，而且大一是提升妹子好感度，<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL2Jhbmd1bWkvbWVkaWEvbWQ0MTg4Lw==">与其约会，使其娇羞<i class="fa fa-external-link-alt"></i></span>的关键时期。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/13/how-to-learn-c/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -232,11 +859,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -319,11 +951,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -406,11 +1043,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -480,624 +1122,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/02/java-code-review-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/02/java-code-review-1/" class="post-title-link" itemprop="url">Java代码审查（一）：代码审查问题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-01-02 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-02T00:00:00+08:00">2019-01-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-02-03 12:35:50" itemprop="dateModified" datetime="2022-02-03T12:35:50+08:00">2022-02-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>当然，由于不同项目用的东西大概会很不一样，所以本文仅供参考。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/02/java-code-review-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2019/01/01/java-code-review-0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/01/java-code-review-0/" class="post-title-link" itemprop="url">Java代码审查：目录</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-01-01 00:00:00" itemprop="dateCreated datePublished" datetime="2019-01-01T00:00:00+08:00">2019-01-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-02-03 12:35:50" itemprop="dateModified" datetime="2022-02-03T12:35:50+08:00">2022-02-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">项目管理</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在讨论代码审查问题之前，需要指出不遵守代码规范的后果：</p>
-<ol>
-<li>被骂“坑爹”</li>
-<li>被同事暗中诅咒</li>
-<li>跳槽之后被新同事暗中诅咒</li>
-<li>跳槽之后被原来公司的同事暗中诅咒</li>
-</ol>
-<p>为了避免诅咒的命运，本系列文章整理了一些代码审查问题，并以个人角度对编程习惯提出一些要求和建议。对于项目而言，一方面要加强审查，另一方面要加强对项目成员的教育，防止问题再次产生。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/java-code-review-0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/12/20/deploy-checklist/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/20/deploy-checklist/" class="post-title-link" itemprop="url">升级发版检查表</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-20 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-20T00:00:00+08:00">2018-12-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">系统运维</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>系统升级和发版是一个动静很大的操作，必须充分做好实施计划和应急预案。本文是我们项目（项目制）日常升级的检查表，供大家参考。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/20/deploy-checklist/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/12/14/install-windows-on-macbook-pro-2018/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/14/install-windows-on-macbook-pro-2018/" class="post-title-link" itemprop="url">在2018版MacBook Pro手工安装Windows 10，以及分区扩容</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-14 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-14T00:00:00+08:00">2018-12-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>几个月前在苹果商店购买了新版的MacBook Pro，为了玩个游戏（例如GTA5），准备安装Windows系统，然而发现通过系统的Boot Camp（启动转换助理）进行安装根本无法成功。经过一番折腾，得出一个结论：只能手工制作安装盘，以手工方式安装Windows 10。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/14/install-windows-on-macbook-pro-2018/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/12/13/switch-to-idea-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/13/switch-to-idea-1/" class="post-title-link" itemprop="url">从Eclipse切换到IDEA（一）：切换操作</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-13 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-13T00:00:00+08:00">2018-12-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本文主要介绍IDEA的操作方法。为了避免出现复杂问题，本文假设项目已经事先配置好，而且配置文件加到了版本控制中，其他人只要下载代码就可以直接用IDEA打开。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/13/switch-to-idea-1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/12/12/switch-to-idea-0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/12/12/switch-to-idea-0/" class="post-title-link" itemprop="url">从Eclipse切换到IDEA</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-12-12 00:00:00" itemprop="dateCreated datePublished" datetime="2018-12-12T00:00:00+08:00">2018-12-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ IDEA。本系列文章面向Eclipse使用者，讲述IDEA的一些基本操作，以便平稳地进行切换。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/12/switch-to-idea-0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2018/11/02/weblogic-caution/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/img/avatar.png">
-      <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="plusNaN">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/02/weblogic-caution/" class="post-title-link" itemprop="url">WebLogic踩坑记录</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-11-02 00:00:00" itemprop="dateCreated datePublished" datetime="2018-11-02T00:00:00+08:00">2018-11-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-01-11 10:01:56" itemprop="dateModified" datetime="2022-01-11T10:01:56+08:00">2022-01-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">系统运维</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g（10.3.6）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/02/weblogic-caution/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
@@ -1106,15 +1132,14 @@
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -1122,26 +1147,38 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"93ccefe6fa5dc946637b27eeb51ad55c"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"93ccefe6fa5dc946637b27eeb51ad55c"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

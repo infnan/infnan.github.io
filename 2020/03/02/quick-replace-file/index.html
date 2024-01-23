@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="生产环境遇到bug，需要紧急修改几个Java文件，然后尽快部署到生产系统中。如果代码中混有其他改动，无法完整打包，那么如何尽快提取出改完的class文件并快速地放到服务器的正确位置呢？">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="生产环境遇到bug，需要紧急修改几个Java文件，然后尽快部署到生产系统中。如果代码中混有其他改动，无法完整打包，那么如何尽快提取出改完的class文件并快速地放到服务器的正确位置呢？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用脚本快速从本地提取、替换生产服务器class文件">
 <meta property="og:url" content="https://plusnan.me/2020/03/02/quick-replace-file/index.html">
@@ -46,8 +45,12 @@
 <title>使用脚本快速从本地提取、替换生产服务器class文件 | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -62,8 +65,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -83,7 +86,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -92,11 +95,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -129,15 +128,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -158,17 +151,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,47 +172,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -237,11 +218,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="使用脚本快速从本地提取、替换生产服务器class文件 | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -284,329 +270,31 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>生产环境遇到bug，需要紧急修改几个Java文件，然后尽快部署到生产系统中。如果代码中混有其他改动，无法完整打包，那么如何尽快提取出改完的class文件并快速地放到服务器的正确位置呢？</p>
+    <div class="post-body" itemprop="articleBody"><p>生产环境遇到bug，需要紧急修改几个Java文件，然后尽快部署到生产系统中。如果代码中混有其他改动，无法完整打包，那么如何尽快提取出改完的class文件并快速地放到服务器的正确位置呢？</p>
 <span id="more"></span>
 
 <h1 id="从本机提取文件"><a href="#从本机提取文件" class="headerlink" title="从本机提取文件"></a>从本机提取文件</h1><p>先在自己的IDE中把代码改出来，编译，运行。避免打WAR包，否则还要费心思解压，而且有些系统（例如Mac）解出来之后时间戳还不对。</p>
 <p>重新生成的class文件的修改时间肯定比其他class文件新，这样我们就能用一些脚本将它们挑出来了。</p>
 <h2 id="Windows系统"><a href="#Windows系统" class="headerlink" title="Windows系统"></a>Windows系统</h2><p>使用PowerShell脚本。放在 D:\tiqu.ps1 中：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token namespace">[CmdletBinding()]</span>
-<span class="token keyword">Param</span> <span class="token punctuation">(</span>
-    <span class="token namespace">[string]</span> 
-    <span class="token variable">$from</span> = <span class="token string">'.'</span><span class="token punctuation">,</span> 
-
-    <span class="token namespace">[string]</span>
-    <span class="token variable">$to</span> = <span class="token string">'..\output'</span><span class="token punctuation">,</span>
-
-    <span class="token namespace">[AllowNull()]</span>
-    <span class="token namespace">[string]</span>
-    <span class="token variable">$time</span><span class="token punctuation">,</span>
-
-    <span class="token namespace">[AllowNull()]</span>
-    <span class="token namespace">[int]</span>
-    <span class="token variable">$min</span><span class="token punctuation">,</span>
-
-    <span class="token namespace">[int]</span>
-    <span class="token variable">$flat</span> = 0
-<span class="token punctuation">)</span>
-
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$time</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token variable">$minTime</span> = <span class="token namespace">[DateTime]</span>::ParseExact<span class="token punctuation">(</span><span class="token variable">$time</span><span class="token punctuation">,</span> <span class="token string">'hh:mm'</span><span class="token punctuation">,</span> <span class="token variable">$null</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">elseif</span> <span class="token punctuation">(</span><span class="token variable">$min</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token variable">$minTime</span> = <span class="token punctuation">(</span><span class="token function">Get-Date</span><span class="token punctuation">)</span><span class="token punctuation">.</span>AddMinutes<span class="token punctuation">(</span><span class="token operator">-</span><span class="token variable">$min</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-    <span class="token variable">$minTime</span> = <span class="token namespace">[DateTime]</span>::ParseExact<span class="token punctuation">(</span><span class="token string">'00'</span><span class="token punctuation">,</span> <span class="token string">'hh'</span><span class="token punctuation">,</span> <span class="token variable">$null</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment"># 新建文件夹</span>
-<span class="token function">New-Item</span> <span class="token operator">-</span>Path <span class="token variable">$to</span> <span class="token operator">-</span>ItemType Directory <span class="token operator">-</span>Force <span class="token punctuation">|</span> <span class="token function">Out-Null</span>
-
-<span class="token comment"># 搜索文件</span>
-<span class="token function">Push-Location</span> <span class="token variable">$from</span>
-
-<span class="token variable">$fileList</span> = <span class="token function">Get-ChildItem</span> <span class="token operator">-</span>Path <span class="token punctuation">.</span> <span class="token operator">-</span>Recurse <span class="token punctuation">|</span> ? <span class="token punctuation">&#123;</span><span class="token variable">$_</span><span class="token punctuation">.</span>LastWriteTime <span class="token operator">-gt</span> <span class="token variable">$minTime</span><span class="token punctuation">&#125;</span>
-<span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$file</span> in <span class="token variable">$fileList</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token variable">$relativePath</span> = <span class="token function">Resolve-Path</span> <span class="token operator">-</span>Path <span class="token variable">$file</span><span class="token punctuation">.</span>FullName <span class="token operator">-</span>Relative
-    
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$flat</span> <span class="token operator">-eq</span> 0<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment"># 保持目录结构</span>
-        <span class="token function">Write-Output</span> <span class="token variable">$relativePath</span>
-        <span class="token variable">$newPath</span> = <span class="token function">Join-Path</span> <span class="token operator">-</span>Path <span class="token variable">$to</span> <span class="token operator">-</span>ChildPath <span class="token variable">$relativePath</span>
-        <span class="token variable">$newDir</span> = <span class="token function">Split-Path</span> <span class="token operator">-</span>Path <span class="token variable">$newPath</span>
-        <span class="token function">New-Item</span> <span class="token operator">-</span>Path <span class="token variable">$newDir</span> <span class="token operator">-</span>ItemType Directory <span class="token operator">-</span>Force <span class="token punctuation">|</span> <span class="token function">Out-Null</span>
-        <span class="token function">Copy-Item</span> <span class="token operator">-</span>Path <span class="token variable">$file</span><span class="token punctuation">.</span>FullName <span class="token operator">-</span>Destination <span class="token variable">$newDir</span> <span class="token operator">-</span>Force <span class="token punctuation">|</span> <span class="token function">Out-Null</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment"># 不保持目录结构，直接复制</span>
-        <span class="token function">Write-Output</span> <span class="token variable">$file</span><span class="token punctuation">.</span>Name
-        <span class="token function">Copy-Item</span> <span class="token operator">-</span>Path <span class="token variable">$file</span><span class="token punctuation">.</span>FullName <span class="token operator">-</span>Destination <span class="token variable">$to</span> <span class="token operator">-</span>Force <span class="token punctuation">|</span> <span class="token function">Out-Null</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token function">Pop-Location</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">[<span class="type">CmdletBinding</span>()]</span></span><br><span class="line"><span class="keyword">Param</span> (</span><br><span class="line">    [<span class="built_in">string</span>] </span><br><span class="line">    <span class="variable">$from</span> = <span class="string">&#x27;.&#x27;</span>, </span><br><span class="line"></span><br><span class="line">    [<span class="built_in">string</span>]</span><br><span class="line">    <span class="variable">$to</span> = <span class="string">&#x27;..\output&#x27;</span>,</span><br><span class="line"></span><br><span class="line">    [<span class="type">AllowNull</span>()]</span><br><span class="line">    [<span class="built_in">string</span>]</span><br><span class="line">    <span class="variable">$time</span>,</span><br><span class="line"></span><br><span class="line">    [<span class="type">AllowNull</span>()]</span><br><span class="line">    [<span class="built_in">int</span>]</span><br><span class="line">    <span class="variable">$min</span>,</span><br><span class="line"></span><br><span class="line">    [<span class="built_in">int</span>]</span><br><span class="line">    <span class="variable">$flat</span> = <span class="number">0</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$time</span>) &#123;</span><br><span class="line">    <span class="variable">$minTime</span> = [<span class="built_in">DateTime</span>]::ParseExact(<span class="variable">$time</span>, <span class="string">&#x27;hh:mm&#x27;</span>, <span class="variable">$null</span>)</span><br><span class="line">&#125; <span class="keyword">elseif</span> (<span class="variable">$min</span>) &#123;</span><br><span class="line">    <span class="variable">$minTime</span> = (<span class="built_in">Get-Date</span>).AddMinutes(-<span class="variable">$min</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable">$minTime</span> = [<span class="built_in">DateTime</span>]::ParseExact(<span class="string">&#x27;00&#x27;</span>, <span class="string">&#x27;hh&#x27;</span>, <span class="variable">$null</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新建文件夹</span></span><br><span class="line"><span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$to</span> <span class="literal">-ItemType</span> Directory <span class="literal">-Force</span> | <span class="built_in">Out-Null</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索文件</span></span><br><span class="line"><span class="built_in">Push-Location</span> <span class="variable">$from</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$fileList</span> = <span class="built_in">Get-ChildItem</span> <span class="literal">-Path</span> . <span class="literal">-Recurse</span> | ? &#123;<span class="variable">$_</span>.LastWriteTime <span class="operator">-gt</span> <span class="variable">$minTime</span>&#125;</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$file</span> <span class="keyword">in</span> <span class="variable">$fileList</span>) &#123;</span><br><span class="line">    <span class="variable">$relativePath</span> = <span class="built_in">Resolve-Path</span> <span class="literal">-Path</span> <span class="variable">$file</span>.FullName <span class="literal">-Relative</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$flat</span> <span class="operator">-eq</span> <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment"># 保持目录结构</span></span><br><span class="line">        <span class="built_in">Write-Output</span> <span class="variable">$relativePath</span></span><br><span class="line">        <span class="variable">$newPath</span> = <span class="built_in">Join-Path</span> <span class="literal">-Path</span> <span class="variable">$to</span> <span class="literal">-ChildPath</span> <span class="variable">$relativePath</span></span><br><span class="line">        <span class="variable">$newDir</span> = <span class="built_in">Split-Path</span> <span class="literal">-Path</span> <span class="variable">$newPath</span></span><br><span class="line">        <span class="built_in">New-Item</span> <span class="literal">-Path</span> <span class="variable">$newDir</span> <span class="literal">-ItemType</span> Directory <span class="literal">-Force</span> | <span class="built_in">Out-Null</span></span><br><span class="line">        <span class="built_in">Copy-Item</span> <span class="literal">-Path</span> <span class="variable">$file</span>.FullName <span class="literal">-Destination</span> <span class="variable">$newDir</span> <span class="literal">-Force</span> | <span class="built_in">Out-Null</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment"># 不保持目录结构，直接复制</span></span><br><span class="line">        <span class="built_in">Write-Output</span> <span class="variable">$file</span>.Name</span><br><span class="line">        <span class="built_in">Copy-Item</span> <span class="literal">-Path</span> <span class="variable">$file</span>.FullName <span class="literal">-Destination</span> <span class="variable">$to</span> <span class="literal">-Force</span> | <span class="built_in">Out-Null</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Pop-Location</span></span><br></pre></td></tr></table></figure>
 
 <p>操作时，启动PowerShell，输入</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment"># 进入到Web应用所在目录，IDEA通常是artifacts，Eclipse通常是WebRoot</span>
-cd X:\xxxxxx\out\artifacts
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入到Web应用所在目录，IDEA通常是artifacts，Eclipse通常是WebRoot</span></span><br><span class="line"><span class="built_in">cd</span> X:\xxxxxx\out\artifacts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取5分钟之前到现在修改的文件，放到 ..\临时替换 目录中</span></span><br><span class="line">D:\tiqu.ps1 <span class="literal">-to</span> ..\临时替换 <span class="literal">-min</span> <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取从9:20到现在之间修改的文件，放到 ..\output 目录中</span></span><br><span class="line">D:\tiqu.ps1 <span class="literal">-time</span> <span class="number">09</span>:<span class="number">20</span> </span><br></pre></td></tr></table></figure>
 
-<span class="token comment"># 提取5分钟之前到现在修改的文件，放到 ..\临时替换 目录中</span>
-D:\tiqu<span class="token punctuation">.</span>ps1 <span class="token operator">-</span>to <span class="token punctuation">.</span><span class="token punctuation">.</span>\临时替换 <span class="token operator">-</span>min 5
-
-<span class="token comment"># 提取从9:20到现在之间修改的文件，放到 ..\output 目录中</span>
-D:\tiqu<span class="token punctuation">.</span>ps1 <span class="token operator">-</span>time 09:20 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Linux-Mac-Cygwin"><a href="#Linux-Mac-Cygwin" class="headerlink" title="Linux/Mac/Cygwin"></a>Linux/Mac/Cygwin</h2><p>将以下脚本放在<code>/usr/local/bin/tiqu</code>中，设置好<code>x</code>权限。</p>
+<h2 id="Linux-Mac-Cygwin"><a href="#Linux-Mac-Cygwin" class="headerlink" title="Linux&#x2F;Mac&#x2F;Cygwin"></a>Linux&#x2F;Mac&#x2F;Cygwin</h2><p>将以下脚本放在<code>/usr/local/bin/tiqu</code>中，设置好<code>x</code>权限。</p>
 <p>注意Mac系统自带getopt是BSD版本，功能比GNU版少，只支持一个字母的短参数，需另外安装gnu-getopt（后面假设安装到了<code>/usr/local/opt/gnu-getopt/bin/getopt</code>）。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
- 
-<span class="token function-name function">help</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"tiqu [options]"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"默认值：把当前目录、当天修改文件放到 out 目录中"</span>
-    <span class="token builtin class-name">echo</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --from=&lt;path>, -f       指定待查找目录"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --to=&lt;path>, -t         指定放置位置，如果没有则自动 mkdir"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --time=&lt;HH:mm>          复制 HH:mm 之后修改的文件"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --min=&lt;min>             复制从 min 分钟之前到现在的文件，和上面参数冲突"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --exclude=&lt;list>, -e    复制时排除符合&lt;list>规则的文件"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --exclude-from=&lt;file>   复制时排除匹配了&lt;file>规则配置列表文件的文件"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --flat, -b              把所有文件平摊到同一目录中，不要保持目录结构（默认值：保持目录结构）"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --help                  显示本帮助"</span>
-    <span class="token builtin class-name">echo</span>
-<span class="token punctuation">&#125;</span>
- 
-<span class="token assign-left variable">fromPath</span><span class="token operator">=</span><span class="token string">"."</span>
-<span class="token assign-left variable">toPath</span><span class="token operator">=</span><span class="token string">"./out"</span>
-<span class="token assign-left variable">findTime</span><span class="token operator">=</span><span class="token string">"00:00"</span>
-<span class="token assign-left variable">findMin</span><span class="token operator">=</span>-1
-<span class="token assign-left variable">excludeCmd</span><span class="token operator">=</span><span class="token string">""</span>
-<span class="token assign-left variable">flat</span><span class="token operator">=</span><span class="token number">0</span>
- 
-<span class="token comment"># 苹果系统</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token string">"/usr/local/opt/gnu-getopt/bin:<span class="token environment constant">$PATH</span>"</span>
- 
-<span class="token assign-left variable">TEMP</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span>getopt -o hf:t:e:b --long help,from:,to:,time:,min:,exclude:,exclude-from,flat -- <span class="token string">"<span class="token variable">$@</span>"</span><span class="token variable">`</span></span>
-<span class="token builtin class-name">eval</span> <span class="token builtin class-name">set</span> -- <span class="token string">"<span class="token variable">$TEMP</span>"</span>
- 
-<span class="token keyword">while</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
-    <span class="token keyword">case</span> <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token keyword">in</span>
-        -f<span class="token operator">|</span>--from<span class="token punctuation">)</span>
-            <span class="token assign-left variable">fromPath</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$2</span>"</span>
-            <span class="token builtin class-name">shift</span> <span class="token number">2</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        -t<span class="token operator">|</span>--to<span class="token punctuation">)</span>
-            <span class="token assign-left variable">toPath</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$2</span>"</span>
-            <span class="token builtin class-name">shift</span> <span class="token number">2</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        --time<span class="token punctuation">)</span>
-            <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$2</span>"</span> <span class="token operator">=~</span> ^<span class="token punctuation">[</span>01<span class="token punctuation">]</span>?<span class="token punctuation">[</span><span class="token number">0</span>-9<span class="token punctuation">]</span>:<span class="token punctuation">[</span><span class="token number">0</span>-5<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span>-9<span class="token punctuation">]</span>$ <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-                <span class="token assign-left variable">findTime</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$2</span>"</span>
-            <span class="token keyword">else</span>
-                <span class="token builtin class-name">echo</span> 错误：无效时间格式！
-                <span class="token builtin class-name">exit</span> <span class="token number">1</span>
-            <span class="token keyword">fi</span>
-            <span class="token builtin class-name">shift</span> <span class="token number">2</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        --min<span class="token punctuation">)</span>
-            <span class="token assign-left variable">findMin</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$2</span>"</span>
-            <span class="token builtin class-name">shift</span> <span class="token number">2</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        -e<span class="token operator">|</span>--exclude<span class="token punctuation">)</span>
-            <span class="token assign-left variable">excludeCmd</span><span class="token operator">=</span><span class="token string">"--exclude=<span class="token entity" title="\&quot;">\"</span><span class="token variable">$2</span><span class="token entity" title="\&quot;">\"</span>"</span>
-            <span class="token builtin class-name">shift</span> <span class="token number">2</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        --exclude-from<span class="token punctuation">)</span>
-            <span class="token assign-left variable">excludeCmd</span><span class="token operator">=</span><span class="token string">"--exclude-from=<span class="token entity" title="\&quot;">\"</span><span class="token variable">$2</span><span class="token entity" title="\&quot;">\"</span>"</span>
-            <span class="token builtin class-name">shift</span> <span class="token number">2</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        -b<span class="token operator">|</span>--flat<span class="token punctuation">)</span>
-            <span class="token assign-left variable">flat</span><span class="token operator">=</span><span class="token number">1</span>
-            <span class="token builtin class-name">shift</span> <span class="token number">1</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        -h<span class="token operator">|</span>--help<span class="token punctuation">)</span>
-            <span class="token builtin class-name">help</span>
-            <span class="token builtin class-name">exit</span> <span class="token number">0</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        --<span class="token punctuation">)</span>
-            <span class="token builtin class-name">shift</span>
-            <span class="token builtin class-name">break</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        *<span class="token punctuation">)</span>
-            <span class="token comment"># echo "Internal error!"</span>
-            <span class="token comment"># exit 1</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-    <span class="token keyword">esac</span>
-<span class="token keyword">done</span>
- 
-<span class="token comment"># 计算时间</span>
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$findMin</span> -eq -1 <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token assign-left variable"><span class="token environment constant">IFS</span></span><span class="token operator">=</span>: <span class="token builtin class-name">read</span> nowh nowm nows <span class="token operator">&lt;&lt;&lt;</span> <span class="token string">"<span class="token variable"><span class="token variable">`</span><span class="token function">date</span> +%T<span class="token variable">`</span></span>"</span>
-    <span class="token assign-left variable"><span class="token environment constant">IFS</span></span><span class="token operator">=</span>: <span class="token builtin class-name">read</span> bh bm <span class="token operator">&lt;&lt;&lt;</span> <span class="token string">"<span class="token variable">$findTime</span>"</span>
-
-    <span class="token assign-left variable">nowh</span><span class="token operator">=</span><span class="token variable">$&#123;nowh<span class="token operator">#</span>0&#125;</span>
-    <span class="token assign-left variable">nowm</span><span class="token operator">=</span><span class="token variable">$&#123;nowm<span class="token operator">#</span>0&#125;</span>
-    <span class="token assign-left variable">bh</span><span class="token operator">=</span><span class="token variable">$&#123;bh<span class="token operator">#</span>0&#125;</span>
-    <span class="token assign-left variable">bm</span><span class="token operator">=</span><span class="token variable">$&#123;bm<span class="token operator">#</span>0&#125;</span>
- 
-    <span class="token assign-left variable">findMin</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span><span class="token punctuation">(</span>nowh<span class="token operator">*</span><span class="token number">60</span><span class="token operator">+</span>nowm<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">(</span>bh<span class="token operator">*</span><span class="token number">60</span><span class="token operator">+</span>bm<span class="token variable">))</span></span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$findMin</span> -lt <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-        <span class="token assign-left variable">findMin</span><span class="token operator">=</span><span class="token number">0</span>
-    <span class="token keyword">fi</span>
-<span class="token keyword">fi</span>
- 
-<span class="token assign-left variable">findMin</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span><span class="token operator">-</span>findMin<span class="token variable">))</span></span>
- 
-<span class="token comment"># 将toPath转成绝对路径</span>
-<span class="token function">mkdir</span> -p <span class="token string">"<span class="token variable">$toPath</span>"</span>
-<span class="token builtin class-name">cd</span> <span class="token string">"<span class="token variable">$toPath</span>"</span>
-<span class="token assign-left variable">toPath</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">pwd</span><span class="token variable">`</span></span>"</span>
-<span class="token builtin class-name">cd</span> -
- 
-<span class="token comment"># 使用rsync复制文件</span>
-<span class="token builtin class-name">cd</span> <span class="token string">"<span class="token variable">$fromPath</span>"</span>
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$flat</span> -eq <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token comment"># 保持目录结构</span>
-    <span class="token function">find</span> <span class="token builtin class-name">.</span> -type f -mmin <span class="token variable">$findMin</span> -exec <span class="token function">rsync</span> -aR <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token string">"<span class="token variable">$toPath</span>"</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
-<span class="token keyword">else</span>
-    <span class="token comment"># 不要保持目录结构</span>
-    <span class="token function">find</span> <span class="token builtin class-name">.</span> -type f -mmin <span class="token variable">$findMin</span> -exec <span class="token function">rsync</span> -a <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token string">"<span class="token variable">$toPath</span>"</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
-<span class="token keyword">fi</span>
- 
-<span class="token comment"># 展示已复制文件</span>
-<span class="token builtin class-name">cd</span> <span class="token string">"<span class="token variable">$toPath</span>"</span>
-<span class="token function">find</span> <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="title">help</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;tiqu [options]&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;默认值：把当前目录、当天修改文件放到 out 目录中&quot;</span></span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --from=&lt;path&gt;, -f       指定待查找目录&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --to=&lt;path&gt;, -t         指定放置位置，如果没有则自动 mkdir&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --time=&lt;HH:mm&gt;          复制 HH:mm 之后修改的文件&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --min=&lt;min&gt;             复制从 min 分钟之前到现在的文件，和上面参数冲突&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --exclude=&lt;list&gt;, -e    复制时排除符合&lt;list&gt;规则的文件&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --exclude-from=&lt;file&gt;   复制时排除匹配了&lt;file&gt;规则配置列表文件的文件&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --flat, -b              把所有文件平摊到同一目录中，不要保持目录结构（默认值：保持目录结构）&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --help                  显示本帮助&quot;</span></span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">fromPath=<span class="string">&quot;.&quot;</span></span><br><span class="line">toPath=<span class="string">&quot;./out&quot;</span></span><br><span class="line">findTime=<span class="string">&quot;00:00&quot;</span></span><br><span class="line">findMin=-1</span><br><span class="line">excludeCmd=<span class="string">&quot;&quot;</span></span><br><span class="line">flat=0</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 苹果系统</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/usr/local/opt/gnu-getopt/bin:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"> </span><br><span class="line">TEMP=`getopt -o hf:t:e:b --long <span class="built_in">help</span>,from:,to:,time:,min:,exclude:,exclude-from,flat -- <span class="string">&quot;<span class="variable">$@</span>&quot;</span>`</span><br><span class="line"><span class="built_in">eval</span> <span class="built_in">set</span> -- <span class="string">&quot;<span class="variable">$TEMP</span>&quot;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line">        -f|--from)</span><br><span class="line">            fromPath=<span class="string">&quot;<span class="variable">$2</span>&quot;</span></span><br><span class="line">            <span class="built_in">shift</span> 2</span><br><span class="line">            ;;</span><br><span class="line">        -t|--to)</span><br><span class="line">            toPath=<span class="string">&quot;<span class="variable">$2</span>&quot;</span></span><br><span class="line">            <span class="built_in">shift</span> 2</span><br><span class="line">            ;;</span><br><span class="line">        --time)</span><br><span class="line">            <span class="keyword">if</span> [[ <span class="string">&quot;<span class="variable">$2</span>&quot;</span> =~ ^[01]?[0-9]:[0-5][0-9]$ ]]; <span class="keyword">then</span></span><br><span class="line">                findTime=<span class="string">&quot;<span class="variable">$2</span>&quot;</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">echo</span> 错误：无效时间格式！</span><br><span class="line">                <span class="built_in">exit</span> 1</span><br><span class="line">            <span class="keyword">fi</span></span><br><span class="line">            <span class="built_in">shift</span> 2</span><br><span class="line">            ;;</span><br><span class="line">        --min)</span><br><span class="line">            findMin=<span class="string">&quot;<span class="variable">$2</span>&quot;</span></span><br><span class="line">            <span class="built_in">shift</span> 2</span><br><span class="line">            ;;</span><br><span class="line">        -e|--exclude)</span><br><span class="line">            excludeCmd=<span class="string">&quot;--exclude=\&quot;<span class="variable">$2</span>\&quot;&quot;</span></span><br><span class="line">            <span class="built_in">shift</span> 2</span><br><span class="line">            ;;</span><br><span class="line">        --exclude-from)</span><br><span class="line">            excludeCmd=<span class="string">&quot;--exclude-from=\&quot;<span class="variable">$2</span>\&quot;&quot;</span></span><br><span class="line">            <span class="built_in">shift</span> 2</span><br><span class="line">            ;;</span><br><span class="line">        -b|--flat)</span><br><span class="line">            flat=1</span><br><span class="line">            <span class="built_in">shift</span> 1</span><br><span class="line">            ;;</span><br><span class="line">        -h|--<span class="built_in">help</span>)</span><br><span class="line">            <span class="built_in">help</span></span><br><span class="line">            <span class="built_in">exit</span> 0</span><br><span class="line">            ;;</span><br><span class="line">        --)</span><br><span class="line">            <span class="built_in">shift</span></span><br><span class="line">            <span class="built_in">break</span></span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            <span class="comment"># echo &quot;Internal error!&quot;</span></span><br><span class="line">            <span class="comment"># exit 1</span></span><br><span class="line">            ;;</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 计算时间</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$findMin</span> -eq -1 ]; <span class="keyword">then</span></span><br><span class="line">    IFS=: <span class="built_in">read</span> nowh nowm nows &lt;&lt;&lt; <span class="string">&quot;`date +%T`&quot;</span></span><br><span class="line">    IFS=: <span class="built_in">read</span> bh bm &lt;&lt;&lt; <span class="string">&quot;<span class="variable">$findTime</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    nowh=<span class="variable">$&#123;nowh#0&#125;</span></span><br><span class="line">    nowm=<span class="variable">$&#123;nowm#0&#125;</span></span><br><span class="line">    bh=<span class="variable">$&#123;bh#0&#125;</span></span><br><span class="line">    bm=<span class="variable">$&#123;bm#0&#125;</span></span><br><span class="line"> </span><br><span class="line">    findMin=$(((nowh*<span class="number">60</span>+nowm)-(bh*<span class="number">60</span>+bm)))</span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$findMin</span> -lt 0 ]; <span class="keyword">then</span></span><br><span class="line">        findMin=0</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"> </span><br><span class="line">findMin=$((-findMin))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 将toPath转成绝对路径</span></span><br><span class="line"><span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$toPath</span>&quot;</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$toPath</span>&quot;</span></span><br><span class="line">toPath=<span class="string">&quot;`pwd`&quot;</span></span><br><span class="line"><span class="built_in">cd</span> -</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 使用rsync复制文件</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$fromPath</span>&quot;</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$flat</span> -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="comment"># 保持目录结构</span></span><br><span class="line">    find . -<span class="built_in">type</span> f -mmin <span class="variable">$findMin</span> -<span class="built_in">exec</span> rsync -aR &#123;&#125; <span class="string">&quot;<span class="variable">$toPath</span>&quot;</span> \;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="comment"># 不要保持目录结构</span></span><br><span class="line">    find . -<span class="built_in">type</span> f -mmin <span class="variable">$findMin</span> -<span class="built_in">exec</span> rsync -a &#123;&#125; <span class="string">&quot;<span class="variable">$toPath</span>&quot;</span> \;</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 展示已复制文件</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$toPath</span>&quot;</span></span><br><span class="line">find .</span><br></pre></td></tr></table></figure>
 
 <p>操作时：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 进入到Web应用所在目录，IDEA通常是artifacts，Eclipse通常是WebRoot</span>
-<span class="token builtin class-name">cd</span> xxxxxx/out/artifacts
-
-<span class="token comment"># 提取5分钟之前到现在修改的文件，放到 ../临时替换 目录中</span>
-tiqu --to<span class="token operator">=</span><span class="token punctuation">..</span>/临时替换 --min<span class="token operator">=</span><span class="token number">5</span>
-
-<span class="token comment"># 提取从9:20到现在之间修改到文件，放到 ./out 目录中</span>
-tiqu --time<span class="token operator">=</span><span class="token number">9</span>:20 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入到Web应用所在目录，IDEA通常是artifacts，Eclipse通常是WebRoot</span></span><br><span class="line"><span class="built_in">cd</span> xxxxxx/out/artifacts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取5分钟之前到现在修改的文件，放到 ../临时替换 目录中</span></span><br><span class="line">tiqu --to=../临时替换 --min=5</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取从9:20到现在之间修改到文件，放到 ./out 目录中</span></span><br><span class="line">tiqu --time=9:20 </span><br></pre></td></tr></table></figure>
 
 <p>程序会自动搜索已修改文件，并且会按目录结构组织好，之后你就可以直接打包了。</p>
 <h1 id="在服务器上替换（Linux）"><a href="#在服务器上替换（Linux）" class="headerlink" title="在服务器上替换（Linux）"></a>在服务器上替换（Linux）</h1><p>如果已经按目录结构整理好，直接解压替换（<code>unzip -o xxx.zip -d 应用所在目录</code>）便是。对于war包，可使用zip命令直接把文件替换到包里面（<code>cd xxx; zip -r war包 *</code>）。</p>
 <p>如果提供的是散装的class文件，那么找目录会很费劲，可以借助脚本自动找目录，自动替换。可修改以下脚本中的MYBASE变量，然后保存到<code>/usr/local/bin/tihuan</code>中，加好<code>x</code>权限：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
-
-<span class="token comment"># 应用所在位置。通常不会变化，可以写死在脚本里头。</span>
-<span class="token assign-left variable">MYBASE</span><span class="token operator">=</span>/opt/xxx
-
-<span class="token function-name function">help</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"tihuan [options] 文件名1 文件名2 ..."</span>
-    <span class="token builtin class-name">echo</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --to=&lt;path>, -t         指定搜索目录（默认值：<span class="token variable">$&#123;MYBASE&#125;</span>）"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --dry-run, -n           只生成命令，不要实际替换"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --force, -f             不用确认，直接动手替换"</span>
-    <span class="token builtin class-name">echo</span> <span class="token string">"  --help                  显示本帮助"</span>
-<span class="token punctuation">&#125;</span>
- 
-<span class="token comment"># 苹果系统</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token string">"/usr/local/opt/gnu-getopt/bin:<span class="token environment constant">$PATH</span>"</span>
- 
-<span class="token assign-left variable">TEMP</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span>getopt -o ht:nf --long help,to:,dry-run,force -- <span class="token string">"<span class="token variable">$@</span>"</span><span class="token variable">`</span></span>
-<span class="token builtin class-name">eval</span> <span class="token builtin class-name">set</span> -- <span class="token string">"<span class="token variable">$TEMP</span>"</span>
-
-<span class="token assign-left variable">toPath</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$MYBASE</span>"</span>
-<span class="token assign-left variable">dryrun</span><span class="token operator">=</span><span class="token number">0</span>
-<span class="token assign-left variable">force</span><span class="token operator">=</span><span class="token number">0</span>
- 
-<span class="token keyword">while</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
-    <span class="token keyword">case</span> <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token keyword">in</span>
-        -t<span class="token operator">|</span>--to<span class="token punctuation">)</span>
-            <span class="token assign-left variable">toPath</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$2</span>"</span>
-            <span class="token builtin class-name">shift</span> <span class="token number">2</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        -n<span class="token operator">|</span>--dry-run<span class="token punctuation">)</span>
-            <span class="token assign-left variable">dryrun</span><span class="token operator">=</span><span class="token number">1</span>
-            <span class="token builtin class-name">shift</span> <span class="token number">1</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        -f<span class="token operator">|</span>--force<span class="token punctuation">)</span>
-            <span class="token assign-left variable">force</span><span class="token operator">=</span><span class="token number">1</span>
-            <span class="token builtin class-name">shift</span> <span class="token number">1</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        -h<span class="token operator">|</span>--help<span class="token punctuation">)</span>
-            <span class="token builtin class-name">help</span>
-            <span class="token builtin class-name">exit</span> <span class="token number">0</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        --<span class="token punctuation">)</span>
-            <span class="token builtin class-name">shift</span>
-            <span class="token builtin class-name">break</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-        *<span class="token punctuation">)</span>
-            <span class="token comment"># echo "Internal error!"</span>
-            <span class="token comment"># exit 1</span>
-            <span class="token punctuation">;</span><span class="token punctuation">;</span>
-    <span class="token keyword">esac</span>
-<span class="token keyword">done</span>
-
-<span class="token assign-left variable">i</span><span class="token operator">=</span><span class="token number">0</span>
-<span class="token keyword">for</span> <span class="token for-or-select variable">file</span> <span class="token keyword">in</span> <span class="token string">"<span class="token variable">$@</span>"</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
-    <span class="token assign-left variable">i</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$((</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token variable">))</span></span>
-
-    <span class="token keyword">if</span> <span class="token operator">!</span> <span class="token punctuation">[</span> -f <span class="token string">"<span class="token variable">$file</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-        <span class="token operator">></span><span class="token file-descriptor important">&amp;2</span> <span class="token builtin class-name">echo</span> <span class="token string">"[文件 #<span class="token variable">$&#123;i&#125;</span>] 源文件不存在：<span class="token variable">$&#123;file&#125;</span>"</span>
-        <span class="token builtin class-name">continue</span>
-    <span class="token keyword">fi</span>
-
-    <span class="token assign-left variable">fileName</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">basename</span> <span class="token string">"<span class="token variable">$file</span>"</span><span class="token variable">`</span></span>
-
-    <span class="token function">find</span> <span class="token string">"<span class="token variable">$toPath</span>"</span> -name <span class="token string">"<span class="token variable">$fileName</span>"</span> <span class="token operator">></span> /tmp/tmpfilelist
-    <span class="token assign-left variable">list</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">cat</span> /tmp/tmpfilelist<span class="token variable">`</span></span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">[</span> -n <span class="token string">"<span class="token variable">$list</span>"</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$list</span>"</span> <span class="token operator">!=</span> <span class="token string">"<span class="token entity" title="\n">\n</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-        <span class="token builtin class-name">echo</span> <span class="token string">"[文件 #<span class="token variable">$&#123;i&#125;</span>] 已找到"</span>
-
-        <span class="token function">cat</span> /tmp/tmpfilelist <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token builtin class-name">read</span> target<span class="token punctuation">;</span> <span class="token keyword">do</span>
-            <span class="token builtin class-name">echo</span> <span class="token variable">$target</span>
-        <span class="token keyword">done</span>
-
-        <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$force</span> -eq <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-            <span class="token builtin class-name">echo</span> -n <span class="token string">"是否继续替换 [y/n]？"</span>
-            <span class="token builtin class-name">read</span> choice
-        <span class="token keyword">else</span>
-            <span class="token assign-left variable">choice</span><span class="token operator">=</span><span class="token string">"y"</span>
-        <span class="token keyword">fi</span>
-
-        <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$choice</span>"</span> <span class="token operator">==</span> <span class="token string">"y"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-            <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$dryrun</span> -eq <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-                <span class="token builtin class-name">echo</span> <span class="token string">"[文件 #<span class="token variable">$&#123;i&#125;</span>] 已进行替换"</span>
-            <span class="token keyword">else</span>
-                <span class="token builtin class-name">echo</span> <span class="token string">"[文件 #<span class="token variable">$&#123;i&#125;</span>] 请运行以下命令"</span>
-            <span class="token keyword">fi</span>
-            <span class="token function">cat</span> /tmp/tmpfilelist <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token builtin class-name">read</span> target<span class="token punctuation">;</span> <span class="token keyword">do</span>
-                <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$dryrun</span> -eq <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-                    <span class="token function">cp</span> <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token string">"<span class="token variable">$target</span>"</span>
-                <span class="token keyword">else</span>
-                    <span class="token builtin class-name">echo</span> <span class="token string">"cp <span class="token entity" title="\&quot;">\"</span><span class="token variable">$file</span><span class="token entity" title="\&quot;">\"</span> <span class="token entity" title="\&quot;">\"</span><span class="token variable">$target</span><span class="token entity" title="\&quot;">\"</span>"</span>
-                <span class="token keyword">fi</span>
-            <span class="token keyword">done</span>
-        <span class="token keyword">else</span>
-            <span class="token builtin class-name">echo</span> <span class="token string">"[文件 #<span class="token variable">$&#123;i&#125;</span>] 已放弃替换"</span>
-        <span class="token keyword">fi</span>
-    <span class="token keyword">else</span>
-        <span class="token builtin class-name">echo</span> <span class="token string">"[文件 #<span class="token variable">$&#123;i&#125;</span>] 未找到文件，未进行替换"</span>
-    <span class="token keyword">fi</span>
-
-    <span class="token builtin class-name">echo</span>
-<span class="token keyword">done</span>
-
-<span class="token function">rm</span> /tmp/tmpfilelist <span class="token operator"><span class="token file-descriptor important">2</span>></span> /dev/null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 应用所在位置。通常不会变化，可以写死在脚本里头。</span></span><br><span class="line">MYBASE=/opt/xxx</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">help</span></span>() &#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;tihuan [options] 文件名1 文件名2 ...&quot;</span></span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --to=&lt;path&gt;, -t         指定搜索目录（默认值：<span class="variable">$&#123;MYBASE&#125;</span>）&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --dry-run, -n           只生成命令，不要实际替换&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --force, -f             不用确认，直接动手替换&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;  --help                  显示本帮助&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 苹果系统</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="string">&quot;/usr/local/opt/gnu-getopt/bin:<span class="variable">$PATH</span>&quot;</span></span><br><span class="line"> </span><br><span class="line">TEMP=`getopt -o ht:nf --long <span class="built_in">help</span>,to:,dry-run,force -- <span class="string">&quot;<span class="variable">$@</span>&quot;</span>`</span><br><span class="line"><span class="built_in">eval</span> <span class="built_in">set</span> -- <span class="string">&quot;<span class="variable">$TEMP</span>&quot;</span></span><br><span class="line"></span><br><span class="line">toPath=<span class="string">&quot;<span class="variable">$MYBASE</span>&quot;</span></span><br><span class="line">dryrun=0</span><br><span class="line">force=0</span><br><span class="line"> </span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line">        -t|--to)</span><br><span class="line">            toPath=<span class="string">&quot;<span class="variable">$2</span>&quot;</span></span><br><span class="line">            <span class="built_in">shift</span> 2</span><br><span class="line">            ;;</span><br><span class="line">        -n|--dry-run)</span><br><span class="line">            dryrun=1</span><br><span class="line">            <span class="built_in">shift</span> 1</span><br><span class="line">            ;;</span><br><span class="line">        -f|--force)</span><br><span class="line">            force=1</span><br><span class="line">            <span class="built_in">shift</span> 1</span><br><span class="line">            ;;</span><br><span class="line">        -h|--<span class="built_in">help</span>)</span><br><span class="line">            <span class="built_in">help</span></span><br><span class="line">            <span class="built_in">exit</span> 0</span><br><span class="line">            ;;</span><br><span class="line">        --)</span><br><span class="line">            <span class="built_in">shift</span></span><br><span class="line">            <span class="built_in">break</span></span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">            <span class="comment"># echo &quot;Internal error!&quot;</span></span><br><span class="line">            <span class="comment"># exit 1</span></span><br><span class="line">            ;;</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">i=0</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> <span class="string">&quot;<span class="variable">$@</span>&quot;</span>; <span class="keyword">do</span></span><br><span class="line">    i=$((i+<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> ! [ -f <span class="string">&quot;<span class="variable">$file</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">        &gt;&amp;2 <span class="built_in">echo</span> <span class="string">&quot;[文件 #<span class="variable">$&#123;i&#125;</span>] 源文件不存在：<span class="variable">$&#123;file&#125;</span>&quot;</span></span><br><span class="line">        <span class="built_in">continue</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    fileName=`<span class="built_in">basename</span> <span class="string">&quot;<span class="variable">$file</span>&quot;</span>`</span><br><span class="line"></span><br><span class="line">    find <span class="string">&quot;<span class="variable">$toPath</span>&quot;</span> -name <span class="string">&quot;<span class="variable">$fileName</span>&quot;</span> &gt; /tmp/tmpfilelist</span><br><span class="line">    list=`<span class="built_in">cat</span> /tmp/tmpfilelist`</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$list</span>&quot;</span> ] &amp;&amp; [ <span class="string">&quot;<span class="variable">$list</span>&quot;</span> != <span class="string">&quot;\n&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;[文件 #<span class="variable">$&#123;i&#125;</span>] 已找到&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">cat</span> /tmp/tmpfilelist | <span class="keyword">while</span> <span class="built_in">read</span> target; <span class="keyword">do</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="variable">$target</span></span><br><span class="line">        <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$force</span> -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> -n <span class="string">&quot;是否继续替换 [y/n]？&quot;</span></span><br><span class="line">            <span class="built_in">read</span> choice</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            choice=<span class="string">&quot;y&quot;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$choice</span>&quot;</span> == <span class="string">&quot;y&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">if</span> [ <span class="variable">$dryrun</span> -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&quot;[文件 #<span class="variable">$&#123;i&#125;</span>] 已进行替换&quot;</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&quot;[文件 #<span class="variable">$&#123;i&#125;</span>] 请运行以下命令&quot;</span></span><br><span class="line">            <span class="keyword">fi</span></span><br><span class="line">            <span class="built_in">cat</span> /tmp/tmpfilelist | <span class="keyword">while</span> <span class="built_in">read</span> target; <span class="keyword">do</span></span><br><span class="line">                <span class="keyword">if</span> [ <span class="variable">$dryrun</span> -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">                    <span class="built_in">cp</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="string">&quot;<span class="variable">$target</span>&quot;</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="built_in">echo</span> <span class="string">&quot;cp \&quot;<span class="variable">$file</span>\&quot; \&quot;<span class="variable">$target</span>\&quot;&quot;</span></span><br><span class="line">                <span class="keyword">fi</span></span><br><span class="line">            <span class="keyword">done</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;[文件 #<span class="variable">$&#123;i&#125;</span>] 已放弃替换&quot;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;[文件 #<span class="variable">$&#123;i&#125;</span>] 未找到文件，未进行替换&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> /tmp/tmpfilelist 2&gt; /dev/null</span><br></pre></td></tr></table></figure>
 
 <p>操作时：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 此处省略下载文件与备份操作。实际操作时注意备份！</span>
-<span class="token comment"># 以下根据实际情况二选一</span>
-
-<span class="token comment"># 展开（exploded）模式</span>
-tihuan XXXXX.class
-
-<span class="token comment"># war包模式</span>
-<span class="token function">mkdir</span> tmp
-<span class="token function">unzip</span> -o war包 -d tmp
-tihuan --to<span class="token operator">=</span>tmp XXXXX.class
-<span class="token builtin class-name">cd</span> tmp
-<span class="token function">zip</span> -r 原先的war包 *<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此处省略下载文件与备份操作。实际操作时注意备份！</span></span><br><span class="line"><span class="comment"># 以下根据实际情况二选一</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 展开（exploded）模式</span></span><br><span class="line">tihuan XXXXX.class</span><br><span class="line"></span><br><span class="line"><span class="comment"># war包模式</span></span><br><span class="line"><span class="built_in">mkdir</span> tmp</span><br><span class="line">unzip -o war包 -d tmp</span><br><span class="line">tihuan --to=tmp XXXXX.class</span><br><span class="line"><span class="built_in">cd</span> tmp</span><br><span class="line">zip -r 原先的war包 *</span><br></pre></td></tr></table></figure>
 
 <h1 id="后续操作"><a href="#后续操作" class="headerlink" title="后续操作"></a>后续操作</h1><ul>
 <li>本文的操作应当只用于应急处置。问题处理好之后，代码该提交提交，基线该打patch打patch，忘了的话就是极大的隐患。</li>
@@ -633,7 +321,7 @@ tihuan --to<span class="token operator">=</span>tmp XXXXX.class
       <a href="https://plusnan.me/2020/03/02/quick-replace-file/" title="使用脚本快速从本地提取、替换生产服务器class文件">https://plusnan.me/2020/03/02/quick-replace-file/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -647,12 +335,12 @@ tihuan --to<span class="token operator">=</span>tmp XXXXX.class
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2020/02/20/how-to-write-document/" rel="prev" title="如何写好软件文档">
-                  <i class="fa fa-chevron-left"></i> 如何写好软件文档
+                  <i class="fa fa-angle-left"></i> 如何写好软件文档
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2020/08/16/resume-filtering/" rel="next" title="浅谈社招招聘（一）：作为招聘者，筛选简历的关注点">
-                  浅谈社招招聘（一）：作为招聘者，筛选简历的关注点 <i class="fa fa-chevron-right"></i>
+                  浅谈社招招聘（一）：作为招聘者，筛选简历的关注点 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -672,15 +360,14 @@ tihuan --to<span class="token operator">=</span>tmp XXXXX.class
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -688,26 +375,38 @@ tihuan --to<span class="token operator">=</span>tmp XXXXX.class
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"b71e1673118b307a15d2963c5698101a"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"b71e1673118b307a15d2963c5698101a"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

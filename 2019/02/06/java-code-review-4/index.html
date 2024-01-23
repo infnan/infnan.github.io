@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="本文介绍如何使用Phabricator进行人工代码审查（实际上是审计），以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。 Phabricator是一个在浏览器上操作的开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文介绍如何使用Phabricator进行人工代码审查（实际上是审计），以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。 Phabricator是一个在浏览器上操作的开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java代码审查（四）：使用Phabricator进行代码审计">
 <meta property="og:url" content="https://plusnan.me/2019/02/06/java-code-review-4/index.html">
@@ -57,8 +56,12 @@
 <title>Java代码审查（四）：使用Phabricator进行代码审计 | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -73,8 +76,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -94,7 +97,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -103,11 +106,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -140,15 +139,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -169,17 +162,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -190,47 +183,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -248,11 +229,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java代码审查（四）：使用Phabricator进行代码审计 | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -295,8 +281,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>本文介绍如何使用Phabricator进行人工代码审查（实际上是审计），以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。</p>
+    <div class="post-body" itemprop="articleBody"><p>本文介绍如何使用Phabricator进行人工代码审查（实际上是审计），以及供参考的操作规范。因为时间和篇幅有限，不再写如何搭建Phabricator，需要者可自行在网上搜索安装教程。</p>
 <p>Phabricator是一个在浏览器上操作的开发管理平台，其中包括一个代码审查工具。工具支持两种代码审查方式，一种是事前审查，即提交之后必须先审查通过才能进入代码库；另一种是事后审查，也就是无论是否审查，代码都已经提交到代码库中。考虑我们自身实际情况（事前审查成本比较高），我们采用了“事后审查”的方式，本文也将讲述事后审查的操作。</p>
 <span id="more"></span>
 
@@ -305,7 +290,7 @@
 <li>配置好之后比较容易上手，而且不用额外安装软件，只要电脑有浏览器就能使用。（不过对于配置者来说很难上手）</li>
 <li>审查以代码提交为单位，每个提交都会展示差异，比较方便和直观。</li>
 <li>审查时可直接在具体代码处标记问题，方便定位和纠正。</li>
-<li>如采用Phabricator进行任务或缺陷管理，可将代码提交活动与任务/缺陷进行关联，便于任务跟踪。</li>
+<li>如采用Phabricator进行任务或缺陷管理，可将代码提交活动与任务&#x2F;缺陷进行关联，便于任务跟踪。</li>
 <li>支持表情包。</li>
 </ul>
 <p>Phabricator的不足之处：</p>
@@ -319,7 +304,7 @@
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>如果准备工作已经做好，那么可以直接跳到下面“审查”一节。</p>
 <p>以下是Phabricator的基本条件：</p>
 <ol>
-<li>服务器上面安装了Phabricator及相关组件，包括Apache/Nginx、PHP 7.2、MySQL、Phabricator、Git/Subversion、Pygments（基于Python 3，在PATH中且可执行）等。</li>
+<li>服务器上面安装了Phabricator及相关组件，包括Apache&#x2F;Nginx、PHP 7.2、MySQL、Phabricator、Git&#x2F;Subversion、Pygments（基于Python 3，在PATH中且可执行）等。</li>
 <li>服务器配置了域名。如果没有域名，那么需要设置一个伪域名，并要求各成员改hosts。</li>
 <li>给各成员建立了账号。（注意：如果给Phabricator配置了邮箱，注意几乎每个动作都会发邮件，需要告知大家调整系统邮件通知设置）</li>
 <li>有代码库访问权限。</li>
@@ -331,7 +316,7 @@
 <p><img src="/img/2019-02-06-java-code-review-4/repository.png" alt="repository"></p>
 <p>除了新建Repository，还需要完成以下工作才能开始审查：</p>
 <ol>
-<li>指定实际的Git/SVN仓库位置。</li>
+<li>指定实际的Git&#x2F;SVN仓库位置。</li>
 <li>设置需要导入的路径（仅适用于SVN）。</li>
 <li>设置默认字符编码（如果不是UTF-8的话）。</li>
 <li>激活仓库。</li>
@@ -342,15 +327,15 @@
 <p><img src="/img/2019-02-06-java-code-review-4/uri-2.png" alt="uri-2"></p>
 <p>点击“Edit URI”修改设置</p>
 <p><img src="/img/2019-02-06-java-code-review-4/uri-3.png" alt="uri-3"></p>
-<p>需要将其中的“I/O Type”修改成“No I/O”，然后保存。之后点击URIs页面上的“New URI”按钮，添加真正的代码库的URL：</p>
+<p>需要将其中的“I&#x2F;O Type”修改成“No I&#x2F;O”，然后保存。之后点击URIs页面上的“New URI”按钮，添加真正的代码库的URL：</p>
 <p><img src="/img/2019-02-06-java-code-review-4/uri-4.png" alt="uri-4"></p>
-<p>注意“I/O Type”选择Observe，因为这个仓库仅用于代码审查，不用于真正的提交。（对于Git仓库，可以用Phabricator作为中介实现事前审查，但SVN仓库不支持事前审查）</p>
+<p>注意“I&#x2F;O Type”选择Observe，因为这个仓库仅用于代码审查，不用于真正的提交。（对于Git仓库，可以用Phabricator作为中介实现事前审查，但SVN仓库不支持事前审查）</p>
 <p>若代码库需要认证，那么还需要在保存之后点击页面右侧的“Set Credential”设置账号密码。</p>
 <p>建议给代码库设置Phabricator访问专用账号。</p>
 <h3 id="设置需要导入的路径（SVN）"><a href="#设置需要导入的路径（SVN）" class="headerlink" title="设置需要导入的路径（SVN）"></a>设置需要导入的路径（SVN）</h3><p>在输入代码库URL时，我们必须输入整个SVN仓库的根目录。实际上可能仅在个别分支上进行开发，不需要关注整个代码库的提交，这样的话需要设置实际导入的路径：</p>
 <p><img src="/img/2019-02-06-java-code-review-4/svn-path.png" alt="svn-path"></p>
 <h3 id="设置字符编码、激活仓库"><a href="#设置字符编码、激活仓库" class="headerlink" title="设置字符编码、激活仓库"></a>设置字符编码、激活仓库</h3><p>在概览页点击“Actions”按钮，从弹出的菜单中选择“Edit Text Encoding”即可指定默认编码。</p>
-<p>选择“Activate Repository”即可激活仓库。一旦仓库激活，Phabricator的后台进程便会定时爬取Git/SVN提交记录，同步更新代码库。爬取频率与代码库实际提交情况有关，工作时间提交频繁，同步速度就快，而下班时间无人提交，同步速度也会降下来。</p>
+<p>选择“Activate Repository”即可激活仓库。一旦仓库激活，Phabricator的后台进程便会定时爬取Git&#x2F;SVN提交记录，同步更新代码库。爬取频率与代码库实际提交情况有关，工作时间提交频繁，同步速度就快，而下班时间无人提交，同步速度也会降下来。</p>
 <p>如果使用HTTPS协议的SVN仓库，且HTTPS证书不正确，那么同步版本库会失败。这种情况下可以进入服务器的shell，以Web Server用户身份手动运行一下svn checkout，永久信任证书，成功checkout之后便可自动同步了。</p>
 <h1 id="审查"><a href="#审查" class="headerlink" title="审查"></a>审查</h1><p>进入Phabricator的Diffusion应用，找到自己项目的代码库，点击之后可以看到代码库内容和提交记录：</p>
 <p><img src="/img/2019-02-06-java-code-review-4/repo.png" alt="repo"></p>
@@ -369,41 +354,9 @@
 <p><img src="/img/2019-02-06-java-code-review-4/search.png" alt="search"></p>
 <h1 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h1><p>Phabricator未提供导出代码审查问题列表功能，也没有代码审查问题的统计功能，因此需要登录到后台数据库，通过查SQL的方法进行导出和统计。</p>
 <p>假设Phabricator中代码库代号为R5，那么</p>
-<h2 id="问题列表"><a href="#问题列表" class="headerlink" title="问题列表"></a>问题列表</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span>
-    cmt<span class="token punctuation">.</span>commitIdentifier <span class="token keyword">AS</span> <span class="token identifier"><span class="token punctuation">`</span>提交ID<span class="token punctuation">`</span></span><span class="token punctuation">,</span>
-    DATE_FORMAT<span class="token punctuation">(</span>FROM_UNIXTIME<span class="token punctuation">(</span>cmt<span class="token punctuation">.</span>epoch<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'%Y-%m-%d %H:%i:%s'</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token identifier"><span class="token punctuation">`</span>提交时间<span class="token punctuation">`</span></span><span class="token punctuation">,</span>
-    dat<span class="token punctuation">.</span>authorName <span class="token keyword">AS</span> <span class="token identifier"><span class="token punctuation">`</span>提交者<span class="token punctuation">`</span></span><span class="token punctuation">,</span>
-    usr<span class="token punctuation">.</span>userName <span class="token keyword">AS</span> <span class="token identifier"><span class="token punctuation">`</span>审核者<span class="token punctuation">`</span></span><span class="token punctuation">,</span>
-    cmt<span class="token punctuation">.</span>auditStatus <span class="token keyword">AS</span> <span class="token identifier"><span class="token punctuation">`</span>状态<span class="token punctuation">`</span></span><span class="token punctuation">,</span>
-    path<span class="token punctuation">.</span>path<span class="token punctuation">,</span>
-    <span class="token keyword">RIGHT</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span>path<span class="token punctuation">,</span> INSTR<span class="token punctuation">(</span>REVERSE<span class="token punctuation">(</span>path<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token identifier"><span class="token punctuation">`</span>文件名<span class="token punctuation">`</span></span><span class="token punctuation">,</span>
-    <span class="token keyword">CASE</span> <span class="token keyword">WHEN</span> pl<span class="token punctuation">.</span>lineNumber<span class="token operator">=</span><span class="token number">0</span> <span class="token keyword">THEN</span> <span class="token boolean">NULL</span> <span class="token keyword">ELSE</span> pl<span class="token punctuation">.</span>lineNumber <span class="token keyword">END</span> <span class="token keyword">AS</span> <span class="token identifier"><span class="token punctuation">`</span>行号<span class="token punctuation">`</span></span><span class="token punctuation">,</span>
-    pl<span class="token punctuation">.</span>content <span class="token keyword">AS</span> <span class="token identifier"><span class="token punctuation">`</span>问题描述<span class="token punctuation">`</span></span>
-<span class="token keyword">FROM</span> phabricator_repository<span class="token punctuation">.</span>repository_commit cmt
-<span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> phabricator_repository<span class="token punctuation">.</span>repository_commitdata dat <span class="token keyword">ON</span> dat<span class="token punctuation">.</span>commitID <span class="token operator">=</span> cmt<span class="token punctuation">.</span>id
-<span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> phabricator_audit<span class="token punctuation">.</span>audit_transaction aud <span class="token keyword">ON</span> aud<span class="token punctuation">.</span>objectPHID <span class="token operator">=</span> cmt<span class="token punctuation">.</span>phid <span class="token operator">AND</span> aud<span class="token punctuation">.</span>commentPHID <span class="token operator">IS</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
-<span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> phabricator_audit<span class="token punctuation">.</span>audit_transaction_comment pl <span class="token keyword">ON</span> pl<span class="token punctuation">.</span>phid <span class="token operator">=</span> aud<span class="token punctuation">.</span>commentPHID
-<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> phabricator_repository<span class="token punctuation">.</span>repository_path path <span class="token keyword">ON</span> path<span class="token punctuation">.</span>id <span class="token operator">=</span> pl<span class="token punctuation">.</span>pathID
-<span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> phabricator_user<span class="token punctuation">.</span><span class="token keyword">user</span> usr <span class="token keyword">ON</span> usr<span class="token punctuation">.</span>phid <span class="token operator">=</span> pl<span class="token punctuation">.</span>authorPHID
-<span class="token keyword">WHERE</span>
-    cmt<span class="token punctuation">.</span>repositoryID <span class="token operator">=</span> <span class="token number">5</span>
-    <span class="token comment">-- 根据需要解除下面的注释</span>
-    <span class="token comment">-- AND auditStatus IN ('concern-raised', 'needs-verification')  -- 未关闭</span>
-    <span class="token comment">-- AND auditStatus = 'audited'                                  -- 已关闭</span>
-    <span class="token comment">-- AND DATEDIFF(SYSDATE(), FROM_UNIXTIME(cmt.epoch)) &lt; 7        -- 七天之内</span>
-    <span class="token comment">-- AND DATEDIFF(SYSDATE(), FROM_UNIXTIME(cmt.epoch)) >= 7       -- 七天以上</span>
-<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> cmt<span class="token punctuation">.</span>epoch <span class="token keyword">DESC</span><span class="token punctuation">,</span> cmt<span class="token punctuation">.</span>repositoryID <span class="token keyword">DESC</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="问题列表"><a href="#问题列表" class="headerlink" title="问题列表"></a>问题列表</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    cmt.commitIdentifier <span class="keyword">AS</span> `提交ID`,</span><br><span class="line">    DATE_FORMAT(FROM_UNIXTIME(cmt.epoch), <span class="string">&#x27;%Y-%m-%d %H:%i:%s&#x27;</span>) <span class="keyword">AS</span> `提交时间`,</span><br><span class="line">    dat.authorName <span class="keyword">AS</span> `提交者`,</span><br><span class="line">    usr.userName <span class="keyword">AS</span> `审核者`,</span><br><span class="line">    cmt.auditStatus <span class="keyword">AS</span> `状态`,</span><br><span class="line">    path.path,</span><br><span class="line">    <span class="keyword">RIGHT</span>(path.path, INSTR(REVERSE(path.path), <span class="string">&#x27;/&#x27;</span>)<span class="number">-1</span>) <span class="keyword">AS</span> `文件名`,</span><br><span class="line">    <span class="keyword">CASE</span> <span class="keyword">WHEN</span> pl.lineNumber<span class="operator">=</span><span class="number">0</span> <span class="keyword">THEN</span> <span class="keyword">NULL</span> <span class="keyword">ELSE</span> pl.lineNumber <span class="keyword">END</span> <span class="keyword">AS</span> `行号`,</span><br><span class="line">    pl.content <span class="keyword">AS</span> `问题描述`</span><br><span class="line"><span class="keyword">FROM</span> phabricator_repository.repository_commit cmt</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> phabricator_repository.repository_commitdata dat <span class="keyword">ON</span> dat.commitID <span class="operator">=</span> cmt.id</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> phabricator_audit.audit_transaction aud <span class="keyword">ON</span> aud.objectPHID <span class="operator">=</span> cmt.phid <span class="keyword">AND</span> aud.commentPHID <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> phabricator_audit.audit_transaction_comment pl <span class="keyword">ON</span> pl.phid <span class="operator">=</span> aud.commentPHID</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> phabricator_repository.repository_path path <span class="keyword">ON</span> path.id <span class="operator">=</span> pl.pathID</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> phabricator_user.user usr <span class="keyword">ON</span> usr.phid <span class="operator">=</span> pl.authorPHID</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    cmt.repositoryID <span class="operator">=</span> <span class="number">5</span></span><br><span class="line">    <span class="comment">-- 根据需要解除下面的注释</span></span><br><span class="line">    <span class="comment">-- AND auditStatus IN (&#x27;concern-raised&#x27;, &#x27;needs-verification&#x27;)  -- 未关闭</span></span><br><span class="line">    <span class="comment">-- AND auditStatus = &#x27;audited&#x27;                                  -- 已关闭</span></span><br><span class="line">    <span class="comment">-- AND DATEDIFF(SYSDATE(), FROM_UNIXTIME(cmt.epoch)) &lt; 7        -- 七天之内</span></span><br><span class="line">    <span class="comment">-- AND DATEDIFF(SYSDATE(), FROM_UNIXTIME(cmt.epoch)) &gt;= 7       -- 七天以上</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> cmt.epoch <span class="keyword">DESC</span>, cmt.repositoryID <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
 
-<h2 id="按提交人统计未关闭缺陷数量"><a href="#按提交人统计未关闭缺陷数量" class="headerlink" title="按提交人统计未关闭缺陷数量"></a>按提交人统计未关闭缺陷数量</h2><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span>
-    u<span class="token punctuation">.</span>userName<span class="token punctuation">,</span> u<span class="token punctuation">.</span>realName<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">as</span> 未关闭数目
-<span class="token keyword">FROM</span> phabricator_repository<span class="token punctuation">.</span>repository_commit c
-<span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> phabricator_user<span class="token punctuation">.</span><span class="token keyword">user</span> u <span class="token keyword">ON</span> u<span class="token punctuation">.</span>phid<span class="token operator">=</span>c<span class="token punctuation">.</span>authorPHID
-<span class="token keyword">WHERE</span>
-    c<span class="token punctuation">.</span>auditStatus <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'concern-raised'</span><span class="token punctuation">,</span> <span class="token string">'needs-verification'</span><span class="token punctuation">)</span>
-    <span class="token operator">AND</span> c<span class="token punctuation">.</span>repositoryID <span class="token operator">=</span> <span class="token number">5</span>
-<span class="token keyword">GROUP</span> <span class="token keyword">BY</span>
-    u<span class="token punctuation">.</span>userName<span class="token punctuation">,</span> u<span class="token punctuation">.</span>realName
-<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">DESC</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="按提交人统计未关闭缺陷数量"><a href="#按提交人统计未关闭缺陷数量" class="headerlink" title="按提交人统计未关闭缺陷数量"></a>按提交人统计未关闭缺陷数量</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    u.userName, u.realName, <span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">as</span> 未关闭数目</span><br><span class="line"><span class="keyword">FROM</span> phabricator_repository.repository_commit c</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> phabricator_user.user u <span class="keyword">ON</span> u.phid<span class="operator">=</span>c.authorPHID</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">    c.auditStatus <span class="keyword">IN</span> (<span class="string">&#x27;concern-raised&#x27;</span>, <span class="string">&#x27;needs-verification&#x27;</span>)</span><br><span class="line">    <span class="keyword">AND</span> c.repositoryID <span class="operator">=</span> <span class="number">5</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span></span><br><span class="line">    u.userName, u.realName</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
 
 <h1 id="操作规范（仅供参考）"><a href="#操作规范（仅供参考）" class="headerlink" title="操作规范（仅供参考）"></a>操作规范（仅供参考）</h1><ul>
 <li>应当按照实际开发活动一次性把相关文件都提交上，但是开发活动不同的话代码也要分开提交。</li>
@@ -411,7 +364,7 @@
 <li>如有开发活动，每日不定期进行代码审查。</li>
 <li>新员工和经验不足者的代码必须被审查。</li>
 <li>审查如发现问题，需要进行说明，并将其标记在问题代码处。</li>
-<li>问题纠正后由本人在系统中将状态标记为“Request Verification”，通过Git/SVN提交摘要或站内评论的方式将新旧版本号关联，然后由原审查者重审，将新旧版本同时关闭。</li>
+<li>问题纠正后由本人在系统中将状态标记为“Request Verification”，通过Git&#x2F;SVN提交摘要或站内评论的方式将新旧版本号关联，然后由原审查者重审，将新旧版本同时关闭。</li>
 <li>审查发现的问题应当及时（例如限制一周之内）关闭。</li>
 </ul>
 <h1 id="本系列目录"><a href="#本系列目录" class="headerlink" title="本系列目录"></a>本系列目录</h1><ol>
@@ -442,7 +395,7 @@
       <a href="https://plusnan.me/2019/02/06/java-code-review-4/" title="Java代码审查（四）：使用Phabricator进行代码审计">https://plusnan.me/2019/02/06/java-code-review-4/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -456,12 +409,12 @@
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2019/01/29/equals/" rel="prev" title="批量将&#34;&#34;.equals()替换成StringUtils.isEmpty()">
-                  <i class="fa fa-chevron-left"></i> 批量将&#34;&#34;.equals()替换成StringUtils.isEmpty()
+                  <i class="fa fa-angle-left"></i> 批量将&#34;&#34;.equals()替换成StringUtils.isEmpty()
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2019/02/08/login-page/" rel="next" title="并不简单的基础开发工作（一）：登录页面">
-                  并不简单的基础开发工作（一）：登录页面 <i class="fa fa-chevron-right"></i>
+                  并不简单的基础开发工作（一）：登录页面 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -481,15 +434,14 @@
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -497,26 +449,38 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"c1845fb667207e918435a545c503a8b8"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"c1845fb667207e918435a545c503a8b8"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

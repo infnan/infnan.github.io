@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="本文主要介绍IDEA的操作方法。为了避免出现复杂问题，本文假设项目已经事先配置好，而且配置文件加到了版本控制中，其他人只要下载代码就可以直接用IDEA打开。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文主要介绍IDEA的操作方法。为了避免出现复杂问题，本文假设项目已经事先配置好，而且配置文件加到了版本控制中，其他人只要下载代码就可以直接用IDEA打开。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从Eclipse切换到IDEA（一）：切换操作">
 <meta property="og:url" content="https://plusnan.me/2018/12/13/switch-to-idea-1/index.html">
@@ -54,8 +53,12 @@
 <title>从Eclipse切换到IDEA（一）：切换操作 | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -70,8 +73,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -91,7 +94,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -100,11 +103,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -137,15 +136,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -166,17 +159,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -187,47 +180,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -245,11 +226,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="从Eclipse切换到IDEA（一）：切换操作 | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -292,8 +278,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>本文主要介绍IDEA的操作方法。为了避免出现复杂问题，本文假设项目已经事先配置好，而且配置文件加到了版本控制中，其他人只要下载代码就可以直接用IDEA打开。</p>
+    <div class="post-body" itemprop="articleBody"><p>本文主要介绍IDEA的操作方法。为了避免出现复杂问题，本文假设项目已经事先配置好，而且配置文件加到了版本控制中，其他人只要下载代码就可以直接用IDEA打开。</p>
 <span id="more"></span>
 
 <h1 id="初始化配置"><a href="#初始化配置" class="headerlink" title="初始化配置"></a>初始化配置</h1><p>下面只讲Windows的操作方法（尽管截图是macOS）。对于Linux或苹果用户而言，我觉得既然能使用这两种系统，就说明不太需要这种详细教程吧。</p>
@@ -351,7 +336,7 @@
 <td>按两下Shift</td>
 </tr>
 <tr>
-<td>查看变量定义/函数使用情况</td>
+<td>查看变量定义&#x2F;函数使用情况</td>
 <td>Ctrl+点击</td>
 <td>Ctrl+点击</td>
 </tr>
@@ -400,20 +385,7 @@
 <p>相反地，如果需要撤销更改，选择Revert菜单即可。</p>
 <p><img src="/img/2018-12-01-switch-to-idea-1/changelist-2.png" alt="检查待提交文件列表和内容，输入摘要，点击Commit提交。"></p>
 <h4 id="针对新开发者的提醒"><a href="#针对新开发者的提醒" class="headerlink" title="针对新开发者的提醒"></a>针对新开发者的提醒</h4><p>以下内容转载自<span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDA5LzAyLzYuaHRtbA==">编程随想的博客<i class="fa fa-external-link-alt"></i></span>：</p>
-<pre class="line-numbers language-none"><code class="language-none">据俺多年的观察，发觉 RCS（备注：版本管理软件）主要有如下几种误用的情况：
-
-◇不正确的提交频度
-　　有很多新手不习惯使用 RCS，很少进行代码的提交。有些人甚至到项目快结束时还没有提交过一行代码。结果导致整个 RCS 形同虚设。
-　　还有一些人则走向另一个极端，频繁提交代码。有些人每改完一个文件就提交一次，还有些人甚至把修改一半，尚【不能】编译通过的代码也提交到 RCS。
-　　俺个人认为，正确的提交频度应该分两种情况：在编写功能代码时，每完成一个功能点，并且自己经过了自测之后，提交一次；在调试的时候，每修复一个 bug，提交一次。这样能够保证提交到 RCS 的代码都是【能编译通过】的（详见[每日构建系列](https:&#x2F;&#x2F;program-think.blogspot.com&#x2F;2009&#x2F;02&#x2F;daily-build-0-overview.html)），并且业务逻辑上也是相对完整的（对于每日构建后的测试很重要）。
-
-◇提交时不写注释
-　　很多人提交代码时不写注释，将来再想到版本历史里面找代码就犹如大海捞针般困难。
-　　比如在俺经手的代码中，有些源代码文件历时3年，提交次数上百次，如果提交时不写注释，日后根本没法找。
-
-◇不做代码基线（Baseline）、不做代码分支（Branch）
-　　在正规的开发团队，每当有一个版本发布（Release）并交付给用户使用时，都需要在 RCS 中制作一个基线，以便于进行相应的 bug 跟踪和补丁制作。因此，诸如【做基线】之类的事情，属于整个团队的集体行为，需要由 Team Leader 牵头来搞。
-　　假如一个开发团队从来不做代码基线或者代码分支，仅仅是把 RCS 当成一个源文件的备份工具来用，那至少说明这个团队的 Team Leader 在软件工程管理方面非常失败。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">据俺多年的观察，发觉 RCS（备注：版本管理软件）主要有如下几种误用的情况：</span><br><span class="line"></span><br><span class="line">◇不正确的提交频度</span><br><span class="line">　　有很多新手不习惯使用 RCS，很少进行代码的提交。有些人甚至到项目快结束时还没有提交过一行代码。结果导致整个 RCS 形同虚设。</span><br><span class="line">　　还有一些人则走向另一个极端，频繁提交代码。有些人每改完一个文件就提交一次，还有些人甚至把修改一半，尚【不能】编译通过的代码也提交到 RCS。</span><br><span class="line">　　俺个人认为，正确的提交频度应该分两种情况：在编写功能代码时，每完成一个功能点，并且自己经过了自测之后，提交一次；在调试的时候，每修复一个 bug，提交一次。这样能够保证提交到 RCS 的代码都是【能编译通过】的（详见[每日构建系列](https://program-think.blogspot.com/2009/02/daily-build-0-overview.html)），并且业务逻辑上也是相对完整的（对于每日构建后的测试很重要）。</span><br><span class="line"></span><br><span class="line">◇提交时不写注释</span><br><span class="line">　　很多人提交代码时不写注释，将来再想到版本历史里面找代码就犹如大海捞针般困难。</span><br><span class="line">　　比如在俺经手的代码中，有些源代码文件历时3年，提交次数上百次，如果提交时不写注释，日后根本没法找。</span><br><span class="line"></span><br><span class="line">◇不做代码基线（Baseline）、不做代码分支（Branch）</span><br><span class="line">　　在正规的开发团队，每当有一个版本发布（Release）并交付给用户使用时，都需要在 RCS 中制作一个基线，以便于进行相应的 bug 跟踪和补丁制作。因此，诸如【做基线】之类的事情，属于整个团队的集体行为，需要由 Team Leader 牵头来搞。</span><br><span class="line">　　假如一个开发团队从来不做代码基线或者代码分支，仅仅是把 RCS 当成一个源文件的备份工具来用，那至少说明这个团队的 Team Leader 在软件工程管理方面非常失败。</span><br></pre></td></tr></table></figure>
 
 <h3 id="查看文件提交历史"><a href="#查看文件提交历史" class="headerlink" title="查看文件提交历史"></a>查看文件提交历史</h3><p>对着文件点击右键，选择“Subversion”里面的“Show History”，即可在下面的Version Control窗口看到文件的提交历史。对着版本点击右键，选择“Show Diff”，即可看到某个版本是哪个人进行了哪些修改。</p>
 <p>除SVN提交历史外，也可以查看文件的本地编辑历史。假如不慎错误地修改了某些内容，又不方便直接回退文件，可对着文件点右键，找到“Local History”，查看本地的历史记录以便恢复。</p>
@@ -452,7 +424,7 @@ IDEA Ultimate版内置了DataGrip插件。
       <a href="https://plusnan.me/2018/12/13/switch-to-idea-1/" title="从Eclipse切换到IDEA（一）：切换操作">https://plusnan.me/2018/12/13/switch-to-idea-1/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -466,12 +438,12 @@ IDEA Ultimate版内置了DataGrip插件。
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2018/12/12/switch-to-idea-0/" rel="prev" title="从Eclipse切换到IDEA">
-                  <i class="fa fa-chevron-left"></i> 从Eclipse切换到IDEA
+                  <i class="fa fa-angle-left"></i> 从Eclipse切换到IDEA
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2018/12/14/install-windows-on-macbook-pro-2018/" rel="next" title="在2018版MacBook Pro手工安装Windows 10，以及分区扩容">
-                  在2018版MacBook Pro手工安装Windows 10，以及分区扩容 <i class="fa fa-chevron-right"></i>
+                  在2018版MacBook Pro手工安装Windows 10，以及分区扩容 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -491,15 +463,14 @@ IDEA Ultimate版内置了DataGrip插件。
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -507,26 +478,38 @@ IDEA Ultimate版内置了DataGrip插件。
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"ce355a3205e1b7c244db40d237ba452f"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"ce355a3205e1b7c244db40d237ba452f"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

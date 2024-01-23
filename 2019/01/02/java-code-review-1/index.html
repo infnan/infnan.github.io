@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="当然，由于不同项目用的东西大概会很不一样，所以本文仅供参考。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="当然，由于不同项目用的东西大概会很不一样，所以本文仅供参考。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java代码审查（一）：代码审查问题">
 <meta property="og:url" content="https://plusnan.me/2019/01/02/java-code-review-1/index.html">
@@ -46,8 +45,12 @@
 <title>Java代码审查（一）：代码审查问题 | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -62,8 +65,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -83,7 +86,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -92,11 +95,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -129,15 +128,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -158,17 +151,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,47 +172,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -237,11 +218,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java代码审查（一）：代码审查问题 | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -284,19 +270,18 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>当然，由于不同项目用的东西大概会很不一样，所以本文仅供参考。</p>
+    <div class="post-body" itemprop="articleBody"><p>当然，由于不同项目用的东西大概会很不一样，所以本文仅供参考。</p>
 <span id="more"></span>
 
 <h1 id="格式与美观问题"><a href="#格式与美观问题" class="headerlink" title="格式与美观问题"></a>格式与美观问题</h1><ul>
 <li><p>命名不规范：例如类名小写字母开头、函数名大写字母开头、拼音英语混写等。由于关于命名规范的资料很多，这里不再列出。</p>
 </li>
-<li><p>不加空白/空白太多：例如</p>
+<li><p>不加空白&#x2F;空白太多：例如</p>
 <ul>
 <li>没有缩进、缩进混乱、Tab空格混用</li>
 <li>if、while、for或运算符之类的没有空格</li>
 <li>一行代码后面留好几行空白</li>
-<li>不同业务逻辑之间没有空行或“华丽的分割线”<br>以上虽然没有错误，但是不好看。</li>
+<li>不同业务逻辑之间没有空行或“华丽的分割线”<br>  以上虽然没有错误，但是不好看。</li>
 </ul>
 </li>
 <li><p>一行内容太长</p>
@@ -306,481 +291,130 @@
 <li><p>变量、方法顺序混乱</p>
 </li>
 <li><p>表达式太复杂：</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 错误：?:优先级低，导致整个判断条件的逻辑不正确。应该将不同情况用括号包上，分行列举并用注释说明业务规则</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>year <span class="token operator">>=</span> nowYear <span class="token operator">-</span> <span class="token number">5</span> <span class="token operator">&amp;&amp;</span> hasApplied <span class="token operator">||</span> year <span class="token operator">>=</span> nowYear <span class="token operator">-</span> <span class="token number">10</span> <span class="token operator">&amp;&amp;</span> year <span class="token operator">&lt;</span> nowYear <span class="token operator">-</span> <span class="token number">5</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>hasApplied <span class="token operator">||</span> year <span class="token operator">>=</span> hasApplied <span class="token operator">?</span> nowYear <span class="token operator">-</span> <span class="token number">20</span> <span class="token operator">:</span> nowYear <span class="token operator">-</span> <span class="token number">15</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 修改成</span>
-<span class="token keyword">boolean</span> isValidApply <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>year <span class="token operator">>=</span> nowYear <span class="token operator">-</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> hasApplied<span class="token punctuation">)</span> <span class="token operator">||</span>         <span class="token comment">// 业务规则1</span>
-    <span class="token punctuation">(</span><span class="token punctuation">(</span>year <span class="token operator">>=</span> nowYear <span class="token operator">-</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>year <span class="token operator">&lt;</span> nowYear <span class="token operator">-</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>hasApplied<span class="token punctuation">)</span> <span class="token operator">||</span>  <span class="token comment">// 业务规则2</span>
-    <span class="token punctuation">(</span>year <span class="token operator">>=</span> <span class="token punctuation">(</span>hasApplied <span class="token operator">?</span> <span class="token punctuation">(</span>nowYear <span class="token operator">-</span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token punctuation">(</span>nowYear <span class="token operator">-</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// 业务规则3</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>isValidApply<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误：?:优先级低，导致整个判断条件的逻辑不正确。应该将不同情况用括号包上，分行列举并用注释说明业务规则</span></span><br><span class="line"><span class="keyword">if</span> (year &gt;= nowYear - <span class="number">5</span> &amp;&amp; hasApplied || year &gt;= nowYear - <span class="number">10</span> &amp;&amp; year &lt; nowYear - <span class="number">5</span> &amp;&amp; !hasApplied || year &gt;= hasApplied ? nowYear - <span class="number">20</span> : nowYear - <span class="number">15</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改成</span></span><br><span class="line"><span class="type">boolean</span> <span class="variable">isValidApply</span> <span class="operator">=</span> ((year &gt;= nowYear - <span class="number">5</span>) &amp;&amp; hasApplied) ||         <span class="comment">// 业务规则1</span></span><br><span class="line">    ((year &gt;= nowYear - <span class="number">10</span>) &amp;&amp; (year &lt; nowYear - <span class="number">5</span>) &amp;&amp; !hasApplied) ||  <span class="comment">// 业务规则2</span></span><br><span class="line">    (year &gt;= (hasApplied ? (nowYear - <span class="number">20</span>) : (nowYear - <span class="number">15</span>)));           <span class="comment">// 业务规则3</span></span><br><span class="line"><span class="keyword">if</span> (isValidApply) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用魔法值（未定义的常量）：建议改用常数或枚举。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"4"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>vo<span class="token punctuation">.</span><span class="token function">getStatusFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>   <span class="token comment">// 4是什么状态？</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-</li>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">&quot;4&quot;</span>.equals(vo.getStatusFlag())) &#123;   <span class="comment">// 4是什么状态？</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h1><ul>
-<li><p>使用==和!=比较字符串：在Java中==和!=比较的不是字符串内容，应该用equals方法。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 错误</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>str <span class="token operator">!=</span> <span class="token string">""</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 修改之后</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token string">""</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<li><p>使用&#x3D;&#x3D;和!&#x3D;比较字符串：在Java中&#x3D;&#x3D;和!&#x3D;比较的不是字符串内容，应该用equals方法。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误</span></span><br><span class="line"><span class="keyword">if</span> (str != <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改之后</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="string">&quot;&quot;</span>.equals(str)) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>空指针风险：字符串对象和常量比较时，应当把常量放前面，例如</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 错误</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 正确：str为null时返回false，不会报错，也不需要另外去判断</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误</span></span><br><span class="line"><span class="keyword">if</span> (str.equals(<span class="string">&quot;A&quot;</span>)) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确：str为null时返回false，不会报错，也不需要另外去判断</span></span><br><span class="line"><span class="keyword">if</span> (<span class="string">&quot;A&quot;</span>.equals(str)) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>接上条：判断是否为空串时，未判断是否为null。建议改用StringUtils.isEmpty或StringUtils.isNotEmpty。  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 应该是 str != null &amp;&amp; !"".equals(str)</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token string">""</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
+<li>接上条：判断是否为空串时，未判断是否为null。建议改用StringUtils.isEmpty或StringUtils.isNotEmpty。  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 应该是 str != null &amp;&amp; !&quot;&quot;.equals(str)</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="string">&quot;&quot;</span>.equals(str)) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p>使用equals比较StringBuffer、StringBuilder或Date的值：如果equals前后一个是String，另一个是StringBuffer等对象，那么返回结果一定是false：</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">StringBuilder</span> sql <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
-<span class="token class-name">Date</span> date <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token comment">// 错误：前后类型不一致，结果肯定是false</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>sql<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"2019-01-01"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 修改之后</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>sql<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span> <span class="token comment">// 或者 if (sql.length() == 0) &#123; ... &#125;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"2019-01-01"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">"YYYY-MM-DD"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
-<span class="token comment">// 或者 if ("2019-01-01".equals(DateFormatUtils.ISO_DATE_FORMAT.format(date))) &#123; ... &#125; </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">sql</span> <span class="operator">=</span> ...;</span><br><span class="line"><span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> ...;</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 错误：前后类型不一致，结果肯定是false</span></span><br><span class="line"><span class="keyword">if</span> (<span class="string">&quot;&quot;</span>.equals(sql)) &#123; ... &#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="string">&quot;2019-01-01&quot;</span>.equals(date)) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改之后</span></span><br><span class="line"><span class="keyword">if</span> (<span class="string">&quot;&quot;</span>.equals(sql.toString())) &#123; ... &#125; <span class="comment">// 或者 if (sql.length() == 0) &#123; ... &#125;</span></span><br><span class="line"><span class="keyword">if</span> (<span class="string">&quot;2019-01-01&quot;</span>.equals(<span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;YYYY-MM-DD&quot;</span>).format(date))) &#123; ... &#125;</span><br><span class="line"><span class="comment">// 或者 if (&quot;2019-01-01&quot;.equals(DateFormatUtils.ISO_DATE_FORMAT.format(date))) &#123; ... &#125; </span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>在for、while循环里面用+=拼接字符串：使用+=拼接字符串的效率比较低，运行数百次就会和StringBuilder产生明显差别，应该用StringBuilder或StringBuffer（如果多线程的话）拼接字符串。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 错误</span>
-<span class="token class-name">String</span> output <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    output <span class="token operator">+=</span> id <span class="token operator">+</span> <span class="token string">": "</span> <span class="token operator">+</span> line <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>      <span class="token comment">// 直接拼接字符串效率较低</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 修改之后</span>
-<span class="token class-name">StringBuilder</span> output <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    output<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">": "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<li><p>在for、while循环里面用+&#x3D;拼接字符串：使用+&#x3D;拼接字符串的效率比较低，运行数百次就会和StringBuilder产生明显差别，应该用StringBuilder或StringBuffer（如果多线程的话）拼接字符串。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误</span></span><br><span class="line"><span class="type">String</span> <span class="variable">output</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">for</span> (...) &#123;</span><br><span class="line">    ...</span><br><span class="line">    output += id + <span class="string">&quot;: &quot;</span> + line + <span class="string">&quot;\n&quot;</span>;      <span class="comment">// 直接拼接字符串效率较低</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改之后</span></span><br><span class="line"><span class="type">StringBuilder</span> <span class="variable">output</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line"><span class="keyword">for</span> (...) &#123;</span><br><span class="line">    ...</span><br><span class="line">    output.append(id).append(<span class="string">&quot;: &quot;</span>).append(line).append(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>split之后用固定下标取值：</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token class-name">String</span> val <span class="token operator">=</span> arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>    <span class="token comment">// 错误：如果str中分隔符后面没有内容（例如a,,b,c,,），val的位置将不是3</span>
-
-<span class="token comment">// 可以修改成</span>
-<span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// 或者不再依赖位置</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String[] arr = str.split(<span class="string">&quot;,&quot;</span>);</span><br><span class="line"><span class="type">String</span> <span class="variable">val</span> <span class="operator">=</span> arr[<span class="number">3</span>];    <span class="comment">// 错误：如果str中分隔符后面没有内容（例如a,,b,c,,），val的位置将不是3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以修改成</span></span><br><span class="line">String[] arr = str.split(<span class="string">&quot;,&quot;</span>, -<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 或者不再依赖位置</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>split时未注意分隔符前后有空格：例如原始数据是<code>1, 2,3 , 4</code>。建议取值之后trim。</p>
 </li>
 <li><p>使用split、trim之前未判断是否为null：常见于从数据库获取值之后立即操作。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> remark <span class="token operator">=</span> rs<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">"REMARK"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// 错误：未判断REMARK是否为null</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-</li>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">remark</span> <span class="operator">=</span> rs.getString(<span class="string">&quot;REMARK&quot;</span>).trim();      <span class="comment">// 错误：未判断REMARK是否为null</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="对象访问"><a href="#对象访问" class="headerlink" title="对象访问"></a>对象访问</h1><ul>
 <li><p>在循环里面初始化对象：</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">ApplyFormPO</span> applyForm<span class="token operator">:</span> applyList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">Date</span> now <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// 浪费资源</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    applyForm<span class="token punctuation">.</span><span class="token function">setOperating_time</span><span class="token punctuation">(</span>now<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 修改成</span>
-<span class="token class-name">Date</span> now <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">ApplyFormPO</span> applyForm<span class="token operator">:</span> applyList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    applyForm<span class="token punctuation">.</span><span class="token function">setOperating_time</span><span class="token punctuation">(</span>now<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (ApplyFormPO applyForm: applyList) &#123;</span><br><span class="line">    <span class="type">Date</span> <span class="variable">now</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();      <span class="comment">// 浪费资源</span></span><br><span class="line">    ...</span><br><span class="line">    applyForm.setOperating_time(now);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改成</span></span><br><span class="line"><span class="type">Date</span> <span class="variable">now</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="keyword">for</span> (ApplyFormPO applyForm: applyList) &#123;</span><br><span class="line">    ...</span><br><span class="line">    applyForm.setOperating_time(now);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  需要注意的是，并不是所有在循环里初始化对象的代码都有问题，例如下面代码就不能向上面那样改：</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">ApplyFormPO</span><span class="token punctuation">></span></span> applyList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">ApplyFormPO</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">ApplyFormPO</span> applyForm <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ApplyFormPO</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// 这个不能放到for外面，因List里面保存的是对象引用</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    applyList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>applyForm<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;ApplyFormPO&gt; applyList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;ApplyFormPO&gt;();</span><br><span class="line"><span class="keyword">for</span> (...) &#123;</span><br><span class="line">    <span class="type">ApplyFormPO</span> <span class="variable">applyForm</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ApplyFormPO</span>();      <span class="comment">// 这个不能放到for外面，因List里面保存的是对象引用</span></span><br><span class="line">    ...</span><br><span class="line">    applyList.add(applyForm);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>空指针：在DAO、List、Map等地方取值时未判断是否为null，例如</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 错误：未判断list的元素个数</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token string">""</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>list<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getStatus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 错误：未判断中间变量A和B是否为null</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">getA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getB</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">isC</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误：未判断list的元素个数</span></span><br><span class="line"><span class="keyword">if</span> (!<span class="string">&quot;&quot;</span>.equals(list.get(<span class="number">0</span>).getStatus()) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误：未判断中间变量A和B是否为null</span></span><br><span class="line"><span class="keyword">if</span> (obj.getA().getB().isC()) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>包装类比较==或!=：</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span> i1 <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
-<span class="token class-name">Integer</span> i2 <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
-<span class="token comment">// 错误：下面比较的不是i1和i2的值</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>i1 <span class="token operator">==</span> i2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<li><p>包装类比较&#x3D;&#x3D;或!&#x3D;：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Integer</span> <span class="variable">i1</span> <span class="operator">=</span> ...;</span><br><span class="line"><span class="type">Integer</span> <span class="variable">i2</span> <span class="operator">=</span> ...;</span><br><span class="line"><span class="comment">// 错误：下面比较的不是i1和i2的值</span></span><br><span class="line"><span class="keyword">if</span> (i1 == i2) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>顺便提一下，float、double即使不是包装类也不能用==或!=比较，因为存在精度问题。</li>
+<li>顺便提一下，float、double即使不是包装类也不能用&#x3D;&#x3D;或!&#x3D;比较，因为存在精度问题。</li>
 </ul>
 </li>
 <li><p>在for循环里添加或删除集合中的元素：</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Item</span> obj<span class="token operator">:</span> itemList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"d"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        itemList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// 错误：会破坏for循环</span>
-        <span class="token keyword">continue</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 修改方法：使用Iterator操作删除，或者再创建一个List，将删除操作反映到新List中</span>
-<span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Item</span><span class="token punctuation">></span></span> newItemList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Item</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Item</span> obj<span class="token operator">:</span> itemList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token string">"d"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span><span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        newItemList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Item</span> obj<span class="token operator">:</span> newItemList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// 后续操作使用newItemList，或者以 itemList = newItemList; 替换</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Item obj: itemList) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;d&quot;</span>.equals(obj.getFlag()) &#123;</span><br><span class="line">        itemList.remove(obj);       <span class="comment">// 错误：会破坏for循环</span></span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改方法：使用Iterator操作删除，或者再创建一个List，将删除操作反映到新List中</span></span><br><span class="line">List&lt;Item&gt; newItemList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Item&gt;();</span><br><span class="line"><span class="keyword">for</span> (Item obj: itemList) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="string">&quot;d&quot;</span>.equals(obj.getFlag()) &#123;</span><br><span class="line">        newItemList.add(obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (Item obj: newItemList) &#123; <span class="comment">// 后续操作使用newItemList，或者以 itemList = newItemList; 替换</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>static SimpleDateFormat：SimpleDateFormat不是线程安全的，其实例不应定义成静态变量。建议不再使用SimpleDateFormat，而是改用DateFormatUtils。</p>
 </li>
 <li><p>工具类未使用static定义，或者static方法仍然在new对象之后调用：</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StringUtils</span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">// 错误：应改成static</span>
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isEmpty</span><span class="token punctuation">(</span><span class="token class-name">String</span> str<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token punctuation">(</span>str <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span>str<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token class-name">StringUtils</span> su <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringUtils</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// 改成static之后无需再实例化，以免浪费资源</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>su<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-</li>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StringUtils</span> &#123;</span><br><span class="line">    <span class="comment">// 错误：应改成static</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">(String str)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (str == <span class="literal">null</span>) || (str.length() == <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"><span class="type">StringUtils</span> <span class="variable">su</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringUtils</span>();     <span class="comment">// 改成static之后无需再实例化，以免浪费资源</span></span><br><span class="line"><span class="keyword">if</span> (su.isEmpty(str)) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><ul>
 <li><p>将异常用作流程控制：该用if-else进行判断的地方不要用try-catch，因为效率低以及语义不同。</p>
 </li>
 <li><p>在for或while中try-catch：同样消耗资源，建议将try块挪到循环外面。</p>
 </li>
-<li><p>捕获/抛出NullPointerException或IndexOutOfBoundsException等异常：空指针、索引越界等问题应当使用if判断来避免，而且此类问题有可能是业务层面问题，不应靠异常机制处理。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> result<span class="token punctuation">;</span>
-<span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>poList<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        result <span class="token operator">=</span> <span class="token string">"Y"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        result <span class="token operator">=</span> <span class="token string">"N"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NullPointerException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>          <span class="token comment">// 错误：应当避免使程序产生此类异常</span>
-    result <span class="token operator">=</span> <span class="token string">"E"</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IndexOutOfBoundsException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>     <span class="token comment">// 错误：应当避免使程序产生此类异常</span>
-    result <span class="token operator">=</span> <span class="token string">"E"</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 修改成</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span>poList <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> poList<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    result <span class="token operator">=</span> <span class="token string">"E"</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>poList<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        result <span class="token operator">=</span> <span class="token string">"Y"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        result <span class="token operator">=</span> <span class="token string">"N"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<li><p>捕获&#x2F;抛出NullPointerException或IndexOutOfBoundsException等异常：空指针、索引越界等问题应当使用if判断来避免，而且此类问题有可能是业务层面问题，不应靠异常机制处理。</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">String result;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;A&quot;</span>.equals(poList.get(<span class="number">0</span>).getFlag())) &#123;</span><br><span class="line">        result = <span class="string">&quot;Y&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        result = <span class="string">&quot;N&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (NullPointerException e) &#123;          <span class="comment">// 错误：应当避免使程序产生此类异常</span></span><br><span class="line">    result = <span class="string">&quot;E&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">catch</span> (IndexOutOfBoundsException e) &#123;     <span class="comment">// 错误：应当避免使程序产生此类异常</span></span><br><span class="line">    result = <span class="string">&quot;E&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改成</span></span><br><span class="line"><span class="keyword">if</span> (poList == <span class="literal">null</span> || poList.size() == <span class="number">0</span>) &#123;</span><br><span class="line">    result = <span class="string">&quot;E&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;A&quot;</span>.equals(poList.get(<span class="number">0</span>).getFlag())) &#123;</span><br><span class="line">        result = <span class="string">&quot;Y&quot;</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        result = <span class="string">&quot;N&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>打印日志：</p>
 <ul>
 <li>发生异常却未向用户反馈，仍然提示“成功”：实际上已经出错了，应当提示出来。如果确定对用户没有影响，可以忽略，那么应当在注释中明确指出来。</li>
-<li>报错信息缺少用户能看懂的语言：应当先提示用户能看得懂的内容，给出大概的错误原因和处理方法。  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token string">"保存成功！"</span><span class="token punctuation">,</span> <span class="token class-name">MessageLevel</span><span class="token punctuation">.</span>SUCCESS<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">setMessage</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token class-name">MessageLevel</span><span class="token punctuation">.</span>ERROR<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 错误：用户看不懂Exception的内容</span>
-    logger<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"保存过程中发生内部错误"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>日志级别与实际情况不一致：例如用error输出调试内容、用debug输出错误信息。  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token string">"保存成功！"</span><span class="token punctuation">,</span> <span class="token class-name">MessageLevel</span><span class="token punctuation">.</span>SUCCESS<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token string">"保存过程中发生内部错误："</span> <span class="token operator">+</span> e<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"！"</span><span class="token punctuation">,</span> <span class="token class-name">MessageLevel</span><span class="token punctuation">.</span>ERROR<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    logger<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"保存过程中发生内部错误"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// 错误：应该是error</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-  如果系统在上线一段时间之后已经比较稳定，建议提高日志级别，以节约服务器空间和I/O资源消耗。</li>
-<li>屏幕提示和日志记录不一致：  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token string">"保存成功！"</span><span class="token punctuation">,</span> <span class="token class-name">MessageLevel</span><span class="token punctuation">.</span>SUCCESS<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token string">"保存过程中发生内部错误："</span> <span class="token operator">+</span> e<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"！"</span><span class="token punctuation">,</span> <span class="token class-name">MessageLevel</span><span class="token punctuation">.</span>ERROR<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    logger<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"查询工作单信息出错"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// 错误：与屏幕提示不一致，找日志时会产生困扰</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
+<li>报错信息缺少用户能看懂的语言：应当先提示用户能看得懂的内容，给出大概的错误原因和处理方法。  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    setMessage(<span class="string">&quot;保存成功！&quot;</span>, MessageLevel.SUCCESS);</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    setMessage(e.getMessage(), MessageLevel.ERROR); <span class="comment">// 错误：用户看不懂Exception的内容</span></span><br><span class="line">    logger.debug(<span class="string">&quot;保存过程中发生内部错误&quot;</span>, e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>日志级别与实际情况不一致：例如用error输出调试内容、用debug输出错误信息。  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    setMessage(<span class="string">&quot;保存成功！&quot;</span>, MessageLevel.SUCCESS);</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    setMessage(<span class="string">&quot;保存过程中发生内部错误：&quot;</span> + e.getMessage() + <span class="string">&quot;！&quot;</span>, MessageLevel.ERROR);</span><br><span class="line">    logger.debug(<span class="string">&quot;保存过程中发生内部错误&quot;</span>, e);      <span class="comment">// 错误：应该是error</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  如果系统在上线一段时间之后已经比较稳定，建议提高日志级别，以节约服务器空间和I&#x2F;O资源消耗。</li>
+<li>屏幕提示和日志记录不一致：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    setMessage(<span class="string">&quot;保存成功！&quot;</span>, MessageLevel.SUCCESS);</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    setMessage(<span class="string">&quot;保存过程中发生内部错误：&quot;</span> + e.getMessage() + <span class="string">&quot;！&quot;</span>, MessageLevel.ERROR);</span><br><span class="line">    logger.error(<span class="string">&quot;查询工作单信息出错&quot;</span>, e);      <span class="comment">// 错误：与屏幕提示不一致，找日志时会产生困扰</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p>捕获异常但未做任何处理：一旦出现异常，开发人员将无法进行诊断。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        <span class="token comment">// 应向用户反馈（最外层）或向上抛（不是最外层的话）</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">    e.printStackTrace();        <span class="comment">// 应向用户反馈（最外层）或向上抛（不是最外层的话）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重复捕获异常：在业务层捕获异常，使得业务调用者无法得知异常，也无法向用户提供反馈。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 业务逻辑</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BusinessBO</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 业务逻辑</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BusinessBO</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ApplyPO <span class="title function_">getApplyInfo</span><span class="params">(String applyId)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ...     <span class="comment">// 业务逻辑</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            logger.error(<span class="string">&quot;查询时发生异常&quot;</span>, e);</span><br><span class="line">            <span class="comment">// 错误：业务层的异常未往上抛，这样即使发生异常用户也无法收到反馈</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">ApplyPO</span> <span class="token function">getApplyInfo</span><span class="token punctuation">(</span><span class="token class-name">String</span> applyId<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-            <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>     <span class="token comment">// 业务逻辑</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            logger<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"查询时发生异常"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">// 错误：业务层的异常未往上抛，这样即使发生异常用户也无法收到反馈</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 业务调用者</span>
-<span class="token annotation punctuation">@Controller</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BusinessController</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-
-    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/apply/&#123;id&#125;"</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getApplyInfo</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-            <span class="token class-name">ApplyPO</span> applypo <span class="token operator">=</span> <span class="token class-name">BusinessBO</span><span class="token punctuation">.</span><span class="token function">getApplyInfo</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">// 虽然使用Exception不会产生编译错误，但是这里根本捕捉不到异常</span>
-            <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 业务调用者</span></span><br><span class="line"><span class="meta">@Controller()</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BusinessController</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/apply/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getApplyInfo</span><span class="params">(...)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">ApplyPO</span> <span class="variable">applypo</span> <span class="operator">=</span> BusinessBO.getApplyInfo(id);</span><br><span class="line">            ...</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// 虽然使用Exception不会产生编译错误，但是这里根本捕捉不到异常</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在Web请求层（SpringMVC的Controller、Struts的Action）或WebService服务上面抛出异常：服务调用者无法捕获服务抛出的异常，顶多能够得知服务返回了500状态码（然而这样是不对的）。应该由双方约定错误信息格式，将抛出异常改成返回错误码。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@WebService</span><span class="token punctuation">(</span>endpointInterface <span class="token operator">=</span> <span class="token string">"com.company.BusinessService"</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BusinessService</span> <span class="token keyword">implements</span> <span class="token class-name">IBusinessService</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-
-    <span class="token comment">// 错误示例 - Service不能抛出异常</span>
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">doJob</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">SQLException</span> <span class="token punctuation">&#123;</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">// 正确示例 - 返回错误码，使调用者得知接口通了，但是结果异常</span>
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">doJob</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">String</span> result <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-            <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-            result <span class="token operator">=</span> <span class="token string">"&#123;\"result\": \"SUCCESS\", \"info\": \"操作成功\"&#125;"</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-            result <span class="token operator">=</span> <span class="token string">"&#123;\"result\": \"E01\", \"info\": \"操作失败，数据库异常\"&#125;"</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-</li>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebService(endpointInterface = &quot;com.company.BusinessService&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BusinessService</span> <span class="keyword">implements</span> <span class="title class_">IBusinessService</span> &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 错误示例 - Service不能抛出异常</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">doJob</span><span class="params">()</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 正确示例 - 返回错误码，使调用者得知接口通了，但是结果异常</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">doJob</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ...</span><br><span class="line">            result = <span class="string">&quot;&#123;\&quot;result\&quot;: \&quot;SUCCESS\&quot;, \&quot;info\&quot;: \&quot;操作成功\&quot;&#125;&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            ...</span><br><span class="line">            result = <span class="string">&quot;&#123;\&quot;result\&quot;: \&quot;E01\&quot;, \&quot;info\&quot;: \&quot;操作失败，数据库异常\&quot;&#125;&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h1><ul>
 <li><p>未关闭资源：未关闭ResultSet、PrepareStatement、Connection或者各种（不一定是数据库的）流。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Connection</span> conn <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
-<span class="token class-name">PreparedStatement</span> stmt <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-<span class="token class-name">ResultSet</span> rs <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-<span class="token comment">// 错误：未关闭资源</span>
-<span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-    stmt <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">prepareStatement</span><span class="token punctuation">(</span><span class="token string">"..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    rs <span class="token operator">=</span> stmt<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">while</span> <span class="token punctuation">(</span>rs<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 应在finally中释放资源</span>
-<span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-    stmt <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>rs <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> rs<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>stmt <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> stmt<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>conn <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> conn<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> ...;</span><br><span class="line"><span class="type">PreparedStatement</span> <span class="variable">stmt</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="type">ResultSet</span> <span class="variable">rs</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"><span class="comment">// 错误：未关闭资源</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    stmt = conn.prepareStatement(<span class="string">&quot;...&quot;</span>);</span><br><span class="line">    rs = stmt.executeQuery();</span><br><span class="line">    <span class="keyword">while</span> (rs.next()) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 应在finally中释放资源</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    stmt = ...</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (rs != <span class="literal">null</span>) &#123; rs.close(); &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (stmt != <span class="literal">null</span>) &#123; stmt.close(); &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (conn != <span class="literal">null</span>) &#123; conn.close(); &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在循环中操作数据库：建立连接、执行SQL和关闭连接需要时间，虽然一次执行时间可能不长，但是在循环中累积会很耗时。因此应当减少数据库操作次数，一次性查询好，或者使用批处理一次性执行修改。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> id<span class="token operator">:</span> idList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">// 从数据库获取对象</span>
-    <span class="token class-name">ItemPO</span> item <span class="token operator">=</span> <span class="token function">getItem</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 错误：在for循环中操作数据库</span>
-    <span class="token comment">// 进行修改</span>
-    item<span class="token punctuation">.</span><span class="token function">setColA</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    item<span class="token punctuation">.</span><span class="token function">setColB</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// 将修改保存到数据库中</span>
-    <span class="token function">updateItem</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// 错误：在for循环中操作数据库</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 修改成（假定itemList还有其他用途，要不然直接UPDATE就行了）</span>
-<span class="token comment">// 一次性将idList里的数据都取出来</span>
-<span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">ItemPO</span><span class="token punctuation">></span></span> itemList <span class="token operator">=</span> <span class="token function">getItemList</span><span class="token punctuation">(</span>idList<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">// 将itemList装到Map中以便查询</span>
-<span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">ItemPO</span><span class="token punctuation">></span></span> itemMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">ItemPO</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">ItemPO</span> item<span class="token operator">:</span> itemList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    itemMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token class-name">PreparedStatement</span> stmt <span class="token operator">=</span> connection<span class="token punctuation">.</span><span class="token function">prepareStatement</span><span class="token punctuation">(</span><span class="token string">"UPDATE BUSINESS SET AAA=?, BBB=? WHERE ID=?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> id<span class="token operator">:</span> idList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">// 从Map获取对象</span>
-    <span class="token class-name">ItemPO</span> item <span class="token operator">=</span> itemMap<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// 进行修改</span>
-    stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> item<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// 加入批处理</span>
-    stmt<span class="token punctuation">.</span><span class="token function">addBatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">// 执行批处理</span>
-stmt<span class="token punctuation">.</span><span class="token function">executeBatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (String id: idList) &#123;</span><br><span class="line">    <span class="comment">// 从数据库获取对象</span></span><br><span class="line">    <span class="type">ItemPO</span> <span class="variable">item</span> <span class="operator">=</span> getItem(id);   <span class="comment">// 错误：在for循环中操作数据库</span></span><br><span class="line">    <span class="comment">// 进行修改</span></span><br><span class="line">    item.setColA(...);</span><br><span class="line">    item.setColB(...);</span><br><span class="line">    <span class="comment">// 将修改保存到数据库中</span></span><br><span class="line">    updateItem(item);     <span class="comment">// 错误：在for循环中操作数据库</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改成（假定itemList还有其他用途，要不然直接UPDATE就行了）</span></span><br><span class="line"><span class="comment">// 一次性将idList里的数据都取出来</span></span><br><span class="line">List&lt;ItemPO&gt; itemList = getItemList(idList);</span><br><span class="line"><span class="comment">// 将itemList装到Map中以便查询</span></span><br><span class="line">Map&lt;String, ItemPO&gt; itemMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;String, ItemPO&gt;();</span><br><span class="line"><span class="keyword">for</span> (ItemPO item: itemList) &#123;</span><br><span class="line">    itemMap.put(item.getId(), item);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">PreparedStatement</span> <span class="variable">stmt</span> <span class="operator">=</span> connection.prepareStatement(<span class="string">&quot;UPDATE BUSINESS SET AAA=?, BBB=? WHERE ID=?&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (String id: idList) &#123;</span><br><span class="line">    <span class="comment">// 从Map获取对象</span></span><br><span class="line">    <span class="type">ItemPO</span> <span class="variable">item</span> <span class="operator">=</span> itemMap.get(id);</span><br><span class="line">    <span class="comment">// 进行修改</span></span><br><span class="line">    stmt.setString(<span class="number">1</span>, ...);</span><br><span class="line">    stmt.setString(<span class="number">2</span>, ...);</span><br><span class="line">    stmt.setString(<span class="number">3</span>, item.getId());</span><br><span class="line">    <span class="comment">// 加入批处理</span></span><br><span class="line">    stmt.addBatch();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 执行批处理</span></span><br><span class="line">stmt.executeBatch();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>getString之后未判断是否为null，或者从DAO取值后未判断是否为null：从可空字段取值之后，返回的可能是null。</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> remark <span class="token operator">=</span> rs<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span><span class="token string">"REMARK"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// 错误：未判断是否为null</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">remark</span> <span class="operator">=</span> rs.getString(<span class="string">&quot;REMARK&quot;</span>).trim();      <span class="comment">// 错误：未判断是否为null</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>事务</p>
 <ul>
 <li>该有事务的地方没加事务：对于一系列数据库修改操作而言，如果这些操作应当“共进退”，即要么全部执行完，要么出错之后能够全部恢复，那么应当加入事务控制。</li>
-<li>发生异常时未回滚事务：  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-    conn<span class="token punctuation">.</span><span class="token function">setAutoCommit</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    conn<span class="token punctuation">.</span><span class="token function">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">// 错误：此处应有conn.rollback();</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>重复提交/回滚事务：已经commit/rollback之后又执行了commit/rollback。如果在开启事务之后调用了一些函数，但是未注意到函数里面也有事务控制，那么结果可能会出错。</li>
+<li>发生异常时未回滚事务：  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    conn.setAutoCommit(<span class="literal">false</span>);</span><br><span class="line">    ...</span><br><span class="line">    conn.commit();</span><br><span class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">    <span class="comment">// 错误：此处应有conn.rollback();</span></span><br><span class="line">    ...</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>重复提交&#x2F;回滚事务：已经commit&#x2F;rollback之后又执行了commit&#x2F;rollback。如果在开启事务之后调用了一些函数，但是未注意到函数里面也有事务控制，那么结果可能会出错。</li>
 </ul>
 </li>
 <li><p>该加锁的地方没加锁：例如从流水号表取下一流水号</p>
-  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">getNextSerial</span><span class="token punctuation">(</span><span class="token class-name">String</span> businessType<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">SQLException</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-        stmt <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">prepareStatement</span><span class="token punctuation">(</span><span class="token string">"SELECT NEXT_NO FROM T_SERIAL WHERE ..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        stmt<span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        rs <span class="token operator">=</span> stmt<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>rs<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">int</span> next_no <span class="token operator">=</span> rs<span class="token punctuation">.</span><span class="token function">getInt</span><span class="token punctuation">(</span><span class="token string">"NEXT_NO"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            result <span class="token operator">=</span> businessType <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> next_no<span class="token punctuation">;</span>
-            <span class="token comment">// 将流水号表中的记录加1</span>
-            <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">// 将初始值置为1，并向流水号表插入记录</span>
-            <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>     
-        <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SQLException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title function_">getNextSerial</span><span class="params">(String businessType)</span> <span class="keyword">throws</span> SQLException &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        stmt = conn.prepareStatement(<span class="string">&quot;SELECT NEXT_NO FROM T_SERIAL WHERE ...&quot;</span>);</span><br><span class="line">        stmt.setString(<span class="number">1</span>, ...);</span><br><span class="line">        rs = stmt.executeQuery();</span><br><span class="line">        <span class="keyword">if</span> (rs.next()) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">next_no</span> <span class="operator">=</span> rs.getInt(<span class="string">&quot;NEXT_NO&quot;</span>);</span><br><span class="line">            result = businessType + <span class="string">&quot;-&quot;</span> + next_no;</span><br><span class="line">            <span class="comment">// 将流水号表中的记录加1</span></span><br><span class="line">            ...</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 将初始值置为1，并向流水号表插入记录</span></span><br><span class="line">            ...     </span><br><span class="line">        &#125;</span><br><span class="line">        ...</span><br><span class="line">    &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>  假如NEXT_NO为5，那么在并发条件下各用户获取到的可能都是5，从而产生冲突，因此需要通过加锁进行控制（例如synchronized）。另外注意这种代码在读取数据时就发生了冲突，所以光加事务控制是不起作用的。</p>
 </li>
 </ul>
 <h1 id="SQL语句"><a href="#SQL语句" class="headerlink" title="SQL语句"></a>SQL语句</h1><ul>
-<li>SQL语法错误：例如引号不配对、括号不配对、数据类型不匹配，或者拼接的SQL缺空格、有多余AND和多余逗号等。  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">StringBuilder</span> sql <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token string">"SELECT ID,NAME FROM TAB WHERE"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span>cond1<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">// 两个错误：一个是缺空格，另一个是在WHERE后面直接拼接AND了</span>
-    sql<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"AND cond1='"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token function">escapeSQL</span><span class="token punctuation">(</span>cond1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"'"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span>cond2<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    sql<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">" AND cond2 IN ("</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> cond2<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token operator">:</span> arr<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        sql<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"'"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token function">escapeSQL</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"',"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token comment">// 错误：未处理最后一个多余的逗号</span>
-    sql<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">")"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>SQL语法错误：例如引号不配对、括号不配对、数据类型不匹配，或者拼接的SQL缺空格、有多余AND和多余逗号等。  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">StringBuilder</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;SELECT ID,NAME FROM TAB WHERE&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond1)) &#123;</span><br><span class="line">    <span class="comment">// 两个错误：一个是缺空格，另一个是在WHERE后面直接拼接AND了</span></span><br><span class="line">    sql.append(<span class="string">&quot;AND cond1=&#x27;&quot;</span>).append(escapeSQL(cond1)).append(<span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond2)) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; AND cond2 IN (&quot;</span>);</span><br><span class="line">    String[] arr = cond2.split(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (String s: arr) &#123;</span><br><span class="line">        sql.append(<span class="string">&quot;&#x27;&quot;</span>).append(escapeSQL(s)).append(<span class="string">&quot;&#x27;,&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 错误：未处理最后一个多余的逗号</span></span><br><span class="line">    sql.append(<span class="string">&quot;)&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>使用SELECT *：应当写清字段名而非简单粗暴的*。</li>
 <li>直接拼接SQL：未对用户输入进行处理，会导致SQL注入，应该用PreparedStatement或者使用转义函数对用户输入内容转义。<ul>
 <li>接上条，要避免重复转义。</li>
 </ul>
 </li>
-<li>对可空字段使用&lt;&gt;或NOT IN：应注意单独判断NULL值。  <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 假设FLAG是可空字段，那么以下都是有问题的</span>
-<span class="token keyword">SELECT</span> ID<span class="token punctuation">,</span> NAME <span class="token keyword">FROM</span> TAB <span class="token keyword">WHERE</span> FLAG<span class="token operator">&lt;></span><span class="token string">'1'</span><span class="token punctuation">;</span>
-<span class="token keyword">SELECT</span> ID<span class="token punctuation">,</span> NAME <span class="token keyword">FROM</span> TAB <span class="token keyword">WHERE</span> FLAG <span class="token operator">NOT</span> <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token string">'2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">-- 应修改成（下面只考虑NULL问题，不考虑效率问题）</span>
-<span class="token keyword">SELECT</span> ID<span class="token punctuation">,</span> NAME <span class="token keyword">FROM</span> TAB <span class="token keyword">WHERE</span> FLAG<span class="token operator">&lt;></span><span class="token string">'1'</span> <span class="token operator">OR</span> FLAG <span class="token operator">IS</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
-<span class="token keyword">SELECT</span> ID<span class="token punctuation">,</span> NAME <span class="token keyword">FROM</span> TAB <span class="token keyword">WHERE</span> FLAG <span class="token operator">NOT</span> <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token string">'2'</span><span class="token punctuation">)</span> <span class="token operator">OR</span> FLAG <span class="token operator">IS</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>子查询返回多条记录：  <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> ID<span class="token punctuation">,</span> NAME <span class="token keyword">FROM</span> TAB <span class="token keyword">WHERE</span> BUSINO<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">SELECT</span> BUSINO <span class="token keyword">FROM</span> APPL <span class="token keyword">WHERE</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">-- 如果查询APPL会返回多条记录，那么会出错，因此需要调整子查询条件，保证至多返回一条记录，例如（Oracle）</span>
-<span class="token keyword">SELECT</span> ID<span class="token punctuation">,</span> NAME <span class="token keyword">FROM</span> TAB <span class="token keyword">WHERE</span> BUSINO<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">SELECT</span> BUSINO <span class="token keyword">FROM</span> APPL <span class="token keyword">WHERE</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token operator">AND</span> ROWNUM<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li>用==或&lt;&gt;判断NULL：应使用IS NULL或IS NOT NULL进行判断。</li>
+<li>对可空字段使用&lt;&gt;或NOT IN：应注意单独判断NULL值。  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 假设FLAG是可空字段，那么以下都是有问题的</span></span><br><span class="line"><span class="keyword">SELECT</span> ID, NAME <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG<span class="operator">&lt;&gt;</span><span class="string">&#x27;1&#x27;</span>;</span><br><span class="line"><span class="keyword">SELECT</span> ID, NAME <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>);</span><br><span class="line"><span class="comment">-- 应修改成（下面只考虑NULL问题，不考虑效率问题）</span></span><br><span class="line"><span class="keyword">SELECT</span> ID, NAME <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG<span class="operator">&lt;&gt;</span><span class="string">&#x27;1&#x27;</span> <span class="keyword">OR</span> FLAG <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br><span class="line"><span class="keyword">SELECT</span> ID, NAME <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> FLAG <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="string">&#x27;1&#x27;</span>, <span class="string">&#x27;2&#x27;</span>) <span class="keyword">OR</span> FLAG <span class="keyword">IS</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure></li>
+<li>子查询返回多条记录：  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ID, NAME <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> BUSINO<span class="operator">=</span>(<span class="keyword">SELECT</span> BUSINO <span class="keyword">FROM</span> APPL <span class="keyword">WHERE</span> ...);</span><br><span class="line"><span class="comment">-- 如果查询APPL会返回多条记录，那么会出错，因此需要调整子查询条件，保证至多返回一条记录，例如（Oracle）</span></span><br><span class="line"><span class="keyword">SELECT</span> ID, NAME <span class="keyword">FROM</span> TAB <span class="keyword">WHERE</span> BUSINO<span class="operator">=</span>(<span class="keyword">SELECT</span> BUSINO <span class="keyword">FROM</span> APPL <span class="keyword">WHERE</span> ... <span class="keyword">AND</span> ROWNUM<span class="operator">=</span><span class="number">1</span>);</span><br></pre></td></tr></table></figure></li>
+<li>用&#x3D;&#x3D;或&lt;&gt;判断NULL：应使用IS NULL或IS NOT NULL进行判断。</li>
 <li>IN后面没有值，或者取值超过了1000个。</li>
-<li>参数校验不完整：假如HUGE_TABLE是张很大的表，对于下面代码而言，只要构造不含任何条件的请求，那么就可以把系统搞瘫痪。  <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 绕过前台校验，不传任何条件，使程序直接查全表</span>
-<span class="token class-name">StringBuilder</span> sql <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token string">"SELECT NAME,DESCRIPTION FROM HUGE_TABLE WHERE 1=1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span>cond1<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    sql<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">" AND COND1='"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token function">escapeSQL</span><span class="token punctuation">(</span>cond1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"'"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span>cond2<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    sql<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">" AND COND2='"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token function">escapeSQL</span><span class="token punctuation">(</span>cond2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"'"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">isNotEmpty</span><span class="token punctuation">(</span>cond3<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    sql<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">" AND COND3='"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token function">escapeSQL</span><span class="token punctuation">(</span>cond3<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"'"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token class-name">PreparedStatement</span> stmt <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token function">prepareStatement</span><span class="token punctuation">(</span>sql<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<li>参数校验不完整：假如HUGE_TABLE是张很大的表，对于下面代码而言，只要构造不含任何条件的请求，那么就可以把系统搞瘫痪。  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绕过前台校验，不传任何条件，使程序直接查全表</span></span><br><span class="line"><span class="type">StringBuilder</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;SELECT NAME,DESCRIPTION FROM HUGE_TABLE WHERE 1=1&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond1)) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; AND COND1=&#x27;&quot;</span>).append(escapeSQL(cond1)).append(<span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond2)) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; AND COND2=&#x27;&quot;</span>).append(escapeSQL(cond2)).append(<span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (StringUtils.isNotEmpty(cond3)) &#123;</span><br><span class="line">    sql.append(<span class="string">&quot; AND COND3=&#x27;&quot;</span>).append(escapeSQL(cond3)).append(<span class="string">&quot;&#x27;&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">PreparedStatement</span> <span class="variable">stmt</span> <span class="operator">=</span> conn.prepareStatement(sql.toString());</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
   另外两个例子：<ul>
 <li>如果分页程序未对每页最多记录数进行限制，那么用户可以让每页显示10000条记录，从而影响系统运行。</li>
 <li>如果参数作为UPDATE或DELETE的条件来使用，那么绕过校验会产生灾难性后果。</li>
 </ul>
 </li>
 </ul>
-<h1 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h1><h2 id="HTML-JSP"><a href="#HTML-JSP" class="headerlink" title="HTML/JSP"></a>HTML/JSP</h2><ul>
-<li>使用过时的标签和属性，例如&lt;font&gt;或者&lt;span color=”red”&gt;。</li>
+<h1 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h1><h2 id="HTML-JSP"><a href="#HTML-JSP" class="headerlink" title="HTML&#x2F;JSP"></a>HTML&#x2F;JSP</h2><ul>
+<li>使用过时的标签和属性，例如&lt;font&gt;或者&lt;span color&#x3D;”red”&gt;。</li>
 <li>HTML标签不匹配。</li>
 <li>修改表格标题内容，未修改待展示的数据，或者未修改带有colspan的单元格。</li>
 <li>不经转义直接输出动态内容：容易导致XSS注入。</li>
@@ -828,7 +462,7 @@ stmt<span class="token punctuation">.</span><span class="token function">execute
       <a href="https://plusnan.me/2019/01/02/java-code-review-1/" title="Java代码审查（一）：代码审查问题">https://plusnan.me/2019/01/02/java-code-review-1/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -842,12 +476,12 @@ stmt<span class="token punctuation">.</span><span class="token function">execute
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2019/01/01/java-code-review-0/" rel="prev" title="Java代码审查：目录">
-                  <i class="fa fa-chevron-left"></i> Java代码审查：目录
+                  <i class="fa fa-angle-left"></i> Java代码审查：目录
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2019/01/03/java-code-review-2/" rel="next" title="Java代码审查（二）：应用安全问题">
-                  Java代码审查（二）：应用安全问题 <i class="fa fa-chevron-right"></i>
+                  Java代码审查（二）：应用安全问题 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -867,15 +501,14 @@ stmt<span class="token punctuation">.</span><span class="token function">execute
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -883,26 +516,38 @@ stmt<span class="token punctuation">.</span><span class="token function">execute
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"cdca6d9efed6bdec3ee802980ce00081"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"cdca6d9efed6bdec3ee802980ce00081"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

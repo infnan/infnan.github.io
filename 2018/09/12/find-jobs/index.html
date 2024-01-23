@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="还有不到一年就要毕业，自身水平一般般，BAT大厂无望，如何去找普通一些的Java Web工作？">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="还有不到一年就要毕业，自身水平一般般，BAT大厂无望，如何去找普通一些的Java Web工作？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 校招（一）：如何找工作">
 <meta property="og:url" content="https://plusnan.me/2018/09/12/find-jobs/index.html">
@@ -46,8 +45,12 @@
 <title>Java 校招（一）：如何找工作 | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -62,8 +65,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -83,7 +86,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -92,11 +95,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -129,15 +128,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -158,17 +151,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,47 +172,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -237,11 +218,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java 校招（一）：如何找工作 | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -284,8 +270,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>还有不到一年就要毕业，自身水平一般般，BAT大厂无望，如何去找普通一些的Java Web工作？</p>
+    <div class="post-body" itemprop="articleBody"><p>还有不到一年就要毕业，自身水平一般般，BAT大厂无望，如何去找普通一些的Java Web工作？</p>
 <span id="more"></span>
 
 <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><ul>
@@ -300,7 +285,7 @@
 <h3 id="主营业务"><a href="#主营业务" class="headerlink" title="主营业务"></a>主营业务</h3><p>进公司之前，要了解公司的主营业务，分析它的领域是否宽广，行业前途是否光明。起始平台很重要，选错起点，你的职业生涯就是一步错、步步错：</p>
 <ul>
 <li>互联网：你手机上那些APP的开发商基本上都是。这类公司的产品、服务竞争激烈，用户量极大，面临的技术问题极多，有动力培养专业技术团队，比较靠谱。</li>
-<li>传统产品/服务：针对特定行业开发产品/服务，然后拿去卖。这类产品通常不针对具体个人或实体，定制化内容较少，产品较为通用，存在一些竞争，技术提升的动力稍微大些。不过也有不少只吃老本不创新的。</li>
+<li>传统产品&#x2F;服务：针对特定行业开发产品&#x2F;服务，然后拿去卖。这类产品通常不针对具体个人或实体，定制化内容较少，产品较为通用，存在一些竞争，技术提升的动力稍微大些。不过也有不少只吃老本不创新的。</li>
 <li>传统项目（项目外包）：项目制则是跑项目签合同，给甲方（例如政府、事业单位、企业等）定制化开发，优先实现特定需求。有活干就挣钱，没活干就赔钱。</li>
 <li>人力外包（“外包”一词通常指这个）：像建筑队一样，招一批人，有活之后就去工地干活，干完了换下一家工地继续干，没活就呆着，或者解散。由于通常去甲方现场工作，地点、工资待遇、工作内容都不固定，而且容易受歧视，不建议去做外包。</li>
 <li>建站：公司主业与软件无关（例如电子商务），也不太需要专业团队，只是招些技术人员进行基本的系统开发。</li>
@@ -355,10 +340,10 @@
 <li>《Effective Java》</li>
 </ul>
 </li>
-<li>Web开发：HTML/CSS/JavaScript，了解一些常用的框架如jQuery等</li>
+<li>Web开发：HTML&#x2F;CSS&#x2F;JavaScript，了解一些常用的框架如jQuery等</li>
 <li>数据库：MySQL，基本的DML与DDL操作。</li>
 <li>开发工具<ul>
-<li>Eclipse/IntelliJ IDEA</li>
+<li>Eclipse&#x2F;IntelliJ IDEA</li>
 <li>MySQL客户端</li>
 </ul>
 </li>
@@ -411,10 +396,10 @@
 <ul>
 <li>错别字、语病、英语名称拼错：直接枪毙</li>
 <li>从第二页开始的所有内容：大佬去社招的话写两三页还行，你个萌新一页就够了，多了都是注水。</li>
-<li>凌乱/优雅的格式<ul>
+<li>凌乱&#x2F;优雅的格式<ul>
 <li>Word格式：请用PDF格式。HR有可能拿手机或别的软件看，看完之后直接用微信推给开发部门，Word格式排版会全部乱掉。</li>
 <li>PowerPoint格式：PowerPoint是用来在投影上展示的。你应聘的是程序员，不是美工设计，HR不可能拿个投影仪挨个页面播放你的大作。</li>
-<li>招聘网站模板/表格：花哨的格式会导致审美疲劳，影响观感。简单地排好版，在必要地方加黑体字，用你的文字打动人，这样就够了。</li>
+<li>招聘网站模板&#x2F;表格：花哨的格式会导致审美疲劳，影响观感。简单地排好版，在必要地方加黑体字，用你的文字打动人，这样就够了。</li>
 </ul>
 </li>
 <li>无关信息<ul>
@@ -473,7 +458,7 @@
 <li>一家公司不要投多遍：只要你没往垃圾箱投，也没用扔垃圾的方式投，那么HR肯定收到了你的简历。投次数多了，会让人反感，然后你就PASS了。</li>
 <li>关于纸质简历：普通地拿A4打印就行了，这样的话被HR扔掉也不可惜。</li>
 <li>关于电子邮件简历：<ul>
-<li>给你的邮箱名称设置为你自己的名字。给自己发封邮件测试一下，看发件人写的是“℡ぐ㈨9б情怀 <span class="exturl" data-url="bWFpbHRvOiYjeDc4OyYjMTIwOyYjMTIwOyYjMTIwOyYjeDQwOyYjeDY3OyYjeDZkOyYjOTc7JiN4Njk7JiMxMDg7JiN4MmU7JiM5OTsmIzExMTsmI3g2ZDs=">&#x78;&#120;&#120;&#120;&#x40;&#x67;&#x6d;&#97;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;<i class="fa fa-external-link-alt"></i></span>”还是“张三 <span class="exturl" data-url="bWFpbHRvOiYjeDc4OyYjMTIwOyYjeDc4OyYjeDc4OyYjeDQwOyYjMTAzOyYjMTA5OyYjeDYxOyYjeDY5OyYjMTA4OyYjeDJlOyYjeDYzOyYjeDZmOyYjMTA5Ow==">&#x78;&#120;&#x78;&#x78;&#x40;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#x63;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span>”</li>
+<li>给你的邮箱名称设置为你自己的名字。给自己发封邮件测试一下，看发件人写的是“℡ぐ㈨9б情怀 <span class="exturl" data-url="bWFpbHRvOiYjeDc4OyYjMTIwOyYjMTIwOyYjeDc4OyYjNjQ7JiMxMDM7JiMxMDk7JiM5NzsmI3g2OTsmI3g2YzsmIzQ2OyYjeDYzOyYjeDZmOyYjMTA5Ow==">&#x78;&#120;&#120;&#x78;&#64;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;<i class="fa fa-external-link-alt"></i></span>”还是“张三 <span class="exturl" data-url="bWFpbHRvOiYjeDc4OyYjeDc4OyYjeDc4OyYjMTIwOyYjeDQwOyYjMTAzOyYjeDZkOyYjeDYxOyYjMTA1OyYjeDZjOyYjNDY7JiN4NjM7JiMxMTE7JiMxMDk7">&#x78;&#x78;&#x78;&#120;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;<i class="fa fa-external-link-alt"></i></span>”</li>
 <li>邮件使用类似<code>【校招应聘】张三_Java开发工程师_XXX大学_本科</code>的标题，让HR一看就能看到是你想找工作。否则的话，你的邮件会随着各种垃圾埋没于HR邮箱之中。</li>
 <li>邮件正文要写内容，例如尊敬的HR怎么怎么地。邮件正文是写给人看的，而且HR不会认真看，所以只要说清自己是投简历的，言语礼貌就行了。</li>
 <li>别忘了加附件。附件也要按类似邮件标题的格式起名字。</li>
@@ -517,7 +502,7 @@
 <li>到外地面试或培训时，主动派人接站</li>
 <li>问公司具体办公地点时，回答含糊不清</li>
 <li>工作地点远离市区与开发区</li>
-<li>需要前往<strong>天津静海</strong>、天津武清、北京通州、北京大兴、北京房山、北京燕郊/河北燕郊（实际上是河北的）、河北廊坊、河北沧州等地区。具体可见<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29odS5jb20vYS8xMzQ1NTI1MjlfNjE3NzE3">传销高发地图<i class="fa fa-external-link-alt"></i></span>。</li>
+<li>需要前往<strong>天津静海</strong>、天津武清、北京通州、北京大兴、北京房山、北京燕郊&#x2F;河北燕郊（实际上是河北的）、河北廊坊、河北沧州等地区。具体可见<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29odS5jb20vYS8xMzQ1NTI1MjlfNjE3NzE3">传销高发地图<i class="fa fa-external-link-alt"></i></span>。</li>
 </ul>
 <h2 id="骗钱"><a href="#骗钱" class="headerlink" title="骗钱"></a>骗钱</h2><ol>
 <li><strong>正规招聘不会收费！</strong><ul>
@@ -540,7 +525,7 @@
 <h2 id="招聘黑话"><a href="#招聘黑话" class="headerlink" title="招聘黑话"></a>招聘黑话</h2><p>仅供参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZG91YmFuLmNvbS9ncm91cC90b3BpYy85NTQyNDUxMy8=">招聘黑话大全<i class="fa fa-external-link-alt"></i></span></p>
 <h2 id="福利"><a href="#福利" class="headerlink" title="福利"></a>福利</h2><p>根据<span class="exturl" data-url="aHR0cDovL3d3dy5nb3YuY24vYmFuc2hpLzIwMDUtMDUvMjUvY29udGVudF85MDUuaHRt">劳动法<i class="fa fa-external-link-alt"></i></span>，以下待遇都是你应得的，根本不是福利：</p>
 <ul>
-<li>五险一金 = 社保 + 公积金 = 养老保险、医疗保险、生育保险、失业保险、工伤保险 + 公积金</li>
+<li>五险一金 &#x3D; 社保 + 公积金 &#x3D; 养老保险、医疗保险、生育保险、失业保险、工伤保险 + 公积金</li>
 <li>加班费1.5倍、周末加班2倍、法定节假日三薪（一般公司只给法假三薪，别的加班费不给）</li>
 <li>带薪年休假</li>
 <li>定期体检</li>
@@ -551,7 +536,7 @@
 <p>如果很在乎这个东西，那么可以研究研究如何告劳动仲裁，以及后续如何防止被公司报复（这一点很重要，当你决定告劳动仲裁时，稍微懂一点法律的公司当然会研究如何报复你）。或者，如果你不在乎涨工资受阻的话，也可以考虑在非工作时间玩失踪。</p>
 <h2 id="五险一金"><a href="#五险一金" class="headerlink" title="五险一金"></a>五险一金</h2><p>只要正常工作，公司必须给员工交五险一金，所以这是你应得的，不叫福利。然而五险一金是按基本工资交的，为了节省成本，公司通常会把工资明细分得很细，尽可能压低基本工资，从而少交五险一金，这是普遍现象，不要太在意。</p>
 <p>少交还可以理解，毕竟公司都会想办法省钱。但是，如果连交都不交，那么务必拒绝签约，而且只要你还没签字，你就不需要赔偿任何费用。如果已不幸入职，那么尽快辞职，因为不交五险一金的话你会惹上麻烦（例如影响落户），而且你还不能自己掏腰包补齐。</p>
-<h2 id="狼性-末位淘汰制"><a href="#狼性-末位淘汰制" class="headerlink" title="狼性 / 末位淘汰制"></a>狼性 / 末位淘汰制</h2><p>除非公司平台很好，否则慎重。在这种公司，同事们为了不被淘汰，通常不得不去坑其他同事，结果往往是内斗严重，谁的日子都过不安宁。</p>
+<h2 id="狼性-末位淘汰制"><a href="#狼性-末位淘汰制" class="headerlink" title="狼性 &#x2F; 末位淘汰制"></a>狼性 &#x2F; 末位淘汰制</h2><p>除非公司平台很好，否则慎重。在这种公司，同事们为了不被淘汰，通常不得不去坑其他同事，结果往往是内斗严重，谁的日子都过不安宁。</p>
 <h2 id="外包转正"><a href="#外包转正" class="headerlink" title="外包转正"></a>外包转正</h2><p>有些外包公司是给大厂（例如腾讯）做外包的，然后领导会承诺说表现得好可以“转正”，进入甲方。不要相信这种话，外包本身就是为了省钱和省指标，这种“转正”机会连你未来的领导都没轮到，怎么可能轮到你？</p>
 <p>如果不得不进入外包公司，而且遇到了一个能力比较强的领导或同事，倒是可以考虑跟他们处好关系（不过你自己的工作能力也要给力才行），将来找准机会跟着他们一块儿跳槽。</p>
 <h2 id="创业"><a href="#创业" class="headerlink" title="创业"></a>创业</h2><p><strong>不要自己去创业！</strong>理由如下：</p>
@@ -598,7 +583,7 @@
       <a href="https://plusnan.me/2018/09/12/find-jobs/" title="Java 校招（一）：如何找工作">https://plusnan.me/2018/09/12/find-jobs/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -612,12 +597,12 @@
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2018/07/15/to-new-employee/" rel="prev" title="给校招新员工分享的一点人生的经验">
-                  <i class="fa fa-chevron-left"></i> 给校招新员工分享的一点人生的经验
+                  <i class="fa fa-angle-left"></i> 给校招新员工分享的一点人生的经验
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2018/11/02/weblogic-caution/" rel="next" title="WebLogic踩坑记录">
-                  WebLogic踩坑记录 <i class="fa fa-chevron-right"></i>
+                  WebLogic踩坑记录 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -637,15 +622,14 @@
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -653,26 +637,38 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"e4a90f92327b54686cee719ded9859e3"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"e4a90f92327b54686cee719ded9859e3"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

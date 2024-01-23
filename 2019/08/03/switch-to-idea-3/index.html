@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="除了在IDEA手工配置项目，也可考虑将传统Web项目转为Gradle项目，以便简化项目依赖管理、实现标准化构建等，也便于后续结合Jenkins等进一步实现自动化。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="除了在IDEA手工配置项目，也可考虑将传统Web项目转为Gradle项目，以便简化项目依赖管理、实现标准化构建等，也便于后续结合Jenkins等进一步实现自动化。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从Eclipse切换到IDEA（三）：传统Web项目转为Gradle项目">
 <meta property="og:url" content="https://plusnan.me/2019/08/03/switch-to-idea-3/index.html">
@@ -46,8 +45,12 @@
 <title>从Eclipse切换到IDEA（三）：传统Web项目转为Gradle项目 | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -62,8 +65,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -83,7 +86,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -92,11 +95,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -129,15 +128,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -158,17 +151,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,47 +172,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -237,11 +218,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="从Eclipse切换到IDEA（三）：传统Web项目转为Gradle项目 | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -284,50 +270,11 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>除了在IDEA手工配置项目，也可考虑将传统Web项目转为Gradle项目，以便简化项目依赖管理、实现标准化构建等，也便于后续结合Jenkins等进一步实现自动化。</p>
+    <div class="post-body" itemprop="articleBody"><p>除了在IDEA手工配置项目，也可考虑将传统Web项目转为Gradle项目，以便简化项目依赖管理、实现标准化构建等，也便于后续结合Jenkins等进一步实现自动化。</p>
 <span id="more"></span>
 
 <h1 id="项目目录结构"><a href="#项目目录结构" class="headerlink" title="项目目录结构"></a>项目目录结构</h1><p>我们以下面项目为例</p>
-<pre class="line-numbers language-none"><code class="language-none">&gt; WebProj1                      ----&gt; Web模块1
-    &gt; src                       ----&gt; Java源代码1
-    .   &gt; com
-    .       ...
-    &gt; config                    ----&gt; 模块配置文件1，部署时计划放到 WEB-INF&#x2F;classes 目录中
-    .   SpringMVC-servlet.xml
-    .   ...
-    &gt; WebContent                ----&gt; Web文件目录
-        &gt; WEB-INF
-        .   &gt; lib               ----&gt; 所需jar包
-        .       ...
-        .   web.xml
-        .   ...
-        index.jsp
-        ...
-
-&gt; WebProj2                      ----&gt; Web模块2
-    &gt; src                       ----&gt; Java源代码2
-    .   &gt; com
-    .       ...
-    &gt; config                    ----&gt; 模块配置文件2
-    .   SpringMVC-servlet.xml
-    .   ...
-    &gt; WebContent                ----&gt; Web文件目录
-        &gt; WEB-INF
-        .   &gt; lib               ----&gt; 所需jar包
-        .       ...
-        .   web.xml
-        .   ...
-        index.jsp
-        ...
-
-&gt; CommonProj                    ----&gt; 公共代码，另外两个Project的依赖项
-    &gt; src                       ----&gt; Java源代码
-    .   &gt; com
-    .       ...
-    &gt; commonConfig              ----&gt; 全局配置文件
-        log4j.xml
-        ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&gt; WebProj1                      ----&gt; Web模块1</span><br><span class="line">    &gt; src                       ----&gt; Java源代码1</span><br><span class="line">    .   &gt; com</span><br><span class="line">    .       ...</span><br><span class="line">    &gt; config                    ----&gt; 模块配置文件1，部署时计划放到 WEB-INF/classes 目录中</span><br><span class="line">    .   SpringMVC-servlet.xml</span><br><span class="line">    .   ...</span><br><span class="line">    &gt; WebContent                ----&gt; Web文件目录</span><br><span class="line">        &gt; WEB-INF</span><br><span class="line">        .   &gt; lib               ----&gt; 所需jar包</span><br><span class="line">        .       ...</span><br><span class="line">        .   web.xml</span><br><span class="line">        .   ...</span><br><span class="line">        index.jsp</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">&gt; WebProj2                      ----&gt; Web模块2</span><br><span class="line">    &gt; src                       ----&gt; Java源代码2</span><br><span class="line">    .   &gt; com</span><br><span class="line">    .       ...</span><br><span class="line">    &gt; config                    ----&gt; 模块配置文件2</span><br><span class="line">    .   SpringMVC-servlet.xml</span><br><span class="line">    .   ...</span><br><span class="line">    &gt; WebContent                ----&gt; Web文件目录</span><br><span class="line">        &gt; WEB-INF</span><br><span class="line">        .   &gt; lib               ----&gt; 所需jar包</span><br><span class="line">        .       ...</span><br><span class="line">        .   web.xml</span><br><span class="line">        .   ...</span><br><span class="line">        index.jsp</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">&gt; CommonProj                    ----&gt; 公共代码，另外两个Project的依赖项</span><br><span class="line">    &gt; src                       ----&gt; Java源代码</span><br><span class="line">    .   &gt; com</span><br><span class="line">    .       ...</span><br><span class="line">    &gt; commonConfig              ----&gt; 全局配置文件</span><br><span class="line">        log4j.xml</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
 
 <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ol>
 <li>安装JDK 8：本文所用的Gradle 5.4既不支持古老的JDK 6，也不支持崭新的JDK 10。后文会解释如何保证不同版本JDK的兼容性。</li>
@@ -337,294 +284,83 @@
 </ol>
 <h1 id="开始改造"><a href="#开始改造" class="headerlink" title="开始改造"></a>开始改造</h1><h2 id="项目文件结构调整"><a href="#项目文件结构调整" class="headerlink" title="项目文件结构调整"></a>项目文件结构调整</h2><p>Maven和Gradle有很多约定俗成的要求，例如Java代码存放位置。我们需要按照这些约定来调整我们的代码结构：</p>
 <ul>
-<li>src（Java代码） → src/main/java</li>
-<li>test（Java代码） → test/main/java</li>
-<li>config（需要拷到 WEB-INF/classes 下面的配置文件） → src/main/resources</li>
-<li>WebContent（Web文件内容，例如jsp等） → src/main/webapp</li>
+<li>src（Java代码） → src&#x2F;main&#x2F;java</li>
+<li>test（Java代码） → test&#x2F;main&#x2F;java</li>
+<li>config（需要拷到 WEB-INF&#x2F;classes 下面的配置文件） → src&#x2F;main&#x2F;resources</li>
+<li>WebContent（Web文件内容，例如jsp等） → src&#x2F;main&#x2F;webapp</li>
 <li>增加gradle相关配置文件，后文将介绍如何编写这些文件。</li>
 </ul>
 <p>调整效果如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&gt; WebProj1                      ----&gt; Web模块1
-    &gt; src                       
-    .   &gt; 【main】
-    .   .   &gt; 【java】          ----&gt; Java源代码1挪到此处
-    .   .   .   &gt; com
-    .   .   .       ...
-    .   .   &gt; 【resources】     ----&gt; 模块配置文件1（原config）挪到此处
-    .   .   .   SpringMVC-servlet.xml
-    .   .   .   ...
-    .   .   &gt; 【webapp】        ----&gt; Web文件目录（原WebContent）挪到此处
-    .   .       &gt; WEB-INF
-    .   .       .   &gt; lib       ----&gt; 所需jar包
-    .   .       .       ...
-    .   .       .   web.xml
-    .   .       index.jsp
-    .   .       ...
-    .   &gt; 【test】              ----&gt; 即使未编写测试代码，也建议保留目录结构
-    .       &gt; java
-    .       &gt; resources
-    【build.gradle】            ----&gt; 新增的构建脚本
-
-&gt; WebProj2                      ----&gt; Web模块2
-    &gt; src                       
-    .   &gt; 【main】
-    .   .   &gt; 【java】          ----&gt; Java源代码2挪到此处
-    .   .   .   &gt; com
-    .   .   .       ...
-    .   .   &gt; 【resources】     ----&gt; 模块配置文件2（原config）挪到此处
-    .   .   .   SpringMVC-servlet.xml
-    .   .   .   ...
-    .   .   &gt; 【webapp】        ----&gt; Web文件目录（原WebContent）挪到此处
-    .   .       &gt; WEB-INF
-    .   .       .   &gt; lib       ----&gt; 所需jar包
-    .   .       .       ...
-    .   .       .   web.xml
-    .   .       index.jsp
-    .   .       ...
-    .   &gt; 【test】
-    .       &gt; java
-    .       &gt; resources
-    【build.gradle】            ----&gt; 新增的构建脚本
-
-&gt; CommonProj                    ----&gt; 公共代码，另外两个Project的依赖项
-    &gt; src                       
-    .   &gt; 【main】
-    .   .   &gt; 【java】          ----&gt; Java源代码挪到此处
-    .   .   .   &gt; com
-    .   .   .       ...
-    .   .   &gt; 【resources】     ----&gt; 全局配置文件挪到此处
-    .   .   .   log4j.xml
-    .   .   .   ...
-    .   &gt; test
-    .       &gt; java
-    .       &gt; resources
-    &gt; lib                      ----&gt; 为了消除编译错误，这里需要准备一份CommonProj必需的jar包
-    .   ...
-    【build.gradle】            ----&gt; 新增的构建脚本
-
-&gt; gradle                       ----&gt; Gradle Wrapper，后面会用命令来生成该目录及文件。
-    &gt; wrapper
-        gradle-wrapper.jar
-        gradle-wrapper.properties
-build.gradle                   ----&gt; 新增的构建脚本。此脚本范围为整个项目。
-settings.gradle
-gradle.properties<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&gt; WebProj1                      ----&gt; Web模块1</span><br><span class="line">    &gt; src                       </span><br><span class="line">    .   &gt; 【main】</span><br><span class="line">    .   .   &gt; 【java】          ----&gt; Java源代码1挪到此处</span><br><span class="line">    .   .   .   &gt; com</span><br><span class="line">    .   .   .       ...</span><br><span class="line">    .   .   &gt; 【resources】     ----&gt; 模块配置文件1（原config）挪到此处</span><br><span class="line">    .   .   .   SpringMVC-servlet.xml</span><br><span class="line">    .   .   .   ...</span><br><span class="line">    .   .   &gt; 【webapp】        ----&gt; Web文件目录（原WebContent）挪到此处</span><br><span class="line">    .   .       &gt; WEB-INF</span><br><span class="line">    .   .       .   &gt; lib       ----&gt; 所需jar包</span><br><span class="line">    .   .       .       ...</span><br><span class="line">    .   .       .   web.xml</span><br><span class="line">    .   .       index.jsp</span><br><span class="line">    .   .       ...</span><br><span class="line">    .   &gt; 【test】              ----&gt; 即使未编写测试代码，也建议保留目录结构</span><br><span class="line">    .       &gt; java</span><br><span class="line">    .       &gt; resources</span><br><span class="line">    【build.gradle】            ----&gt; 新增的构建脚本</span><br><span class="line"></span><br><span class="line">&gt; WebProj2                      ----&gt; Web模块2</span><br><span class="line">    &gt; src                       </span><br><span class="line">    .   &gt; 【main】</span><br><span class="line">    .   .   &gt; 【java】          ----&gt; Java源代码2挪到此处</span><br><span class="line">    .   .   .   &gt; com</span><br><span class="line">    .   .   .       ...</span><br><span class="line">    .   .   &gt; 【resources】     ----&gt; 模块配置文件2（原config）挪到此处</span><br><span class="line">    .   .   .   SpringMVC-servlet.xml</span><br><span class="line">    .   .   .   ...</span><br><span class="line">    .   .   &gt; 【webapp】        ----&gt; Web文件目录（原WebContent）挪到此处</span><br><span class="line">    .   .       &gt; WEB-INF</span><br><span class="line">    .   .       .   &gt; lib       ----&gt; 所需jar包</span><br><span class="line">    .   .       .       ...</span><br><span class="line">    .   .       .   web.xml</span><br><span class="line">    .   .       index.jsp</span><br><span class="line">    .   .       ...</span><br><span class="line">    .   &gt; 【test】</span><br><span class="line">    .       &gt; java</span><br><span class="line">    .       &gt; resources</span><br><span class="line">    【build.gradle】            ----&gt; 新增的构建脚本</span><br><span class="line"></span><br><span class="line">&gt; CommonProj                    ----&gt; 公共代码，另外两个Project的依赖项</span><br><span class="line">    &gt; src                       </span><br><span class="line">    .   &gt; 【main】</span><br><span class="line">    .   .   &gt; 【java】          ----&gt; Java源代码挪到此处</span><br><span class="line">    .   .   .   &gt; com</span><br><span class="line">    .   .   .       ...</span><br><span class="line">    .   .   &gt; 【resources】     ----&gt; 全局配置文件挪到此处</span><br><span class="line">    .   .   .   log4j.xml</span><br><span class="line">    .   .   .   ...</span><br><span class="line">    .   &gt; test</span><br><span class="line">    .       &gt; java</span><br><span class="line">    .       &gt; resources</span><br><span class="line">    &gt; lib                      ----&gt; 为了消除编译错误，这里需要准备一份CommonProj必需的jar包</span><br><span class="line">    .   ...</span><br><span class="line">    【build.gradle】            ----&gt; 新增的构建脚本</span><br><span class="line"></span><br><span class="line">&gt; gradle                       ----&gt; Gradle Wrapper，后面会用命令来生成该目录及文件。</span><br><span class="line">    &gt; wrapper</span><br><span class="line">        gradle-wrapper.jar</span><br><span class="line">        gradle-wrapper.properties</span><br><span class="line">build.gradle                   ----&gt; 新增的构建脚本。此脚本范围为整个项目。</span><br><span class="line">settings.gradle</span><br><span class="line">gradle.properties</span><br></pre></td></tr></table></figure>
 
 <h2 id="配置Gradle"><a href="#配置Gradle" class="headerlink" title="配置Gradle"></a>配置Gradle</h2><ol>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cueWlpYmFpLmNvbS9ncmFkbGUvaG93LWluc3RhbGwtZ3JhZGxlLXdpbmRvd3MuaHRtbA==">安装Gradle<i class="fa fa-external-link-alt"></i></span></li>
-<li>放置Gradle Wrapper：打开终端，进入项目所在的根目录，输入<code>gradle wrapper</code>。以后其他成员只要在终端中直接输入“./gradlew”就能自动下载相同版本的Gradle。</li>
+<li>放置Gradle Wrapper：打开终端，进入项目所在的根目录，输入<code>gradle wrapper</code>。以后其他成员只要在终端中直接输入“.&#x2F;gradlew”就能自动下载相同版本的Gradle。</li>
 </ol>
 <p>考虑到国内网络情况，需要进行两种额外处理步骤（二选一）：</p>
 <ol>
 <li>将gradle-5.4-all.zip分发给团队其他成员，让大家都按照上面方法手工安装Gradle。</li>
-<li>上传到国内或公司内的服务器，例如<code>http://10.11.22.33:8088/gradle-5.4-all.zip</code>，然后修改你项目中的 gradle/wrapper/gradle-wrapper.properties 文件，将 distributionUrl 修改成该地址。后续其他成员只要执行gradlew就会自动从这个URL下载Gradle。</li>
+<li>上传到国内或公司内的服务器，例如<code>http://10.11.22.33:8088/gradle-5.4-all.zip</code>，然后修改你项目中的 gradle&#x2F;wrapper&#x2F;gradle-wrapper.properties 文件，将 distributionUrl 修改成该地址。后续其他成员只要执行gradlew就会自动从这个URL下载Gradle。</li>
 </ol>
-<p>假如需要代理才能访问网络，可在自己电脑 ~/.gradle/gradle.properties（C:\Users\xxx\.gradle\gradle.properties）中配置网络代理。</p>
+<p>假如需要代理才能访问网络，可在自己电脑 ~&#x2F;.gradle&#x2F;gradle.properties（C:\Users\xxx\.gradle\gradle.properties）中配置网络代理。</p>
 <p>若使用HTTP代理，地址为<code>http://127.0.0.1:1081</code>，可加入：</p>
-<pre class="line-numbers language-none"><code class="language-none">systemProp.http.proxyHost&#x3D;127.0.0.1
-systemProp.http.proxyPort&#x3D;1081
-systemProp.https.proxyHost&#x3D;127.0.0.1
-systemProp.https.proxyPort&#x3D;1081<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemProp.http.proxyHost=127.0.0.1</span><br><span class="line">systemProp.http.proxyPort=1081</span><br><span class="line">systemProp.https.proxyHost=127.0.0.1</span><br><span class="line">systemProp.https.proxyPort=1081</span><br></pre></td></tr></table></figure>
 
 <p>若使用SOCKS5代理，地址为<code>127.0.0.1:1080</code>，则是</p>
-<pre class="line-numbers language-none"><code class="language-none">org.gradle.jvmargs&#x3D;-DsocksProxyHost&#x3D;127.0.0.1 -DsocksProxyPort&#x3D;1080<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.gradle.jvmargs=-DsocksProxyHost=127.0.0.1 -DsocksProxyPort=1080</span><br></pre></td></tr></table></figure>
 
 <p>配置代理之后，个别情况下会出现<code>Error 403 Forbidden</code>报错，这种情况说明仓库屏蔽了你的代理，你只能换梯子或换国内源了。</p>
-<h2 id="编写Gradle构建脚本"><a href="#编写Gradle构建脚本" class="headerlink" title="编写Gradle构建脚本"></a>编写Gradle构建脚本</h2><h3 id="build-gradle"><a href="#build-gradle" class="headerlink" title="/build.gradle"></a>/build.gradle</h3><p>build.gradle是构建脚本的核心。由于本文的案例是多模块项目，build.gradle也就分成了两层，外层是项目整体的，内层是各模块的。本小节是整体的配置。</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">allprojects <span class="token punctuation">&#123;</span>
-    group <span class="token operator">=</span> <span class="token string">'com.yourcompany.xxx'</span>
-    version <span class="token operator">=</span> <span class="token string">'1.0'</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// subprojects是各模块的统一配置</span>
-subprojects <span class="token punctuation">&#123;</span>
-    apply plugin<span class="token punctuation">:</span> <span class="token string">'java'</span>
-
-    <span class="token comment">// Java 版本</span>
-    sourceCompatibility <span class="token operator">=</span> <span class="token number">1.8</span>
-    targetCompatibility <span class="token operator">=</span> <span class="token number">1.8</span>
-
-    <span class="token comment">// 用Maven库管理部分依赖</span>
-    repositories <span class="token punctuation">&#123;</span>
-        <span class="token function">mavenCentral</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-        <span class="token comment">// 使用阿里镜像</span>
-        maven <span class="token punctuation">&#123;</span>
-            url <span class="token string">'http://maven.aliyun.com/nexus/content/groups/public/'</span>
-        <span class="token punctuation">&#125;</span>
-        maven <span class="token punctuation">&#123;</span>
-            url <span class="token string">'http://maven.aliyun.com/nexus/content/repositories/jcenter'</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">// 默认编译器是javac，如果构建所用JDK与生产环境JDK版本不一致，可能会产生兼容性问题。</span>
-    <span class="token comment">// 将javac换成Eclipse编译器可避免问题。</span>
-    configurations <span class="token punctuation">&#123;</span>
-        ecj
-    <span class="token punctuation">&#125;</span>
-
-    dependencies <span class="token punctuation">&#123;</span>
-        ecj <span class="token string">'org.eclipse.jdt.core.compiler:ecj:4.6.1'</span>
-    <span class="token punctuation">&#125;</span>
-
-    compileJava <span class="token punctuation">&#123;</span>
-        options<span class="token punctuation">.</span>fork <span class="token operator">=</span> <span class="token boolean">true</span>
-        options<span class="token punctuation">.</span>forkOptions<span class="token punctuation">.</span>with <span class="token punctuation">&#123;</span>
-            executable <span class="token operator">=</span> <span class="token string">'java'</span>
-            jvmArgs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'-classpath'</span><span class="token punctuation">,</span> project<span class="token punctuation">.</span>configurations<span class="token punctuation">.</span>ecj<span class="token punctuation">.</span>asPath<span class="token punctuation">,</span> <span class="token string">'org.eclipse.jdt.internal.compiler.batch.Main'</span><span class="token punctuation">,</span> <span class="token string">'-nowarn'</span><span class="token punctuation">]</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 构建系统</span>
-task <span class="token function">myproj</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    dependsOn <span class="token string">':WebProj1:build'</span><span class="token punctuation">,</span> <span class="token string">':WebProj2:build'</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="编写Gradle构建脚本"><a href="#编写Gradle构建脚本" class="headerlink" title="编写Gradle构建脚本"></a>编写Gradle构建脚本</h2><h3 id="build-gradle"><a href="#build-gradle" class="headerlink" title="&#x2F;build.gradle"></a>&#x2F;build.gradle</h3><p>build.gradle是构建脚本的核心。由于本文的案例是多模块项目，build.gradle也就分成了两层，外层是项目整体的，内层是各模块的。本小节是整体的配置。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    group = <span class="string">&#x27;com.yourcompany.xxx&#x27;</span></span><br><span class="line">    version = <span class="string">&#x27;1.0&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// subprojects是各模块的统一配置</span></span><br><span class="line">subprojects &#123;</span><br><span class="line">    apply <span class="attr">plugin:</span> <span class="string">&#x27;java&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Java 版本</span></span><br><span class="line">    sourceCompatibility = <span class="number">1.8</span></span><br><span class="line">    targetCompatibility = <span class="number">1.8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用Maven库管理部分依赖</span></span><br><span class="line">    repositories &#123;</span><br><span class="line">        mavenCentral()</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用阿里镜像</span></span><br><span class="line">        maven &#123;</span><br><span class="line">            url <span class="string">&#x27;http://maven.aliyun.com/nexus/content/groups/public/&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">        maven &#123;</span><br><span class="line">            url <span class="string">&#x27;http://maven.aliyun.com/nexus/content/repositories/jcenter&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 默认编译器是javac，如果构建所用JDK与生产环境JDK版本不一致，可能会产生兼容性问题。</span></span><br><span class="line">    <span class="comment">// 将javac换成Eclipse编译器可避免问题。</span></span><br><span class="line">    configurations &#123;</span><br><span class="line">        ecj</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dependencies &#123;</span><br><span class="line">        ecj <span class="string">&#x27;org.eclipse.jdt.core.compiler:ecj:4.6.1&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    compileJava &#123;</span><br><span class="line">        options.fork = <span class="literal">true</span></span><br><span class="line">        options.forkOptions.with &#123;</span><br><span class="line">            executable = <span class="string">&#x27;java&#x27;</span></span><br><span class="line">            jvmArgs = [<span class="string">&#x27;-classpath&#x27;</span>, project.configurations.ecj.asPath, <span class="string">&#x27;org.eclipse.jdt.internal.compiler.batch.Main&#x27;</span>, <span class="string">&#x27;-nowarn&#x27;</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 构建系统</span></span><br><span class="line">task myproj() &#123;</span><br><span class="line">    dependsOn <span class="string">&#x27;:WebProj1:build&#x27;</span>, <span class="string">&#x27;:WebProj2:build&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>如果java代码采用GBK编码，那么需要下面的调整：</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">subprojects <span class="token punctuation">&#123;</span>
-    <span class="token comment">// ...</span>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">subprojects &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    compileJava &#123;</span><br><span class="line">        <span class="comment">// 字符编码</span></span><br><span class="line">        options.encoding = <span class="string">&#x27;GBK&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    compileJava <span class="token punctuation">&#123;</span>
-        <span class="token comment">// 字符编码</span>
-        options<span class="token punctuation">.</span>encoding <span class="token operator">=</span> <span class="token string">'GBK'</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="settings-gradle"><a href="#settings-gradle" class="headerlink" title="&#x2F;settings.gradle"></a>&#x2F;settings.gradle</h3><p>该文件用于表示项目有哪些子模块（subproject）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rootProject.name = &#x27;myproj&#x27;</span><br><span class="line"></span><br><span class="line">include &#x27;CommonProj&#x27;</span><br><span class="line">include &#x27;WebProj1&#x27;</span><br><span class="line">include &#x27;WebProj2&#x27;</span><br></pre></td></tr></table></figure>
 
-<h3 id="settings-gradle"><a href="#settings-gradle" class="headerlink" title="/settings.gradle"></a>/settings.gradle</h3><p>该文件用于表示项目有哪些子模块（subproject）：</p>
-<pre class="line-numbers language-none"><code class="language-none">rootProject.name &#x3D; &#39;myproj&#39;
-
-include &#39;CommonProj&#39;
-include &#39;WebProj1&#39;
-include &#39;WebProj2&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="gradle-properties"><a href="#gradle-properties" class="headerlink" title="/gradle.properties"></a>/gradle.properties</h3><p>该文件用于配置Gradle本身的环境，例如JVM参数等：</p>
-<pre class="line-numbers language-none"><code class="language-none"># 内存设置
-org.gradle.jvmargs&#x3D;-Xmx1280m
-# 允许并行
-org.gradle.parallel&#x3D;true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="gradle-properties"><a href="#gradle-properties" class="headerlink" title="&#x2F;gradle.properties"></a>&#x2F;gradle.properties</h3><p>该文件用于配置Gradle本身的环境，例如JVM参数等：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 内存设置</span><br><span class="line">org.gradle.jvmargs=-Xmx1280m</span><br><span class="line"># 允许并行</span><br><span class="line">org.gradle.parallel=true</span><br></pre></td></tr></table></figure>
 
 <p>如果项目文件使用的字符编码是GBK，可加入（其中Xmx与字符编码无关，需要根据自己电脑情况设置）：</p>
-<pre class="line-numbers language-none"><code class="language-none">systemProp.file.encoding&#x3D;GBK
-org.gradle.jvmargs&#x3D;-Xmx1280m -Dfile.encoding&#x3D;GBK<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemProp.file.encoding=GBK</span><br><span class="line">org.gradle.jvmargs=-Xmx1280m -Dfile.encoding=GBK</span><br></pre></td></tr></table></figure>
 
-<h3 id="WebProj1-build-gradle"><a href="#WebProj1-build-gradle" class="headerlink" title="/WebProj1/build.gradle"></a>/WebProj1/build.gradle</h3><p>该文件负责WebProj1模块的构建。</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">plugins <span class="token punctuation">&#123;</span>
-    id <span class="token string">'war'</span>
-<span class="token punctuation">&#125;</span>
-
-dependencies <span class="token punctuation">&#123;</span>
-    <span class="token comment">// 依赖模块：CommonProj</span>
-    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token function">project</span><span class="token punctuation">(</span><span class="token string">':CommonProj'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// 不要引入CommonProj的jar包，否则打包时依赖jar包会被打两遍</span>
-        <span class="token comment">// 但这样做你需要保证WebProj1和WebProj2中有必需的jar包，否则运行应用时会报错</span>
-        transitive <span class="token operator">=</span> <span class="token boolean">false</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">// 本地jar包</span>
-    providedCompile <span class="token function">fileTree</span><span class="token punctuation">(</span>dir<span class="token punctuation">:</span> <span class="token string">'src/main/webapp/WEB-INF/lib'</span><span class="token punctuation">,</span> include<span class="token punctuation">:</span> <span class="token string">'*.jar'</span><span class="token punctuation">)</span>
-
-    <span class="token comment">// Servlet API，部署到生产环境时实际由Tomcat等中间件提供</span>
-    providedCompile <span class="token string">'javax.servlet:servlet-api:2.5'</span>
-    providedCompile <span class="token string">'javax.servlet.jsp:jsp-api:2.1'</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="WebProj1-build-gradle"><a href="#WebProj1-build-gradle" class="headerlink" title="&#x2F;WebProj1&#x2F;build.gradle"></a>&#x2F;WebProj1&#x2F;build.gradle</h3><p>该文件负责WebProj1模块的构建。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">    id <span class="string">&#x27;war&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    <span class="comment">// 依赖模块：CommonProj</span></span><br><span class="line">    implementation(project(<span class="string">&#x27;:CommonProj&#x27;</span>)) &#123;</span><br><span class="line">        <span class="comment">// 不要引入CommonProj的jar包，否则打包时依赖jar包会被打两遍</span></span><br><span class="line">        <span class="comment">// 但这样做你需要保证WebProj1和WebProj2中有必需的jar包，否则运行应用时会报错</span></span><br><span class="line">        transitive = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 本地jar包</span></span><br><span class="line">    providedCompile fileTree(<span class="attr">dir:</span> <span class="string">&#x27;src/main/webapp/WEB-INF/lib&#x27;</span>, <span class="attr">include:</span> <span class="string">&#x27;*.jar&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Servlet API，部署到生产环境时实际由Tomcat等中间件提供</span></span><br><span class="line">    providedCompile <span class="string">&#x27;javax.servlet:servlet-api:2.5&#x27;</span></span><br><span class="line">    providedCompile <span class="string">&#x27;javax.servlet.jsp:jsp-api:2.1&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>传统项目的jar包需要手动管理，在切换成Gradle之后，可转交Gradle管理，例如删除SpringMVC相关jar包删除，并修改build.gradle：</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">dependencies <span class="token punctuation">&#123;</span>
-    <span class="token comment">// ...</span>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    implementation <span class="string">&#x27;org.springframework:spring-webmvc:4.1.6.RELEASE&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    implementation <span class="token string">'org.springframework:spring-webmvc:4.1.6.RELEASE'</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>WebProj2&#x2F;build.gradle内容相同，不再赘述。</p>
+<h3 id="CommonProj-build-gradle"><a href="#CommonProj-build-gradle" class="headerlink" title="&#x2F;CommonProj&#x2F;build.gradle"></a>&#x2F;CommonProj&#x2F;build.gradle</h3><p>内容比较简单。实际构建时会被打成jar包并放在其他模块的WEB-INF&#x2F;lib中。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation fileTree(<span class="attr">dir:</span> <span class="string">&#x27;lib&#x27;</span>, <span class="attr">include:</span> <span class="string">&#x27;*.jar&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Servlet API</span></span><br><span class="line">    implementation <span class="string">&#x27;javax.servlet:servlet-api:2.5&#x27;</span></span><br><span class="line">    implementation <span class="string">&#x27;javax.servlet.jsp:jsp-api:2.1&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>WebProj2/build.gradle内容相同，不再赘述。</p>
-<h3 id="CommonProj-build-gradle"><a href="#CommonProj-build-gradle" class="headerlink" title="/CommonProj/build.gradle"></a>/CommonProj/build.gradle</h3><p>内容比较简单。实际构建时会被打成jar包并放在其他模块的WEB-INF/lib中。</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">dependencies <span class="token punctuation">&#123;</span>
-    implementation <span class="token function">fileTree</span><span class="token punctuation">(</span>dir<span class="token punctuation">:</span> <span class="token string">'lib'</span><span class="token punctuation">,</span> include<span class="token punctuation">:</span> <span class="token string">'*.jar'</span><span class="token punctuation">)</span>
-
-    <span class="token comment">// Servlet API</span>
-    implementation <span class="token string">'javax.servlet:servlet-api:2.5'</span>
-    implementation <span class="token string">'javax.servlet.jsp:jsp-api:2.1'</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="gitignore"><a href="#gitignore" class="headerlink" title="/.gitignore"></a>/.gitignore</h3><p>需要让版本控制软件忽略Gradle产生的中间文件：</p>
-<pre class="line-numbers language-none"><code class="language-none">.gradle
-
-&#x2F;WebProj1&#x2F;build&#x2F;
-&#x2F;WebProj2&#x2F;build&#x2F;
-&#x2F;CommonProj&#x2F;build&#x2F;
-
-# 不要忽略gradle-wrapper.jar
-!gradle-wrapper.jar<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="gitignore"><a href="#gitignore" class="headerlink" title="&#x2F;.gitignore"></a>&#x2F;.gitignore</h3><p>需要让版本控制软件忽略Gradle产生的中间文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.gradle</span><br><span class="line"></span><br><span class="line">/WebProj1/build/</span><br><span class="line">/WebProj2/build/</span><br><span class="line">/CommonProj/build/</span><br><span class="line"></span><br><span class="line"># 不要忽略gradle-wrapper.jar</span><br><span class="line">!gradle-wrapper.jar</span><br></pre></td></tr></table></figure>
 
 <p>虽然gitignore只适用于Git，不过其他版本控制软件要做的事情也是相似的。</p>
 <h1 id="验证测试"><a href="#验证测试" class="headerlink" title="验证测试"></a>验证测试</h1><p>打开终端，进入到项目所在目录，输入<code>gradle myproj</code>或<code>./gradlew myproj</code>。</p>
-<p>如果构建成功，Gradle会生成一个jar包和两个WAR包，分别位于<code>CommonProj/build/libs</code>、<code>WebProj1/build/libs</code>和<code>WebProj2/build/libs</code>。其中CommonProj是jar包，并且会被加到另外两个WAR包中（WEB-INF/lib）。</p>
-<p>接下来你需要展开两个WAR包，并与传统方式编译生成出来的内容进行比较。重点检查WEB-INF、WEB-INF/lib和WEB-INF/classes，如果二者一致，就说明打包打出来的内容是对的，否则需要根据实际情况来挪动源代码的文件。</p>
-<p>可以确定的是，打出来的包缺少CommonProj模块中的class及配置文件，因为它们都在WEB-INF/lib/CommonProj-1.0.jar中。另外WEB-INF/classes中会缺少config目录，然而事实上也不需要这个目录（将config中的内容摊到WEB-INF/classes下面才是正确的）。如果部署测试之后未发现问题，那么可以忽略这两点差异。</p>
+<p>如果构建成功，Gradle会生成一个jar包和两个WAR包，分别位于<code>CommonProj/build/libs</code>、<code>WebProj1/build/libs</code>和<code>WebProj2/build/libs</code>。其中CommonProj是jar包，并且会被加到另外两个WAR包中（WEB-INF&#x2F;lib）。</p>
+<p>接下来你需要展开两个WAR包，并与传统方式编译生成出来的内容进行比较。重点检查WEB-INF、WEB-INF&#x2F;lib和WEB-INF&#x2F;classes，如果二者一致，就说明打包打出来的内容是对的，否则需要根据实际情况来挪动源代码的文件。</p>
+<p>可以确定的是，打出来的包缺少CommonProj模块中的class及配置文件，因为它们都在WEB-INF&#x2F;lib&#x2F;CommonProj-1.0.jar中。另外WEB-INF&#x2F;classes中会缺少config目录，然而事实上也不需要这个目录（将config中的内容摊到WEB-INF&#x2F;classes下面才是正确的）。如果部署测试之后未发现问题，那么可以忽略这两点差异。</p>
 <p>项目能够正确打包，并且部署到Tomcat等中间件之后应用也能正常使用，你就可以把改动提交到版本控制系统，让同事也开始使用Gradle。</p>
 <h1 id="其他需求（待补完）"><a href="#其他需求（待补完）" class="headerlink" title="其他需求（待补完）"></a>其他需求（待补完）</h1><h2 id="不要改变项目目录结构"><a href="#不要改变项目目录结构" class="headerlink" title="不要改变项目目录结构"></a>不要改变项目目录结构</h2><p>考虑到实际生产过程中开发团队的学习成本与切换成本，可能无法要求团队全部切换到Gradle，也不能改变代码目录结构。这样的话Gradle配置文件需要进行以下额外的调整：</p>
 <p>根目录的build.gradle：</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">subprojects <span class="token punctuation">&#123;</span>
-    <span class="token comment">// ...</span>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">subprojects &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 手动指定路径</span></span><br><span class="line">    sourceSets &#123;</span><br><span class="line">        main &#123;</span><br><span class="line">            java &#123;</span><br><span class="line">                srcDirs = [<span class="string">&#x27;src&#x27;</span>]</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            resources &#123;</span><br><span class="line">                srcDirs = [<span class="string">&#x27;src/config&#x27;</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        test &#123;</span><br><span class="line">            java &#123;</span><br><span class="line">                srcDirs = [<span class="string">&#x27;test&#x27;</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    <span class="token comment">// 手动指定路径</span>
-    sourceSets <span class="token punctuation">&#123;</span>
-        main <span class="token punctuation">&#123;</span>
-            java <span class="token punctuation">&#123;</span>
-                srcDirs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'src'</span><span class="token punctuation">]</span>
-            <span class="token punctuation">&#125;</span>
+<p>WebProj1&#x2F;build.gradle 和 WebProj2&#x2F;build.gradle 需在文件中加入：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 手动指定Web文件路径</span></span><br><span class="line">webAppDirName = <span class="string">&#x27;WebRoot&#x27;</span></span><br></pre></td></tr></table></figure>
 
-            resources <span class="token punctuation">&#123;</span>
-                srcDirs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'src/config'</span><span class="token punctuation">]</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-
-        test <span class="token punctuation">&#123;</span>
-            java <span class="token punctuation">&#123;</span>
-                srcDirs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'test'</span><span class="token punctuation">]</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">// ...</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>WebProj1/build.gradle 和 WebProj2/build.gradle 需在文件中加入：</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token comment">// 手动指定Web文件路径</span>
-webAppDirName <span class="token operator">=</span> <span class="token string">'WebRoot'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>CommonProj/build.gradle不用调整，然而你仍然需要建立/CommonProj/lib目录，并把CommonProj所需的jar包放进去。</p>
+<p>CommonProj&#x2F;build.gradle不用调整，然而你仍然需要建立&#x2F;CommonProj&#x2F;lib目录，并把CommonProj所需的jar包放进去。</p>
 <h2 id="不要将CommonProj打成jar包"><a href="#不要将CommonProj打成jar包" class="headerlink" title="不要将CommonProj打成jar包"></a>不要将CommonProj打成jar包</h2><p>从上面的项目结构中可以看出，CommonProj中有一些公共的配置文件，将其打成jar包之后可能无法正确加载。为避免这种情况发生，可在打WAR包时将CommonProj的内容展开。</p>
 <p>在根目录的build.gradle中进行如下调整：</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">subprojects <span class="token punctuation">&#123;</span>
-    <span class="token comment">// ...</span>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">subprojects &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    processCommonProj = &#123; excludes = <span class="literal">null</span> -&gt;</span><br><span class="line">        war.from(zipTree(<span class="string">&quot;$&#123;project(&#x27;:CommonProj&#x27;).buildDir&#125;/libs/CommonProj.jar&quot;</span>)) &#123;</span><br><span class="line">            into <span class="string">&#x27;WEB-INF/classes&#x27;</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// WEB-INF/classes/META-INF 是解压之后出现的多余的东西，需要删除</span></span><br><span class="line">            exclude <span class="string">&#x27;META-INF/**&#x27;</span></span><br><span class="line">            <span class="keyword">if</span> (excludes != <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">for</span> (String <span class="attr">s:</span> excludes) &#123;</span><br><span class="line">                    exclude s</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        war.rootSpec.exclude <span class="string">&#x27;CommonProj.jar&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    processCommonProj <span class="token operator">=</span> <span class="token punctuation">&#123;</span> excludes <span class="token operator">=</span> null <span class="token operator">-></span>
-        war<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token function">zipTree</span><span class="token punctuation">(</span><span class="token string gstring">"<span class="token expression"><span class="token punctuation">$</span><span class="token punctuation">&#123;</span><span class="token function">project</span><span class="token punctuation">(</span><span class="token string">':CommonProj'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>buildDir<span class="token punctuation">&#125;</span></span>/libs/CommonProj.jar"</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            into <span class="token string">'WEB-INF/classes'</span>
-
-            <span class="token comment">// WEB-INF/classes/META-INF 是解压之后出现的多余的东西，需要删除</span>
-            exclude <span class="token string">'META-INF/**'</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>excludes <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">for</span> <span class="token punctuation">(</span>String s<span class="token punctuation">:</span> excludes<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                    exclude s
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-        war<span class="token punctuation">.</span>rootSpec<span class="token punctuation">.</span>exclude <span class="token string">'CommonProj.jar'</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在CommonProj/build.gradle中追加：</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token comment">// 将jar包名字固定下来，以便后面处理</span>
-jar <span class="token punctuation">&#123;</span>
-    archiveName <span class="token operator">=</span> <span class="token string">'CommonProj.jar'</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在CommonProj&#x2F;build.gradle中追加：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将jar包名字固定下来，以便后面处理</span></span><br><span class="line">jar &#123;</span><br><span class="line">    archiveName = <span class="string">&#x27;CommonProj.jar&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在两个WebProj的build.gradle中追加：</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">war <span class="token punctuation">&#123;</span>
-    <span class="token function">processCommonProj</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">war &#123;</span><br><span class="line">    processCommonProj()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="运行（待补完）"><a href="#运行（待补完）" class="headerlink" title="运行（待补完）"></a>运行（待补完）</h2><p><code>TODO</code></p>
 <h2 id="按不同环境打包不同的配置文件（待补完）"><a href="#按不同环境打包不同的配置文件（待补完）" class="headerlink" title="按不同环境打包不同的配置文件（待补完）"></a>按不同环境打包不同的配置文件（待补完）</h2><p><code>TODO</code></p>
@@ -655,7 +391,7 @@ jar <span class="token punctuation">&#123;</span>
       <a href="https://plusnan.me/2019/08/03/switch-to-idea-3/" title="从Eclipse切换到IDEA（三）：传统Web项目转为Gradle项目">https://plusnan.me/2019/08/03/switch-to-idea-3/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -669,12 +405,12 @@ jar <span class="token punctuation">&#123;</span>
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2019/07/25/non-functional-requirement/" rel="prev" title="那些容易遗忘的非功能性需求">
-                  <i class="fa fa-chevron-left"></i> 那些容易遗忘的非功能性需求
+                  <i class="fa fa-angle-left"></i> 那些容易遗忘的非功能性需求
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2019/08/16/genius-software/" rel="next" title="风险提示：请使用正版！">
-                  风险提示：请使用正版！ <i class="fa fa-chevron-right"></i>
+                  风险提示：请使用正版！ <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -694,15 +430,14 @@ jar <span class="token punctuation">&#123;</span>
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -710,26 +445,38 @@ jar <span class="token punctuation">&#123;</span>
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"a6083d1b6ac7150edb6df992b1dafebc"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"a6083d1b6ac7150edb6df992b1dafebc"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,10 +17,11 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="如果Web系统需要调用特定ActiveX控件才能操作，像身份证阅读器、读卡器、获取电脑网卡MAC地址等，而且预计控件厂商在一段时间内无法解决浏览器兼容性问题，那我们能不能想法让用户在非IE浏览器中也能调用控件呢？ 本文提出一种解决思路：开发一个“控件小助手”代理程序。该程序安装在用户电脑中，负责调用ActiveX控件，并在本地建立一个简易Web Server，而业务系统相关页面则通过Ajax（备注">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="如果Web系统需要调用特定ActiveX控件才能操作，像身份证阅读器、读卡器、获取电脑网卡MAC地址等，而且预计控件厂商在一段时间内无法解决浏览器兼容性问题，那我们能不能想法让用户在非IE浏览器中也能调用控件呢？ 本文提出一种解决思路：开发一个“控件小助手”代理程序。该程序安装在用户电脑中，负责调用ActiveX控件，并在本地建立一个简易Web Server，而业务系统相关页面则通过Ajax（备注">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Web开发中，如果无法回避ActiveX控件——一种让用户在非IE浏览器调用控件的思路">
 <meta property="og:url" content="https://plusnan.me/2019/11/25/activex-helper/index.html">
@@ -46,8 +45,12 @@
 <title>在Web开发中，如果无法回避ActiveX控件——一种让用户在非IE浏览器调用控件的思路 | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -62,8 +65,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -83,7 +86,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -92,11 +95,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -129,15 +128,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -158,17 +151,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,47 +172,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -237,11 +218,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="在Web开发中，如果无法回避ActiveX控件——一种让用户在非IE浏览器调用控件的思路 | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -284,216 +270,31 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>如果Web系统需要调用特定ActiveX控件才能操作，像身份证阅读器、读卡器、获取电脑网卡MAC地址等，而且预计控件厂商在一段时间内无法解决浏览器兼容性问题，那我们能不能想法让用户在非IE浏览器中也能调用控件呢？</p>
+    <div class="post-body" itemprop="articleBody"><p>如果Web系统需要调用特定ActiveX控件才能操作，像身份证阅读器、读卡器、获取电脑网卡MAC地址等，而且预计控件厂商在一段时间内无法解决浏览器兼容性问题，那我们能不能想法让用户在非IE浏览器中也能调用控件呢？</p>
 <p>本文提出一种解决思路：开发一个“控件小助手”代理程序。该程序安装在用户电脑中，负责调用ActiveX控件，并在本地建立一个简易Web Server，而业务系统相关页面则通过Ajax（备注：实际是JSONP）调用代理接口，从而间接地与控件交互。</p>
 <span id="more"></span>
 
 <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>假设业务系统未开启HTTPS，因为启用HTTPS后问题会变得复杂。</p>
 <h1 id="示意图"><a href="#示意图" class="headerlink" title="示意图"></a>示意图</h1><p>以身份证阅读器为例：</p>
-<pre class="line-numbers language-none"><code class="language-none">|-----------------------------------|                      |
-|              IE浏览器              |      Windows系统      |      外设
-|                                   |                      |
-|  |------------|   |------------|  |                      |
-|  | JavaScript |---| ActiveX控件 |-------身份证阅读器驱动--------身份证阅读器
-|  |------------|   |------------|  |                      |
-|                                   |                      |
-|-----------------------------------|                      |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">|-----------------------------------|                      |</span><br><span class="line">|              IE浏览器              |      Windows系统      |      外设</span><br><span class="line">|                                   |                      |</span><br><span class="line">|  |------------|   |------------|  |                      |</span><br><span class="line">|  | JavaScript |---| ActiveX控件 |-------身份证阅读器驱动--------身份证阅读器</span><br><span class="line">|  |------------|   |------------|  |                      |</span><br><span class="line">|                                   |                      |</span><br><span class="line">|-----------------------------------|                      |</span><br></pre></td></tr></table></figure>
 
 <p>ActiveX是微软专利，其他浏览器无法调用。然而，在用户电脑中安装一个代理程序（即“控件小助手”），便可通过代理程序来操作控件：</p>
-<pre class="line-numbers language-none"><code class="language-none">                             |------------------------------------|                |
-|------------------|         |               代理程序              |   Windows系统   |      外设
-|   Chrome浏览器    |         |                                    |                |
-|                  |         |  |--------------|   |----------|   |                |
-|  |------------|  |         |  |     小型      |   | ActiveX  |  |     身份证       |
-|  | JavaScript |-----JSONP-----|  Web Server  |---|   控件    |--------阅读器-----------身份证阅读器
-|  |------------|  |         |  |--------------|   |----------|   |     驱动        |
-|                  |         |                                    |                |
-|------------------|         |------------------------------------|                |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">                             |------------------------------------|                |</span><br><span class="line">|------------------|         |               代理程序              |   Windows系统   |      外设</span><br><span class="line">|   Chrome浏览器    |         |                                    |                |</span><br><span class="line">|                  |         |  |--------------|   |----------|   |                |</span><br><span class="line">|  |------------|  |         |  |     小型      |   | ActiveX  |  |     身份证       |</span><br><span class="line">|  | JavaScript |-----JSONP-----|  Web Server  |---|   控件    |--------阅读器-----------身份证阅读器</span><br><span class="line">|  |------------|  |         |  |--------------|   |----------|   |     驱动        |</span><br><span class="line">|                  |         |                                    |                |</span><br><span class="line">|------------------|         |------------------------------------|                |</span><br></pre></td></tr></table></figure>
 
 <h1 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h1><p>假设原先的读卡逻辑为：</p>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>readCardButton<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript"><span class="token function">readCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>读取身份证<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
-    <span class="token keyword">function</span> <span class="token function">readCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>cardReader<span class="token punctuation">.</span>Check<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">var</span> check <span class="token operator">=</span> window<span class="token punctuation">.</span>cardReader<span class="token punctuation">.</span><span class="token function">Check</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>check <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">var</span> ret <span class="token operator">=</span> window<span class="token punctuation">.</span>cardReader<span class="token punctuation">.</span><span class="token function">ReadCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">!==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                    <span class="token comment">// 读取不成功，需要重试</span>
-                    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                        <span class="token function">readCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-                    <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'读卡成功！身份证号码为'</span> <span class="token operator">+</span> window<span class="token punctuation">.</span>cardReader<span class="token punctuation">.</span>IdCard<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-                <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'无法读取身份证，请检查身份证阅读器是否连接到电脑，驱动是否正确安装！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-            <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'无法读取身份证，请检查身份证阅读器控件是否正确安装！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>object</span> <span class="token attr-name">classid</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>clsid:xxxxxx<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cardReader<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>object</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">id</span>=<span class="string">&quot;readCardButton&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;readCard()&quot;</span>&gt;</span>读取身份证<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">readCard</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">cardReader</span>.<span class="property">Check</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">var</span> check = <span class="variable language_">window</span>.<span class="property">cardReader</span>.<span class="title class_">Check</span>();</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (check &gt; <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> ret = <span class="variable language_">window</span>.<span class="property">cardReader</span>.<span class="title class_">ReadCard</span>();</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">if</span> (ret !== <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="comment">// 读取不成功，需要重试</span></span></span><br><span class="line"><span class="language-javascript">                    <span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                        <span class="title function_">readCard</span>()</span></span><br><span class="line"><span class="language-javascript">                    &#125;, <span class="number">1000</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="title function_">alert</span>(<span class="string">&#x27;读卡成功！身份证号码为&#x27;</span> + <span class="variable language_">window</span>.<span class="property">cardReader</span>.<span class="property">IdCard</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&#x27;无法读取身份证，请检查身份证阅读器是否连接到电脑，驱动是否正确安装！&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">alert</span>(<span class="string">&#x27;无法读取身份证，请检查身份证阅读器控件是否正确安装！&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">classid</span>=<span class="string">&quot;clsid:xxxxxx&quot;</span> <span class="attr">id</span>=<span class="string">&quot;cardReader&quot;</span> <span class="attr">width</span>=<span class="string">&quot;0&quot;</span> <span class="attr">height</span>=<span class="string">&quot;0&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="小助手原型"><a href="#小助手原型" class="headerlink" title="小助手原型"></a>小助手原型</h2><p>我们采用C#快速实现原型程序，这样的话需要提前准备好Visual Studio。</p>
 <p>进入Visual Studio，新建“Windows 窗体应用 (.Net Framework)”，命名为ControlHelper，并在NuGet管理器中安装<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05hbmN5RngvTmFuY3k=">Nancy<i class="fa fa-external-link-alt"></i></span>。在窗体Form1中添加身份证阅读器控件，命名为CardReader。</p>
 <p>Form1.cs代码如下：</p>
-<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">Nancy<span class="token punctuation">.</span>Hosting<span class="token punctuation">.</span>Self</span><span class="token punctuation">;</span>
-<span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
-<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Windows<span class="token punctuation">.</span>Forms</span><span class="token punctuation">;</span>
-<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>Tasks</span><span class="token punctuation">;</span>
-
-<span class="token keyword">namespace</span> <span class="token namespace">ControlHelper</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> <span class="token class-name">Form1</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Form</span></span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">private</span> <span class="token class-name">NancyHost</span> server <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">public</span> <span class="token function">Form1</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token function">InitializeComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Form1_Load</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token comment">// 启动Web Server</span>
-            server <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">NancyHost</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Uri</span><span class="token punctuation">(</span><span class="token string">"http://127.0.0.1:12345"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            server<span class="token punctuation">.</span><span class="token function">Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token keyword">public</span> <span class="token return-type class-name">CheckResult</span> <span class="token function">Check</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token class-name"><span class="token keyword">var</span></span> ret <span class="token operator">=</span> CardReader<span class="token punctuation">.</span><span class="token function">Check</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name"><span class="token keyword">var</span></span> obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">CheckResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
-            <span class="token punctuation">&#123;</span>
-                obj<span class="token punctuation">.</span>Result <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                obj<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">"身份证阅读器检测成功！"</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">else</span>
-            <span class="token punctuation">&#123;</span>
-                obj<span class="token punctuation">.</span>Result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-                obj<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">"无法读取身份证，请检查身份证阅读器是否连接到电脑，驱动是否正确安装！"</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-
-            <span class="token keyword">return</span> obj<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token return-type class-name">Task<span class="token punctuation">&lt;</span>IdCard<span class="token punctuation">></span></span> <span class="token function">ReadIdCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token class-name"><span class="token keyword">var</span></span> obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">IdCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            obj<span class="token punctuation">.</span>result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            obj<span class="token punctuation">.</span>message <span class="token operator">=</span> <span class="token string">"无法读取身份证，请重试！"</span><span class="token punctuation">;</span>
-
-            <span class="token keyword">try</span>
-            <span class="token punctuation">&#123;</span>
-                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">var</span></span> retry <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> retry <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span> retry<span class="token operator">--</span><span class="token punctuation">)</span>
-                <span class="token punctuation">&#123;</span>
-                    <span class="token class-name"><span class="token keyword">var</span></span> ret <span class="token operator">=</span> CardReader<span class="token punctuation">.</span><span class="token function">ReadCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token keyword">if</span> <span class="token punctuation">(</span>ret <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-                    <span class="token punctuation">&#123;</span>
-                        obj<span class="token punctuation">.</span>Result <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-                        obj<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">"读卡成功"</span><span class="token punctuation">;</span>
-                        obj<span class="token punctuation">.</span>IdCard <span class="token operator">=</span> CardReader<span class="token punctuation">.</span>IdCard<span class="token punctuation">;</span>
-                        <span class="token comment">// 此处省略其他属性</span>
-                        <span class="token keyword">break</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">&#125;</span>
-                    System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>Thread<span class="token punctuation">.</span><span class="token function">Sleep</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span>
-            <span class="token punctuation">&#123;</span>
-                
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">return</span> obj<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Nancy.Hosting.Self;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Windows.Forms;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">ControlHelper</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">Form1</span> : <span class="title">Form</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> NancyHost server = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Form1</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            InitializeComponent();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Form1_Load</span>(<span class="params"><span class="built_in">object</span> sender, EventArgs e</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 启动Web Server</span></span><br><span class="line">            server = <span class="keyword">new</span> NancyHost(<span class="keyword">new</span> Uri(<span class="string">&quot;http://127.0.0.1:12345&quot;</span>));</span><br><span class="line">            server.Start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> CheckResult <span class="title">Check</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> ret = CardReader.Check();</span><br><span class="line">            <span class="keyword">var</span> obj = <span class="keyword">new</span> CheckResult();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (ret &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                obj.Result = <span class="number">1</span>;</span><br><span class="line">                obj.Message = <span class="string">&quot;身份证阅读器检测成功！&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                obj.Result = <span class="number">0</span>;</span><br><span class="line">                obj.Message = <span class="string">&quot;无法读取身份证，请检查身份证阅读器是否连接到电脑，驱动是否正确安装！&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> obj;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task&lt;IdCard&gt; <span class="title">ReadIdCard</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> obj = <span class="keyword">new</span> IdCard();</span><br><span class="line"></span><br><span class="line">            obj.result = <span class="number">0</span>;</span><br><span class="line">            obj.message = <span class="string">&quot;无法读取身份证，请重试！&quot;</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> retry = <span class="number">3</span>; retry &gt; <span class="number">0</span>; retry--)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">var</span> ret = CardReader.ReadCard();</span><br><span class="line">                    <span class="keyword">if</span> (ret == <span class="number">0</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        obj.Result = <span class="number">1</span>;</span><br><span class="line">                        obj.Message = <span class="string">&quot;读卡成功&quot;</span>;</span><br><span class="line">                        obj.IdCard = CardReader.IdCard;</span><br><span class="line">                        <span class="comment">// 此处省略其他属性</span></span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    System.Threading.Thread.Sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">catch</span> (Exception e)</span><br><span class="line">            &#123;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> obj;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Helper.cs：</p>
-<pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">Nancy</span><span class="token punctuation">;</span>
-<span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
-
-<span class="token keyword">namespace</span> <span class="token namespace">ControlHelper</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Helper</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">NancyModule</span></span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">public</span> <span class="token function">Helper</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"/idcard/check"</span><span class="token punctuation">,</span> param <span class="token operator">=></span> Response<span class="token punctuation">.</span><span class="token function">AsJson</span><span class="token punctuation">(</span>Program<span class="token punctuation">.</span>mainForm<span class="token punctuation">.</span><span class="token function">Check</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token comment">// 读卡不一定能立刻返回结果，使用async</span>
-            <span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"/idcard/read"</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>context<span class="token punctuation">,</span> t<span class="token punctuation">)</span> <span class="token operator">=></span> Response<span class="token punctuation">.</span><span class="token function">AsJson</span><span class="token punctuation">(</span><span class="token keyword">await</span> Program<span class="token punctuation">.</span>mainForm<span class="token punctuation">.</span><span class="token function">ReadIdCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Serializable</span></span><span class="token punctuation">]</span>
-    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">IdCard</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> Result <span class="token punctuation">&#123;</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
-        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> Message <span class="token punctuation">&#123;</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
-        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> IdCard <span class="token punctuation">&#123;</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
-        <span class="token comment">// ...</span>
-        <span class="token comment">// 其他属性：姓名、性别、民族、出生日期、地址、签发机关、有效期、照片等</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Serializable</span></span><span class="token punctuation">]</span>
-    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CheckResult</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> Result <span class="token punctuation">&#123;</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
-        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> Message <span class="token punctuation">&#123;</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Nancy;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">ControlHelper</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Helper</span> : <span class="title">NancyModule</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Helper</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            Get(<span class="string">&quot;/idcard/check&quot;</span>, param =&gt; Response.AsJson(Program.mainForm.Check()));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 读卡不一定能立刻返回结果，使用async</span></span><br><span class="line">            Get(<span class="string">&quot;/idcard/read&quot;</span>, <span class="keyword">async</span> (context, t) =&gt; Response.AsJson(<span class="keyword">await</span> Program.mainForm.ReadIdCard()));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Serializable</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">IdCard</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> Result &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> Message &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> IdCard &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="comment">// 其他属性：姓名、性别、民族、出生日期、地址、签发机关、有效期、照片等</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Serializable</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CheckResult</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">int</span> Result &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> Message &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>代码中的监听端口为12345。为了避免冲突，可以修改成其他端口（最大65535，尽量用五位数）。由于监听地址为127.0.0.1（本机），与业务系统不同，会涉及跨域问题。为了避免离题讨论，本文代码以GET方式提供服务，并返回JSON格式数据，以便业务系统通过JSONP调用，不使用POST。</p>
 <h2 id="Web应用页面代码调整"><a href="#Web应用页面代码调整" class="headerlink" title="Web应用页面代码调整"></a>Web应用页面代码调整</h2><p>调整读卡按钮的逻辑，先判断ActiveX控件是否可用。如果可用，沿用原先的ActiveX操作方式；如果不可用，则尝试通过$.ajax向“小助手”的小型Web Server发送请求。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">readCardNew</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#readCardButton'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prop</span><span class="token punctuation">(</span><span class="token string">'disabled'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// 先尝试调用ActiveX控件，调不通的话就调用辅助程序</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>cardreader<span class="token punctuation">.</span>ReadCard<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token function">readCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#readCardButton'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prop</span><span class="token punctuation">(</span><span class="token string">'disabled'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-            <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'http://localhost:12345/idcard/check'</span><span class="token punctuation">,</span>
-            <span class="token literal-property property">dataType</span><span class="token operator">:</span> <span class="token string">'jsonp'</span><span class="token punctuation">,</span>
-            <span class="token literal-property property">timeout</span><span class="token operator">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
-            <span class="token literal-property property">cache</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-            <span class="token function-variable function">success</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">data1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>data1<span class="token punctuation">.</span>Result <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                    <span class="token function">alert</span><span class="token punctuation">(</span>data1<span class="token punctuation">.</span>Message<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#readCardButton'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prop</span><span class="token punctuation">(</span><span class="token string">'disabled'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-                    $<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-                        <span class="token literal-property property">url</span><span class="token operator">:</span> <span class="token string">'http://localhost:12345/idcard/read'</span><span class="token punctuation">,</span>
-                        <span class="token literal-property property">dataType</span><span class="token operator">:</span> <span class="token string">'jsonp'</span><span class="token punctuation">,</span>
-                        <span class="token literal-property property">cache</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-                        <span class="token function-variable function">success</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">data2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                            <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#readCardButton'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prop</span><span class="token punctuation">(</span><span class="token string">'disabled'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                            <span class="token keyword">if</span> <span class="token punctuation">(</span>data2<span class="token punctuation">.</span>Result <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                                <span class="token function">alert</span><span class="token punctuation">(</span>data2<span class="token punctuation">.</span>Message<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-                                <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'读卡成功！身份证号为'</span> <span class="token operator">+</span> data2<span class="token punctuation">.</span>IdCard<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                            <span class="token punctuation">&#125;</span>
-                        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-                        <span class="token function-variable function">error</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                            <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'无法读取身份证，请重试！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                            <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#readCardButton'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prop</span><span class="token punctuation">(</span><span class="token string">'disabled'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                        <span class="token punctuation">&#125;</span>
-                    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-            <span class="token function-variable function">error</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'无法读取身份证，请检查小助手是否启动！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#readCardButton'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prop</span><span class="token punctuation">(</span><span class="token string">'disabled'</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">readCardNew</span>(<span class="params"></span>) &#123;</span><br><span class="line">    $(<span class="string">&#x27;#readCardButton&#x27;</span>).<span class="title function_">prop</span>(<span class="string">&#x27;disabled&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line">    <span class="comment">// 先尝试调用ActiveX控件，调不通的话就调用辅助程序</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">window</span>.<span class="property">cardreader</span>.<span class="property">ReadCard</span>) &#123;</span><br><span class="line">        <span class="title function_">readCard</span>();</span><br><span class="line">        $(<span class="string">&#x27;#readCardButton&#x27;</span>).<span class="title function_">prop</span>(<span class="string">&#x27;disabled&#x27;</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;http://localhost:12345/idcard/check&#x27;</span>,</span><br><span class="line">            <span class="attr">dataType</span>: <span class="string">&#x27;jsonp&#x27;</span>,</span><br><span class="line">            <span class="attr">timeout</span>: <span class="number">500</span>,</span><br><span class="line">            <span class="attr">cache</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">data1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (data1.<span class="property">Result</span> === <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="title function_">alert</span>(data1.<span class="property">Message</span>);</span><br><span class="line">                    $(<span class="string">&#x27;#readCardButton&#x27;</span>).<span class="title function_">prop</span>(<span class="string">&#x27;disabled&#x27;</span>, <span class="literal">false</span>);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">                        <span class="attr">url</span>: <span class="string">&#x27;http://localhost:12345/idcard/read&#x27;</span>,</span><br><span class="line">                        <span class="attr">dataType</span>: <span class="string">&#x27;jsonp&#x27;</span>,</span><br><span class="line">                        <span class="attr">cache</span>: <span class="literal">false</span>,</span><br><span class="line">                        <span class="attr">success</span>: <span class="keyword">function</span> (<span class="params">data2</span>) &#123;</span><br><span class="line">                            $(<span class="string">&#x27;#readCardButton&#x27;</span>).<span class="title function_">prop</span>(<span class="string">&#x27;disabled&#x27;</span>, <span class="literal">false</span>);</span><br><span class="line">                            <span class="keyword">if</span> (data2.<span class="property">Result</span> === <span class="number">0</span>) &#123;</span><br><span class="line">                                <span class="title function_">alert</span>(data2.<span class="property">Message</span>);</span><br><span class="line">                            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                                <span class="title function_">alert</span>(<span class="string">&#x27;读卡成功！身份证号为&#x27;</span> + data2.<span class="property">IdCard</span>);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                        <span class="attr">error</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                            <span class="title function_">alert</span>(<span class="string">&#x27;无法读取身份证，请重试！&#x27;</span>);</span><br><span class="line">                            $(<span class="string">&#x27;#readCardButton&#x27;</span>).<span class="title function_">prop</span>(<span class="string">&#x27;disabled&#x27;</span>, <span class="literal">false</span>);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">error</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                <span class="title function_">alert</span>(<span class="string">&#x27;无法读取身份证，请检查小助手是否启动！&#x27;</span>);</span><br><span class="line">                $(<span class="string">&#x27;#readCardButton&#x27;</span>).<span class="title function_">prop</span>(<span class="string">&#x27;disabled&#x27;</span>, <span class="literal">false</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="投入商业使用之前"><a href="#投入商业使用之前" class="headerlink" title="投入商业使用之前"></a>投入商业使用之前</h1><p>以上是实验用原型，质量粗糙，还需要进行一些功能优化才能交付用户，例如：</p>
 <ul>
@@ -525,7 +326,7 @@
       <a href="https://plusnan.me/2019/11/25/activex-helper/" title="在Web开发中，如果无法回避ActiveX控件——一种让用户在非IE浏览器调用控件的思路">https://plusnan.me/2019/11/25/activex-helper/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -539,12 +340,12 @@
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2019/09/21/edit-page/" rel="prev" title="并不简单的基础开发工作（三）：信息录入表单">
-                  <i class="fa fa-chevron-left"></i> 并不简单的基础开发工作（三）：信息录入表单
+                  <i class="fa fa-angle-left"></i> 并不简单的基础开发工作（三）：信息录入表单
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2020/01/22/logger/" rel="next" title="如何正确地打日志">
-                  如何正确地打日志 <i class="fa fa-chevron-right"></i>
+                  如何正确地打日志 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -564,15 +365,14 @@
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -580,26 +380,38 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"c12f2e983cb0db096d15a0adb228a3c6"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"c12f2e983cb0db096d15a0adb228a3c6"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>

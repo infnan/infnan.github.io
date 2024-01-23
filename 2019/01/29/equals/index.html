@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
@@ -19,12 +17,13 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.9.0","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="甲方前一段时间使用360代码卫士对我们项目进行了“代码审计”，其中一个问题是“使用equals()来判断字符串是否为空”。由于甲方只关心问题数量，不关心问题性质（甚至连算不算问题都不在乎），我们只能硬着头皮去按甲方要求修改。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="甲方前一段时间使用360代码卫士对我们项目进行了“代码审计”，其中一个问题是“使用equals()来判断字符串是否为空”。由于甲方只关心问题数量，不关心问题性质（甚至连算不算问题都不在乎），我们只能硬着头皮去按甲方要求修改。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="批量将&amp;#34;&amp;#34;.equals()替换成StringUtils.isEmpty()">
+<meta property="og:title" content="批量将&#34;&#34;.equals()替换成StringUtils.isEmpty()">
 <meta property="og:url" content="https://plusnan.me/2019/01/29/equals/index.html">
 <meta property="og:site_name" content="plusNaN">
 <meta property="og:description" content="甲方前一段时间使用360代码卫士对我们项目进行了“代码审计”，其中一个问题是“使用equals()来判断字符串是否为空”。由于甲方只关心问题数量，不关心问题性质（甚至连算不算问题都不在乎），我们只能硬着头皮去按甲方要求修改。">
@@ -46,8 +45,12 @@
 <title>批量将&#34;&#34;.equals()替换成StringUtils.isEmpty() | plusNaN</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false}</script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
 
 
 
@@ -62,8 +65,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏" role="button">
         <span class="toggle-line"></span>
@@ -83,7 +86,7 @@
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
         <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
@@ -92,11 +95,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger">搜索
         </a>
@@ -129,15 +128,9 @@
     </div>
   </div>
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -158,17 +151,17 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="plusNaN"
       src="/img/avatar.png">
   <p class="site-author-name" itemprop="name">plusNaN</p>
   <div class="site-description" itemprop="description">我为长者续NaN秒</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">65</span>
+          <span class="site-state-item-count">72</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -179,47 +172,35 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-count">61</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
         <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me"><i class="envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="/rss.xml" title="RSS → &#x2F;rss.xml"><i class="rss fa-fw"></i>RSS</a>
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
       </span>
   </div>
-  <div class="cc-license site-overview-item animated" itemprop="license">
-    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
   </div>
-
-
 
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+  </aside>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
 
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -237,11 +218,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/avatar.png">
       <meta itemprop="name" content="plusNaN">
-      <meta itemprop="description" content="我为长者续NaN秒">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="批量将&#34;&#34;.equals()替换成StringUtils.isEmpty() | plusNaN">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -284,198 +270,18 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p>甲方前一段时间使用360代码卫士对我们项目进行了“代码审计”，其中一个问题是“使用equals()来判断字符串是否为空”。由于甲方只关心问题数量，不关心问题性质（甚至连算不算问题都不在乎），我们只能硬着头皮去按甲方要求修改。</p>
+    <div class="post-body" itemprop="articleBody"><p>甲方前一段时间使用360代码卫士对我们项目进行了“代码审计”，其中一个问题是“使用equals()来判断字符串是否为空”。由于甲方只关心问题数量，不关心问题性质（甚至连算不算问题都不在乎），我们只能硬着头皮去按甲方要求修改。</p>
 <span id="more"></span>
 
 <h1 id="修改的必要性"><a href="#修改的必要性" class="headerlink" title="修改的必要性"></a>修改的必要性</h1><p>首先看一下equals()和length()的实现：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span><span class="token class-name">Object</span> anObject<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> anObject<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>anObject <span class="token keyword">instanceof</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">String</span> anotherString <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span>anObject<span class="token punctuation">;</span>
-        <span class="token keyword">int</span> n <span class="token operator">=</span> value<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> anotherString<span class="token punctuation">.</span>value<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">char</span> v1<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
-            <span class="token keyword">char</span> v2<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> anotherString<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
-            <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span>n<span class="token operator">--</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>v1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> v2<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
-                    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-                i<span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> value<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object anObject)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span> == anObject) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">anotherString</span> <span class="operator">=</span> (String)anObject;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> value.length;</span><br><span class="line">        <span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line">            <span class="type">char</span> v1[] = value;</span><br><span class="line">            <span class="type">char</span> v2[] = anotherString.value;</span><br><span class="line">            <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">length</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> value.length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>很明显，equals也是先比较字符串长度，而且空串长度是0，即使进入while处也跑不起来，因此在业务系统这种意义上不会有任何性能差异。另一方面，我们进行了简单的性能测试（循环一千万次），结果同样表明完全没有必要改。</p>
 <h1 id="施工"><a href="#施工" class="headerlink" title="施工"></a>施工</h1><p>为了交差，我们不得不去做没有必要的事情，所以我们需要考虑一种代价最小、没有副作用的改法。考虑到业务系统并不差调用一个函数的时间，我们干脆直接使用StringUtils工具类，既增加代码可读性，也便于装逼。代码通过awk和bash进行自动处理。</p>
 <h2 id="检查公共函数"><a href="#检查公共函数" class="headerlink" title="检查公共函数"></a>检查公共函数</h2><p>先确认import org.apache.commons.lang.StringUtils是否能正确导入。如果不能，那么需要导入jar包（commons-lang.jar）。</p>
-<h2 id="equals-awk"><a href="#equals-awk" class="headerlink" title="equals.awk"></a>equals.awk</h2><pre class="line-numbers language-awk" data-language="awk"><code class="language-awk"># 注意：mac系统要使用gawk
+<h2 id="equals-awk"><a href="#equals-awk" class="headerlink" title="equals.awk"></a>equals.awk</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意：mac系统要使用gawk</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">BEGIN</span> &#123;</span><br><span class="line">    imported = <span class="number">0</span>;</span><br><span class="line">    last_import_line = -<span class="number">1</span>;</span><br><span class="line">    bufflen = <span class="number">0</span>;</span><br><span class="line">    changed = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修正第一类equals判断问题 &quot;&quot;.equals(xxx)，提取括号里的内容，pos需要是恰好为括号的位置，如果失败则返回-1。</span></span><br><span class="line"><span class="keyword">function</span> extract1(str, pos,        i, level, endpos, result, len, arr) &#123;</span><br><span class="line">    level = <span class="number">0</span>;</span><br><span class="line">    endpos = -<span class="number">1</span>;</span><br><span class="line">    result = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    len = length(str);</span><br><span class="line">    split(str, arr, <span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=pos; i&lt;=length(arr); i++) &#123;</span><br><span class="line">        result = result arr[i];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (arr[i]==<span class="string">&quot;(&quot;</span>) &#123;</span><br><span class="line">            level++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[i]==<span class="string">&quot;)&quot;</span>) &#123;</span><br><span class="line">            level--;</span><br><span class="line">            <span class="keyword">if</span> (level == <span class="number">0</span>) &#123;</span><br><span class="line">                endpos=i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (endpos == -<span class="number">1</span>) &#123;</span><br><span class="line">        return -<span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修正第一类equals判断问题： &quot;&quot;.equals(xxx)</span></span><br><span class="line"><span class="keyword">function</span> fix_equals1(str,      result, m, txt, tmp) &#123;</span><br><span class="line">    result = str;</span><br><span class="line">    m = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        m = match(substr(result, m + <span class="number">1</span>), <span class="regexp">/[^\\]&quot;&quot;\.equals/</span>);</span><br><span class="line">        <span class="keyword">if</span> (m &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            txt = extract1(result, m + <span class="number">10</span>);</span><br><span class="line">            <span class="keyword">if</span> (txt != -<span class="number">1</span>) &#123;</span><br><span class="line">                result = substr(result, <span class="number">1</span>, m) <span class="string">&quot;StringUtils.isEmpty&quot;</span> txt substr(result, m + <span class="number">10</span> + length(txt));</span><br><span class="line">                m = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修正第二类equals判断问题xxx.equals(&quot;&quot;)，提取其中的xxx，匹配规则：括号、字母、数字，碰到别的东西就停止</span></span><br><span class="line"><span class="keyword">function</span> extract2(str, pos,     i, level, result, ch, arr) &#123;</span><br><span class="line">    level = <span class="number">0</span>;</span><br><span class="line">    split(str, arr, <span class="string">&quot;&quot;</span>);</span><br><span class="line">    result = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = pos; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        ch = arr[i];</span><br><span class="line">        <span class="keyword">if</span> (match(ch, <span class="regexp">/[a-zA-Z0-9_ \t\.]/</span>)) &#123;</span><br><span class="line">            <span class="comment"># 放行</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">&quot;)&quot;</span>) &#123;</span><br><span class="line">            level++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ch == <span class="string">&quot;(&quot;</span>) &#123;</span><br><span class="line">            level--;</span><br><span class="line">            <span class="keyword">if</span> (level &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (level == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        result = ch result;</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修正第二类equals判断问题：xxx.equals(&quot;&quot;)</span></span><br><span class="line"><span class="keyword">function</span> fix_equals2(str,    result, m, txt, tmp) &#123;</span><br><span class="line">    result = str;</span><br><span class="line">    m = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        m = match(substr(result, m + <span class="number">1</span>), <span class="regexp">/\.equals\(&quot;&quot;\)/</span>);</span><br><span class="line">        <span class="keyword">if</span> (m &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            txt = extract2(result, m - <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (txt != <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">                result = substr(result, <span class="number">1</span>, m - length(txt) - <span class="number">1</span>) <span class="string">&quot;StringUtils.isEmpty(&quot;</span> txt <span class="string">&quot;)&quot;</span> substr(result, m + <span class="number">11</span>);</span><br><span class="line">                m = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="regexp">/^import.*;$/</span> &#123;</span><br><span class="line">    <span class="comment"># 检查有没有import字符串工具类</span></span><br><span class="line">    <span class="keyword">if</span> (imported == <span class="number">0</span> &amp;&amp; match(<span class="variable">$0</span>, <span class="regexp">/StringUtils;/</span>)) &#123;</span><br><span class="line">        imported = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    last_import_line = NR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    line = <span class="variable">$0</span>;</span><br><span class="line"></span><br><span class="line">    line = fix_equals1(line);</span><br><span class="line">    line = fix_equals2(line);</span><br><span class="line"></span><br><span class="line">    gsub(<span class="regexp">/!StringUtils\.isEmpty/</span>, <span class="string">&quot;StringUtils.isNotEmpty&quot;</span>, line);</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 实际上不必要的trim。如果你的项目确实会出现空格，请谨慎处理。</span></span><br><span class="line">    line = gensub(<span class="regexp">/StringUtils\.isEmpty\(([a-zA-Z0-9_ ]+)\.trim\(\)[ ]*\)/</span>, <span class="string">&quot;StringUtils.isEmpty(\\1)&quot;</span>, <span class="string">&quot;g&quot;</span>, line);</span><br><span class="line">    line = gensub(<span class="regexp">/StringUtils\.isNotEmpty\(([a-zA-Z0-9_ ]+)\.trim\(\)[ ]*\)/</span>, <span class="string">&quot;StringUtils.isNotEmpty(\\1)&quot;</span>, <span class="string">&quot;g&quot;</span>, line);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$0</span> != line) &#123;</span><br><span class="line">        changed = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 在完成分析import之前不要直接输出，以便插入import StringUtils语句</span></span><br><span class="line">    buff[bufflen + <span class="number">1</span>] = line;</span><br><span class="line">    bufflen = bufflen + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= bufflen; i++) &#123;</span><br><span class="line">        print buff[i];</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 插入 import StringUtils。如果有import语句就插到所有import后面，否则放在第二行（正常情况下package com.xxx是第一行）</span></span><br><span class="line">        <span class="keyword">if</span> (imported != <span class="number">1</span> &amp;&amp; (i == last_import_line || last_import_line == -<span class="number">1</span>) &amp;&amp; changed == <span class="number">1</span>) &#123;</span><br><span class="line">            print <span class="string">&quot;import org.apache.commons.lang.StringUtils;&quot;</span>;</span><br><span class="line">            imported = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-BEGIN &#123;
-    imported &#x3D; 0;
-    last_import_line &#x3D; -1;
-    bufflen &#x3D; 0;
-    changed &#x3D; 0;
-&#125;
-
-# 修正第一类equals判断问题 &quot;&quot;.equals(xxx)，提取括号里的内容，pos需要是恰好为括号的位置，如果失败则返回-1。
-function extract1(str, pos,        i, level, endpos, result, len, arr) &#123;
-    level &#x3D; 0;
-    endpos &#x3D; -1;
-    result &#x3D; &quot;&quot;;
-
-    len &#x3D; length(str);
-    split(str, arr, &quot;&quot;);
-
-    for (i&#x3D;pos; i&lt;&#x3D;length(arr); i++) &#123;
-        result &#x3D; result arr[i];
-
-        if (arr[i]&#x3D;&#x3D;&quot;(&quot;) &#123;
-            level++;
-        &#125; else if (arr[i]&#x3D;&#x3D;&quot;)&quot;) &#123;
-            level--;
-            if (level &#x3D;&#x3D; 0) &#123;
-                endpos&#x3D;i;
-                break;
-            &#125;
-        &#125;
-    &#125;
-
-    if (endpos &#x3D;&#x3D; -1) &#123;
-        return -1;
-    &#125; else &#123;
-        return result;
-    &#125;
-&#125;
-
-# 修正第一类equals判断问题： &quot;&quot;.equals(xxx)
-function fix_equals1(str,      result, m, txt, tmp) &#123;
-    result &#x3D; str;
-    m &#x3D; 0;
-
-    while (1) &#123;
-        m &#x3D; match(substr(result, m + 1), &#x2F;[^\\]&quot;&quot;\.equals&#x2F;);
-        if (m &gt; 0) &#123;
-            txt &#x3D; extract1(result, m + 10);
-            if (txt !&#x3D; -1) &#123;
-                result &#x3D; substr(result, 1, m) &quot;StringUtils.isEmpty&quot; txt substr(result, m + 10 + length(txt));
-                m &#x3D; 0;
-            &#125;
-        &#125; else &#123;
-            break;
-        &#125;
-    &#125;
-
-    return result;
-&#125;
-
-# 修正第二类equals判断问题xxx.equals(&quot;&quot;)，提取其中的xxx，匹配规则：括号、字母、数字，碰到别的东西就停止
-function extract2(str, pos,     i, level, result, ch, arr) &#123;
-    level &#x3D; 0;
-    split(str, arr, &quot;&quot;);
-    result &#x3D; &quot;&quot;;
-
-    for (i &#x3D; pos; i &gt; 0; i--) &#123;
-        ch &#x3D; arr[i];
-        if (match(ch, &#x2F;[a-zA-Z0-9_ \t\.]&#x2F;)) &#123;
-            # 放行
-        &#125; else if (ch &#x3D;&#x3D; &quot;)&quot;) &#123;
-            level++;
-        &#125; else if (ch &#x3D;&#x3D; &quot;(&quot;) &#123;
-            level--;
-            if (level &lt; 0) &#123;
-                break;
-            &#125;
-        &#125; else &#123;
-            if (level &#x3D;&#x3D; 0) &#123;
-                break;
-            &#125;
-        &#125;
-        result &#x3D; ch result;
-    &#125;
-    return result;
-&#125;
-
-# 修正第二类equals判断问题：xxx.equals(&quot;&quot;)
-function fix_equals2(str,    result, m, txt, tmp) &#123;
-    result &#x3D; str;
-    m &#x3D; 0;
-
-    while (1) &#123;
-        m &#x3D; match(substr(result, m + 1), &#x2F;\.equals\(&quot;&quot;\)&#x2F;);
-        if (m &gt; 0) &#123;
-            txt &#x3D; extract2(result, m - 1);
-            if (txt !&#x3D; &quot;&quot;) &#123;
-                result &#x3D; substr(result, 1, m - length(txt) - 1) &quot;StringUtils.isEmpty(&quot; txt &quot;)&quot; substr(result, m + 11);
-                m &#x3D; 0;
-            &#125;
-        &#125; else &#123;
-            break;
-        &#125;
-    &#125;
-
-    return result;
-&#125;
-
-&#x2F;^import.*;$&#x2F; &#123;
-    # 检查有没有import字符串工具类
-    if (imported &#x3D;&#x3D; 0 &amp;&amp; match($0, &#x2F;StringUtils;&#x2F;)) &#123;
-        imported &#x3D; 1;
-    &#125;
-    last_import_line &#x3D; NR;
-&#125;
-
-&#123;
-    line &#x3D; $0;
-
-    line &#x3D; fix_equals1(line);
-    line &#x3D; fix_equals2(line);
-
-    gsub(&#x2F;!StringUtils\.isEmpty&#x2F;, &quot;StringUtils.isNotEmpty&quot;, line);
-
-    # 实际上不必要的trim。如果你的项目确实会出现空格，请谨慎处理。
-    line &#x3D; gensub(&#x2F;StringUtils\.isEmpty\(([a-zA-Z0-9_ ]+)\.trim\(\)[ ]*\)&#x2F;, &quot;StringUtils.isEmpty(\\1)&quot;, &quot;g&quot;, line);
-    line &#x3D; gensub(&#x2F;StringUtils\.isNotEmpty\(([a-zA-Z0-9_ ]+)\.trim\(\)[ ]*\)&#x2F;, &quot;StringUtils.isNotEmpty(\\1)&quot;, &quot;g&quot;, line);
-
-    if ($0 !&#x3D; line) &#123;
-        changed &#x3D; 1;
-    &#125;
-
-    # 在完成分析import之前不要直接输出，以便插入import StringUtils语句
-    buff[bufflen + 1] &#x3D; line;
-    bufflen &#x3D; bufflen + 1;
-&#125;
-
-END &#123;
-    for (i &#x3D; 1; i &lt;&#x3D; bufflen; i++) &#123;
-        print buff[i];
-
-        # 插入 import StringUtils。如果有import语句就插到所有import后面，否则放在第二行（正常情况下package com.xxx是第一行）
-        if (imported !&#x3D; 1 &amp;&amp; (i &#x3D;&#x3D; last_import_line || last_import_line &#x3D;&#x3D; -1) &amp;&amp; changed &#x3D;&#x3D; 1) &#123;
-            print &quot;import org.apache.commons.lang.StringUtils;&quot;;
-            imported &#x3D; 1;
-        &#125;
-    &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="equals-sh"><a href="#equals-sh" class="headerlink" title="equals.sh"></a>equals.sh</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
-<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">LC_ALL</span></span><span class="token operator">=</span>zh_CN.GBK         <span class="token comment"># 代码用UTF-8的，本行需要删掉</span>
-<span class="token builtin class-name">cd</span> 代码所在路径
-<span class="token function">find</span> <span class="token builtin class-name">.</span> -name <span class="token string">"*.java"</span> <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token builtin class-name">read</span> <span class="token function">file</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$file</span>
-    <span class="token function">awk</span> -f equals.awk <span class="token variable">$file</span> <span class="token operator">></span> _tmp.java         <span class="token comment"># macOS需要用gawk，安装命令brew install gawk或port install gawk</span>
-    <span class="token function">cp</span> _tmp.java <span class="token variable">$file</span>
-<span class="token keyword">done</span>
-<span class="token function">rm</span> _tmp.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="equals-sh"><a href="#equals-sh" class="headerlink" title="equals.sh"></a>equals.sh</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">export</span> LC_ALL=zh_CN.GBK         <span class="comment"># 代码用UTF-8的，本行需要删掉</span></span><br><span class="line"><span class="built_in">cd</span> 代码所在路径</span><br><span class="line">find . -name <span class="string">&quot;*.java&quot;</span> | <span class="keyword">while</span> <span class="built_in">read</span> file; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$file</span></span><br><span class="line">    awk -f equals.awk <span class="variable">$file</span> &gt; _tmp.java         <span class="comment"># macOS需要用gawk，安装命令brew install gawk或port install gawk</span></span><br><span class="line">    <span class="built_in">cp</span> _tmp.java <span class="variable">$file</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">rm</span> _tmp.java</span><br></pre></td></tr></table></figure>
 
 <h2 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h2><p>编译程序，发现程序出现了很多编译错误，这些错误都是因类型不一致导致的低级错误，例如字符串与日期比较、对着int值进行Interger.valueOf、判断int值是否为空串等等。这样看来，无用功做得倒也值了。</p>
 <h1 id="已知问题"><a href="#已知问题" class="headerlink" title="已知问题"></a>已知问题</h1><p><code>str != null &amp;&amp; !&quot;&quot;.equals(str)</code>以及<code>str == null || &quot;&quot;.equals(str)</code>转换之后会变成<code>str != null &amp;&amp; StringUtils.isNotEmpty(str)</code>和<code>str == null || StringUtils.isEmpty(str)</code>，但空指针判断已经没有必要，应当删除。</p>
@@ -497,10 +303,10 @@ END &#123;
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://plusnan.me/2019/01/29/equals/" title="批量将&amp;#34;&amp;#34;.equals()替换成StringUtils.isEmpty()">https://plusnan.me/2019/01/29/equals/</a>
+      <a href="https://plusnan.me/2019/01/29/equals/" title="批量将&#34;&#34;.equals()替换成StringUtils.isEmpty()">https://plusnan.me/2019/01/29/equals/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -514,12 +320,12 @@ END &#123;
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/2019/01/27/switch-to-idea-2/" rel="prev" title="从Eclipse切换到IDEA（二）：传统Web项目的Project Structure">
-                  <i class="fa fa-chevron-left"></i> 从Eclipse切换到IDEA（二）：传统Web项目的Project Structure
+                  <i class="fa fa-angle-left"></i> 从Eclipse切换到IDEA（二）：传统Web项目的Project Structure
                 </a>
             </div>
             <div class="post-nav-item">
                 <a href="/2019/02/06/java-code-review-4/" rel="next" title="Java代码审查（四）：使用Phabricator进行代码审计">
-                  Java代码审查（四）：使用Phabricator进行代码审计 <i class="fa fa-chevron-right"></i>
+                  Java代码审查（四）：使用Phabricator进行代码审计 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -539,15 +345,14 @@ END &#123;
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2023</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">plusNaN</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
   <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
   </div>
 
@@ -555,26 +360,38 @@ END &#123;
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
 
   
-<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
 <script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
 
+
+
   
 
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js","integrity":"sha256-Pmj85ojLaPOWwRtlMJwmezB/Qg8BzvJp5eTzvXaYAfA="},"path_md5":"a248d3fdb5d99cb6741ca939f0b71642"}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"a248d3fdb5d99cb6741ca939f0b71642"}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
