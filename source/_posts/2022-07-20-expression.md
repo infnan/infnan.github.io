@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 见人说人话，见鬼说鬼话
-category: 一点人生的经验
+category: 项目管理
 tags:
 - 沟通
 ---

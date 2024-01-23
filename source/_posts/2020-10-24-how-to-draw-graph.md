@@ -123,4 +123,4 @@ tags:
 # 本系列文章
 * [如何写好软件文档](/2020/02/20/how-to-write-document/)
 * **如何画架构图**
-* [如何做PPT](/2021/04/16/how-to-make-ppt/)
+* [如何做PPT](/2022/11/05/how-to-make-ppt/)

@@ -13,7 +13,9 @@ tags:
 
 <!-- more -->
 
-下面以若依的[前后分离版本](https://gitee.com/y_project/RuoYi-Vue)为例来实现这个功能。
+# 说明
+
+如在生产系统中使用，可直接使用更为成熟的产品，例如[magic-api](https://www.ssssssss.org/)（[在线预览](https://magic-api.ssssssss.org.cn/magic/web/index.html)）。
 
 # 功能设计
 
@@ -80,7 +82,7 @@ CREATE TABLE interface_group
 
 # 核心代码
 
-下面介绍核心部分代码，完整代码参见[GitHub](https://github.com/infnan/dynamic-controller-demo)。
+以若依的[前后分离版本](https://gitee.com/y_project/RuoYi-Vue)为例来实现这个功能。下面介绍核心部分代码，完整代码参见[GitHub](https://github.com/infnan/dynamic-controller-demo)。
 
 ## 解析动态SQL
 
