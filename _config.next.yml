@@ -13,6 +13,8 @@ favicon:
   safari_pinned_tab: /img/favicon/safari-pinned-tab.svg
   android_manifest: /img/favicon/manifest.json
 
+minify: true
+
 scheme: Pisces
 fancybox: false
 pangu: true
@@ -91,7 +93,7 @@ social_icons:
 codeblock:
   theme:
     light: default
-    dark: tomorrow-night
+    dark: tomorrow-night-blue
   prism:
     light: prism-nord
     dark: prism-nord

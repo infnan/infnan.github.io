@@ -3,29 +3,29 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "5.4.0"
+    "version": "7.1.0"
   },
   "dependencies": {
-    "hexo": "^5.4.0",
-    "hexo-all-minifier": "^0.5.5",
-    "hexo-deployer-git": "^2.1.0",
-    "hexo-fs": "^3.1.0",
-    "hexo-generator-archive": "^1.0.0",
-    "hexo-generator-category": "^1.0.0",
+    "hexo": "^7.1.0",
+    "hexo-all-minifier": "^0.5.7",
+    "hexo-deployer-git": "^4.0.0",
+    "hexo-fs": "^4.1.1",
+    "hexo-generator-archive": "^2.0.0",
+    "hexo-generator-category": "^2.0.0",
     "hexo-generator-feed": "^3.0.0",
-    "hexo-generator-index": "^2.0.0",
-    "hexo-generator-searchdb": "^1.3.4",
-    "hexo-generator-sitemap": "^2.1.0",
-    "hexo-generator-tag": "^1.0.0",
+    "hexo-generator-index": "^3.0.0",
+    "hexo-generator-searchdb": "^1.4.1",
+    "hexo-generator-sitemap": "^3.0.1",
+    "hexo-generator-tag": "^2.0.0",
     "hexo-helper-qrcode": "^1.0.2",
-    "hexo-renderer-ejs": "^1.0.0",
+    "hexo-renderer-ejs": "^2.0.0",
     "hexo-renderer-kramed": "^0.1.4",
-    "hexo-renderer-less": "^2.0.2",
-    "hexo-renderer-marked": "^3.3.0",
-    "hexo-renderer-stylus": "^2.0.1",
-    "hexo-server": "^2.0.0",
-    "hexo-theme-next": "^8.7.1",
-    "hexo-util": "^2.4.0"
+    "hexo-renderer-less": "^4.0.0",
+    "hexo-renderer-marked": "^6.2.0",
+    "hexo-renderer-stylus": "^3.0.1",
+    "hexo-server": "^3.0.0",
+    "hexo-theme-next": "^8.19.1",
+    "hexo-util": "^3.2.0"
   },
   "scripts": {
     "server": "hexo --config=_config.tmp.yml server",
@@ -38,7 +38,7 @@
     "generate": "hexo g"
   },
   "devDependencies": {
-    "hexo-cli": "^3.1.0",
+    "hexo-cli": "^4.3.1",
     "js-yaml": "^3.14.0"
   }
 }
