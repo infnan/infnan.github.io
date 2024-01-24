@@ -277,7 +277,6 @@
     
     <div class="post-body" itemprop="articleBody"><p>不写文档会挨骂，写烂文档更挨骂，写好文档，才能少挨骂。</p>
 <span id="more"></span>
-
 <h1 id="动笔之前"><a href="#动笔之前" class="headerlink" title="动笔之前"></a>动笔之前</h1><h2 id="明确受众"><a href="#明确受众" class="headerlink" title="明确受众"></a>明确受众</h2><p>开始动笔之前，先问领导与自己：<strong>文档是写给谁看的？</strong></p>
 <p>受众不同，文档的侧重点也要有所不同。</p>
 <p>写给技术人员，文档的语言要尽可能精确，而且要明白他们关心的是什么内容。例如同样是写接口手册，开发人员文档要把重点放在接口规范方面，而运维文档要把重点放在接口服务的监控与维护方面。</p>
@@ -294,16 +293,16 @@
 </ul>
 <p>可以用以下三种方法来建构文档。我们以软件设计文档为例：</p>
 <h3 id="先建立结构，再填充细节"><a href="#先建立结构，再填充细节" class="headerlink" title="先建立结构，再填充细节"></a>先建立结构，再填充细节</h3><p>我们对上面提到的“总述”和“分述”进行分解：</p>
-<p><img src="/img/2020-02-20-how-to-write-document/g1.png"></p>
+<p><img src="/img/2020-02-20-how-to-write-document/g1.png" alt=""></p>
 <p>很显然这样是不够的。我们继续挑其中一个点（功能设计）继续分解：</p>
-<p><img src="/img/2020-02-20-how-to-write-document/g2.png"></p>
+<p><img src="/img/2020-02-20-how-to-write-document/g2.png" alt=""></p>
 <p>这时不用急着填充内容，先参照国家标准和其他现有文档，把“应该有什么内容”梳理出来，力求覆盖全面。当然这个工作不是必须一次性独立完成的，可以先形成一版，然后让领导同事帮你查漏补缺。</p>
 <p>确认无误后，就可以按照这个结构开始填充内容了。</p>
 <h3 id="先整理素材，再形成结构"><a href="#先整理素材，再形成结构" class="headerlink" title="先整理素材，再形成结构"></a>先整理素材，再形成结构</h3><p>我们从另一个角度来考虑系统设计：</p>
 <p>假设设计面向社会用户的“xx证申请”功能，那么这个功能需要考虑以下方面：</p>
-<p><img src="/img/2020-02-20-how-to-write-document/g3.png"></p>
+<p><img src="/img/2020-02-20-how-to-write-document/g3.png" alt=""></p>
 <p>整理出来之后，需要进行一个取舍，哪些是要写进文档的，哪些是不适合写进文档的（离题或者过于细节），然后整理出一个结构：</p>
-<p><img src="/img/2020-02-20-how-to-write-document/g4.png"></p>
+<p><img src="/img/2020-02-20-how-to-write-document/g4.png" alt=""></p>
 <p>总结出结构后，按照规范的文档的结构进行调整，该功能设计的初稿就差不多了。</p>
 <h3 id="综合运用以上两种方式"><a href="#综合运用以上两种方式" class="headerlink" title="综合运用以上两种方式"></a>综合运用以上两种方式</h3><p>写作方式不是一成不变的。在写作过程中，要时不时地改变一下视角，在整体结构与局部细节之中切换，同时也在上述两种工作方式之间进行切换，从两个角度分别进行“进攻”，否则的话容易产生两种极端：</p>
 <ol>
@@ -341,11 +340,11 @@
 <h1 id="管理提升"><a href="#管理提升" class="headerlink" title="管理提升"></a>管理提升</h1><h2 id="版本管理"><a href="#版本管理" class="headerlink" title="版本管理"></a>版本管理</h2><p>文档应做好版本管理。</p>
 <p>即便无法版本管理（例如净是些照片、Word、Excel、PowerPoint文件），至少要有个固定地方集中存放，而不是乱七八糟散落在邮箱附件、微信聊天记录、QQ群文件、张三电脑C盘、李四电脑D盘……特别是与外界沟通协调的文件，如果不集中管理，日后需要追查记录时便无处可寻，让人觉得管理混乱。</p>
 <p>文档要分门别类存放。就算要偷懒，至少文件名要有个规范（包含关键词、日期时间等），不要“QQ文件1231231231.doc”、“预算.xls”，免得日后找不到。另外也可以考虑使用Everything等文件搜索工具来查找文件。</p>
-<p>对于内部开发文档，个人提倡使用纯文本与Markdown格式，不要使用Word格式。Word格式需要浪费时间排版，难以搜索，而且很难管理版本，而Markdown格式简洁明了，便于全文搜索，并且可以直接扔到SVN&#x2F;Git仓库里面进行版本管理。</p>
+<p>对于内部开发文档，个人提倡使用纯文本与Markdown格式，不要使用Word格式。Word格式需要浪费时间排版，难以搜索，而且很难管理版本，而Markdown格式简洁明了，便于全文搜索，并且可以直接扔到SVN/Git仓库里面进行版本管理。</p>
 <p>文档发生重要改动，如需求变更、用户确认结论等，务必记录修改时间和修改原因，并做好变更管理（例如commit message），以便日后追查。受影响的程序代码也要用注释和提交信息加以说明。</p>
-<p>提倡在编写过程中使用在线文档（例如<span class="exturl" data-url="aHR0cHM6Ly9zaGltby5pbS8=">石墨文档<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnFxLmNvbS8=">腾讯文档<i class="fa fa-external-link-alt"></i></span>），或者使用一些专门的文档&#x2F;知识库软件，例如ShowDoc（<span class="exturl" data-url="aHR0cHM6Ly93d3cuc2hvd2RvYy5jb20uY24v">在线版<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N0YXI3dGgvc2hvd2RvYw==">本地部署版<i class="fa fa-external-link-alt"></i></span>）。这类软件操作方便，适合团队协作维护文档，又有版本管理功能，可随时检查修订记录。</p>
+<p>提倡在编写过程中使用在线文档（例如<span class="exturl" data-url="aHR0cHM6Ly9zaGltby5pbQ==">石墨文档<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnFxLmNvbQ==">腾讯文档<i class="fa fa-external-link-alt"></i></span>），或者使用一些专门的文档/知识库软件，例如ShowDoc（<span class="exturl" data-url="aHR0cHM6Ly93d3cuc2hvd2RvYy5jb20uY24=">在线版<i class="fa fa-external-link-alt"></i></span>、<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3N0YXI3dGgvc2hvd2RvYw==">本地部署版<i class="fa fa-external-link-alt"></i></span>）。这类软件操作方便，适合团队协作维护文档，又有版本管理功能，可随时检查修订记录。</p>
 <h2 id="文档要随时维护，不要攒着"><a href="#文档要随时维护，不要攒着" class="headerlink" title="文档要随时维护，不要攒着"></a>文档要随时维护，不要攒着</h2><p>当用户需求、功能设计、接口规范、数据库结构等信息发生变化时，务必及时更新相应的文档。今天不把文档维护好，明天会有新的事情来烦扰你，让你更没有心思管文档，日积月累，最终变成一个大坑。</p>
-<p>建议在小组安排一个专门的文档人员，在有人往工作群丢文件的时候，他&#x2F;她能默默地把文件收集整理好。当一项阶段性任务完成的时候，也能把团队成员工作的素材给整理好。</p>
+<p>建议在小组安排一个专门的文档人员，在有人往工作群丢文件的时候，他/她能默默地把文件收集整理好。当一项阶段性任务完成的时候，也能把团队成员工作的素材给整理好。</p>
 <p>如果没有专门的文档团队，那么在管理项目时应当将文档也作为开发任务之一来管理，将光写代码（特别是变更了设计的代码）、不维护相关开发文档视为没完成任务。</p>
 <p>当然现在已经是内卷的时代，能把工作卷完就已经很难了，所以即便无力将文档维护到最新，至少要维护一份比较规范的备忘录，指出文档哪个地方与实际不符，文档希望按A实现而实际上已经按B思路来做，然后再对备忘录进行统一的版本管理，这样总比什么文字记录都没有强。</p>
 <h2 id="平时抽空练习练习"><a href="#平时抽空练习练习" class="headerlink" title="平时抽空练习练习"></a>平时抽空练习练习</h2><p>很多技术人员的语言表达能力不强，虽然大佬心里清楚他是什么意思，但是一般萌新却难以理解。建议大家去CSDN、GitHub等网站开个博客，或者去知乎问答编故事，用长篇回答装装逼，提高自己的语言表达能力、搜索资料的能力与整理信息的能力。</p>

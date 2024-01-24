@@ -278,9 +278,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>本文主要介绍IDEA的操作方法。为了避免出现复杂问题，本文假设项目已经事先配置好，而且配置文件加到了版本控制中，其他人只要下载代码就可以直接用IDEA打开。</p>
-<span id="more"></span>
-
+    <div class="post-body" itemprop="articleBody"><p>本文主要介绍IDEA的操作方法。为了避免出现复杂问题，本文假设项目已经事先配置好，而且配置文件加到了版本控制中，其他人只要下载代码就可以直接用IDEA打开。<br><span id="more"></span></p>
 <h1 id="初始化配置"><a href="#初始化配置" class="headerlink" title="初始化配置"></a>初始化配置</h1><p>下面只讲Windows的操作方法（尽管截图是macOS）。对于Linux或苹果用户而言，我觉得既然能使用这两种系统，就说明不太需要这种详细教程吧。</p>
 <h2 id="安装IDEA"><a href="#安装IDEA" class="headerlink" title="安装IDEA"></a>安装IDEA</h2><p>IDEA可以从<span class="exturl" data-url="aHR0cHM6Ly93d3cuamV0YnJhaW5zLmNvbS9pZGVhL2Rvd25sb2FkLw==">官网<i class="fa fa-external-link-alt"></i></span>下载，下载完成之后只要下一步下一步地操作就行。如果没钱买正版，请从<span class="exturl" data-url="aHR0cHM6Ly93d3cuamV0YnJhaW5zLmNvbS9pZGVhL2Rvd25sb2FkL3ByZXZpb3VzLmh0bWw=">这里<i class="fa fa-external-link-alt"></i></span>找个稍微旧一点的版本，因为太新的版本可能没有破解工具或激活码。</p>
 <p>安装结束后，如果没给JetBrains公司掏过钱，那么还需要从网上搜一下激活工具进行激活。</p>
@@ -302,6 +300,7 @@
 <h2 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h2><p>默认字符编码是UTF-8。如果项目使用GB2312、GBK、GB18030这种编码，需要在系统设置“Editor”里的“File Encodings”设置默认编码。</p>
 <h1 id="日常工作"><a href="#日常工作" class="headerlink" title="日常工作"></a>日常工作</h1><h2 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h2><p>默认情况下IDEA会自动保存文件修改，所以在IDEA里面不需要按Ctrl+S，也找不到保存按钮。如果不希望自动保存的话，可以在系统设置里面把它关掉。</p>
 <h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><p>快捷键可以从菜单上面查看，下面列举几个默认而且最常用的按键设置：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -310,7 +309,8 @@
 <th>IDEA按键</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>全局搜索字符串</td>
 <td>Ctrl+H</td>
 <td>Ctrl+Shift+F</td>
@@ -336,7 +336,7 @@
 <td>按两下Shift</td>
 </tr>
 <tr>
-<td>查看变量定义&#x2F;函数使用情况</td>
+<td>查看变量定义/函数使用情况</td>
 <td>Ctrl+点击</td>
 <td>Ctrl+点击</td>
 </tr>
@@ -370,7 +370,9 @@
 <td>F8</td>
 <td>F9</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>如果习惯了Eclipse的按键，也可以将快捷键调成Eclipse模式。具体方法是找到系统设置中的“Keymap”，然后在右面的设置中选择“Eclipse”方案，这样各功能快捷键就和Eclipse一致了。</p>
 <h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>在第一次调试时，建议检查一下启动配置是否符合自己需要。</p>
 <p><img src="/img/2018-12-01-switch-to-idea-1/debug-1.png" alt="启动配置"></p>
@@ -386,7 +388,6 @@
 <p><img src="/img/2018-12-01-switch-to-idea-1/changelist-2.png" alt="检查待提交文件列表和内容，输入摘要，点击Commit提交。"></p>
 <h4 id="针对新开发者的提醒"><a href="#针对新开发者的提醒" class="headerlink" title="针对新开发者的提醒"></a>针对新开发者的提醒</h4><p>以下内容转载自<span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDA5LzAyLzYuaHRtbA==">编程随想的博客<i class="fa fa-external-link-alt"></i></span>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">据俺多年的观察，发觉 RCS（备注：版本管理软件）主要有如下几种误用的情况：</span><br><span class="line"></span><br><span class="line">◇不正确的提交频度</span><br><span class="line">　　有很多新手不习惯使用 RCS，很少进行代码的提交。有些人甚至到项目快结束时还没有提交过一行代码。结果导致整个 RCS 形同虚设。</span><br><span class="line">　　还有一些人则走向另一个极端，频繁提交代码。有些人每改完一个文件就提交一次，还有些人甚至把修改一半，尚【不能】编译通过的代码也提交到 RCS。</span><br><span class="line">　　俺个人认为，正确的提交频度应该分两种情况：在编写功能代码时，每完成一个功能点，并且自己经过了自测之后，提交一次；在调试的时候，每修复一个 bug，提交一次。这样能够保证提交到 RCS 的代码都是【能编译通过】的（详见[每日构建系列](https://program-think.blogspot.com/2009/02/daily-build-0-overview.html)），并且业务逻辑上也是相对完整的（对于每日构建后的测试很重要）。</span><br><span class="line"></span><br><span class="line">◇提交时不写注释</span><br><span class="line">　　很多人提交代码时不写注释，将来再想到版本历史里面找代码就犹如大海捞针般困难。</span><br><span class="line">　　比如在俺经手的代码中，有些源代码文件历时3年，提交次数上百次，如果提交时不写注释，日后根本没法找。</span><br><span class="line"></span><br><span class="line">◇不做代码基线（Baseline）、不做代码分支（Branch）</span><br><span class="line">　　在正规的开发团队，每当有一个版本发布（Release）并交付给用户使用时，都需要在 RCS 中制作一个基线，以便于进行相应的 bug 跟踪和补丁制作。因此，诸如【做基线】之类的事情，属于整个团队的集体行为，需要由 Team Leader 牵头来搞。</span><br><span class="line">　　假如一个开发团队从来不做代码基线或者代码分支，仅仅是把 RCS 当成一个源文件的备份工具来用，那至少说明这个团队的 Team Leader 在软件工程管理方面非常失败。</span><br></pre></td></tr></table></figure>
-
 <h3 id="查看文件提交历史"><a href="#查看文件提交历史" class="headerlink" title="查看文件提交历史"></a>查看文件提交历史</h3><p>对着文件点击右键，选择“Subversion”里面的“Show History”，即可在下面的Version Control窗口看到文件的提交历史。对着版本点击右键，选择“Show Diff”，即可看到某个版本是哪个人进行了哪些修改。</p>
 <p>除SVN提交历史外，也可以查看文件的本地编辑历史。假如不慎错误地修改了某些内容，又不方便直接回退文件，可对着文件点右键，找到“Local History”，查看本地的历史记录以便恢复。</p>
 <h3 id="查看代码库版本变更记录"><a href="#查看代码库版本变更记录" class="headerlink" title="查看代码库版本变更记录"></a>查看代码库版本变更记录</h3><p>Version Control第一个页签是你的待提交修改，第二个页签就是其他人已经提交的修改。如果没有看到提交记录，点击刷新按钮即可。</p>
@@ -394,7 +395,6 @@
 <!--## 数据库操作
 IDEA Ultimate版内置了DataGrip插件。
 -->
-
 <h1 id="参见"><a href="#参见" class="headerlink" title="参见"></a>参见</h1><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuamV0YnJhaW5zLmNvbS9oZWxwL2lkZWEvbWlncmF0aW5nLWZyb20tZWNsaXBzZS10by1pbnRlbGxpai1pZGVhLmh0bWw=">Migrating From Eclipse to IntelliJ IDEA<i class="fa fa-external-link-alt"></i></span></li>
 </ul>

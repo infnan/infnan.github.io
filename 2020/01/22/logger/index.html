@@ -272,7 +272,6 @@
     
     <div class="post-body" itemprop="articleBody"><p>在程序中打日志很简单，<code>logger.debug(&quot;Hello, Happy World!&quot;)</code>，OK。可是，正确地打日志并不简单，需要注意以下几个问题。</p>
 <span id="more"></span>
-
 <h1 id="日志的目的"><a href="#日志的目的" class="headerlink" title="日志的目的"></a>日志的目的</h1><p><strong>备注：本文中的“日志”专指程序内部日志。</strong></p>
 <p>打日志是为了记录程序的运行情况，这样可以：</p>
 <ul>
@@ -286,7 +285,6 @@
 <p>在这里向没有开发经验的人强调一下：生产系统的日志量非常大，而且出于性能考虑不会展示调试日志。在海量日志中找信息是件很麻烦的事情，请不要给维护人员挖坑。</p>
 <h1 id="日志的内容"><a href="#日志的内容" class="headerlink" title="日志的内容"></a>日志的内容</h1><p>通过日志，应该能快速地了解“什么时间在哪里大概发生了什么事”，猜到“大概是什么原因导致了问题”，然后进一步定位程序代码，确认问题、解决问题。例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2020-01-02 12:34:56 [UserService] WARN 查询用户不存在，uid = 1234567890</span><br><span class="line">2020-01-03 12:45:06 [AuthService] INFO 实名核验成功，uid = 1234567899，身份证号 = 110101123412341234，耗时 = 12ms</span><br><span class="line">2020-01-04 12:56:01 [InfoService] ERROR 用户保存个人信息时发生异常</span><br><span class="line">java.sql.SQLException: ORA-12899: value too large for column &quot;XXXXX&quot;.&quot;YYYYY&quot;.&quot;ZZZZZ&quot; (actual: 60, maximum: 30)</span><br><span class="line">        at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:445)</span><br><span class="line">        at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:396)</span><br><span class="line">        ......</span><br></pre></td></tr></table></figure>
-
 <p>一条日志应该包含以下内容：</p>
 <ul>
 <li><strong>时间（“何时”）</strong>：日志要记录事件的发生时间。<ul>
@@ -305,7 +303,7 @@
 <li><strong>上下文</strong>：例如<ul>
 <li>异常的堆栈</li>
 <li>重要参数：有时需要复现问题，可以记录某些重要参数（例如uid）以便还原现场</li>
-<li>重要状态变化：例如线程启动&#x2F;中断、特殊进程进入&#x2F;退出等</li>
+<li>重要状态变化：例如线程启动/中断、特殊进程进入/退出等</li>
 </ul>
 </li>
 </ul>
@@ -315,17 +313,14 @@
 <ul>
 <li>ERROR：记录影响系统与业务的严重问题，例如系统异常、数据库故障等。</li>
 <li>WARN：记录“确实是问题，不过不耽误使用”的问题，以便后续跟踪检查。</li>
-<li>INFO：比较重要的信息，例如系统参数、线程启动&#x2F;结束、特殊任务等。</li>
+<li>INFO：比较重要的信息，例如系统参数、线程启动/结束、特殊任务等。</li>
 <li>DEBUG、TRACE：记录开发调试过程中的细节。这类信息只要能方便开发人员调试即可。在生产环境中，这类信息应该被屏蔽掉，不往日志里头打，或者仅在跟踪问题时临时启用，用完之后立刻关掉。</li>
 </ul>
-<h1 id="打日志的位置"><a href="#打日志的位置" class="headerlink" title="打日志的位置"></a>打日志的位置</h1><p>假设信息查询的堆栈如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">QueryController.queryInfo()</span><br><span class="line">    UserService.getUserInfo()</span><br><span class="line">        UserDAO.getUser()</span><br><span class="line">        RoleDAO.getRole()</span><br><span class="line">    InfoService.getInformation()</span><br><span class="line">        InfoDAO.getInfo()</span><br><span class="line">    InfoCommonMethod.generateOutput()</span><br></pre></td></tr></table></figure>
-
+<h1 id="打日志的位置"><a href="#打日志的位置" class="headerlink" title="打日志的位置"></a>打日志的位置</h1><p>假设信息查询的堆栈如下：<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">QueryController.queryInfo()</span><br><span class="line">    UserService.getUserInfo()</span><br><span class="line">        UserDAO.getUser()</span><br><span class="line">        RoleDAO.getRole()</span><br><span class="line">    InfoService.getInformation()</span><br><span class="line">        InfoDAO.getInfo()</span><br><span class="line">    InfoCommonMethod.generateOutput()</span><br></pre></td></tr></table></figure></p>
 <p>捕获异常、输出异常日志的操作尽量都交给最外层的调用方，即上面的<code>QueryController.queryInfo()</code>。</p>
 <p>里层的函数（<code>UserService.getUserInfo()</code>、<code>UserDAO.getUser()</code>等）在抛出异常时不要打日志。否则里面打一遍，外面打一遍，日志就重复了。</p>
 <p>像下面这样写函数就是在坑人：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">getUser</span><span class="params">(String param ...)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 业务逻辑</span></span><br><span class="line">        ...</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        logger.error(<span class="string">&quot;错误&quot;</span>, e);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="comment">// 清理</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>以上代码存在三个问题：</p>
 <ol>
 <li>发生异常时，异常直接catch掉，未往上抛（<code>throw e;</code>），导致调用者无法捕获异常。</li>
@@ -333,7 +328,7 @@
 <li>如使用数据库事务（例如Spring的@Transactional），那么将无法正确回滚，导致状态错误。</li>
 </ol>
 <h1 id="日志文件"><a href="#日志文件" class="headerlink" title="日志文件"></a>日志文件</h1><p>不要假设日志全部都会输出到屏幕上，或者全部输出到特定的日志文件中！</p>
-<p>日志输出目标是可以调整的，例如直接输出到stdout&#x2F;stderr（生产环境不会这样干）、输出到特定日志文件、输出到数据库，或输出到特定的日志服务器中。日志不仅可以输出到单个文件，也可以根据子系统、日志级别、日志目的、日期时间等条件将日志拆分成多个文件。</p>
+<p>日志输出目标是可以调整的，例如直接输出到stdout/stderr（生产环境不会这样干）、输出到特定日志文件、输出到数据库，或输出到特定的日志服务器中。日志不仅可以输出到单个文件，也可以根据子系统、日志级别、日志目的、日期时间等条件将日志拆分成多个文件。</p>
 <p>因此要杜绝用<code>System.out.println()</code>、<code>System.error.println()</code>与<code>e.printStackTrace()</code>打日志！这样打出来的日志，不仅缺乏信息，而且有可能会打错地方，让人找不到。</p>
 <p>第三方接口务必要打日志，而且不仅要记一些关键参数，还要便于查询（例如放入专门的XX公司接口日志文件中），以免出问题时互相踢皮球。</p>
 <h1 id="其他的坑"><a href="#其他的坑" class="headerlink" title="其他的坑"></a>其他的坑</h1><ul>

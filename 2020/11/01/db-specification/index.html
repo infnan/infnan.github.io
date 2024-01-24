@@ -274,7 +274,6 @@
     <div class="post-body" itemprop="articleBody"><p>本文为我们项目中所采用的MySQL数据库设计规范。</p>
 <p>计划分为三篇文章，第一篇为数据库的表结构设计，<a href="/2020/11/07/db-specification-2/">第二篇</a>为SQL语句的书写，<a href="/2020/11/10/db-specification-3/">第三篇</a>为PDM文档规范。</p>
 <span id="more"></span>
-
 <h1 id="数据库设计原则"><a href="#数据库设计原则" class="headerlink" title="数据库设计原则"></a>数据库设计原则</h1><h2 id="表设计原则"><a href="#表设计原则" class="headerlink" title="表设计原则"></a>表设计原则</h2><ol>
 <li>使用InnoDB引擎。如使用其他引擎，应经过评估。</li>
 <li>字符集采用utf8mb4。</li>
@@ -295,6 +294,7 @@
 <li>只允许使用以下数据类型：数值系列（TINYINT到BIGINT）、DECIMAL、CHAR、VARCHAR、TINYTEXT至LONGTEXT、TINYBLOB至LONGBLOB、DATETIME、TIMESTAMP。</li>
 <li>除非为纯查询用表，否则应包含以下五个字段：</li>
 </ol>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -304,7 +304,8 @@
 <th>说明</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>版本</td>
 <td>version</td>
 <td>INT</td>
@@ -334,7 +335,9 @@
 <td>INT</td>
 <td>类型与用户ID保持一致</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>该五个字段均为NOT NULL，且不应包含任何额外业务逻辑。在执行UPDATE时，必须对“修改时间”与“修改人”字段进行更新。</p>
 <h2 id="键设计原则"><a href="#键设计原则" class="headerlink" title="键设计原则"></a>键设计原则</h2><ol>
 <li>禁止在生产环境使用外键。</li>
@@ -374,7 +377,7 @@
 <li>禁止在数据库存储明文密码，必须进行加密后再存储。避免使用MD5、SHA1等安全性较低的加密方式。</li>
 <li>设计IP字段时应考虑IPv6接入。IPv6地址最长长度为39个字符。</li>
 <li>考虑到扩展性，如系统未来可能会改为Oracle或其他数据库部署，在设计字段时应考虑数据类型的兼容性。</li>
-<li>应用服务器、数据库服务器操作系统时区统一用Asia&#x2F;Shanghai（东八区）。</li>
+<li>应用服务器、数据库服务器操作系统时区统一用Asia/Shanghai（东八区）。</li>
 </ol>
 <h1 id="数据库管理流程规范"><a href="#数据库管理流程规范" class="headerlink" title="数据库管理流程规范"></a>数据库管理流程规范</h1><h2 id="数据库文档管理"><a href="#数据库文档管理" class="headerlink" title="数据库文档管理"></a>数据库文档管理</h2><p>软件开发人员应及时维护以下资料：</p>
 <ol>
@@ -385,6 +388,7 @@
 <p>这些资料应纳入配置管理，而数据库物理模型设计文档应在设计完成后形成基线，后续进行变更管理流程。</p>
 <h3 id="数据库表结构版本"><a href="#数据库表结构版本" class="headerlink" title="数据库表结构版本"></a>数据库表结构版本</h3><p>数据库表结构应设置版本号，并采用表结构设计变更时间作为版本的编号，其格式为<code>数据库名称-YYYYMMDD-两位流水号</code>，例如<code>helloworld-20201101-01</code>。</p>
 <p>在数据库中设立数据库版本表<code>db_version</code>，表结构如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -396,7 +400,8 @@
 <th>其他要求</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>序号</td>
 <td>id</td>
 <td>INT</td>
@@ -428,7 +433,9 @@
 <td>√</td>
 <td></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="表结构变更SQL文件"><a href="#表结构变更SQL文件" class="headerlink" title="表结构变更SQL文件"></a>表结构变更SQL文件</h3><p>表结构变更SQL文件应遵循以下规则：</p>
 <ol>
 <li>文件名为<code>版本号-变更简要说明.sql</code>，例如<code>helloworld-20201101-01-新增业务表.sql</code>。</li>
@@ -437,7 +444,8 @@
 <li>除非明确要求执行删除（DROP、TRUNCATE等）操作，变更应使用ALTER修改，不得先DROP后CREATE。</li>
 <li>SQL文件不包含<code>CREATE DATABASE</code>、<code>USE 数据库名</code>等涉及数据库实例的语句，也不指定数据库实例（例如<code>helloworld.dict_dict</code>）。创建与切换数据库操作总是应当确认后手工执行。</li>
 <li>在空白数据库中，按SQL文件顺序逐个执行以后，形成的表结构应与当前版本的物理模型文档完全一致，且过程中产生的数据也得到了妥善处理。</li>
-<li>文件应包含更新数据库版本表的语句：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> db_version (version, operate_name) <span class="keyword">VALUES</span> (<span class="string">&#x27;版本号&#x27;</span>, <span class="string">&#x27;责任人姓名&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
+<li>文件应包含更新数据库版本表的语句：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> db_version (version, operate_name) <span class="keyword">VALUES</span> (<span class="string">&#x27;版本号&#x27;</span>, <span class="string">&#x27;责任人姓名&#x27;</span>);</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
 <h2 id="表结构变更"><a href="#表结构变更" class="headerlink" title="表结构变更"></a>表结构变更</h2><ol>
 <li>禁止未经评审确认私自修改表结构，包括文档以及开发、测试与生产数据库。</li>

@@ -273,9 +273,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>开发业务系统，虽然原理非常简单，就是数据库的增删改查，而且业务规则也不过是一堆if-else判断，但是想要做好其实并不容易。本系列文章旨在说明：即使是看起来非常简单的基础开发工作，在设计和实现上也会有很多陷阱，需要非常认真和细心才行。</p>
-<p>本文以简单的登录页面为例，为了突出问题，假设系统只有两个页面：一个登录页面，另一个是登录成功之后显示的“Hello world”。</p>
-<span id="more"></span>
-
+<p>本文以简单的登录页面为例，为了突出问题，假设系统只有两个页面：一个登录页面，另一个是登录成功之后显示的“Hello world”。<br><span id="more"></span></p>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>登录的思路很简单，就是去数据库里查一下用户输入的账号和密码是否和数据库数据一致，如果一致就将会话状态设置成“已登录”，并跳转到正式的操作页面上，如果不一致就返回登录页面并提示“账号密码错误”。</p>
 <h1 id="设计方面的问题"><a href="#设计方面的问题" class="headerlink" title="设计方面的问题"></a>设计方面的问题</h1><h2 id="暴露多余的信息"><a href="#暴露多余的信息" class="headerlink" title="暴露多余的信息"></a>暴露多余的信息</h2><p>有的系统会“智能”地提示“用户名错误”、“密码错误”，这样会在不经意间暴露多余信息。特别是“密码错误”，这个提示会暗示“用户名正确”，从而促使攻击者加快攻击的步伐。正确的做法是使信息尽可能模糊，只提示“用户名或密码错误”。</p>
 <h2 id="未防范暴力破解"><a href="#未防范暴力破解" class="headerlink" title="未防范暴力破解"></a>未防范暴力破解</h2><p>虽然密码不正确的话进不去，但是网站也未针对暴力破解进行防范，也就是说，只要写个程序一个一个密码地试验，早晚能把密码试出来。因此需要设计防暴力破解的机制，例如：</p>
@@ -294,10 +292,8 @@
 <h2 id="绕过认证"><a href="#绕过认证" class="headerlink" title="绕过认证"></a>绕过认证</h2><p>如果知道Helloworld页面的网址，没登录的情况下能不能依靠直接敲网址进去呢？如果能，说明只实现了登录功能，配套的会话验证和权限验证功能没实现。</p>
 <h2 id="SQL注入问题"><a href="#SQL注入问题" class="headerlink" title="SQL注入问题"></a>SQL注入问题</h2><p>初学者容易这样来书写SQL：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;SELECT count(1) FROM users WHERE username=&#x27;&quot;</span> + username + <span class="string">&quot;&#x27; AND password=&#x27;&quot;</span> + password + <span class="string">&quot;&#x27;&quot;</span>;</span><br></pre></td></tr></table></figure>
-
 <p>代码中的SQL是直接拼接的，所以只要在密码框输入<code>&#39; or &#39;1&#39;=&#39;1</code>即可绕过验证，因为SQL会变成：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username<span class="operator">=</span><span class="string">&#x27;admin&#x27;</span> <span class="keyword">AND</span> password<span class="operator">=</span><span class="string">&#x27;&#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;1&#x27;</span><span class="operator">=</span><span class="string">&#x27;1&#x27;</span>;</span><br><span class="line">                                                                <span class="operator">^</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">=</span><span class="operator">^</span></span><br></pre></td></tr></table></figure>
-
 <p>所输密码成为了SQL逻辑的一部分，破坏了原来SQL的逻辑，即SQL注入。</p>
 <p>建议尽可能用绑定参数的形式来查询SQL。如果非要去拼接字符串，那么必须保证用户输入全部被转义，但是不推荐拼接因为容易忘记过滤。</p>
 <h2 id="前台校验"><a href="#前台校验" class="headerlink" title="前台校验"></a>前台校验</h2><p>建议加入前台校验，当用户未输入用户名或密码便点击登录按钮时，系统给出提示并跳转到未输入内容的文本框上，因为前台校验和提示发生在用户的浏览器上面，耗时可以忽略不计，而提交到服务器去校验，提交和返回都需要时间，网络状况差的话速度会比较慢。另外建议采用统一的校验程序，不要自己写校验js，浪费时间精力。</p>

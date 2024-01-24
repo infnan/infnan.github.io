@@ -270,21 +270,135 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。</p>
-<span id="more"></span>
-
+    <div class="post-body" itemprop="articleBody"><p>本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。<br><span id="more"></span></p>
 <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>本文只讨论一个页面：学生信息管理系统中的学生列表页面，大体上样式如下（PC浏览器）</p>
 <p>身份证号码：<input type="text"> 姓名：<input type="text"> 学号：<input type="text"> <button type="button">查找</button><button type="button">重置</button></p>
-<p><button type="button">添加学生</button></p>
-<p>| 序号 | 身份证号码  | 姓名    | 性别   | 民族  | 户籍省份 | 市    | 区县   | 出生日期 | 学院  | 班级  | 学号  | 联系电话 | 未来意向  |  状态 | 操作 |<br>|————|——–|——-|——-|———|——|——–|———|——|——|——-|———|—–|<br>| 1  | 1234…78  | 一花   | 女     | 汉族  | 北京市   | 西城区 |      | 19XX年X月X日 | 计算机与软件工程学院 | 软件1901 | 201901010101 | 13012345678 | 升学 | 有效 | <button type="button">查看</button> <button type="button">编辑</button> <button type="button">删除</button> |<br>| 2  | 1234…79  | 二乃   | 女     | 汉族  | 上海市   | 黄浦区 |      | 19XX年X月X日 | 计算机与软件工程学院 | 软件1901 | 201901010102 | 13012345679 | 就业 | 有效 | <button type="button">查看</button> <button type="button">编辑</button> <button type="button">删除</button> |<br>| 3  | 1234…80  | 三玖   | 女     | 汉族  | 广东省   | 广州市 | 越秀区 | 19XX年X月X日 | 计算机与软件工程学院 | 软件1901 | 201901010103 | 13012345680 | 创业 | 有效 | <button type="button">查看</button> <button type="button">编辑</button> <button type="button">删除</button> |<br>| 4  | 1234…81  | 四叶   | 女     | 汉族  | 浙江省   | 杭州市 | 西湖区 | 19XX年X月X日 | 计算机与软件工程学院 | 软件1901 | 201901010104 | 13012345681 | 未确定 | 有效 | <button type="button">查看</button> <button type="button">编辑</button> <button type="button">删除</button> |<br>| 5  | 1234…82  | 五月   | 女     | 汉族  | 江苏省   | 南京市 | 鼓楼区 | 19XX年X月X日 | 计算机与软件工程学院 | 软件1901 | 201901010105 | 13012345682 | 未确定 | 有效 | <button type="button">查看</button> <button type="button">编辑</button> <button type="button">删除</button> |</p>
-<p>每页显示<select><option>10</option><option>20</option><option>50</option><option>100</option></select>条，共49条 <button type="button">首页</button> <button type="button">上一页</button> <select><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>&#x2F;5页 <button type="button">下一页</button> <button type="button">尾页</button></p>
+<button type="button">添加学生</button>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>身份证号码</th>
+<th>姓名</th>
+<th>性别</th>
+<th>民族</th>
+<th>户籍省份</th>
+<th>市</th>
+<th>区县</th>
+<th>出生日期</th>
+<th>学院</th>
+<th>班级</th>
+<th>学号</th>
+<th>联系电话</th>
+<th>未来意向</th>
+<th>状态</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1234…78</td>
+<td>一花</td>
+<td>女</td>
+<td>汉族</td>
+<td>北京市</td>
+<td>西城区</td>
+<td></td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010101</td>
+<td>13012345678</td>
+<td>升学</td>
+<td>有效</td>
+<td><button type="button">查看</button> <button type="button">编辑</button> <button type="button">删除</button></td>
+</tr>
+<tr>
+<td>2</td>
+<td>1234…79</td>
+<td>二乃</td>
+<td>女</td>
+<td>汉族</td>
+<td>上海市</td>
+<td>黄浦区</td>
+<td></td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010102</td>
+<td>13012345679</td>
+<td>就业</td>
+<td>有效</td>
+<td><button type="button">查看</button> <button type="button">编辑</button> <button type="button">删除</button></td>
+</tr>
+<tr>
+<td>3</td>
+<td>1234…80</td>
+<td>三玖</td>
+<td>女</td>
+<td>汉族</td>
+<td>广东省</td>
+<td>广州市</td>
+<td>越秀区</td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010103</td>
+<td>13012345680</td>
+<td>创业</td>
+<td>有效</td>
+<td><button type="button">查看</button> <button type="button">编辑</button> <button type="button">删除</button></td>
+</tr>
+<tr>
+<td>4</td>
+<td>1234…81</td>
+<td>四叶</td>
+<td>女</td>
+<td>汉族</td>
+<td>浙江省</td>
+<td>杭州市</td>
+<td>西湖区</td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010104</td>
+<td>13012345681</td>
+<td>未确定</td>
+<td>有效</td>
+<td><button type="button">查看</button> <button type="button">编辑</button> <button type="button">删除</button></td>
+</tr>
+<tr>
+<td>5</td>
+<td>1234…82</td>
+<td>五月</td>
+<td>女</td>
+<td>汉族</td>
+<td>江苏省</td>
+<td>南京市</td>
+<td>鼓楼区</td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010105</td>
+<td>13012345682</td>
+<td>未确定</td>
+<td>有效</td>
+<td><button type="button">查看</button> <button type="button">编辑</button> <button type="button">删除</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>每页显示<select><option>10</option><option>20</option><option>50</option><option>100</option></select>条，共49条 <button type="button">首页</button> <button type="button">上一页</button> <select><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>/5页 <button type="button">下一页</button> <button type="button">尾页</button></p>
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>列表页面的原理比较简单，不考虑分页的话，<code>SELECT idcard, name, gender, ... FROM students WHERE 一些条件</code>，然后将查出来的结果全部展示到页面即可。但是加上分页之后逻辑会复杂很多，因此建议事先将分页功能封装成公共函数或组件（本文不再讨论分页的实现方式）。</p>
 <p>对于有固定取值的数据（性别、省市县、学院等），建议准备专门的字典表或配置文件，展示时从字典中取值。建议将读取字典数据也维护成公共函数或组件。</p>
 <h1 id="设计方面的问题"><a href="#设计方面的问题" class="headerlink" title="设计方面的问题"></a>设计方面的问题</h1><h2 id="屏幕分辨率"><a href="#屏幕分辨率" class="headerlink" title="屏幕分辨率"></a>屏幕分辨率</h2><p>开发人员经常使用大显示器，分辨率比较高，而用户的显示器五花八门，有大有小，甚至在当今这个满街液晶显示屏的时代仍然使用大脑袋瓜子的1024x768 CRT显示器。因此，设计页面时要考虑多种显示器宽度和高度，例如采用响应式布局，或者去除不必要的东西，或者加水平滚动条，总之要避免让窄屏用户看到像本博客上面那样“东西装不下”的页面效果。</p>
 <p>如果你的显示器分辨率比较高，建议把一些常用的宽度和高度测量好，贴在你的显示器上，并且在调试的时候测试不同尺寸的浏览器窗口。</p>
 <h2 id="不清楚实际数据规模"><a href="#不清楚实际数据规模" class="headerlink" title="不清楚实际数据规模"></a>不清楚实际数据规模</h2><p>一个班级大约有二三十人，而一个年级会有几十至几百人，一个学校可能超过上万人。如果不考虑实际数据规模，设计和实现出来的东西有可能会使用户困扰，例如没有分页（然后把全校上万人全部展示出来）、缺少导入功能（上万人信息需要一个一个地录入）和批量操作功能（上万工作单需要一个一个地提交）。</p>
 <p>即使故意要求给用户增加障碍，例如审核工作单时必须一个一个地操作，我们其实也可以设法在不违反原则的前提下给用户提供一些便利，例如审核完成后自动跳转到下一工作单，并提醒还有多少工作单未处理，而用户不想处理的单子也可以轻松跳过。</p>
-<h2 id="没有搜索-搜索条件不足"><a href="#没有搜索-搜索条件不足" class="headerlink" title="没有搜索&#x2F;搜索条件不足"></a>没有搜索&#x2F;搜索条件不足</h2><p>数据很多的时候，应当给用户提供搜索功能，便于很快从大量数据中找到需要的内容。另外设计查询条件时要了解用户希望如何定位数据，避免漏掉常用条件或提供很多多余条件，例如去营业厅查电话费，以身份证或手机号中的前几位或后几位作为查询条件比较靠谱，而用姓名和性别作为条件就不靠谱。</p>
+<h2 id="没有搜索-搜索条件不足"><a href="#没有搜索-搜索条件不足" class="headerlink" title="没有搜索/搜索条件不足"></a>没有搜索/搜索条件不足</h2><p>数据很多的时候，应当给用户提供搜索功能，便于很快从大量数据中找到需要的内容。另外设计查询条件时要了解用户希望如何定位数据，避免漏掉常用条件或提供很多多余条件，例如去营业厅查电话费，以身份证或手机号中的前几位或后几位作为查询条件比较靠谱，而用姓名和性别作为条件就不靠谱。</p>
 <p>对于上面的表单来说，查询条件里便缺少学院、班级和学号，并且身份证号和学号最好是模糊查询，因为除了学生本人以外很少有人能把这些号码记得一个数字都不差，而且就算拿着本人身份证或学生证，敲数字也挺麻烦的。</p>
 <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>展示数据最好排个顺序（默认排序顺序应当取决于用户经常做什么事情），而且要让用户能选择给哪一列排序，例如拿学生名单核对数据时会希望按学号排序，找人的时候会希望按姓名拼音排序，统计生源地时会希望按出生地排序……数据库里面什么顺序就展示什么顺序的话，没准会让用户头大。</p>
 <h2 id="个人隐私"><a href="#个人隐私" class="headerlink" title="个人隐私"></a>个人隐私</h2><p>身份证号、手机号等数据属于个人隐私，没有必要的话不要随意展示给用户。如果确实需要展示，建议考虑脱敏处理（即使本人录入的也是，谁敢说不会盗号呢），例如130****5678。</p>
@@ -295,15 +409,13 @@
 <h3 id="数据库索引"><a href="#数据库索引" class="headerlink" title="数据库索引"></a>数据库索引</h3><p>如果该建索引的地方没建索引，或者SQL写得很糟糕，根本没走索引，那么查询速度自然会变慢。</p>
 <h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h3><p>以Oracle为例</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> s.<span class="operator">*</span>, s.ROWNUM rn <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> students <span class="keyword">where</span> ...</span><br><span class="line">    ) s <span class="keyword">WHERE</span> rownum<span class="operator">&lt;=</span><span class="number">10000000</span><span class="operator">+</span><span class="number">10</span></span><br><span class="line">) <span class="keyword">WHERE</span> rn<span class="operator">&gt;=</span><span class="number">10000000</span>;</span><br></pre></td></tr></table></figure>
-
 <p>的效率要比</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> ROWID <span class="keyword">IN</span> (</span><br><span class="line">    <span class="keyword">SELECT</span> id <span class="keyword">FROM</span> (</span><br><span class="line">        <span class="keyword">SELECT</span> s.ROWID id, s.ROWNUM n <span class="keyword">FROM</span> (</span><br><span class="line">            <span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> students <span class="keyword">WHERE</span> ...</span><br><span class="line">        ) s <span class="keyword">WHERE</span> rownum<span class="operator">&lt;=</span><span class="number">10000000</span><span class="operator">+</span><span class="number">10</span></span><br><span class="line">    ) <span class="keyword">WHERE</span> n<span class="operator">&gt;=</span><span class="number">10000000</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <p>低一些，因此建议按后者查询。</p>
 <h3 id="反复查数据库"><a href="#反复查数据库" class="headerlink" title="反复查数据库"></a>反复查数据库</h3><p>出生地、民族等字典数据可能也存放在数据库中。如果每次获取取值都查一遍数据库（特别是循环里面查数据库）会非常影响性能。由于字典数据变化并不频繁，建议将此类数据做成缓存，一次性从数据库查好并缓存之后就直接从缓存里面取值。</p>
 <p>缓存会有缓存时效以及线程安全等问题，这里不再展开讨论。</p>
 <h3 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h3><p>模糊查询，特别是双“%”（<code>LIKE &#39;%字符%&#39;</code>）会影响性能，如果不能去掉模糊查询功能，那么要控制好条件，避免大幅度的表扫描。</p>
-<h2 id="越权访问"><a href="#越权访问" class="headerlink" title="越权访问"></a>越权访问</h2><p>假如查看的链接是“&#x2F;students&#x2F;view.do?id&#x3D;10001”，那么将id&#x3D;10001改成不属于你的10002，你能否看到数据呢？如果能，说明存在漏洞，应当在查数据时附上身份验证（例如在SQL加上是创建者本人的查询条件），确保用户只能看到自己的数据。</p>
+<h2 id="越权访问"><a href="#越权访问" class="headerlink" title="越权访问"></a>越权访问</h2><p>假如查看的链接是“/students/view.do?id=10001”，那么将id=10001改成不属于你的10002，你能否看到数据呢？如果能，说明存在漏洞，应当在查数据时附上身份验证（例如在SQL加上是创建者本人的查询条件），确保用户只能看到自己的数据。</p>
 <h2 id="拒绝服务"><a href="#拒绝服务" class="headerlink" title="拒绝服务"></a>拒绝服务</h2><p>假如查询查出总共10000条数据（当然是把分页之后的数据合到一起），你能否通过修改请求的方式让每页展示10000条数据？如果能展示，而且性能开销还不小，那么别人也可以用类似的方法使系统变慢甚至瘫痪。</p>
 <p>你的查询耗时长吗？如果耗时比较长，而且SQL层面的优化已经做得很到位，无法再进一步提高效率，那么建议增加按钮变灰（点一下查询按钮之后就无法再点击，直到查询完成）、动画反馈（Loading…）和限制操作频率（例如禁止频繁操作，或要求先输入验证码再查询）等措施，以免用户频繁提交影响系统整体性能。</p>
 <h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><p>老生常谈的问题，不再详细讨论。假如你在某个查询条件框输入<code>&#39; or &#39;1&#39;=&#39;1</code>却能查出很多数据，那么你要赶紧补漏洞了。</p>

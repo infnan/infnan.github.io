@@ -274,26 +274,21 @@
     
     <div class="post-body" itemprop="articleBody"><p>为满足等保测评要求，对CentOS 7服务器进行了统一整改，整改命令记录如下。</p>
 <span id="more"></span>
-
 <h1 id="升级SSH"><a href="#升级SSH" class="headerlink" title="升级SSH"></a>升级SSH</h1><p>网上教程太多了，此处不再提供。</p>
 <p>如果从7.x旧版升级到8.x或9.x，需要注意几个问题：</p>
 <ol>
 <li>禁用SELinux：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">&#x27;s/=enforcing/=disabled/&#x27;</span> /etc/selinux/config</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol>
 <li>删除旧的key：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f /etc/ssh/ssh*key</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
+<ol>
 <li>允许root登录：</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;PermitRootLogin yes&quot;</span> &gt;&gt; /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-
 <h1 id="升级curl（需要网络）"><a href="#升级curl（需要网络）" class="headerlink" title="升级curl（需要网络）"></a>升级curl（需要网络）</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh http://www.city-fan.org/ftp/contrib/yum-repo/city-fan.org-release-3-4.rhel7.noarch.rpm</span><br><span class="line">sed -i <span class="string">&#x27;s/enabled=0/enabled=1/g&#x27;</span> /etc/yum.repos.d/city-fan.org.repo</span><br><span class="line">sed -i <span class="string">&#x27;s/gpgcheck=1/gpgcheck=0/g&#x27;</span> /etc/yum.repos.d/city-fan.org.repo</span><br><span class="line">yum update -y --nogpgcheck curl</span><br></pre></td></tr></table></figure>
-
 <h1 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># shell不记录历史命令</span></span><br><span class="line">sed -i <span class="string">&#x27;s/HISTSIZE=1000/HISTSIZE=0/g&#x27;</span> /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># shell自动超时</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export TMOUT=600&#x27;</span> &gt;&gt; /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 密码复杂度规则、账号锁定规则</span></span><br><span class="line">sed -i <span class="string">&#x27;s/authtok_type=/authtok_type= minlen=12 lcredit=-1 ucredit=-1 dcr+++edit=-1 ocredit=-1 enforce_for_root/&#x27;</span> /etc/pam.d/system-auth</span><br><span class="line">sed -i <span class="string">&#x27;s/99999/120/g&#x27;</span> /etc/login.defs</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;auth required pam_tally.so onerr=fail no_magic_root&#x27;</span> &gt;&gt; /etc/pam.d/system-auth</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;account required pam_tally.so deny=5 unlock_time=300 root_unlock_time=300 no_magic_root even_deny_root_account per_user reset&#x27;</span> &gt;&gt; /etc/pam.d/system-auth</span><br><span class="line"></span><br><span class="line"><span class="comment"># SSH加密算法</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521&#x27;</span> &gt;&gt; /etc/ssh/sshd_config</span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
 
     </div>
