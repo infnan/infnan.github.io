@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.1","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="系统升级和发版是一个动静很大的操作，必须充分做好实施计划和应急预案。本文是我们项目（项目制）日常升级的检查表，供大家参考。">
 <meta property="og:type" content="article">
@@ -45,8 +45,8 @@
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>升级发版检查表 | plusNaN</title>
   
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134391990-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-134391990-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2C91QDVMGC"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-2C91QDVMGC","only_pageview":false,"measure_protocol_api_secret":null}</script>
   <script src="/js/third-party/analytics/google-analytics.js"></script>
 
 
@@ -161,7 +161,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">72</span>
+          <span class="site-state-item-count">73</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -172,7 +172,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">61</span>
+        <span class="site-state-item-count">62</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -273,7 +273,8 @@
     <div class="post-body" itemprop="articleBody"><p>系统升级和发版是一个动静很大的操作，必须充分做好实施计划和应急预案。本文是我们项目（项目制）日常升级的检查表，供大家参考。</p>
 <span id="more"></span>
 <ul>
-<li>完成项目内准备工作<ul>
+<li>完成项目内准备工作
+<ul>
 <li>完成所有功能测试</li>
 <li>完成代码审查，严重缺陷全部关闭</li>
 <li>制定对外的发版说明，准备推送内容，更新“更新历史”内容</li>
@@ -281,15 +282,15 @@
 <li>应用打包</li>
 <li>检查打包内容，确认已按生产环境配置，而且不包含.svn、.git、.DS_Store这样的敏感文件</li>
 <li>完成部门内部申请流程</li>
-</ul>
-</li>
-<li>完成与甲方的沟通工作（需提前一周实施）<ul>
+</ul></li>
+<li>完成与甲方的沟通工作（需提前一周实施）
+<ul>
 <li>决定向甲方报告的内容，提交相关申请材料，跟踪甲方审核进度</li>
 <li>审核通过后申请堡垒机操作权限</li>
-</ul>
-</li>
+</ul></li>
 <li>提前在系统进行升级公告，使用户做好准备（我们设计了相关功能，只要在数据库插入一条记录就能展示公告）</li>
-<li>实施升级<ul>
+<li>实施升级
+<ul>
 <li>检查内存、硬盘使用情况，如果硬盘剩余空间不足则清理或压缩旧备份与旧日志</li>
 <li>备份原程序</li>
 <li>暂停Web应用防火墙（WAF）防护</li>
@@ -297,20 +298,19 @@
 <li>将程序替换为新版本并进行Web服务器的更新</li>
 <li>执行升级初始化SQL</li>
 <li>如有数据库表结构调整，并且涉及OGG传输（Oracle），则需要同时处理OGG的源端和汇聚端，并确保OGG状态正常</li>
-</ul>
-</li>
-<li>升级后验证<ul>
+</ul></li>
+<li>升级后验证
+<ul>
 <li>观察应用是否正常启动</li>
 <li>进行功能验证，发现问题及时处理。若在堡垒机权限结束前无法修复，那么则进行回滚（包括程序包和SQL），放弃升级</li>
 <li>全部操作完成后，恢复WAF防护</li>
-</ul>
-</li>
-<li>结束<ul>
+</ul></li>
+<li>结束
+<ul>
 <li>通知甲方升级顺利完成</li>
 <li>向用户推送新版本的发版说明</li>
 <li>向客服和运维人员通知升级内容</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
     </div>
@@ -414,6 +414,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
