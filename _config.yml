@@ -36,26 +36,26 @@ external_link:
   enable: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
-highlight:
-  enable: false
-  line_number: true
-  auto_detect: false
-  tab_replace:
+syntax_highlighter: prismjs
 prismjs:
-  enable: true
   preprocess: true
   line_number: true
-  tab_replace: ''
+  line_threshold: 0
+  tab_replace: ""
+
+marked:
+  prependRoot: true
+  postAsset: true
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: ''
+  path: ""
   per_page: 10
   order_by: -date
 
@@ -118,19 +118,19 @@ html_minifier:
   ignoreCustomComments:
     - '!!js/regexp /^\s*more/'
   exclude:
-    - '**/themes/**/*.swig'
-    - '**/source/**/*.md'
+    - "**/themes/**/*.swig"
+    - "**/source/**/*.md"
 js_minifier:
   enable: true
   mangle: true
   exclude:
-    - '*.min.js'
-    - '**/themes/**/*'
+    - "*.min.js"
+    - "**/themes/**/*"
 css_minifier:
   enable: true
   exclude:
-    - '*.min.css'
-    - '**/themes/**/*'
+    - "*.min.css"
+    - "**/themes/**/*"
 image_minifier:
   enable: true
   interlaced: false
