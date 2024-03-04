@@ -53,6 +53,7 @@ tags:
 ```
 
 # 准备工作
+
 1. 安装JDK 8：本文所用的Gradle 5.4既不支持古老的JDK 6，也不支持崭新的JDK 10。后文会解释如何保证不同版本JDK的兼容性。
 2. 检查各模块是否存在循环依赖：例如WebProj1依赖CommonProj，而CommonProj反过来又依赖WebProj1。这种情况在Eclipse里面能正常打包，然而切换到Gradle之后会出错，需要通过代码重构来消除错误。
 3. 统一java文件的字符编码（java就行，其他文件类型无妨）。假如一部分java代码文件是UTF-8，另一部分java代码文件用GBK，要么会出现编译错误，要么会产生乱码。
@@ -61,6 +62,7 @@ tags:
 # 开始改造
 ## 项目文件结构调整
 Maven和Gradle有很多约定俗成的要求，例如Java代码存放位置。我们需要按照这些约定来调整我们的代码结构：
+
 * src（Java代码） → src/main/java
 * test（Java代码） → test/main/java
 * config（需要拷到 WEB-INF/classes 下面的配置文件） → src/main/resources
@@ -137,10 +139,12 @@ gradle.properties
 ```
 
 ## 配置Gradle
+
 1. [安装Gradle](https://www.yiibai.com/gradle/how-install-gradle-windows.html)
 2. 放置Gradle Wrapper：打开终端，进入项目所在的根目录，输入`gradle wrapper`。以后其他成员只要在终端中直接输入“./gradlew”就能自动下载相同版本的Gradle。
 
 考虑到国内网络情况，需要进行两种额外处理步骤（二选一）：
+
 1. 将gradle-5.4-all.zip分发给团队其他成员，让大家都按照上面方法手工安装Gradle。
 2. 上传到国内或公司内的服务器，例如`http://10.11.22.33:8088/gradle-5.4-all.zip`，然后修改你项目中的 gradle/wrapper/gradle-wrapper.properties 文件，将 distributionUrl 修改成该地址。后续其他成员只要执行gradlew就会自动从这个URL下载Gradle。
 

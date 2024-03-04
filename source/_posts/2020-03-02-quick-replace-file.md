@@ -15,7 +15,7 @@ tags:
 重新生成的class文件的修改时间肯定比其他class文件新，这样我们就能用一些脚本将它们挑出来了。
 
 ## Windows系统
-使用PowerShell脚本。放在 D:\tiqu.ps1 中：
+使用PowerShell脚本。放在 D:\\tiqu.ps1 中：
 ```powershell
 [CmdletBinding()]
 Param (

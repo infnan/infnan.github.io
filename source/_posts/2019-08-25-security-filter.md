@@ -145,6 +145,7 @@ httpResponse.addHeader("X-XSS-Protection", "1; mode=block");
 ```
 
 需要注意的是：
+
 1. 敏感词机制非常容易导致误判（例如拦截` AND `会把正常的英语内容也给拦截掉），需要增加例外机制，并结合业务进行充分测试。
 2. 敏感词机制无法防止所有注入，例如攻击者仍然可以通过字符编码、加空格、加回车、加注释等方式来绕过拦截。
 3. 上面GET/POST参数检测无法检测Restful API和JSON请求。如果业务有这两种请求，需另外写代码进行处理。
@@ -216,6 +217,7 @@ if (!intercept && !"GET,POST,HEAD,OPTIONS,PUT,DELETE".contains(method)) {
 ```
 
 如果你的系统使用了PUT、DELETE等浏览器不支持的动词，需要分两种情况讨论：
+
 * 浏览器页面：框架往往会进行一些特殊处理（例如将实际请求方式保存在name为_method的隐藏域中），使浏览器以POST方式提交用户请求。这样的话不需要特意放行PUT和DELETE。
 * 后台接口：由于调用方不是浏览器，可直接使用相应动词，此时过滤器需放行PUT和DELETE等动词。
 

@@ -31,6 +31,7 @@ code {
 | 启动报错，提示无法加载config.xml | `Server failed. Reason: [Management:141266]Parsing Failure in config.xml: failed to find method MethodName` | -Dweblogic.configuration.schemaValidationEnabled=false
 
 如何修改WebLogic的启动参数？
+
 * AdminServer启动参数：找到类似于`/u01/Oracle/Middleware/user_projects/domains/base_domain/bin/setDomainEnv.sh`的文件，找到倒数第一个`JAVA_OPTIONS=...`，在它的后面追加参数。
 * 修改其他节点的启动参数：进入WebLogic控制台，点击服务器→你的服务器（例如app_server1）→配置→服务器启动，然后往下翻，找到“参数”项。
 
@@ -57,6 +58,7 @@ TODO
 生产环境通常会架设集群，通过负载均衡进行访问。如果负载均衡未按照Cookie进行分配，或者分配策略不完全正确，那么这样的话很可能会存在串Session的问题，例如登录成功之后进的是节点1，稍微做点操作后默默地跳到了节点3，导致会话丢失，系统提示重新登录。因为平时开发不会去使用负载均衡，所以可能注意不到这个问题。
 
 这个问题可以通过以下几种方法解决：
+
 1. 正确地配置负载均衡，保证同一会话（JSESSIONID）的流量只分配到同一节点上；
 2. 使用WebLogic的“会话复制”功能（这个比较正统）；
 3. 通过Redis等实现会话共享（比较复杂）。
@@ -372,6 +374,7 @@ session required /lib64/security/pam_limits.so
 有时观察服务器状态，可以看到状态是“RUNNING”，然而健康状况没有内容，这说明节点可能死了，你可以试一下重启复活。
 
 如果不慎关掉AdminServer，或者打算整个重启，那么操作会比较麻烦，大体上要按以下思路操作：
+
 1. 在管理节点上启动AdminServer（startWebLogic.sh）。
 2. 在每个节点上都启动一遍NodeManager（startNodeManager.sh）。
 3. 进入管理控制台，启动各应用节点。

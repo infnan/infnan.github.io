@@ -360,3 +360,4 @@ var list = tabService.getList();
 1. 查阅接口调用日志
 2. Swagger接口文档
 3. Kotlin语言支持
+4. [ES6支持](/2023/05/10/javet)
