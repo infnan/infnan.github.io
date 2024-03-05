@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "7.1.0"
+    "version": "7.1.1"
   },
   "dependencies": {
-    "hexo": "^7.1.0",
+    "hexo": "^7.1.1",
     "hexo-all-minifier": "^0.5.7",
     "hexo-deployer-git": "^4.0.0",
     "hexo-fs": "^4.1.1",
@@ -24,10 +24,11 @@
     "hexo-renderer-pandoc": "^0.4.0",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-theme-next": "^8.19.1",
+    "hexo-theme-next": "^8.19.2",
     "hexo-util": "^3.2.0"
   },
   "scripts": {
+    "build": "hexo generate",
     "server": "hexo --config=_config.tmp.yml server",
     "preserver": "hexo clean && node tools/preview.js",
     "postserver": "rm _config.tmp.yml",

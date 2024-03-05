@@ -23,6 +23,14 @@ darkmode: true
 
 preconnect: true
 
+post_meta:
+  updated_at:
+    enable: false
+
+theme_color:
+  light: "#203040"
+  dark: "#203040"
+
 gitalk:
   enable: true
   github_id: infnan
