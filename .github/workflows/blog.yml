@@ -31,6 +31,10 @@ jobs:
             ${{ runner.OS }}-npm-cache
       - name: Install Dependencies
         run: yarn
+      - name: Install pandoc
+        uses: pandoc/actions/setup@{main}
+        with:
+          version: 2.19
       - name: Build
         run: yarn run build
       - name: Upload Pages artifact
