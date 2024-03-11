@@ -1378,6 +1378,42 @@ Pro来说，只要不是特别现代的游戏，虚拟机也能带得动了。�
       </tags>
   </entry>
   <entry>
+    <title>Java代码审查：目录</title>
+    <url>/2019/01/01/java-code-review-0/</url>
+    <content><![CDATA[<p>在讨论代码审查问题之前，需要指出不遵守代码规范的后果：</p>
+<ol type="1">
+<li>被骂“坑爹”</li>
+<li>被同事暗中诅咒</li>
+<li>跳槽之后被新同事暗中诅咒</li>
+<li>跳槽之后被原来公司的同事暗中诅咒</li>
+</ol>
+<p>为了避免诅咒的命运，本系列文章整理了一些代码审查问题，并以个人角度对编程习惯提出一些要求和建议。对于项目而言，一方面要加强审查，另一方面要加强对项目成员的教育，防止问题再次产生。</p>
+<span id="more"></span>
+<figure>
+<img src="/img/2019-01-01-java-code-review-0/kuroneko.jpg" alt="诅咒" />
+<figcaption aria-hidden="true">诅咒</figcaption>
+</figure>
+<h1 id="本系列目录">本系列目录</h1>
+<ol type="1">
+<li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
+<li><a
+href="/2019/01/03/java-code-review-2">应用安全问题</a>：由于安全问题经常被忽视和无视，因此有必要专门指出安全隐患以及预防措施。</li>
+<li><a
+href="/2019/01/04/java-code-review-3">关于编程习惯的要求</a>：这里主要是我个人关于操作方面的倡议，感觉合理的话可以参考。</li>
+<li><a
+href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查</a></li>
+<li>使用FindBugs和SonarQube等工具进行扫描</li>
+<li>……</li>
+</ol>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>升级发版检查表</title>
     <url>/2018/12/20/deploy-checklist/</url>
     <content><![CDATA[<p>系统升级和发版是一个动静很大的操作，必须充分做好实施计划和应急预案。本文是我们项目（项目制）日常升级的检查表，供大家参考。</p>
@@ -1429,42 +1465,6 @@ Pro来说，只要不是特别现代的游戏，虚拟机也能带得动了。�
       <tags>
         <tag>Web</tag>
         <tag>项目实施</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java代码审查：目录</title>
-    <url>/2019/01/01/java-code-review-0/</url>
-    <content><![CDATA[<p>在讨论代码审查问题之前，需要指出不遵守代码规范的后果：</p>
-<ol type="1">
-<li>被骂“坑爹”</li>
-<li>被同事暗中诅咒</li>
-<li>跳槽之后被新同事暗中诅咒</li>
-<li>跳槽之后被原来公司的同事暗中诅咒</li>
-</ol>
-<p>为了避免诅咒的命运，本系列文章整理了一些代码审查问题，并以个人角度对编程习惯提出一些要求和建议。对于项目而言，一方面要加强审查，另一方面要加强对项目成员的教育，防止问题再次产生。</p>
-<span id="more"></span>
-<figure>
-<img src="/img/2019-01-01-java-code-review-0/kuroneko.jpg" alt="诅咒" />
-<figcaption aria-hidden="true">诅咒</figcaption>
-</figure>
-<h1 id="本系列目录">本系列目录</h1>
-<ol type="1">
-<li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
-<li><a
-href="/2019/01/03/java-code-review-2">应用安全问题</a>：由于安全问题经常被忽视和无视，因此有必要专门指出安全隐患以及预防措施。</li>
-<li><a
-href="/2019/01/04/java-code-review-3">关于编程习惯的要求</a>：这里主要是我个人关于操作方面的倡议，感觉合理的话可以参考。</li>
-<li><a
-href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查</a></li>
-<li>使用FindBugs和SonarQube等工具进行扫描</li>
-<li>……</li>
-</ol>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1974,6 +1974,117 @@ href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查<
       </tags>
   </entry>
   <entry>
+    <title>Java代码审查（三）：关于编程习惯的要求</title>
+    <url>/2019/01/04/java-code-review-3/</url>
+    <content><![CDATA[<p>这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。
+<span id="more"></span></p>
+<h1 id="新来者">新来者</h1>
+<ul>
+<li>主动了解项目有哪些开发规范。
+<ul>
+<li>如果实际操作与开发规范已经不符，要敢于提出质疑，纠正错误操作或调整过时规范。</li>
+</ul></li>
+<li>仿写是快速学习的一种方法，但是，仿写时候要动脑子，不要完全照抄已有代码，更不要照搬垃圾代码。</li>
+<li>除了完成任务，不要忘了界面美观、操作便利、性能高效、保证信息安全、代码规范清晰这类不会使自己涨工资但是能减少被诅咒次数的东西。</li>
+<li>如果不能保质保量地完成任务，一定要尽早吱声。如果拖到最后也做不出来，或者做到最后挖的坑比正面贡献还多，后果好不了。</li>
+<li>事后诸葛亮：不听取本文意见，最终结果可能是项目质量感人。</li>
+</ul>
+<h1 id="开发工作">开发工作</h1>
+<h2 id="准备工作">准备工作</h2>
+<ul>
+<li>新功能和数据库表结构的设计都要通过评审。</li>
+<li>搞清楚业务场景和业务逻辑再动手。</li>
+<li>把数据量估计好，以免产生正式环境运行过慢、页面展示爆炸等特效。</li>
+</ul>
+<h2 id="书写新代码">书写新代码</h2>
+<ul>
+<li>避免直接copy-paste。就算抄也要自己写一遍，过一下脑子。</li>
+<li>如果一段代码重复了两三遍甚至更多，那么应当改写成公共代码。
+<ul>
+<li>接上条，造新轮子之前，查一下有没有可以拿来用的现成的东西。</li>
+</ul></li>
+<li>将Web（请求处理）、BO（业务逻辑）、DAO（数据持久）等层次与PO（持久对象）、VO（值对象）等领域区分好，例如不要在Web层或JSP页面写业务逻辑。</li>
+<li>代码和页面风格都要规范统一。</li>
+</ul>
+<h2 id="修改既有代码">修改既有代码</h2>
+<ul>
+<li>修改函数签名、函数实现、应用配置、接口签名等内容之前必须先检查引用情况。
+<ul>
+<li>修改公共方法和公共配置之前应仔细评估影响并加强测试。如果不清楚影响，那么要先咨询老员工再修改。</li>
+<li>设计和修改公共组件（包括公共函数、标签、模板、Filter等），除了正确实现功能，还必须更加关注运行效率、资源占用、线程安全性等问题。</li>
+</ul></li>
+<li>如果发现待修改的代码比较诡异，修改之前建议先问问老员工有没有什么历史原因或者坑。</li>
+<li>即使是简单的修改也要进行测试，因为再有经验也有可能改出问题。</li>
+<li>及时清理出于备份目的留下的注释，以免造成混淆。如果后续有可能恢复，那么应当用注释说清情况。</li>
+</ul>
+<h2 id="提交">提交</h2>
+<ul>
+<li>提交代码之前完成功能自测。</li>
+<li>提交之前对代码进行一下美化，例如自动缩进、移除无用import等（需要事先统一标准）。</li>
+<li>提交之前必须检查待提交的Diff（差异）：
+<ul>
+<li>提交务必完整，不能出现编译错误，不能导致程序无法正常运行。</li>
+<li>不能完整提交就不要提交。</li>
+<li>不要有错别字、笔误和语病。</li>
+<li>不要把本地调试代码（例如alert(val)、屏蔽校验规则、写死测试数据之类的）提交上去。</li>
+</ul></li>
+<li>提交时书写提交说明，例如实现了什么功能或解决了什么问题。</li>
+<li>注意提交频率，按活动一次性提交齐全，不要长期不提交，也不要改一个文件就提交一下。</li>
+</ul>
+<h1 id="代码细节">代码细节</h1>
+<h2 id="命名">命名</h2>
+<ul>
+<li>除了循环ijk那种一望而知的情况，要用有意义的英文名，而且不要用拼音简写，更不要拼音英语混写。</li>
+<li>保持命名一致，例如不要前面还在用“state”表示“状态”，后面就变成了用“status”表示状态。如果不知道如何一致，那么就看代码规范以及别人怎么写的。</li>
+<li>如果确实需要借用名称或借用字段，要把情况写清楚，以免造成混淆。</li>
+</ul>
+<h2 id="sql">SQL</h2>
+<ul>
+<li>书写SQL要实地执行一下。</li>
+<li>要估计投入到生产环境之后会产生多少数据，以免效率过低甚至系统瘫痪。</li>
+<li>查询和关联时要留意是否一定能查到数据。不确定的话要与熟悉业务的人或DBA交流。</li>
+<li>书写复杂SQL要看执行计划，估算执行效率，必要时与DBA交流，以便在数据库层面进行优化调整。
+<ul>
+<li>如果顺便发现没有主键或索引，那么也要告诉DBA。</li>
+</ul></li>
+<li>尽量以绑定变量形式书写SQL而非直接拼接，以提高语句解析效率。</li>
+<li>对于改造升级类的系统，注意要兼容历史数据。</li>
+</ul>
+<h2 id="注释">注释</h2>
+<ul>
+<li>在业务代码处简单地解释业务规则。</li>
+<li>复杂逻辑、边界情况、HACK操作以及“装逼操作”要写注释说明。</li>
+<li>需求变更、业务逻辑修改等情况务必在相关代码中写注释说明，而且要标出在什么时间、因什么原因而修改，以便事后追溯。
+<ul>
+<li>接上条，如果预计以后还会发生变动，建议各关联代码都用唯一且相同的代码进行标记（例如CHANGE20190101），这样以后再改代码的时候容易搜索。</li>
+</ul></li>
+<li>TODO的事情写上TODO四个字母并进行跟踪，已经完成以及不是TODO的事情不要写TODO。</li>
+</ul>
+<h2 id="其他">其他</h2>
+<ul>
+<li>关于报错：给用户展示正常人类能看懂的文字，而且让用户和开发者都能知道大概是哪方面错误以及如何处理。</li>
+<li>及时清理无效引用与变更。</li>
+<li>及时维护文档。如果不能及时维护，建议强迫自己改完文档再编码。</li>
+</ul>
+<h1 id="本系列目录">本系列目录</h1>
+<ol type="1">
+<li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
+<li><a href="/2019/01/03/java-code-review-2">应用安全问题</a></li>
+<li><strong>关于编程习惯的要求</strong></li>
+<li><a
+href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查</a></li>
+<li>使用FindBugs和SonarQube等工具进行扫描</li>
+<li>……</li>
+</ol>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java代码审查（二）：应用安全问题</title>
     <url>/2019/01/03/java-code-review-2/</url>
     <content><![CDATA[<p>由于安全问题经常被忽视与无视，因此有必要专门指出一些常见的安全隐患以及预防措施。不过Web安全问题已是老生常谈，网上资料也非常丰富，故本文仅仅点到为止，不再详细解释。</p>
@@ -2134,117 +2245,6 @@ href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查<
         <tag>安全</tag>
         <tag>注入</tag>
         <tag>越权</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java代码审查（三）：关于编程习惯的要求</title>
-    <url>/2019/01/04/java-code-review-3/</url>
-    <content><![CDATA[<p>这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。
-<span id="more"></span></p>
-<h1 id="新来者">新来者</h1>
-<ul>
-<li>主动了解项目有哪些开发规范。
-<ul>
-<li>如果实际操作与开发规范已经不符，要敢于提出质疑，纠正错误操作或调整过时规范。</li>
-</ul></li>
-<li>仿写是快速学习的一种方法，但是，仿写时候要动脑子，不要完全照抄已有代码，更不要照搬垃圾代码。</li>
-<li>除了完成任务，不要忘了界面美观、操作便利、性能高效、保证信息安全、代码规范清晰这类不会使自己涨工资但是能减少被诅咒次数的东西。</li>
-<li>如果不能保质保量地完成任务，一定要尽早吱声。如果拖到最后也做不出来，或者做到最后挖的坑比正面贡献还多，后果好不了。</li>
-<li>事后诸葛亮：不听取本文意见，最终结果可能是项目质量感人。</li>
-</ul>
-<h1 id="开发工作">开发工作</h1>
-<h2 id="准备工作">准备工作</h2>
-<ul>
-<li>新功能和数据库表结构的设计都要通过评审。</li>
-<li>搞清楚业务场景和业务逻辑再动手。</li>
-<li>把数据量估计好，以免产生正式环境运行过慢、页面展示爆炸等特效。</li>
-</ul>
-<h2 id="书写新代码">书写新代码</h2>
-<ul>
-<li>避免直接copy-paste。就算抄也要自己写一遍，过一下脑子。</li>
-<li>如果一段代码重复了两三遍甚至更多，那么应当改写成公共代码。
-<ul>
-<li>接上条，造新轮子之前，查一下有没有可以拿来用的现成的东西。</li>
-</ul></li>
-<li>将Web（请求处理）、BO（业务逻辑）、DAO（数据持久）等层次与PO（持久对象）、VO（值对象）等领域区分好，例如不要在Web层或JSP页面写业务逻辑。</li>
-<li>代码和页面风格都要规范统一。</li>
-</ul>
-<h2 id="修改既有代码">修改既有代码</h2>
-<ul>
-<li>修改函数签名、函数实现、应用配置、接口签名等内容之前必须先检查引用情况。
-<ul>
-<li>修改公共方法和公共配置之前应仔细评估影响并加强测试。如果不清楚影响，那么要先咨询老员工再修改。</li>
-<li>设计和修改公共组件（包括公共函数、标签、模板、Filter等），除了正确实现功能，还必须更加关注运行效率、资源占用、线程安全性等问题。</li>
-</ul></li>
-<li>如果发现待修改的代码比较诡异，修改之前建议先问问老员工有没有什么历史原因或者坑。</li>
-<li>即使是简单的修改也要进行测试，因为再有经验也有可能改出问题。</li>
-<li>及时清理出于备份目的留下的注释，以免造成混淆。如果后续有可能恢复，那么应当用注释说清情况。</li>
-</ul>
-<h2 id="提交">提交</h2>
-<ul>
-<li>提交代码之前完成功能自测。</li>
-<li>提交之前对代码进行一下美化，例如自动缩进、移除无用import等（需要事先统一标准）。</li>
-<li>提交之前必须检查待提交的Diff（差异）：
-<ul>
-<li>提交务必完整，不能出现编译错误，不能导致程序无法正常运行。</li>
-<li>不能完整提交就不要提交。</li>
-<li>不要有错别字、笔误和语病。</li>
-<li>不要把本地调试代码（例如alert(val)、屏蔽校验规则、写死测试数据之类的）提交上去。</li>
-</ul></li>
-<li>提交时书写提交说明，例如实现了什么功能或解决了什么问题。</li>
-<li>注意提交频率，按活动一次性提交齐全，不要长期不提交，也不要改一个文件就提交一下。</li>
-</ul>
-<h1 id="代码细节">代码细节</h1>
-<h2 id="命名">命名</h2>
-<ul>
-<li>除了循环ijk那种一望而知的情况，要用有意义的英文名，而且不要用拼音简写，更不要拼音英语混写。</li>
-<li>保持命名一致，例如不要前面还在用“state”表示“状态”，后面就变成了用“status”表示状态。如果不知道如何一致，那么就看代码规范以及别人怎么写的。</li>
-<li>如果确实需要借用名称或借用字段，要把情况写清楚，以免造成混淆。</li>
-</ul>
-<h2 id="sql">SQL</h2>
-<ul>
-<li>书写SQL要实地执行一下。</li>
-<li>要估计投入到生产环境之后会产生多少数据，以免效率过低甚至系统瘫痪。</li>
-<li>查询和关联时要留意是否一定能查到数据。不确定的话要与熟悉业务的人或DBA交流。</li>
-<li>书写复杂SQL要看执行计划，估算执行效率，必要时与DBA交流，以便在数据库层面进行优化调整。
-<ul>
-<li>如果顺便发现没有主键或索引，那么也要告诉DBA。</li>
-</ul></li>
-<li>尽量以绑定变量形式书写SQL而非直接拼接，以提高语句解析效率。</li>
-<li>对于改造升级类的系统，注意要兼容历史数据。</li>
-</ul>
-<h2 id="注释">注释</h2>
-<ul>
-<li>在业务代码处简单地解释业务规则。</li>
-<li>复杂逻辑、边界情况、HACK操作以及“装逼操作”要写注释说明。</li>
-<li>需求变更、业务逻辑修改等情况务必在相关代码中写注释说明，而且要标出在什么时间、因什么原因而修改，以便事后追溯。
-<ul>
-<li>接上条，如果预计以后还会发生变动，建议各关联代码都用唯一且相同的代码进行标记（例如CHANGE20190101），这样以后再改代码的时候容易搜索。</li>
-</ul></li>
-<li>TODO的事情写上TODO四个字母并进行跟踪，已经完成以及不是TODO的事情不要写TODO。</li>
-</ul>
-<h2 id="其他">其他</h2>
-<ul>
-<li>关于报错：给用户展示正常人类能看懂的文字，而且让用户和开发者都能知道大概是哪方面错误以及如何处理。</li>
-<li>及时清理无效引用与变更。</li>
-<li>及时维护文档。如果不能及时维护，建议强迫自己改完文档再编码。</li>
-</ul>
-<h1 id="本系列目录">本系列目录</h1>
-<ol type="1">
-<li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
-<li><a href="/2019/01/03/java-code-review-2">应用安全问题</a></li>
-<li><strong>关于编程习惯的要求</strong></li>
-<li><a
-href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查</a></li>
-<li>使用FindBugs和SonarQube等工具进行扫描</li>
-<li>……</li>
-</ol>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -4318,6 +4318,205 @@ href="tw.manhuagui.com">https://tw.manhuagui.com</a>网站扒漫画。
       </tags>
   </entry>
   <entry>
+    <title>使用Puppeteer制作微信消息通知机器人</title>
+    <url>/2019/06/03/wechat-bot/</url>
+    <content><![CDATA[<p>微信机器人是一个比较难搞的东西，因为微信登录比较麻烦，而且官方不仅不提供API，还积极封杀机器人和“非法登录”的途径，导致研发风险较大。目前比较成熟的两种方式是模拟微信网页版以及程序控制微信PC版应用。</p>
+<p>本文采用Puppeteer框架，借助真实的浏览器访问微信网页版，模拟浏览器的正常操作，以降低被封杀的风险。
+<span id="more"></span></p>
+<h2 id="大致思路">大致思路</h2>
+<ul>
+<li>使用Express框架提供对外接口，让其他程序能够调用。</li>
+<li>使用Puppeteer来访问微信网页版。由于微信网页版需要扫码登录，需要设计接口来暴露二维码（这里直接提供网页截图）。另外二维码会过期，因此需要刷新机制（本文程序的话，重启就行，不需要再另行实现）。</li>
+<li>通过操作DOM来判断页面的状态。</li>
+<li>通过模拟按键来寻找好友或群组、输入消息和发送消息。</li>
+<li>通过捕获浏览器AJAX请求来获取新消息内容（本文未实现）。</li>
+<li>实现敏感词和敏感言论过滤机制，以防无意或有意的攻击。</li>
+</ul>
+<h2 id="代码">代码</h2>
+<p>详细参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9TaW1wbGVOb3RpZnlCb3Q=">https://github.com/infnan/SimpleNotifyBot<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>开启浏览器： <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 开启无头浏览器</span>
+<span class="token keyword">const</span> browser <span class="token operator">=</span> <span class="token keyword">await</span> puppeteer<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">headless</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> page <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> browser<span class="token punctuation">.</span><span class="token function">pages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>                 <span class="token comment">// 取浏览器第一个Tab页</span>
+<span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">setViewport</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token number">1366</span><span class="token punctuation">,</span> <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">768</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 浏览器窗口大小</span>
+
+<span class="token comment">// 使用简体中文界面</span>
+<span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">goto</span><span class="token punctuation">(</span><span class="token string">'https://wx.qq.com/?lang=zh_CN'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+<p>发送消息的过程：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">sendMessage</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> message</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 判断是否登录</span>
+    <span class="token keyword">const</span> unloginTest <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'body.unlogin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>unloginTest<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Not login'</span><span class="token punctuation">,</span> <span class="token string">'NOLOGIN'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not found'</span><span class="token punctuation">,</span> <span class="token string">'NOTARGET'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 如果当前聊天就是目标，那么不用搜了，直接蹦到聊天框</span>
+    <span class="token keyword">const</span> testEle1 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#chatArea a.title_name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> test1 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> testEle1<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>test1 <span class="token operator">!==</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">const</span> searchEle <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar > input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 清空搜索框和搜索结果</span>
+        <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$eval</span><span class="token punctuation">(</span><span class="token string">'#search_bar input'</span><span class="token punctuation">,</span> <span class="token parameter">node</span> <span class="token operator">=></span> node<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Backspace'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 延时，使页面上原有的搜索结果消失</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">40</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> testEle2 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar div.mmpop'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>testEle2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 输入目标群组名称</span>
+        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 等待出现搜索结果，最长等待5秒</span>
+        <span class="token keyword">let</span> ok <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> testEle3 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar div.mmpop h4.contact_title'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>testEle3<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">const</span> test3 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> testEle3<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>test3 <span class="token operator">===</span> <span class="token string">'找不到匹配的结果'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not found'</span><span class="token punctuation">,</span> <span class="token string">'NOTARGET'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                    ok <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ok<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'WeChat not responding'</span><span class="token punctuation">,</span> <span class="token string">'NORESPONSE'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 遍历搜索结果</span>
+        <span class="token comment">// 由于overflow数字不大，且翻页需要消耗操作和等待网络请求的时间，建议目标名称独一无二，免得不好找。</span>
+        <span class="token keyword">const</span> pop <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar div.mmpop'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> lastname <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+        ok <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> overflow <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span> overflow <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> overflow<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> nowEle <span class="token operator">=</span> <span class="token keyword">await</span> pop<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'div.contact_item.on'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 说明正在loading</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>nowEle<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">let</span> currname <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> nowEle<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'h4'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>lastname <span class="token operator">===</span> currname<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// 未找到目标，结束</span>
+                ok <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            lastname <span class="token operator">=</span> currname<span class="token punctuation">;</span>
+
+            <span class="token comment">// 如果没找到而且能往下翻那么就继续往下翻</span>
+            <span class="token comment">// 找到的话按一下回车键，进入聊天界面</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>currname <span class="token operator">===</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                ok <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'ArrowDown'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// 等待微信响应</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">const</span> nowEle2 <span class="token operator">=</span> <span class="token keyword">await</span> pop<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'div.contact_item.on'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>nowEle2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        <span class="token keyword">let</span> currname2 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> nowEle2<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'h4'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>currname <span class="token operator">!==</span> currname2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            <span class="token keyword">break</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">&#125;</span>
+                        <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                        <span class="token comment">// 暂时到底了，需要loading</span>
+                        <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ok<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not found'</span><span class="token punctuation">,</span> <span class="token string">'NOTARGET'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 等待进入聊天界面</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> titleEle <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#chatArea a.title_name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">const</span> title <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> titleEle<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>title <span class="token operator">===</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">const</span> testEle4 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#chatArea a.title_name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> test4 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> testEle4<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>test4 <span class="token operator">===</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 输入消息</span>
+        <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$eval</span><span class="token punctuation">(</span><span class="token string">'#editArea'</span><span class="token punctuation">,</span> <span class="token parameter">node</span> <span class="token operator">=></span> node<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">const</span> editEle <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#editArea'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">await</span> editEle<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token punctuation">[</span>i<span class="token punctuation">,</span> line<span class="token punctuation">]</span> <span class="token keyword">of</span> message<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// 发送多行消息时需要用 Ctrl+Enter 换行</span>
+                <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">down</span><span class="token punctuation">(</span><span class="token string">'Control'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">up</span><span class="token punctuation">(</span><span class="token string">'Control'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">await</span> editEle<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 按下发送按钮</span>
+        <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not confirmed'</span><span class="token punctuation">,</span> <span class="token string">'NORESPONSE'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="保号注意事项">保号注意事项</h2>
+<p>为确保安全，使用机器人时需要多加注意，以免封号甚至招致牢狱之灾。以下皆为网友经验，仅供参考。</p>
+<h3 id="注册">注册</h3>
+<ul>
+<li>使用真实手机注册，避免用模拟器或双开软件。
+<ul>
+<li>使用模拟器的话需要先用xprivacy控制好微信的权限，否则会无法登录或被微信封禁。</li>
+<li>使用双开之前先调查靠不靠谱，例如有些双开会被微信识别，导致账号被封，而小米手机的双开就比较安全。</li>
+</ul></li>
+<li>使用真实手机号注册，并进行实名认证，然后绑定一张银行卡，再往微信钱包里头存一块钱。</li>
+<li>手机和手机号尽量专用，一个设备或手机号不要拿着注册很多微信号，也不要拿着频繁登录注销。</li>
+<li>新注册的账号要在真实的手机上挂15至30天，然后再进行其他操作，以免让系统“大数据”识别。</li>
+<li>不要忘记设置昵称、地区和头像。</li>
+<li>至少保持三个真实好友。</li>
+<li>一天之内不要加太多好友。</li>
+<li>好友不要超过5000。</li>
+</ul>
+<h3 id="发送消息">发送消息</h3>
+<ul>
+<li>注意消息发送频率不要太高。几秒钟就发一大堆消息（例如像<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL2F2Mzk0MjgxLw==">脸滚键盘<i class="fa fa-external-link-alt"></i></span>那样），这样很容易被封号。</li>
+<li>不定期往“filehelper”或专用群发送keepalive消息，以防掉线。</li>
+<li>注意设计监控和报警机制，掉线之后能及时去恢复连接。</li>
+<li>要特别注意控制消息发送内容！尤其是接受用户输入的程序，一定要做好言论控制，以免他人无意或有意触发政治敏感话题，导致你的账号被封，甚至让你被警方请去喝茶。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>闲谈</category>
+      </categories>
+      <tags>
+        <tag>Puppeteer</tag>
+        <tag>微信</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>利用Oracle数据库进行文件传输</title>
     <url>/2019/05/27/dbftp/</url>
     <content><![CDATA[<p>为甲方升级系统时，堡垒机应用服务器正常，唯独FTP出现故障，无法上传程序包（堡垒机软件不支持直接向Linux服务器传文件）。在为无法完成部署任务发愁时，我们发现借助专用VPN可以直连甲方的Oracle数据库，并以DBA身份登录，于是我们临时编写了一款“基于Oracle的文件传输工具”。
@@ -4569,205 +4768,6 @@ CLASSPATH&#x3D;.:&#x2F;opt&#x2F;ojdbc6.jar java Down 文件名<span aria-hidden=
       </categories>
       <tags>
         <tag>Oracle</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Puppeteer制作微信消息通知机器人</title>
-    <url>/2019/06/03/wechat-bot/</url>
-    <content><![CDATA[<p>微信机器人是一个比较难搞的东西，因为微信登录比较麻烦，而且官方不仅不提供API，还积极封杀机器人和“非法登录”的途径，导致研发风险较大。目前比较成熟的两种方式是模拟微信网页版以及程序控制微信PC版应用。</p>
-<p>本文采用Puppeteer框架，借助真实的浏览器访问微信网页版，模拟浏览器的正常操作，以降低被封杀的风险。
-<span id="more"></span></p>
-<h2 id="大致思路">大致思路</h2>
-<ul>
-<li>使用Express框架提供对外接口，让其他程序能够调用。</li>
-<li>使用Puppeteer来访问微信网页版。由于微信网页版需要扫码登录，需要设计接口来暴露二维码（这里直接提供网页截图）。另外二维码会过期，因此需要刷新机制（本文程序的话，重启就行，不需要再另行实现）。</li>
-<li>通过操作DOM来判断页面的状态。</li>
-<li>通过模拟按键来寻找好友或群组、输入消息和发送消息。</li>
-<li>通过捕获浏览器AJAX请求来获取新消息内容（本文未实现）。</li>
-<li>实现敏感词和敏感言论过滤机制，以防无意或有意的攻击。</li>
-</ul>
-<h2 id="代码">代码</h2>
-<p>详细参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9TaW1wbGVOb3RpZnlCb3Q=">https://github.com/infnan/SimpleNotifyBot<i class="fa fa-external-link-alt"></i></span>。</p>
-<p>开启浏览器： <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 开启无头浏览器</span>
-<span class="token keyword">const</span> browser <span class="token operator">=</span> <span class="token keyword">await</span> puppeteer<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-    <span class="token literal-property property">headless</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">const</span> page <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> browser<span class="token punctuation">.</span><span class="token function">pages</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>                 <span class="token comment">// 取浏览器第一个Tab页</span>
-<span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">setViewport</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">width</span><span class="token operator">:</span> <span class="token number">1366</span><span class="token punctuation">,</span> <span class="token literal-property property">height</span><span class="token operator">:</span> <span class="token number">768</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">// 浏览器窗口大小</span>
-
-<span class="token comment">// 使用简体中文界面</span>
-<span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">goto</span><span class="token punctuation">(</span><span class="token string">'https://wx.qq.com/?lang=zh_CN'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
-<p>发送消息的过程：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">sendMessage</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> message</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-    <span class="token comment">// 判断是否登录</span>
-    <span class="token keyword">const</span> unloginTest <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'body.unlogin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>unloginTest<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Not login'</span><span class="token punctuation">,</span> <span class="token string">'NOLOGIN'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not found'</span><span class="token punctuation">,</span> <span class="token string">'NOTARGET'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token comment">// 如果当前聊天就是目标，那么不用搜了，直接蹦到聊天框</span>
-    <span class="token keyword">const</span> testEle1 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#chatArea a.title_name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">const</span> test1 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> testEle1<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>test1 <span class="token operator">!==</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">const</span> searchEle <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar > input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token comment">// 清空搜索框和搜索结果</span>
-        <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$eval</span><span class="token punctuation">(</span><span class="token string">'#search_bar input'</span><span class="token punctuation">,</span> <span class="token parameter">node</span> <span class="token operator">=></span> node<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Backspace'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">// 延时，使页面上原有的搜索结果消失</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">40</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">const</span> testEle2 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar div.mmpop'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>testEle2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">break</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token comment">// 输入目标群组名称</span>
-        <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span>target<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token comment">// 等待出现搜索结果，最长等待5秒</span>
-        <span class="token keyword">let</span> ok <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">const</span> testEle3 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar div.mmpop h4.contact_title'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>testEle3<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">const</span> test3 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> testEle3<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>test3 <span class="token operator">===</span> <span class="token string">'找不到匹配的结果'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not found'</span><span class="token punctuation">,</span> <span class="token string">'NOTARGET'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-                    ok <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-                    <span class="token keyword">break</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ok<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'WeChat not responding'</span><span class="token punctuation">,</span> <span class="token string">'NORESPONSE'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token comment">// 遍历搜索结果</span>
-        <span class="token comment">// 由于overflow数字不大，且翻页需要消耗操作和等待网络请求的时间，建议目标名称独一无二，免得不好找。</span>
-        <span class="token keyword">const</span> pop <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#search_bar div.mmpop'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">let</span> lastname <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
-        ok <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> overflow <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span> overflow <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> overflow<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">const</span> nowEle <span class="token operator">=</span> <span class="token keyword">await</span> pop<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'div.contact_item.on'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">// 说明正在loading</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>nowEle<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">continue</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">let</span> currname <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> nowEle<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'h4'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>lastname <span class="token operator">===</span> currname<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token comment">// 未找到目标，结束</span>
-                ok <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-                <span class="token keyword">break</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            lastname <span class="token operator">=</span> currname<span class="token punctuation">;</span>
-
-            <span class="token comment">// 如果没找到而且能往下翻那么就继续往下翻</span>
-            <span class="token comment">// 找到的话按一下回车键，进入聊天界面</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>currname <span class="token operator">===</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                ok <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-                <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">break</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">await</span> searchEle<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'ArrowDown'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-                <span class="token comment">// 等待微信响应</span>
-                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                    <span class="token keyword">const</span> nowEle2 <span class="token operator">=</span> <span class="token keyword">await</span> pop<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'div.contact_item.on'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token keyword">if</span> <span class="token punctuation">(</span>nowEle2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                        <span class="token keyword">let</span> currname2 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> nowEle2<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'h4'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                        <span class="token keyword">if</span> <span class="token punctuation">(</span>currname <span class="token operator">!==</span> currname2<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                            <span class="token keyword">break</span><span class="token punctuation">;</span>
-                        <span class="token punctuation">&#125;</span>
-                        <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-                        <span class="token comment">// 暂时到底了，需要loading</span>
-                        <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                    <span class="token punctuation">&#125;</span>
-                <span class="token punctuation">&#125;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>ok<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not found'</span><span class="token punctuation">,</span> <span class="token string">'NOTARGET'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token comment">// 等待进入聊天界面</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> timeout <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span> timeout <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> timeout<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">const</span> titleEle <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#chatArea a.title_name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">const</span> title <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> titleEle<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>title <span class="token operator">===</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">break</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">await</span> <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token keyword">const</span> testEle4 <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#chatArea a.title_name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">const</span> test4 <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span><span class="token keyword">await</span> testEle4<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">'textContent'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">jsonValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>test4 <span class="token operator">===</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// 输入消息</span>
-        <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$eval</span><span class="token punctuation">(</span><span class="token string">'#editArea'</span><span class="token punctuation">,</span> <span class="token parameter">node</span> <span class="token operator">=></span> node<span class="token punctuation">.</span>textContent <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">const</span> editEle <span class="token operator">=</span> <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#editArea'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">await</span> editEle<span class="token punctuation">.</span><span class="token function">focus</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token punctuation">[</span>i<span class="token punctuation">,</span> line<span class="token punctuation">]</span> <span class="token keyword">of</span> message<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">entries</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token comment">// 发送多行消息时需要用 Ctrl+Enter 换行</span>
-                <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">down</span><span class="token punctuation">(</span><span class="token string">'Control'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">up</span><span class="token punctuation">(</span><span class="token string">'Control'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            <span class="token keyword">await</span> editEle<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token comment">// 按下发送按钮</span>
-        <span class="token keyword">await</span> page<span class="token punctuation">.</span>keyboard<span class="token punctuation">.</span><span class="token function">press</span><span class="token punctuation">(</span><span class="token string">'Enter'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not confirmed'</span><span class="token punctuation">,</span> <span class="token string">'NORESPONSE'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="保号注意事项">保号注意事项</h2>
-<p>为确保安全，使用机器人时需要多加注意，以免封号甚至招致牢狱之灾。以下皆为网友经验，仅供参考。</p>
-<h3 id="注册">注册</h3>
-<ul>
-<li>使用真实手机注册，避免用模拟器或双开软件。
-<ul>
-<li>使用模拟器的话需要先用xprivacy控制好微信的权限，否则会无法登录或被微信封禁。</li>
-<li>使用双开之前先调查靠不靠谱，例如有些双开会被微信识别，导致账号被封，而小米手机的双开就比较安全。</li>
-</ul></li>
-<li>使用真实手机号注册，并进行实名认证，然后绑定一张银行卡，再往微信钱包里头存一块钱。</li>
-<li>手机和手机号尽量专用，一个设备或手机号不要拿着注册很多微信号，也不要拿着频繁登录注销。</li>
-<li>新注册的账号要在真实的手机上挂15至30天，然后再进行其他操作，以免让系统“大数据”识别。</li>
-<li>不要忘记设置昵称、地区和头像。</li>
-<li>至少保持三个真实好友。</li>
-<li>一天之内不要加太多好友。</li>
-<li>好友不要超过5000。</li>
-</ul>
-<h3 id="发送消息">发送消息</h3>
-<ul>
-<li>注意消息发送频率不要太高。几秒钟就发一大堆消息（例如像<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL2F2Mzk0MjgxLw==">脸滚键盘<i class="fa fa-external-link-alt"></i></span>那样），这样很容易被封号。</li>
-<li>不定期往“filehelper”或专用群发送keepalive消息，以防掉线。</li>
-<li>注意设计监控和报警机制，掉线之后能及时去恢复连接。</li>
-<li>要特别注意控制消息发送内容！尤其是接受用户输入的程序，一定要做好言论控制，以免他人无意或有意触发政治敏感话题，导致你的账号被封，甚至让你被警方请去喝茶。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>闲谈</category>
-      </categories>
-      <tags>
-        <tag>Puppeteer</tag>
-        <tag>微信</tag>
       </tags>
   </entry>
   <entry>
@@ -8339,6 +8339,166 @@ href="/2020/02/20/how-to-write-document/">如何写好软件文档</a></li>
       </tags>
   </entry>
   <entry>
+    <title>MySQL数据库设计规范（二）：SQL语句</title>
+    <url>/2020/11/07/db-specification-2/</url>
+    <content><![CDATA[<p>本文为我们项目中所采用的MySQL数据库设计规范。</p>
+<p>计划分为三篇文章，<a
+href="/2020/11/01/db-specification/">前一篇</a>为数据库的表结构设计，本篇为SQL语句的书写，<a
+href="/2020/11/10/db-specification-3/">第三篇</a>为PDM文档规范。
+<span id="more"></span></p>
+<h1 id="sql书写规则">SQL书写规则</h1>
+<h2 id="语法与格式">语法与格式</h2>
+<ul>
+<li>SQL关键字使用大写字母</li>
+<li>表名、字段名等使用小写字母</li>
+<li>每个单词之间只有一个空格</li>
+<li>避免复杂语句。如为复杂语句，应拆分成多行，并合理控制缩进，保持可读性。</li>
+<li>对于不直观的条件，应使用注释解释含义。</li>
+</ul>
+<h2 id="避免性能问题">避免性能问题</h2>
+<ul>
+<li>SQL语句应尽可能简单，减小响应时间。</li>
+<li>使用查询条件时，值与字段数据类型必须保持一致，例如<code>id</code>为<code>INT</code>类型，查询条件则不应该写成<code>id='1'</code>。</li>
+<li>需要<code>JOIN</code>时，关联的字段的数据类型必须保持一致。</li>
+<li>避免使用<code>NOT IN</code>。该语句会将NULL值查出来。</li>
+<li>避免使用<code>NOT IN</code>、<code>NOT LIKE</code>、<code>&lt;&gt;</code>、<code>!=</code>，否则查询时不走索引，影响性能。</li>
+<li>避免使用<code>OR</code>，尽量改写成<code>IN</code>或<code>UNION ALL</code>。</li>
+<li><code>IN</code>条件的数据项要控制在1000以内。如可以，建议用<code>EXISTS</code>代替<code>IN</code>。</li>
+<li>禁止列运算，例如<code>WHERE age+1&gt;20</code>会导致表扫描，使索引失效，应改写为<code>WHERE age&gt;19</code>。</li>
+<li>禁止使用左模糊与全模糊（即<code>LIKE '%TEXT'</code>、<code>LIKE '%TEXT%'</code>）。如有需要，使用搜索引擎处理。</li>
+<li>禁止<code>SELECT *</code>，必须指明具体字段。<code>SELECT COUNT(*)</code>除外。</li>
+<li>尽量使用<code>LIMIT</code>限定查询结果数量。</li>
+<li>尽量不要在SQL语句中进行计算，而是放入调用参数中，以利用查询缓存，例如<code>WHERE date&lt;CURDATE()</code>改为<code>WHERE date&lt;?</code>然后在Java层传入当前时间。</li>
+<li>书写查询语句后，应采用EXPLAIN等方式进行性能分析。</li>
+</ul>
+<h2 id="避免sql的坑">避免SQL的坑</h2>
+<ul>
+<li>注意：<code>COUNT(列名)</code>不会统计NULL值，而<code>COUNT(1)</code>与<code>COUNT(*)</code>会统计NULL值。</li>
+<li>注意：如果表中没有数据，或者全部为NULL，<code>SUM(列名)</code>、<code>AVG(列名)</code>、<code>MIN(列名)</code>、<code>MAX(列名)</code>等统计函数会返回NULL，而<code>COUNT(列名)</code>只会返回0，不会返回NULL。</li>
+<li>如字段可空，应使用<code>ISNULL()</code>判断是否为NULL，且不能用<code>&lt;&gt;</code>、<code>NOT IN</code>判断取值。</li>
+<li>必须使用<code>#&#123;&#125;</code>、<code>#param#</code>配置参数，禁止使用<code>$&#123;&#125;</code>配置参数，以避免SQL注入。</li>
+<li>严禁人工拼接SQL查询参数，一是容易拼接不全导致语法错误，二是容易产生SQL注入，三是无法利用查询缓存。</li>
+<li>字符计数使用<code>CHARACTER_LENGTH</code>。注意一个汉字不是2字节，不一定是3字节。</li>
+<li>在多表关联查询时，每个字段应总是指定表的名称。也可使用<code>t1</code>、<code>t2</code>等别名简化书写。</li>
+</ul>
+<h2 id="其他">其他</h2>
+<ul>
+<li>在Java代码中，类中的boolean型变量不要加is前缀，is前缀不要使用boolean类型。</li>
+<li>禁止使用函数、存储过程和触发器，在应用程序实现。</li>
+<li>禁止使用外键。约束应在程序中实现。</li>
+<li>禁止在程序代码中使用<code>TRUNCATE TABLE</code>语句清空表。该语句为DDL语句。</li>
+</ul>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsaWJhYmEvcDNjL2Jsb2IvbWFzdGVyL0phdmHlvIDlj5HmiYvlhozvvIjltanlsbHniYjvvIkucGRm">阿里巴巴《Java
+开发手册》（V1.7）<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h1 id="扩展阅读">扩展阅读</h1>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3Fsc3R5bGUuZ3VpZGUvemg=">SQL样式指南<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h1 id="本系列文章">本系列文章</h1>
+<ul>
+<li><a
+href="/2020/11/01/db-specification/">MySQL数据库设计规范（一）：表结构设计</a></li>
+<li><strong>MySQL数据库设计规范（二）：SQL语句</strong></li>
+<li><a
+href="/2020/11/10/db-specification-3/">MySQL数据库设计规范（三）：PDM文档</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>规范</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL数据库设计规范（三）：PDM文档</title>
+    <url>/2020/11/10/db-specification-3/</url>
+    <content><![CDATA[<p>本文为我们项目中所采用的数据库文档的设计规范。</p>
+<p>计划分为三篇文章，<a
+href="/2020/11/01/db-specification/">第一篇</a>为数据库的表结构设计，<a
+href="/2020/11/07/db-specification-2/">第二篇</a>为SQL语句的书写，本篇为PDM文档规范。
+<span id="more"></span></p>
+<h1 id="工具">工具</h1>
+<p>本文以<span class="exturl" data-url="aHR0cDovL3d3dy5wZG1hbi5jbi8=">PDMan<i class="fa fa-external-link-alt"></i></span>为数据库模型设计工具。其他工具可适当参考。</p>
+<h1 id="命名">命名</h1>
+<ul>
+<li>表格应按业务域进行归类。字典及系统通用（例如用户）则分别放在“字典”与“系统通用”类别中。</li>
+<li>命名统一用小写字母。</li>
+<li>“数据域”一栏的“数据类型”中，将名称和代码统一改成实际类型，例如<code>VARCHAR(32)</code>，并采用大写字母，方便不同成员合并。团队所有人可直接复制粘贴附录中的代码。</li>
+<li>数据表命名
+<ul>
+<li>模块名采用<code>B-SYS-系统基础</code>格式</li>
+<li>中文表名采用<code>01-用户信息</code>格式（因为已经有分组，名称太长的话会影响展示）</li>
+<li>英文表名<code>t_dynamic_xxx</code>，长度不要超过25（在oracle标识符不能超过30，考虑到主键前缀<code>pk_</code>，表名就不能卡着30起了）</li>
+<li>显示方式<code>&#123;name&#125;[&#123;code&#125;]</code>（正好跟默认值颠倒，以方便浏览）</li>
+<li>英文单词使用名词、单数</li>
+</ul></li>
+</ul>
+<h1 id="字段">字段</h1>
+<ul>
+<li>系统默认字段按以下设置：
+<ul>
+<li>版本，<code>version</code>，<code>INT</code>，非空，默认值0</li>
+<li>创建人，<code>created_by</code>，<code>INT</code>，非空，无默认值</li>
+<li>创建时间，<code>created_at</code>，<code>TIMESTAMP</code>，非空，默认值<code>CURRENT_TIMESTAMP</code></li>
+<li>更新人，<code>updated_by</code>，<code>INT</code>，非空，无默认值</li>
+<li>更新时间，<code>updated_at</code>，<code>TIMESTAMP</code>，非空，默认值<code>CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</code></li>
+</ul></li>
+<li>字段信息
+<ul>
+<li>名称长度不超过25</li>
+<li>字段尽量非空，并尽量指定默认值</li>
+<li><code>VARCHAR</code>、<code>CHAR</code>必须非空，如需可空，说明中要明确体现<code>可空</code>二字</li>
+<li>只允许使用以下数据类型：
+<ul>
+<li>CHAR</li>
+<li>VARCHAR，长度从10、20、32、50、64、255、512、1024里面取。</li>
+<li>TINYINT</li>
+<li>INT</li>
+<li>BIGINT</li>
+<li>DATETIME</li>
+<li>DECIMAL（必须指定长度，建议默认取<code>DECIMAL(10,2)</code>）</li>
+<li>BLOB、TEXT（应避免使用）</li>
+</ul></li>
+<li>禁止使用FLOAT、DOUBLE</li>
+</ul></li>
+<li>字段的说明
+<ul>
+<li>字段名的含义不能一望而知时，必须在说明进行解释。</li>
+<li>标志项必须指明取值，例如<code>0-否，1-是</code>，或者<code>参见GB/T 2260-2007</code>。</li>
+<li>数据使用分隔符分隔（例如<code>1,2,4</code>）、JSON串等非标准数据，必须在说明中解释。</li>
+<li>取值有国家标准、行业标准的，应优先采用国家标准及行业标准。实在搜不到再自创值域。</li>
+</ul></li>
+</ul>
+<h1 id="其他">其他</h1>
+<ul>
+<li>必须设置索引，除非没有任何需要建索引的字段。另外主键自带索引，因此不要再给主键建立索引。</li>
+<li>除表结构外，每个模块中应绘制关系图。</li>
+</ul>
+<h1 id="附录统一数据类型">附录：统一数据类型</h1>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span><span class="token property">"database"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">"datatype"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR2(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CLOB"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NTEXT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(12,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(24,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(8,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(2,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"TINYINT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"TINYINT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"TINYINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Integer"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Integer"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Long"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DATETIME"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DATETIME"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Date"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATETIME"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATE"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATE"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATE"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="本系列文章">本系列文章</h1>
+<ul>
+<li><a
+href="/2020/11/01/db-specification/">MySQL数据库设计规范（一）：表结构设计</a></li>
+<li><a
+href="/2020/11/07/db-specification-2/">MySQL数据库设计规范（二）：SQL语句</a></li>
+<li><strong>MySQL数据库设计规范（三）：PDM文档</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>规范</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MySQL数据库设计规范（一）：表结构设计</title>
     <url>/2020/11/01/db-specification/</url>
     <content><![CDATA[<p>本文为我们项目中所采用的MySQL数据库设计规范。</p>
@@ -8581,166 +8741,6 @@ NULL。</li>
 href="/2020/11/07/db-specification-2/">MySQL数据库设计规范（二）：SQL语句</a></li>
 <li><a
 href="/2020/11/10/db-specification-3/">MySQL数据库设计规范（三）：PDM文档</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-        <tag>规范</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL数据库设计规范（二）：SQL语句</title>
-    <url>/2020/11/07/db-specification-2/</url>
-    <content><![CDATA[<p>本文为我们项目中所采用的MySQL数据库设计规范。</p>
-<p>计划分为三篇文章，<a
-href="/2020/11/01/db-specification/">前一篇</a>为数据库的表结构设计，本篇为SQL语句的书写，<a
-href="/2020/11/10/db-specification-3/">第三篇</a>为PDM文档规范。
-<span id="more"></span></p>
-<h1 id="sql书写规则">SQL书写规则</h1>
-<h2 id="语法与格式">语法与格式</h2>
-<ul>
-<li>SQL关键字使用大写字母</li>
-<li>表名、字段名等使用小写字母</li>
-<li>每个单词之间只有一个空格</li>
-<li>避免复杂语句。如为复杂语句，应拆分成多行，并合理控制缩进，保持可读性。</li>
-<li>对于不直观的条件，应使用注释解释含义。</li>
-</ul>
-<h2 id="避免性能问题">避免性能问题</h2>
-<ul>
-<li>SQL语句应尽可能简单，减小响应时间。</li>
-<li>使用查询条件时，值与字段数据类型必须保持一致，例如<code>id</code>为<code>INT</code>类型，查询条件则不应该写成<code>id='1'</code>。</li>
-<li>需要<code>JOIN</code>时，关联的字段的数据类型必须保持一致。</li>
-<li>避免使用<code>NOT IN</code>。该语句会将NULL值查出来。</li>
-<li>避免使用<code>NOT IN</code>、<code>NOT LIKE</code>、<code>&lt;&gt;</code>、<code>!=</code>，否则查询时不走索引，影响性能。</li>
-<li>避免使用<code>OR</code>，尽量改写成<code>IN</code>或<code>UNION ALL</code>。</li>
-<li><code>IN</code>条件的数据项要控制在1000以内。如可以，建议用<code>EXISTS</code>代替<code>IN</code>。</li>
-<li>禁止列运算，例如<code>WHERE age+1&gt;20</code>会导致表扫描，使索引失效，应改写为<code>WHERE age&gt;19</code>。</li>
-<li>禁止使用左模糊与全模糊（即<code>LIKE '%TEXT'</code>、<code>LIKE '%TEXT%'</code>）。如有需要，使用搜索引擎处理。</li>
-<li>禁止<code>SELECT *</code>，必须指明具体字段。<code>SELECT COUNT(*)</code>除外。</li>
-<li>尽量使用<code>LIMIT</code>限定查询结果数量。</li>
-<li>尽量不要在SQL语句中进行计算，而是放入调用参数中，以利用查询缓存，例如<code>WHERE date&lt;CURDATE()</code>改为<code>WHERE date&lt;?</code>然后在Java层传入当前时间。</li>
-<li>书写查询语句后，应采用EXPLAIN等方式进行性能分析。</li>
-</ul>
-<h2 id="避免sql的坑">避免SQL的坑</h2>
-<ul>
-<li>注意：<code>COUNT(列名)</code>不会统计NULL值，而<code>COUNT(1)</code>与<code>COUNT(*)</code>会统计NULL值。</li>
-<li>注意：如果表中没有数据，或者全部为NULL，<code>SUM(列名)</code>、<code>AVG(列名)</code>、<code>MIN(列名)</code>、<code>MAX(列名)</code>等统计函数会返回NULL，而<code>COUNT(列名)</code>只会返回0，不会返回NULL。</li>
-<li>如字段可空，应使用<code>ISNULL()</code>判断是否为NULL，且不能用<code>&lt;&gt;</code>、<code>NOT IN</code>判断取值。</li>
-<li>必须使用<code>#&#123;&#125;</code>、<code>#param#</code>配置参数，禁止使用<code>$&#123;&#125;</code>配置参数，以避免SQL注入。</li>
-<li>严禁人工拼接SQL查询参数，一是容易拼接不全导致语法错误，二是容易产生SQL注入，三是无法利用查询缓存。</li>
-<li>字符计数使用<code>CHARACTER_LENGTH</code>。注意一个汉字不是2字节，不一定是3字节。</li>
-<li>在多表关联查询时，每个字段应总是指定表的名称。也可使用<code>t1</code>、<code>t2</code>等别名简化书写。</li>
-</ul>
-<h2 id="其他">其他</h2>
-<ul>
-<li>在Java代码中，类中的boolean型变量不要加is前缀，is前缀不要使用boolean类型。</li>
-<li>禁止使用函数、存储过程和触发器，在应用程序实现。</li>
-<li>禁止使用外键。约束应在程序中实现。</li>
-<li>禁止在程序代码中使用<code>TRUNCATE TABLE</code>语句清空表。该语句为DDL语句。</li>
-</ul>
-<h1 id="参考资料">参考资料</h1>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsaWJhYmEvcDNjL2Jsb2IvbWFzdGVyL0phdmHlvIDlj5HmiYvlhozvvIjltanlsbHniYjvvIkucGRm">阿里巴巴《Java
-开发手册》（V1.7）<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<h1 id="扩展阅读">扩展阅读</h1>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3Fsc3R5bGUuZ3VpZGUvemg=">SQL样式指南<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<h1 id="本系列文章">本系列文章</h1>
-<ul>
-<li><a
-href="/2020/11/01/db-specification/">MySQL数据库设计规范（一）：表结构设计</a></li>
-<li><strong>MySQL数据库设计规范（二）：SQL语句</strong></li>
-<li><a
-href="/2020/11/10/db-specification-3/">MySQL数据库设计规范（三）：PDM文档</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-        <tag>规范</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL数据库设计规范（三）：PDM文档</title>
-    <url>/2020/11/10/db-specification-3/</url>
-    <content><![CDATA[<p>本文为我们项目中所采用的数据库文档的设计规范。</p>
-<p>计划分为三篇文章，<a
-href="/2020/11/01/db-specification/">第一篇</a>为数据库的表结构设计，<a
-href="/2020/11/07/db-specification-2/">第二篇</a>为SQL语句的书写，本篇为PDM文档规范。
-<span id="more"></span></p>
-<h1 id="工具">工具</h1>
-<p>本文以<span class="exturl" data-url="aHR0cDovL3d3dy5wZG1hbi5jbi8=">PDMan<i class="fa fa-external-link-alt"></i></span>为数据库模型设计工具。其他工具可适当参考。</p>
-<h1 id="命名">命名</h1>
-<ul>
-<li>表格应按业务域进行归类。字典及系统通用（例如用户）则分别放在“字典”与“系统通用”类别中。</li>
-<li>命名统一用小写字母。</li>
-<li>“数据域”一栏的“数据类型”中，将名称和代码统一改成实际类型，例如<code>VARCHAR(32)</code>，并采用大写字母，方便不同成员合并。团队所有人可直接复制粘贴附录中的代码。</li>
-<li>数据表命名
-<ul>
-<li>模块名采用<code>B-SYS-系统基础</code>格式</li>
-<li>中文表名采用<code>01-用户信息</code>格式（因为已经有分组，名称太长的话会影响展示）</li>
-<li>英文表名<code>t_dynamic_xxx</code>，长度不要超过25（在oracle标识符不能超过30，考虑到主键前缀<code>pk_</code>，表名就不能卡着30起了）</li>
-<li>显示方式<code>&#123;name&#125;[&#123;code&#125;]</code>（正好跟默认值颠倒，以方便浏览）</li>
-<li>英文单词使用名词、单数</li>
-</ul></li>
-</ul>
-<h1 id="字段">字段</h1>
-<ul>
-<li>系统默认字段按以下设置：
-<ul>
-<li>版本，<code>version</code>，<code>INT</code>，非空，默认值0</li>
-<li>创建人，<code>created_by</code>，<code>INT</code>，非空，无默认值</li>
-<li>创建时间，<code>created_at</code>，<code>TIMESTAMP</code>，非空，默认值<code>CURRENT_TIMESTAMP</code></li>
-<li>更新人，<code>updated_by</code>，<code>INT</code>，非空，无默认值</li>
-<li>更新时间，<code>updated_at</code>，<code>TIMESTAMP</code>，非空，默认值<code>CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</code></li>
-</ul></li>
-<li>字段信息
-<ul>
-<li>名称长度不超过25</li>
-<li>字段尽量非空，并尽量指定默认值</li>
-<li><code>VARCHAR</code>、<code>CHAR</code>必须非空，如需可空，说明中要明确体现<code>可空</code>二字</li>
-<li>只允许使用以下数据类型：
-<ul>
-<li>CHAR</li>
-<li>VARCHAR，长度从10、20、32、50、64、255、512、1024里面取。</li>
-<li>TINYINT</li>
-<li>INT</li>
-<li>BIGINT</li>
-<li>DATETIME</li>
-<li>DECIMAL（必须指定长度，建议默认取<code>DECIMAL(10,2)</code>）</li>
-<li>BLOB、TEXT（应避免使用）</li>
-</ul></li>
-<li>禁止使用FLOAT、DOUBLE</li>
-</ul></li>
-<li>字段的说明
-<ul>
-<li>字段名的含义不能一望而知时，必须在说明进行解释。</li>
-<li>标志项必须指明取值，例如<code>0-否，1-是</code>，或者<code>参见GB/T 2260-2007</code>。</li>
-<li>数据使用分隔符分隔（例如<code>1,2,4</code>）、JSON串等非标准数据，必须在说明中解释。</li>
-<li>取值有国家标准、行业标准的，应优先采用国家标准及行业标准。实在搜不到再自创值域。</li>
-</ul></li>
-</ul>
-<h1 id="其他">其他</h1>
-<ul>
-<li>必须设置索引，除非没有任何需要建索引的字段。另外主键自带索引，因此不要再给主键建立索引。</li>
-<li>除表结构外，每个模块中应绘制关系图。</li>
-</ul>
-<h1 id="附录统一数据类型">附录：统一数据类型</h1>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span><span class="token property">"database"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token property">"datatype"</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(32)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR2(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(64)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(128)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(255)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(512)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(1024)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR2(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NVARCHAR(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"VARCHAR(3072)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CLOB"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NTEXT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"TEXT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(12,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,10)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(24,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(32,8)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(8,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(10,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Double"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER(2,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DECIMAL(4,2)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"TINYINT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"TINYINT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"TINYINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Integer"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Integer"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"INT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Long"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"NUMBER"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"BIGINT"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"DATETIME"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"DATETIME"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"Date"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATETIME"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATE"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATE"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"DATE"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span><span class="token property">"name"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">,</span><span class="token property">"code"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">,</span><span class="token property">"apply"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"MYSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"ORACLE"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"JAVA"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"String"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"SQLServer"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span><span class="token property">"PostgreSQL"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token property">"type"</span><span class="token operator">:</span><span class="token string">"CHAR(1)"</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="本系列文章">本系列文章</h1>
-<ul>
-<li><a
-href="/2020/11/01/db-specification/">MySQL数据库设计规范（一）：表结构设计</a></li>
-<li><a
-href="/2020/11/07/db-specification-2/">MySQL数据库设计规范（二）：SQL语句</a></li>
-<li><strong>MySQL数据库设计规范（三）：PDM文档</strong></li>
 </ul>
 ]]></content>
       <categories>
@@ -9636,81 +9636,6 @@ href="/2020/08/20/resume-improvement/">来自招聘者的建议——如何优�
       </tags>
   </entry>
   <entry>
-    <title>控制团队内部的负面言论</title>
-    <url>/2021/04/01/expression-control/</url>
-    <content><![CDATA[<p>在开发团队中，不当的负面言论很容易打击成员的积极性，降低生产力，甚至对团队文化造成不可逆的破坏。因此需要对负面言论进行识别和判断，过滤掉有害言论，调整本质上有益但形式上不恰当的言论。</p>
-<span id="more"></span>
-<h2 id="本文不是">本文不是……</h2>
-<p>本文目标读者主要为软件开发团队的管理者，因此本文不是：</p>
-<ul>
-<li>本文不是介绍（政府）如何言论审查。</li>
-<li>本文不是介绍如何应对（来自用户的）负面舆情。</li>
-</ul>
-<h2 id="负面言论的危害">负面言论的危害</h2>
-<p>没有人喜欢被责骂、被否定，即使是个M（受虐狂），也得是被自己喜欢的异性施虐才能兴奋，所以不要随便对员工讲负面的话。</p>
-<p>负面言论的影响包括以下几个方面：</p>
-<ul>
-<li>员工经常被上级训的话，容易消极怠工，或者“破罐子破摔”。</li>
-<li>员工经常被同级训的话，容易成为团队内的“背锅侠”，从而心灰意冷。</li>
-<li>团队/部门/公司经常被说坏话的话，员工会质疑自己工作的意义，然后选择混日子，“反正好好干活也没用”。如果一半以上的人都开始混日子，这个团队恐怕就没救了。</li>
-</ul>
-<p>不同年龄层的承受能力是不一样的。一般来讲，80后或者年龄更大的员工，可能会因为要养家糊口而选择忍耐一时，但是对于90后甚至未来的00后员工，他们很可能会直接撂挑子走人，“老子不伺候你了”。</p>
-<h2 id="识别与处理负面言论">识别与处理负面言论</h2>
-<p>管理者要调整自己的心态，通过以下三个思路来处理负面言论：</p>
-<ol type="1">
-<li>将负面语气转变正面语气</li>
-<li>将“背锅”、“追责”转变为“解决/预防问题”</li>
-<li>屏蔽掉不解决问题的言论</li>
-</ol>
-<h3 id="负面语气-正面语气">负面语气 → 正面语气</h3>
-<p>即使你的本意是为了改善员工工作方式，提升员工个人能力，也不要用否定、反问的语气与同事或下属说话。用微信、钉钉等文字聊天工具时，要更加注意措辞，以免被误认为是责备。例如：</p>
-<ul>
-<li>员工开发了一个功能，却延期了一两天才完成。这时候不要训“你怎么做的这么慢”、“怎么才干完”，而是从两方面入手，一方面是调整任务排期（例如安排加班），尽量抵消延期的影响，另一方面，管理者要帮他分析延期的原因，然后提醒他，“你在xxx方面应该再努力/注意一下”。</li>
-<li>员工开发了一个功能，但是性能很差，而且还有SQL注入问题，这时候不要说“你怎么连这么低级的错误都犯”，而是直接点明问题，让他们“继续优化完善”。</li>
-<li>员工提出了一个idea，但是不符合实际情况，或者实现的代价太大，这时候不要说“你的想法不行”，而是先顺着他的idea，代入到项目中进行分析，逐步推导出“不合适”的结论（如果结论正好相反，也可以考虑采用，然后公开表扬奖励），从而使员工信服。</li>
-<li>员工认为应该按A方案工作，而管理者认为应该按B方案工作，并且经验证明B确实可行而A确实不可行，这时候不要说“你就是不行，就是得听我的”，而是要稍微解释一下，“以我的实践经验，B方案是更加合适的，我们应该先尝试B”。</li>
-</ul>
-<p>说话要给员工留面子，员工做了好事则要给他们挣面子。纯负面的话不讲，批评的话私下讲，表扬的话公开讲。</p>
-<p>不要因为员工做得不好，就把员工的活抢过来亲自去做（除非任务非常紧急），一方面会让员工觉得自己不受信任，尊严受到打击，另一方面会让自己变得很忙很累。这种情况下，还是应该审视他们的工作，哪怕自己做起来效率更高、质量更好，也要把该做的事情指出来，交给员工自己完成改进，实在不行再考虑换人。</p>
-<h3 id="背锅追责-解决预防问题">背锅、追责 → 解决、预防问题</h3>
-<p>发生事故的时候，不要追问或暗示“是哪个混蛋干的好事”，而是要尽快定位问题、解决问题，先把窟窿堵上再说。</p>
-<p>如果追责，肯定是先追究领导责任，所以领导也应当先背锅，而不是把责任推给下属。就算是下属故意搞破坏，领导责任也只能说是减轻而不是完全消失。如果坚持找个人毛病，以后团队成员做事会变得畏手畏脚，担心惹事生非，与他人沟通也会采取踢皮球的策略，这就是一种无形之中的打击。</p>
-<p>除了不轻易追究个人责任，更重要的还是分析如何预防问题，让同样的问题不再发生，这才是领导应该做的事情。</p>
-<h3 id="屏蔽无意义言论">屏蔽无意义言论</h3>
-<p>什么算是无意义言论呢？光抱怨不努力，光提问题不解决，光制造矛盾不收拾，这样的言论都是无意义言论。</p>
-<p>应该通过适当的管理来屏蔽这类言论，例如：</p>
-<ul>
-<li>管理者应该对经常发牢骚的人提出要求，要么闭嘴好好干活，要么找个没人的地方随便发泄，不要在工作场合影响其他人工作。</li>
-<li>管理者应当要求，无论是谁，如果想否定他人观点、推翻他人工作，那么就必须提出一套可行的解决方案，否则就视为不尊重他人。</li>
-<li>管理者应该私下提醒说闲话的人，不要评论跟本职工作无关的事情，例如公司高层内斗、市场机会丢失、xx领导是傻逼等等。如果是自己听到了，就当作没听见，还能保平安。</li>
-</ul>
-<h2 id="除了处理言论还应当更进一步">除了处理言论，还应当更进一步</h2>
-<p>处理言论是“治标不治本”的方式。为了使团队可持续地走下去，管理者最终还是要从团队文化建设方面下手，建设积极正向的氛围，使成员自发地朝着目标努力，这样负面言论自然而然就少了。</p>
-<p>团队文化建设是一个复杂的问题，本文只挑几个方面进行讨论：</p>
-<h3 id="互相尊重">互相尊重</h3>
-<p>在建设团队文化过程中，一个简单而重要的做法是彼此之间互信尊重、坦诚相待，不要用斗争哲学来处事。</p>
-<p>可以不定期分批次地、小范围地、非正式地与员工进行一些交流，交换彼此的看法，增强互信，减少误判。特别是90后甚至即将步入职场的00后年轻员工，斗争哲学容易把他们赶跑，而坦诚相待可以使他们主动靠过来。谁都不用防备谁，工作可以更轻松。</p>
-<h3 id="言而有信">言而有信</h3>
-<p>大家都知道“狼来了”的故事。如果管理者屡次失信，那么大家就不会再相信你了，而且这种信任危机是很难挽救的。</p>
-<p>言而有信就是说到做到，但是，换个角度来想，也可以是“做不到就不说”，不要提出无法兑现的承诺，不要给员工画吃不到的饼。</p>
-<h3 id="适当激励">适当激励</h3>
-<p>激励是促使员工积极工作的有效手段。鉴于激励的复杂性，以及很多公司事实上难以落实物质激励，本文就不再详细讨论了。</p>
-<h2 id="反例">反例</h2>
-<p>控制负面言论，不代表不能进行批评，例如员工经常消极工作，领导仍然应该及时“敲打敲打”（为了留面子，可以私下敲打）。如果严重违背原则，甚至违反了法律法规，这时候还是要公开批评，防止更多人走歪路。</p>
-<p>负面言论虽然不适合对员工讲，但是适合自己对自己讲，自我批评，鞭策自己进步。</p>
-<h2 id="参考资料">参考资料</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cDovL3d3dy5uZXRraWxsZXIuY24vbWFuYWdlbWVudA==">Netkiller管理手札<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-      <tags>
-        <tag>团队建设</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>浅谈社招招聘（四）：面试的安排</title>
     <url>/2021/05/12/interview/</url>
     <content><![CDATA[<p>前文谈到了笔试，本文继续谈一谈面试的经验。</p>
@@ -9800,6 +9725,81 @@ href="/2020/08/20/resume-improvement/">来自招聘者的建议——如何优�
       <tags>
         <tag>招聘</tag>
         <tag>面试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>控制团队内部的负面言论</title>
+    <url>/2021/04/01/expression-control/</url>
+    <content><![CDATA[<p>在开发团队中，不当的负面言论很容易打击成员的积极性，降低生产力，甚至对团队文化造成不可逆的破坏。因此需要对负面言论进行识别和判断，过滤掉有害言论，调整本质上有益但形式上不恰当的言论。</p>
+<span id="more"></span>
+<h2 id="本文不是">本文不是……</h2>
+<p>本文目标读者主要为软件开发团队的管理者，因此本文不是：</p>
+<ul>
+<li>本文不是介绍（政府）如何言论审查。</li>
+<li>本文不是介绍如何应对（来自用户的）负面舆情。</li>
+</ul>
+<h2 id="负面言论的危害">负面言论的危害</h2>
+<p>没有人喜欢被责骂、被否定，即使是个M（受虐狂），也得是被自己喜欢的异性施虐才能兴奋，所以不要随便对员工讲负面的话。</p>
+<p>负面言论的影响包括以下几个方面：</p>
+<ul>
+<li>员工经常被上级训的话，容易消极怠工，或者“破罐子破摔”。</li>
+<li>员工经常被同级训的话，容易成为团队内的“背锅侠”，从而心灰意冷。</li>
+<li>团队/部门/公司经常被说坏话的话，员工会质疑自己工作的意义，然后选择混日子，“反正好好干活也没用”。如果一半以上的人都开始混日子，这个团队恐怕就没救了。</li>
+</ul>
+<p>不同年龄层的承受能力是不一样的。一般来讲，80后或者年龄更大的员工，可能会因为要养家糊口而选择忍耐一时，但是对于90后甚至未来的00后员工，他们很可能会直接撂挑子走人，“老子不伺候你了”。</p>
+<h2 id="识别与处理负面言论">识别与处理负面言论</h2>
+<p>管理者要调整自己的心态，通过以下三个思路来处理负面言论：</p>
+<ol type="1">
+<li>将负面语气转变正面语气</li>
+<li>将“背锅”、“追责”转变为“解决/预防问题”</li>
+<li>屏蔽掉不解决问题的言论</li>
+</ol>
+<h3 id="负面语气-正面语气">负面语气 → 正面语气</h3>
+<p>即使你的本意是为了改善员工工作方式，提升员工个人能力，也不要用否定、反问的语气与同事或下属说话。用微信、钉钉等文字聊天工具时，要更加注意措辞，以免被误认为是责备。例如：</p>
+<ul>
+<li>员工开发了一个功能，却延期了一两天才完成。这时候不要训“你怎么做的这么慢”、“怎么才干完”，而是从两方面入手，一方面是调整任务排期（例如安排加班），尽量抵消延期的影响，另一方面，管理者要帮他分析延期的原因，然后提醒他，“你在xxx方面应该再努力/注意一下”。</li>
+<li>员工开发了一个功能，但是性能很差，而且还有SQL注入问题，这时候不要说“你怎么连这么低级的错误都犯”，而是直接点明问题，让他们“继续优化完善”。</li>
+<li>员工提出了一个idea，但是不符合实际情况，或者实现的代价太大，这时候不要说“你的想法不行”，而是先顺着他的idea，代入到项目中进行分析，逐步推导出“不合适”的结论（如果结论正好相反，也可以考虑采用，然后公开表扬奖励），从而使员工信服。</li>
+<li>员工认为应该按A方案工作，而管理者认为应该按B方案工作，并且经验证明B确实可行而A确实不可行，这时候不要说“你就是不行，就是得听我的”，而是要稍微解释一下，“以我的实践经验，B方案是更加合适的，我们应该先尝试B”。</li>
+</ul>
+<p>说话要给员工留面子，员工做了好事则要给他们挣面子。纯负面的话不讲，批评的话私下讲，表扬的话公开讲。</p>
+<p>不要因为员工做得不好，就把员工的活抢过来亲自去做（除非任务非常紧急），一方面会让员工觉得自己不受信任，尊严受到打击，另一方面会让自己变得很忙很累。这种情况下，还是应该审视他们的工作，哪怕自己做起来效率更高、质量更好，也要把该做的事情指出来，交给员工自己完成改进，实在不行再考虑换人。</p>
+<h3 id="背锅追责-解决预防问题">背锅、追责 → 解决、预防问题</h3>
+<p>发生事故的时候，不要追问或暗示“是哪个混蛋干的好事”，而是要尽快定位问题、解决问题，先把窟窿堵上再说。</p>
+<p>如果追责，肯定是先追究领导责任，所以领导也应当先背锅，而不是把责任推给下属。就算是下属故意搞破坏，领导责任也只能说是减轻而不是完全消失。如果坚持找个人毛病，以后团队成员做事会变得畏手畏脚，担心惹事生非，与他人沟通也会采取踢皮球的策略，这就是一种无形之中的打击。</p>
+<p>除了不轻易追究个人责任，更重要的还是分析如何预防问题，让同样的问题不再发生，这才是领导应该做的事情。</p>
+<h3 id="屏蔽无意义言论">屏蔽无意义言论</h3>
+<p>什么算是无意义言论呢？光抱怨不努力，光提问题不解决，光制造矛盾不收拾，这样的言论都是无意义言论。</p>
+<p>应该通过适当的管理来屏蔽这类言论，例如：</p>
+<ul>
+<li>管理者应该对经常发牢骚的人提出要求，要么闭嘴好好干活，要么找个没人的地方随便发泄，不要在工作场合影响其他人工作。</li>
+<li>管理者应当要求，无论是谁，如果想否定他人观点、推翻他人工作，那么就必须提出一套可行的解决方案，否则就视为不尊重他人。</li>
+<li>管理者应该私下提醒说闲话的人，不要评论跟本职工作无关的事情，例如公司高层内斗、市场机会丢失、xx领导是傻逼等等。如果是自己听到了，就当作没听见，还能保平安。</li>
+</ul>
+<h2 id="除了处理言论还应当更进一步">除了处理言论，还应当更进一步</h2>
+<p>处理言论是“治标不治本”的方式。为了使团队可持续地走下去，管理者最终还是要从团队文化建设方面下手，建设积极正向的氛围，使成员自发地朝着目标努力，这样负面言论自然而然就少了。</p>
+<p>团队文化建设是一个复杂的问题，本文只挑几个方面进行讨论：</p>
+<h3 id="互相尊重">互相尊重</h3>
+<p>在建设团队文化过程中，一个简单而重要的做法是彼此之间互信尊重、坦诚相待，不要用斗争哲学来处事。</p>
+<p>可以不定期分批次地、小范围地、非正式地与员工进行一些交流，交换彼此的看法，增强互信，减少误判。特别是90后甚至即将步入职场的00后年轻员工，斗争哲学容易把他们赶跑，而坦诚相待可以使他们主动靠过来。谁都不用防备谁，工作可以更轻松。</p>
+<h3 id="言而有信">言而有信</h3>
+<p>大家都知道“狼来了”的故事。如果管理者屡次失信，那么大家就不会再相信你了，而且这种信任危机是很难挽救的。</p>
+<p>言而有信就是说到做到，但是，换个角度来想，也可以是“做不到就不说”，不要提出无法兑现的承诺，不要给员工画吃不到的饼。</p>
+<h3 id="适当激励">适当激励</h3>
+<p>激励是促使员工积极工作的有效手段。鉴于激励的复杂性，以及很多公司事实上难以落实物质激励，本文就不再详细讨论了。</p>
+<h2 id="反例">反例</h2>
+<p>控制负面言论，不代表不能进行批评，例如员工经常消极工作，领导仍然应该及时“敲打敲打”（为了留面子，可以私下敲打）。如果严重违背原则，甚至违反了法律法规，这时候还是要公开批评，防止更多人走歪路。</p>
+<p>负面言论虽然不适合对员工讲，但是适合自己对自己讲，自我批评，鞭策自己进步。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL3d3dy5uZXRraWxsZXIuY24vbWFuYWdlbWVudA==">Netkiller管理手札<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>团队建设</tag>
       </tags>
   </entry>
   <entry>
@@ -10078,59 +10078,6 @@ AnyConnect的流量特征太明显，所以建议用其他更可靠的方式翻�
       </tags>
   </entry>
   <entry>
-    <title>CentOS 7安全等保整改记录</title>
-    <url>/2021/10/24/centos-security/</url>
-    <content><![CDATA[<p>为满足等保测评要求，对CentOS
-7服务器进行了统一整改，整改命令记录如下。</p>
-<span id="more"></span>
-<h1 id="升级ssh">升级SSH</h1>
-<p>网上教程太多了，此处不再提供。</p>
-<p>如果从7.x旧版升级到8.x或9.x，需要注意几个问题：</p>
-<ol type="1">
-<li>禁用SELinux：</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">setenforce <span class="token number">0</span>
-<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/=enforcing/=disabled/'</span> /etc/selinux/config<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<ol start="2" type="1">
-<li>删除旧的key：</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rm</span> <span class="token parameter variable">-f</span> /etc/ssh/ssh*key<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ol start="3" type="1">
-<li>允许root登录：</li>
-</ol>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">"PermitRootLogin yes"</span> <span class="token operator">>></span> /etc/ssh/sshd_config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="升级curl需要网络">升级curl（需要网络）</h1>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> <span class="token parameter variable">-Uvh</span> http://www.city-fan.org/ftp/contrib/yum-repo/city-fan.org-release-3-4.rhel7.noarch.rpm
-<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/enabled=0/enabled=1/g'</span> /etc/yum.repos.d/city-fan.org.repo
-<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/gpgcheck=1/gpgcheck=0/g'</span> /etc/yum.repos.d/city-fan.org.repo
-yum update <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span> <span class="token function">curl</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="系统配置">系统配置</h1>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># shell不记录历史命令</span>
-<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/HISTSIZE=1000/HISTSIZE=0/g'</span> /etc/profile
-
-<span class="token comment"># shell自动超时</span>
-<span class="token builtin class-name">echo</span> <span class="token string">'export TMOUT=600'</span> <span class="token operator">>></span> /etc/profile
-
-<span class="token comment"># 密码复杂度规则、账号锁定规则</span>
-<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/authtok_type=/authtok_type= minlen=12 lcredit=-1 ucredit=-1 dcr+++edit=-1 ocredit=-1 enforce_for_root/'</span> /etc/pam.d/system-auth
-<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/99999/120/g'</span> /etc/login.defs
-<span class="token builtin class-name">echo</span> <span class="token string">'auth required pam_tally.so onerr=fail no_magic_root'</span> <span class="token operator">>></span> /etc/pam.d/system-auth
-<span class="token builtin class-name">echo</span> <span class="token string">'account required pam_tally.so deny=5 unlock_time=300 root_unlock_time=300 no_magic_root even_deny_root_account per_user reset'</span> <span class="token operator">>></span> /etc/pam.d/system-auth
-
-<span class="token comment"># SSH加密算法</span>
-<span class="token builtin class-name">echo</span> <span class="token string">'KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521'</span> <span class="token operator">>></span> /etc/ssh/sshd_config
-systemctl restart sshd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>安全</tag>
-        <tag>CentOS</tag>
-        <tag>等保</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如果你的Web应用出现了莫名其妙的问题，你可以怀疑是否被WAF设备拦截</title>
     <url>/2021/11/19/waf/</url>
     <content><![CDATA[<p>有些时候，你的Web应用明明正常，但是突然有一天，它出现了莫名其妙的问题，无法定位到是哪一行代码错误，而且检查服务器配置也没有问题。这种情况下，可能是WAF安全设备在作怪。</p>
@@ -10265,6 +10212,95 @@ curl: (18) transfer closed with outstanding read data remaining
       </tags>
   </entry>
   <entry>
+    <title>CentOS 7安全等保整改记录</title>
+    <url>/2021/10/24/centos-security/</url>
+    <content><![CDATA[<p>为满足等保测评要求，对CentOS
+7服务器进行了统一整改，整改命令记录如下。</p>
+<span id="more"></span>
+<h1 id="升级ssh">升级SSH</h1>
+<p>网上教程太多了，此处不再提供。</p>
+<p>如果从7.x旧版升级到8.x或9.x，需要注意几个问题：</p>
+<ol type="1">
+<li>禁用SELinux：</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">setenforce <span class="token number">0</span>
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/=enforcing/=disabled/'</span> /etc/selinux/config<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ol start="2" type="1">
+<li>删除旧的key：</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rm</span> <span class="token parameter variable">-f</span> /etc/ssh/ssh*key<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol start="3" type="1">
+<li>允许root登录：</li>
+</ol>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">"PermitRootLogin yes"</span> <span class="token operator">>></span> /etc/ssh/sshd_config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="升级curl需要网络">升级curl（需要网络）</h1>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> <span class="token parameter variable">-Uvh</span> http://www.city-fan.org/ftp/contrib/yum-repo/city-fan.org-release-3-4.rhel7.noarch.rpm
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/enabled=0/enabled=1/g'</span> /etc/yum.repos.d/city-fan.org.repo
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/gpgcheck=1/gpgcheck=0/g'</span> /etc/yum.repos.d/city-fan.org.repo
+yum update <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span> <span class="token function">curl</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="系统配置">系统配置</h1>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># shell不记录历史命令</span>
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/HISTSIZE=1000/HISTSIZE=0/g'</span> /etc/profile
+
+<span class="token comment"># shell自动超时</span>
+<span class="token builtin class-name">echo</span> <span class="token string">'export TMOUT=600'</span> <span class="token operator">>></span> /etc/profile
+
+<span class="token comment"># 密码复杂度规则、账号锁定规则</span>
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/authtok_type=/authtok_type= minlen=12 lcredit=-1 ucredit=-1 dcr+++edit=-1 ocredit=-1 enforce_for_root/'</span> /etc/pam.d/system-auth
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/99999/120/g'</span> /etc/login.defs
+<span class="token builtin class-name">echo</span> <span class="token string">'auth required pam_tally.so onerr=fail no_magic_root'</span> <span class="token operator">>></span> /etc/pam.d/system-auth
+<span class="token builtin class-name">echo</span> <span class="token string">'account required pam_tally.so deny=5 unlock_time=300 root_unlock_time=300 no_magic_root even_deny_root_account per_user reset'</span> <span class="token operator">>></span> /etc/pam.d/system-auth
+
+<span class="token comment"># SSH加密算法</span>
+<span class="token builtin class-name">echo</span> <span class="token string">'KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521'</span> <span class="token operator">>></span> /etc/ssh/sshd_config
+systemctl restart sshd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>安全</tag>
+        <tag>CentOS</tag>
+        <tag>等保</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小心你的数据库查询窗口，以免误操作</title>
+    <url>/2021/12/16/db-console/</url>
+    <content><![CDATA[<p>如果你的数据库查询窗口的第一行是<code>DROP DATABASE</code>，你又不小心点击了执行按钮……</p>
+<p>有些数据库软件能够智能地执行光标所在行的指令，但有些数据库软件没那么智能，或者需要配置才能变聪明，一不小心，就会把窗口里面的所有SQL都执行一遍，所以使用数据库软件时要注意防范误操作。</p>
+<span id="more"></span>
+<h1 id="先检查再操作">先检查再操作</h1>
+<ul>
+<li>执行UPDATE和DELETE之前，检查是否写了WHERE条件，并用同样条件执行一遍SELECT查询，检查条件是否正确。</li>
+<li>执行选择或光标处SQL语句时，检查SQL语句是否选择完整。</li>
+</ul>
+<h1 id="及时清理破坏性sql">及时清理破坏性SQL</h1>
+<p>在操作数据库时，如果需要执行有副作用的指令，例如DROP、DELETE、INSERT、UPDATE、TRUNCATE等，记得在执行完成后及时清理掉这些语句。可以用以下方式操作：</p>
+<ul>
+<li>每执行完一个SQL，就立刻把它删掉。</li>
+<li>为了方便查找或记录，不希望把SQL删掉，可以在执行完SQL之后立刻把它注释掉。</li>
+<li>在SQL窗口第一行放一个会报错的SQL，如果不小心点了执行，可以让数据库客户端在第一行就停下来。需要注意，有些数据库客户端在失败后会继续执行后面的指令，所以还要慎重。</li>
+</ul>
+<h1 id="连接生产系统不要图方便">连接生产系统，不要图方便</h1>
+<p>生产系统权限意味着巨大的责任，而连接生产系统的方式越容易，犯错误的几率就越大，所以不要为了图方便把自己置于危险境地。可以用以下方法来防范：</p>
+<ul>
+<li>不要在同一个系统、同一个数据库软件中同时连接开发系统和生产系统，避免弄错环境。</li>
+<li>连接生产系统之前总是手工输入账号密码，不要自动连接，使自己清晰地意识到自己在连接生产系统，同时防止无关人员盗用。</li>
+<li>批量执行语句，或导入SQL文件时，先检查SQL内容，确认是否有破坏性指令（例如有些软件生成的导入SQL会先删表），确认无误后再执行。</li>
+<li>把在生产系统执行的每条SQL都做好记录，包括执行时间、执行人、操作目的，以备事后追溯。</li>
+<li>及时清理生产系统的数据库操作界面里的SQL。</li>
+<li>操作完成后及时关闭数据库软件。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>一点人生的经验</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何正确使用信用卡</title>
     <url>/2022/02/22/credit-card/</url>
     <content><![CDATA[<p>学会正确使用信用卡，让自己不会成为“卡奴”。</p>
@@ -10319,42 +10355,6 @@ id="如果你要办信用卡那么要熟悉信用卡的一些概念">如果你�
       </categories>
       <tags>
         <tag>信用卡</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>小心你的数据库查询窗口，以免误操作</title>
-    <url>/2021/12/16/db-console/</url>
-    <content><![CDATA[<p>如果你的数据库查询窗口的第一行是<code>DROP DATABASE</code>，你又不小心点击了执行按钮……</p>
-<p>有些数据库软件能够智能地执行光标所在行的指令，但有些数据库软件没那么智能，或者需要配置才能变聪明，一不小心，就会把窗口里面的所有SQL都执行一遍，所以使用数据库软件时要注意防范误操作。</p>
-<span id="more"></span>
-<h1 id="先检查再操作">先检查再操作</h1>
-<ul>
-<li>执行UPDATE和DELETE之前，检查是否写了WHERE条件，并用同样条件执行一遍SELECT查询，检查条件是否正确。</li>
-<li>执行选择或光标处SQL语句时，检查SQL语句是否选择完整。</li>
-</ul>
-<h1 id="及时清理破坏性sql">及时清理破坏性SQL</h1>
-<p>在操作数据库时，如果需要执行有副作用的指令，例如DROP、DELETE、INSERT、UPDATE、TRUNCATE等，记得在执行完成后及时清理掉这些语句。可以用以下方式操作：</p>
-<ul>
-<li>每执行完一个SQL，就立刻把它删掉。</li>
-<li>为了方便查找或记录，不希望把SQL删掉，可以在执行完SQL之后立刻把它注释掉。</li>
-<li>在SQL窗口第一行放一个会报错的SQL，如果不小心点了执行，可以让数据库客户端在第一行就停下来。需要注意，有些数据库客户端在失败后会继续执行后面的指令，所以还要慎重。</li>
-</ul>
-<h1 id="连接生产系统不要图方便">连接生产系统，不要图方便</h1>
-<p>生产系统权限意味着巨大的责任，而连接生产系统的方式越容易，犯错误的几率就越大，所以不要为了图方便把自己置于危险境地。可以用以下方法来防范：</p>
-<ul>
-<li>不要在同一个系统、同一个数据库软件中同时连接开发系统和生产系统，避免弄错环境。</li>
-<li>连接生产系统之前总是手工输入账号密码，不要自动连接，使自己清晰地意识到自己在连接生产系统，同时防止无关人员盗用。</li>
-<li>批量执行语句，或导入SQL文件时，先检查SQL内容，确认是否有破坏性指令（例如有些软件生成的导入SQL会先删表），确认无误后再执行。</li>
-<li>把在生产系统执行的每条SQL都做好记录，包括执行时间、执行人、操作目的，以备事后追溯。</li>
-<li>及时清理生产系统的数据库操作界面里的SQL。</li>
-<li>操作完成后及时关闭数据库软件。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>一点人生的经验</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -10833,40 +10833,6 @@ http &#123;
       </tags>
   </entry>
   <entry>
-    <title>见人说人话，见鬼说鬼话</title>
-    <url>/2022/07/20/expression/</url>
-    <content><![CDATA[<p>在微博上看到了这样一个故事：</p>
-<blockquote>
-<p>跟讲科学的人谈科学，和信玄学的人谈玄学才是万全之策。
-妇产科接一产妇，要求明天剖宫产，还详细到几点几分，但是她现在还没到预产期，一切都是正常指标，没有手术指征，医生不能给她提前剖，她和家人非要，说家里人找大师给算了，孩子明天那个时间出生命格好。
-医生解释了半天，不听，非要剖，不然就去投诉医生态度不好……
-主任听说了，来解围说：人的命格天注定，瓜熟蒂落，瓜熟蒂落，你这瓜不熟，强行摘下，也就是说想逆天改命，要不得，没那个道行，强行如此，会被反噬，到时候，你们一家都不够赔。
-产妇和家人一商量，觉得主任说的对，走了……
-医生说，那一刻，觉得主任万丈光芒。</p>
-</blockquote>
-<p>技术人员在与他人沟通时，经常会出现陷入自己逻辑的现象，导致沟通困难。本文借助这个故事，讲一讲与人沟通的一些技巧。</p>
-<span id="more"></span>
-<h1 id="了解对方的知识体系与话语体系">了解对方的知识体系与话语体系</h1>
-<p>技术人员之间进行沟通，由于双方对技术都有所了解，因此使用行话可以很容易沟通，但是一般人并不了解这些技术，使用行话自然会让他们困惑。</p>
-<p>有一些人受自身所受教育限制，或者出于维护自己面子的需要，他会有一套自己的思想理论，而且会坚持这些理论。如果你的理论与他的理论发生冲突，自然容易发生争执。</p>
-<p>因此，面对知识体系不同的人，不要急着用自己的技术理论进行沟通，更不要急着否定对方，而是先试探对方对技术的理解情况，了解他的理论和语言。</p>
-<p>以前文故事为例，产妇家提到了“大师”，说明他们家不懂任何现代医学，而且具有封建迷信思想，因此不能用现代医学理论和术语来沟通，而是要用一些传统医学或封建迷信的语言来沟通。</p>
-<h1 id="抓住主要矛盾必要时切换思路">抓住主要矛盾，必要时切换思路</h1>
-<p>沟通的目的是解决问题，但解决问题之前需要先了解问题是什么，哪些是主要矛盾，哪些不是主要矛盾。</p>
-<p>以前文故事为例，产妇家的诉求是早产，而做技术的人就很容易讲自己的话，然后对自己的观点进行进一步解释，例如早产需要哪些条件、对方不符合哪些条件、后果如何之类，而对方会因为听不懂，无法理解，导致沟通陷入僵局。</p>
-<p>当沟通陷入僵局时，就不要再沿着之前的思路进行思考，而是要直接跳出这种逻辑，重新换一个思路：产妇为什么会要求早产呢？其实是因为他们听了“大师”的话，因此主要矛盾实际上不是如何否定早产，而是如何证明“大师”是错的。</p>
-<h1 id="翻译成对方能理解的话">翻译成对方能理解的话</h1>
-<p>搞清楚问题之后，不要直接去解答问题，而是要把你的观点整理一下，翻译成他们能够理解的词语。特别是要否定对方时，要先顺着对方的思维说话，当对方接受以后再引出自己的观点。</p>
-<p>主任来了，他的经验丰富，知道对方只能理解“玄学”理论，因此用玄学理论与他们沟通。主任先提出“人的命格天注定”的论断，而且不说“没到预产期”，而是将其换成“你这瓜不熟，强行摘下，也就是说想逆天改命”，让对方很容易理解。在此基础上，主任稍微恐吓一下，“要不得，没那个道行，强行如此，会被反噬”，因为大师再厉害，也不可能超越天命，所以很容易就说服了对方。</p>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-      <tags>
-        <tag>沟通</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>基于Spring Boot和若依框架实现可灵活配置的动态接口</title>
     <url>/2022/06/08/dynamic-controller/</url>
     <content><![CDATA[<p>很多业务都是以增删改查为基础，利用若依框架，已经能够实现代码的快速生成，但需要在后端部署一些VO、Controller和Service，如需维护，依然要修改多个文件，而且要升级和重启后端系统。</p>
@@ -11163,6 +11129,40 @@ AppUtil<span class="token punctuation">.</span><span class="token function">exec
         <tag>数据库</tag>
         <tag>Spring Boot</tag>
         <tag>接口</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>见人说人话，见鬼说鬼话</title>
+    <url>/2022/07/20/expression/</url>
+    <content><![CDATA[<p>在微博上看到了这样一个故事：</p>
+<blockquote>
+<p>跟讲科学的人谈科学，和信玄学的人谈玄学才是万全之策。
+妇产科接一产妇，要求明天剖宫产，还详细到几点几分，但是她现在还没到预产期，一切都是正常指标，没有手术指征，医生不能给她提前剖，她和家人非要，说家里人找大师给算了，孩子明天那个时间出生命格好。
+医生解释了半天，不听，非要剖，不然就去投诉医生态度不好……
+主任听说了，来解围说：人的命格天注定，瓜熟蒂落，瓜熟蒂落，你这瓜不熟，强行摘下，也就是说想逆天改命，要不得，没那个道行，强行如此，会被反噬，到时候，你们一家都不够赔。
+产妇和家人一商量，觉得主任说的对，走了……
+医生说，那一刻，觉得主任万丈光芒。</p>
+</blockquote>
+<p>技术人员在与他人沟通时，经常会出现陷入自己逻辑的现象，导致沟通困难。本文借助这个故事，讲一讲与人沟通的一些技巧。</p>
+<span id="more"></span>
+<h1 id="了解对方的知识体系与话语体系">了解对方的知识体系与话语体系</h1>
+<p>技术人员之间进行沟通，由于双方对技术都有所了解，因此使用行话可以很容易沟通，但是一般人并不了解这些技术，使用行话自然会让他们困惑。</p>
+<p>有一些人受自身所受教育限制，或者出于维护自己面子的需要，他会有一套自己的思想理论，而且会坚持这些理论。如果你的理论与他的理论发生冲突，自然容易发生争执。</p>
+<p>因此，面对知识体系不同的人，不要急着用自己的技术理论进行沟通，更不要急着否定对方，而是先试探对方对技术的理解情况，了解他的理论和语言。</p>
+<p>以前文故事为例，产妇家提到了“大师”，说明他们家不懂任何现代医学，而且具有封建迷信思想，因此不能用现代医学理论和术语来沟通，而是要用一些传统医学或封建迷信的语言来沟通。</p>
+<h1 id="抓住主要矛盾必要时切换思路">抓住主要矛盾，必要时切换思路</h1>
+<p>沟通的目的是解决问题，但解决问题之前需要先了解问题是什么，哪些是主要矛盾，哪些不是主要矛盾。</p>
+<p>以前文故事为例，产妇家的诉求是早产，而做技术的人就很容易讲自己的话，然后对自己的观点进行进一步解释，例如早产需要哪些条件、对方不符合哪些条件、后果如何之类，而对方会因为听不懂，无法理解，导致沟通陷入僵局。</p>
+<p>当沟通陷入僵局时，就不要再沿着之前的思路进行思考，而是要直接跳出这种逻辑，重新换一个思路：产妇为什么会要求早产呢？其实是因为他们听了“大师”的话，因此主要矛盾实际上不是如何否定早产，而是如何证明“大师”是错的。</p>
+<h1 id="翻译成对方能理解的话">翻译成对方能理解的话</h1>
+<p>搞清楚问题之后，不要直接去解答问题，而是要把你的观点整理一下，翻译成他们能够理解的词语。特别是要否定对方时，要先顺着对方的思维说话，当对方接受以后再引出自己的观点。</p>
+<p>主任来了，他的经验丰富，知道对方只能理解“玄学”理论，因此用玄学理论与他们沟通。主任先提出“人的命格天注定”的论断，而且不说“没到预产期”，而是将其换成“你这瓜不熟，强行摘下，也就是说想逆天改命”，让对方很容易理解。在此基础上，主任稍微恐吓一下，“要不得，没那个道行，强行如此，会被反噬”，因为大师再厉害，也不可能超越天命，所以很容易就说服了对方。</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>沟通</tag>
       </tags>
   </entry>
   <entry>
@@ -11696,7 +11696,7 @@ quattro（高配车型，落地大约55万）？还是去二手市场找找八�
 <p>对于大众、本田这种根本不愁卖不出去的品牌，其实他们完全没有必要去降价。但是，为了做出因为“价格战”优惠的感觉，4S可以调整指导价，然后再调整终端优惠和一系列“工时费”，让你以为便宜了不少，然而落地价还是那么多。如果你能回到过去，你会发现“价格战”前后落地价都是一个样子。</p>
 <p>2022年因为疫情影响经济，出台了购置税减半的政策。那么当时买能省钱吗？并没有！只要4S店稍微做一些操作，就可以让你感觉到自己享受到了国家的优惠，然而落地价却一分都没少。</p>
 <h2 id="所以">所以……</h2>
-<p>需要买车的，该买就买，可以稍微等等出新款之前4S店便宜处理的旧款库存车，但是没必要特意等“价格战”；</p>
+<p>需要买车的，该买就买，可以稍微等等出新款之前4S店便宜处理的旧款库存车，但是没必要特意等“价格战”，也没必要去费太大力气讲价；</p>
 <p>不需要买车的，别因为出现所谓的“利好”政策，或者发生所谓的“价格战”就草率入场，也许车市有“崩”的迹象，但是车价并没有真的变便宜。</p>
 ]]></content>
       <categories>
