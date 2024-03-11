@@ -627,53 +627,6 @@ Happy World！程序。</p>
       </tags>
   </entry>
   <entry>
-    <title>从Eclipse切换到IDEA</title>
-    <url>/2018/12/12/switch-to-idea-0/</url>
-    <content><![CDATA[<p>我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ
-IDEA。本系列文章面向Eclipse使用者，讲述IDEA的一些基本操作，以便平稳地进行切换。
-<span id="more"></span></p>
-<h1 id="本系列内容">本系列内容</h1>
-<ul>
-<li><strong>为什么进行切换</strong></li>
-<li><a href="/2018/12/13/switch-to-idea-1/">切换的基本操作</a></li>
-<li><a href="/2019/01/27/switch-to-idea-2">传统Web项目在IDEA的Project
-Structure</a></li>
-<li><a
-href="/2019/08/03/switch-to-idea-3/">传统Web项目转为Gradle项目</a></li>
-</ul>
-<h1 id="切换到idea的理由">切换到IDEA的理由</h1>
-<p>下面是我向同事推荐使用IDEA（商业版）的一些理由：</p>
-<ol type="1">
-<li>公司版本管理软件从ClearCase切换到了SVN，这意味着开发工作不再受ClearCase拖累，开发工具也可以随意换成更好用的了。</li>
-<li>公司电脑配置不高，而且项目文件非常多，Eclipse用起来很卡。虽然IDEA资源消耗比较高，但是用起来比Eclipse顺畅得多（备注：对于内存只有4GB的电脑，要么加条，要么换旧版IDEA，否则会很糟糕）。</li>
-<li>IDEA的搜索比Eclipse快得多，按全项目搜索的话，Eclipse要等把所有文件都过一遍，而IDEA可以一下子搜出来。</li>
-<li>IDEA的SVN支持非常好，可以很方便地检查自己修改的代码、查询同事修改、对比文件版本，虽然TortoiseSVN和Eclipse也有类似功能，但是IDEA用起来更舒服。</li>
-</ol>
-<p>以下也是IDEA的长处，不过有些是个人体验，或者未作为推销的内容向同事介绍：</p>
-<ol type="1">
-<li>IDEA的工作空间对版本控制友好，只要我把项目配置好，加到版本库中，其他人就可以直接用IDEA打开项目，等IDEA把文件索引完，然后再配一下JDK和Tomcat路径就能投入开发了。Eclipse的话每次全新checkout都要从头开始配置，而且我们项目组有时也会出现因工作安排变动或电脑难用而重新搭环境甚至重装系统的情况。</li>
-<li>IDEA集成了数据库插件，代码提示比其他数据库软件好一些。另外修改数据时PL/SQL
-Developer需要附上FOR UPDATE，Toad需要用EDIT语句，SQL
-Developer需要自己写UPDATE语句，而IDEA可以直接在查询结果上面改。</li>
-<li>IDEA对代码风格方面的提示和警告比Eclipse丰富，例如IDEA可以检测出哪些代码是一模一样的，或者哪些类与函数根本没有人使用。</li>
-<li>IDEA自带反编译工具，可以方便地反编译代码，以分析一些jar包的原理。</li>
-</ol>
-<p>当然，Eclipse的用户和插件也不少，对于爱搞配置的人来说应该也比较好用。</p>
-<h1 id="差异">差异</h1>
-<p>Eclipse和IDEA的界面与操作方法有些区别。概念上的重大差异主要是“Project
-Structure”，即项目文件结构的管理，不过如果有人把项目配置好并提交版本控制之后，其他成员反倒不太需要关注这些东西，因此我会另外写一篇文章进行叙述。</p>
-<h1 id="法律问题">法律问题</h1>
-<p>IDEA分免费的社区版（Community Edition）和收费的商业版（Ultimate
-Edition），前者不支持Web开发，只能选用商业版。商业版需要激活，大家往往会用注册码、注册机来进行破解。这当然是违法的，而且比起个人，公司更容易陷入诉讼（告赢了就是一大笔钱），因此有条件的话务必买正版。</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>IDEA</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>WebLogic踩坑记录</title>
     <url>/2018/11/02/weblogic-caution/</url>
     <content><![CDATA[本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g（10.3.6）。
@@ -1056,6 +1009,53 @@ java.lang.ClassNotFoundException: jsp_servlet._somepackage.__somejsppage.
       </categories>
       <tags>
         <tag>WebLogic</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从Eclipse切换到IDEA</title>
+    <url>/2018/12/12/switch-to-idea-0/</url>
+    <content><![CDATA[<p>我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ
+IDEA。本系列文章面向Eclipse使用者，讲述IDEA的一些基本操作，以便平稳地进行切换。
+<span id="more"></span></p>
+<h1 id="本系列内容">本系列内容</h1>
+<ul>
+<li><strong>为什么进行切换</strong></li>
+<li><a href="/2018/12/13/switch-to-idea-1/">切换的基本操作</a></li>
+<li><a href="/2019/01/27/switch-to-idea-2">传统Web项目在IDEA的Project
+Structure</a></li>
+<li><a
+href="/2019/08/03/switch-to-idea-3/">传统Web项目转为Gradle项目</a></li>
+</ul>
+<h1 id="切换到idea的理由">切换到IDEA的理由</h1>
+<p>下面是我向同事推荐使用IDEA（商业版）的一些理由：</p>
+<ol type="1">
+<li>公司版本管理软件从ClearCase切换到了SVN，这意味着开发工作不再受ClearCase拖累，开发工具也可以随意换成更好用的了。</li>
+<li>公司电脑配置不高，而且项目文件非常多，Eclipse用起来很卡。虽然IDEA资源消耗比较高，但是用起来比Eclipse顺畅得多（备注：对于内存只有4GB的电脑，要么加条，要么换旧版IDEA，否则会很糟糕）。</li>
+<li>IDEA的搜索比Eclipse快得多，按全项目搜索的话，Eclipse要等把所有文件都过一遍，而IDEA可以一下子搜出来。</li>
+<li>IDEA的SVN支持非常好，可以很方便地检查自己修改的代码、查询同事修改、对比文件版本，虽然TortoiseSVN和Eclipse也有类似功能，但是IDEA用起来更舒服。</li>
+</ol>
+<p>以下也是IDEA的长处，不过有些是个人体验，或者未作为推销的内容向同事介绍：</p>
+<ol type="1">
+<li>IDEA的工作空间对版本控制友好，只要我把项目配置好，加到版本库中，其他人就可以直接用IDEA打开项目，等IDEA把文件索引完，然后再配一下JDK和Tomcat路径就能投入开发了。Eclipse的话每次全新checkout都要从头开始配置，而且我们项目组有时也会出现因工作安排变动或电脑难用而重新搭环境甚至重装系统的情况。</li>
+<li>IDEA集成了数据库插件，代码提示比其他数据库软件好一些。另外修改数据时PL/SQL
+Developer需要附上FOR UPDATE，Toad需要用EDIT语句，SQL
+Developer需要自己写UPDATE语句，而IDEA可以直接在查询结果上面改。</li>
+<li>IDEA对代码风格方面的提示和警告比Eclipse丰富，例如IDEA可以检测出哪些代码是一模一样的，或者哪些类与函数根本没有人使用。</li>
+<li>IDEA自带反编译工具，可以方便地反编译代码，以分析一些jar包的原理。</li>
+</ol>
+<p>当然，Eclipse的用户和插件也不少，对于爱搞配置的人来说应该也比较好用。</p>
+<h1 id="差异">差异</h1>
+<p>Eclipse和IDEA的界面与操作方法有些区别。概念上的重大差异主要是“Project
+Structure”，即项目文件结构的管理，不过如果有人把项目配置好并提交版本控制之后，其他成员反倒不太需要关注这些东西，因此我会另外写一篇文章进行叙述。</p>
+<h1 id="法律问题">法律问题</h1>
+<p>IDEA分免费的社区版（Community Edition）和收费的商业版（Ultimate
+Edition），前者不支持Web开发，只能选用商业版。商业版需要激活，大家往往会用注册码、注册机来进行破解。这当然是违法的，而且比起个人，公司更容易陷入诉讼（告赢了就是一大笔钱），因此有条件的话务必买正版。</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>IDEA</tag>
       </tags>
   </entry>
   <entry>
@@ -2248,361 +2248,6 @@ href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查<
       </tags>
   </entry>
   <entry>
-    <title>作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言</title>
-    <url>/2019/01/13/how-to-learn-c/</url>
-    <content><![CDATA[<p>在学校上学的时候，曾经就这个问题专门给学弟们做过讲座，并且总结成了一篇文章。为了造福后辈，帮助后辈争取早日脱单，这里把以前写的内容修改一下发表出来，毕竟C语言课通常大一开，而且大一是提升妹子好感度，<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL2Jhbmd1bWkvbWVkaWEvbWQ0MTg4Lw==">与其约会，使其娇羞<i class="fa fa-external-link-alt"></i></span>的关键时期。</p>
-<span id="more"></span>
-<p>说实话，现代人都比较功利——既然是非计算机专业的学生，那么C语言基本上是个用不着的东西。可是，它还是门必修课，那最起码不能挂科，对吧？</p>
-<p>内容很长，最好找个时间慢慢读。</p>
-<h1 id="first">FIRST</h1>
-<p>稍微了解一下C语言的历史，你就应该知道那个东西绝不是给孩子们入门用的——一开始它的应用是Unix操作系统，尽管创造Unix操作系统最初的目的是为了玩个<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kv5pif6ZmF5peF6KGMXygxOTY55bm05ri45oiPKQ==">游戏<i class="fa fa-external-link-alt"></i></span>。</p>
-<p>从这个角度讲，对于非计算机专业的学生来说，Pascal甚至Basic都比C语言靠谱。因为C语言对于他们而言过于灵活，暴露了很多让初学者迷惑的东西。而Pascal和Basic都很简单，而且Visual
-Basic还很好玩。</p>
-<p>当然，虽然VB又简单又好玩，但是我们的老师成功地把VB讲成了一个比C语言还困难的语言，而且不是因为内容深，而是讲得不好。由此可见，<strong>编程语言学不好可能是门没入对</strong>。</p>
-<p>很多人喜欢看清华大学出版社的谭浩强的书。但是请注意，虽然出版社名字带着“清华大学”四个字，但是这家出版社的书都是垃圾。清华大学出版社的书不仅无法把东西讲明白，而且还误导人（谭浩强书中甚至有根本跑不通的示例程序），拉低了清华大学学术水平的下限。因此大家不要买清华出版社的书，已经买的建议考虑扔掉或者送给关系不好的人。</p>
-<p>如果有闲功夫的话，可以拜读一下C语言之父Dennis
-Ritchie（dmr）的《C程序设计语言》。这本入门书比大多数国产C语言书薄，但是是一部经典。毕竟是C语言亲爹写的。</p>
-<h1 id="如何学习">如何学习</h1>
-<p>回答“只要多努力……”、“只要多练习……”当然没有意义，所以下面写一些个人经验。</p>
-<p>注意，本文有一个前提——“非计算机专业”。因此我假设学完C语言基本上是为了通过考试和二级。</p>
-<h2 id="新思维">新思维</h2>
-<p>大学每一科目都有自己的思维方式，C语言也一样。</p>
-<p>C语言作为一门“语言”，当然有自己的语法，只不过是人类和机器约定好的、互相都能看得懂的语法。人类可以一目十行，但是对于机器而言，它只能一行一行地读、一句一句地读。</p>
-<p>如果把每一条语句当作一件事儿，那么计算机当然是有条不紊地做事儿。写代码的时候，你当然也要一件事儿一件事儿地做。</p>
-<p>因为我们学的是简单的单文件的C语言，所以实际上代码结构基本都是这样的：</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token comment">// 输入</span>
-    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-
-    <span class="token comment">// 处理</span>
-    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-
-    <span class="token comment">// 输出</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>注意上面有“输入”、“处理”和“输出”三个阶段。做题的时候（编写练习程序和做题类似），我们需要按照题目要求逐步完善这三个阶段的内容，或者说按照题目要求填坑。至于能不能填上，就看你积累了多少“段子”——这和多做数学题积攒解题思路是差不多的。</p>
-<p>填坑的时候有一个技巧：如果遇到困难，尽量先把题目的语言翻译成“像C语言的东西”。例如，“判断n是否为XX数，如果是则输出YES和全部的xxx，否则输出‘NO’”。那么首先应该能够想到，“判断”是if，因此：</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>n是XX数<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"YES\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment">// 输出全部的xxx</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span>全部xxx<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">else</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"NO\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>那什么是“XX数”呢？看题目其他条件，例如“一个数恰好等于因子之和”，那么if语句应该是</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> n的因子之和<span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>“因子”之和怎么求呢？按照以往的练习，因子是用for语句找的，所以在if之前最起码得有个for语句：</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>i是因子<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        sum<span class="token operator">=</span>sum<span class="token operator">+</span>i<span class="token punctuation">;</span>    <span class="token comment">// 不要忘记前面 sum=0</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> sum<span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>“是因子”实际上就是整除，即“n%i==0”。</p>
-<p>假如题目还需要输出所有因子，那么我们不妨在找因子的时候把类似代码再敲一遍。因为我们是应付考试，不是参加ACM比赛，倒不需要太追求性能。</p>
-<p>最后检查一下输入输出格式，把细节完善（见后面的“一一对应”），然后测试、调试，一切OK就可以提交了。如果考试是笔试，实在遇到困难，也可以用类似方法骗分。</p>
-<h2 id="先问搜索引擎">先问搜索引擎</h2>
-<p>问问题是一门艺术。在错误的时间、错误的地点找错误的人问了错误的问题，那是要失败的。</p>
-<p>学习编程会遇到很多问题，例如不会搭建开发环境、忘记某个函数的名字或参数、遇到错误，这时候不建议马上去问别人。不妨先自己尝试解决，如果解决不了，再到搜索引擎上搜索。</p>
-<p>如果不会使用搜索引擎，可以看下图的操作说明（图片来自网络）：</p>
-<figure>
-<img src="/img/2019-01-13-how-to-learn-c/baidu.jpg"
-alt="百度使用说明" />
-<figcaption aria-hidden="true">百度使用说明</figcaption>
-</figure>
-<p>因为大多数语言和框架（在开发项目时，从零开始是不理智的）是老外写的，对于某些问题，如果你用英文搜索，可能会更快得到结果。这时候你可能就要想办法找谷歌了（备注：必应也行，至少免翻墙）。</p>
-<p>在技术方面的中文搜索中，百度和谷歌区别不太大。百度经常有误导人的推广，但是在技术话题上这个问题并不明显。</p>
-<p>在英文搜素方面，百度几乎不可用。谷歌最好（直接与StackOverflow整合），如果在网络方面遇到困难，也可以考虑必应。当然，因为很多外国网站使用谷歌服务器来加速（CDN），所以点进链接后可能会卡半天不出内容。遭遇这种情况的话，你还是需要先把网络问题解决一下。</p>
-<p>因为全世界就连那个没网（全国网站地址是10开头的IP）的北朝鲜都在使用C语言，因此搜C语言本身的东西不会遇到太大困难。</p>
-<h2 id="照猫画虎">照猫画虎</h2>
-<p>不要问别人“xxx怎么写”——照着书上的代码改，或者到搜索引擎上找代码，照着他们的代码改。</p>
-<p>学习一门编程语言，很多时候找个老师不如<strong>找一段示例代码，照着敲一遍，编译运行，观察现象，然后对代码稍作修改，编译运行，观察产生了什么变化……</strong></p>
-<p>需要注意的是，有些东西涉及算法（应该都是简单算法，不涉及数据结构），例如简单素数判断<span
-class="blackout">（素数测试有很多种）</span>。那么你需要找到一些现成的代码，搞清楚处理过程中哪些变量是输入、哪些是结果，了解大致的思路，然后自己写一遍。这种东西务必亲自上机写一遍，哪怕没有完全理解——光靠背是不现实的。</p>
-<p>很多算法的套路是固定的，因此建议学过函数之后，自己编程的时候把它们都扔到函数里，例如：</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">is_prime</span><span class="token punctuation">(</span><span class="token keyword">int</span> number<span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>number<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>number <span class="token operator">%</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>在做作业的时候直接<code>is_prime(a)</code>判断（别忘了把函数实现拷到作业里头），既方便又避免出错。</p>
-<h2 id="一一对应">一一对应</h2>
-<p>编程是个比较严谨的东西。初学者在写代码的时候，为了避免出错，要注意“一一对应”：</p>
-<ul>
-<li>解答题目的时候，你的代码是否和题目条件、输入输出格式要求对应？</li>
-<li>该写分号的地方是否写分号了？</li>
-<li>不该写分号的地方是不是没写？（例如for
-(...;...;...)的后面不应该写，如果故意要写，最好用个注释说明一下）</li>
-<li>printf、scanf中的“%d”（或别的什么）是否和后面的变量一一对应？数量、类型都对应了吗？
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> a<span class="token punctuation">;</span>
-<span class="token keyword">float</span> b<span class="token punctuation">;</span>
-             第二个<span class="token operator">%</span>d对应后面的b
-            <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">|</span>
-            v      v
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d %f"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">^</span>       <span class="token operator">^</span>
-        <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token operator">|</span>
-         第一个<span class="token operator">%</span>d对应后面的a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>假如后面不是int类型，你前面是否还在用“%d”？</li>
-</ul></li>
-<li>scanf后面有没有“&amp;”？</li>
-<li>int
-main()、if、while、for等的圆括号是否匹配？后面是否跟了“{”和“}”并且数量匹配？
-<ul>
-<li>虽然if、while、for后面代码只有一句时可以省略花括号，但是强烈建议你不要偷这个懒。</li>
-</ul></li>
-<li>在使用变量的时候，前面是否已经定义了？（例如要scanf
-n了，前面是否有int n？按照题目要求是不是应该为int？）</li>
-<li>在使用“++”、“--”、“+=”等符号的时候，前面是否已经初始化了（说白了就是有没有让它先等于0）？
-<ul>
-<li>初始化的值和初始化的位置是否正确？比方说有的应该放到for前头，有的应该放到for后头……</li>
-</ul></li>
-<li>数组大小是否不比题目要求的小？
-<ul>
-<li>为了安全，建议开大点。例如题目说最大100，你就开110甚至是11000。反正贪污和浪费内存不是极大的犯罪（by
-毛泽西）。</li>
-</ul></li>
-<li>头文件都写全了吗？
-<ul>
-<li>为了安全，可以把你听说过的标准库的头文件都写上。实际上ACM比赛经常有人把能想到的头文件全都写上，结果#include写得比后面的具体实现还长。</li>
-</ul></li>
-</ul>
-<h2 id="多试验">多试验</h2>
-<p>别怕试验。多写一些小片段，看看那些代码是怎样运行的。</p>
-<p>举个例子——for循环到底执行了多少次：</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">15</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"i=%d\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">;</span> i<span class="token operator">&lt;=</span><span class="token number">15</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"B"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"i=%d\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>scanf和gets的冲突：scanf和get紧挨着可能在输入数据时遇到问题，这时候需要一个小技巧……</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">fgets</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token constant">stdin</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 其实就是 gets(str) 的推荐写法</span>
-<span class="token function">puts</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment">// 如果那个scanf里没有“\n”，gets的时候……</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>再举个例子（指针与一维数组）：</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> a<span class="token punctuation">;</span>
-
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> p<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>p<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>因为只是为了看个结果，所以，只要自己能把结果弄明白，怎么舒服怎么来。</p>
-<p>当然有个重要前提——你手头得有个电脑。如果没有电脑，或者“大一不让带”，可以买个几百或一两千的Win10平板，比手机便宜，而且便于隐藏和携带，既可防导员查寝，又可带教室去开小差。</p>
-<h2 id="调试">调试</h2>
-<p>经常有人问“为什么我的代码结果不对”，然后贴上一段代码。这是非常令人讨厌的行为。</p>
-<p>为了不被人鄙视，大家应该学一些调试的技巧。</p>
-<p>作为非专业人士，与其学习那些复杂又难用的调试工具，不如学习又简单又实用的
-printf。</p>
-<p>printf有两大作用：定位错误、查看中间值。</p>
-<p>假如程序崩溃了，可以这样调试：</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> i<span class="token punctuation">,</span> n<span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"准备读n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"准备读a\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"开始处理\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>假如崩溃的时候屏幕上面只有“准备读n”而没有“准备读a”，说明中间夹着的scanf有问题；假如崩溃的时候有“准备读a”而没有“开始处理”，说明中间夹着的for有问题，这样你可以在for语句内部插入一些<code>printf("a\n")</code>，从而精确地找到错误的出处（例如，崩溃的时候看到10个a，说明数组开得不够大）。</p>
-<p>如果计算结果不正确，可以这样调试（筛法求素数）：</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> i<span class="token punctuation">,</span> num<span class="token punctuation">,</span> isprime<span class="token punctuation">;</span>
-isprime <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span>num<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span> num<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span> num<span class="token operator">++</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">%</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#123;</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"DEBUG: %d不是素数(╯°Д°)╯︵ ┻━┻\n"</span><span class="token punctuation">,</span> num<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            isprime <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-            <span class="token keyword">break</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"DEBUG: %d 是素数吗？%d\n"</span><span class="token punctuation">,</span> num<span class="token punctuation">,</span> isprime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>isprime<span class="token punctuation">)</span>
-    <span class="token punctuation">&#123;</span>
-        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d "</span><span class="token punctuation">,</span> num<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>运行结果只有2和3。通过观察调试输出，发现程序认为5不是素数。按理说，如果不是素数，屏幕会输出一个掀桌子的表情。然而程序认为5不是素数，但是还没有掀桌子表情，说明问题出在isprime变量上面——<code>isprime=1</code>的位置不对。</p>
-<p>当然，交作业的时候别忘了把这种输出删掉。</p>
-<h2 id="测试">测试</h2>
-<p>不要把测试和调试搞混。用一句话概括它们的区别：测试是为了观察“程序结果是否正确”，而调试是为了“找到程序的错误”。</p>
-<p>很多初学者经常不做测试，或者不做充分的测试就提交，然后遇到问题就反复改，反复提交。这样也是不好的。</p>
-<p>Online
-Judge网站就是测试的一种：系统预置了一系列数据和答案，按照题目要求解题、提交，系统会自动编译和运行代码，检查程序是否能在规定时间内处理预定输入并得到正确结果。在比赛中，错误提交是要影响成绩的，因此选手必须要学会自己测试，争取一次提交就通过。</p>
-<p>程序编译通过之后，当然要用数据检验一下结果。如果把样例输入敲进去结果都不对，那程序肯定不行。</p>
-<p>光通过样例也是不行的。为了保证通过，你应该自行构造多个输入，观察输出是否正确。应从以下几个角度构造数据：</p>
-<ol type="1">
-<li>守规矩的计算</li>
-<li>不守规矩的计算：如果题目没做保证，那么应假设有非法数据。假如题目没说a一定大于0，那你有没有想到a可以等于0或-1？</li>
-<li>多种情况：假如程序有多种结果（Yes/No），你是否都测试到了？</li>
-<li>边界条件：假如最多100个人，那么你的程序在恰好输入100个人的情况下能否正常工作？
-<ul>
-<li>没有人或只有1个人呢？</li>
-<li>稍微提一下，假如数组有100个元素（int
-a[100]），访问a[100]是非法的，但是在你自己电脑上不一定报错。这是一个隐藏的错误。为了避免这种错误，可以把数组开大一些，例如200甚至10000。</li>
-</ul></li>
-</ol>
-<p>除此之外，初学者常常忽略的问题有空格（一个空格、两个空格、多个空格、行末空格）、回车（例如最后一行的回车）、字母大小写和符号全半角，还有不明显的格式差别（例如题目要求用逗号分隔你却用了空格）。因为测试是全文逐字比较的，所以不要犯这种低级错误。</p>
-<h2 id="养成好习惯">养成好习惯</h2>
-<p>建议大家照做，因为这样可以避免很多不必要的错误：</p>
-<ul>
-<li>如果你不知道全角符号<code>，。、（）</code>和半角符号<code>,.\()</code>有什么区别，那么建议你写代码的时候把输入法关掉，免得出现莫名其妙的错误。</li>
-<li>不同功能（定义变量、输入、数据处理、输出）之间留点空行，也就是按功能分块，就像前面提到的那样。</li>
-<li>接上条，如果代码太长，那么最好多用一些函数，把各功能分离出来。写代码的时候一个功能一个功能地写。没有人喜欢又长又臭的代码。</li>
-<li>缩进，一定要保持代码的缩进。没有缩进的代码难以理解，而且很有可能丢花括号，从而造成不必要的麻烦。</li>
-<li>使用“黑科技”（不解释就难以理解）的时候要加注释。</li>
-<li>if、for等语句后面可以不加花括号对吧？别懒，把花括号加上，免得犯这样的错误：</li>
-</ul>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> b<span class="token punctuation">)</span>
-    c<span class="token operator">=</span>a<span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">else</span>
-    c<span class="token operator">=</span>b<span class="token punctuation">;</span>
-    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="如何通过二级">如何通过二级</h1>
-<p>这是也很多人关心的问题。虽然事实上计算机二级比英语六级容易通过（对于985、211的学生来说，只要英语三级也就是高考成绩不太烂，英语四级裸奔也能过……），但是很多人还是没通过。这不是他们不刻苦或者学得不好，而是因为他们不知道如何对付一个考证级别的考试。对，和英语四六级有着本质的区别。</p>
-<p>首先用一句话概括通过计算机三级和四级的武林秘籍：去购买高等教育出版社的、封面上带个大大的黄色字母K的官方题库（不是教材），从头到尾把题刷一遍，该背的试题背下来，如果还没通过那你肯定是没好好背。</p>
-<h2 id="基本内容">基本内容</h2>
-<p>虽然二级过了三四级成绩才能算数，但是，之所以先介绍三四级，是因为三四级比二级好过——三四级基本上可以纯背，但二级还是要会点东西的。下面就介绍介绍二级C语言：</p>
-<ul>
-<li>选择题40分，大题（改错、填空、编程）60分。</li>
-<li>上机考试，先做选择题，选择题全部做完才能做大题。做选择的时候电脑屏幕是锁死的，做大题的时候才能使用编程软件。</li>
-<li>题目是从题库里随机抽的，所以不要尝试照旁边的人抄。当然，运气好的话，你会碰到和官方教材中差不多的题。撞大题的概率更高。</li>
-<li>选择题中至少有20~30分来自“二级公共语言基础”，这个“公共语言基础”大致分成两类，一类是“算法与数据结构”，需要你去理解一些东西；另一类不管它是啥，反正是纯粹要背的东西。剩下的选择题和C语言本身有关。</li>
-<li>C语言课的东西够用了，关键是你对考试出题的基本法的了解程度。</li>
-<li>编程软件是钦点的Visual C++
-6.0，虽然它是盗版的，虽然它很可能无法在你自己的电脑上正常运行。</li>
-<li>二级考完只有三种状态：没通过（&lt;60分）、合格（60<sub>89分）、优秀（90</sub>100分）。因此，如果你不打算拿优秀证，考60和考89没有任何区别。（在这一点上，英语四六级就不一样——证书上面把成绩写出来了）</li>
-<li>因为计算机二三四级证书都很水，因此，求职时如果应聘条件没有明确要求，不要指望拿这些证书给自己贴金。虽然二级可能是很多岗位的基本条件之一。</li>
-<li>最后，如果你想考三四级，一定要看清楚对应科目对二级的要求——是要求通过编程语言类的二级还是数据库语言类的二级。如果你二级报的是Office那还是别考三四级了。</li>
-</ul>
-<h2 id="选择题">选择题</h2>
-<p>如果你觉得大题把握很大，而且没有拿优秀证的打算，那么“二级公共语言基础”的东西就可以少背一点了。反之要多背一些。</p>
-<p>“算法和数据结构”是一个不太容易懂的东西——如果学得很好，没准就可以去打ACM比赛了。既然是个只需要拿60分的考证，那么不妨把官方教材拿出来，看看他们喜欢怎样出题，把相关考点记住即可。</p>
-<p>有关C语言本身的选择题，实在不懂也不必太较真，因为它可能没有意义：例如经典的<code>a+=a-=a*a;</code>和<code>a=a++;</code>都是未定义行为——连C语言标准对这些语句的结果都没做任何保证，所以肯定没有正确答案。</p>
-<h2 id="大题">大题</h2>
-<p>大题是一定要会的。如果你没有精心准备，选择题分数可能会惨不忍睹，因此大题要尽量把分数都弄到手。</p>
-<p>为了把分数搞到手，我们要从两方面准备，一方面是正确解答题目，另一方面是正确地解答题目。</p>
-<h3 id="正确解答题目">正确解答题目</h3>
-<p>大题分为改错、填空、编程。</p>
-<p>改错就很简单了。因为改错的模式都比较固定，只要多看看官方的题目就应该清楚他们会怎样考了。</p>
-<p>填空也一样。一般是让你填一些“单词”，或者是些简单的表达式。填空时候要多留意已经定义和未使用的变量。</p>
-<p>其实吧，改错和填空题很多时候就是<strong>推理</strong>题——不用太清楚程序干嘛，只要保证所有变量都被用过了，该对应的地方都对应了，OK。</p>
-<p>编程题要注意：数组、指针和字符串对于初学者来说比较难理解，对吧？不幸的是，出题人也爱考这些东西。因此，还是要看官方教材，看看他们喜欢怎样出题，并且建议你在做这些题的时候亲自上机练习一下。</p>
-<h3 id="正确地解答题目">正确地解答题目</h3>
-<p>两个要点：一是不犯低级错误，二是要会用Visual C++ 6.0编辑代码。</p>
-<p>不犯低级错误，举个例子，题目提示<code>只修改/******* FOUND *******/下一行的代码</code>，那么你不要改其他地方的代码，也不要把这个注释本身修改或删除。此外尽量不要碰原有代码的其他部分，例如空格和缩进。</p>
-<p>Visual C++
-6.0是一个古老的软件了（1998年发布），在现代操作系统（Windows
-8/8.1/10）中会出现兼容性问题，甚至无法启动。因此，平时在自己电脑上练习的时候可以使用其他编程软件，然后考前去一趟机房（学校机房应该安装了Visual
-C++
-6.0），学会如何打开和保存代码（考试软件会帮你打开代码）、如何找到<code>int main()</code>、如何编译运行。知道这些就足够了。</p>
-<figure>
-<img src="/img/2019-01-13-how-to-learn-c/vc.png"
-alt="会点上面三个按钮就够了" />
-<figcaption aria-hidden="true">会点上面三个按钮就够了</figcaption>
-</figure>
-<p>会点上面三个按钮就够了。</p>
-<h1 id="拓展学习">拓展学习</h1>
-<p>对于非计算机专业的学生来说，尽管C语言很难学，尽管C语言<span
-class="blackout">看起来</span>“不实用”，但是很多编程语言的套路都是类似的，因此学完C语言有助于其他“实用”语言的学习。有些“实用”语言甚至直接向C语言致敬，例如PHP。</p>
-<p>以下是一些当下很流行的、学起来可以“实用”的编程语言，如果有兴趣的话可以学一学。</p>
-<ul>
-<li>HTML+CSS+JavaScript：做网页的一套语言，虽然是三个，但是实际上哪个都不需要学得太深——一方面需要什么东西可以自己去查，另一方面现成框架太多了，很多时候用不着从零开始。我个人建议不要用Dreamweaver，即使用也要用最新的Dreamweaver
-CC，否则容易落伍。</li>
-<li>PHP：想做个实用网站吗？学吧！就是它大量致敬了C语言的语法！
-<ul>
-<li>由于PHP学习门槛很低，因此很容易写出有大量安全漏洞的网站。做项目时要多加小心。</li>
-</ul></li>
-<li>Python：Python是个小巧而又强大的脚本语言。建议有兴趣的一定要学。
-<ul>
-<li>如果想写一个随写随用的程序，当然要找它；</li>
-<li>如果想做一个实用的网站，同样可以找它——可以学习基于Python语言的Django框架；</li>
-<li>如果想做一个带窗口对话框的程序，当然也可以找它——可以学习基于Python语言和Qt的PyQt框架。对于这种情况，建议同时学习PyQt和Qt
-C++。</li>
-<li>Python有两种版本，一个是2.7，一个是3.6。它们两个有些差别，但是实际上不影响学习。遇到困难时到搜索引擎上搜一下就行了。</li>
-</ul></li>
-<li>Visual
-C#：C++和C#都带个“C”，那它们当然是从C语言衍生过来的……学C语言写不出一个带窗口对话框的程序对吧，没关系，我们可以用一个好学的Visual
-C#，随手画个窗口出来！</li>
-<li>Qt C++：同样是用来制作带窗口对话框程序的，只不过这个是C++语言。</li>
-<li>Java：会写Java至少能混口饭吃，而且现在很多业务系统和Android应用都是拿Java写的。</li>
-<li>Objective-C：iOS应用是拿这个语言写的（备注：现在已经换成Swift，所以不用学Objective-C了），只不过进App
-Store的门槛有点高。</li>
-<li>MATLAB：数值计算、数值模拟必备。一定先把高等数学和线性代数学好然后再学这个……</li>
-</ul>
-<p>我不推荐Pascal和Basic，前者用的人数不多，后者……VB6也是1998年的东西，在现在的系统中已经不能正常运行了，而且学新版VB不如学C#。</p>
-<p>另外还有两个硬件（小心，玩硬件烧钱）：</p>
-<ul>
-<li>Arduino：Arduino是一个卡片大小的开发板（如果不知道开发板是啥——就是可以让你拿来写程序的电路板），编程的时候基本上就是C或C++。与电路相关的东西都是封装好的，可以直接调用函数，所以不会一开始就被一些细枝末节困扰。虽然玩51单片机（备注：51单片机通常是STC产的，其<span class="exturl" data-url="aHR0cDovL3d3dy5zdGNtY3UuY29t">官网<i class="fa fa-external-link-alt"></i></span>和牛皮癣小广告有一拼）的人更多，但是我觉得从Arduino入门会容易很多。深入之后也可以考虑玩STM32之类的单片机。</li>
-<li>树莓派：树莓派是一个卡片大小的单板电脑。虽然设计者的定位是儿童电脑，不过实际上被极客当成高级玩具了。最新的树莓派3可以跑Linux和Windows
-10（物联网版）系统，对物联网感兴趣的可以玩玩。</li>
-</ul>
-<p>我个人的学习建议：</p>
-<ol type="1">
-<li>尽量找外文书的中译本，原因很简单，翻译一本书需要付出大量时间精力，因此能够被拿来翻译的书基本上都是好书。<span>因为写书很容易，因此国内很容易出烂书。外国的月亮也不圆——外国也一样。</span></li>
-<li>把书粗读一遍，大致了解一下基本语法。很多语言的基本结构都差不多，只不过单词不一样罢了。</li>
-<li>细读，看看（特别是翻译本那种）作者的思想和思路。</li>
-<li>照着教材做个小练习。</li>
-<li>不用强求把所有东西都记住。现在网络那么发达，甚至手机流量都不需要省着用，有问题可以直接去网上查。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>闲谈</category>
-      </categories>
-      <tags>
-        <tag>C</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>通过数据库“阅读器”在上班时间看小说</title>
     <url>/2019/01/11/oracle-novel/</url>
     <content><![CDATA[<p>上班时间看小说有很多种方式，例如直接拿手机看，在浏览器上面看，用小说阅读器看，拷到Word里面看，甚至拷到Eclipse里面看……然而，这几种方式看起来都比较显眼，就算放在Eclipse上面看起来也不太自然（方块字又多又密，而且没有语法高亮，一看就不像程序代码）。在此，本文针对软件开发和运维人员介绍一种可以大大方方在上班时间看小说而且不会引起怀疑的方法——在数据库客户端里面看小说。</p>
@@ -3040,6 +2685,361 @@ href="/img/2019-01-11-oracle-novel/eromanga.jpg">插画</a>的话），而且领
         <tag>Oracle</tag>
         <tag>MySQL</tag>
         <tag>Cheatsheet</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言</title>
+    <url>/2019/01/13/how-to-learn-c/</url>
+    <content><![CDATA[<p>在学校上学的时候，曾经就这个问题专门给学弟们做过讲座，并且总结成了一篇文章。为了造福后辈，帮助后辈争取早日脱单，这里把以前写的内容修改一下发表出来，毕竟C语言课通常大一开，而且大一是提升妹子好感度，<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL2Jhbmd1bWkvbWVkaWEvbWQ0MTg4Lw==">与其约会，使其娇羞<i class="fa fa-external-link-alt"></i></span>的关键时期。</p>
+<span id="more"></span>
+<p>说实话，现代人都比较功利——既然是非计算机专业的学生，那么C语言基本上是个用不着的东西。可是，它还是门必修课，那最起码不能挂科，对吧？</p>
+<p>内容很长，最好找个时间慢慢读。</p>
+<h1 id="first">FIRST</h1>
+<p>稍微了解一下C语言的历史，你就应该知道那个东西绝不是给孩子们入门用的——一开始它的应用是Unix操作系统，尽管创造Unix操作系统最初的目的是为了玩个<span class="exturl" data-url="aHR0cHM6Ly96aC53aWtpcGVkaWEub3JnL3dpa2kv5pif6ZmF5peF6KGMXygxOTY55bm05ri45oiPKQ==">游戏<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>从这个角度讲，对于非计算机专业的学生来说，Pascal甚至Basic都比C语言靠谱。因为C语言对于他们而言过于灵活，暴露了很多让初学者迷惑的东西。而Pascal和Basic都很简单，而且Visual
+Basic还很好玩。</p>
+<p>当然，虽然VB又简单又好玩，但是我们的老师成功地把VB讲成了一个比C语言还困难的语言，而且不是因为内容深，而是讲得不好。由此可见，<strong>编程语言学不好可能是门没入对</strong>。</p>
+<p>很多人喜欢看清华大学出版社的谭浩强的书。但是请注意，虽然出版社名字带着“清华大学”四个字，但是这家出版社的书都是垃圾。清华大学出版社的书不仅无法把东西讲明白，而且还误导人（谭浩强书中甚至有根本跑不通的示例程序），拉低了清华大学学术水平的下限。因此大家不要买清华出版社的书，已经买的建议考虑扔掉或者送给关系不好的人。</p>
+<p>如果有闲功夫的话，可以拜读一下C语言之父Dennis
+Ritchie（dmr）的《C程序设计语言》。这本入门书比大多数国产C语言书薄，但是是一部经典。毕竟是C语言亲爹写的。</p>
+<h1 id="如何学习">如何学习</h1>
+<p>回答“只要多努力……”、“只要多练习……”当然没有意义，所以下面写一些个人经验。</p>
+<p>注意，本文有一个前提——“非计算机专业”。因此我假设学完C语言基本上是为了通过考试和二级。</p>
+<h2 id="新思维">新思维</h2>
+<p>大学每一科目都有自己的思维方式，C语言也一样。</p>
+<p>C语言作为一门“语言”，当然有自己的语法，只不过是人类和机器约定好的、互相都能看得懂的语法。人类可以一目十行，但是对于机器而言，它只能一行一行地读、一句一句地读。</p>
+<p>如果把每一条语句当作一件事儿，那么计算机当然是有条不紊地做事儿。写代码的时候，你当然也要一件事儿一件事儿地做。</p>
+<p>因为我们学的是简单的单文件的C语言，所以实际上代码结构基本都是这样的：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">// 输入</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token comment">// 处理</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+    <span class="token comment">// 输出</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>注意上面有“输入”、“处理”和“输出”三个阶段。做题的时候（编写练习程序和做题类似），我们需要按照题目要求逐步完善这三个阶段的内容，或者说按照题目要求填坑。至于能不能填上，就看你积累了多少“段子”——这和多做数学题积攒解题思路是差不多的。</p>
+<p>填坑的时候有一个技巧：如果遇到困难，尽量先把题目的语言翻译成“像C语言的东西”。例如，“判断n是否为XX数，如果是则输出YES和全部的xxx，否则输出‘NO’”。那么首先应该能够想到，“判断”是if，因此：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>n是XX数<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"YES\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 输出全部的xxx</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span>全部xxx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">else</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"NO\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那什么是“XX数”呢？看题目其他条件，例如“一个数恰好等于因子之和”，那么if语句应该是</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> n的因子之和<span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>“因子”之和怎么求呢？按照以往的练习，因子是用for语句找的，所以在if之前最起码得有个for语句：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i是因子<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        sum<span class="token operator">=</span>sum<span class="token operator">+</span>i<span class="token punctuation">;</span>    <span class="token comment">// 不要忘记前面 sum=0</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> sum<span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>“是因子”实际上就是整除，即“n%i==0”。</p>
+<p>假如题目还需要输出所有因子，那么我们不妨在找因子的时候把类似代码再敲一遍。因为我们是应付考试，不是参加ACM比赛，倒不需要太追求性能。</p>
+<p>最后检查一下输入输出格式，把细节完善（见后面的“一一对应”），然后测试、调试，一切OK就可以提交了。如果考试是笔试，实在遇到困难，也可以用类似方法骗分。</p>
+<h2 id="先问搜索引擎">先问搜索引擎</h2>
+<p>问问题是一门艺术。在错误的时间、错误的地点找错误的人问了错误的问题，那是要失败的。</p>
+<p>学习编程会遇到很多问题，例如不会搭建开发环境、忘记某个函数的名字或参数、遇到错误，这时候不建议马上去问别人。不妨先自己尝试解决，如果解决不了，再到搜索引擎上搜索。</p>
+<p>如果不会使用搜索引擎，可以看下图的操作说明（图片来自网络）：</p>
+<figure>
+<img src="/img/2019-01-13-how-to-learn-c/baidu.jpg"
+alt="百度使用说明" />
+<figcaption aria-hidden="true">百度使用说明</figcaption>
+</figure>
+<p>因为大多数语言和框架（在开发项目时，从零开始是不理智的）是老外写的，对于某些问题，如果你用英文搜索，可能会更快得到结果。这时候你可能就要想办法找谷歌了（备注：必应也行，至少免翻墙）。</p>
+<p>在技术方面的中文搜索中，百度和谷歌区别不太大。百度经常有误导人的推广，但是在技术话题上这个问题并不明显。</p>
+<p>在英文搜素方面，百度几乎不可用。谷歌最好（直接与StackOverflow整合），如果在网络方面遇到困难，也可以考虑必应。当然，因为很多外国网站使用谷歌服务器来加速（CDN），所以点进链接后可能会卡半天不出内容。遭遇这种情况的话，你还是需要先把网络问题解决一下。</p>
+<p>因为全世界就连那个没网（全国网站地址是10开头的IP）的北朝鲜都在使用C语言，因此搜C语言本身的东西不会遇到太大困难。</p>
+<h2 id="照猫画虎">照猫画虎</h2>
+<p>不要问别人“xxx怎么写”——照着书上的代码改，或者到搜索引擎上找代码，照着他们的代码改。</p>
+<p>学习一门编程语言，很多时候找个老师不如<strong>找一段示例代码，照着敲一遍，编译运行，观察现象，然后对代码稍作修改，编译运行，观察产生了什么变化……</strong></p>
+<p>需要注意的是，有些东西涉及算法（应该都是简单算法，不涉及数据结构），例如简单素数判断<span
+class="blackout">（素数测试有很多种）</span>。那么你需要找到一些现成的代码，搞清楚处理过程中哪些变量是输入、哪些是结果，了解大致的思路，然后自己写一遍。这种东西务必亲自上机写一遍，哪怕没有完全理解——光靠背是不现实的。</p>
+<p>很多算法的套路是固定的，因此建议学过函数之后，自己编程的时候把它们都扔到函数里，例如：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">is_prime</span><span class="token punctuation">(</span><span class="token keyword">int</span> number<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> i<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>number<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>number <span class="token operator">%</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在做作业的时候直接<code>is_prime(a)</code>判断（别忘了把函数实现拷到作业里头），既方便又避免出错。</p>
+<h2 id="一一对应">一一对应</h2>
+<p>编程是个比较严谨的东西。初学者在写代码的时候，为了避免出错，要注意“一一对应”：</p>
+<ul>
+<li>解答题目的时候，你的代码是否和题目条件、输入输出格式要求对应？</li>
+<li>该写分号的地方是否写分号了？</li>
+<li>不该写分号的地方是不是没写？（例如for
+(...;...;...)的后面不应该写，如果故意要写，最好用个注释说明一下）</li>
+<li>printf、scanf中的“%d”（或别的什么）是否和后面的变量一一对应？数量、类型都对应了吗？
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> a<span class="token punctuation">;</span>
+<span class="token keyword">float</span> b<span class="token punctuation">;</span>
+             第二个<span class="token operator">%</span>d对应后面的b
+            <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">|</span>
+            v      v
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d %f"</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">^</span>       <span class="token operator">^</span>
+        <span class="token operator">|</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span><span class="token operator">|</span>
+         第一个<span class="token operator">%</span>d对应后面的a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>假如后面不是int类型，你前面是否还在用“%d”？</li>
+</ul></li>
+<li>scanf后面有没有“&amp;”？</li>
+<li>int
+main()、if、while、for等的圆括号是否匹配？后面是否跟了“{”和“}”并且数量匹配？
+<ul>
+<li>虽然if、while、for后面代码只有一句时可以省略花括号，但是强烈建议你不要偷这个懒。</li>
+</ul></li>
+<li>在使用变量的时候，前面是否已经定义了？（例如要scanf
+n了，前面是否有int n？按照题目要求是不是应该为int？）</li>
+<li>在使用“++”、“--”、“+=”等符号的时候，前面是否已经初始化了（说白了就是有没有让它先等于0）？
+<ul>
+<li>初始化的值和初始化的位置是否正确？比方说有的应该放到for前头，有的应该放到for后头……</li>
+</ul></li>
+<li>数组大小是否不比题目要求的小？
+<ul>
+<li>为了安全，建议开大点。例如题目说最大100，你就开110甚至是11000。反正贪污和浪费内存不是极大的犯罪（by
+毛泽西）。</li>
+</ul></li>
+<li>头文件都写全了吗？
+<ul>
+<li>为了安全，可以把你听说过的标准库的头文件都写上。实际上ACM比赛经常有人把能想到的头文件全都写上，结果#include写得比后面的具体实现还长。</li>
+</ul></li>
+</ul>
+<h2 id="多试验">多试验</h2>
+<p>别怕试验。多写一些小片段，看看那些代码是怎样运行的。</p>
+<p>举个例子——for循环到底执行了多少次：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">15</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"i=%d\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">;</span> i<span class="token operator">&lt;=</span><span class="token number">15</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"B"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"i=%d\n"</span><span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>scanf和gets的冲突：scanf和get紧挨着可能在输入数据时遇到问题，这时候需要一个小技巧……</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">fgets</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token constant">stdin</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// 其实就是 gets(str) 的推荐写法</span>
+<span class="token function">puts</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment">// 如果那个scanf里没有“\n”，gets的时候……</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>再举个例子（指针与一维数组）：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> a<span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> p<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span><span class="token punctuation">(</span>p<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为只是为了看个结果，所以，只要自己能把结果弄明白，怎么舒服怎么来。</p>
+<p>当然有个重要前提——你手头得有个电脑。如果没有电脑，或者“大一不让带”，可以买个几百或一两千的Win10平板，比手机便宜，而且便于隐藏和携带，既可防导员查寝，又可带教室去开小差。</p>
+<h2 id="调试">调试</h2>
+<p>经常有人问“为什么我的代码结果不对”，然后贴上一段代码。这是非常令人讨厌的行为。</p>
+<p>为了不被人鄙视，大家应该学一些调试的技巧。</p>
+<p>作为非专业人士，与其学习那些复杂又难用的调试工具，不如学习又简单又实用的
+printf。</p>
+<p>printf有两大作用：定位错误、查看中间值。</p>
+<p>假如程序崩溃了，可以这样调试：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> a<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> i<span class="token punctuation">,</span> n<span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"准备读n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"准备读a\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"开始处理\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>假如崩溃的时候屏幕上面只有“准备读n”而没有“准备读a”，说明中间夹着的scanf有问题；假如崩溃的时候有“准备读a”而没有“开始处理”，说明中间夹着的for有问题，这样你可以在for语句内部插入一些<code>printf("a\n")</code>，从而精确地找到错误的出处（例如，崩溃的时候看到10个a，说明数组开得不够大）。</p>
+<p>如果计算结果不正确，可以这样调试（筛法求素数）：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> i<span class="token punctuation">,</span> num<span class="token punctuation">,</span> isprime<span class="token punctuation">;</span>
+isprime <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>num<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span> num<span class="token operator">&lt;</span><span class="token number">10</span><span class="token punctuation">;</span> num<span class="token operator">++</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">%</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"DEBUG: %d不是素数(╯°Д°)╯︵ ┻━┻\n"</span><span class="token punctuation">,</span> num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            isprime <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"DEBUG: %d 是素数吗？%d\n"</span><span class="token punctuation">,</span> num<span class="token punctuation">,</span> isprime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>isprime<span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d "</span><span class="token punctuation">,</span> num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>运行结果只有2和3。通过观察调试输出，发现程序认为5不是素数。按理说，如果不是素数，屏幕会输出一个掀桌子的表情。然而程序认为5不是素数，但是还没有掀桌子表情，说明问题出在isprime变量上面——<code>isprime=1</code>的位置不对。</p>
+<p>当然，交作业的时候别忘了把这种输出删掉。</p>
+<h2 id="测试">测试</h2>
+<p>不要把测试和调试搞混。用一句话概括它们的区别：测试是为了观察“程序结果是否正确”，而调试是为了“找到程序的错误”。</p>
+<p>很多初学者经常不做测试，或者不做充分的测试就提交，然后遇到问题就反复改，反复提交。这样也是不好的。</p>
+<p>Online
+Judge网站就是测试的一种：系统预置了一系列数据和答案，按照题目要求解题、提交，系统会自动编译和运行代码，检查程序是否能在规定时间内处理预定输入并得到正确结果。在比赛中，错误提交是要影响成绩的，因此选手必须要学会自己测试，争取一次提交就通过。</p>
+<p>程序编译通过之后，当然要用数据检验一下结果。如果把样例输入敲进去结果都不对，那程序肯定不行。</p>
+<p>光通过样例也是不行的。为了保证通过，你应该自行构造多个输入，观察输出是否正确。应从以下几个角度构造数据：</p>
+<ol type="1">
+<li>守规矩的计算</li>
+<li>不守规矩的计算：如果题目没做保证，那么应假设有非法数据。假如题目没说a一定大于0，那你有没有想到a可以等于0或-1？</li>
+<li>多种情况：假如程序有多种结果（Yes/No），你是否都测试到了？</li>
+<li>边界条件：假如最多100个人，那么你的程序在恰好输入100个人的情况下能否正常工作？
+<ul>
+<li>没有人或只有1个人呢？</li>
+<li>稍微提一下，假如数组有100个元素（int
+a[100]），访问a[100]是非法的，但是在你自己电脑上不一定报错。这是一个隐藏的错误。为了避免这种错误，可以把数组开大一些，例如200甚至10000。</li>
+</ul></li>
+</ol>
+<p>除此之外，初学者常常忽略的问题有空格（一个空格、两个空格、多个空格、行末空格）、回车（例如最后一行的回车）、字母大小写和符号全半角，还有不明显的格式差别（例如题目要求用逗号分隔你却用了空格）。因为测试是全文逐字比较的，所以不要犯这种低级错误。</p>
+<h2 id="养成好习惯">养成好习惯</h2>
+<p>建议大家照做，因为这样可以避免很多不必要的错误：</p>
+<ul>
+<li>如果你不知道全角符号<code>，。、（）</code>和半角符号<code>,.\()</code>有什么区别，那么建议你写代码的时候把输入法关掉，免得出现莫名其妙的错误。</li>
+<li>不同功能（定义变量、输入、数据处理、输出）之间留点空行，也就是按功能分块，就像前面提到的那样。</li>
+<li>接上条，如果代码太长，那么最好多用一些函数，把各功能分离出来。写代码的时候一个功能一个功能地写。没有人喜欢又长又臭的代码。</li>
+<li>缩进，一定要保持代码的缩进。没有缩进的代码难以理解，而且很有可能丢花括号，从而造成不必要的麻烦。</li>
+<li>使用“黑科技”（不解释就难以理解）的时候要加注释。</li>
+<li>if、for等语句后面可以不加花括号对吧？别懒，把花括号加上，免得犯这样的错误：</li>
+</ul>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> b<span class="token punctuation">)</span>
+    c<span class="token operator">=</span>a<span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">else</span>
+    c<span class="token operator">=</span>b<span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="如何通过二级">如何通过二级</h1>
+<p>这是也很多人关心的问题。虽然事实上计算机二级比英语六级容易通过（对于985、211的学生来说，只要英语三级也就是高考成绩不太烂，英语四级裸奔也能过……），但是很多人还是没通过。这不是他们不刻苦或者学得不好，而是因为他们不知道如何对付一个考证级别的考试。对，和英语四六级有着本质的区别。</p>
+<p>首先用一句话概括通过计算机三级和四级的武林秘籍：去购买高等教育出版社的、封面上带个大大的黄色字母K的官方题库（不是教材），从头到尾把题刷一遍，该背的试题背下来，如果还没通过那你肯定是没好好背。</p>
+<h2 id="基本内容">基本内容</h2>
+<p>虽然二级过了三四级成绩才能算数，但是，之所以先介绍三四级，是因为三四级比二级好过——三四级基本上可以纯背，但二级还是要会点东西的。下面就介绍介绍二级C语言：</p>
+<ul>
+<li>选择题40分，大题（改错、填空、编程）60分。</li>
+<li>上机考试，先做选择题，选择题全部做完才能做大题。做选择的时候电脑屏幕是锁死的，做大题的时候才能使用编程软件。</li>
+<li>题目是从题库里随机抽的，所以不要尝试照旁边的人抄。当然，运气好的话，你会碰到和官方教材中差不多的题。撞大题的概率更高。</li>
+<li>选择题中至少有20~30分来自“二级公共语言基础”，这个“公共语言基础”大致分成两类，一类是“算法与数据结构”，需要你去理解一些东西；另一类不管它是啥，反正是纯粹要背的东西。剩下的选择题和C语言本身有关。</li>
+<li>C语言课的东西够用了，关键是你对考试出题的基本法的了解程度。</li>
+<li>编程软件是钦点的Visual C++
+6.0，虽然它是盗版的，虽然它很可能无法在你自己的电脑上正常运行。</li>
+<li>二级考完只有三种状态：没通过（&lt;60分）、合格（60<sub>89分）、优秀（90</sub>100分）。因此，如果你不打算拿优秀证，考60和考89没有任何区别。（在这一点上，英语四六级就不一样——证书上面把成绩写出来了）</li>
+<li>因为计算机二三四级证书都很水，因此，求职时如果应聘条件没有明确要求，不要指望拿这些证书给自己贴金。虽然二级可能是很多岗位的基本条件之一。</li>
+<li>最后，如果你想考三四级，一定要看清楚对应科目对二级的要求——是要求通过编程语言类的二级还是数据库语言类的二级。如果你二级报的是Office那还是别考三四级了。</li>
+</ul>
+<h2 id="选择题">选择题</h2>
+<p>如果你觉得大题把握很大，而且没有拿优秀证的打算，那么“二级公共语言基础”的东西就可以少背一点了。反之要多背一些。</p>
+<p>“算法和数据结构”是一个不太容易懂的东西——如果学得很好，没准就可以去打ACM比赛了。既然是个只需要拿60分的考证，那么不妨把官方教材拿出来，看看他们喜欢怎样出题，把相关考点记住即可。</p>
+<p>有关C语言本身的选择题，实在不懂也不必太较真，因为它可能没有意义：例如经典的<code>a+=a-=a*a;</code>和<code>a=a++;</code>都是未定义行为——连C语言标准对这些语句的结果都没做任何保证，所以肯定没有正确答案。</p>
+<h2 id="大题">大题</h2>
+<p>大题是一定要会的。如果你没有精心准备，选择题分数可能会惨不忍睹，因此大题要尽量把分数都弄到手。</p>
+<p>为了把分数搞到手，我们要从两方面准备，一方面是正确解答题目，另一方面是正确地解答题目。</p>
+<h3 id="正确解答题目">正确解答题目</h3>
+<p>大题分为改错、填空、编程。</p>
+<p>改错就很简单了。因为改错的模式都比较固定，只要多看看官方的题目就应该清楚他们会怎样考了。</p>
+<p>填空也一样。一般是让你填一些“单词”，或者是些简单的表达式。填空时候要多留意已经定义和未使用的变量。</p>
+<p>其实吧，改错和填空题很多时候就是<strong>推理</strong>题——不用太清楚程序干嘛，只要保证所有变量都被用过了，该对应的地方都对应了，OK。</p>
+<p>编程题要注意：数组、指针和字符串对于初学者来说比较难理解，对吧？不幸的是，出题人也爱考这些东西。因此，还是要看官方教材，看看他们喜欢怎样出题，并且建议你在做这些题的时候亲自上机练习一下。</p>
+<h3 id="正确地解答题目">正确地解答题目</h3>
+<p>两个要点：一是不犯低级错误，二是要会用Visual C++ 6.0编辑代码。</p>
+<p>不犯低级错误，举个例子，题目提示<code>只修改/******* FOUND *******/下一行的代码</code>，那么你不要改其他地方的代码，也不要把这个注释本身修改或删除。此外尽量不要碰原有代码的其他部分，例如空格和缩进。</p>
+<p>Visual C++
+6.0是一个古老的软件了（1998年发布），在现代操作系统（Windows
+8/8.1/10）中会出现兼容性问题，甚至无法启动。因此，平时在自己电脑上练习的时候可以使用其他编程软件，然后考前去一趟机房（学校机房应该安装了Visual
+C++
+6.0），学会如何打开和保存代码（考试软件会帮你打开代码）、如何找到<code>int main()</code>、如何编译运行。知道这些就足够了。</p>
+<figure>
+<img src="/img/2019-01-13-how-to-learn-c/vc.png"
+alt="会点上面三个按钮就够了" />
+<figcaption aria-hidden="true">会点上面三个按钮就够了</figcaption>
+</figure>
+<p>会点上面三个按钮就够了。</p>
+<h1 id="拓展学习">拓展学习</h1>
+<p>对于非计算机专业的学生来说，尽管C语言很难学，尽管C语言<span
+class="blackout">看起来</span>“不实用”，但是很多编程语言的套路都是类似的，因此学完C语言有助于其他“实用”语言的学习。有些“实用”语言甚至直接向C语言致敬，例如PHP。</p>
+<p>以下是一些当下很流行的、学起来可以“实用”的编程语言，如果有兴趣的话可以学一学。</p>
+<ul>
+<li>HTML+CSS+JavaScript：做网页的一套语言，虽然是三个，但是实际上哪个都不需要学得太深——一方面需要什么东西可以自己去查，另一方面现成框架太多了，很多时候用不着从零开始。我个人建议不要用Dreamweaver，即使用也要用最新的Dreamweaver
+CC，否则容易落伍。</li>
+<li>PHP：想做个实用网站吗？学吧！就是它大量致敬了C语言的语法！
+<ul>
+<li>由于PHP学习门槛很低，因此很容易写出有大量安全漏洞的网站。做项目时要多加小心。</li>
+</ul></li>
+<li>Python：Python是个小巧而又强大的脚本语言。建议有兴趣的一定要学。
+<ul>
+<li>如果想写一个随写随用的程序，当然要找它；</li>
+<li>如果想做一个实用的网站，同样可以找它——可以学习基于Python语言的Django框架；</li>
+<li>如果想做一个带窗口对话框的程序，当然也可以找它——可以学习基于Python语言和Qt的PyQt框架。对于这种情况，建议同时学习PyQt和Qt
+C++。</li>
+<li>Python有两种版本，一个是2.7，一个是3.6。它们两个有些差别，但是实际上不影响学习。遇到困难时到搜索引擎上搜一下就行了。</li>
+</ul></li>
+<li>Visual
+C#：C++和C#都带个“C”，那它们当然是从C语言衍生过来的……学C语言写不出一个带窗口对话框的程序对吧，没关系，我们可以用一个好学的Visual
+C#，随手画个窗口出来！</li>
+<li>Qt C++：同样是用来制作带窗口对话框程序的，只不过这个是C++语言。</li>
+<li>Java：会写Java至少能混口饭吃，而且现在很多业务系统和Android应用都是拿Java写的。</li>
+<li>Objective-C：iOS应用是拿这个语言写的（备注：现在已经换成Swift，所以不用学Objective-C了），只不过进App
+Store的门槛有点高。</li>
+<li>MATLAB：数值计算、数值模拟必备。一定先把高等数学和线性代数学好然后再学这个……</li>
+</ul>
+<p>我不推荐Pascal和Basic，前者用的人数不多，后者……VB6也是1998年的东西，在现在的系统中已经不能正常运行了，而且学新版VB不如学C#。</p>
+<p>另外还有两个硬件（小心，玩硬件烧钱）：</p>
+<ul>
+<li>Arduino：Arduino是一个卡片大小的开发板（如果不知道开发板是啥——就是可以让你拿来写程序的电路板），编程的时候基本上就是C或C++。与电路相关的东西都是封装好的，可以直接调用函数，所以不会一开始就被一些细枝末节困扰。虽然玩51单片机（备注：51单片机通常是STC产的，其<span class="exturl" data-url="aHR0cDovL3d3dy5zdGNtY3UuY29t">官网<i class="fa fa-external-link-alt"></i></span>和牛皮癣小广告有一拼）的人更多，但是我觉得从Arduino入门会容易很多。深入之后也可以考虑玩STM32之类的单片机。</li>
+<li>树莓派：树莓派是一个卡片大小的单板电脑。虽然设计者的定位是儿童电脑，不过实际上被极客当成高级玩具了。最新的树莓派3可以跑Linux和Windows
+10（物联网版）系统，对物联网感兴趣的可以玩玩。</li>
+</ul>
+<p>我个人的学习建议：</p>
+<ol type="1">
+<li>尽量找外文书的中译本，原因很简单，翻译一本书需要付出大量时间精力，因此能够被拿来翻译的书基本上都是好书。<span>因为写书很容易，因此国内很容易出烂书。外国的月亮也不圆——外国也一样。</span></li>
+<li>把书粗读一遍，大致了解一下基本语法。很多语言的基本结构都差不多，只不过单词不一样罢了。</li>
+<li>细读，看看（特别是翻译本那种）作者的思想和思路。</li>
+<li>照着教材做个小练习。</li>
+<li>不用强求把所有东西都记住。现在网络那么发达，甚至手机流量都不需要省着用，有问题可以直接去网上查。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>闲谈</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
       </tags>
   </entry>
   <entry>
@@ -4865,65 +4865,6 @@ CLASSPATH&#x3D;.:&#x2F;opt&#x2F;ojdbc6.jar java Down 文件名<span aria-hidden=
       </tags>
   </entry>
   <entry>
-    <title>风险提示：请使用正版！</title>
-    <url>/2019/08/16/genius-software/</url>
-    <content><![CDATA[<p>道理大家都懂，其中的坑大家却不一定都清楚。</p>
-<p>在中国，使用盗版软件已经是习以为常的事情。即使你去公安局自首，说自己电脑上装了一堆破解版，警察叔叔也不会把你抓起来，只会把你轰回家。但是请注意，给公司工作就是另一码事了——律师函警告！</p>
-<p>希望借本文给大家提个醒，挣钱不易，务必小心！ <span id="more"></span></p>
-<h1 id="案例">案例</h1>
-<p>在公司上班，使用盗版可能会给自己和公司招来严重后果。</p>
-<h2 id="后门安全问题">后门安全问题</h2>
-<ul>
-<li>2012年1月31日，<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS9odG1sL2l0LzEwMDY4Lmh0bQ==">部分汉化版PuTTY、WinSCP、SSH
-Secure等软件存在后门<i class="fa fa-external-link-alt"></i></span>。</li>
-<li>2015年，<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW50aXkuY29tL3Jlc3BvbnNlL3hjb2RlZ2hvc3QuaHRtbA==">XcodeGhost事件<i class="fa fa-external-link-alt"></i></span>：中国网络环境问题，促进了恶意版本编程软件的传播。</li>
-<li>2016年11月，<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXFuaXUuY29tL3RocmVhdC1hbGVydC8yMTEzNi5odG1s">有人在CSDN等地散布含有勒索软件的PL/SQL
-Developer<i class="fa fa-external-link-alt"></i></span>。</li>
-</ul>
-<h2 id="律师函警告">律师函警告</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cDovL2ZpbmFuY2Uuc2luYS5jb20uY24vY2hhbmppbmcvZ3NuZXdzLzIwMTQwODAxLzAxNTAxOTg3OTc4My5zaHRtbA==">公司遭到工商部门“突袭”检查盗版<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS8wLzQxMi80NzYuaHRt">2019年3月，某公司实习生使用盗版Photoshop和字体，使公司陷入诉讼和巨额赔偿<i class="fa fa-external-link-alt"></i></span>。</li>
-<li>“版权流氓”苏州思杰马克丁：在网上散布假破解版，查到企业使用后发真律师函；国内代理价格高于官方渠道……被这家代理“污染”的软件列表可见<span class="exturl" data-url="aHR0cDovL3d3dy5tYWtlZGluZy5jb20vcHJvZHVjdHMuaHRtbA==">其官网介绍<i class="fa fa-external-link-alt"></i></span>（注意其中有常用的Photoshop、TeamViewer、Xshell）。</li>
-<li><del>
-任天堂最强法务部、迪士尼最强法务部、蔡徐坤律师函警告
-</del></li>
-</ul>
-<h1 id="解决方案">解决方案</h1>
-<h2 id="破财消灾">破财消灾</h2>
-<p>从道理上讲，花钱买正版天经地义，权益遭到侵害，维权也天经地义。如果软件真的在用，其地位不可替代，那么当然应该去买正版（虽然公司不见得能同意花钱），否则吃官司赔钱也是活该。</p>
-<p>然而，有些厂商发律师函索要赔偿，更多是为了讹钱，甚至会“放长线钓大鱼”，在你们公司创业阶段视而不见，等你们公司挣到钱了再发律师函。对于这类公司，事先买些正版授权，把钱给够，没准以后用多少盗版他们也会视而不见了。</p>
-<h2 id="金盆洗手">金盆洗手</h2>
-<p>别急着付钱！</p>
-<p>如果软件不是很常用，而且官方喜欢打官司，读完本文之后，尽快把软件和软件的使用痕迹清除掉，或者采取一些防范措施，别让人用技术手段给查出来，成为日后对方发律师函和起诉的证据。</p>
-<p>假如真的有律师函发过来，你可以先评估一下他们是真的掌握证据了，还是“敲诈勒索”（有的真是敲诈勒索）。想一想自己早在几个月前就把东西给删得干干净净的，就算各种部门现在马上来突击检查，也查不到任何证据，那么就可以理所当然地不鸟他们了，甚至怼他们一下：你说我们用你家盗版，你的证据呢？（小心反告你们敲诈勒索……）</p>
-<h2 id="使用免费开源替代品">使用免费/开源替代品</h2>
-<p>钱不是白来的，实在不想花钱的话，也可以使用免费或开源替代品（至少要让别人觉得你有替代品）。</p>
-<p>不过需要注意的是，有些软件个人使用免费，商业使用收费。在安装之前，要先阅读许可协议，别看都不看就直接点同意，除非你确定对方厂商懒得管。</p>
-<h2 id="加强教育">加强教育</h2>
-<p>有新入职员工时，要及时提醒注意版权问题。特别要留意喜欢“折腾”的人，要么要求他们买正版，要么要求使用无版权风险的软件，要么要求放弃个人喜好，使用与开发团队一样的软件（别集体翻车就行）。</p>
-<p>除所用软件外，各种资料，例如程序代码、多媒体素材、字体等也要注意版权。要不然的话，即使躲过代理Photoshop的思杰马克丁，可能又会因应用登录页面的一张背景图片<span class="exturl" data-url="aHR0cDovL3d3dy54aW5odWFuZXQuY29tLzIwMTktMDQvMTIvY18xMjEwMTA3Mjg2Lmh0bQ==">让视觉中国找上门<i class="fa fa-external-link-alt"></i></span>（毕竟连国旗国徽的版权都是视觉中国的）。</p>
-<p>即使是免费软件，也要到正规渠道下载，不要随便找“绿色版”、“汉化版”。谁知道里头有没有藏着删库（却让你跑不了路）的后门呢？</p>
-<h1 id="相关问题">相关问题</h1>
-<h2 id="树大招风">树大招风</h2>
-<p>除了使用盗版软件，抄袭别人成果也是有风险的：</p>
-<ul>
-<li>汉芯：<span class="exturl" data-url="aHR0cHM6Ly9uZXdzLm15ZHJpdmVycy5jb20vMS82MTYvNjE2NzM3Lmh0bQ==">被一家装修公司“出卖”<i class="fa fa-external-link-alt"></i></span></li>
-<li>银河麒麟：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2lsbGlhbWxvbmcuaW5mby9hcmNoaXZlcy81MDguaHRtbA==">被发现是改版FreeBSD<i class="fa fa-external-link-alt"></i></span>。</li>
-<li>红芯浏览器：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGhlcGFwZXIuY24vbmV3c0RldGFpbF9mb3J3YXJkXzIzNTUyMzk=">被发现是换了壳的Chrome<i class="fa fa-external-link-alt"></i></span></li>
-<li>木兰编程语言：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS8wLzQ2OS8yMDUuaHRt">改名“素贞编程语言”才更符合其性质<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<p>未经蔡徐坤本人同意就制作打篮球视频也是有风险的。</p>
-<h2
-id="在中国没遭到迫害出国之后却吃了牢饭">在中国没遭到迫害，出国之后却吃了牢饭</h2>
-<p>本文开头提到，你去公安局自首，警察会把你直接轰回家。然而，换成重视版权的国家，结局会沦为吃官司和吃牢饭。因此，如果你有机会去发达国家，无论是出游、出差还是出逃，建议稍微注意一下。</p>
-<p>不过，像非洲那类地方就无所谓了，比起挣多少钱或者用什么软件，你更需要担心自己能不能活着回国。</p>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-  </entry>
-  <entry>
     <title>从Eclipse切换到IDEA（三）：传统Web项目转为Gradle项目</title>
     <url>/2019/08/03/switch-to-idea-3/</url>
     <content><![CDATA[<p>除了在IDEA手工配置项目，也可考虑将传统Web项目转为Gradle项目，以便简化项目依赖管理、实现标准化构建等，也便于后续结合Jenkins等进一步实现自动化。
@@ -5286,6 +5227,65 @@ Structure</a></li>
       <tags>
         <tag>Gradle</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>风险提示：请使用正版！</title>
+    <url>/2019/08/16/genius-software/</url>
+    <content><![CDATA[<p>道理大家都懂，其中的坑大家却不一定都清楚。</p>
+<p>在中国，使用盗版软件已经是习以为常的事情。即使你去公安局自首，说自己电脑上装了一堆破解版，警察叔叔也不会把你抓起来，只会把你轰回家。但是请注意，给公司工作就是另一码事了——律师函警告！</p>
+<p>希望借本文给大家提个醒，挣钱不易，务必小心！ <span id="more"></span></p>
+<h1 id="案例">案例</h1>
+<p>在公司上班，使用盗版可能会给自己和公司招来严重后果。</p>
+<h2 id="后门安全问题">后门安全问题</h2>
+<ul>
+<li>2012年1月31日，<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS9odG1sL2l0LzEwMDY4Lmh0bQ==">部分汉化版PuTTY、WinSCP、SSH
+Secure等软件存在后门<i class="fa fa-external-link-alt"></i></span>。</li>
+<li>2015年，<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW50aXkuY29tL3Jlc3BvbnNlL3hjb2RlZ2hvc3QuaHRtbA==">XcodeGhost事件<i class="fa fa-external-link-alt"></i></span>：中国网络环境问题，促进了恶意版本编程软件的传播。</li>
+<li>2016年11月，<span class="exturl" data-url="aHR0cHM6Ly93d3cuYXFuaXUuY29tL3RocmVhdC1hbGVydC8yMTEzNi5odG1s">有人在CSDN等地散布含有勒索软件的PL/SQL
+Developer<i class="fa fa-external-link-alt"></i></span>。</li>
+</ul>
+<h2 id="律师函警告">律师函警告</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cDovL2ZpbmFuY2Uuc2luYS5jb20uY24vY2hhbmppbmcvZ3NuZXdzLzIwMTQwODAxLzAxNTAxOTg3OTc4My5zaHRtbA==">公司遭到工商部门“突袭”检查盗版<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS8wLzQxMi80NzYuaHRt">2019年3月，某公司实习生使用盗版Photoshop和字体，使公司陷入诉讼和巨额赔偿<i class="fa fa-external-link-alt"></i></span>。</li>
+<li>“版权流氓”苏州思杰马克丁：在网上散布假破解版，查到企业使用后发真律师函；国内代理价格高于官方渠道……被这家代理“污染”的软件列表可见<span class="exturl" data-url="aHR0cDovL3d3dy5tYWtlZGluZy5jb20vcHJvZHVjdHMuaHRtbA==">其官网介绍<i class="fa fa-external-link-alt"></i></span>（注意其中有常用的Photoshop、TeamViewer、Xshell）。</li>
+<li><del>
+任天堂最强法务部、迪士尼最强法务部、蔡徐坤律师函警告
+</del></li>
+</ul>
+<h1 id="解决方案">解决方案</h1>
+<h2 id="破财消灾">破财消灾</h2>
+<p>从道理上讲，花钱买正版天经地义，权益遭到侵害，维权也天经地义。如果软件真的在用，其地位不可替代，那么当然应该去买正版（虽然公司不见得能同意花钱），否则吃官司赔钱也是活该。</p>
+<p>然而，有些厂商发律师函索要赔偿，更多是为了讹钱，甚至会“放长线钓大鱼”，在你们公司创业阶段视而不见，等你们公司挣到钱了再发律师函。对于这类公司，事先买些正版授权，把钱给够，没准以后用多少盗版他们也会视而不见了。</p>
+<h2 id="金盆洗手">金盆洗手</h2>
+<p>别急着付钱！</p>
+<p>如果软件不是很常用，而且官方喜欢打官司，读完本文之后，尽快把软件和软件的使用痕迹清除掉，或者采取一些防范措施，别让人用技术手段给查出来，成为日后对方发律师函和起诉的证据。</p>
+<p>假如真的有律师函发过来，你可以先评估一下他们是真的掌握证据了，还是“敲诈勒索”（有的真是敲诈勒索）。想一想自己早在几个月前就把东西给删得干干净净的，就算各种部门现在马上来突击检查，也查不到任何证据，那么就可以理所当然地不鸟他们了，甚至怼他们一下：你说我们用你家盗版，你的证据呢？（小心反告你们敲诈勒索……）</p>
+<h2 id="使用免费开源替代品">使用免费/开源替代品</h2>
+<p>钱不是白来的，实在不想花钱的话，也可以使用免费或开源替代品（至少要让别人觉得你有替代品）。</p>
+<p>不过需要注意的是，有些软件个人使用免费，商业使用收费。在安装之前，要先阅读许可协议，别看都不看就直接点同意，除非你确定对方厂商懒得管。</p>
+<h2 id="加强教育">加强教育</h2>
+<p>有新入职员工时，要及时提醒注意版权问题。特别要留意喜欢“折腾”的人，要么要求他们买正版，要么要求使用无版权风险的软件，要么要求放弃个人喜好，使用与开发团队一样的软件（别集体翻车就行）。</p>
+<p>除所用软件外，各种资料，例如程序代码、多媒体素材、字体等也要注意版权。要不然的话，即使躲过代理Photoshop的思杰马克丁，可能又会因应用登录页面的一张背景图片<span class="exturl" data-url="aHR0cDovL3d3dy54aW5odWFuZXQuY29tLzIwMTktMDQvMTIvY18xMjEwMTA3Mjg2Lmh0bQ==">让视觉中国找上门<i class="fa fa-external-link-alt"></i></span>（毕竟连国旗国徽的版权都是视觉中国的）。</p>
+<p>即使是免费软件，也要到正规渠道下载，不要随便找“绿色版”、“汉化版”。谁知道里头有没有藏着删库（却让你跑不了路）的后门呢？</p>
+<h1 id="相关问题">相关问题</h1>
+<h2 id="树大招风">树大招风</h2>
+<p>除了使用盗版软件，抄袭别人成果也是有风险的：</p>
+<ul>
+<li>汉芯：<span class="exturl" data-url="aHR0cHM6Ly9uZXdzLm15ZHJpdmVycy5jb20vMS82MTYvNjE2NzM3Lmh0bQ==">被一家装修公司“出卖”<i class="fa fa-external-link-alt"></i></span></li>
+<li>银河麒麟：<span class="exturl" data-url="aHR0cHM6Ly93d3cud2lsbGlhbWxvbmcuaW5mby9hcmNoaXZlcy81MDguaHRtbA==">被发现是改版FreeBSD<i class="fa fa-external-link-alt"></i></span>。</li>
+<li>红芯浏览器：<span class="exturl" data-url="aHR0cHM6Ly93d3cudGhlcGFwZXIuY24vbmV3c0RldGFpbF9mb3J3YXJkXzIzNTUyMzk=">被发现是换了壳的Chrome<i class="fa fa-external-link-alt"></i></span></li>
+<li>木兰编程语言：<span class="exturl" data-url="aHR0cHM6Ly93d3cuaXRob21lLmNvbS8wLzQ2OS8yMDUuaHRt">改名“素贞编程语言”才更符合其性质<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<p>未经蔡徐坤本人同意就制作打篮球视频也是有风险的。</p>
+<h2
+id="在中国没遭到迫害出国之后却吃了牢饭">在中国没遭到迫害，出国之后却吃了牢饭</h2>
+<p>本文开头提到，你去公安局自首，警察会把你直接轰回家。然而，换成重视版权的国家，结局会沦为吃官司和吃牢饭。因此，如果你有机会去发达国家，无论是出游、出差还是出逃，建议稍微注意一下。</p>
+<p>不过，像非洲那类地方就无所谓了，比起挣多少钱或者用什么软件，你更需要担心自己能不能活着回国。</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
   </entry>
   <entry>
     <title>实现一个简单粗暴的Java Web安全过滤器</title>
@@ -6757,234 +6757,6 @@ java.sql.SQLException: ORA-12899: value too large for column &quot;XXXXX&quot;.&
       </tags>
   </entry>
   <entry>
-    <title>浅谈社招招聘（一）：作为招聘者，筛选简历的关注点</title>
-    <url>/2020/08/16/resume-filtering/</url>
-    <content><![CDATA[<p>因公司业务发展，需要招聘一些初、中级Java开发人员。本系列文章将面向求职者，以招聘者的视角来进行讨论，希望能为疫情期间苦于找工作的求职者带来一些启发。</p>
-<p>由于不同公司情况不同，有着急的，有不着急的，有舍得花钱的，有比周扒皮还抠门的，因此本系列文章意见仅供参考。</p>
-<span id="more"></span>
-<h1 id="招聘流程和分工">招聘流程和分工</h1>
-<p>正常情况下，招聘的流程如下：</p>
-<ol type="1">
-<li>提出招聘需求，分配招聘指标</li>
-<li>发布招聘广告、收简历等事务性工作</li>
-<li>简历筛选</li>
-<li>组织笔试、面试：很多单位不安排笔试，但一定会安排面试。有些单位还会组织多轮面试</li>
-<li>发放Offer、背景调查、入职手续等事务性工作</li>
-</ol>
-<p>其中，发布招聘信息、筛选简历可能有以下几种情况：</p>
-<ul>
-<li>主流情况：人力资源部门发布信息、收取简历，人力资源初步筛选并扔掉明显不靠谱的简历，然后将看起来合适的移交用人部门判断。用人部门再进一步筛选简历，确定可以面试之后再由人力部门进行发通知等事务性工作。</li>
-<li>个别情况：用人部门在取得公司授权之后，自行发布招聘信息，收取简历、组织面试，人力部门辅助。考核通过后由人力部门办理背调、入职等手续。小公司缺乏人力部门，也会选择这样做。</li>
-</ul>
-<p>因此，收你简历并与你联系的，通常是代收者。</p>
-<h1 id="同样的jdjob-description不同的目的">同样的JD（Job
-Description），不同的目的</h1>
-<p>在招聘网站上，各公司的JD（Job
-Description，岗位介绍）看起来都差不多，但关注点是不同的。</p>
-<p>为了节约成本，公司会倾向于内部调配人员，实在无法调配才会去招聘，例如：</p>
-<ul>
-<li>业务扩张
-<ul>
-<li>组建新团队</li>
-<li>项目实施缺人，需要拉人干活</li>
-</ul></li>
-<li>有人辞职，需要从外面拉个接盘侠</li>
-<li>需要特殊技能</li>
-</ul>
-<p>根据业务性质不同，对技能深度要求会有所不同。例如：</p>
-<ul>
-<li>小型政府项目，可能用户数不大，也可以要求业主堆硬件，出问题时用户也能有所容忍，这样对开发人员能力要求就不会特别高，能熟练使用一些东西就行。</li>
-<li>互联网产品，用户数很大，一个微小的问题可能就会引发系统不稳定，而且用户无法容忍系统宕机，这样对开发人员基础知识要求就比较高，以免挖坑。</li>
-<li>外包公司，员工只会被安排做些没什么含金量、但还不得不去做的低级工作，所以公司只要找个省钱能干的年轻人就行。</li>
-</ul>
-<p>对技能广度要求也有差异，例如：</p>
-<ul>
-<li>新公司、新团队或者并非专门做软件的公司会要一些复合型人才，例如“全栈工程师”，各类工作都要懂一些，这样可以少招人。</li>
-<li>大型团队内部分工明确，只需要一些“螺丝钉”，最典型的就是专门的前端、后端、测试、DBA、运维等，而且可能对这些职位的所用的工具和框架也有固定要求。</li>
-</ul>
-<p>在投递简历之前，可以通过各种途径了解一下公司，从而针对性地调整简历内容。</p>
-<h1
-id="用正确方法投递简历我们才有机会看到你的简历">用正确方法投递简历，我们才有机会看到你的简历</h1>
-<p>首先，你需要用正确的方法投递简历。HR的邮箱总是堆满垃圾，如果投递方法错误，你的简历连被看的机会都没有，更不用说筛选和面试了。</p>
-<h2 id="邮件投递">邮件投递</h2>
-<p>请注意邮件标题！邮箱里面总是堆满垃圾，如果你的邮件标题不能明显看出是应聘，我们可能会错过你的邮件。</p>
-<p>建议邮件标题采用“【应聘】姓名-岗位名-3年工作经验”之类的格式，让我们一眼就能看出你是在应聘，而且能够一眼看出你的基本情况。附件文件名也采用类似格式，方便我们保存和查找。</p>
-<p>发送邮件之前，请检查邮件发件人姓名，不要使用乱七八糟的网名，并且确认邮件中确实包含了简历附件。如果你害怕邮件内容有误，你可以先给自己发一封邮件，检查邮件内容是否正确，然后再发给HR。</p>
-<p>邮件正文实际上是无所谓的。收到邮件，我们至少要看一下简历内容，不会单纯因为你没写正文或者在正文中又写了一遍简历内容就把你Pass掉。</p>
-<h2 id="boss直聘-拉勾网">BOSS直聘 / 拉勾网</h2>
-<p>BOSS直聘 /
-拉勾网的特殊之处在于你可以提前与HR（当然不是BOSS）进行一些简单的交流。建议维护一份在线简历，让招聘者能够简单地了解你的基本情况，然后决定收简历。</p>
-<p>招聘经常是人力资源部门的人来做，所以请避免问工作细节，因为他们也不见得知道。</p>
-<h2 id="内推">内推</h2>
-<p>如果你为人靠谱，而且有熟人，可以考虑走内推去他们的公司，省去一切麻烦事情。</p>
-<p>注意，即便是内推，甚至内定入职，简历也要好好写，否则的话，轻则给人留下负面印象，重则容易失去面试和入职机会（到时你还有何面目去见替你内推的人？）</p>
-<h2 id="简历文件格式">简历文件格式</h2>
-<p>请使用PDF格式！不要使用其他文件格式！</p>
-<p>很多时候HR会用手机来登录邮箱或BOSS直聘，然后通过微信或QQ向同事传送文件。PDF格式不需要装插件，还可以保证样式稳定，而Word文件经常排版错乱，这会给我们留下极坏的第一印象。</p>
-<h1 id="解读简历中的信息">解读简历中的信息</h1>
-<p>牢记：<strong>简历的目的是让招聘者认为你能够胜任他们的工作</strong>。简历内容务必围绕这个主题展开。</p>
-<p>如果你的简历质量不高，缺乏有效信息，那么你就容易被Pass掉——连个人简历都写不好，如何保证以后能高质量地完成工作？</p>
-<p>收到简历后，我们会在十几秒钟之内扫描你的简历。挖掘到有效信息，才会仔细阅读并通知你参加面试。</p>
-<h2 id="页面排版">页面排版</h2>
-<p>简历模板请保持整体主题整洁、内容条理清晰、风格样式统一、字体字号得当。不要层次不清，也不要参差不齐，否则会给人留下很坏的印象，例如：</p>
-<figure>
-<img src="/img/2020-08-29-bad-resume/mixed-1.png" alt="混合样式" />
-<figcaption aria-hidden="true">混合样式</figcaption>
-</figure>
-<p>编程是一项注重细节的工作，而这一段话中，既有半角标点<span
-style="display:none;">x</span>,又有全角标点<span
-style="display:none;">x</span>;既 有 留 空 格，<span
-style="letter-spacing: -0.2em;">又有紧贴的数字序号</span>；既使用<span
-style="font-family:&#39;Times New Roman&#39;,Times,serif;">Times New
-Roman</span>，<span
-style="font-family:&#39;Songti SC&#39;, STSong, NSimSun, SimSun, serif;">又使用宋体</span>；<big>有些字大</big>，<small>有些字小</small>。这样会让人感觉此人“不拘小节”，爱给同事挖坑。</p>
-<p>另外：</p>
-<ul>
-<li>页面篇幅不要太长，两三页就好。社招项目经验多，只写一页不见得能装得下，不用强求。</li>
-<li>不要用填表式模板，不好看。</li>
-<li>建议自己设计模板，不要用网上被用滥的模板。</li>
-<li>简历请保持简约风格，不要太花哨，我们关心的是你的简历内容。</li>
-</ul>
-<h2 id="个人基本信息">个人基本信息</h2>
-<p>请写清姓名、电话、邮箱这三项内容，并保证联系方式畅通。电话用来向你发通知，邮箱用来发Offer，如果这两种联系方式都联系不上，对不起，你的工作机会没了。</p>
-<p>其他信息例如籍贯、政治面貌、民族等，没有特殊要求的话不用写，我们不关心这些事情。如果应聘国企或事业单位，而且是党员或预备党员的话，可以把党员身份写上。</p>
-<p>如果有软件开发相关的社交媒体账号，例如GitHub账号、CSDN账号、个人博客，而且有一定的成果，那么请务必写到简历中，这会成为一个重大加分项。但是，如果没有，千万别拿这些东西装X——我们会核实你的账号，发现没有什么实质内容的话，例如只有helloworld，或者只是些fork仓库或转载文章，那么社交媒体账号会成为扣分项。</p>
-<h2 id="照片">照片</h2>
-<p>建议不要放照片，因为脸不是判断你适不适合工作的因素。</p>
-<p>如果放照片，请放一张好看的照片。假如照片很难看，或者PS/美颜痕迹明显，那么你的第一印象就会崩坏，甚至会直接把我们“劝退”。</p>
-<h2 id="年龄">年龄</h2>
-<p>注意：“不限年龄”或者不提年龄限制，不代表没有年龄限制。为规避法律风险，避免被举报就业歧视，招聘者往往会采用更加隐蔽的手段来进行限制，例如把年龄不合适的人直接筛掉。</p>
-<p>软件行业是青春饭，30岁以下的年轻人，人傻、肯干、学习能力强，可以少发工资，而且简单工作的话年轻人稍微学习学习就能掌握，所以初中级岗位倾向于招年轻人。为了省钱，很多公司还会设法逼走年龄较大的员工，也就是所谓的“35岁危机”。</p>
-<p>如果年龄超过30还想投递简历，除非应聘高级岗位，或者有稀缺技能，或者项目/行业经验非常出色，而且愿意少挣钱，否则没戏。在初中级岗位中，年长者比不过年轻人的。如果已经有10年或以上经验，建议找熟人内推，或者让猎头挖，不要再用普通招聘形式找工作。</p>
-<h2 id="性别">性别</h2>
-<p>注意：“不招女性”也是就业歧视行为，而且明显违反劳动法，只要去劳动仲裁挥一挥女拳，公司必输。因此有些招聘者不会直说“不招女性”，而是把女性投递的简历直接筛掉，避免引来女拳麻烦。</p>
-<p>因为人们对女性有着刻板印象，加上害怕女性怀孕（已经有孩子？那还要二胎吗？）、休产假影响团队整体工作，女性找工作本身就吃亏，所以要更加注意简历中项目经验的优化。</p>
-<h2 id="教育信息">教育信息</h2>
-<p>请正确填写教育信息。学历从大专/大本开始往上写。虽然你学过的大学知识已经还给了老师，但是你的两个证（毕业证、学位证）还是有用的，不要弄丢。</p>
-<h3 id="学历">学历</h3>
-<p>学历歧视也是存在的。通常情况下，不仅只接受本科生或研究生（博士生年龄太大，除非算法岗位，否则对应聘者和招聘者来说都不划算），而且只接受重点大学毕业生。本科还得是全日制的，因为光是本科生就够HR忍受的了。尽管大专、专升本或非全日制学生也有工作能力强的，但通常会被无视，而且应聘要求不会说得太明确，免得被举报。</p>
-<p>从统计学意义上讲，学生个人素质通常是“重点大学&gt;普通大学&gt;三本专科”，从个人言谈举止方面也能看出比较明显的区别。当然，这只是一般规律：我们也认识到，即便是二本、三本、专科学校的毕业生，也能成为公司的业务或技术骨干，而985学校毕业生也有工作不认真、爱给同事挖坑的。所以，我们会考虑学校，但不会把学校当作唯一考察因素。</p>
-<p>我们招聘时不太考虑专业，无论是否计算机软件专业都可以考虑。有些学生虽然非计算机专业毕业，但他们出于个人兴趣爱好选择了软件行业，这类人的个人能力往往比科班出身的人还强。但是，由于非计算机专业学生可能只学过写代码，底子较差，工程意识薄弱，在面试时要注意考察数据结构与算法之类的基础知识。相对的，这类人找工作之前也要补一下相关知识。</p>
-<p>最后学历千万不要隐瞒或造假，如果背景调查时发现实际学历与简历内容不一致，那么不好意思，拜拜。就算你工作确实出色，被争取挽留了下来，我们也不敢再提拔你了，连入职都敢违法，谁敢保证你以后不去犯别的法呢？</p>
-<h3 id="培训班">培训班</h3>
-<p>如果参加过社会培训班，建议调整一下工作的时间节点，把这段经历隐藏掉。如果只参加过社会培训班，没有实际经验，那么请节哀，因为有经验的招聘者能看出来你只去过培训班，没有实际工作经历。</p>
-<p>由于培训班培训内容经常与行业实际脱节，而且我们认为花钱进补习班=学习能力差，所以我们不喜欢招参加过培训班的人，甚至会直接将有培训班经历的人给Pass掉。</p>
-<h3 id="在校期间表现">在校期间表现</h3>
-<p>如果毕业时间不长，而且在大学期间拿过ACM区域赛、全国数学建模竞赛、美国数学建模比赛、飞思卡尔智能车大赛等含金量较高的奖项，或者已经通过英语六级与更高水平的考试，建议将其写到简历上。我们会认为这类人比较有潜力。</p>
-<p>其他表现没必要往简历上写。走向社会，学校期间的表现都是浮云了。</p>
-<h2 id="工作单位">工作单位</h2>
-<p>在工作单位方面，我们关心：</p>
-<ul>
-<li>工作单位与行业：大厂出身更容易吸引人，而外包公司或小公司出身会让人敬而远之。
-<ul>
-<li>外包公司：因为外包员工经常做技术含量不高的低级工作，无论工作多少年都只能折算成一年经验，除非项目经验感人，否则倾向于Pass。</li>
-<li>小公司、创业公司或非软件公司：在这类公司工作的人，找工作时可能也会遇到困难，因为他们通常没经历过正规开发流程，缺乏规范意识。在面试时要注意考察他们的质量把控情况。</li>
-</ul></li>
-<li>跳槽频率：假如你频繁跳槽，一年跑一次，甚至不到一年就跑路，你说我们还敢招你吗？
-<ul>
-<li>如果是不可控原因被迫跳槽，例如公司欠薪、倒闭，建议明确标在简历上，以免被当成频繁跑路。</li>
-</ul></li>
-</ul>
-<p>工作时间不要有断档。如果确实因为脱产进修、裸辞在家或出门环游世界等原因产生了空档，请把空档时间和原因写出来，否则会认为你“逆水行舟，不进则退”。</p>
-<p>社招简历，除非是大厂，实习经验写不写都行，因为我们都清楚实习生其实没做什么实际工作。请用最近一两年的项目经历来证明自己工作能力。</p>
-<p>请不要编造或隐瞒工作单位。公司会在你入职前后对你进行背景调查，核实工作经历，有可疑之处的话就会拒绝录用你，以免遇到法律问题。</p>
-<p>另外建议投简历之前在知乎、看准网（2021年更新：看准网已经没有员工评论了）等平台对即将投递简历的公司进行背景调查，免得刚逃出一个坑，又在不经意间跳进下一个坑。</p>
-<h2 id="项目信息">项目信息</h2>
-<p>项目信息是简历的重点。我们需要通过你的项目信息来判断你的阅历与能力，例如：</p>
-<ul>
-<li>你的语言表达能力、总结提练能力如何？</li>
-<li>有没有做过大型项目？</li>
-<li>是否熟悉大型系统会遇到的问题（数据量大、并发量高，等等）？</li>
-<li>有没有经历过完整、规范的工作流程？</li>
-<li>独立完成，还是团队协作完成？</li>
-<li>在项目中是凑数、普通成员，还是核心成员或救火队员？</li>
-<li>曾经参与过哪些行业，是否与本公司一致？</li>
-<li>实践过哪些技术栈（Vue/React，Spring
-Boot……）？只是肤浅地增删改查，还是深入研究、优化完善？</li>
-<li>只做过开发工作，还是做过管理工作，或是多面手？</li>
-<li>有没有个人思考？</li>
-<li>……</li>
-</ul>
-<p>对于每个项目，请在不泄露商业机密的前提下简短地介绍一下项目是做什么的，否则我们这些外人会看得一头雾水。然后不要忘记写一下自己在项目中的角色与工作内容，让我们意识到你不是来“打酱油”的。</p>
-<p>很多系统，从本质上讲就是一大堆的增删改查，或者说是“数据库前端”，因此工作内容不要只写“开发XX模块”，否则会被认为只做了些微小的增删改查工作。工作内容应当尽量遵循“STAR法则”（情境、任务、行动、结果）来写，让人知道你不是机械地执行命令，而是有针对性地解决了实际问题：</p>
-<ul>
-<li>情境：需要解决什么问题，或者遇到了什么事情</li>
-<li>任务：你的目标是什么</li>
-<li>行动：你做了什么事情</li>
-<li>结果：最后达到了什么效果。如果能量化，那么务必提供一个有说服力的数字，例如系统响应时间从2s降低到200ms。</li>
-</ul>
-<p>举一个具体例子：“开发XX功能，用到了Redis”，这没什么意思，因为很多项目都会用这个东西。但是，如果你改写“针对项目XX功能具有瞬时高并发特点，使用Redis实现XX，解决XX问题”，那么就会成为一个亮点。<a
-href="/2020/08/20/resume-improvement/">后续</a>会专门介绍如何优化你的项目经验。</p>
-<p>项目经历也可以稍微吹吹牛。假如你读过其他人写的代码，熟悉了它的内部逻辑，换成自己写，大体上也能搞出来，那么你完全可以“剽窃”他人的劳动成果，将其据为己有，反正我们又不可能去核实真假。无论实际开发工作是不是你做的，只要面试时候能把事情说得像你做的一样就行。</p>
-<p>项目经历请按从新到旧的顺序写。两三年的事情可能已经记不清，而且当时你工作可能还没那么熟练，所以我们面试官也没必要再深究了。</p>
-<p>在实际招聘过程中，我们发现大部分人未能正确地拼写他们所用的技术框架或工具，例如把“Spring
-Boot”写成“springboot”、“Springboot”，把“MySQL”写成“mysql”、“Mysql”、“MySql”……虽然很多招聘者并不会在意这个事情，但是花点时间查阅正确拼写肯定没有坏处。至少我们会觉得你更加专业。</p>
-<h2 id="薪资">薪资</h2>
-<p>建议不要写任何有关薪资的内容，包括起始薪资、当前薪资和期望薪资。</p>
-<ul>
-<li>如果薪资写得低了，那么谈薪资的时候，我们会尽量在你写的范围往下压，这样你会吃亏。</li>
-<li>如果薪资写得高了，我们会直接Pass你的简历（工资开不起），或者在面试的时候为难你，以便找理由压低工资，同样会让你吃亏。</li>
-</ul>
-<p>非要写薪资的话，如何写期望薪资才合适呢？先通过同学、同事、招聘网站等渠道，调查一下所在城市的行业平均收入水平，再估计一下自己实际能力，然后写一个区间，而且最低值不要低于平均水平。例如期望值15k，你写成17～20k（当然你要有这个水平），谈判时没有暴露心理预期，而且谈判失利，只得到16k，那么你实际上还赚了一千块。</p>
-<h2 id="个人技能">个人技能</h2>
-<p>个人技能是一个“锦上添花”的东西。项目经历这个“锦”不好看的话，个人技能这些“花”也不会起太大作用。这个东西你可以认为是给那些外行HR们进行关键词匹配用的，对内行人来说作用不大。</p>
-<p>根据掌握程度分类，通常分为三种程度：精通、熟悉、了解。除非你真的精通到了底层的程度，否则请写成“熟悉”。不熟悉的东西请写成“了解”。因为这些东西很可能会成为面试问题，所以不要写自己不熟悉的东西，以免面试翻车。</p>
-<p>技能有容易上手的，也有难于上手的。例如XML、JSON数据格式或Postman工具用几分钟就能学会，而Linux系统操作技能需要花一些时间来积累，所以说自己熟悉JSON就没什么实际意义，而说自己熟悉Linux就会高人半等。尽量不要写那类容易上手的东西，没有意义，写多了还会让人找不到你的特长，结果只能是减分。</p>
-<p>不要简单地“熟悉XX”、“了解XX”就结束了，后面要再写点东西，例如“熟悉JavaScript，熟悉原型链、Promise等原理”，这样才能说明你真熟悉JavaScript。另外个人技能不用局限于具体的工具或框架，像英语水平好、热爱研究开源软件、使用Google搜索这类事情都可以写（当然要和软件开发工作相关），只要简历和面试能自圆其说就行。</p>
-<h2 id="自我评价">自我评价</h2>
-<p>别给自己做评价！</p>
-<p>在见过各种年轻员工的工作能力和工作态度之后，我们眼里的自我评价是这样的——</p>
-<ul>
-<li>已通过英语四级——英语水平差，六级没过</li>
-<li>有责任心，工作认真负责——员工做好本职工作，有什么可夸的？</li>
-<li>学习能力强——实际上什么都不会，有事情都是去问百度</li>
-<li>爱好广泛——没有特长</li>
-<li>热爱编程——只会编程，不会别的事情（例如写文档、与用户沟通），无法胜任工作</li>
-<li>自我驱动力强——天天刷微博、抖音，你敢说你自我驱动力强？</li>
-<li>富有团队精神——个人能力差，工作需要“抱大腿”</li>
-<li>热爱运动——技术水平烂，所以拿日常生活充数</li>
-<li>能吃苦，肯加班——这可是你说的，后边不要食言！</li>
-<li>愿与公司共同进步——找工作太难了，我今天放下身段，不图别的，只求能被贵司的HR大人录用</li>
-<li>实现人生价值——钱给够才行，否则不会好好干活的（我们的想法：你先好好干活，我们才能给你涨工资）</li>
-</ul>
-<p>以上是玩笑。严肃地讲，因为大家写的基本上都是些固定的客套话，都会抱着谦虚的态度，所以“自我评价”没什么实际意义，我们也不会特意看，只会把说大话和瞎抱怨的简历给Pass掉。</p>
-<h2 id="其他">其他</h2>
-<p>简历中不要出现错别字，不要把英语单词拼错，要使用规范汉字与规范标点符号，并且要符合中文语法，否则你的简历容易被直接Pass掉。要想避免这类细节错误，最简单的方法就是写完之后从头到尾认真检查两遍。</p>
-<h2 id="最后一步">最后一步</h2>
-<p>请把简历转成PDF格式之后再发送，原因见前文解释。</p>
-<h1
-id="不要问我们收没收到简历也不要傻等回复">不要问我们收没收到简历，也不要傻等回复</h1>
-<p>如果是研发部门直接招聘，那么你的简历发过来之后就会由研发部门直接筛选。如果是公司人力部门招聘，他们会对简历进行一个初选，筛掉看起来不靠谱的简历，再把看起来靠谱的简历交给研发部门精选。所以</p>
-<ul>
-<li>不要主动问收没收到简历。正常情况下，只要你的简历没有被当成垃圾邮件，那么你的简历肯定被收到了，但处置方法不同团队做法会不一样。你要是问我收没收到，这个我真不知道，而且这种事也不值得去浪费同事时间特意检查。</li>
-<li>不要傻等我们回复。如果你的简历看起来合适，我们会很快联系你面试。然而大部分人的简历并不匹配，有些人的简历还是垃圾，这些简历我们会直接扔到垃圾箱里，无暇挨个回复。因此投完简历之后，应该马上去下一家公司投简历，不要一棵树上吊死。</li>
-</ul>
-<p>如果有事情，正常情况下应该会在工作日的白天联系你，因为HR不加班。碰到晚上或周末联系的，大概率是996公司，或者公司太小没有专业HR，建议敬而远之。BOSS直聘或看准网这样的APP除外，因为他真的有可能是晚上刷抖音的时候顺便看了一下简历。</p>
-<h1 id="本系列文章">本系列文章</h1>
-<ul>
-<li><strong>作为招聘者，筛选简历的关注点</strong></li>
-<li><a
-href="/2020/08/20/resume-improvement/">来自招聘者的建议——如何优化简历</a></li>
-<li><a href="/2020/08/29/bad-resume/">迷惑简历大赏</a></li>
-<li><a href="/2021/02/12/hiring-test-paper/">笔试的设计</a></li>
-<li><a href="/2021/05/12/interview/">面试的安排</a></li>
-</ul>
-<h1 id="扩展阅读">扩展阅读</h1>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDA5LzA0L2RlZmVjdC1vZi1oaXJlLmh0bWw=">招聘的误区<i class="fa fa-external-link-alt"></i></span></li>
-<li><span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDExLzAzL2hpcmluZy1leHBlcmllbmNlLTAuaHRtbA==">俺的招聘经验
-- 编程随想的博客<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>一点人生的经验</category>
-      </categories>
-      <tags>
-        <tag>招聘</tag>
-        <tag>简历</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何写好软件文档</title>
     <url>/2020/02/20/how-to-write-document/</url>
     <content><![CDATA[<p>不写文档会挨骂，写烂文档更挨骂，写好文档，才能少挨骂。</p>
@@ -7431,6 +7203,460 @@ tihuan <span class="token parameter variable">--to</span><span class="token oper
       </tags>
   </entry>
   <entry>
+    <title>浅谈社招招聘（一）：作为招聘者，筛选简历的关注点</title>
+    <url>/2020/08/16/resume-filtering/</url>
+    <content><![CDATA[<p>因公司业务发展，需要招聘一些初、中级Java开发人员。本系列文章将面向求职者，以招聘者的视角来进行讨论，希望能为疫情期间苦于找工作的求职者带来一些启发。</p>
+<p>由于不同公司情况不同，有着急的，有不着急的，有舍得花钱的，有比周扒皮还抠门的，因此本系列文章意见仅供参考。</p>
+<span id="more"></span>
+<h1 id="招聘流程和分工">招聘流程和分工</h1>
+<p>正常情况下，招聘的流程如下：</p>
+<ol type="1">
+<li>提出招聘需求，分配招聘指标</li>
+<li>发布招聘广告、收简历等事务性工作</li>
+<li>简历筛选</li>
+<li>组织笔试、面试：很多单位不安排笔试，但一定会安排面试。有些单位还会组织多轮面试</li>
+<li>发放Offer、背景调查、入职手续等事务性工作</li>
+</ol>
+<p>其中，发布招聘信息、筛选简历可能有以下几种情况：</p>
+<ul>
+<li>主流情况：人力资源部门发布信息、收取简历，人力资源初步筛选并扔掉明显不靠谱的简历，然后将看起来合适的移交用人部门判断。用人部门再进一步筛选简历，确定可以面试之后再由人力部门进行发通知等事务性工作。</li>
+<li>个别情况：用人部门在取得公司授权之后，自行发布招聘信息，收取简历、组织面试，人力部门辅助。考核通过后由人力部门办理背调、入职等手续。小公司缺乏人力部门，也会选择这样做。</li>
+</ul>
+<p>因此，收你简历并与你联系的，通常是代收者。</p>
+<h1 id="同样的jdjob-description不同的目的">同样的JD（Job
+Description），不同的目的</h1>
+<p>在招聘网站上，各公司的JD（Job
+Description，岗位介绍）看起来都差不多，但关注点是不同的。</p>
+<p>为了节约成本，公司会倾向于内部调配人员，实在无法调配才会去招聘，例如：</p>
+<ul>
+<li>业务扩张
+<ul>
+<li>组建新团队</li>
+<li>项目实施缺人，需要拉人干活</li>
+</ul></li>
+<li>有人辞职，需要从外面拉个接盘侠</li>
+<li>需要特殊技能</li>
+</ul>
+<p>根据业务性质不同，对技能深度要求会有所不同。例如：</p>
+<ul>
+<li>小型政府项目，可能用户数不大，也可以要求业主堆硬件，出问题时用户也能有所容忍，这样对开发人员能力要求就不会特别高，能熟练使用一些东西就行。</li>
+<li>互联网产品，用户数很大，一个微小的问题可能就会引发系统不稳定，而且用户无法容忍系统宕机，这样对开发人员基础知识要求就比较高，以免挖坑。</li>
+<li>外包公司，员工只会被安排做些没什么含金量、但还不得不去做的低级工作，所以公司只要找个省钱能干的年轻人就行。</li>
+</ul>
+<p>对技能广度要求也有差异，例如：</p>
+<ul>
+<li>新公司、新团队或者并非专门做软件的公司会要一些复合型人才，例如“全栈工程师”，各类工作都要懂一些，这样可以少招人。</li>
+<li>大型团队内部分工明确，只需要一些“螺丝钉”，最典型的就是专门的前端、后端、测试、DBA、运维等，而且可能对这些职位的所用的工具和框架也有固定要求。</li>
+</ul>
+<p>在投递简历之前，可以通过各种途径了解一下公司，从而针对性地调整简历内容。</p>
+<h1
+id="用正确方法投递简历我们才有机会看到你的简历">用正确方法投递简历，我们才有机会看到你的简历</h1>
+<p>首先，你需要用正确的方法投递简历。HR的邮箱总是堆满垃圾，如果投递方法错误，你的简历连被看的机会都没有，更不用说筛选和面试了。</p>
+<h2 id="邮件投递">邮件投递</h2>
+<p>请注意邮件标题！邮箱里面总是堆满垃圾，如果你的邮件标题不能明显看出是应聘，我们可能会错过你的邮件。</p>
+<p>建议邮件标题采用“【应聘】姓名-岗位名-3年工作经验”之类的格式，让我们一眼就能看出你是在应聘，而且能够一眼看出你的基本情况。附件文件名也采用类似格式，方便我们保存和查找。</p>
+<p>发送邮件之前，请检查邮件发件人姓名，不要使用乱七八糟的网名，并且确认邮件中确实包含了简历附件。如果你害怕邮件内容有误，你可以先给自己发一封邮件，检查邮件内容是否正确，然后再发给HR。</p>
+<p>邮件正文实际上是无所谓的。收到邮件，我们至少要看一下简历内容，不会单纯因为你没写正文或者在正文中又写了一遍简历内容就把你Pass掉。</p>
+<h2 id="boss直聘-拉勾网">BOSS直聘 / 拉勾网</h2>
+<p>BOSS直聘 /
+拉勾网的特殊之处在于你可以提前与HR（当然不是BOSS）进行一些简单的交流。建议维护一份在线简历，让招聘者能够简单地了解你的基本情况，然后决定收简历。</p>
+<p>招聘经常是人力资源部门的人来做，所以请避免问工作细节，因为他们也不见得知道。</p>
+<h2 id="内推">内推</h2>
+<p>如果你为人靠谱，而且有熟人，可以考虑走内推去他们的公司，省去一切麻烦事情。</p>
+<p>注意，即便是内推，甚至内定入职，简历也要好好写，否则的话，轻则给人留下负面印象，重则容易失去面试和入职机会（到时你还有何面目去见替你内推的人？）</p>
+<h2 id="简历文件格式">简历文件格式</h2>
+<p>请使用PDF格式！不要使用其他文件格式！</p>
+<p>很多时候HR会用手机来登录邮箱或BOSS直聘，然后通过微信或QQ向同事传送文件。PDF格式不需要装插件，还可以保证样式稳定，而Word文件经常排版错乱，这会给我们留下极坏的第一印象。</p>
+<h1 id="解读简历中的信息">解读简历中的信息</h1>
+<p>牢记：<strong>简历的目的是让招聘者认为你能够胜任他们的工作</strong>。简历内容务必围绕这个主题展开。</p>
+<p>如果你的简历质量不高，缺乏有效信息，那么你就容易被Pass掉——连个人简历都写不好，如何保证以后能高质量地完成工作？</p>
+<p>收到简历后，我们会在十几秒钟之内扫描你的简历。挖掘到有效信息，才会仔细阅读并通知你参加面试。</p>
+<h2 id="页面排版">页面排版</h2>
+<p>简历模板请保持整体主题整洁、内容条理清晰、风格样式统一、字体字号得当。不要层次不清，也不要参差不齐，否则会给人留下很坏的印象，例如：</p>
+<figure>
+<img src="/img/2020-08-29-bad-resume/mixed-1.png" alt="混合样式" />
+<figcaption aria-hidden="true">混合样式</figcaption>
+</figure>
+<p>编程是一项注重细节的工作，而这一段话中，既有半角标点<span
+style="display:none;">x</span>,又有全角标点<span
+style="display:none;">x</span>;既 有 留 空 格，<span
+style="letter-spacing: -0.2em;">又有紧贴的数字序号</span>；既使用<span
+style="font-family:&#39;Times New Roman&#39;,Times,serif;">Times New
+Roman</span>，<span
+style="font-family:&#39;Songti SC&#39;, STSong, NSimSun, SimSun, serif;">又使用宋体</span>；<big>有些字大</big>，<small>有些字小</small>。这样会让人感觉此人“不拘小节”，爱给同事挖坑。</p>
+<p>另外：</p>
+<ul>
+<li>页面篇幅不要太长，两三页就好。社招项目经验多，只写一页不见得能装得下，不用强求。</li>
+<li>不要用填表式模板，不好看。</li>
+<li>建议自己设计模板，不要用网上被用滥的模板。</li>
+<li>简历请保持简约风格，不要太花哨，我们关心的是你的简历内容。</li>
+</ul>
+<h2 id="个人基本信息">个人基本信息</h2>
+<p>请写清姓名、电话、邮箱这三项内容，并保证联系方式畅通。电话用来向你发通知，邮箱用来发Offer，如果这两种联系方式都联系不上，对不起，你的工作机会没了。</p>
+<p>其他信息例如籍贯、政治面貌、民族等，没有特殊要求的话不用写，我们不关心这些事情。如果应聘国企或事业单位，而且是党员或预备党员的话，可以把党员身份写上。</p>
+<p>如果有软件开发相关的社交媒体账号，例如GitHub账号、CSDN账号、个人博客，而且有一定的成果，那么请务必写到简历中，这会成为一个重大加分项。但是，如果没有，千万别拿这些东西装X——我们会核实你的账号，发现没有什么实质内容的话，例如只有helloworld，或者只是些fork仓库或转载文章，那么社交媒体账号会成为扣分项。</p>
+<h2 id="照片">照片</h2>
+<p>建议不要放照片，因为脸不是判断你适不适合工作的因素。</p>
+<p>如果放照片，请放一张好看的照片。假如照片很难看，或者PS/美颜痕迹明显，那么你的第一印象就会崩坏，甚至会直接把我们“劝退”。</p>
+<h2 id="年龄">年龄</h2>
+<p>注意：“不限年龄”或者不提年龄限制，不代表没有年龄限制。为规避法律风险，避免被举报就业歧视，招聘者往往会采用更加隐蔽的手段来进行限制，例如把年龄不合适的人直接筛掉。</p>
+<p>软件行业是青春饭，30岁以下的年轻人，人傻、肯干、学习能力强，可以少发工资，而且简单工作的话年轻人稍微学习学习就能掌握，所以初中级岗位倾向于招年轻人。为了省钱，很多公司还会设法逼走年龄较大的员工，也就是所谓的“35岁危机”。</p>
+<p>如果年龄超过30还想投递简历，除非应聘高级岗位，或者有稀缺技能，或者项目/行业经验非常出色，而且愿意少挣钱，否则没戏。在初中级岗位中，年长者比不过年轻人的。如果已经有10年或以上经验，建议找熟人内推，或者让猎头挖，不要再用普通招聘形式找工作。</p>
+<h2 id="性别">性别</h2>
+<p>注意：“不招女性”也是就业歧视行为，而且明显违反劳动法，只要去劳动仲裁挥一挥女拳，公司必输。因此有些招聘者不会直说“不招女性”，而是把女性投递的简历直接筛掉，避免引来女拳麻烦。</p>
+<p>因为人们对女性有着刻板印象，加上害怕女性怀孕（已经有孩子？那还要二胎吗？）、休产假影响团队整体工作，女性找工作本身就吃亏，所以要更加注意简历中项目经验的优化。</p>
+<h2 id="教育信息">教育信息</h2>
+<p>请正确填写教育信息。学历从大专/大本开始往上写。虽然你学过的大学知识已经还给了老师，但是你的两个证（毕业证、学位证）还是有用的，不要弄丢。</p>
+<h3 id="学历">学历</h3>
+<p>学历歧视也是存在的。通常情况下，不仅只接受本科生或研究生（博士生年龄太大，除非算法岗位，否则对应聘者和招聘者来说都不划算），而且只接受重点大学毕业生。本科还得是全日制的，因为光是本科生就够HR忍受的了。尽管大专、专升本或非全日制学生也有工作能力强的，但通常会被无视，而且应聘要求不会说得太明确，免得被举报。</p>
+<p>从统计学意义上讲，学生个人素质通常是“重点大学&gt;普通大学&gt;三本专科”，从个人言谈举止方面也能看出比较明显的区别。当然，这只是一般规律：我们也认识到，即便是二本、三本、专科学校的毕业生，也能成为公司的业务或技术骨干，而985学校毕业生也有工作不认真、爱给同事挖坑的。所以，我们会考虑学校，但不会把学校当作唯一考察因素。</p>
+<p>我们招聘时不太考虑专业，无论是否计算机软件专业都可以考虑。有些学生虽然非计算机专业毕业，但他们出于个人兴趣爱好选择了软件行业，这类人的个人能力往往比科班出身的人还强。但是，由于非计算机专业学生可能只学过写代码，底子较差，工程意识薄弱，在面试时要注意考察数据结构与算法之类的基础知识。相对的，这类人找工作之前也要补一下相关知识。</p>
+<p>最后学历千万不要隐瞒或造假，如果背景调查时发现实际学历与简历内容不一致，那么不好意思，拜拜。就算你工作确实出色，被争取挽留了下来，我们也不敢再提拔你了，连入职都敢违法，谁敢保证你以后不去犯别的法呢？</p>
+<h3 id="培训班">培训班</h3>
+<p>如果参加过社会培训班，建议调整一下工作的时间节点，把这段经历隐藏掉。如果只参加过社会培训班，没有实际经验，那么请节哀，因为有经验的招聘者能看出来你只去过培训班，没有实际工作经历。</p>
+<p>由于培训班培训内容经常与行业实际脱节，而且我们认为花钱进补习班=学习能力差，所以我们不喜欢招参加过培训班的人，甚至会直接将有培训班经历的人给Pass掉。</p>
+<h3 id="在校期间表现">在校期间表现</h3>
+<p>如果毕业时间不长，而且在大学期间拿过ACM区域赛、全国数学建模竞赛、美国数学建模比赛、飞思卡尔智能车大赛等含金量较高的奖项，或者已经通过英语六级与更高水平的考试，建议将其写到简历上。我们会认为这类人比较有潜力。</p>
+<p>其他表现没必要往简历上写。走向社会，学校期间的表现都是浮云了。</p>
+<h2 id="工作单位">工作单位</h2>
+<p>在工作单位方面，我们关心：</p>
+<ul>
+<li>工作单位与行业：大厂出身更容易吸引人，而外包公司或小公司出身会让人敬而远之。
+<ul>
+<li>外包公司：因为外包员工经常做技术含量不高的低级工作，无论工作多少年都只能折算成一年经验，除非项目经验感人，否则倾向于Pass。</li>
+<li>小公司、创业公司或非软件公司：在这类公司工作的人，找工作时可能也会遇到困难，因为他们通常没经历过正规开发流程，缺乏规范意识。在面试时要注意考察他们的质量把控情况。</li>
+</ul></li>
+<li>跳槽频率：假如你频繁跳槽，一年跑一次，甚至不到一年就跑路，你说我们还敢招你吗？
+<ul>
+<li>如果是不可控原因被迫跳槽，例如公司欠薪、倒闭，建议明确标在简历上，以免被当成频繁跑路。</li>
+</ul></li>
+</ul>
+<p>工作时间不要有断档。如果确实因为脱产进修、裸辞在家或出门环游世界等原因产生了空档，请把空档时间和原因写出来，否则会认为你“逆水行舟，不进则退”。</p>
+<p>社招简历，除非是大厂，实习经验写不写都行，因为我们都清楚实习生其实没做什么实际工作。请用最近一两年的项目经历来证明自己工作能力。</p>
+<p>请不要编造或隐瞒工作单位。公司会在你入职前后对你进行背景调查，核实工作经历，有可疑之处的话就会拒绝录用你，以免遇到法律问题。</p>
+<p>另外建议投简历之前在知乎、看准网（2021年更新：看准网已经没有员工评论了）等平台对即将投递简历的公司进行背景调查，免得刚逃出一个坑，又在不经意间跳进下一个坑。</p>
+<h2 id="项目信息">项目信息</h2>
+<p>项目信息是简历的重点。我们需要通过你的项目信息来判断你的阅历与能力，例如：</p>
+<ul>
+<li>你的语言表达能力、总结提练能力如何？</li>
+<li>有没有做过大型项目？</li>
+<li>是否熟悉大型系统会遇到的问题（数据量大、并发量高，等等）？</li>
+<li>有没有经历过完整、规范的工作流程？</li>
+<li>独立完成，还是团队协作完成？</li>
+<li>在项目中是凑数、普通成员，还是核心成员或救火队员？</li>
+<li>曾经参与过哪些行业，是否与本公司一致？</li>
+<li>实践过哪些技术栈（Vue/React，Spring
+Boot……）？只是肤浅地增删改查，还是深入研究、优化完善？</li>
+<li>只做过开发工作，还是做过管理工作，或是多面手？</li>
+<li>有没有个人思考？</li>
+<li>……</li>
+</ul>
+<p>对于每个项目，请在不泄露商业机密的前提下简短地介绍一下项目是做什么的，否则我们这些外人会看得一头雾水。然后不要忘记写一下自己在项目中的角色与工作内容，让我们意识到你不是来“打酱油”的。</p>
+<p>很多系统，从本质上讲就是一大堆的增删改查，或者说是“数据库前端”，因此工作内容不要只写“开发XX模块”，否则会被认为只做了些微小的增删改查工作。工作内容应当尽量遵循“STAR法则”（情境、任务、行动、结果）来写，让人知道你不是机械地执行命令，而是有针对性地解决了实际问题：</p>
+<ul>
+<li>情境：需要解决什么问题，或者遇到了什么事情</li>
+<li>任务：你的目标是什么</li>
+<li>行动：你做了什么事情</li>
+<li>结果：最后达到了什么效果。如果能量化，那么务必提供一个有说服力的数字，例如系统响应时间从2s降低到200ms。</li>
+</ul>
+<p>举一个具体例子：“开发XX功能，用到了Redis”，这没什么意思，因为很多项目都会用这个东西。但是，如果你改写“针对项目XX功能具有瞬时高并发特点，使用Redis实现XX，解决XX问题”，那么就会成为一个亮点。<a
+href="/2020/08/20/resume-improvement/">后续</a>会专门介绍如何优化你的项目经验。</p>
+<p>项目经历也可以稍微吹吹牛。假如你读过其他人写的代码，熟悉了它的内部逻辑，换成自己写，大体上也能搞出来，那么你完全可以“剽窃”他人的劳动成果，将其据为己有，反正我们又不可能去核实真假。无论实际开发工作是不是你做的，只要面试时候能把事情说得像你做的一样就行。</p>
+<p>项目经历请按从新到旧的顺序写。两三年的事情可能已经记不清，而且当时你工作可能还没那么熟练，所以我们面试官也没必要再深究了。</p>
+<p>在实际招聘过程中，我们发现大部分人未能正确地拼写他们所用的技术框架或工具，例如把“Spring
+Boot”写成“springboot”、“Springboot”，把“MySQL”写成“mysql”、“Mysql”、“MySql”……虽然很多招聘者并不会在意这个事情，但是花点时间查阅正确拼写肯定没有坏处。至少我们会觉得你更加专业。</p>
+<h2 id="薪资">薪资</h2>
+<p>建议不要写任何有关薪资的内容，包括起始薪资、当前薪资和期望薪资。</p>
+<ul>
+<li>如果薪资写得低了，那么谈薪资的时候，我们会尽量在你写的范围往下压，这样你会吃亏。</li>
+<li>如果薪资写得高了，我们会直接Pass你的简历（工资开不起），或者在面试的时候为难你，以便找理由压低工资，同样会让你吃亏。</li>
+</ul>
+<p>非要写薪资的话，如何写期望薪资才合适呢？先通过同学、同事、招聘网站等渠道，调查一下所在城市的行业平均收入水平，再估计一下自己实际能力，然后写一个区间，而且最低值不要低于平均水平。例如期望值15k，你写成17～20k（当然你要有这个水平），谈判时没有暴露心理预期，而且谈判失利，只得到16k，那么你实际上还赚了一千块。</p>
+<h2 id="个人技能">个人技能</h2>
+<p>个人技能是一个“锦上添花”的东西。项目经历这个“锦”不好看的话，个人技能这些“花”也不会起太大作用。这个东西你可以认为是给那些外行HR们进行关键词匹配用的，对内行人来说作用不大。</p>
+<p>根据掌握程度分类，通常分为三种程度：精通、熟悉、了解。除非你真的精通到了底层的程度，否则请写成“熟悉”。不熟悉的东西请写成“了解”。因为这些东西很可能会成为面试问题，所以不要写自己不熟悉的东西，以免面试翻车。</p>
+<p>技能有容易上手的，也有难于上手的。例如XML、JSON数据格式或Postman工具用几分钟就能学会，而Linux系统操作技能需要花一些时间来积累，所以说自己熟悉JSON就没什么实际意义，而说自己熟悉Linux就会高人半等。尽量不要写那类容易上手的东西，没有意义，写多了还会让人找不到你的特长，结果只能是减分。</p>
+<p>不要简单地“熟悉XX”、“了解XX”就结束了，后面要再写点东西，例如“熟悉JavaScript，熟悉原型链、Promise等原理”，这样才能说明你真熟悉JavaScript。另外个人技能不用局限于具体的工具或框架，像英语水平好、热爱研究开源软件、使用Google搜索这类事情都可以写（当然要和软件开发工作相关），只要简历和面试能自圆其说就行。</p>
+<h2 id="自我评价">自我评价</h2>
+<p>别给自己做评价！</p>
+<p>在见过各种年轻员工的工作能力和工作态度之后，我们眼里的自我评价是这样的——</p>
+<ul>
+<li>已通过英语四级——英语水平差，六级没过</li>
+<li>有责任心，工作认真负责——员工做好本职工作，有什么可夸的？</li>
+<li>学习能力强——实际上什么都不会，有事情都是去问百度</li>
+<li>爱好广泛——没有特长</li>
+<li>热爱编程——只会编程，不会别的事情（例如写文档、与用户沟通），无法胜任工作</li>
+<li>自我驱动力强——天天刷微博、抖音，你敢说你自我驱动力强？</li>
+<li>富有团队精神——个人能力差，工作需要“抱大腿”</li>
+<li>热爱运动——技术水平烂，所以拿日常生活充数</li>
+<li>能吃苦，肯加班——这可是你说的，后边不要食言！</li>
+<li>愿与公司共同进步——找工作太难了，我今天放下身段，不图别的，只求能被贵司的HR大人录用</li>
+<li>实现人生价值——钱给够才行，否则不会好好干活的（我们的想法：你先好好干活，我们才能给你涨工资）</li>
+</ul>
+<p>以上是玩笑。严肃地讲，因为大家写的基本上都是些固定的客套话，都会抱着谦虚的态度，所以“自我评价”没什么实际意义，我们也不会特意看，只会把说大话和瞎抱怨的简历给Pass掉。</p>
+<h2 id="其他">其他</h2>
+<p>简历中不要出现错别字，不要把英语单词拼错，要使用规范汉字与规范标点符号，并且要符合中文语法，否则你的简历容易被直接Pass掉。要想避免这类细节错误，最简单的方法就是写完之后从头到尾认真检查两遍。</p>
+<h2 id="最后一步">最后一步</h2>
+<p>请把简历转成PDF格式之后再发送，原因见前文解释。</p>
+<h1
+id="不要问我们收没收到简历也不要傻等回复">不要问我们收没收到简历，也不要傻等回复</h1>
+<p>如果是研发部门直接招聘，那么你的简历发过来之后就会由研发部门直接筛选。如果是公司人力部门招聘，他们会对简历进行一个初选，筛掉看起来不靠谱的简历，再把看起来靠谱的简历交给研发部门精选。所以</p>
+<ul>
+<li>不要主动问收没收到简历。正常情况下，只要你的简历没有被当成垃圾邮件，那么你的简历肯定被收到了，但处置方法不同团队做法会不一样。你要是问我收没收到，这个我真不知道，而且这种事也不值得去浪费同事时间特意检查。</li>
+<li>不要傻等我们回复。如果你的简历看起来合适，我们会很快联系你面试。然而大部分人的简历并不匹配，有些人的简历还是垃圾，这些简历我们会直接扔到垃圾箱里，无暇挨个回复。因此投完简历之后，应该马上去下一家公司投简历，不要一棵树上吊死。</li>
+</ul>
+<p>如果有事情，正常情况下应该会在工作日的白天联系你，因为HR不加班。碰到晚上或周末联系的，大概率是996公司，或者公司太小没有专业HR，建议敬而远之。BOSS直聘或看准网这样的APP除外，因为他真的有可能是晚上刷抖音的时候顺便看了一下简历。</p>
+<h1 id="本系列文章">本系列文章</h1>
+<ul>
+<li><strong>作为招聘者，筛选简历的关注点</strong></li>
+<li><a
+href="/2020/08/20/resume-improvement/">来自招聘者的建议——如何优化简历</a></li>
+<li><a href="/2020/08/29/bad-resume/">迷惑简历大赏</a></li>
+<li><a href="/2021/02/12/hiring-test-paper/">笔试的设计</a></li>
+<li><a href="/2021/05/12/interview/">面试的安排</a></li>
+</ul>
+<h1 id="扩展阅读">扩展阅读</h1>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDA5LzA0L2RlZmVjdC1vZi1oaXJlLmh0bWw=">招聘的误区<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDExLzAzL2hpcmluZy1leHBlcmllbmNlLTAuaHRtbA==">俺的招聘经验
+- 编程随想的博客<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+]]></content>
+      <categories>
+        <category>一点人生的经验</category>
+      </categories>
+      <tags>
+        <tag>招聘</tag>
+        <tag>简历</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅谈社招招聘（二）：来自招聘者的建议——如何优化简历</title>
+    <url>/2020/08/20/resume-improvement/</url>
+    <content><![CDATA[<p>“是金子总会发光”不适用于招聘。为了提高简历通过率，你需要针对招聘者关心的东西来优化你的简历。</p>
+<span id="more"></span>
+<h1 id="优化整体格式">优化整体格式</h1>
+<p>不要忽略排版细节！收到简历时，良好的排版会给人留下良好的第一印象，而差劣的排版会让人怀疑此人是否能认真工作。</p>
+<p>你的简历请满足以下要求：</p>
+<ol type="1">
+<li>内容、版式简洁明了；</li>
+<li>排版清晰，逻辑顺畅；</li>
+<li>字体字号整齐，标点符号规范；</li>
+<li>正确拼写英文单词，例如<code>MySQL</code>而非<code>mysql</code>、<code>Mysql</code>或<code>MySql</code>。</li>
+</ol>
+<p>请避免套用网上模板：下载量越多，说明用的人越多，也越容易让HR审美疲劳（甚至会让人觉得你参加过培训班）。“keep
+simple and
+naive”的设计也是可以的，例如只有标题加下划线、正文加项目符号、内容保持对齐三种样式，足够了。</p>
+<p>以下问题会导致你直接出局：</p>
+<ol type="1">
+<li>错别字和语病——中国话都写不好，说明你工作不认真；</li>
+<li>篇幅过长，例如写了五六页内容——说明你表达能力和总结提炼的能力差；</li>
+<li>页面版式太花哨，或者有背景色/背景图，让人难以阅读重要内容——面试时简历是要打印出来的；</li>
+<li>使用了乱七八糟的文件格式，无法打开，或者打开之后乱码——浪费HR时间；</li>
+</ol>
+<p>投递简历时请将文件转为PDF格式，因为Word格式容易导致排版错乱。</p>
+<h1 id="梳理项目经历">梳理项目经历</h1>
+<p>工作与项目经历是招聘者最关心的内容。通过项目经历，招聘者可以了解到：</p>
+<ul>
+<li>你的语言表达能力、总结提练能力如何？</li>
+<li>有没有做过大型项目？</li>
+<li>是否熟悉大型系统会遇到的问题（数据量大、并发量高，等等）？</li>
+<li>有没有经历过完整、规范的工作流程？</li>
+<li>独立完成，还是团队协作完成？</li>
+<li>在项目中是凑数、普通成员，还是核心成员或救火队员？</li>
+<li>曾经参与过哪些行业，是否与本公司一致？</li>
+<li>实践过哪些技术栈（Vue/React，Spring
+Boot……）？只是肤浅地增删改查，还是深入研究、优化完善？</li>
+<li>只做过开发工作，还是做过管理工作，或是多面手？</li>
+<li>有没有个人思考？</li>
+<li>……</li>
+</ul>
+<h2 id="反例与分析">反例与分析</h2>
+<p>先看几个非常典型的反面案例：</p>
+<h3 id="案例一">案例一</h3>
+<ul>
+<li>项目名称：XXX项目</li>
+<li>项目简介：XXX……</li>
+<li>工作职责：
+<ol type="1">
+<li>参与系统需求、设计</li>
+<li>开发了XX模块、XX模块</li>
+<li>系统部署与维护</li>
+</ol></li>
+</ul>
+<p>分析：没有体现技术栈，我们无法得知你用了什么语言和技术，也无法得知你的参与程度，只能认为你在凑数。</p>
+<h3 id="案例二">案例二</h3>
+<ul>
+<li>项目名称：XXX项目</li>
+<li>项目简介：XXX……</li>
+<li>工作职责：
+<ol type="1">
+<li>参与系统需求、设计</li>
+<li>开发了XX模块、XX模块，使用了Spring
+Boot+MyBatis+Redis+Kafka+XXXXXX</li>
+<li>系统部署与维护，系统部署在Linux服务器，使用Tomcat+MySQL+XXX</li>
+</ol></li>
+</ul>
+<p>分析：虽然介绍了技术栈，但只是简单地堆砌单词，没有结合项目具体工作描述，无法体现出你是如何利用这些技术的。</p>
+<h3 id="案例三">案例三</h3>
+<ul>
+<li>项目名称：XXX项目</li>
+<li>项目简介：XXX……</li>
+</ul>
+<p>分析：只介绍了项目，没写自己做什么事情，怎么认定你有项目经验？（这就好比我把QQ、微信、支付宝等产品介绍写到简历中，我就是参与过大型互联网产品开发的人了）</p>
+<h3 id="案例四">案例四</h3>
+<ul>
+<li>项目名称：XXX项目</li>
+<li>项目简介：XXX……</li>
+<li>工作内容：
+<ul>
+<li>针对XX功能进行判断：在A情况下，系统采取a措施，处理b数据，做出c操作，实现d效果；在E情况下，采用f方法，提示用户录入g数据，根据h规则与i规则进行j处理，得出k结果。</li>
+</ul></li>
+</ul>
+<p>分析：请专注于技术，不要钻到业务细节中，一是招聘者不会关心具体业务（我们用不到你们的业务），二是你会泄露你们公司的商业机密。</p>
+<h2 id="整理工作内容">整理工作内容</h2>
+<p>通过上面几个反例，你需要意识到合适的项目经历应该包含以下内容：</p>
+<ul>
+<li>项目名称</li>
+<li>项目背景</li>
+<li>技术栈</li>
+<li>工作职责（说明不是凑数的）</li>
+<li>个人亮点（说明不是应付工作的）</li>
+</ul>
+<h3 id="项目背景">项目背景</h3>
+<p>用简洁的语言交待项目背景：</p>
+<ul>
+<li>项目或产品大概是做什么事情的；</li>
+<li>项目的意义或优势，例如政府项目可以是提高了信息化管理水平；</li>
+<li>简要交待技术栈，用了什么框架，用了什么技术。</li>
+</ul>
+<p>目的是让他人对你项目的价值、技术有个基本的了解。</p>
+<h3 id="工作职责">工作职责</h3>
+<p>简单讲一下自己在团队中的主要职责（例如开发人员），让招聘者知道你在项目中不是吃干饭的。当然，如果项目经历充实，不写角色也无妨。</p>
+<h3 id="提炼亮点">提炼亮点</h3>
+<p>要想说明工作能力强，就要拿出实际的证据，例如解决了项目问题，或者干出了业绩，拿亮点闪瞎招聘者的眼睛。</p>
+<p>工作内容应当尽量遵循“STAR法则”（情境、任务、行动、结果）来写，让人知道你不是机械地执行命令，而是有针对性地解决了实际问题：</p>
+<ul>
+<li>情境：需要解决什么问题，或者遇到了什么事情</li>
+<li>任务：你的目标是什么</li>
+<li>行动：你做了什么事情</li>
+<li>结果：最后达到了什么效果。如果能量化，那么务必提供一个有说服力的数字，例如系统响应时间从2s降低到200ms，或者承担了30%的开发工作。</li>
+</ul>
+<p>举两个典型例子：</p>
+<ul>
+<li>开发XX、XX模块
+<ul>
+<li>分析：只有“行动”，没有背景和结果，也无法体现XX模块的重要性，会让人认为只做了一些基础的增删改查。</li>
+<li>优化：
+<ul>
+<li>使用XXX框架、XX技术
+<em>（行动：使用了XX技术）</em>，开发XX、XX等<strong>核心功能</strong>模块
+<em>（如果是核心功能，强调核心）</em></li>
+<li>使用XXX框架、XX技术
+<em>（行动：使用了XX技术）</em>，开发XX、XX等模块，开发工作量占全系统的30%。<em>（如果不是核心功能，强调工作量）</em></li>
+</ul></li>
+</ul></li>
+<li>SQL性能优化
+<ul>
+<li>分析：优化怎么做的？有效果吗？</li>
+<li>优化：
+<ul>
+<li>通过慢查询日志、执行计划识别分析执行效率较低的SQL
+<em>（行动之一：通过两种方法发现问题）</em>，根据具体情况改写SQL，调整索引
+<em>（行动之二：通过改SQL和建索引解决了这个问题）</em>，提高数据库查询效率，查询时间从平均xx降低到xx
+<em>（情境和结果：系统性能低，经过优化，系统性能提高）</em>。</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>除主要工作外，为了提高工作效率而搞研究也是能接受的：</p>
+<ul>
+<li>编写Python脚本
+<em>（行动：写Python脚本）</em>实现XX、XX等任务的自动化
+<em>（目标：自动化）</em>，大幅提高团队工作效率，有效地避免了内容遗漏、操作失误等问题
+<em>（情境和结果：解决了人工操作效率低、容易出错的问题）</em>。</li>
+<li>在开发过程中指导其他员工，并进行了X次技术分享活动，主题包括XX、XX等。</li>
+</ul>
+<p>如果是一个参与程度不高的项目，提练不出什么亮点，那么建议隐藏掉，只谈大项目。<!-- TODO 加分：系统架构、整体认知；带团队经历 ；忌讳：学习了XXX；写不熟悉东西 --></p>
+<h3 id="加分项">加分项</h3>
+<p>以下事情会从侧面证明你的工作能力，如果与你参与的项目匹配，请在简历上进行体现：</p>
+<ul>
+<li>成型产品：有成型产品，说明系统已经上线了。如果产品评价好，说明系统做得不错，不是糊弄的。</li>
+<li>技术栈：大家都喜欢新技术。用过各类新技术的员工更受欢迎。</li>
+<li>团队规模：小团队工作可以随意一些，而大团队工作不规范就会变成屎山。在大型团队中工作，阅历应该更丰富了。</li>
+<li>合同额、开发周期：项目制公司的话，合同额和开发周期也能证明软件规模。做过大型项目，阅历和规范程度应该会比较高。</li>
+<li>用户量：道理同上。</li>
+<li>相同行业：就算技术差点，至少业务知识不是零蛋。</li>
+</ul>
+<h3 id="如果技术栈太老旧">如果技术栈太老旧</h3>
+<p>因为商业项目更加追求稳定，所以很多项目仍然用比较旧的技术栈，甚至还在使用JDK
+5，这是正常现象。不必隐瞒具体技术：老旧技术用熟了，能够掌握基本原理，切换起来也容易。</p>
+<p>很多公司希望员工进去就能干活。完全没碰过新技术的话，找工作会非常吃亏，所以建议在简历中体现自己特意学习过某些新技术（例如因XX技术较为落后，曾自学XXX并尝试用新技术实践项目功能，让HR觉得你比较上进），或者直接假装自己项目是用新技术开发的。但是，除了在简历提及以外，你必须要确实实践过，否则面试会穿帮。</p>
+<h2 id="优化结果">优化结果</h2>
+<p>根据以上建议，简历优化结果如下：</p>
+<ul>
+<li>项目名称：XXX项目</li>
+<li>项目简介：XXX，目前用户访问量已达XXX万。项目使用了XXX、YYY、ZZZ等技术。<em>（把项目使用到，但是你自己没有深入使用过的技术框架放到项目简介里，让招聘者了解你们项目大体的技术栈）</em></li>
+<li>工作职责：主要负责前期需求调研、需求编写、系统设计，以及XX与XX模块开发工作。<em>（让人知道你的主要职责是开发人员，而不是测试、运维或者PPT岗位）</em></li>
+<li>工作内容：<em>（此处专注于展示亮点）</em>
+<ul>
+<li>作为项目主要成员，使用XX框架开发XX模块，实现XX、XX、XX等核心功能。</li>
+<li>使用XXX作为消息队列服务，实现后台数据推送功能。</li>
+<li>在技术选型过程中，考虑到XX功能会存在瞬时高并发场景，选择XX框架进行处理。实际开发过程中，利用XX框架，将XX数据进行XX处理，并发能力xx%。</li>
+<li>通过慢查询日志、执行计划识别分析执行效率较低的SQL，根据具体情况改写SQL，调整索引，提高数据库查询效率，查询时间从平均xx降低到xx。</li>
+<li>与其他同事合作，对项目进行拆分和重构，实现基于XXX的持续集成和自动化部署。</li>
+<li>编写Python脚本实现XX、XX等任务的自动化，大幅提高团队工作效率，有效地避免了内容遗漏、操作失误等问题。</li>
+<li>在开发过程中指导其他员工，并进行了X次技术分享活动，主题包括XX、XX等。</li>
+</ul></li>
+</ul>
+<p>这样写，就算仍然找不到工作，至少会有更多公司通知你参加面试了。</p>
+<h1 id="个人技能优化">个人技能优化</h1>
+<p>通常简历上还会写着“熟悉XXX”、“了解XXX”。这个地方也是有优化空间的：</p>
+<ol type="1">
+<li>注意招聘中的招聘要求（JD），“熟悉”、“了解”的内容尽量贴近JD。碰到不太懂技术、会用Ctrl+F来检查单词的HR时不吃亏。</li>
+<li>梳理你“熟悉”、“了解”的东西，确定这些技能的学习成本。尽量少写那些只需要几分钟或者一两天就能掌握的东西，多写一些需要时间积累才能熟练掌握的东西。</li>
+<li>不要简单地“熟悉XX”、“了解XX”。熟悉了解之后要再写点东西，例如“熟悉JavaScript，掌握原型链、Promise等原理”，这样才能说明你真熟悉JavaScript。</li>
+<li>如果你英语好，或者会翻墙（注意不要明说，以免因言获罪），或者有一些软件开发方面的个人爱好，也可以稍微提及。</li>
+</ol>
+<h1 id="了解其他加分项与减分项">了解其他加分项与减分项</h1>
+<h2 id="加分项-1">加分项</h2>
+<p>如果工作时间不长，大学英语六级过了，或者拿过ACM区域赛之类等含金量较高的奖项，请把它们写到简历中。</p>
+<p>如果有软考高级证书，或者拿到了行业认证（例如Oracle认证），请务必写到简历里。</p>
+<p>如果以下账号有实际内容，也请写到简历中让人知道：</p>
+<ul>
+<li>GitHub：例如参与过开源项目，提交过代码，或者自己的GitHub仓库被打了很多Star，我们会认为你有一定的能力。</li>
+<li>个人博客：如果个人博客活跃，而且有一些写得好的原创文章，我们就知道你对技术有所思开，擅长总结。</li>
+<li>技术论坛：例如活跃于Stack
+Overflow，我们会认为你对技术掌握比较好，有解决问题能力。</li>
+</ul>
+<p>注意：如果你在简历中写了社交媒体链接，那么我们一定会进入这些网站来核实真伪。假如你的GitHub或博客中缺乏原创内容，只有些helloworld级的练习文件，或者都是些转载或fork内容，或者在找工作时候才胡乱凑些东西，那么我们会认为你是在装X，然后把你的简历给Pass掉。</p>
+<h2 id="减分项">减分项</h2>
+<ul>
+<li>培训班经历：由于培训班培训内容经常与行业实际脱节，所以很多公司不喜欢招参加过培训班的人，甚至会直接将有培训班经历的人给Pass掉。实际工作中用到的技术知识基本上都是“实践型”知识，照着网上的培训教程就能学会基本用法，实在没必要去培训班。</li>
+<li>外包公司经历：外包公司员工经常被安排做一些初级工作，接触不到核心功能与技术。如果简历中体现不出你有所思考，那么我们只能当作民工来使唤了。</li>
+<li>小公司/非软件公司经历：小公司，或主业不是软件的公司（例如电子商务），通常缺乏标准开发规范，其中的开发者可能也缺乏规范意识。</li>
+</ul>
+<h1 id="最后的注意事项">最后的注意事项</h1>
+<p>写完之后务必从头到尾认真检查几遍。如果有信得过的哥们，可以再让他们帮忙检查一下简历。</p>
+<p>只要你能把事情说得像自己做过一样，那么项目经历就可以稍微吹吹牛，毕竟我们不可能去你们公司系统里核实代码提交记录。但是，简历的内容会被拿来当作面试的话题，因此要提前想好实施细节（甚至包括版本号），而且不懂的东西不要乱编，以免被打脸。</p>
+<h1 id="本系列文章">本系列文章</h1>
+<ul>
+<li><a
+href="/2020/08/16/resume-filtering/">作为招聘者，筛选简历的关注点</a></li>
+<li><strong>来自招聘者的建议——如何优化简历</strong></li>
+<li><a href="/2020/08/29/bad-resume/">迷惑简历大赏</a></li>
+<li><a href="/2021/02/12/hiring-test-paper/">笔试的设计</a></li>
+<li><a href="/2021/05/12/interview/">面试的安排</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>一点人生的经验</category>
+      </categories>
+      <tags>
+        <tag>招聘</tag>
+        <tag>简历</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>浅谈社招招聘（三）：迷惑简历大赏</title>
     <url>/2020/08/29/bad-resume/</url>
     <content><![CDATA[<p>本文收录个人在筛选简历时看到的令人哭笑不得的内容。在博君一笑的同时，希望也能引以为戒，不要因本可以避免的低级错误耽误前途。</p>
@@ -7801,232 +8027,6 @@ href="/2020/08/16/resume-filtering/">作为招聘者，筛选简历的关注点<
 <li><a
 href="/2020/08/20/resume-improvement/">来自招聘者的建议——如何优化简历</a></li>
 <li><strong>迷惑简历大赏</strong></li>
-<li><a href="/2021/02/12/hiring-test-paper/">笔试的设计</a></li>
-<li><a href="/2021/05/12/interview/">面试的安排</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>一点人生的经验</category>
-      </categories>
-      <tags>
-        <tag>招聘</tag>
-        <tag>简历</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>浅谈社招招聘（二）：来自招聘者的建议——如何优化简历</title>
-    <url>/2020/08/20/resume-improvement/</url>
-    <content><![CDATA[<p>“是金子总会发光”不适用于招聘。为了提高简历通过率，你需要针对招聘者关心的东西来优化你的简历。</p>
-<span id="more"></span>
-<h1 id="优化整体格式">优化整体格式</h1>
-<p>不要忽略排版细节！收到简历时，良好的排版会给人留下良好的第一印象，而差劣的排版会让人怀疑此人是否能认真工作。</p>
-<p>你的简历请满足以下要求：</p>
-<ol type="1">
-<li>内容、版式简洁明了；</li>
-<li>排版清晰，逻辑顺畅；</li>
-<li>字体字号整齐，标点符号规范；</li>
-<li>正确拼写英文单词，例如<code>MySQL</code>而非<code>mysql</code>、<code>Mysql</code>或<code>MySql</code>。</li>
-</ol>
-<p>请避免套用网上模板：下载量越多，说明用的人越多，也越容易让HR审美疲劳（甚至会让人觉得你参加过培训班）。“keep
-simple and
-naive”的设计也是可以的，例如只有标题加下划线、正文加项目符号、内容保持对齐三种样式，足够了。</p>
-<p>以下问题会导致你直接出局：</p>
-<ol type="1">
-<li>错别字和语病——中国话都写不好，说明你工作不认真；</li>
-<li>篇幅过长，例如写了五六页内容——说明你表达能力和总结提炼的能力差；</li>
-<li>页面版式太花哨，或者有背景色/背景图，让人难以阅读重要内容——面试时简历是要打印出来的；</li>
-<li>使用了乱七八糟的文件格式，无法打开，或者打开之后乱码——浪费HR时间；</li>
-</ol>
-<p>投递简历时请将文件转为PDF格式，因为Word格式容易导致排版错乱。</p>
-<h1 id="梳理项目经历">梳理项目经历</h1>
-<p>工作与项目经历是招聘者最关心的内容。通过项目经历，招聘者可以了解到：</p>
-<ul>
-<li>你的语言表达能力、总结提练能力如何？</li>
-<li>有没有做过大型项目？</li>
-<li>是否熟悉大型系统会遇到的问题（数据量大、并发量高，等等）？</li>
-<li>有没有经历过完整、规范的工作流程？</li>
-<li>独立完成，还是团队协作完成？</li>
-<li>在项目中是凑数、普通成员，还是核心成员或救火队员？</li>
-<li>曾经参与过哪些行业，是否与本公司一致？</li>
-<li>实践过哪些技术栈（Vue/React，Spring
-Boot……）？只是肤浅地增删改查，还是深入研究、优化完善？</li>
-<li>只做过开发工作，还是做过管理工作，或是多面手？</li>
-<li>有没有个人思考？</li>
-<li>……</li>
-</ul>
-<h2 id="反例与分析">反例与分析</h2>
-<p>先看几个非常典型的反面案例：</p>
-<h3 id="案例一">案例一</h3>
-<ul>
-<li>项目名称：XXX项目</li>
-<li>项目简介：XXX……</li>
-<li>工作职责：
-<ol type="1">
-<li>参与系统需求、设计</li>
-<li>开发了XX模块、XX模块</li>
-<li>系统部署与维护</li>
-</ol></li>
-</ul>
-<p>分析：没有体现技术栈，我们无法得知你用了什么语言和技术，也无法得知你的参与程度，只能认为你在凑数。</p>
-<h3 id="案例二">案例二</h3>
-<ul>
-<li>项目名称：XXX项目</li>
-<li>项目简介：XXX……</li>
-<li>工作职责：
-<ol type="1">
-<li>参与系统需求、设计</li>
-<li>开发了XX模块、XX模块，使用了Spring
-Boot+MyBatis+Redis+Kafka+XXXXXX</li>
-<li>系统部署与维护，系统部署在Linux服务器，使用Tomcat+MySQL+XXX</li>
-</ol></li>
-</ul>
-<p>分析：虽然介绍了技术栈，但只是简单地堆砌单词，没有结合项目具体工作描述，无法体现出你是如何利用这些技术的。</p>
-<h3 id="案例三">案例三</h3>
-<ul>
-<li>项目名称：XXX项目</li>
-<li>项目简介：XXX……</li>
-</ul>
-<p>分析：只介绍了项目，没写自己做什么事情，怎么认定你有项目经验？（这就好比我把QQ、微信、支付宝等产品介绍写到简历中，我就是参与过大型互联网产品开发的人了）</p>
-<h3 id="案例四">案例四</h3>
-<ul>
-<li>项目名称：XXX项目</li>
-<li>项目简介：XXX……</li>
-<li>工作内容：
-<ul>
-<li>针对XX功能进行判断：在A情况下，系统采取a措施，处理b数据，做出c操作，实现d效果；在E情况下，采用f方法，提示用户录入g数据，根据h规则与i规则进行j处理，得出k结果。</li>
-</ul></li>
-</ul>
-<p>分析：请专注于技术，不要钻到业务细节中，一是招聘者不会关心具体业务（我们用不到你们的业务），二是你会泄露你们公司的商业机密。</p>
-<h2 id="整理工作内容">整理工作内容</h2>
-<p>通过上面几个反例，你需要意识到合适的项目经历应该包含以下内容：</p>
-<ul>
-<li>项目名称</li>
-<li>项目背景</li>
-<li>技术栈</li>
-<li>工作职责（说明不是凑数的）</li>
-<li>个人亮点（说明不是应付工作的）</li>
-</ul>
-<h3 id="项目背景">项目背景</h3>
-<p>用简洁的语言交待项目背景：</p>
-<ul>
-<li>项目或产品大概是做什么事情的；</li>
-<li>项目的意义或优势，例如政府项目可以是提高了信息化管理水平；</li>
-<li>简要交待技术栈，用了什么框架，用了什么技术。</li>
-</ul>
-<p>目的是让他人对你项目的价值、技术有个基本的了解。</p>
-<h3 id="工作职责">工作职责</h3>
-<p>简单讲一下自己在团队中的主要职责（例如开发人员），让招聘者知道你在项目中不是吃干饭的。当然，如果项目经历充实，不写角色也无妨。</p>
-<h3 id="提炼亮点">提炼亮点</h3>
-<p>要想说明工作能力强，就要拿出实际的证据，例如解决了项目问题，或者干出了业绩，拿亮点闪瞎招聘者的眼睛。</p>
-<p>工作内容应当尽量遵循“STAR法则”（情境、任务、行动、结果）来写，让人知道你不是机械地执行命令，而是有针对性地解决了实际问题：</p>
-<ul>
-<li>情境：需要解决什么问题，或者遇到了什么事情</li>
-<li>任务：你的目标是什么</li>
-<li>行动：你做了什么事情</li>
-<li>结果：最后达到了什么效果。如果能量化，那么务必提供一个有说服力的数字，例如系统响应时间从2s降低到200ms，或者承担了30%的开发工作。</li>
-</ul>
-<p>举两个典型例子：</p>
-<ul>
-<li>开发XX、XX模块
-<ul>
-<li>分析：只有“行动”，没有背景和结果，也无法体现XX模块的重要性，会让人认为只做了一些基础的增删改查。</li>
-<li>优化：
-<ul>
-<li>使用XXX框架、XX技术
-<em>（行动：使用了XX技术）</em>，开发XX、XX等<strong>核心功能</strong>模块
-<em>（如果是核心功能，强调核心）</em></li>
-<li>使用XXX框架、XX技术
-<em>（行动：使用了XX技术）</em>，开发XX、XX等模块，开发工作量占全系统的30%。<em>（如果不是核心功能，强调工作量）</em></li>
-</ul></li>
-</ul></li>
-<li>SQL性能优化
-<ul>
-<li>分析：优化怎么做的？有效果吗？</li>
-<li>优化：
-<ul>
-<li>通过慢查询日志、执行计划识别分析执行效率较低的SQL
-<em>（行动之一：通过两种方法发现问题）</em>，根据具体情况改写SQL，调整索引
-<em>（行动之二：通过改SQL和建索引解决了这个问题）</em>，提高数据库查询效率，查询时间从平均xx降低到xx
-<em>（情境和结果：系统性能低，经过优化，系统性能提高）</em>。</li>
-</ul></li>
-</ul></li>
-</ul>
-<p>除主要工作外，为了提高工作效率而搞研究也是能接受的：</p>
-<ul>
-<li>编写Python脚本
-<em>（行动：写Python脚本）</em>实现XX、XX等任务的自动化
-<em>（目标：自动化）</em>，大幅提高团队工作效率，有效地避免了内容遗漏、操作失误等问题
-<em>（情境和结果：解决了人工操作效率低、容易出错的问题）</em>。</li>
-<li>在开发过程中指导其他员工，并进行了X次技术分享活动，主题包括XX、XX等。</li>
-</ul>
-<p>如果是一个参与程度不高的项目，提练不出什么亮点，那么建议隐藏掉，只谈大项目。<!-- TODO 加分：系统架构、整体认知；带团队经历 ；忌讳：学习了XXX；写不熟悉东西 --></p>
-<h3 id="加分项">加分项</h3>
-<p>以下事情会从侧面证明你的工作能力，如果与你参与的项目匹配，请在简历上进行体现：</p>
-<ul>
-<li>成型产品：有成型产品，说明系统已经上线了。如果产品评价好，说明系统做得不错，不是糊弄的。</li>
-<li>技术栈：大家都喜欢新技术。用过各类新技术的员工更受欢迎。</li>
-<li>团队规模：小团队工作可以随意一些，而大团队工作不规范就会变成屎山。在大型团队中工作，阅历应该更丰富了。</li>
-<li>合同额、开发周期：项目制公司的话，合同额和开发周期也能证明软件规模。做过大型项目，阅历和规范程度应该会比较高。</li>
-<li>用户量：道理同上。</li>
-<li>相同行业：就算技术差点，至少业务知识不是零蛋。</li>
-</ul>
-<h3 id="如果技术栈太老旧">如果技术栈太老旧</h3>
-<p>因为商业项目更加追求稳定，所以很多项目仍然用比较旧的技术栈，甚至还在使用JDK
-5，这是正常现象。不必隐瞒具体技术：老旧技术用熟了，能够掌握基本原理，切换起来也容易。</p>
-<p>很多公司希望员工进去就能干活。完全没碰过新技术的话，找工作会非常吃亏，所以建议在简历中体现自己特意学习过某些新技术（例如因XX技术较为落后，曾自学XXX并尝试用新技术实践项目功能，让HR觉得你比较上进），或者直接假装自己项目是用新技术开发的。但是，除了在简历提及以外，你必须要确实实践过，否则面试会穿帮。</p>
-<h2 id="优化结果">优化结果</h2>
-<p>根据以上建议，简历优化结果如下：</p>
-<ul>
-<li>项目名称：XXX项目</li>
-<li>项目简介：XXX，目前用户访问量已达XXX万。项目使用了XXX、YYY、ZZZ等技术。<em>（把项目使用到，但是你自己没有深入使用过的技术框架放到项目简介里，让招聘者了解你们项目大体的技术栈）</em></li>
-<li>工作职责：主要负责前期需求调研、需求编写、系统设计，以及XX与XX模块开发工作。<em>（让人知道你的主要职责是开发人员，而不是测试、运维或者PPT岗位）</em></li>
-<li>工作内容：<em>（此处专注于展示亮点）</em>
-<ul>
-<li>作为项目主要成员，使用XX框架开发XX模块，实现XX、XX、XX等核心功能。</li>
-<li>使用XXX作为消息队列服务，实现后台数据推送功能。</li>
-<li>在技术选型过程中，考虑到XX功能会存在瞬时高并发场景，选择XX框架进行处理。实际开发过程中，利用XX框架，将XX数据进行XX处理，并发能力xx%。</li>
-<li>通过慢查询日志、执行计划识别分析执行效率较低的SQL，根据具体情况改写SQL，调整索引，提高数据库查询效率，查询时间从平均xx降低到xx。</li>
-<li>与其他同事合作，对项目进行拆分和重构，实现基于XXX的持续集成和自动化部署。</li>
-<li>编写Python脚本实现XX、XX等任务的自动化，大幅提高团队工作效率，有效地避免了内容遗漏、操作失误等问题。</li>
-<li>在开发过程中指导其他员工，并进行了X次技术分享活动，主题包括XX、XX等。</li>
-</ul></li>
-</ul>
-<p>这样写，就算仍然找不到工作，至少会有更多公司通知你参加面试了。</p>
-<h1 id="个人技能优化">个人技能优化</h1>
-<p>通常简历上还会写着“熟悉XXX”、“了解XXX”。这个地方也是有优化空间的：</p>
-<ol type="1">
-<li>注意招聘中的招聘要求（JD），“熟悉”、“了解”的内容尽量贴近JD。碰到不太懂技术、会用Ctrl+F来检查单词的HR时不吃亏。</li>
-<li>梳理你“熟悉”、“了解”的东西，确定这些技能的学习成本。尽量少写那些只需要几分钟或者一两天就能掌握的东西，多写一些需要时间积累才能熟练掌握的东西。</li>
-<li>不要简单地“熟悉XX”、“了解XX”。熟悉了解之后要再写点东西，例如“熟悉JavaScript，掌握原型链、Promise等原理”，这样才能说明你真熟悉JavaScript。</li>
-<li>如果你英语好，或者会翻墙（注意不要明说，以免因言获罪），或者有一些软件开发方面的个人爱好，也可以稍微提及。</li>
-</ol>
-<h1 id="了解其他加分项与减分项">了解其他加分项与减分项</h1>
-<h2 id="加分项-1">加分项</h2>
-<p>如果工作时间不长，大学英语六级过了，或者拿过ACM区域赛之类等含金量较高的奖项，请把它们写到简历中。</p>
-<p>如果有软考高级证书，或者拿到了行业认证（例如Oracle认证），请务必写到简历里。</p>
-<p>如果以下账号有实际内容，也请写到简历中让人知道：</p>
-<ul>
-<li>GitHub：例如参与过开源项目，提交过代码，或者自己的GitHub仓库被打了很多Star，我们会认为你有一定的能力。</li>
-<li>个人博客：如果个人博客活跃，而且有一些写得好的原创文章，我们就知道你对技术有所思开，擅长总结。</li>
-<li>技术论坛：例如活跃于Stack
-Overflow，我们会认为你对技术掌握比较好，有解决问题能力。</li>
-</ul>
-<p>注意：如果你在简历中写了社交媒体链接，那么我们一定会进入这些网站来核实真伪。假如你的GitHub或博客中缺乏原创内容，只有些helloworld级的练习文件，或者都是些转载或fork内容，或者在找工作时候才胡乱凑些东西，那么我们会认为你是在装X，然后把你的简历给Pass掉。</p>
-<h2 id="减分项">减分项</h2>
-<ul>
-<li>培训班经历：由于培训班培训内容经常与行业实际脱节，所以很多公司不喜欢招参加过培训班的人，甚至会直接将有培训班经历的人给Pass掉。实际工作中用到的技术知识基本上都是“实践型”知识，照着网上的培训教程就能学会基本用法，实在没必要去培训班。</li>
-<li>外包公司经历：外包公司员工经常被安排做一些初级工作，接触不到核心功能与技术。如果简历中体现不出你有所思考，那么我们只能当作民工来使唤了。</li>
-<li>小公司/非软件公司经历：小公司，或主业不是软件的公司（例如电子商务），通常缺乏标准开发规范，其中的开发者可能也缺乏规范意识。</li>
-</ul>
-<h1 id="最后的注意事项">最后的注意事项</h1>
-<p>写完之后务必从头到尾认真检查几遍。如果有信得过的哥们，可以再让他们帮忙检查一下简历。</p>
-<p>只要你能把事情说得像自己做过一样，那么项目经历就可以稍微吹吹牛，毕竟我们不可能去你们公司系统里核实代码提交记录。但是，简历的内容会被拿来当作面试的话题，因此要提前想好实施细节（甚至包括版本号），而且不懂的东西不要乱编，以免被打脸。</p>
-<h1 id="本系列文章">本系列文章</h1>
-<ul>
-<li><a
-href="/2020/08/16/resume-filtering/">作为招聘者，筛选简历的关注点</a></li>
-<li><strong>来自招聘者的建议——如何优化简历</strong></li>
-<li><a href="/2020/08/29/bad-resume/">迷惑简历大赏</a></li>
 <li><a href="/2021/02/12/hiring-test-paper/">笔试的设计</a></li>
 <li><a href="/2021/05/12/interview/">面试的安排</a></li>
 </ul>
@@ -10265,42 +10265,6 @@ curl: (18) transfer closed with outstanding read data remaining
       </tags>
   </entry>
   <entry>
-    <title>小心你的数据库查询窗口，以免误操作</title>
-    <url>/2021/12/16/db-console/</url>
-    <content><![CDATA[<p>如果你的数据库查询窗口的第一行是<code>DROP DATABASE</code>，你又不小心点击了执行按钮……</p>
-<p>有些数据库软件能够智能地执行光标所在行的指令，但有些数据库软件没那么智能，或者需要配置才能变聪明，一不小心，就会把窗口里面的所有SQL都执行一遍，所以使用数据库软件时要注意防范误操作。</p>
-<span id="more"></span>
-<h1 id="先检查再操作">先检查再操作</h1>
-<ul>
-<li>执行UPDATE和DELETE之前，检查是否写了WHERE条件，并用同样条件执行一遍SELECT查询，检查条件是否正确。</li>
-<li>执行选择或光标处SQL语句时，检查SQL语句是否选择完整。</li>
-</ul>
-<h1 id="及时清理破坏性sql">及时清理破坏性SQL</h1>
-<p>在操作数据库时，如果需要执行有副作用的指令，例如DROP、DELETE、INSERT、UPDATE、TRUNCATE等，记得在执行完成后及时清理掉这些语句。可以用以下方式操作：</p>
-<ul>
-<li>每执行完一个SQL，就立刻把它删掉。</li>
-<li>为了方便查找或记录，不希望把SQL删掉，可以在执行完SQL之后立刻把它注释掉。</li>
-<li>在SQL窗口第一行放一个会报错的SQL，如果不小心点了执行，可以让数据库客户端在第一行就停下来。需要注意，有些数据库客户端在失败后会继续执行后面的指令，所以还要慎重。</li>
-</ul>
-<h1 id="连接生产系统不要图方便">连接生产系统，不要图方便</h1>
-<p>生产系统权限意味着巨大的责任，而连接生产系统的方式越容易，犯错误的几率就越大，所以不要为了图方便把自己置于危险境地。可以用以下方法来防范：</p>
-<ul>
-<li>不要在同一个系统、同一个数据库软件中同时连接开发系统和生产系统，避免弄错环境。</li>
-<li>连接生产系统之前总是手工输入账号密码，不要自动连接，使自己清晰地意识到自己在连接生产系统，同时防止无关人员盗用。</li>
-<li>批量执行语句，或导入SQL文件时，先检查SQL内容，确认是否有破坏性指令（例如有些软件生成的导入SQL会先删表），确认无误后再执行。</li>
-<li>把在生产系统执行的每条SQL都做好记录，包括执行时间、执行人、操作目的，以备事后追溯。</li>
-<li>及时清理生产系统的数据库操作界面里的SQL。</li>
-<li>操作完成后及时关闭数据库软件。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>一点人生的经验</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何正确使用信用卡</title>
     <url>/2022/02/22/credit-card/</url>
     <content><![CDATA[<p>学会正确使用信用卡，让自己不会成为“卡奴”。</p>
@@ -10355,6 +10319,42 @@ id="如果你要办信用卡那么要熟悉信用卡的一些概念">如果你�
       </categories>
       <tags>
         <tag>信用卡</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小心你的数据库查询窗口，以免误操作</title>
+    <url>/2021/12/16/db-console/</url>
+    <content><![CDATA[<p>如果你的数据库查询窗口的第一行是<code>DROP DATABASE</code>，你又不小心点击了执行按钮……</p>
+<p>有些数据库软件能够智能地执行光标所在行的指令，但有些数据库软件没那么智能，或者需要配置才能变聪明，一不小心，就会把窗口里面的所有SQL都执行一遍，所以使用数据库软件时要注意防范误操作。</p>
+<span id="more"></span>
+<h1 id="先检查再操作">先检查再操作</h1>
+<ul>
+<li>执行UPDATE和DELETE之前，检查是否写了WHERE条件，并用同样条件执行一遍SELECT查询，检查条件是否正确。</li>
+<li>执行选择或光标处SQL语句时，检查SQL语句是否选择完整。</li>
+</ul>
+<h1 id="及时清理破坏性sql">及时清理破坏性SQL</h1>
+<p>在操作数据库时，如果需要执行有副作用的指令，例如DROP、DELETE、INSERT、UPDATE、TRUNCATE等，记得在执行完成后及时清理掉这些语句。可以用以下方式操作：</p>
+<ul>
+<li>每执行完一个SQL，就立刻把它删掉。</li>
+<li>为了方便查找或记录，不希望把SQL删掉，可以在执行完SQL之后立刻把它注释掉。</li>
+<li>在SQL窗口第一行放一个会报错的SQL，如果不小心点了执行，可以让数据库客户端在第一行就停下来。需要注意，有些数据库客户端在失败后会继续执行后面的指令，所以还要慎重。</li>
+</ul>
+<h1 id="连接生产系统不要图方便">连接生产系统，不要图方便</h1>
+<p>生产系统权限意味着巨大的责任，而连接生产系统的方式越容易，犯错误的几率就越大，所以不要为了图方便把自己置于危险境地。可以用以下方法来防范：</p>
+<ul>
+<li>不要在同一个系统、同一个数据库软件中同时连接开发系统和生产系统，避免弄错环境。</li>
+<li>连接生产系统之前总是手工输入账号密码，不要自动连接，使自己清晰地意识到自己在连接生产系统，同时防止无关人员盗用。</li>
+<li>批量执行语句，或导入SQL文件时，先检查SQL内容，确认是否有破坏性指令（例如有些软件生成的导入SQL会先删表），确认无误后再执行。</li>
+<li>把在生产系统执行的每条SQL都做好记录，包括执行时间、执行人、操作目的，以备事后追溯。</li>
+<li>及时清理生产系统的数据库操作界面里的SQL。</li>
+<li>操作完成后及时关闭数据库软件。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>一点人生的经验</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -10833,6 +10833,40 @@ http &#123;
       </tags>
   </entry>
   <entry>
+    <title>见人说人话，见鬼说鬼话</title>
+    <url>/2022/07/20/expression/</url>
+    <content><![CDATA[<p>在微博上看到了这样一个故事：</p>
+<blockquote>
+<p>跟讲科学的人谈科学，和信玄学的人谈玄学才是万全之策。
+妇产科接一产妇，要求明天剖宫产，还详细到几点几分，但是她现在还没到预产期，一切都是正常指标，没有手术指征，医生不能给她提前剖，她和家人非要，说家里人找大师给算了，孩子明天那个时间出生命格好。
+医生解释了半天，不听，非要剖，不然就去投诉医生态度不好……
+主任听说了，来解围说：人的命格天注定，瓜熟蒂落，瓜熟蒂落，你这瓜不熟，强行摘下，也就是说想逆天改命，要不得，没那个道行，强行如此，会被反噬，到时候，你们一家都不够赔。
+产妇和家人一商量，觉得主任说的对，走了……
+医生说，那一刻，觉得主任万丈光芒。</p>
+</blockquote>
+<p>技术人员在与他人沟通时，经常会出现陷入自己逻辑的现象，导致沟通困难。本文借助这个故事，讲一讲与人沟通的一些技巧。</p>
+<span id="more"></span>
+<h1 id="了解对方的知识体系与话语体系">了解对方的知识体系与话语体系</h1>
+<p>技术人员之间进行沟通，由于双方对技术都有所了解，因此使用行话可以很容易沟通，但是一般人并不了解这些技术，使用行话自然会让他们困惑。</p>
+<p>有一些人受自身所受教育限制，或者出于维护自己面子的需要，他会有一套自己的思想理论，而且会坚持这些理论。如果你的理论与他的理论发生冲突，自然容易发生争执。</p>
+<p>因此，面对知识体系不同的人，不要急着用自己的技术理论进行沟通，更不要急着否定对方，而是先试探对方对技术的理解情况，了解他的理论和语言。</p>
+<p>以前文故事为例，产妇家提到了“大师”，说明他们家不懂任何现代医学，而且具有封建迷信思想，因此不能用现代医学理论和术语来沟通，而是要用一些传统医学或封建迷信的语言来沟通。</p>
+<h1 id="抓住主要矛盾必要时切换思路">抓住主要矛盾，必要时切换思路</h1>
+<p>沟通的目的是解决问题，但解决问题之前需要先了解问题是什么，哪些是主要矛盾，哪些不是主要矛盾。</p>
+<p>以前文故事为例，产妇家的诉求是早产，而做技术的人就很容易讲自己的话，然后对自己的观点进行进一步解释，例如早产需要哪些条件、对方不符合哪些条件、后果如何之类，而对方会因为听不懂，无法理解，导致沟通陷入僵局。</p>
+<p>当沟通陷入僵局时，就不要再沿着之前的思路进行思考，而是要直接跳出这种逻辑，重新换一个思路：产妇为什么会要求早产呢？其实是因为他们听了“大师”的话，因此主要矛盾实际上不是如何否定早产，而是如何证明“大师”是错的。</p>
+<h1 id="翻译成对方能理解的话">翻译成对方能理解的话</h1>
+<p>搞清楚问题之后，不要直接去解答问题，而是要把你的观点整理一下，翻译成他们能够理解的词语。特别是要否定对方时，要先顺着对方的思维说话，当对方接受以后再引出自己的观点。</p>
+<p>主任来了，他的经验丰富，知道对方只能理解“玄学”理论，因此用玄学理论与他们沟通。主任先提出“人的命格天注定”的论断，而且不说“没到预产期”，而是将其换成“你这瓜不熟，强行摘下，也就是说想逆天改命”，让对方很容易理解。在此基础上，主任稍微恐吓一下，“要不得，没那个道行，强行如此，会被反噬”，因为大师再厉害，也不可能超越天命，所以很容易就说服了对方。</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>沟通</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于Spring Boot和若依框架实现可灵活配置的动态接口</title>
     <url>/2022/06/08/dynamic-controller/</url>
     <content><![CDATA[<p>很多业务都是以增删改查为基础，利用若依框架，已经能够实现代码的快速生成，但需要在后端部署一些VO、Controller和Service，如需维护，依然要修改多个文件，而且要升级和重启后端系统。</p>
@@ -11129,40 +11163,6 @@ AppUtil<span class="token punctuation">.</span><span class="token function">exec
         <tag>数据库</tag>
         <tag>Spring Boot</tag>
         <tag>接口</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>见人说人话，见鬼说鬼话</title>
-    <url>/2022/07/20/expression/</url>
-    <content><![CDATA[<p>在微博上看到了这样一个故事：</p>
-<blockquote>
-<p>跟讲科学的人谈科学，和信玄学的人谈玄学才是万全之策。
-妇产科接一产妇，要求明天剖宫产，还详细到几点几分，但是她现在还没到预产期，一切都是正常指标，没有手术指征，医生不能给她提前剖，她和家人非要，说家里人找大师给算了，孩子明天那个时间出生命格好。
-医生解释了半天，不听，非要剖，不然就去投诉医生态度不好……
-主任听说了，来解围说：人的命格天注定，瓜熟蒂落，瓜熟蒂落，你这瓜不熟，强行摘下，也就是说想逆天改命，要不得，没那个道行，强行如此，会被反噬，到时候，你们一家都不够赔。
-产妇和家人一商量，觉得主任说的对，走了……
-医生说，那一刻，觉得主任万丈光芒。</p>
-</blockquote>
-<p>技术人员在与他人沟通时，经常会出现陷入自己逻辑的现象，导致沟通困难。本文借助这个故事，讲一讲与人沟通的一些技巧。</p>
-<span id="more"></span>
-<h1 id="了解对方的知识体系与话语体系">了解对方的知识体系与话语体系</h1>
-<p>技术人员之间进行沟通，由于双方对技术都有所了解，因此使用行话可以很容易沟通，但是一般人并不了解这些技术，使用行话自然会让他们困惑。</p>
-<p>有一些人受自身所受教育限制，或者出于维护自己面子的需要，他会有一套自己的思想理论，而且会坚持这些理论。如果你的理论与他的理论发生冲突，自然容易发生争执。</p>
-<p>因此，面对知识体系不同的人，不要急着用自己的技术理论进行沟通，更不要急着否定对方，而是先试探对方对技术的理解情况，了解他的理论和语言。</p>
-<p>以前文故事为例，产妇家提到了“大师”，说明他们家不懂任何现代医学，而且具有封建迷信思想，因此不能用现代医学理论和术语来沟通，而是要用一些传统医学或封建迷信的语言来沟通。</p>
-<h1 id="抓住主要矛盾必要时切换思路">抓住主要矛盾，必要时切换思路</h1>
-<p>沟通的目的是解决问题，但解决问题之前需要先了解问题是什么，哪些是主要矛盾，哪些不是主要矛盾。</p>
-<p>以前文故事为例，产妇家的诉求是早产，而做技术的人就很容易讲自己的话，然后对自己的观点进行进一步解释，例如早产需要哪些条件、对方不符合哪些条件、后果如何之类，而对方会因为听不懂，无法理解，导致沟通陷入僵局。</p>
-<p>当沟通陷入僵局时，就不要再沿着之前的思路进行思考，而是要直接跳出这种逻辑，重新换一个思路：产妇为什么会要求早产呢？其实是因为他们听了“大师”的话，因此主要矛盾实际上不是如何否定早产，而是如何证明“大师”是错的。</p>
-<h1 id="翻译成对方能理解的话">翻译成对方能理解的话</h1>
-<p>搞清楚问题之后，不要直接去解答问题，而是要把你的观点整理一下，翻译成他们能够理解的词语。特别是要否定对方时，要先顺着对方的思维说话，当对方接受以后再引出自己的观点。</p>
-<p>主任来了，他的经验丰富，知道对方只能理解“玄学”理论，因此用玄学理论与他们沟通。主任先提出“人的命格天注定”的论断，而且不说“没到预产期”，而是将其换成“你这瓜不熟，强行摘下，也就是说想逆天改命”，让对方很容易理解。在此基础上，主任稍微恐吓一下，“要不得，没那个道行，强行如此，会被反噬”，因为大师再厉害，也不可能超越天命，所以很容易就说服了对方。</p>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-      <tags>
-        <tag>沟通</tag>
       </tags>
   </entry>
   <entry>
@@ -11664,6 +11664,46 @@ class="math inline">\(\frac{12200 - 10900}{10900} = 11.9\%\)</span>
       </tags>
   </entry>
   <entry>
+    <title>对汽车“价格战”的一点看法</title>
+    <url>/2023/04/01/is-price-war-real/</url>
+    <content><![CDATA[<p>今年3月份，从东风雪铁龙C6补贴9万开始，汽车市场仿佛开始了“价格战”。然而，汽车真的便宜了吗？</p>
+<p><strong>本文纯属个人见解，与当下事件无关，如有雷同，纯属巧合。</strong></p>
+<span id="more"></span>
+<h2 id="关于雪铁龙降9万">关于雪铁龙降9万</h2>
+<p>哇塞，优惠居然这么大！是真的吗？</p>
+<p>是的，但是，如果你不熟悉汽车，可以去大街上留意一下：雪铁龙的车标是两个尖（类似︽符号），可是大街上有几辆带两个尖的车呢？在这些车里面，又有几辆是新车呢？</p>
+<p>雪铁龙本来就是没什么人买的车（新车），再加上一下子降了最高9万（实际可能不到9万），可能是因为什么原因根本没卖出去的车。这种车不可能太多的，当然售完为止。其他法系车例如标致同理。</p>
+<p>另外某些商家有一种操作方法，说什么东西大幅降价，当你过去买的时候，“卖没了，看看别的吧”，其实根本没卖过，只是一种引流策略而已。</p>
+<p>后续：<span class="exturl" data-url="aHR0cHM6Ly9tLnlpY2FpLmNvbS9uZXdzLzEwMTc5OTY1My5odG1s">车主需全款买车，然而补贴一直没有到位<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="关于20万买奥迪">关于20万买奥迪</h2>
+<p>奥迪给人的印象是豪车。如今豪车已经卖不动，居然用20万就能搞定？</p>
+<p>当然了！但是，奥迪A3，加上做汽车金融操作。</p>
+<p>奥迪A3是什么？是奥迪里面配置最低的车型，俗称“乞丐车”，跟一般人眼里的奥迪A6、A8完全不是一个档次，甚至不如同样容易遭歧视的奥迪A4（落地价大约30左右）。就算你把车屁股上的A3字样抠掉，再贴个quattro，稍有常识的人都会看出，这只是辆想装大款的乞丐A3。</p>
+<p>汽车金融是什么？分期，贷款。由于贷款或分期，4S店能挣到提成，而全款挣不到提成，所以很多4S店会对全款买车的车主表示反感，甚至分期买车的最后给你举办个隆重的交车仪式，而全款买车的完事了直接让你滚蛋。然而选择贷款或分期，车辆名义上的价格下降了，但实际花销会比全款高。</p>
+<p>想用20万搞定四个圈的A6 55
+quattro（高配车型，落地大约55万）？还是去二手市场找找八手车吧！</p>
+<h2 id="关于大幅优惠大幅让利">关于大幅优惠、大幅让利</h2>
+<p>没买过车的，看到“终端优惠4万”，会觉得厂商让利很大。但是真的很大吗？</p>
+<p>所以我们一定要先了解汽车的各种价格的概念：</p>
+<ul>
+<li>裸车价：裸车价是由4S店开出的价格，是汽车本身的价格。然而只买车，车是不能挂牌上路的，所以还需要一系列税费和手续费。</li>
+<li>落地价：落地价是<strong>你的真实花销</strong>，落地价=裸车价+购置税+保险费用+各种其他费用。鉴于一般群众买不起豪车，如果你懒得计算，可以粗暴地认为落地价=裸车价+2～3万。</li>
+<li>指导价：由厂商提出的售价，非真实价格。</li>
+<li>优惠：优惠是4S店在指导价基础上做出的优惠。</li>
+</ul>
+<p>需要注意的是，虽然官方有指导价，但是4S店根本不会按指导价来卖车，而是平时就会降几万块钱来卖，所以就算他们提出了所谓的“优惠”，也是在指导价上面做的优惠，实际上还是相当于没有优惠。</p>
+<p>还需要注意一种情况，有的汽车真的降价了，但是同一型号有高中低配置版本之分，他们给低配降得多，中高配降得少或几乎不降。你以为捡到了便宜，却发现低配功能不够用，想要开得舒服，还是需要买中高配，结果会导致想省钱的开着难受，想舒服的实际上根本没省几个钱。</p>
+<p>对于大众、本田这种根本不愁卖不出去的品牌，其实他们完全没有必要去降价。但是，为了做出因为“价格战”优惠的感觉，4S可以调整指导价，然后再调整终端优惠和一系列“工时费”，让你以为便宜了不少，然而落地价还是那么多。如果你能回到过去，你会发现“价格战”前后落地价都是一个样子。</p>
+<p>2022年因为疫情影响经济，出台了购置税减半的政策。那么当时买能省钱吗？并没有！只要4S店稍微做一些操作，就可以让你感觉到自己享受到了国家的优惠，然而落地价却一分都没少。</p>
+<h2 id="所以">所以……</h2>
+<p>需要买车的，该买就买，可以稍微等等出新款之前4S店便宜处理的旧款库存车，但是没必要特意等“价格战”；</p>
+<p>不需要买车的，别因为出现所谓的“利好”政策，或者发生所谓的“价格战”就草率入场，也许车市有“崩”的迹象，但是车价并没有真的变便宜。</p>
+]]></content>
+      <categories>
+        <category>闲谈</category>
+      </categories>
+  </entry>
+  <entry>
     <title>在Java中运行ES6代码</title>
     <url>/2023/05/10/javet/</url>
     <content><![CDATA[<p>Java自带Nashorn引擎，可以在Java程序中运行JavaScript代码，从而<a
@@ -11929,46 +11969,6 @@ Caused by: java.lang.UnsatisfiedLinkError: &#x2F;tmp&#x2F;javet&#x2F;1&#x2F;libj
         <tag>Javet</tag>
         <tag>JavaScript</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>对汽车“价格战”的一点看法</title>
-    <url>/2023/04/01/is-price-war-real/</url>
-    <content><![CDATA[<p>今年3月份，从东风雪铁龙C6补贴9万开始，汽车市场仿佛开始了“价格战”。然而，汽车真的便宜了吗？</p>
-<p><strong>本文纯属个人见解，与当下事件无关，如有雷同，纯属巧合。</strong></p>
-<span id="more"></span>
-<h2 id="关于雪铁龙降9万">关于雪铁龙降9万</h2>
-<p>哇塞，优惠居然这么大！是真的吗？</p>
-<p>是的，但是，如果你不熟悉汽车，可以去大街上留意一下：雪铁龙的车标是两个尖（类似︽符号），可是大街上有几辆带两个尖的车呢？在这些车里面，又有几辆是新车呢？</p>
-<p>雪铁龙本来就是没什么人买的车（新车），再加上一下子降了最高9万（实际可能不到9万），可能是因为什么原因根本没卖出去的车。这种车不可能太多的，当然售完为止。其他法系车例如标致同理。</p>
-<p>另外某些商家有一种操作方法，说什么东西大幅降价，当你过去买的时候，“卖没了，看看别的吧”，其实根本没卖过，只是一种引流策略而已。</p>
-<p>后续：<span class="exturl" data-url="aHR0cHM6Ly9tLnlpY2FpLmNvbS9uZXdzLzEwMTc5OTY1My5odG1s">车主需全款买车，然而补贴一直没有到位<i class="fa fa-external-link-alt"></i></span></p>
-<h2 id="关于20万买奥迪">关于20万买奥迪</h2>
-<p>奥迪给人的印象是豪车。如今豪车已经卖不动，居然用20万就能搞定？</p>
-<p>当然了！但是，奥迪A3，加上做汽车金融操作。</p>
-<p>奥迪A3是什么？是奥迪里面配置最低的车型，俗称“乞丐车”，跟一般人眼里的奥迪A6、A8完全不是一个档次，甚至不如同样容易遭歧视的奥迪A4（落地价大约30左右）。就算你把车屁股上的A3字样抠掉，再贴个quattro，稍有常识的人都会看出，这只是辆想装大款的乞丐A3。</p>
-<p>汽车金融是什么？分期，贷款。由于贷款或分期，4S店能挣到提成，而全款挣不到提成，所以很多4S店会对全款买车的车主表示反感，甚至分期买车的最后给你举办个隆重的交车仪式，而全款买车的完事了直接让你滚蛋，连根红绳都不给。然而选择贷款或分期，车辆名义上的价格下降了，但实际花销会比全款高。</p>
-<p>想用20万搞定四个圈的A6 55
-quattro（高配车型，落地大约55万）？还是去二手市场找找八手车吧！</p>
-<h2 id="关于大幅优惠大幅让利">关于大幅优惠、大幅让利</h2>
-<p>没买过车的，看到“终端优惠4万”，会觉得厂商让利很大。但是真的很大吗？</p>
-<p>所以我们一定要先了解汽车的各种价格的概念：</p>
-<ul>
-<li>裸车价：裸车价是由4S店开出的价格，是汽车本身的价格。然而只买车，车是不能挂牌上路的，所以还需要一系列税费和手续费。</li>
-<li>落地价：落地价是<strong>你的真实花销</strong>，落地价=裸车价+购置税+保险费用+各种其他费用。鉴于一般群众买不起豪车，如果你懒得计算，可以粗暴地认为落地价=裸车价+2～3万。</li>
-<li>指导价：由厂商提出的售价，非真实价格。</li>
-<li>优惠：优惠是4S店在指导价基础上做出的优惠。</li>
-</ul>
-<p>需要注意的是，虽然官方有指导价，但是4S店根本不会按指导价来卖车，而是平时就会降几万块钱来卖，所以就算他们提出了所谓的“优惠”，也是在指导价上面做的优惠，实际上还是相当于没有优惠。</p>
-<p>还需要注意一种情况，有的汽车真的降价了，但是同一型号有高中低配置版本之分，他们给低配降得多，中高配降得少或几乎不降。你以为捡到了便宜，却发现低配功能不够用，想要开得舒服，还是需要买中高配，结果会导致想省钱的开着难受，想舒服的实际上根本没省几个钱。</p>
-<p>对于大众、本田这种根本不愁卖不出去的品牌，其实他们完全没有必要去降价。但是，为了做出因为“价格战”优惠的感觉，4S可以调整指导价，然后再调整终端优惠和一系列“工时费”，让你以为便宜了不少，然而落地价还是那么多。如果你能回到过去，你会发现“价格战”前后落地价都是一个样子。</p>
-<p>2022年因为疫情影响经济，出台了购置税减半的政策。那么当时买能省钱吗？并没有！只要4S店稍微做一些操作，就可以让你感觉到自己享受到了国家的优惠，然而落地价却一分都没少。</p>
-<h2 id="所以">所以……</h2>
-<p>需要买车的，该买就买，可以稍微等等出新款之前4S店便宜处理的旧款库存车，但是没必要特意等“价格战”；</p>
-<p>不需要买车的，别因为出现所谓的“利好”政策，或者发生所谓的“价格战”就草率入场，也许车市有“崩”的迹象，但是车价并没有真的变便宜。</p>
-]]></content>
-      <categories>
-        <category>闲谈</category>
-      </categories>
   </entry>
   <entry>
     <title>中国用户如何注册中文维基百科账号，并且获得编辑权限</title>
