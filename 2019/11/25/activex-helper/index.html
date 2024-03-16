@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">示意图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">原型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E5%8A%A9%E6%89%8B%E5%8E%9F%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">小助手原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E5%BA%94%E7%94%A8%E9%A1%B5%E9%9D%A2%E4%BB%A3%E7%A0%81%E8%B0%83%E6%95%B4"><span class="nav-number">3.2.</span> <span class="nav-text">Web应用页面代码调整</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%95%E5%85%A5%E5%95%86%E4%B8%9A%E4%BD%BF%E7%94%A8%E4%B9%8B%E5%89%8D"><span class="nav-number">4.</span> <span class="nav-text">投入商业使用之前</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EHTTPS"><span class="nav-number">4.1.</span> <span class="nav-text">关于HTTPS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">进一步思考</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">示意图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8E%9F%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">原型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E5%8A%A9%E6%89%8B%E5%8E%9F%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">小助手原型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web%E5%BA%94%E7%94%A8%E9%A1%B5%E9%9D%A2%E4%BB%A3%E7%A0%81%E8%B0%83%E6%95%B4"><span class="nav-number">3.2.</span> <span class="nav-text">Web应用页面代码调整</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%95%E5%85%A5%E5%95%86%E4%B8%9A%E4%BD%BF%E7%94%A8%E4%B9%8B%E5%89%8D"><span class="nav-number">4.</span> <span class="nav-text">投入商业使用之前</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Ehttps"><span class="nav-number">4.1.</span> <span class="nav-text">关于HTTPS</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">进一步思考</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,7 +161,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -264,10 +264,13 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>如果Web系统需要调用特定ActiveX控件才能操作，像身份证阅读器、读卡器、获取电脑网卡MAC地址等，而且预计控件厂商在一段时间内无法解决浏览器兼容性问题，那我们能不能想法让用户在非IE浏览器中也能调用控件呢？</p>
-<p>本文提出一种解决思路：开发一个“控件小助手”代理程序。该程序安装在用户电脑中，负责调用ActiveX控件，并在本地建立一个简易Web Server，而业务系统相关页面则通过Ajax（备注：实际是JSONP）调用代理接口，从而间接地与控件交互。</p>
+<p>本文提出一种解决思路：开发一个“控件小助手”代理程序。该程序安装在用户电脑中，负责调用ActiveX控件，并在本地建立一个简易Web
+Server，而业务系统相关页面则通过Ajax（备注：实际是JSONP）调用代理接口，从而间接地与控件交互。</p>
 <span id="more"></span>
-<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>假设业务系统未开启HTTPS，因为启用HTTPS后问题会变得复杂。</p>
-<h1 id="示意图"><a href="#示意图" class="headerlink" title="示意图"></a>示意图</h1><p>以身份证阅读器为例：<br><pre class="line-numbers language-none"><code class="language-none">|-----------------------------------|                      |
+<h1 id="说明">说明</h1>
+<p>假设业务系统未开启HTTPS，因为启用HTTPS后问题会变得复杂。</p>
+<h1 id="示意图">示意图</h1>
+<p>以身份证阅读器为例： <pre class="line-numbers language-none"><code class="language-none">|-----------------------------------|                      |
 |              IE浏览器              |      Windows系统      |      外设
 |                                   |                      |
 |  |------------|   |------------|  |                      |
@@ -285,7 +288,8 @@
 |  |------------|  |         |  |--------------|   |----------|   |     驱动        |
 |                  |         |                                    |                |
 |------------------|         |------------------------------------|                |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h1><p>假设原先的读卡逻辑为：<br><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>readCardButton<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript"><span class="token function">readCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>读取身份证<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<h1 id="原型">原型</h1>
+<p>假设原先的读卡逻辑为： <pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>button<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>readCardButton<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value javascript language-javascript"><span class="token function">readCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>读取身份证<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript">
     <span class="token keyword">function</span> <span class="token function">readCard</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span>cardReader<span class="token punctuation">.</span>Check<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -309,9 +313,11 @@
     <span class="token punctuation">&#125;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>object</span> <span class="token attr-name">classid</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>clsid:xxxxxx<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>cardReader<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>object</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
-<h2 id="小助手原型"><a href="#小助手原型" class="headerlink" title="小助手原型"></a>小助手原型</h2><p>我们采用C#快速实现原型程序，这样的话需要提前准备好Visual Studio。</p>
-<p>进入Visual Studio，新建“Windows 窗体应用 (.Net Framework)”，命名为ControlHelper，并在NuGet管理器中安装<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05hbmN5RngvTmFuY3k=">Nancy<i class="fa fa-external-link-alt"></i></span>。在窗体Form1中添加身份证阅读器控件，命名为CardReader。</p>
-<p>Form1.cs代码如下：<br><pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">Nancy<span class="token punctuation">.</span>Hosting<span class="token punctuation">.</span>Self</span><span class="token punctuation">;</span>
+<h2 id="小助手原型">小助手原型</h2>
+<p>我们采用C#快速实现原型程序，这样的话需要提前准备好Visual Studio。</p>
+<p>进入Visual Studio，新建“Windows 窗体应用 (.Net
+Framework)”，命名为ControlHelper，并在NuGet管理器中安装<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL05hbmN5RngvTmFuY3k=">Nancy<i class="fa fa-external-link-alt"></i></span>。在窗体Form1中添加身份证阅读器控件，命名为CardReader。</p>
+<p>Form1.cs代码如下： <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">Nancy<span class="token punctuation">.</span>Hosting<span class="token punctuation">.</span>Self</span><span class="token punctuation">;</span>
 <span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
 <span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Windows<span class="token punctuation">.</span>Forms</span><span class="token punctuation">;</span>
 <span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>Tasks</span><span class="token punctuation">;</span>
@@ -384,7 +390,7 @@
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
-<p>Helper.cs：<br><pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">Nancy</span><span class="token punctuation">;</span>
+<p>Helper.cs： <pre class="line-numbers language-csharp" data-language="csharp"><code class="language-csharp"><span class="token keyword">using</span> <span class="token namespace">Nancy</span><span class="token punctuation">;</span>
 <span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
 
 <span class="token keyword">namespace</span> <span class="token namespace">ControlHelper</span>
@@ -418,7 +424,9 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 <p>代码中的监听端口为12345。为了避免冲突，可以修改成其他端口（最大65535，尽量用五位数）。由于监听地址为127.0.0.1（本机），与业务系统不同，会涉及跨域问题。为了避免离题讨论，本文代码以GET方式提供服务，并返回JSON格式数据，以便业务系统通过JSONP调用，不使用POST。</p>
-<h2 id="Web应用页面代码调整"><a href="#Web应用页面代码调整" class="headerlink" title="Web应用页面代码调整"></a>Web应用页面代码调整</h2><p>调整读卡按钮的逻辑，先判断ActiveX控件是否可用。如果可用，沿用原先的ActiveX操作方式；如果不可用，则尝试通过$.ajax向“小助手”的小型Web Server发送请求。</p>
+<h2 id="web应用页面代码调整">Web应用页面代码调整</h2>
+<p>调整读卡按钮的逻辑，先判断ActiveX控件是否可用。如果可用，沿用原先的ActiveX操作方式；如果不可用，则尝试通过$.ajax向“小助手”的小型Web
+Server发送请求。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">readCardNew</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#readCardButton'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prop</span><span class="token punctuation">(</span><span class="token string">'disabled'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment">// 先尝试调用ActiveX控件，调不通的话就调用辅助程序</span>
@@ -462,16 +470,20 @@
         <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="投入商业使用之前"><a href="#投入商业使用之前" class="headerlink" title="投入商业使用之前"></a>投入商业使用之前</h1><p>以上是实验用原型，质量粗糙，还需要进行一些功能优化才能交付用户，例如：</p>
+<h1 id="投入商业使用之前">投入商业使用之前</h1>
+<p>以上是实验用原型，质量粗糙，还需要进行一些功能优化才能交付用户，例如：</p>
 <ul>
-<li>兼顾不同操作系统的兼容性，以及不同版本.Net Framework的兼容性。（建议使用Visual C++重新开发）</li>
+<li>兼顾不同操作系统的兼容性，以及不同版本.Net
+Framework的兼容性。（建议使用Visual C++重新开发）</li>
 <li>增加校验，检测用户是否已经正确安装驱动和控件，并帮助用户完成安装（需注意遵守驱动和控件的许可协议，以免吃官司）。目前状态下，如控件未正确安装，程序一启动就会崩溃。</li>
 <li>增加开机自启、版本更新等功能。</li>
 </ul>
 <p>如果团队有Windows桌面应用开发经验，或者能够接受研发成本，可以考虑进一步将工具开发出来，满足用户需求，解决实际问题。当然，无论是从解决问题的角度来看，还是从开发成本的角度来看，让控件厂商去做浏览器兼容才是最合适的解决办法。</p>
-<h2 id="关于HTTPS"><a href="#关于HTTPS" class="headerlink" title="关于HTTPS"></a>关于HTTPS</h2><p>在决定开发之前，还需要特别留意一个问题：业务系统若进行HTTPS改造，“小助手”将完全失效，因为浏览器会拒绝HTTPS网站访问HTTP网站。这是浏览器的安全特性，JavaScript脚本无法干预此行为。</p>
+<h2 id="关于https">关于HTTPS</h2>
+<p>在决定开发之前，还需要特别留意一个问题：业务系统若进行HTTPS改造，“小助手”将完全失效，因为浏览器会拒绝HTTPS网站访问HTTP网站。这是浏览器的安全特性，JavaScript脚本无法干预此行为。</p>
 <p>这样的话，需要为“localhost”签发（自签名）证书，让“小助手”也使用HTTPS服务，并要求用户（或通过安装程序自动地）将该证书添加到系统信任中。注意，除了操作系统证书库，Firefox也有自己的证书库，因此Firefox浏览器要另外添加信任。</p>
-<h1 id="进一步思考"><a href="#进一步思考" class="headerlink" title="进一步思考"></a>进一步思考</h1><p>从上面代码可以看出，控件读取的身份证号是明文，用户可通过浏览器控制台等途径篡改数据，带来安全隐患，而且这个漏洞无法在前端与控件层面补救。但是，如果全面改用“小助手”，便可在“小助手”一端“动手脚”，用可逆算法加密身份证信息，传到服务器之后才进行解密，从而防止用户在浏览器非法录入信息或篡改数据。</p>
+<h1 id="进一步思考">进一步思考</h1>
+<p>从上面代码可以看出，控件读取的身份证号是明文，用户可通过浏览器控制台等途径篡改数据，带来安全隐患，而且这个漏洞无法在前端与控件层面补救。但是，如果全面改用“小助手”，便可在“小助手”一端“动手脚”，用可逆算法加密身份证信息，传到服务器之后才进行解密，从而防止用户在浏览器非法录入信息或篡改数据。</p>
 
     </div>
 

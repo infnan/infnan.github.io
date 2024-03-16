@@ -150,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BB%BA%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">建库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%B0%8F%E8%AF%B4"><span class="nav-number">2.</span> <span class="nav-text">导入小说</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.1.</span> <span class="nav-text">Java程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awk%E8%84%9A%E6%9C%AC%EF%BC%88Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">awk脚本（Linux服务器）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E8%BF%9E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B9%9F%E6%98%AFWindows%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">如果连数据库也是Windows服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E9%98%85%E8%AF%BB"><span class="nav-number">3.</span> <span class="nav-text">开始阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%93%E5%B1%95"><span class="nav-number">4.</span> <span class="nav-text">拓展</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BB%BA%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">建库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E5%B0%8F%E8%AF%B4"><span class="nav-number">2.</span> <span class="nav-text">导入小说</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.1.</span> <span class="nav-text">Java程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awk%E8%84%9A%E6%9C%AClinux%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">awk脚本（Linux服务器）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E8%BF%9E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B9%9F%E6%98%AFwindows%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">如果连数据库也是Windows服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E9%98%85%E8%AF%BB"><span class="nav-number">3.</span> <span class="nav-text">开始阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%93%E5%B1%95"><span class="nav-number">4.</span> <span class="nav-text">拓展</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -165,7 +165,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -269,8 +269,9 @@
     
     <div class="post-body" itemprop="articleBody"><p>上班时间看小说有很多种方式，例如直接拿手机看，在浏览器上面看，用小说阅读器看，拷到Word里面看，甚至拷到Eclipse里面看……然而，这几种方式看起来都比较显眼，就算放在Eclipse上面看起来也不太自然（方块字又多又密，而且没有语法高亮，一看就不像程序代码）。在此，本文针对软件开发和运维人员介绍一种可以大大方方在上班时间看小说而且不会引起怀疑的方法——在数据库客户端里面看小说。</p>
 <span id="more"></span>
-<h1 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h1><p>如果开发团队管得不严，那么使用团队正在使用的数据库就行，反正领导和人力部门又不可能专门登数据库去看你搞了什么东西。为了避免与其他同事产生误会，建议创建小说专用账号，例如OGGFORWARD（用这个名词也要小心，别让DBA误会）：</p>
-<p>Oracle范例：<br><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 建立OGG传输专用账号</span>
+<h1 id="建库">建库</h1>
+<p>如果开发团队管得不严，那么使用团队正在使用的数据库就行，反正领导和人力部门又不可能专门登数据库去看你搞了什么东西。为了避免与其他同事产生误会，建议创建小说专用账号，例如OGGFORWARD（用这个名词也要小心，别让DBA误会）：</p>
+<p>Oracle范例： <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 建立OGG传输专用账号</span>
 <span class="token keyword">CREATE</span> <span class="token keyword">USER</span> OGGFORWARD IDENTIFIED <span class="token keyword">BY</span> eromanga<span class="token punctuation">;</span>
 <span class="token comment">-- 允许登录OGG账号</span>
 <span class="token keyword">GRANT</span> <span class="token keyword">CONNECT</span><span class="token punctuation">,</span> RESOURCE<span class="token punctuation">,</span> DBA <span class="token keyword">TO</span> OGGFORWARD<span class="token punctuation">;</span>
@@ -280,7 +281,7 @@
         <span class="token keyword">EXECUTE</span> IMMEDIATE <span class="token string">'GRANT SELECT, INSERT, UPDATE, DELETE ON '</span><span class="token operator">||</span>TAB<span class="token punctuation">.</span>TABLE_NAME<span class="token operator">||</span><span class="token string">' TO OGGFORWARD'</span><span class="token punctuation">;</span>
     <span class="token keyword">END</span> <span class="token keyword">LOOP</span><span class="token punctuation">;</span>
 <span class="token keyword">END</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
-<p>MySQL范例：<br><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 建立数据库</span>
+<p>MySQL范例： <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 建立数据库</span>
 <span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> oggforward <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span> utf8<span class="token punctuation">;</span>
 <span class="token comment">-- 建立OGG传输专用账号</span>
 <span class="token keyword">CREATE</span> <span class="token keyword">USER</span> oggforward<span class="token variable">@'%'</span> IDENTIFIED <span class="token keyword">BY</span> <span class="token string">'eromanga'</span><span class="token punctuation">;</span>
@@ -288,7 +289,7 @@
 <span class="token keyword">GRANT</span> <span class="token keyword">ALL</span> <span class="token keyword">PRIVILEGES</span> <span class="token keyword">ON</span> oggforward<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">TO</span> oggforward<span class="token variable">@'%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 <p>以上只是些普通的DBA操作，看起来没什么值得怀疑的。若你连DBA权限都没有，那么就需要自己搭数据库或者想办法骗DBA给你开个账号了。</p>
 <p>接下来用OGGFORWARD登录，建立表结构：</p>
-<p>Oracle范例：<br><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）</span>
+<p>Oracle范例： <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）</span>
 <span class="token keyword">CREATE</span> SEQUENCE OGGFORWARD<span class="token punctuation">.</span>SEQ_TBL_EROMANGA <span class="token keyword">START</span> <span class="token keyword">WITH</span> <span class="token number">1</span> INCREMENT <span class="token keyword">BY</span> <span class="token number">1</span> NOMAXVALUE<span class="token punctuation">;</span>
 <span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> OGGFORWARD<span class="token punctuation">.</span>TBL_EROMANGA <span class="token punctuation">(</span>
     ID NUMBER <span class="token operator">NOT</span> <span class="token boolean">NULL</span>        <span class="token comment">-- 主键</span>
@@ -299,7 +300,7 @@
     IS_READ <span class="token keyword">CHAR</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">DEFAULT</span> <span class="token string">'0'</span><span class="token punctuation">,</span>    <span class="token comment">-- 是否已经阅读</span>
     ACCESS_TIME <span class="token keyword">DATE</span>                <span class="token comment">-- 阅读时间</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
-<p>MySQL范例：<br><!-- tab MySQL --><br><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）</span>
+<p>MySQL范例： <!-- tab MySQL --> <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 《情色漫畫老師》（中国大陆译作《埃罗芒阿老师》）</span>
 <span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token operator">NOT</span> <span class="token keyword">EXISTS</span> oggforward<span class="token punctuation">.</span>tbl_eromanga <span class="token punctuation">(</span>
     id <span class="token keyword">INT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>     <span class="token comment">-- 主键</span>
     book <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>         <span class="token comment">-- 第几作</span>
@@ -310,10 +311,12 @@
     <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>id<span class="token punctuation">)</span>
 <span class="token punctuation">)</span> <span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">InnoDB</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span><span class="token operator">=</span>utf8<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
 <p>毕竟是你自己看的，怎么建都无所谓，但是应该要有ID（便于定位和排序），要区分出是哪本小说，另外也可以加一些伪装用的字段，显得像是在操作自己项目中的表一样。</p>
-<h1 id="导入小说"><a href="#导入小说" class="headerlink" title="导入小说"></a>导入小说</h1><p>这一点比较关键，你需要先将小说下载下来，弄成TXT格式，然后编写一个导入程序，将其导入到数据库中。导入的时候需要注意字段长度和断行。建议在程序里面适当断行，不要一段话一口气写到底，这样查询的时候看起来方便。</p>
+<h1 id="导入小说">导入小说</h1>
+<p>这一点比较关键，你需要先将小说下载下来，弄成TXT格式，然后编写一个导入程序，将其导入到数据库中。导入的时候需要注意字段长度和断行。建议在程序里面适当断行，不要一段话一口气写到底，这样查询的时候看起来方便。</p>
 <p>注意文件字符编码！下面程序默认文件采用GB2312/GBK编码。如果为UTF-8，需在命令行中手动传入编码。</p>
-<h2 id="Java程序"><a href="#Java程序" class="headerlink" title="Java程序"></a>Java程序</h2><p>ImportUtils.java：</p>
-<p>Oracle版本：<br><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span></span><span class="token punctuation">;</span>
+<h2 id="java程序">Java程序</h2>
+<p>ImportUtils.java：</p>
+<p>Oracle版本： <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">Connection</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">DriverManager</span></span><span class="token punctuation">;</span>
@@ -418,7 +421,7 @@
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
-<p>MySQL版本：<br><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span></span><span class="token punctuation">;</span>
+<p>MySQL版本： <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">Connection</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span></span><span class="token class-name">DriverManager</span></span><span class="token punctuation">;</span>
@@ -537,9 +540,10 @@
     <span class="token comment"># UTF-8编码则需要</span>
     <span class="token comment"># java ImportUtils 5 1 5_$i.txt UTF-8</span>
 <span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="awk脚本（Linux服务器）"><a href="#awk脚本（Linux服务器）" class="headerlink" title="awk脚本（Linux服务器）"></a>awk脚本（Linux服务器）</h2><p>DBA们可能并没有在电脑上安装Java，不过没关系，我们也可以将小说上传到服务器上，通过下面的awk脚本生成SQL，然后通过sqlplus执行SQL，把将小说内容导入到数据库中：</p>
+<h2 id="awk脚本linux服务器">awk脚本（Linux服务器）</h2>
+<p>DBA们可能并没有在电脑上安装Java，不过没关系，我们也可以将小说上传到服务器上，通过下面的awk脚本生成SQL，然后通过sqlplus执行SQL，把将小说内容导入到数据库中：</p>
 <p>gen_sql.awk：</p>
-<p>Oracle版本：<br><pre class="line-numbers language-awk" data-language="awk"><code class="language-awk"><span class="token keyword">BEGIN</span> <span class="token punctuation">&#123;</span>
+<p>Oracle版本： <pre class="line-numbers language-awk" data-language="awk"><code class="language-awk"><span class="token keyword">BEGIN</span> <span class="token punctuation">&#123;</span>
     INSERT_SQL <span class="token operator">=</span> <span class="token string">"INSERT INTO OGGFORWARD.TBL_EROMANGA (ID, BOOK, CHAPTER, TEXT) VALUES (SEQ_TBL_EROMANGA.NEXTVAL, '@1', '@2', '@3');"</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>LINE_WIDTH<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         LINE_WIDTH <span class="token operator">=</span> <span class="token number">70</span><span class="token punctuation">;</span>
@@ -571,7 +575,7 @@
 <span class="token keyword">END</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">print</span> <span class="token string">"COMMIT;"</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
-<p>MySQL版本：<br><pre class="line-numbers language-awk" data-language="awk"><code class="language-awk"><span class="token keyword">BEGIN</span> <span class="token punctuation">&#123;</span>
+<p>MySQL版本： <pre class="line-numbers language-awk" data-language="awk"><code class="language-awk"><span class="token keyword">BEGIN</span> <span class="token punctuation">&#123;</span>
     INSERT_SQL <span class="token operator">=</span> <span class="token string">"INSERT INTO oggforward.tbl_eromanga (book, chapter, text) VALUES ('@1', '@2', '@3');"</span><span class="token punctuation">;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>LINE_WIDTH<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         LINE_WIDTH <span class="token operator">=</span> <span class="token number">70</span><span class="token punctuation">;</span>
@@ -616,9 +620,12 @@
 <p>这里需要再次注意文件字符编码，如果txt编码、LANG、NLS_LANG（Oracle）与数据库（Oracle）/表（MySQL）编码四者不一致也会乱码！</p>
 <p>假如txt文件是UTF-8，数据库是GBK，可以先用<code>iconv -f utf8 -t gbk -c 1.txt &gt; 1_gbk.txt</code>对文件转码，然后<code>export LANG=zh_CN.GBK</code>设置awk编码。</p>
 <p>另外也可以不改编码，管道到iconv：<code>awk ... | iconv -f utf8 -t gbk -c | sqlplus oggforward/eromanga</code></p>
-<h2 id="如果连数据库也是Windows服务器"><a href="#如果连数据库也是Windows服务器" class="headerlink" title="如果连数据库也是Windows服务器"></a>如果连数据库也是Windows服务器</h2><p>Windows系统自带VBScript，一样能生成SQL然后执行。不会写VBScript也没关系，把小说扔到Excel里面然后用公式拼接出SQL语句也行。</p>
-<h1 id="开始阅读"><a href="#开始阅读" class="headerlink" title="开始阅读"></a>开始阅读</h1><p>用你平常用的数据库工具登录，然后</p>
-<p>Oracle：<br><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 阅读</span>
+<h2
+id="如果连数据库也是windows服务器">如果连数据库也是Windows服务器</h2>
+<p>Windows系统自带VBScript，一样能生成SQL然后执行。不会写VBScript也没关系，把小说扔到Excel里面然后用公式拼接出SQL语句也行。</p>
+<h1 id="开始阅读">开始阅读</h1>
+<p>用你平常用的数据库工具登录，然后</p>
+<p>Oracle： <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 阅读</span>
 <span class="token keyword">SELECT</span>
     ID<span class="token punctuation">,</span> BOOK<span class="token punctuation">,</span> CHAPTER<span class="token punctuation">,</span> <span class="token keyword">TEXT</span><span class="token punctuation">,</span> IS_READ<span class="token punctuation">,</span> ACCESS_TIME 
 <span class="token keyword">FROM</span>
@@ -628,7 +635,7 @@
 <span class="token comment">-- 阅读未看过的，加个WHERE条件IS_READ='0'</span>
 <span class="token comment">-- 标记已看过的部分</span>
 <span class="token keyword">UPDATE</span> OGGFORWARD<span class="token punctuation">.</span>TBL_EROMANGA <span class="token keyword">SET</span> IS_READ<span class="token operator">=</span><span class="token string">'1'</span><span class="token punctuation">,</span> ACCESS_TIME<span class="token operator">=</span>SYSDATE <span class="token keyword">WHERE</span> ID<span class="token operator">&lt;</span>你所看到的ID <span class="token operator">AND</span> IS_READ<span class="token operator">=</span><span class="token string">'0'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
-<p>MySQL：<br><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 阅读</span>
+<p>MySQL： <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 阅读</span>
 <span class="token keyword">SELECT</span>
     id<span class="token punctuation">,</span> book<span class="token punctuation">,</span> chapter<span class="token punctuation">,</span> <span class="token keyword">text</span><span class="token punctuation">,</span> is_read<span class="token punctuation">,</span> access_time 
 <span class="token keyword">FROM</span>
@@ -678,9 +685,15 @@
 <span class="token comment">-- 耗CPU最多的SQL</span>
 <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> v$sqlstats <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> buffer_gets <span class="token keyword">DESC</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如果在IDEA等环境操作数据库，可以再打开一些平日工作用的程序代码。</p>
-<p><img src="/img/2019-01-11-oracle-novel/preview.png" alt="看不出什么问题"></p>
-<p>嗯，看不出什么问题（如果不看<a href="/img/2019-01-11-oracle-novel/eromanga.jpg">插画</a>的话），而且领导来了也不怕，大大方方地继续执行附近SQL就行了——没准领导还会以为你热爱钻研数据库技术呢。</p>
-<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><p>如果公司网络管的不严，而且自己电脑或数据库服务器能访问互联网，那么也可以继续拓展，通过Oracle或MySQL刷新闻、贴吧或微博之类的东西。</p>
+<figure>
+<img src="/img/2019-01-11-oracle-novel/preview.png"
+alt="看不出什么问题" />
+<figcaption aria-hidden="true">看不出什么问题</figcaption>
+</figure>
+<p>嗯，看不出什么问题（如果不看<a
+href="/img/2019-01-11-oracle-novel/eromanga.jpg">插画</a>的话），而且领导来了也不怕，大大方方地继续执行附近SQL就行了——没准领导还会以为你热爱钻研数据库技术呢。</p>
+<h1 id="拓展">拓展</h1>
+<p>如果公司网络管的不严，而且自己电脑或数据库服务器能访问互联网，那么也可以继续拓展，通过Oracle或MySQL刷新闻、贴吧或微博之类的东西。</p>
 
     </div>
 

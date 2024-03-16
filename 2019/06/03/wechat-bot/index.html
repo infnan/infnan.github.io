@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -265,8 +265,10 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>微信机器人是一个比较难搞的东西，因为微信登录比较麻烦，而且官方不仅不提供API，还积极封杀机器人和“非法登录”的途径，导致研发风险较大。目前比较成熟的两种方式是模拟微信网页版以及程序控制微信PC版应用。</p>
-<p>本文采用Puppeteer框架，借助真实的浏览器访问微信网页版，模拟浏览器的正常操作，以降低被封杀的风险。<br><span id="more"></span></p>
-<h2 id="大致思路"><a href="#大致思路" class="headerlink" title="大致思路"></a>大致思路</h2><ul>
+<p>本文采用Puppeteer框架，借助真实的浏览器访问微信网页版，模拟浏览器的正常操作，以降低被封杀的风险。
+<span id="more"></span></p>
+<h2 id="大致思路">大致思路</h2>
+<ul>
 <li>使用Express框架提供对外接口，让其他程序能够调用。</li>
 <li>使用Puppeteer来访问微信网页版。由于微信网页版需要扫码登录，需要设计接口来暴露二维码（这里直接提供网页截图）。另外二维码会过期，因此需要刷新机制（本文程序的话，重启就行，不需要再另行实现）。</li>
 <li>通过操作DOM来判断页面的状态。</li>
@@ -274,8 +276,9 @@
 <li>通过捕获浏览器AJAX请求来获取新消息内容（本文未实现）。</li>
 <li>实现敏感词和敏感言论过滤机制，以防无意或有意的攻击。</li>
 </ul>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>详细参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9TaW1wbGVOb3RpZnlCb3Q=">https://github.com/infnan/SimpleNotifyBot<i class="fa fa-external-link-alt"></i></span>。</p>
-<p>开启浏览器：<br><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 开启无头浏览器</span>
+<h2 id="代码">代码</h2>
+<p>详细参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9TaW1wbGVOb3RpZnlCb3Q=">https://github.com/infnan/SimpleNotifyBot<i class="fa fa-external-link-alt"></i></span>。</p>
+<p>开启浏览器： <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 开启无头浏览器</span>
 <span class="token keyword">const</span> browser <span class="token operator">=</span> <span class="token keyword">await</span> puppeteer<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
     <span class="token literal-property property">headless</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -424,13 +427,15 @@
         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">MessageError</span><span class="token punctuation">(</span><span class="token string">'Target not confirmed'</span><span class="token punctuation">,</span> <span class="token string">'NORESPONSE'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="保号注意事项"><a href="#保号注意事项" class="headerlink" title="保号注意事项"></a>保号注意事项</h2><p>为确保安全，使用机器人时需要多加注意，以免封号甚至招致牢狱之灾。以下皆为网友经验，仅供参考。</p>
-<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><ul>
-<li>使用真实手机注册，避免用模拟器或双开软件。<ul>
+<h2 id="保号注意事项">保号注意事项</h2>
+<p>为确保安全，使用机器人时需要多加注意，以免封号甚至招致牢狱之灾。以下皆为网友经验，仅供参考。</p>
+<h3 id="注册">注册</h3>
+<ul>
+<li>使用真实手机注册，避免用模拟器或双开软件。
+<ul>
 <li>使用模拟器的话需要先用xprivacy控制好微信的权限，否则会无法登录或被微信封禁。</li>
 <li>使用双开之前先调查靠不靠谱，例如有些双开会被微信识别，导致账号被封，而小米手机的双开就比较安全。</li>
-</ul>
-</li>
+</ul></li>
 <li>使用真实手机号注册，并进行实名认证，然后绑定一张银行卡，再往微信钱包里头存一块钱。</li>
 <li>手机和手机号尽量专用，一个设备或手机号不要拿着注册很多微信号，也不要拿着频繁登录注销。</li>
 <li>新注册的账号要在真实的手机上挂15至30天，然后再进行其他操作，以免让系统“大数据”识别。</li>
@@ -439,7 +444,8 @@
 <li>一天之内不要加太多好友。</li>
 <li>好友不要超过5000。</li>
 </ul>
-<h3 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h3><ul>
+<h3 id="发送消息">发送消息</h3>
+<ul>
 <li>注意消息发送频率不要太高。几秒钟就发一大堆消息（例如像<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL2F2Mzk0MjgxLw==">脸滚键盘<i class="fa fa-external-link-alt"></i></span>那样），这样很容易被封号。</li>
 <li>不定期往“filehelper”或专用群发送keepalive消息，以防掉线。</li>
 <li>注意设计监控和报警机制，掉线之后能及时去恢复连接。</li>

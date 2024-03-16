@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%9A%84%E5%BF%85%E8%A6%81%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">修改的必要性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%BD%E5%B7%A5"><span class="nav-number">2.</span> <span class="nav-text">施工</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E5%85%AC%E5%85%B1%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">检查公共函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals-awk"><span class="nav-number">2.2.</span> <span class="nav-text">equals.awk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals-sh"><span class="nav-number">2.3.</span> <span class="nav-text">equals.sh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.4.</span> <span class="nav-text">运行程序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">已知问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-number">4.</span> <span class="nav-text">后续</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E7%9A%84%E5%BF%85%E8%A6%81%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">修改的必要性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%BD%E5%B7%A5"><span class="nav-number">2.</span> <span class="nav-text">施工</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E5%85%AC%E5%85%B1%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">检查公共函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals.awk"><span class="nav-number">2.2.</span> <span class="nav-text">equals.awk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#equals.sh"><span class="nav-number">2.3.</span> <span class="nav-text">equals.sh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.4.</span> <span class="nav-text">运行程序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%B2%E7%9F%A5%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">已知问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-number">4.</span> <span class="nav-text">后续</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,7 +161,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -263,8 +263,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>甲方前一段时间使用360代码卫士对我们项目进行了“代码审计”，其中一个问题是“使用equals()来判断字符串是否为空”。由于甲方只关心问题数量，不关心问题性质（甚至连算不算问题都不在乎），我们只能硬着头皮去按甲方要求修改。<br><span id="more"></span></p>
-<h1 id="修改的必要性"><a href="#修改的必要性" class="headerlink" title="修改的必要性"></a>修改的必要性</h1><p>首先看一下equals()和length()的实现：</p>
+    <div class="post-body" itemprop="articleBody"><p>甲方前一段时间使用360代码卫士对我们项目进行了“代码审计”，其中一个问题是“使用equals()来判断字符串是否为空”。由于甲方只关心问题数量，不关心问题性质（甚至连算不算问题都不在乎），我们只能硬着头皮去按甲方要求修改。
+<span id="more"></span></p>
+<h1 id="修改的必要性">修改的必要性</h1>
+<p>首先看一下equals()和length()的实现：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span><span class="token class-name">Object</span> anObject<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> anObject<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
         <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
@@ -291,9 +293,13 @@
     <span class="token keyword">return</span> value<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>很明显，equals也是先比较字符串长度，而且空串长度是0，即使进入while处也跑不起来，因此在业务系统这种意义上不会有任何性能差异。另一方面，我们进行了简单的性能测试（循环一千万次），结果同样表明完全没有必要改。</p>
-<h1 id="施工"><a href="#施工" class="headerlink" title="施工"></a>施工</h1><p>为了交差，我们不得不去做没有必要的事情，所以我们需要考虑一种代价最小、没有副作用的改法。考虑到业务系统并不差调用一个函数的时间，我们干脆直接使用StringUtils工具类，既增加代码可读性，也便于装逼。代码通过awk和bash进行自动处理。</p>
-<h2 id="检查公共函数"><a href="#检查公共函数" class="headerlink" title="检查公共函数"></a>检查公共函数</h2><p>先确认import org.apache.commons.lang.StringUtils是否能正确导入。如果不能，那么需要导入jar包（commons-lang.jar）。</p>
-<h2 id="equals-awk"><a href="#equals-awk" class="headerlink" title="equals.awk"></a>equals.awk</h2><pre class="line-numbers language-awk" data-language="awk"><code class="language-awk"><span class="token comment"># 注意：mac系统要使用gawk</span>
+<h1 id="施工">施工</h1>
+<p>为了交差，我们不得不去做没有必要的事情，所以我们需要考虑一种代价最小、没有副作用的改法。考虑到业务系统并不差调用一个函数的时间，我们干脆直接使用StringUtils工具类，既增加代码可读性，也便于装逼。代码通过awk和bash进行自动处理。</p>
+<h2 id="检查公共函数">检查公共函数</h2>
+<p>先确认import
+org.apache.commons.lang.StringUtils是否能正确导入。如果不能，那么需要导入jar包（commons-lang.jar）。</p>
+<h2 id="equals.awk">equals.awk</h2>
+<pre class="line-numbers language-awk" data-language="awk"><code class="language-awk"><span class="token comment"># 注意：mac系统要使用gawk</span>
 
 <span class="token keyword">BEGIN</span> <span class="token punctuation">&#123;</span>
     imported <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -441,7 +447,8 @@
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="equals-sh"><a href="#equals-sh" class="headerlink" title="equals.sh"></a>equals.sh</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+<h2 id="equals.sh">equals.sh</h2>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
 <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">LC_ALL</span></span><span class="token operator">=</span>zh_CN.GBK         <span class="token comment"># 代码用UTF-8的，本行需要删掉</span>
 <span class="token builtin class-name">cd</span> 代码所在路径
 <span class="token function">find</span> <span class="token builtin class-name">.</span> <span class="token parameter variable">-name</span> <span class="token string">"*.java"</span> <span class="token operator">|</span> <span class="token keyword">while</span> <span class="token builtin class-name">read</span> <span class="token function">file</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
@@ -450,9 +457,12 @@
     <span class="token function">cp</span> _tmp.java <span class="token variable">$file</span>
 <span class="token keyword">done</span>
 <span class="token function">rm</span> _tmp.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h2><p>编译程序，发现程序出现了很多编译错误，这些错误都是因类型不一致导致的低级错误，例如字符串与日期比较、对着int值进行Interger.valueOf、判断int值是否为空串等等。这样看来，无用功做得倒也值了。</p>
-<h1 id="已知问题"><a href="#已知问题" class="headerlink" title="已知问题"></a>已知问题</h1><p><code>str != null &amp;&amp; !&quot;&quot;.equals(str)</code>以及<code>str == null || &quot;&quot;.equals(str)</code>转换之后会变成<code>str != null &amp;&amp; StringUtils.isNotEmpty(str)</code>和<code>str == null || StringUtils.isEmpty(str)</code>，但空指针判断已经没有必要，应当删除。</p>
-<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>写脚本和调试脚本花了半天时间，下午脚本执行完成，然后手工处理了一些暴露出来的代码错误。隔壁两位新员工分别改另外两类简单问题，结果各花了一星期，因此非常建议大家学习一两门辅助语言，并且自动化处理事情。</p>
+<h2 id="运行程序">运行程序</h2>
+<p>编译程序，发现程序出现了很多编译错误，这些错误都是因类型不一致导致的低级错误，例如字符串与日期比较、对着int值进行Interger.valueOf、判断int值是否为空串等等。这样看来，无用功做得倒也值了。</p>
+<h1 id="已知问题">已知问题</h1>
+<p><code>str != null &amp;&amp; !"".equals(str)</code>以及<code>str == null || "".equals(str)</code>转换之后会变成<code>str != null &amp;&amp; StringUtils.isNotEmpty(str)</code>和<code>str == null || StringUtils.isEmpty(str)</code>，但空指针判断已经没有必要，应当删除。</p>
+<h1 id="后续">后续</h1>
+<p>写脚本和调试脚本花了半天时间，下午脚本执行完成，然后手工处理了一些暴露出来的代码错误。隔壁两位新员工分别改另外两类简单问题，结果各花了一星期，因此非常建议大家学习一两门辅助语言，并且自动化处理事情。</p>
 
     </div>
 

@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -268,10 +268,15 @@
 <span id="more"></span>
 <p>计划以内网穿透方法进行联调之前，请留意自己公司的管理制度里面有没有网络限制，以免倒霉被抓挨罚。如果能以遵守制度的方式将内网端口映射到公网，建议走公司的手续。</p>
 <p>操作之前需要去搞一台VPS服务器。VPS有国内、国外的，优缺点分别如下：</p>
-<div class="table-container">
 <table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 16%" />
+<col style="width: 49%" />
+<col style="width: 19%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>地区</th>
 <th>优势</th>
 <th>缺点</th>
@@ -279,19 +284,19 @@
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>国内（不含香港）</td>
 <td>网速快<br>网络稳定</td>
 <td>价格较贵，多数需月付<br>未经备案通常会禁止使用80、443、8080等端口，而备案耗时较长，会延误工作</td>
 <td>阿里云、腾讯云等</td>
 </tr>
-<tr>
+<tr class="even">
 <td>香港</td>
 <td>网速快<br>不需要备案，可直接使用80、443等端口</td>
 <td>价格较贵<br>有被墙的风险</td>
 <td>暂无推荐，可自行Google查询</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>国外</td>
 <td>价格便宜，有些厂商甚至可按实际使用时间支付，随时买随时扔<br>不需要备案</td>
 <td>网络不稳定，容易被墙<br>需要能付外币的信用卡</td>
@@ -299,7 +304,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>以Vultr为例。选择该厂商，有以下几个原因：</p>
 <ul>
 <li>随时用，随时扔，按实际使用时间付费</li>
@@ -318,10 +322,15 @@
 <p>准备工作就做好了。</p>
 <p>如果选择CentOS，它会默认开启防火墙，所以要确认一下防火墙状态，然后关闭防火墙或者开放待使用端口。</p>
 <p>联调时先去下载PuTTY，启动，在里面输入服务器地址和端口（默认22），并且按下图进行设置</p>
-<p><img src="/img/2018-07-14-cross-company-debug/putty-tunnel.png" alt="PuTTY设置"></p>
+<figure>
+<img src="/img/2018-07-14-cross-company-debug/putty-tunnel.png"
+alt="PuTTY设置" />
+<figcaption aria-hidden="true">PuTTY设置</figcaption>
+</figure>
 <p>不要忘记点Add按钮。假如本机是<code>http://172.18.106.3:8080</code>，服务器IP是198.13.60.108，你选择的端口是8080，那么登录成功后就可以通过<code>http://198.13.60.108:8080</code>来访问自己的应用了。</p>
 <p>因为是外国服务器，所以连接可能不太稳定，需要不定期检查连接，断了的话随时重新连。</p>
-<p>如果需要域名，可以去国外的<span class="exturl" data-url="aHR0cHM6Ly9uYW1lY2hlYXAuY29t">Namecheap<i class="fa fa-external-link-alt"></i></span>上面购买个便宜的外国域名（注意：需要准备Visa/MasterCard信用卡）。如果还需要HTTPS，可以使用Let’s Encrypt。国内域名也可以，除了需要实名认证以外通常也没什么问题（国内域名、国外服务器不用备案，国内服务器才需要备案）。</p>
+<p>如果需要域名，可以去国外的<span class="exturl" data-url="aHR0cHM6Ly9uYW1lY2hlYXAuY29t">Namecheap<i class="fa fa-external-link-alt"></i></span>上面购买个便宜的外国域名（注意：需要准备Visa/MasterCard信用卡）。如果还需要HTTPS，可以使用Let's
+Encrypt。国内域名也可以，除了需要实名认证以外通常也没什么问题（国内域名、国外服务器不用备案，国内服务器才需要备案）。</p>
 
     </div>
 
@@ -355,13 +364,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2018/05/15/deployment/" rel="prev" title="Web应用部署注意事项">
-                  <i class="fa fa-angle-left"></i> Web应用部署注意事项
+                <a href="/2018/07/14/cross-company-debug/" rel="prev" title="接口设计与联调经验">
+                  <i class="fa fa-angle-left"></i> 接口设计与联调经验
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2018/07/14/cross-company-debug/" rel="next" title="接口设计与联调经验">
-                  接口设计与联调经验 <i class="fa fa-angle-right"></i>
+                <a href="/2018/07/15/to-new-employee/" rel="next" title="给校招新员工分享的一点人生的经验">
+                  给校招新员工分享的一点人生的经验 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

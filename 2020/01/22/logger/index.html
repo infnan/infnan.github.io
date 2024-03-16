@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">日志的目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">日志的内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%9A%84%E7%AD%89%E7%BA%A7"><span class="nav-number">3.</span> <span class="nav-text">日志的等级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E6%97%A5%E5%BF%97%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">打日志的位置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">日志文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E5%9D%91"><span class="nav-number">6.</span> <span class="nav-text">其他的坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A%E4%B8%80%E7%A7%8D%E4%BE%BF%E4%BA%8E%E8%AF%8A%E6%96%AD%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">7.</span> <span class="nav-text">补充：一种便于诊断的方案</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">日志的目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">日志的内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E7%9A%84%E7%AD%89%E7%BA%A7"><span class="nav-number">3.</span> <span class="nav-text">日志的等级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E6%97%A5%E5%BF%97%E7%9A%84%E4%BD%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">打日志的位置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">日志文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E5%9D%91"><span class="nav-number">6.</span> <span class="nav-text">其他的坑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E4%B8%80%E7%A7%8D%E4%BE%BF%E4%BA%8E%E8%AF%8A%E6%96%AD%E7%9A%84%E6%96%B9%E6%A1%88"><span class="nav-number">7.</span> <span class="nav-text">补充：一种便于诊断的方案</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,7 +161,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">84</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -263,9 +263,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>在程序中打日志很简单，<code>logger.debug(&quot;Hello, Happy World!&quot;)</code>，OK。可是，正确地打日志并不简单，需要注意以下几个问题。</p>
+    <div class="post-body" itemprop="articleBody"><p>在程序中打日志很简单，<code>logger.debug("Hello, Happy World!")</code>，OK。可是，正确地打日志并不简单，需要注意以下几个问题。</p>
 <span id="more"></span>
-<h1 id="日志的目的"><a href="#日志的目的" class="headerlink" title="日志的目的"></a>日志的目的</h1><p><strong>备注：本文中的“日志”专指程序内部日志。</strong></p>
+<h1 id="日志的目的">日志的目的</h1>
+<p><strong>备注：本文中的“日志”专指程序内部日志。</strong></p>
 <p>打日志是为了记录程序的运行情况，这样可以：</p>
 <ul>
 <li>确认事件发生顺序、时间节点</li>
@@ -276,7 +277,8 @@
 </ul>
 <p>因此，日志要记好有助于解决问题的各类信息，不要堆积无助于解决问题的垃圾，而且要遵循一定的规范，便于查找、定位。</p>
 <p>在这里向没有开发经验的人强调一下：生产系统的日志量非常大，而且出于性能考虑不会展示调试日志。在海量日志中找信息是件很麻烦的事情，请不要给维护人员挖坑。</p>
-<h1 id="日志的内容"><a href="#日志的内容" class="headerlink" title="日志的内容"></a>日志的内容</h1><p>通过日志，应该能快速地了解“什么时间在哪里大概发生了什么事”，猜到“大概是什么原因导致了问题”，然后进一步定位程序代码，确认问题、解决问题。例如：</p>
+<h1 id="日志的内容">日志的内容</h1>
+<p>通过日志，应该能快速地了解“什么时间在哪里大概发生了什么事”，猜到“大概是什么原因导致了问题”，然后进一步定位程序代码，确认问题、解决问题。例如：</p>
 <pre class="line-numbers language-none"><code class="language-none">2020-01-02 12:34:56 [UserService] WARN 查询用户不存在，uid &#x3D; 1234567890
 2020-01-03 12:45:06 [AuthService] INFO 实名核验成功，uid &#x3D; 1234567899，身份证号 &#x3D; 110101123412341234，耗时 &#x3D; 12ms
 2020-01-04 12:56:01 [InfoService] ERROR 用户保存个人信息时发生异常
@@ -286,28 +288,29 @@ java.sql.SQLException: ORA-12899: value too large for column &quot;XXXXX&quot;.&
         ......<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>一条日志应该包含以下内容：</p>
 <ul>
-<li><strong>时间（“何时”）</strong>：日志要记录事件的发生时间。<ul>
+<li><strong>时间（“何时”）</strong>：日志要记录事件的发生时间。
+<ul>
 <li>日志组件记录的实际上是“打日志的时间”，而非“事件发生时间”。不过，通常事件执行时间很短，这个差异可以忽略不计。</li>
 <li>如果事件执行时间比较长，“时间”就要区分为“发生时间”、“结束时间”和“持续时间”。</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>具体位置（“何地”）</strong>：记录事件于哪个模块、文件、函数等产生。建议至少把模块名打上，以便翻代码。</li>
-<li><strong>事件简要描述（“什么事情”）</strong>：看到日志之后大概能猜到发生了什么事情。语言要简洁。<ul>
+<li><strong>事件简要描述（“什么事情”）</strong>：看到日志之后大概能猜到发生了什么事情。语言要简洁。
+<ul>
 <li>不好的例子：“发生错误”、“数据库异常”、“数据不存在”</li>
 <li>好的例子：“查询用户信息时产生异常”、“执行用户信息保存时数据库异常”、“用户id不存在”</li>
 <li>建议描述文字不要完全相同。比方说，都是“数据查询失败”，其中一处可以写成“数据查询失败了”，而另一处写成“数据查询的失败”，这样便于直接使用全文搜索功能查代码。</li>
-</ul>
-</li>
+</ul></li>
 <li><strong>日志等级</strong>：把日志等级写好，出问题时就可以根据问题的严重性来找日志。</li>
-<li><strong>上下文</strong>：例如<ul>
+<li><strong>上下文</strong>：例如
+<ul>
 <li>异常的堆栈</li>
 <li>重要参数：有时需要复现问题，可以记录某些重要参数（例如uid）以便还原现场</li>
 <li>重要状态变化：例如线程启动/中断、特殊进程进入/退出等</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>在开发时要用团队封装好的框架，不要自己造轮子。</p>
-<h1 id="日志的等级"><a href="#日志的等级" class="headerlink" title="日志的等级"></a>日志的等级</h1><p>以Java为例，Java日志通常分为ERROR、WARN、INFO、DEBUG和TRACE。其他语言和框架情况类似。</p>
+<h1 id="日志的等级">日志的等级</h1>
+<p>以Java为例，Java日志通常分为ERROR、WARN、INFO、DEBUG和TRACE。其他语言和框架情况类似。</p>
 <p>这几个级别用法通常如下：</p>
 <ul>
 <li>ERROR：记录影响系统与业务的严重问题，例如系统异常、数据库故障等。</li>
@@ -315,7 +318,8 @@ java.sql.SQLException: ORA-12899: value too large for column &quot;XXXXX&quot;.&
 <li>INFO：比较重要的信息，例如系统参数、线程启动/结束、特殊任务等。</li>
 <li>DEBUG、TRACE：记录开发调试过程中的细节。这类信息只要能方便开发人员调试即可。在生产环境中，这类信息应该被屏蔽掉，不往日志里头打，或者仅在跟踪问题时临时启用，用完之后立刻关掉。</li>
 </ul>
-<h1 id="打日志的位置"><a href="#打日志的位置" class="headerlink" title="打日志的位置"></a>打日志的位置</h1><p>假设信息查询的堆栈如下：<br><pre class="line-numbers language-none"><code class="language-none">QueryController.queryInfo()
+<h1 id="打日志的位置">打日志的位置</h1>
+<p>假设信息查询的堆栈如下： <pre class="line-numbers language-none"><code class="language-none">QueryController.queryInfo()
     UserService.getUserInfo()
         UserDAO.getUser()
         RoleDAO.getRole()
@@ -336,29 +340,30 @@ java.sql.SQLException: ORA-12899: value too large for column &quot;XXXXX&quot;.&
         <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>以上代码存在三个问题：</p>
-<ol>
-<li>发生异常时，异常直接catch掉，未往上抛（<code>throw e;</code>），导致调用者无法捕获异常。</li>
-<li>在此处打日志，调用者捕获异常之后还要打日志，日志信息就重复了。</li>
-<li>如使用数据库事务（例如Spring的@Transactional），那么将无法正确回滚，导致状态错误。</li>
-</ol>
-<h1 id="日志文件"><a href="#日志文件" class="headerlink" title="日志文件"></a>日志文件</h1><p>不要假设日志全部都会输出到屏幕上，或者全部输出到特定的日志文件中！</p>
+<p>以上代码存在三个问题： 1.
+发生异常时，异常直接catch掉，未往上抛（<code>throw e;</code>），导致调用者无法捕获异常。
+2. 在此处打日志，调用者捕获异常之后还要打日志，日志信息就重复了。 3.
+如使用数据库事务（例如Spring的@Transactional），那么将无法正确回滚，导致状态错误。</p>
+<h1 id="日志文件">日志文件</h1>
+<p>不要假设日志全部都会输出到屏幕上，或者全部输出到特定的日志文件中！</p>
 <p>日志输出目标是可以调整的，例如直接输出到stdout/stderr（生产环境不会这样干）、输出到特定日志文件、输出到数据库，或输出到特定的日志服务器中。日志不仅可以输出到单个文件，也可以根据子系统、日志级别、日志目的、日期时间等条件将日志拆分成多个文件。</p>
 <p>因此要杜绝用<code>System.out.println()</code>、<code>System.error.println()</code>与<code>e.printStackTrace()</code>打日志！这样打出来的日志，不仅缺乏信息，而且有可能会打错地方，让人找不到。</p>
 <p>第三方接口务必要打日志，而且不仅要记一些关键参数，还要便于查询（例如放入专门的XX公司接口日志文件中），以免出问题时互相踢皮球。</p>
-<h1 id="其他的坑"><a href="#其他的坑" class="headerlink" title="其他的坑"></a>其他的坑</h1><ul>
+<h1 id="其他的坑">其他的坑</h1>
+<ul>
 <li><code>catch</code>里面不要空着。遇到异常时，如果不处理，不上抛，也不打日志，一旦出现问题，就把大家全都坑了。</li>
 <li>不要只输出<code>e.getMesssage()</code>，要输出整个堆栈，否则难以定位。</li>
 <li>不要把详细信息（特别是堆栈）暴露给用户。</li>
 <li>再强调一遍，不要<code>System.out.println()</code>、<code>System.error.println()</code>与<code>e.printStackTrace()</code>。这样打，不仅缺乏信息，而且有可能会打错地方，让人找不到。</li>
-<li>生产环境不要打DEBUG日志，否则影响性能。生产系统部署时，应通过配置文件或开关调整日志等级，把DEBUG日志屏蔽掉。<ul>
+<li>生产环境不要打DEBUG日志，否则影响性能。生产系统部署时，应通过配置文件或开关调整日志等级，把DEBUG日志屏蔽掉。
+<ul>
 <li><em>系统刚上线时，为了便于调整，可能也会把DEBUG日志打出来。此时要留意服务器磁盘空间，别让日志把磁盘撑爆。</em></li>
-</ul>
-</li>
+</ul></li>
 <li>日志是各线程公用的。需要换行的话，要先使用<code>\n</code>拼接字符串，拼好之后一口气打出来。多次执行打日志语句，日志内容可能会被其他业务打断。</li>
 <li>频繁执行的代码、数据量大的数据要尽量避免打调试日志，同样影响性能。</li>
 </ul>
-<h1 id="补充：一种便于诊断的方案"><a href="#补充：一种便于诊断的方案" class="headerlink" title="补充：一种便于诊断的方案"></a>补充：一种便于诊断的方案</h1><p>仅在后台打日志，实际上不便于问题定位诊断，而直接把细节打到前台，虽然方便定位了，但不仅对用户不友好，还会引发安全风险。所以可以稍微变通一下：</p>
+<h1 id="补充一种便于诊断的方案">补充：一种便于诊断的方案</h1>
+<p>仅在后台打日志，实际上不便于问题定位诊断，而直接把细节打到前台，虽然方便定位了，但不仅对用户不友好，还会引发安全风险。所以可以稍微变通一下：</p>
 <ul>
 <li>设计一套错误编码，例如：<code>I-1A2B-7F-03</code>，I指IOException，1A2B是class名字经过hash之后取前四位，7F是行号转为十六进制，03是个随机数。</li>
 <li>在系统发生异常时，除了错误信息，把这个编码打到前台页面与后台日志中，并要求用户反馈异常时提供这个代号。</li>
