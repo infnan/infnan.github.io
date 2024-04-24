@@ -148,7 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7ssh"><span class="nav-number">1.</span> <span class="nav-text">升级SSH</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7curl%E9%9C%80%E8%A6%81%E7%BD%91%E7%BB%9C"><span class="nav-number">2.</span> <span class="nav-text">升级curl（需要网络）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">系统配置</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7SSH"><span class="nav-number">1.</span> <span class="nav-text">升级SSH</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7curl%EF%BC%88%E9%9C%80%E8%A6%81%E7%BD%91%E7%BB%9C%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">升级curl（需要网络）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">系统配置</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -265,32 +265,28 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>为满足等保测评要求，对CentOS
-7服务器进行了统一整改，整改命令记录如下。</p>
+    <div class="post-body" itemprop="articleBody"><p>为满足等保测评要求，对CentOS 7服务器进行了统一整改，整改命令记录如下。</p>
 <span id="more"></span>
-<h1 id="升级ssh">升级SSH</h1>
-<p>网上教程太多了，此处不再提供。</p>
+<h1 id="升级SSH"><a href="#升级SSH" class="headerlink" title="升级SSH"></a>升级SSH</h1><p>网上教程太多了，此处不再提供。</p>
 <p>如果从7.x旧版升级到8.x或9.x，需要注意几个问题：</p>
-<ol type="1">
+<ol>
 <li>禁用SELinux：</li>
 </ol>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">setenforce <span class="token number">0</span>
 <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/=enforcing/=disabled/'</span> /etc/selinux/config<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<ol start="2" type="1">
+<ol>
 <li>删除旧的key：</li>
 </ol>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rm</span> <span class="token parameter variable">-f</span> /etc/ssh/ssh*key<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ol start="3" type="1">
+<ol>
 <li>允许root登录：</li>
 </ol>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">"PermitRootLogin yes"</span> <span class="token operator">>></span> /etc/ssh/sshd_config<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="升级curl需要网络">升级curl（需要网络）</h1>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> <span class="token parameter variable">-Uvh</span> http://www.city-fan.org/ftp/contrib/yum-repo/city-fan.org-release-3-4.rhel7.noarch.rpm
+<h1 id="升级curl（需要网络）"><a href="#升级curl（需要网络）" class="headerlink" title="升级curl（需要网络）"></a>升级curl（需要网络）</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> <span class="token parameter variable">-Uvh</span> http://www.city-fan.org/ftp/contrib/yum-repo/city-fan.org-release-3-4.rhel7.noarch.rpm
 <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/enabled=0/enabled=1/g'</span> /etc/yum.repos.d/city-fan.org.repo
 <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/gpgcheck=1/gpgcheck=0/g'</span> /etc/yum.repos.d/city-fan.org.repo
 yum update <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span> <span class="token function">curl</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="系统配置">系统配置</h1>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># shell不记录历史命令</span>
+<h1 id="系统配置"><a href="#系统配置" class="headerlink" title="系统配置"></a>系统配置</h1><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># shell不记录历史命令</span>
 <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/HISTSIZE=1000/HISTSIZE=0/g'</span> /etc/profile
 
 <span class="token comment"># shell自动超时</span>

@@ -150,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%8E%B0%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">问题现象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">系统部署架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">检查过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1a"><span class="nav-number">3.1.</span> <span class="nav-text">业务A</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1b"><span class="nav-number">3.2.</span> <span class="nav-text">业务B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1c"><span class="nav-number">3.3.</span> <span class="nav-text">业务C</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E4%BC%BC%E4%BA%8B%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">类似事件</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E7%8E%B0%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">问题现象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">系统部署架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E8%BF%87%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">检查过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1A"><span class="nav-number">3.1.</span> <span class="nav-text">业务A</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1B"><span class="nav-number">3.2.</span> <span class="nav-text">业务B</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1C"><span class="nav-number">3.3.</span> <span class="nav-text">业务C</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E4%BC%BC%E4%BA%8B%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">类似事件</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -270,17 +270,14 @@
     <div class="post-body" itemprop="articleBody"><p>有些时候，你的Web应用明明正常，但是突然有一天，它出现了莫名其妙的问题，无法定位到是哪一行代码错误，而且检查服务器配置也没有问题。这种情况下，可能是WAF安全设备在作怪。</p>
 <p>本文用几个案例，讲一讲这种“莫名其妙”问题的现象如何，以及如何定位到WAF。</p>
 <span id="more"></span>
-<h1 id="问题现象">问题现象</h1>
-<ul>
+<h1 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h1><ul>
 <li>业务操作A从某时起突然开始提示“操作失败”，且更换账号、清理缓存、更换浏览器等方案皆无效，用户反馈显示所有人都无法成功办理业务。</li>
 <li>业务操作B从差不多的时间开始出故障，点击按钮没有反应，更换账号或浏览器同样无效。</li>
-<li>业务操作C也没有反应，后台抓包显示发生HTTP
-418错误，而且有一个错误页面。跟开发人员确认，页面不是他们系统的。</li>
+<li>业务操作C也没有反应，后台抓包显示发生HTTP 418错误，而且有一个错误页面。跟开发人员确认，页面不是他们系统的。</li>
 <li>其他业务未反馈异常。</li>
 <li>询问实施与运维人员，确认近期没有碰过生产应用、生产数据库或其他相关服务器。</li>
 </ul>
-<h1 id="系统部署架构">系统部署架构</h1>
-<p>业务系统采用了既经典又传统的Web应用部署架构：</p>
+<h1 id="系统部署架构"><a href="#系统部署架构" class="headerlink" title="系统部署架构"></a>系统部署架构</h1><p>业务系统采用了既经典又传统的Web应用部署架构：</p>
 <pre class="line-numbers language-none"><code class="language-none">  Internet     |                    机房
                |
 用户 ← CDN ← 网关 ← 负载均衡 ← 应用服务器（集群） ← 数据库服务器
@@ -295,28 +292,18 @@
 <li>Redis服务器、数据库服务器偶尔出故障，但本次业务问题应该与数据库无关（猜测，需要进一步确认）。</li>
 <li>应用服务器集群，每个节点部署的应用完全相同。应用服务器有故障记录，而且有些不靠谱的开发人员会把bug带到生产系统。</li>
 </ul>
-<h1 id="检查过程">检查过程</h1>
-<p>因故障发生前后未对生产系统服务器进行操作，首先排除自己人操作导致故障的可能性。</p>
+<h1 id="检查过程"><a href="#检查过程" class="headerlink" title="检查过程"></a>检查过程</h1><p>因故障发生前后未对生产系统服务器进行操作，首先排除自己人操作导致故障的可能性。</p>
 <p>接下来排除集群节点故障，因为集群各节点应用相同，且只有特定功能失败，其他功能正常，不会是节点卡死导致的。</p>
 <p>然后又排除了CDN的原因——通过修改自己电脑的hosts文件绕过了CDN，直接与服务器原始IP连接，问题依旧。</p>
 <p>向开发人员确认两业务的代码：操作A是Ajax请求，操作B是普通的form表单提交。</p>
 <p>下面分别分析A与B两个业务的情况。</p>
-<h2 id="业务a">业务A</h2>
-<p>使用浏览器控制台观察请求，发现业务A在Networks页面现象如下：</p>
-<figure>
-<img src="/img/2021-11-19-waf/a-1.png" alt="a-1" />
-<figcaption aria-hidden="true">a-1</figcaption>
-</figure>
+<h2 id="业务A"><a href="#业务A" class="headerlink" title="业务A"></a>业务A</h2><p>使用浏览器控制台观察请求，发现业务A在Networks页面现象如下：</p>
+<p><img src="/img/2021-11-19-waf/a-1.png" alt="a-1"></p>
 <p>其他请求正常，说明应用服务器没挂，唯独这个个别业务可能有bug。需要登录服务器检查应用后台日志。</p>
 <p>登录到服务器，对每个节点的应用日志进行检查，未发现报错。重复操作几遍之后再检查日志，仍然未发现报错。我们怀疑程序未打错误日志。</p>
 <p>然而再仔细观察浏览器抓包的内容：</p>
-<figure>
-<img src="/img/2021-11-19-waf/a-2.png" alt="a-2" />
-<figcaption aria-hidden="true">a-2</figcaption>
-</figure>
-<p>从图中可以发现，在Header里面未找到“Response
-Headers”，没有返回内容，“General”中也没有找到“Status
-Code”，说明甚至没有HTTP状态码。看来连接可能是被“掐断”了。</p>
+<p><img src="/img/2021-11-19-waf/a-2.png" alt="a-2"></p>
+<p>从图中可以发现，在Header里面未找到“Response Headers”，没有返回内容，“General”中也没有找到“Status Code”，说明甚至没有HTTP状态码。看来连接可能是被“掐断”了。</p>
 <p>再用curl测试一下。本地调用的话是：</p>
 <pre class="line-numbers language-none"><code class="language-none">$ curl -v -X POST -H &quot;Content-Type: application&#x2F;json&quot; -b &quot;JSESSIONID&#x3D;从服务器拷过来的cookie&quot; -d &quot;从浏览器抓到的AJAX提交的内容&quot; http:&#x2F;&#x2F;www.xxx.com&#x2F;business&#x2F;submit
 *   Trying xxx.xxx.xxx.xxx...
@@ -336,8 +323,7 @@ Code”，说明甚至没有HTTP状态码。看来连接可能是被“掐断”
 curl: (52) Empty reply from server
 * Closing connection 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>未返回任何数据。</p>
-<p>但登录到服务器里面操作就能返回HTTP 200
-OK，还能看到JSON串，说明应用能正常响应：</p>
+<p>但登录到服务器里面操作就能返回HTTP 200 OK，还能看到JSON串，说明应用能正常响应：</p>
 <pre class="line-numbers language-none"><code class="language-none"># curl -v -X POST -H &quot;Content-Type: application&#x2F;json&quot; -b &quot;JSESSIONID&#x3D;从服务器拷过来的cookie&quot; -d &quot;从浏览器抓到的AJAX提交的内容&quot; http:&#x2F;&#x2F;127.0.0.1:8080&#x2F;business&#x2F;submit
 *   Trying 127.0.0.1...
 * TCP_NODELAY set
@@ -361,14 +347,9 @@ OK，还能看到JSON串，说明应用能正常响应：</p>
 
 * Connection #0 to host 127.0.0.1 left intact
 * Closing connection 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>将127.0.0.1:1080换成负载均衡地址，重复操作几遍，仍然返回200
-OK，说明负载均衡设备应该没有问题。另外对JSON串的内容进行检查，发现提示“办理“成功”或“办理失败！请勿重复办理！”，说明数据库也是正常的，否则不可能校验出“重复办理”。</p>
-<h2 id="业务b">业务B</h2>
-<p>在进入B业务页面时，浏览器控制台显示oper.js有JavaScript语法错误：</p>
-<figure>
-<img src="/img/2021-11-19-waf/b.png" alt="oper.js" />
-<figcaption aria-hidden="true">oper.js</figcaption>
-</figure>
+<p>将127.0.0.1:1080换成负载均衡地址，重复操作几遍，仍然返回200 OK，说明负载均衡设备应该没有问题。另外对JSON串的内容进行检查，发现提示“办理“成功”或“办理失败！请勿重复办理！”，说明数据库也是正常的，否则不可能校验出“重复办理”。</p>
+<h2 id="业务B"><a href="#业务B" class="headerlink" title="业务B"></a>业务B</h2><p>在进入B业务页面时，浏览器控制台显示oper.js有JavaScript语法错误：</p>
+<p><img src="/img/2021-11-19-waf/b.png" alt="oper.js"></p>
 <p>直接用浏览器查看oper.js内容，发现JavaScript脚本并未完整加载。分别在本地和服务器上使用curl命令获取oper.js内容：</p>
 <pre class="line-numbers language-none"><code class="language-none">在本地操作：
 $ curl http:&#x2F;&#x2F;www.xxx.com&#x2F;static&#x2F;js&#x2F;oper.js
@@ -379,14 +360,10 @@ curl: (18) transfer closed with outstanding read data remaining
 # curl http:&#x2F;&#x2F;127.0.0.1:8080&#x2F;static&#x2F;js&#x2F;oper.js
 一堆完整的js代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>发现：在我们电脑上执行curl，脚本还没加载完整，网络连接就被“掐断”了；在服务器上执行curl（域名分别使用127.0.0.1:8080与负载均衡地址），脚本内容能完整加载。</p>
-<h2 id="业务c">业务C</h2>
-<p>跟开发人员确认，他们的系统不会返回HTTP
-418错误，而且错误页面与他们系统设计风格不符。说明错误页面不是该系统产生，而是由其他系统产生，例如CDN，但CDN表示这个错误页面也不是他们产生的。</p>
-<h1 id="结论">结论</h1>
-<p>根据上面一系列现象判断，我们确认现有系统与设备未发生故障，可能某个环节调整了安全策略，导致正常请求被错误拦截。</p>
+<h2 id="业务C"><a href="#业务C" class="headerlink" title="业务C"></a>业务C</h2><p>跟开发人员确认，他们的系统不会返回HTTP 418错误，而且错误页面与他们系统设计风格不符。说明错误页面不是该系统产生，而是由其他系统产生，例如CDN，但CDN表示这个错误页面也不是他们产生的。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>根据上面一系列现象判断，我们确认现有系统与设备未发生故障，可能某个环节调整了安全策略，导致正常请求被错误拦截。</p>
 <p>和甲方负责人员沟通之后，得知机房近期部署了WAF，但甲方既未通知各相关单位，也未派人观察WAF拦截记录。我们直接和WAF负责人员沟通，维护白名单之后问题解决。</p>
-<h1 id="类似事件">类似事件</h1>
-<p>到了另一个项目，该项目使用HTTPS网站。证书即将过期时，登录到nginx服务器替换新证书，浏览器验证时却发现证书有效期未更新，仍为原证书的有效期。</p>
+<h1 id="类似事件"><a href="#类似事件" class="headerlink" title="类似事件"></a>类似事件</h1><p>到了另一个项目，该项目使用HTTPS网站。证书即将过期时，登录到nginx服务器替换新证书，浏览器验证时却发现证书有效期未更新，仍为原证书的有效期。</p>
 <p>仔细检查服务器，发现证书文件已正确替换、nginx配置正确，而且服务器内只有一个nginx实例，并已正确重启。</p>
 <p>但是在测试时意外发现，在服务器上使用<code>curl -vIk https://127.0.0.1</code>查看证书有效期已经更新，但是使用<code>curl -vIk https://xxx.xxx.xxx.xxx</code>（外网地址）时证书有效期未更新，说明服务器和外网之间应该有某类设备。</p>
 <p>经确认，该项目服务器与外网之间也是有一个WAF，联系相应部门在WAF上配置新证书，证书有效期问题就解决了。</p>
