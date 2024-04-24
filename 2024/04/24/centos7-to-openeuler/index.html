@@ -29,7 +29,7 @@
 <meta property="og:description" content="CentOS 7即将停止支持，如果系统同时又有信创要求，可考虑升级为华为的openEuler系统。 因为官方升级工具有很多隐蔽的错误，而且不能平稳升级，所以本教程不使用官方的升级工具，而是直接使用命令升级。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-24T05:13:18.078Z">
+<meta property="article:modified_time" content="2024-04-24T05:14:23.621Z">
 <meta property="article:author" content="plusNaN">
 <meta property="article:tag" content="CentOS">
 <meta property="article:tag" content="openEuler">
@@ -285,7 +285,7 @@ SP3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="n
 <p><strong>下面默认全程使用root账户操作。如不是root，可使用su或sudo
 su切换到root账号。</strong></p>
 <p>直接粘贴以下命令。为保证每条命令都被执行，复制时务必把最后一行的<code>;</code>也复制上：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> <span class="token parameter variable">-y</span> epel-release
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span> epel-release
 yum update <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span>
 yum <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span> dnf
 <span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
