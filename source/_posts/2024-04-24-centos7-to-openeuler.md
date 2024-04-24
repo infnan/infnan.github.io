@@ -5,6 +5,7 @@ category: 教程
 tags:
  - CentOS
  - openEuler
+ - 信创
 ---
 CentOS 7即将停止支持，如果系统同时又有信创要求，可考虑升级为华为的openEuler系统。
 
@@ -32,17 +33,12 @@ ping repo.huaweicloud.com
 
 **下面默认全程使用root账户操作。如不是root，可使用su或sudo su切换到root账号。**
 
-直接粘贴以下命令。为保证每条命令都被执行，复制时务必把最后一行的`;`也复制上：
+直接粘贴以下命令。为保证每条命令都被执行，每次粘贴之后务必按一下回车：
 
 ```shell
-export TMOUT=0
-sed -i 's/enabled=1/enabled=0/' /etc/yum/pluginconf.d/fastestmirror.conf
-sed -i 's/download.docker.com/repo.huaweicloud.com\/docker-ce/' /etc/yum.repos.d/docker-ce.repo
-
-yum install -y epel-release
+yum install -y --nogpgcheck epel-release
 yum update -y --nogpgcheck
 yum install -y --nogpgcheck dnf
-;
 ```
 
 确认无误后reboot重启。
@@ -50,9 +46,6 @@ yum install -y --nogpgcheck dnf
 重启完成后，继续粘贴以下命令：
 
 ```shell
-export TMOUT=0
-export LC_ALL=en_US.UTF-8
-
 cp -r /etc/yum.repos.d/ /etc/yum.repos.d.bak/
 dnf remove epel-release -y
 rm -rf /etc/yum.repos.d/*
@@ -64,7 +57,6 @@ rpm -ivh --nodeps --force https://repo.openeuler.org/openEuler-20.03-LTS-SP3/OS/
 sed -i 's/repo.openeuler.org/repo.huaweicloud.com\/openeuler/g' /etc/yum.repos.d/openEuler.repo
 sed -i 's/metalink=/#metalink=/g' /etc/yum.repos.d/openEuler.repo
 dnf clean all
-;
 ```
 
 此处确认是否报错。
@@ -75,7 +67,6 @@ dnf clean all
 mkdir /tmp/rpm
 cd /tmp/rpm
 dnf -y --releasever='20.03LTS_SP3' --allowerasing --setopt=deltarpm=false distro-sync --nogpgcheck --downloadonly --downloaddir=/tmp/rpm
-;
 ```
 
 执行完成后，确认是否报错。
@@ -99,7 +90,6 @@ sed -i 's/crashkernel=auto/crashkernel=512M/g' /etc/default/grub
 grub2-mkconfig -o $grubcfg/grub.cfg
 sed -i 's/crashkernel=auto/crashkernel=512M/g' $grubcfg/grub.cfg
 rm -rf `find /boot/ -name centos`
-;
 ```
 
 执行完成后，确认是否报错。
@@ -114,7 +104,6 @@ semodule -i libsystemd.pp
 rm libsystemd.pp
 dnf reinstall systemd systemd-libs systemd-udev systemd-help systemd-container -y
 setenforce 0
-;
 ```
 
 如全部无报错，输入 reboot 重启服务器。
@@ -137,9 +126,6 @@ cat /etc/os-release
 直接粘贴：
 
 ```shell
-export TMOUT=0
-export LC_ALL=en_US.UTF-8
-
 dnf -y update
 
 # 刚升级过来，无需再备份了
@@ -152,7 +138,6 @@ rpm -Uvh --nodeps --force https://repo.openeuler.org/openEuler-22.03-LTS-SP3/OS/
 sed -i 's/repo.openeuler.org/repo.huaweicloud.com\/openeuler/g' /etc/yum.repos.d/openEuler.repo
 sed -i 's/metalink=/#metalink=/g' /etc/yum.repos.d/openEuler.repo
 dnf clean all
-;
 ```
 
 #### 软件包升级
@@ -194,7 +179,6 @@ dnf -y --releasever='22.03LTS_SP3' --allowerasing --setopt=deltarpm=false distro
 ```shell
 rpm --rebuilddb
 dnf group install "Minimal Install" -y
-;
 ```
 
 更新GRUB，此处需根据服务器实际情况执行：
@@ -202,7 +186,6 @@ dnf group install "Minimal Install" -y
 ```shell
 export grubcfg=$(find /boot/ -name openEuler)
 grub2-mkconfig -o $grubcfg/grub.cfg
-;
 ```
 
 可考虑卸载旧内核，例如：
@@ -213,7 +196,6 @@ rpm -e --nodeps kernel-4.19.90-2401.1.0.0233.oe1
 
 export grubcfg=$(find /boot/ -name openEuler)
 grub2-mkconfig -o $grubcfg/grub.cfg
-;
 ```
 
 确认无报错后，reboot重启服务器，如服务器正常启动，各应用运行正常，表示升级成功。
@@ -233,7 +215,6 @@ dnf install -y docker-ce docker-ce-cli containerd.io
 
 systemctl enable docker
 systemctl start docker
-;
 ```
 
 ### 升级SSH（勤奋版）
@@ -297,6 +278,7 @@ sshd -V
 
 ```shell
 mkdir ~/openssh-9.4
+cd openssh-9.4
 curl -o openssh-9.4p1-oe2203.x86_64.rpm https://plusnan.me/2024/04/24/centos7-to-openeuler/openssh-9.4p1-oe2203.x86_64.rpm
 curl -o openssh-clients-9.4p1-oe2203.x86_64.rpm https://plusnan.me/2024/04/24/centos7-to-openeuler/openssh-clients-9.4p1-oe2203.x86_64.rpm
 curl -o openssh-debuginfo-9.4p1-oe2203.x86_64.rpm https://plusnan.me/2024/04/24/centos7-to-openeuler/openssh-debuginfo-9.4p1-oe2203.x86_64.rpm
