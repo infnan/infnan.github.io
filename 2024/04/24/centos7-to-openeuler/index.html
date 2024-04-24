@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#203040" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#203040" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.1.1">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#203040">
+  <link rel="manifest" href="/img/favicon/manifest.json">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"plusnan.me","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.19.2","exturl":true,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="CentOS 7即将停止支持，如果系统同时又有信创要求，可考虑升级为华为的openEuler系统。 因为官方升级工具有很多隐蔽的错误，而且不能平稳升级，所以本教程不使用官方的升级工具，而是直接使用命令升级。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 7.x迁移至openEuler 22.03 SP3">
+<meta property="og:url" content="https://plusnan.me/2024/04/24/centos7-to-openeuler/index.html">
+<meta property="og:site_name" content="plusNaN">
+<meta property="og:description" content="CentOS 7即将停止支持，如果系统同时又有信创要求，可考虑升级为华为的openEuler系统。 因为官方升级工具有很多隐蔽的错误，而且不能平稳升级，所以本教程不使用官方的升级工具，而是直接使用命令升级。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-24T02:30:54.455Z">
+<meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="CentOS">
+<meta property="article:tag" content="openEuler">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://plusnan.me/2024/04/24/centos7-to-openeuler/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://plusnan.me/2024/04/24/centos7-to-openeuler/","path":"2024/04/24/centos7-to-openeuler/","title":"CentOS 7.x迁移至openEuler 22.03 SP3"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CentOS 7.x迁移至openEuler 22.03 SP3 | plusNaN</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2C91QDVMGC"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"G-2C91QDVMGC","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/rss.xml" title="plusNaN" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">plusNaN</p>
+      <i class="logo-line"></i>
+    </a>
+      <img class="custom-logo-image" src="/img/logo.png" alt="plusNaN">
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section">标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section">分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section">归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7%E6%B5%81%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">升级流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80centos-7-%E5%8D%87-openeuler-20.03"><span class="nav-number">1.1.</span> <span class="nav-text">一、CentOS 7 升 openEuler
+20.03</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8Copeneuler-20.03-%E5%8D%87-22.03-sp3"><span class="nav-number">1.2.</span> <span class="nav-text">二、openEuler 20.03 升 22.03
+SP3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%8C%85%E5%8D%87%E7%BA%A7"><span class="nav-number">1.2.2.</span> <span class="nav-text">软件包升级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%A7%E7%BB%AD%E5%AE%8C%E6%88%90%E5%8D%87%E7%BA%A7"><span class="nav-number">1.2.3.</span> <span class="nav-text">继续完成升级</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.</span> <span class="nav-text">其他事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85docker"><span class="nav-number">2.1.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7ssh%E5%8B%A4%E5%A5%8B%E7%89%88"><span class="nav-number">2.2.</span> <span class="nav-text">升级SSH（勤奋版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%87%E7%BA%A7ssh%E6%87%92%E4%BA%BA%E7%89%88"><span class="nav-number">2.3.</span> <span class="nav-text">升级SSH（懒人版）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E6%BB%A1%E8%B6%B3%E4%BF%A1%E5%88%9B%E8%A6%81%E6%B1%82"><span class="nav-number">2.4.</span> <span class="nav-text">不满足信创要求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="plusNaN"
+      src="/img/avatar.png">
+  <p class="site-author-name" itemprop="name">plusNaN</p>
+  <div class="site-description" itemprop="description">我为长者续NaN秒</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbg==" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infnan"><i class="github fa-fw"></i>GitHub</span>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:me@plusnan.me" title="E-Mail → mailto:me@plusnan.me" rel="noopener me"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/rss.xml" title="RSS → &#x2F;rss.xml" rel="noopener me"><i class="rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://plusnan.me/2024/04/24/centos7-to-openeuler/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/avatar.png">
+      <meta itemprop="name" content="plusNaN">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="plusNaN">
+      <meta itemprop="description" content="我为长者续NaN秒">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CentOS 7.x迁移至openEuler 22.03 SP3 | plusNaN">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CentOS 7.x迁移至openEuler 22.03 SP3
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-04-24 00:00:00" itemprop="dateCreated datePublished" datetime="2024-04-24T00:00:00+08:00">2024-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>CentOS
+7即将停止支持，如果系统同时又有信创要求，可考虑升级为华为的openEuler系统。</p>
+<p>因为官方升级工具有很多隐蔽的错误，而且不能平稳升级，所以本教程不使用官方的升级工具，而是直接使用命令升级。</p>
+<span id="more"></span>
+<p>从CentOS
+7直接升级到最新版openEuler会出现兼容性问题，因此，为保证平稳升级，升级要分两步进行，第一步是将CentOS
+7升级到较旧的openEuler
+20.03，升级成功后，再将旧版的openEuler升级到最新版本。</p>
+<h2 id="升级流程">升级流程</h2>
+<h3 id="一centos-7-升-openeuler-20.03">一、CentOS 7 升 openEuler
+20.03</h3>
+<p><strong>生产环境先进行备份，如升级失败，有可能需要重装系统！</strong></p>
+<p>检查本机是否安装了桌面环境，例如GNOME，如果有，需要先将其卸载。</p>
+<p>检查本机是否能访问网络，如果没有网，需要先开策略联网：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ping</span> repo.huaweicloud.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>下面默认全程使用root账户操作。如不是root，可使用su或sudo
+su切换到root账号。</strong></p>
+<p>直接粘贴以下命令。为保证每条命令都被执行，复制时务必把最后一行的<code>;</code>也复制上：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">TMOUT</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/enabled=1/enabled=0/'</span> /etc/yum/pluginconf.d/fastestmirror.conf
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/download.docker.com/repo.huaweicloud.com\/docker-ce/'</span> /etc/yum.repos.d/docker-ce.repo
+
+yum <span class="token function">install</span> <span class="token parameter variable">-y</span> epel-release
+yum update <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span>
+yum <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span> dnf
+<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>确认无误后reboot重启。</p>
+<p>重启完成后，继续粘贴以下命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">TMOUT</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">LC_ALL</span></span><span class="token operator">=</span>en_US.UTF-8
+
+<span class="token function">cp</span> <span class="token parameter variable">-r</span> /etc/yum.repos.d/ /etc/yum.repos.d.bak/
+dnf remove epel-release <span class="token parameter variable">-y</span>
+<span class="token function">rm</span> <span class="token parameter variable">-rf</span> /etc/yum.repos.d/*
+
+<span class="token function">rpm</span> <span class="token parameter variable">-e</span> <span class="token parameter variable">--nodeps</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">rpm</span> -qa<span class="token operator">|</span><span class="token function">grep</span> centos-<span class="token variable">)</span></span>
+<span class="token function">rpm</span> <span class="token parameter variable">-ivh</span> <span class="token parameter variable">--nodeps</span> <span class="token parameter variable">--force</span> https://repo.openeuler.org/openEuler-20.03-LTS-SP3/OS/x86_64/Packages/openEuler-release-20.03LTS_SP3-52.oe1.x86_64.rpm
+<span class="token function">rpm</span> <span class="token parameter variable">-ivh</span> <span class="token parameter variable">--nodeps</span> <span class="token parameter variable">--force</span> https://repo.openeuler.org/openEuler-20.03-LTS-SP3/OS/x86_64/Packages/openEuler-repos-1.0-3.1.oe1.x86_64.rpm
+<span class="token function">rpm</span> <span class="token parameter variable">-ivh</span> <span class="token parameter variable">--nodeps</span> <span class="token parameter variable">--force</span> https://repo.openeuler.org/openEuler-20.03-LTS-SP3/OS/x86_64/Packages/openEuler-gpg-keys-1.0-3.1.oe1.x86_64.rpm
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/repo.openeuler.org/repo.huaweicloud.com\/openeuler/g'</span> /etc/yum.repos.d/openEuler.repo
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/metalink=/#metalink=/g'</span> /etc/yum.repos.d/openEuler.repo
+dnf clean all
+<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>此处确认是否报错。</p>
+<p>如无报错，粘贴以下命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> /tmp/rpm
+<span class="token builtin class-name">cd</span> /tmp/rpm
+dnf <span class="token parameter variable">-y</span> <span class="token parameter variable">--releasever</span><span class="token operator">=</span><span class="token string">'20.03LTS_SP3'</span> <span class="token parameter variable">--allowerasing</span> <span class="token parameter variable">--setopt</span><span class="token operator">=</span>deltarpm<span class="token operator">=</span>false distro-sync <span class="token parameter variable">--nogpgcheck</span> <span class="token parameter variable">--downloadonly</span> <span class="token parameter variable">--downloaddir</span><span class="token operator">=</span>/tmp/rpm
+<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行完成后，确认是否报错。</p>
+<p>如无报错，继续粘贴：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token parameter variable">-y</span> remove dnf
+<span class="token function">rm</span> <span class="token parameter variable">-rf</span> /etc/yum
+<span class="token function">rpm</span> <span class="token parameter variable">-Uvh</span>  <span class="token parameter variable">--nodeps</span> <span class="token parameter variable">--force</span> /tmp/rpm/*.rpm
+
+dnf remove systemd-sysv <span class="token parameter variable">-y</span>
+dnf group <span class="token function">install</span> <span class="token string">"Minimal Install"</span> <span class="token parameter variable">-y</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>此时系统的内核已经变为最新版本，你需要根据服务器的实际情况来更新引导和GRUB启动菜单。我的服务器配置方式如下，仅供参考，请勿照搬：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">grubcfg</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">find</span> /boot/ <span class="token parameter variable">-name</span> openEuler<span class="token variable">)</span></span>
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/crashkernel=auto/crashkernel=512M/g'</span> /etc/default/grub 
+grub2-mkconfig <span class="token parameter variable">-o</span> <span class="token variable">$grubcfg</span>/grub.cfg
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/crashkernel=auto/crashkernel=512M/g'</span> <span class="token variable">$grubcfg</span>/grub.cfg
+<span class="token function">rm</span> <span class="token parameter variable">-rf</span> <span class="token variable"><span class="token variable">`</span><span class="token function">find</span> /boot/ <span class="token parameter variable">-name</span> centos<span class="token variable">`</span></span>
+<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>执行完成后，确认是否报错。</p>
+<p>如无报错，继续粘贴：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span>
+<span class="token function">curl</span> <span class="token parameter variable">-o</span> libsystemd.pp https://plusnan.me/temp/libsystemd.pp
+setenforce <span class="token number">1</span>
+semodule <span class="token parameter variable">-i</span> libsystemd.pp
+<span class="token function">rm</span> libsystemd.pp
+dnf reinstall systemd systemd-libs systemd-udev systemd-help systemd-container <span class="token parameter variable">-y</span>
+setenforce <span class="token number">0</span>
+<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如全部无报错，输入 reboot 重启服务器。</p>
+<p>重启完成后，输入</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">uname</span> <span class="token parameter variable">-a</span>
+<span class="token function">cat</span> /etc/os-release<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>检查操作系统版本，如Linux内核变4.19，操作系统变openEuler，然后再检查各应用运行情况，如果没发现问题，说明CentOS
+7已成功升级到openEuler 20.03。</p>
+<h3 id="二openeuler-20.03-升-22.03-sp3">二、openEuler 20.03 升 22.03
+SP3</h3>
+<h4 id="初始化">初始化</h4>
+<p>直接粘贴：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">TMOUT</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">LC_ALL</span></span><span class="token operator">=</span>en_US.UTF-8
+
+dnf <span class="token parameter variable">-y</span> update
+
+<span class="token comment"># 刚升级过来，无需再备份了</span>
+<span class="token comment"># cp -r /etc/yum.repos.d/ /etc/yum.repos.d.bak</span>
+<span class="token function">rm</span> <span class="token parameter variable">-rf</span> /etc/yum.repos.d/*
+
+<span class="token function">rpm</span> <span class="token parameter variable">-Uvh</span> <span class="token parameter variable">--nodeps</span> <span class="token parameter variable">--force</span> https://repo.openeuler.org/openEuler-22.03-LTS-SP3/OS/x86_64/Packages/openEuler-release-22.03LTS_SP3-56.oe2203sp3.x86_64.rpm
+<span class="token function">rpm</span> <span class="token parameter variable">-Uvh</span> <span class="token parameter variable">--nodeps</span> <span class="token parameter variable">--force</span> https://repo.openeuler.org/openEuler-22.03-LTS-SP3/OS/x86_64/Packages/openEuler-repos-1.0-3.6.oe2203sp3.x86_64.rpm
+<span class="token function">rpm</span> <span class="token parameter variable">-Uvh</span> <span class="token parameter variable">--nodeps</span> <span class="token parameter variable">--force</span> https://repo.openeuler.org/openEuler-22.03-LTS-SP3/OS/x86_64/Packages/openEuler-gpg-keys-1.0-3.6.oe2203sp3.x86_64.rpm
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/repo.openeuler.org/repo.huaweicloud.com\/openeuler/g'</span> /etc/yum.repos.d/openEuler.repo
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/metalink=/#metalink=/g'</span> /etc/yum.repos.d/openEuler.repo
+dnf clean all
+<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="软件包升级">软件包升级</h4>
+<p>接下来，从20.03升到22.03时，很可能会出现软件包冲突，此处需要手工解决冲突，然后再完成升级。</p>
+<p>先输入：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">dnf <span class="token parameter variable">-y</span> <span class="token parameter variable">--releasever</span><span class="token operator">=</span><span class="token string">'22.03LTS_SP3'</span> <span class="token parameter variable">--allowerasing</span> <span class="token parameter variable">--setopt</span><span class="token operator">=</span>deltarpm<span class="token operator">=</span>false distro-sync <span class="token parameter variable">--nogpgcheck</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>执行完成后，如果没有报错，可跳过本章节剩余步骤。如果系统报错，注意报错内容，例如：</p>
+<pre class="line-numbers language-none"><code class="language-none">file &#x2F;usr&#x2F;share&#x2F;glib-2.0&#x2F;schemas&#x2F;org.ukui.power-manager.gschema.xml from install of ukui-power-manager-3.1.2-5.oe2203sp2.x86_64 conflicts with file from package ukui-power-manager-common-2.0.3-1.oe1.x86_64<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>整理一下<code>from package</code>后面的内容，如不是系统核心组件，可先将其卸载，例如：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> <span class="token parameter variable">-e</span> <span class="token parameter variable">--nodeps</span> nss-tools-3.90.0-2.el7_9.x86_64 nss-softokn-freebl-3.90.0-6.el7_9.x86_64 nss-sysinit-3.90.0-2.el7_9.x86_64<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>处理完成后，重新执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">dnf <span class="token parameter variable">-y</span> <span class="token parameter variable">--releasever</span><span class="token operator">=</span><span class="token string">'22.03LTS_SP3'</span> <span class="token parameter variable">--allowerasing</span> <span class="token parameter variable">--setopt</span><span class="token operator">=</span>deltarpm<span class="token operator">=</span>false distro-sync <span class="token parameter variable">--nogpgcheck</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果还报<code>conflicts with file from package</code>的错，就继续按上面方式删除冲突的软件包。</p>
+<p>在安装过程中，会出现ldconfig的报错，这个报错可以忽略，当安装完成后，该错误会自然消失。</p>
+<h4 id="继续完成升级">继续完成升级</h4>
+<p>粘贴以下命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> <span class="token parameter variable">--rebuilddb</span>
+dnf group <span class="token function">install</span> <span class="token string">"Minimal Install"</span> <span class="token parameter variable">-y</span>
+<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>更新GRUB，此处需根据服务器实际情况执行：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">grubcfg</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">find</span> /boot/ <span class="token parameter variable">-name</span> openEuler<span class="token variable">)</span></span>
+grub2-mkconfig <span class="token parameter variable">-o</span> <span class="token variable">$grubcfg</span>/grub.cfg
+<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>可考虑卸载旧内核，例如：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">dnf list installed <span class="token operator">|</span> <span class="token function">grep</span> kernel
+<span class="token function">rpm</span> <span class="token parameter variable">-e</span> <span class="token parameter variable">--nodeps</span> kernel-4.19.90-2401.1.0.0233.oe1
+
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">grubcfg</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">find</span> /boot/ <span class="token parameter variable">-name</span> openEuler<span class="token variable">)</span></span>
+grub2-mkconfig <span class="token parameter variable">-o</span> <span class="token variable">$grubcfg</span>/grub.cfg
+<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>确认无报错后，reboot重启服务器，如服务器正常启动，各应用运行正常，表示升级成功。</p>
+<h2 id="其他事项">其他事项</h2>
+<h3 id="安装docker">安装Docker</h3>
+<p>直接粘贴以下命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token parameter variable">-o</span> /etc/yum.repos.d/docker-ce.repo https://repo.huaweicloud.com/docker-ce/linux/centos/docker-ce.repo
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/\$releasever/7/g'</span> /etc/yum.repos.d/docker-ce.repo
+<span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/download.docker.com/repo.huaweicloud.com\/docker-ce/'</span> /etc/yum.repos.d/docker-ce.repo
+
+dnf <span class="token function">install</span> <span class="token parameter variable">-y</span> docker-ce docker-ce-cli containerd.io
+
+systemctl <span class="token builtin class-name">enable</span> <span class="token function">docker</span>
+systemctl start <span class="token function">docker</span>
+<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="升级ssh勤奋版">升级SSH（勤奋版）</h3>
+<p>以下内容来自<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZvcmVzdHFxL2FydGljbGUvZGV0YWlscy8xMzI3MzMxMzY=">编译国产openEuler
+22.03 LTS系统OpenSSH 9.4的rpm安装包<i class="fa fa-external-link-alt"></i></span>，有改动。</p>
+<p>找一台能够编译的服务器，在此系统上构建rpm包：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">dnf <span class="token function">install</span> <span class="token parameter variable">-y</span> rpm-build zlib-devel openssl-devel gcc perl-devel pam-devel
+
+<span class="token builtin class-name">cd</span>
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> rpmbuild/<span class="token punctuation">&#123;</span>SOURCES,SPECS<span class="token punctuation">&#125;</span>
+<span class="token builtin class-name">cd</span> rpmbuild/SOURCES/
+<span class="token function">curl</span> <span class="token parameter variable">-o</span> openssh-9.4p1.tar.gz <span class="token parameter variable">-k</span> https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-9.4p1.tar.gz
+<span class="token function">curl</span> <span class="token parameter variable">-o</span> x11-ssh-askpass-1.2.4.1.tar.gz <span class="token parameter variable">-k</span> https://src.fedoraproject.org/repo/pkgs/openssh/x11-ssh-askpass-1.2.4.1.tar.gz/8f2e41f3f7eaa8543a2440454637f3c3/x11-ssh-askpass-1.2.4.1.tar.gz
+<span class="token function">curl</span> <span class="token parameter variable">-o</span> openssl-1.1.1v.tar.gz <span class="token parameter variable">-k</span> https://www.openssl.org/source/openssl-1.1.1v.tar.gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>创建<code>~/rpmbuild/SOURCES/sshd.pam.oe2203</code>，内容<a
+href="sshd.pam.oe2203">从这里下载</a>。</p>
+<p>创建<code>~/rpmbuild/SPECS/openssh.spec</code>，内容<a
+href="openssh.spec">从这里下载</a>。</p>
+<p>操作完成后，开始构建安装包：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/rpmbuild/SPECS/
+rpmbuild <span class="token parameter variable">-bb</span> openssh.spec<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>构建完成后进行升级：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ~/rpmbuild/RPMS/x86_64
+<span class="token function">rpm</span> <span class="token parameter variable">-iUv</span> *<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>因为OpenSSH
+9.*加密算法只支持256位以上，因此原来的配置文件不能直接用了，先替换配置文件，再重启服务：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+/bin/cp /etc/ssh/sshd_config.rpmnew /etc/ssh/sshd_config
+
+<span class="token comment"># 根据实际情况修改配置</span>
+<span class="token function">vim</span> /etc/ssh/sshd_config
+
+systemctl restart sshd
+
+<span class="token comment"># 检查升级情况</span>
+<span class="token function">ssh</span> <span class="token parameter variable">-V</span>
+sshd <span class="token parameter variable">-V</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>构建完成后，可将<code>~/rpmbuild/RPMS/x86_64</code>中的安装包拷出来，直接给其他服务器使用，不用再重新构建了。</p>
+<h3 id="升级ssh懒人版">升级SSH（懒人版）</h3>
+<p>如果你是openEuler 22.03，x86_84架构，比较懒：</p>
+<p><strong>警告：以下命令仅供参考，后果自负</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> ~/openssh-9.4
+<span class="token function">curl</span> <span class="token parameter variable">-o</span> openssh-9.4p1-oe2203.x86_64.rpm https://plusnan.me/2024/04/24/centos7-to-openeuler/openssh-9.4p1-oe2203.x86_64.rpm
+<span class="token function">curl</span> <span class="token parameter variable">-o</span> openssh-clients-9.4p1-oe2203.x86_64.rpm https://plusnan.me/2024/04/24/centos7-to-openeuler/openssh-clients-9.4p1-oe2203.x86_64.rpm
+<span class="token function">curl</span> <span class="token parameter variable">-o</span> openssh-debuginfo-9.4p1-oe2203.x86_64.rpm https://plusnan.me/2024/04/24/centos7-to-openeuler/openssh-debuginfo-9.4p1-oe2203.x86_64.rpm
+<span class="token function">curl</span> <span class="token parameter variable">-o</span> openssh-debugsource-9.4p1-oe2203.x86_64.rpm https://plusnan.me/2024/04/24/centos7-to-openeuler/openssh-debugsource-9.4p1-oe2203.x86_64.rpm
+<span class="token function">curl</span> <span class="token parameter variable">-o</span> openssh-server-9.4p1-oe2203.x86_64.rpm https://plusnan.me/2024/04/24/centos7-to-openeuler/openssh-server-9.4p1-oe2203.x86_64.rpm
+
+<span class="token function">rpm</span> <span class="token parameter variable">-iUv</span> *
+
+<span class="token function">mv</span> /etc/sysconfig/sshd.rpmsave /etc/sysconfig/sshd
+<span class="token function">cp</span> /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+/bin/cp <span class="token parameter variable">-f</span> /etc/ssh/sshd_config.rpmnew /etc/ssh/sshd_config
+
+systemctl restart sshd
+systemctl status sshd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="不满足信创要求">不满足信创要求</h3>
+<p>领导说openEuler不在信创目录？没看到“华为”两个字吗，敢说华为不信创，你这领导是不想干了吗？</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82NDg0NzAzNzk=">从Centos-7迁移到(华为欧拉系统)openEuler-20.03-LTS-SP3的教程<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82NDg3MjM4Mjk=">（华为欧拉系统)openEuler-20.03-LTS-SP3升级openEuler-22.03-LTS-SP3教程<i class="fa fa-external-link-alt"></i></span></li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZvcmVzdHFxL2FydGljbGUvZGV0YWlscy8xMzI3MzMxMzY=">编译国产openEuler
+22.03 LTS系统OpenSSH 9.4的rpm安装包<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>plusNaN
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://plusnan.me/2024/04/24/centos7-to-openeuler/" title="CentOS 7.x迁移至openEuler 22.03 SP3">https://plusnan.me/2024/04/24/centos7-to-openeuler/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CentOS/" rel="tag"># CentOS</a>
+              <a href="/tags/openEuler/" rel="tag"># openEuler</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/16/hytera-2/" rel="prev" title="海能达写频的一些问题">
+                  <i class="fa fa-angle-left"></i> 海能达写频的一些问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">plusNaN</span>
+  </div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9waXNjZXMv">NexT.Pisces</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"infnan","repo":"infnan.github.io","client_id":"67600d122bef1671bee9","client_secret":"e61cb1649d584b128b694aacd0e860ea9f41ed3c","admin_user":"infnan","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","labels":"Gitalk","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"6848bd75a80a4897c1a1a2c786c89fa5"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
+
+</body>
+</html>
