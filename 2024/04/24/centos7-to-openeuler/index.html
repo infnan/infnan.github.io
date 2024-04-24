@@ -29,10 +29,11 @@
 <meta property="og:description" content="CentOS 7即将停止支持，如果系统同时又有信创要求，可考虑升级为华为的openEuler系统。 因为官方升级工具有很多隐蔽的错误，而且不能平稳升级，所以本教程不使用官方的升级工具，而是直接使用命令升级。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-23T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-04-24T05:14:23.621Z">
+<meta property="article:modified_time" content="2024-04-24T07:15:43.810Z">
 <meta property="article:author" content="plusNaN">
 <meta property="article:tag" content="CentOS">
 <meta property="article:tag" content="openEuler">
+<meta property="article:tag" content="信创">
 <meta name="twitter:card" content="summary">
 
 
@@ -175,7 +176,7 @@ SP3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="n
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-count">74</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -284,11 +285,10 @@ SP3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="n
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ping</span> repo.huaweicloud.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>下面默认全程使用root账户操作。如不是root，可使用su或sudo
 su切换到root账号。</strong></p>
-<p>直接粘贴以下命令。为保证每条命令都被执行，复制时务必把最后一行的<code>;</code>也复制上：</p>
+<p>直接粘贴以下命令。为保证每条命令都被执行，每次粘贴之后务必按一下回车：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span> epel-release
 yum update <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span>
-yum <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span> dnf
-<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+yum <span class="token function">install</span> <span class="token parameter variable">-y</span> <span class="token parameter variable">--nogpgcheck</span> dnf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>确认无误后reboot重启。</p>
 <p>重启完成后，继续粘贴以下命令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> <span class="token parameter variable">-r</span> /etc/yum.repos.d/ /etc/yum.repos.d.bak/
@@ -301,14 +301,12 @@ dnf remove epel-release <span class="token parameter variable">-y</span>
 <span class="token function">rpm</span> <span class="token parameter variable">-ivh</span> <span class="token parameter variable">--nodeps</span> <span class="token parameter variable">--force</span> https://repo.openeuler.org/openEuler-20.03-LTS-SP3/OS/x86_64/Packages/openEuler-gpg-keys-1.0-3.1.oe1.x86_64.rpm
 <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/repo.openeuler.org/repo.huaweicloud.com\/openeuler/g'</span> /etc/yum.repos.d/openEuler.repo
 <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/metalink=/#metalink=/g'</span> /etc/yum.repos.d/openEuler.repo
-dnf clean all
-<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+dnf clean all<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>此处确认是否报错。</p>
 <p>如无报错，粘贴以下命令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> /tmp/rpm
 <span class="token builtin class-name">cd</span> /tmp/rpm
-dnf <span class="token parameter variable">-y</span> <span class="token parameter variable">--releasever</span><span class="token operator">=</span><span class="token string">'20.03LTS_SP3'</span> <span class="token parameter variable">--allowerasing</span> <span class="token parameter variable">--setopt</span><span class="token operator">=</span>deltarpm<span class="token operator">=</span>false distro-sync <span class="token parameter variable">--nogpgcheck</span> <span class="token parameter variable">--downloadonly</span> <span class="token parameter variable">--downloaddir</span><span class="token operator">=</span>/tmp/rpm
-<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+dnf <span class="token parameter variable">-y</span> <span class="token parameter variable">--releasever</span><span class="token operator">=</span><span class="token string">'20.03LTS_SP3'</span> <span class="token parameter variable">--allowerasing</span> <span class="token parameter variable">--setopt</span><span class="token operator">=</span>deltarpm<span class="token operator">=</span>false distro-sync <span class="token parameter variable">--nogpgcheck</span> <span class="token parameter variable">--downloadonly</span> <span class="token parameter variable">--downloaddir</span><span class="token operator">=</span>/tmp/rpm<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>执行完成后，确认是否报错。</p>
 <p>如无报错，继续粘贴：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token parameter variable">-y</span> remove dnf
@@ -322,8 +320,7 @@ dnf group <span class="token function">install</span> <span class="token string"
 <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/crashkernel=auto/crashkernel=512M/g'</span> /etc/default/grub 
 grub2-mkconfig <span class="token parameter variable">-o</span> <span class="token variable">$grubcfg</span>/grub.cfg
 <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/crashkernel=auto/crashkernel=512M/g'</span> <span class="token variable">$grubcfg</span>/grub.cfg
-<span class="token function">rm</span> <span class="token parameter variable">-rf</span> <span class="token variable"><span class="token variable">`</span><span class="token function">find</span> /boot/ <span class="token parameter variable">-name</span> centos<span class="token variable">`</span></span>
-<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">rm</span> <span class="token parameter variable">-rf</span> <span class="token variable"><span class="token variable">`</span><span class="token function">find</span> /boot/ <span class="token parameter variable">-name</span> centos<span class="token variable">`</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>执行完成后，确认是否报错。</p>
 <p>如无报错，继续粘贴：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span>
@@ -332,8 +329,7 @@ setenforce <span class="token number">1</span>
 semodule <span class="token parameter variable">-i</span> libsystemd.pp
 <span class="token function">rm</span> libsystemd.pp
 dnf reinstall systemd systemd-libs systemd-udev systemd-help systemd-container <span class="token parameter variable">-y</span>
-setenforce <span class="token number">0</span>
-<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+setenforce <span class="token number">0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如全部无报错，输入 reboot 重启服务器。</p>
 <p>重启完成后，输入</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">uname</span> <span class="token parameter variable">-a</span>
@@ -356,8 +352,7 @@ SP3</h3>
 <span class="token function">rpm</span> <span class="token parameter variable">-Uvh</span> <span class="token parameter variable">--nodeps</span> <span class="token parameter variable">--force</span> https://repo.openeuler.org/openEuler-22.03-LTS-SP3/OS/x86_64/Packages/openEuler-gpg-keys-1.0-3.6.oe2203sp3.x86_64.rpm
 <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/repo.openeuler.org/repo.huaweicloud.com\/openeuler/g'</span> /etc/yum.repos.d/openEuler.repo
 <span class="token function">sed</span> <span class="token parameter variable">-i</span> <span class="token string">'s/metalink=/#metalink=/g'</span> /etc/yum.repos.d/openEuler.repo
-dnf clean all
-<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+dnf clean all<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h4 id="软件包升级">软件包升级</h4>
 <p>接下来，从20.03升到22.03时，很可能会出现软件包冲突，此处需要手工解决冲突，然后再完成升级。</p>
 <p>先输入：</p>
@@ -373,19 +368,16 @@ dnf clean all
 <h4 id="继续完成升级">继续完成升级</h4>
 <p>粘贴以下命令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">rpm</span> <span class="token parameter variable">--rebuilddb</span>
-dnf group <span class="token function">install</span> <span class="token string">"Minimal Install"</span> <span class="token parameter variable">-y</span>
-<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+dnf group <span class="token function">install</span> <span class="token string">"Minimal Install"</span> <span class="token parameter variable">-y</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>更新GRUB，此处需根据服务器实际情况执行：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">export</span> <span class="token assign-left variable">grubcfg</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">find</span> /boot/ <span class="token parameter variable">-name</span> openEuler<span class="token variable">)</span></span>
-grub2-mkconfig <span class="token parameter variable">-o</span> <span class="token variable">$grubcfg</span>/grub.cfg
-<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+grub2-mkconfig <span class="token parameter variable">-o</span> <span class="token variable">$grubcfg</span>/grub.cfg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>可考虑卸载旧内核，例如：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">dnf list installed <span class="token operator">|</span> <span class="token function">grep</span> kernel
 <span class="token function">rpm</span> <span class="token parameter variable">-e</span> <span class="token parameter variable">--nodeps</span> kernel-4.19.90-2401.1.0.0233.oe1
 
 <span class="token builtin class-name">export</span> <span class="token assign-left variable">grubcfg</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">find</span> /boot/ <span class="token parameter variable">-name</span> openEuler<span class="token variable">)</span></span>
-grub2-mkconfig <span class="token parameter variable">-o</span> <span class="token variable">$grubcfg</span>/grub.cfg
-<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+grub2-mkconfig <span class="token parameter variable">-o</span> <span class="token variable">$grubcfg</span>/grub.cfg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>确认无报错后，reboot重启服务器，如服务器正常启动，各应用运行正常，表示升级成功。</p>
 <h2 id="其他事项">其他事项</h2>
 <h3 id="安装docker">安装Docker</h3>
@@ -397,8 +389,7 @@ grub2-mkconfig <span class="token parameter variable">-o</span> <span class="tok
 dnf <span class="token function">install</span> <span class="token parameter variable">-y</span> docker-ce docker-ce-cli containerd.io
 
 systemctl <span class="token builtin class-name">enable</span> <span class="token function">docker</span>
-systemctl start <span class="token function">docker</span>
-<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+systemctl start <span class="token function">docker</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="升级ssh勤奋版">升级SSH（勤奋版）</h3>
 <p>以下内容来自<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ZvcmVzdHFxL2FydGljbGUvZGV0YWlscy8xMzI3MzMxMzY=">编译国产openEuler
 22.03 LTS系统OpenSSH 9.4的rpm安装包<i class="fa fa-external-link-alt"></i></span>，有改动。</p>
@@ -491,6 +482,7 @@ systemctl status sshd<span aria-hidden="true" class="line-numbers-rows"><span></
           <div class="post-tags">
               <a href="/tags/CentOS/" rel="tag"># CentOS</a>
               <a href="/tags/openEuler/" rel="tag"># openEuler</a>
+              <a href="/tags/%E4%BF%A1%E5%88%9B/" rel="tag"># 信创</a>
           </div>
 
         
