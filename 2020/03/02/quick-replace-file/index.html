@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E6%9C%AC%E6%9C%BA%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">从本机提取文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">Windows系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-Mac-Cygwin"><span class="nav-number">1.2.</span> <span class="nav-text">Linux&#x2F;Mac&#x2F;Cygwin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%9B%BF%E6%8D%A2%EF%BC%88Linux%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">在服务器上替换（Linux）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">后续操作</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E6%9C%AC%E6%9C%BA%E6%8F%90%E5%8F%96%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">从本机提取文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.1.</span> <span class="nav-text">Windows系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linuxmaccygwin"><span class="nav-number">1.2.</span> <span class="nav-text">Linux&#x2F;Mac&#x2F;Cygwin</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E6%9B%BF%E6%8D%A2linux"><span class="nav-number">2.</span> <span class="nav-text">在服务器上替换（Linux）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">后续操作</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -265,9 +265,11 @@
     
     <div class="post-body" itemprop="articleBody"><p>生产环境遇到bug，需要紧急修改几个Java文件，然后尽快部署到生产系统中。如果代码中混有其他改动，无法完整打包，那么如何尽快提取出改完的class文件并快速地放到服务器的正确位置呢？</p>
 <span id="more"></span>
-<h1 id="从本机提取文件"><a href="#从本机提取文件" class="headerlink" title="从本机提取文件"></a>从本机提取文件</h1><p>先在自己的IDE中把代码改出来，编译，运行。避免打WAR包，否则还要费心思解压，而且有些系统（例如Mac）解出来之后时间戳还不对。</p>
+<h1 id="从本机提取文件">从本机提取文件</h1>
+<p>先在自己的IDE中把代码改出来，编译，运行。避免打WAR包，否则还要费心思解压，而且有些系统（例如Mac）解出来之后时间戳还不对。</p>
 <p>重新生成的class文件的修改时间肯定比其他class文件新，这样我们就能用一些脚本将它们挑出来了。</p>
-<h2 id="Windows系统"><a href="#Windows系统" class="headerlink" title="Windows系统"></a>Windows系统</h2><p>使用PowerShell脚本。放在 D:\tiqu.ps1 中：<br><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token namespace">[CmdletBinding()]</span>
+<h2 id="windows系统">Windows系统</h2>
+<p>使用PowerShell脚本。放在 D:\tiqu.ps1 中： <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token namespace">[CmdletBinding()]</span>
 <span class="token keyword">Param</span> <span class="token punctuation">(</span>
     <span class="token namespace">[string]</span> 
     <span class="token variable">$from</span> = <span class="token string">'.'</span><span class="token punctuation">,</span> 
@@ -329,7 +331,8 @@ D:\tiqu<span class="token punctuation">.</span>ps1 <span class="token operator">
 
 <span class="token comment"># 提取从9:20到现在之间修改的文件，放到 ..\output 目录中</span>
 D:\tiqu<span class="token punctuation">.</span>ps1 <span class="token operator">-</span>time 09:20 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="Linux-Mac-Cygwin"><a href="#Linux-Mac-Cygwin" class="headerlink" title="Linux/Mac/Cygwin"></a>Linux/Mac/Cygwin</h2><p>将以下脚本放在<code>/usr/local/bin/tiqu</code>中，设置好<code>x</code>权限。</p>
+<h2 id="linuxmaccygwin">Linux/Mac/Cygwin</h2>
+<p>将以下脚本放在<code>/usr/local/bin/tiqu</code>中，设置好<code>x</code>权限。</p>
 <p>注意Mac系统自带getopt是BSD版本，功能比GNU版少，只支持一个字母的短参数，需另外安装gnu-getopt（后面假设安装到了<code>/usr/local/opt/gnu-getopt/bin/getopt</code>）。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
  
@@ -458,7 +461,8 @@ tiqu <span class="token parameter variable">--to</span><span class="token operat
 <span class="token comment"># 提取从9:20到现在之间修改到文件，放到 ./out 目录中</span>
 tiqu <span class="token parameter variable">--time</span><span class="token operator">=</span><span class="token number">9</span>:20 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>程序会自动搜索已修改文件，并且会按目录结构组织好，之后你就可以直接打包了。</p>
-<h1 id="在服务器上替换（Linux）"><a href="#在服务器上替换（Linux）" class="headerlink" title="在服务器上替换（Linux）"></a>在服务器上替换（Linux）</h1><p>如果已经按目录结构整理好，直接解压替换（<code>unzip -o xxx.zip -d 应用所在目录</code>）便是。对于war包，可使用zip命令直接把文件替换到包里面（<code>cd xxx; zip -r war包 *</code>）。</p>
+<h1 id="在服务器上替换linux">在服务器上替换（Linux）</h1>
+<p>如果已经按目录结构整理好，直接解压替换（<code>unzip -o xxx.zip -d 应用所在目录</code>）便是。对于war包，可使用zip命令直接把文件替换到包里面（<code>cd xxx; zip -r war包 *</code>）。</p>
 <p>如果提供的是散装的class文件，那么找目录会很费劲，可以借助脚本自动找目录，自动替换。可修改以下脚本中的MYBASE变量，然后保存到<code>/usr/local/bin/tihuan</code>中，加好<code>x</code>权限：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
 
@@ -565,7 +569,7 @@ tiqu <span class="token parameter variable">--time</span><span class="token oper
 <span class="token keyword">done</span>
 
 <span class="token function">rm</span> /tmp/tmpfilelist <span class="token operator"><span class="token file-descriptor important">2</span>></span> /dev/null<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>操作时：<br><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 此处省略下载文件与备份操作。实际操作时注意备份！</span>
+<p>操作时： <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 此处省略下载文件与备份操作。实际操作时注意备份！</span>
 <span class="token comment"># 以下根据实际情况二选一</span>
 
 <span class="token comment"># 展开（exploded）模式</span>
@@ -577,7 +581,8 @@ tihuan XXXXX.class
 tihuan <span class="token parameter variable">--to</span><span class="token operator">=</span>tmp XXXXX.class
 <span class="token builtin class-name">cd</span> tmp
 <span class="token function">zip</span> <span class="token parameter variable">-r</span> 原先的war包 *<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
-<h1 id="后续操作"><a href="#后续操作" class="headerlink" title="后续操作"></a>后续操作</h1><ul>
+<h1 id="后续操作">后续操作</h1>
+<ul>
 <li>本文的操作应当只用于应急处置。问题处理好之后，代码该提交提交，基线该打patch打patch，忘了的话就是极大的隐患。</li>
 <li>这次事情紧急，直接从开发库中取了文件。给不紧急的bug打patch时，一定要取基线代码，从基线上打，打完再合并回去。</li>
 <li>每次正式升级之前一定要打基线，从基线取代码，打整包，生产环境配置文件用事先预备好的备份覆盖升级包，不要单独换文件！换文件升级，有第一次，就会有第二次。越是换文件，后面就越不敢打整包，几个星期以后，全世界就没有人知道生产环境与本地代码有什么区别了。</li>

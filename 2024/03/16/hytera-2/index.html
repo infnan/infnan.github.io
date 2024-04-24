@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%BB%E5%93%AA%E9%87%8C%E4%B8%8B%E8%BD%BD%E5%86%99%E9%A2%91%E8%BD%AF%E4%BB%B6-APP"><span class="nav-number">1.</span> <span class="nav-text">去哪里下载写频软件&#x2F;APP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%89%88%E6%9C%AC%E4%B8%8D%E5%8C%B9%E9%85%8D"><span class="nav-number">2.</span> <span class="nav-text">数据版本不匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E9%A2%91%E6%97%B6%E6%89%BE%E4%B8%8D%E5%88%B0%E7%AB%AF%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">读频时找不到端口</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%BB%E5%93%AA%E9%87%8C%E4%B8%8B%E8%BD%BD%E5%86%99%E9%A2%91%E8%BD%AF%E4%BB%B6app"><span class="nav-number">1.</span> <span class="nav-text">去哪里下载写频软件&#x2F;APP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%89%88%E6%9C%AC%E4%B8%8D%E5%8C%B9%E9%85%8D"><span class="nav-number">2.</span> <span class="nav-text">数据版本不匹配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E9%A2%91%E6%97%B6%E6%89%BE%E4%B8%8D%E5%88%B0%E7%AB%AF%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">读频时找不到端口</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -265,15 +265,19 @@
     
     <div class="post-body" itemprop="articleBody"><p>记录写频时遇到的一些问题和处理方式。</p>
 <span id="more"></span>
-<h2 id="去哪里下载写频软件-APP"><a href="#去哪里下载写频软件-APP" class="headerlink" title="去哪里下载写频软件/APP"></a>去哪里下载写频软件/APP</h2><p>海能达的写频软件在网上找不到，而且官网也不提供下载，那么去哪里找呢？</p>
+<h2 id="去哪里下载写频软件app">去哪里下载写频软件/APP</h2>
+<p>海能达的写频软件在网上找不到，而且官网也不提供下载，那么去哪里找呢？</p>
 <p>如果你在正规渠道购买的设备，商家会给你发送配套的写频软件，如果没有，直接找他们索要即可。</p>
 <p>如果你买的二手，而且原机主也没有给你提供写频软件，那么怎么找呢？给海能达售后4008307020打电话，他们会告诉你找哪个供应商。</p>
 <p>海能达的售后只在工作日的工作时间上班，所以不能像业余无线电一样在业余时间通联。</p>
 <p>拿到写频软件、APP和授权码之后，记得做备份，免得下次找不到还要打电话。</p>
 <p>另外不建议找其他台友要软件，因为软件不通用，除非同一个地方买的，别人的拿来不一定能用。</p>
-<h2 id="数据版本不匹配"><a href="#数据版本不匹配" class="headerlink" title="数据版本不匹配"></a>数据版本不匹配</h2><p>出现这个问题是因为写频软件和机器版本不一致，无法读写频。</p>
+<h2 id="数据版本不匹配">数据版本不匹配</h2>
+<p>出现这个问题是因为写频软件和机器版本不一致，无法读写频。</p>
 <p>能出现写频软件和机器不一致，说明你的软件是从网上找的，或者找其他台友要的。这种情况下，你需要参照前文，重新找买机器时候的供应商索要软件。</p>
-<h2 id="读频时找不到端口"><a href="#读频时找不到端口" class="headerlink" title="读频时找不到端口"></a>读频时找不到端口</h2><p>在给海能达G32/G36写频时遇到了一个问题，写频软件无法识别到端口，在“设备管理器”中也发现有个设备异常的“USB Serial”，重新安装写频软件和串口驱动仍然不能解决问题。</p>
+<h2 id="读频时找不到端口">读频时找不到端口</h2>
+<p>在给海能达G32/G36写频时遇到了一个问题，写频软件无法识别到端口，在“设备管理器”中也发现有个设备异常的“USB
+Serial”，重新安装写频软件和串口驱动仍然不能解决问题。</p>
 <p>问题来了，安装写频软件时候，写频软件不是把配套驱动给安装上了吗？</p>
 <p>是的，他们安装了驱动，但是装错了。他们带的是PL23XX驱动，结果碰到的机器是CH341，所以重新装个<span class="exturl" data-url="aHR0cHM6Ly93d3cud2NoLmNuL2Rvd25sb2Fkcy9DSDM0MVNFUl9FWEUuaHRtbA==">CH341驱动<i class="fa fa-external-link-alt"></i></span>就好了。</p>
 <p>如果你碰到了类似问题，可以装个驱动精灵，让它看一下到底应该装哪个驱动。</p>
