@@ -151,7 +151,7 @@ POST一段JSON（application/json），也可能是调用WebService，里面参�
 <col style="width: 19%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>地区</th>
 <th>优势</th>
 <th>缺点</th>
@@ -159,19 +159,19 @@ POST一段JSON（application/json），也可能是调用WebService，里面参�
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>国内（不含香港）</td>
 <td>网速快<br>网络稳定</td>
 <td>价格较贵，多数需月付<br>未经备案通常会禁止使用80、443、8080等端口，而备案耗时较长，会延误工作</td>
 <td>阿里云、腾讯云等</td>
 </tr>
-<tr class="even">
+<tr>
 <td>香港</td>
 <td>网速快<br>不需要备案，可直接使用80、443等端口</td>
 <td>价格较贵<br>有被墙的风险</td>
 <td>暂无推荐，可自行Google查询</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>国外</td>
 <td>价格便宜，有些厂商甚至可按实际使用时间支付，随时买随时扔<br>不需要备案</td>
 <td>网络不稳定，容易被墙<br>需要能付外币的信用卡</td>
@@ -627,53 +627,6 @@ Happy World！程序。</p>
       </tags>
   </entry>
   <entry>
-    <title>从Eclipse切换到IDEA</title>
-    <url>/2018/12/12/switch-to-idea-0/</url>
-    <content><![CDATA[<p>我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ
-IDEA。本系列文章面向Eclipse使用者，讲述IDEA的一些基本操作，以便平稳地进行切换。
-<span id="more"></span></p>
-<h1 id="本系列内容">本系列内容</h1>
-<ul>
-<li><strong>为什么进行切换</strong></li>
-<li><a href="/2018/12/13/switch-to-idea-1/">切换的基本操作</a></li>
-<li><a href="/2019/01/27/switch-to-idea-2">传统Web项目在IDEA的Project
-Structure</a></li>
-<li><a
-href="/2019/08/03/switch-to-idea-3/">传统Web项目转为Gradle项目</a></li>
-</ul>
-<h1 id="切换到idea的理由">切换到IDEA的理由</h1>
-<p>下面是我向同事推荐使用IDEA（商业版）的一些理由：</p>
-<ol type="1">
-<li>公司版本管理软件从ClearCase切换到了SVN，这意味着开发工作不再受ClearCase拖累，开发工具也可以随意换成更好用的了。</li>
-<li>公司电脑配置不高，而且项目文件非常多，Eclipse用起来很卡。虽然IDEA资源消耗比较高，但是用起来比Eclipse顺畅得多（备注：对于内存只有4GB的电脑，要么加条，要么换旧版IDEA，否则会很糟糕）。</li>
-<li>IDEA的搜索比Eclipse快得多，按全项目搜索的话，Eclipse要等把所有文件都过一遍，而IDEA可以一下子搜出来。</li>
-<li>IDEA的SVN支持非常好，可以很方便地检查自己修改的代码、查询同事修改、对比文件版本，虽然TortoiseSVN和Eclipse也有类似功能，但是IDEA用起来更舒服。</li>
-</ol>
-<p>以下也是IDEA的长处，不过有些是个人体验，或者未作为推销的内容向同事介绍：</p>
-<ol type="1">
-<li>IDEA的工作空间对版本控制友好，只要我把项目配置好，加到版本库中，其他人就可以直接用IDEA打开项目，等IDEA把文件索引完，然后再配一下JDK和Tomcat路径就能投入开发了。Eclipse的话每次全新checkout都要从头开始配置，而且我们项目组有时也会出现因工作安排变动或电脑难用而重新搭环境甚至重装系统的情况。</li>
-<li>IDEA集成了数据库插件，代码提示比其他数据库软件好一些。另外修改数据时PL/SQL
-Developer需要附上FOR UPDATE，Toad需要用EDIT语句，SQL
-Developer需要自己写UPDATE语句，而IDEA可以直接在查询结果上面改。</li>
-<li>IDEA对代码风格方面的提示和警告比Eclipse丰富，例如IDEA可以检测出哪些代码是一模一样的，或者哪些类与函数根本没有人使用。</li>
-<li>IDEA自带反编译工具，可以方便地反编译代码，以分析一些jar包的原理。</li>
-</ol>
-<p>当然，Eclipse的用户和插件也不少，对于爱搞配置的人来说应该也比较好用。</p>
-<h1 id="差异">差异</h1>
-<p>Eclipse和IDEA的界面与操作方法有些区别。概念上的重大差异主要是“Project
-Structure”，即项目文件结构的管理，不过如果有人把项目配置好并提交版本控制之后，其他成员反倒不太需要关注这些东西，因此我会另外写一篇文章进行叙述。</p>
-<h1 id="法律问题">法律问题</h1>
-<p>IDEA分免费的社区版（Community Edition）和收费的商业版（Ultimate
-Edition），前者不支持Web开发，只能选用商业版。商业版需要激活，大家往往会用注册码、注册机来进行破解。这当然是违法的，而且比起个人，公司更容易陷入诉讼（告赢了就是一大笔钱），因此有条件的话务必买正版。</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>IDEA</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>WebLogic踩坑记录</title>
     <url>/2018/11/02/weblogic-caution/</url>
     <content><![CDATA[本文记录我在部署WebLogic时遇到的各种坑。其中JDK为1.6，WebLogic版本11g（10.3.6）。
@@ -698,32 +651,32 @@ code {
 <col style="width: 31%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>场景</th>
 <th>错误信息</th>
 <th>启动参数</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>生成图片</td>
 <td>java.awt.HeadlessException</td>
 <td>-Djava.awt.headless=true</td>
 </tr>
-<tr class="even">
+<tr>
 <td>访问HTTPS网站</td>
 <td>javax.net.ssl.SSLHandshakeException:
 sun.security.validator.ValidatorException: No trusted certificate found
 exception</td>
 <td>-DUseSunHttpHandler=true</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Apache CXF提供WebService服务</td>
 <td>javax.xml.ws.soap.SOAPFaultException: Cannot create a secure
 XMLInputFactory</td>
 <td>-Dorg.apache.cxf.stax.allowInsecureParser=1</td>
 </tr>
-<tr class="even">
+<tr>
 <td>启动报错，提示无法加载config.xml</td>
 <td><code>Server failed. Reason: [Management:141266]Parsing Failure in config.xml: failed to find method MethodName</code></td>
 <td>-Dweblogic.configuration.schemaValidationEnabled=false</td>
@@ -1059,225 +1012,44 @@ java.lang.ClassNotFoundException: jsp_servlet._somepackage.__somejsppage.
       </tags>
   </entry>
   <entry>
-    <title>从Eclipse切换到IDEA（一）：切换操作</title>
-    <url>/2018/12/13/switch-to-idea-1/</url>
-    <content><![CDATA[<p>本文主要介绍IDEA的操作方法。为了避免出现复杂问题，本文假设项目已经事先配置好，而且配置文件加到了版本控制中，其他人只要下载代码就可以直接用IDEA打开。
+    <title>从Eclipse切换到IDEA</title>
+    <url>/2018/12/12/switch-to-idea-0/</url>
+    <content><![CDATA[<p>我们项目组之前一直使用Eclipse进行开发。对于我们项目而言，由于Eclipse存在现实的问题，我便开始研究IDEA的用法，并且试着将工作切换到IDEA上面，之后逐步地在项目组内推广使用IntelliJ
+IDEA。本系列文章面向Eclipse使用者，讲述IDEA的一些基本操作，以便平稳地进行切换。
 <span id="more"></span></p>
-<h1 id="初始化配置">初始化配置</h1>
-<p>下面只讲Windows的操作方法（尽管截图是macOS）。对于Linux或苹果用户而言，我觉得既然能使用这两种系统，就说明不太需要这种详细教程吧。</p>
-<h2 id="安装idea">安装IDEA</h2>
-<p>IDEA可以从<span class="exturl" data-url="aHR0cHM6Ly93d3cuamV0YnJhaW5zLmNvbS9pZGVhL2Rvd25sb2FkLw==">官网<i class="fa fa-external-link-alt"></i></span>下载，下载完成之后只要下一步下一步地操作就行。如果没钱买正版，请从<span class="exturl" data-url="aHR0cHM6Ly93d3cuamV0YnJhaW5zLmNvbS9pZGVhL2Rvd25sb2FkL3ByZXZpb3VzLmh0bWw=">这里<i class="fa fa-external-link-alt"></i></span>找个稍微旧一点的版本，因为太新的版本可能没有破解工具或激活码。</p>
-<p>安装结束后，如果没给JetBrains公司掏过钱，那么还需要从网上搜一下激活工具进行激活。</p>
-<h2 id="安装svn客户端">安装SVN客户端</h2>
-<p>SVN客户端推荐使用<span class="exturl" data-url="aHR0cHM6Ly90b3J0b2lzZXN2bi5uZXQvZG93bmxvYWRzLmh0bWw=">TortoiseSVN<i class="fa fa-external-link-alt"></i></span>，因为和系统整合得比较好。安装时注意把“Command
-Line Tool”也安装上，否则后面IDEA和SVN配置会比较麻烦。</p>
-<h1 id="项目配置">项目配置</h1>
-<p>下面假设项目代码库内已经有统一配置，后续会专门解释如何从头开始配置。</p>
-<p>第一次打开项目时，系统需要花一段时间去建立索引，而第一次启动时系统也要花时间去编译和复制文件，但是这两项工作完成以后响应就比较快了。</p>
-<p>在开始工作之前，需要检查和调整系统与项目的设置，例如SVN、JDK和Tomcat的路径。如果项目使用GBK等编码，还需要检查字符编码设置：</p>
-<h2 id="svn路径">SVN路径</h2>
-<p>点击File下面的Settings菜单，进入系统设置界面，选择“Version
-Control”下面的“Subversion”，在右侧设置中进行SVN路径的设置。找到SVN的安装目录，然后去里面找bin和svn.exe。如果没有发现svn.exe，说明你在安装TortoiseSVN时未安装命令行工具，需要重新安装。</p>
-<figure>
-<img src="/img/2018-12-01-switch-to-idea-1/svnconfig.png"
-alt="SVN设置" />
-<figcaption aria-hidden="true">SVN设置</figcaption>
-</figure>
-<h2 id="jdk路径">JDK路径</h2>
-<p>点击File下面的Project
-Structure菜单，在弹出的对话框中选择左面的“Project”，可以看到类似下面的图：</p>
-<figure>
-<img src="/img/2018-12-01-switch-to-idea-1/structure.png"
-alt="Project Structure" />
-<figcaption aria-hidden="true">Project Structure</figcaption>
-</figure>
-<p>图中Project SDK为空，所以需要添加项目所使用的JDK，而且Project
-language level选择项目所用的JDK版本。下面Project compiler
-output则是项目编译之后文件的存放位置，只要别提交到SVN上面，放在哪里其实都无所谓，不过一定要设置，否则无法启动。</p>
-<h2 id="tomcat路径">Tomcat路径</h2>
-<p>点击Run下面的Edit
-Configuration菜单，进入启动设置界面，如下图所示：</p>
-<figure>
-<img src="/img/2018-12-01-switch-to-idea-1/tomcat-1.png"
-alt="缺少Tomcat" />
-<figcaption aria-hidden="true">缺少Tomcat</figcaption>
-</figure>
-<p>点击Tomcat右边的Configure按钮，选择Tomcat安装路径：</p>
-<figure>
-<img src="/img/2018-12-01-switch-to-idea-1/tomcat-2.png"
-alt="Tomcat设置" />
-<figcaption aria-hidden="true">Tomcat设置</figcaption>
-</figure>
-<p>如果路径正确，IDEA会给出Tomcat的版本。</p>
-<p>若有自定义的context.xml并在其中指定了数据源，那么还要在Tomcat的lib目录中加入相应的数据库驱动，例如<span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS90ZWNobmV0d29yay9hcHBzLXRlY2gvamRiYy0xMTIwMTAtMDkwNzY5Lmh0bWw=">ojdbc6.jar<i class="fa fa-external-link-alt"></i></span>。</p>
-<h2 id="字符编码">字符编码</h2>
-<p>默认字符编码是UTF-8。如果项目使用GB2312、GBK、GB18030这种编码，需要在系统设置“Editor”里的“File
-Encodings”设置默认编码。</p>
-<h1 id="日常工作">日常工作</h1>
-<h2 id="保存">保存</h2>
-<p>默认情况下IDEA会自动保存文件修改，所以在IDEA里面不需要按Ctrl+S，也找不到保存按钮。如果不希望自动保存的话，可以在系统设置里面把它关掉。</p>
-<h2 id="快捷键">快捷键</h2>
-<p>快捷键可以从菜单上面查看，下面列举几个默认而且最常用的按键设置：</p>
-<table>
-<colgroup>
-<col style="width: 49%" />
-<col style="width: 26%" />
-<col style="width: 23%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>功能</th>
-<th>Eclipse按键</th>
-<th>IDEA按键</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>全局搜索字符串</td>
-<td>Ctrl+H</td>
-<td>Ctrl+Shift+F</td>
-</tr>
-<tr class="even">
-<td>全局替换字符串</td>
-<td></td>
-<td>Ctrl+Shift+R</td>
-</tr>
-<tr class="odd">
-<td>快速修复（设置Getter和Setter、设置import等）</td>
-<td>Ctrl+1</td>
-<td>Alt+Enter</td>
-</tr>
-<tr class="even">
-<td>清理多余import</td>
-<td>Ctrl+Shift+O</td>
-<td>Ctrl+Alt+O</td>
-</tr>
-<tr class="odd">
-<td>根据文件名找文件</td>
-<td>Ctrl+Shift+R</td>
-<td>按两下Shift</td>
-</tr>
-<tr class="even">
-<td>查看变量定义/函数使用情况</td>
-<td>Ctrl+点击</td>
-<td>Ctrl+点击</td>
-</tr>
-<tr class="odd">
-<td>查看实现</td>
-<td>Ctrl+点击，或者在函数上面按住Ctrl，在弹出菜单中选择“Open
-Implementation”</td>
-<td>Ctrl+Alt+点击</td>
-</tr>
-<tr class="even">
-<td>格式化</td>
-<td>Ctrl+Shift+F</td>
-<td>Ctrl+Alt+L</td>
-</tr>
-<tr class="odd">
-<td>单步执行，碰到函数就进到函数内部</td>
-<td>F5</td>
-<td>F7</td>
-</tr>
-<tr class="even">
-<td>单步执行，碰到函数直接返回结果</td>
-<td>F6</td>
-<td>F8</td>
-</tr>
-<tr class="odd">
-<td>运行到当前函数的return部分</td>
-<td>F7</td>
-<td>Shift+F8</td>
-</tr>
-<tr class="even">
-<td>暂停之后继续运行程序</td>
-<td>F8</td>
-<td>F9</td>
-</tr>
-</tbody>
-</table>
-<p>如果习惯了Eclipse的按键，也可以将快捷键调成Eclipse模式。具体方法是找到系统设置中的“Keymap”，然后在右面的设置中选择“Eclipse”方案，这样各功能快捷键就和Eclipse一致了。</p>
-<h2 id="调试">调试</h2>
-<p>在第一次调试时，建议检查一下启动配置是否符合自己需要。</p>
-<figure>
-<img src="/img/2018-12-01-switch-to-idea-1/debug-1.png"
-alt="启动配置" />
-<figcaption aria-hidden="true">启动配置</figcaption>
-</figure>
-<p>和Eclipse一样，如果想使用断点调试等功能，需要用虫子按钮而非普通的启动按钮来启动应用。点击启动之后，IDEA会进行编译并生成Web相关文件（见上图下侧Before
-launch部分，实际上IDEA之所以做这两件事是因为你在启动设置里面设置了Build和Build
-artifacts这两步操作），准备完成之后便会自动启动Tomcat。</p>
-<p>另外也可以直接启动某一个类。启动之前那个类需要有一个静态的main函数，而且相关的配置文件要放对地方（例如src下面）。</p>
-<h2 id="版本控制">版本控制</h2>
-<p>版本控制通常在IDEA的Version
-Control窗口中进行。如果未发现这个窗口，可点击“View”菜单下面“Tool
-Buttons”，然后检查窗口下面的工具栏按钮。</p>
-<p>除了在Version
-Control窗口以外，也可以对着文件或代码点鼠标右键，在弹出的版本管理相关菜单上面进行操作。</p>
-<h3 id="changelist">Changelist</h3>
-<p>IDEA的Version
-Control窗口可以很直观地列出你所进行的修改。如果发现修改未同步到列表中，可以点击左面的刷新按钮刷新一下（如果是新增文件，需要检查一下有没有将其加入到版本控制中）。</p>
-<p>代码修改会以“Changelist”的形式组织。举个例子，假如修改了10个文件，有4个文件是为了处理问题A，有3个文件是为了处理问题B，而剩下3个文件是临时修改，不打算提交，这样可以建立三个Changelist（右击然后点击New
-changelist菜单），将三组文件分别拖拽到三个Changelist中，这样检查和提交的时候可以按Changelist分组进行。</p>
-<figure>
-<img src="/img/2018-12-01-switch-to-idea-1/changelist-1.png"
-alt="Changelist可以直观地列出你的代码改动，并根据实际需要分组管理。如果未及时刷新状态，可点击左面的刷新按钮。" />
-<figcaption
-aria-hidden="true">Changelist可以直观地列出你的代码改动，并根据实际需要分组管理。如果未及时刷新状态，可点击左面的刷新按钮。</figcaption>
-</figure>
-<h3 id="提交代码与回退">提交代码与回退</h3>
-<p>当准备进行提交时，只要在Version
-Control窗口对着Changelist或待提交文件（按Ctrl键多选）点右键，选择Commit，就会看到提交代码的窗口。</p>
-<p>相反地，如果需要撤销更改，选择Revert菜单即可。</p>
-<figure>
-<img src="/img/2018-12-01-switch-to-idea-1/changelist-2.png"
-alt="检查待提交文件列表和内容，输入摘要，点击Commit提交。" />
-<figcaption
-aria-hidden="true">检查待提交文件列表和内容，输入摘要，点击Commit提交。</figcaption>
-</figure>
-<h4 id="针对新开发者的提醒">针对新开发者的提醒</h4>
-<p>以下内容转载自<span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDA5LzAyLzYuaHRtbA==">编程随想的博客<i class="fa fa-external-link-alt"></i></span>：</p>
-<pre class="line-numbers language-none"><code class="language-none">据俺多年的观察，发觉 RCS（备注：版本管理软件）主要有如下几种误用的情况：
-
-◇不正确的提交频度
-　　有很多新手不习惯使用 RCS，很少进行代码的提交。有些人甚至到项目快结束时还没有提交过一行代码。结果导致整个 RCS 形同虚设。
-　　还有一些人则走向另一个极端，频繁提交代码。有些人每改完一个文件就提交一次，还有些人甚至把修改一半，尚【不能】编译通过的代码也提交到 RCS。
-　　俺个人认为，正确的提交频度应该分两种情况：在编写功能代码时，每完成一个功能点，并且自己经过了自测之后，提交一次；在调试的时候，每修复一个 bug，提交一次。这样能够保证提交到 RCS 的代码都是【能编译通过】的（详见[每日构建系列](https:&#x2F;&#x2F;program-think.blogspot.com&#x2F;2009&#x2F;02&#x2F;daily-build-0-overview.html)），并且业务逻辑上也是相对完整的（对于每日构建后的测试很重要）。
-
-◇提交时不写注释
-　　很多人提交代码时不写注释，将来再想到版本历史里面找代码就犹如大海捞针般困难。
-　　比如在俺经手的代码中，有些源代码文件历时3年，提交次数上百次，如果提交时不写注释，日后根本没法找。
-
-◇不做代码基线（Baseline）、不做代码分支（Branch）
-　　在正规的开发团队，每当有一个版本发布（Release）并交付给用户使用时，都需要在 RCS 中制作一个基线，以便于进行相应的 bug 跟踪和补丁制作。因此，诸如【做基线】之类的事情，属于整个团队的集体行为，需要由 Team Leader 牵头来搞。
-　　假如一个开发团队从来不做代码基线或者代码分支，仅仅是把 RCS 当成一个源文件的备份工具来用，那至少说明这个团队的 Team Leader 在软件工程管理方面非常失败。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="查看文件提交历史">查看文件提交历史</h3>
-<p>对着文件点击右键，选择“Subversion”里面的“Show
-History”，即可在下面的Version
-Control窗口看到文件的提交历史。对着版本点击右键，选择“Show
-Diff”，即可看到某个版本是哪个人进行了哪些修改。</p>
-<p>除SVN提交历史外，也可以查看文件的本地编辑历史。假如不慎错误地修改了某些内容，又不方便直接回退文件，可对着文件点右键，找到“Local
-History”，查看本地的历史记录以便恢复。</p>
-<h3 id="查看代码库版本变更记录">查看代码库版本变更记录</h3>
-<p>Version
-Control第一个页签是你的待提交修改，第二个页签就是其他人已经提交的修改。如果没有看到提交记录，点击刷新按钮即可。</p>
-<p>在变更记录窗口中，你可以选择提交记录，查看某一次提交涉及的修改内容。如果需要多版本审查，可以按Ctrl多选，右侧变更记录会将多条提交合并在一起。</p>
-<!--## 数据库操作
-IDEA Ultimate版内置了DataGrip插件。
--->
-<h1 id="参见">参见</h1>
+<h1 id="本系列内容">本系列内容</h1>
 <ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuamV0YnJhaW5zLmNvbS9oZWxwL2lkZWEvbWlncmF0aW5nLWZyb20tZWNsaXBzZS10by1pbnRlbGxpai1pZGVhLmh0bWw=">Migrating
-From Eclipse to IntelliJ IDEA<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<h1 id="本系列目录">本系列目录</h1>
-<ul>
-<li><a href="/2018/12/12/switch-to-idea-0/">为什么进行切换</a></li>
-<li><strong>切换的基本操作</strong></li>
+<li><strong>为什么进行切换</strong></li>
+<li><a href="/2018/12/13/switch-to-idea-1/">切换的基本操作</a></li>
 <li><a href="/2019/01/27/switch-to-idea-2">传统Web项目在IDEA的Project
 Structure</a></li>
 <li><a
 href="/2019/08/03/switch-to-idea-3/">传统Web项目转为Gradle项目</a></li>
 </ul>
+<h1 id="切换到idea的理由">切换到IDEA的理由</h1>
+<p>下面是我向同事推荐使用IDEA（商业版）的一些理由：</p>
+<ol type="1">
+<li>公司版本管理软件从ClearCase切换到了SVN，这意味着开发工作不再受ClearCase拖累，开发工具也可以随意换成更好用的了。</li>
+<li>公司电脑配置不高，而且项目文件非常多，Eclipse用起来很卡。虽然IDEA资源消耗比较高，但是用起来比Eclipse顺畅得多（备注：对于内存只有4GB的电脑，要么加条，要么换旧版IDEA，否则会很糟糕）。</li>
+<li>IDEA的搜索比Eclipse快得多，按全项目搜索的话，Eclipse要等把所有文件都过一遍，而IDEA可以一下子搜出来。</li>
+<li>IDEA的SVN支持非常好，可以很方便地检查自己修改的代码、查询同事修改、对比文件版本，虽然TortoiseSVN和Eclipse也有类似功能，但是IDEA用起来更舒服。</li>
+</ol>
+<p>以下也是IDEA的长处，不过有些是个人体验，或者未作为推销的内容向同事介绍：</p>
+<ol type="1">
+<li>IDEA的工作空间对版本控制友好，只要我把项目配置好，加到版本库中，其他人就可以直接用IDEA打开项目，等IDEA把文件索引完，然后再配一下JDK和Tomcat路径就能投入开发了。Eclipse的话每次全新checkout都要从头开始配置，而且我们项目组有时也会出现因工作安排变动或电脑难用而重新搭环境甚至重装系统的情况。</li>
+<li>IDEA集成了数据库插件，代码提示比其他数据库软件好一些。另外修改数据时PL/SQL
+Developer需要附上FOR UPDATE，Toad需要用EDIT语句，SQL
+Developer需要自己写UPDATE语句，而IDEA可以直接在查询结果上面改。</li>
+<li>IDEA对代码风格方面的提示和警告比Eclipse丰富，例如IDEA可以检测出哪些代码是一模一样的，或者哪些类与函数根本没有人使用。</li>
+<li>IDEA自带反编译工具，可以方便地反编译代码，以分析一些jar包的原理。</li>
+</ol>
+<p>当然，Eclipse的用户和插件也不少，对于爱搞配置的人来说应该也比较好用。</p>
+<h1 id="差异">差异</h1>
+<p>Eclipse和IDEA的界面与操作方法有些区别。概念上的重大差异主要是“Project
+Structure”，即项目文件结构的管理，不过如果有人把项目配置好并提交版本控制之后，其他成员反倒不太需要关注这些东西，因此我会另外写一篇文章进行叙述。</p>
+<h1 id="法律问题">法律问题</h1>
+<p>IDEA分免费的社区版（Community Edition）和收费的商业版（Ultimate
+Edition），前者不支持Web开发，只能选用商业版。商业版需要激活，大家往往会用注册码、注册机来进行破解。这当然是违法的，而且比起个人，公司更容易陷入诉讼（告赢了就是一大笔钱），因此有条件的话务必买正版。</p>
 ]]></content>
       <categories>
         <category>教程</category>
@@ -1429,42 +1201,6 @@ Pro来说，只要不是特别现代的游戏，虚拟机也能带得动了。�
       <tags>
         <tag>Web</tag>
         <tag>项目实施</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java代码审查：目录</title>
-    <url>/2019/01/01/java-code-review-0/</url>
-    <content><![CDATA[<p>在讨论代码审查问题之前，需要指出不遵守代码规范的后果：</p>
-<ol type="1">
-<li>被骂“坑爹”</li>
-<li>被同事暗中诅咒</li>
-<li>跳槽之后被新同事暗中诅咒</li>
-<li>跳槽之后被原来公司的同事暗中诅咒</li>
-</ol>
-<p>为了避免诅咒的命运，本系列文章整理了一些代码审查问题，并以个人角度对编程习惯提出一些要求和建议。对于项目而言，一方面要加强审查，另一方面要加强对项目成员的教育，防止问题再次产生。</p>
-<span id="more"></span>
-<figure>
-<img src="/img/2019-01-01-java-code-review-0/kuroneko.jpg" alt="诅咒" />
-<figcaption aria-hidden="true">诅咒</figcaption>
-</figure>
-<h1 id="本系列目录">本系列目录</h1>
-<ol type="1">
-<li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
-<li><a
-href="/2019/01/03/java-code-review-2">应用安全问题</a>：由于安全问题经常被忽视和无视，因此有必要专门指出安全隐患以及预防措施。</li>
-<li><a
-href="/2019/01/04/java-code-review-3">关于编程习惯的要求</a>：这里主要是我个人关于操作方面的倡议，感觉合理的话可以参考。</li>
-<li><a
-href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查</a></li>
-<li>使用FindBugs和SonarQube等工具进行扫描</li>
-<li>……</li>
-</ol>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1974,103 +1710,28 @@ href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查<
       </tags>
   </entry>
   <entry>
-    <title>Java代码审查（三）：关于编程习惯的要求</title>
-    <url>/2019/01/04/java-code-review-3/</url>
-    <content><![CDATA[<p>这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。
-<span id="more"></span></p>
-<h1 id="新来者">新来者</h1>
-<ul>
-<li>主动了解项目有哪些开发规范。
-<ul>
-<li>如果实际操作与开发规范已经不符，要敢于提出质疑，纠正错误操作或调整过时规范。</li>
-</ul></li>
-<li>仿写是快速学习的一种方法，但是，仿写时候要动脑子，不要完全照抄已有代码，更不要照搬垃圾代码。</li>
-<li>除了完成任务，不要忘了界面美观、操作便利、性能高效、保证信息安全、代码规范清晰这类不会使自己涨工资但是能减少被诅咒次数的东西。</li>
-<li>如果不能保质保量地完成任务，一定要尽早吱声。如果拖到最后也做不出来，或者做到最后挖的坑比正面贡献还多，后果好不了。</li>
-<li>事后诸葛亮：不听取本文意见，最终结果可能是项目质量感人。</li>
-</ul>
-<h1 id="开发工作">开发工作</h1>
-<h2 id="准备工作">准备工作</h2>
-<ul>
-<li>新功能和数据库表结构的设计都要通过评审。</li>
-<li>搞清楚业务场景和业务逻辑再动手。</li>
-<li>把数据量估计好，以免产生正式环境运行过慢、页面展示爆炸等特效。</li>
-</ul>
-<h2 id="书写新代码">书写新代码</h2>
-<ul>
-<li>避免直接copy-paste。就算抄也要自己写一遍，过一下脑子。</li>
-<li>如果一段代码重复了两三遍甚至更多，那么应当改写成公共代码。
-<ul>
-<li>接上条，造新轮子之前，查一下有没有可以拿来用的现成的东西。</li>
-</ul></li>
-<li>将Web（请求处理）、BO（业务逻辑）、DAO（数据持久）等层次与PO（持久对象）、VO（值对象）等领域区分好，例如不要在Web层或JSP页面写业务逻辑。</li>
-<li>代码和页面风格都要规范统一。</li>
-</ul>
-<h2 id="修改既有代码">修改既有代码</h2>
-<ul>
-<li>修改函数签名、函数实现、应用配置、接口签名等内容之前必须先检查引用情况。
-<ul>
-<li>修改公共方法和公共配置之前应仔细评估影响并加强测试。如果不清楚影响，那么要先咨询老员工再修改。</li>
-<li>设计和修改公共组件（包括公共函数、标签、模板、Filter等），除了正确实现功能，还必须更加关注运行效率、资源占用、线程安全性等问题。</li>
-</ul></li>
-<li>如果发现待修改的代码比较诡异，修改之前建议先问问老员工有没有什么历史原因或者坑。</li>
-<li>即使是简单的修改也要进行测试，因为再有经验也有可能改出问题。</li>
-<li>及时清理出于备份目的留下的注释，以免造成混淆。如果后续有可能恢复，那么应当用注释说清情况。</li>
-</ul>
-<h2 id="提交">提交</h2>
-<ul>
-<li>提交代码之前完成功能自测。</li>
-<li>提交之前对代码进行一下美化，例如自动缩进、移除无用import等（需要事先统一标准）。</li>
-<li>提交之前必须检查待提交的Diff（差异）：
-<ul>
-<li>提交务必完整，不能出现编译错误，不能导致程序无法正常运行。</li>
-<li>不能完整提交就不要提交。</li>
-<li>不要有错别字、笔误和语病。</li>
-<li>不要把本地调试代码（例如alert(val)、屏蔽校验规则、写死测试数据之类的）提交上去。</li>
-</ul></li>
-<li>提交时书写提交说明，例如实现了什么功能或解决了什么问题。</li>
-<li>注意提交频率，按活动一次性提交齐全，不要长期不提交，也不要改一个文件就提交一下。</li>
-</ul>
-<h1 id="代码细节">代码细节</h1>
-<h2 id="命名">命名</h2>
-<ul>
-<li>除了循环ijk那种一望而知的情况，要用有意义的英文名，而且不要用拼音简写，更不要拼音英语混写。</li>
-<li>保持命名一致，例如不要前面还在用“state”表示“状态”，后面就变成了用“status”表示状态。如果不知道如何一致，那么就看代码规范以及别人怎么写的。</li>
-<li>如果确实需要借用名称或借用字段，要把情况写清楚，以免造成混淆。</li>
-</ul>
-<h2 id="sql">SQL</h2>
-<ul>
-<li>书写SQL要实地执行一下。</li>
-<li>要估计投入到生产环境之后会产生多少数据，以免效率过低甚至系统瘫痪。</li>
-<li>查询和关联时要留意是否一定能查到数据。不确定的话要与熟悉业务的人或DBA交流。</li>
-<li>书写复杂SQL要看执行计划，估算执行效率，必要时与DBA交流，以便在数据库层面进行优化调整。
-<ul>
-<li>如果顺便发现没有主键或索引，那么也要告诉DBA。</li>
-</ul></li>
-<li>尽量以绑定变量形式书写SQL而非直接拼接，以提高语句解析效率。</li>
-<li>对于改造升级类的系统，注意要兼容历史数据。</li>
-</ul>
-<h2 id="注释">注释</h2>
-<ul>
-<li>在业务代码处简单地解释业务规则。</li>
-<li>复杂逻辑、边界情况、HACK操作以及“装逼操作”要写注释说明。</li>
-<li>需求变更、业务逻辑修改等情况务必在相关代码中写注释说明，而且要标出在什么时间、因什么原因而修改，以便事后追溯。
-<ul>
-<li>接上条，如果预计以后还会发生变动，建议各关联代码都用唯一且相同的代码进行标记（例如CHANGE20190101），这样以后再改代码的时候容易搜索。</li>
-</ul></li>
-<li>TODO的事情写上TODO四个字母并进行跟踪，已经完成以及不是TODO的事情不要写TODO。</li>
-</ul>
-<h2 id="其他">其他</h2>
-<ul>
-<li>关于报错：给用户展示正常人类能看懂的文字，而且让用户和开发者都能知道大概是哪方面错误以及如何处理。</li>
-<li>及时清理无效引用与变更。</li>
-<li>及时维护文档。如果不能及时维护，建议强迫自己改完文档再编码。</li>
-</ul>
+    <title>Java代码审查：目录</title>
+    <url>/2019/01/01/java-code-review-0/</url>
+    <content><![CDATA[<p>在讨论代码审查问题之前，需要指出不遵守代码规范的后果：</p>
+<ol type="1">
+<li>被骂“坑爹”</li>
+<li>被同事暗中诅咒</li>
+<li>跳槽之后被新同事暗中诅咒</li>
+<li>跳槽之后被原来公司的同事暗中诅咒</li>
+</ol>
+<p>为了避免诅咒的命运，本系列文章整理了一些代码审查问题，并以个人角度对编程习惯提出一些要求和建议。对于项目而言，一方面要加强审查，另一方面要加强对项目成员的教育，防止问题再次产生。</p>
+<span id="more"></span>
+<figure>
+<img src="/img/2019-01-01-java-code-review-0/kuroneko.jpg" alt="诅咒" />
+<figcaption aria-hidden="true">诅咒</figcaption>
+</figure>
 <h1 id="本系列目录">本系列目录</h1>
 <ol type="1">
 <li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
-<li><a href="/2019/01/03/java-code-review-2">应用安全问题</a></li>
-<li><strong>关于编程习惯的要求</strong></li>
+<li><a
+href="/2019/01/03/java-code-review-2">应用安全问题</a>：由于安全问题经常被忽视和无视，因此有必要专门指出安全隐患以及预防措施。</li>
+<li><a
+href="/2019/01/04/java-code-review-3">关于编程习惯的要求</a>：这里主要是我个人关于操作方面的倡议，感觉合理的话可以参考。</li>
 <li><a
 href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查</a></li>
 <li>使用FindBugs和SonarQube等工具进行扫描</li>
@@ -2245,6 +1906,117 @@ href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查<
         <tag>安全</tag>
         <tag>注入</tag>
         <tag>越权</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java代码审查（三）：关于编程习惯的要求</title>
+    <url>/2019/01/04/java-code-review-3/</url>
+    <content><![CDATA[<p>这里是我个人的倡议，仅供参考。各项目应按照实际情况制定自己的操作规范，经常加强对新人的教育，以免把经文念得越来越歪。
+<span id="more"></span></p>
+<h1 id="新来者">新来者</h1>
+<ul>
+<li>主动了解项目有哪些开发规范。
+<ul>
+<li>如果实际操作与开发规范已经不符，要敢于提出质疑，纠正错误操作或调整过时规范。</li>
+</ul></li>
+<li>仿写是快速学习的一种方法，但是，仿写时候要动脑子，不要完全照抄已有代码，更不要照搬垃圾代码。</li>
+<li>除了完成任务，不要忘了界面美观、操作便利、性能高效、保证信息安全、代码规范清晰这类不会使自己涨工资但是能减少被诅咒次数的东西。</li>
+<li>如果不能保质保量地完成任务，一定要尽早吱声。如果拖到最后也做不出来，或者做到最后挖的坑比正面贡献还多，后果好不了。</li>
+<li>事后诸葛亮：不听取本文意见，最终结果可能是项目质量感人。</li>
+</ul>
+<h1 id="开发工作">开发工作</h1>
+<h2 id="准备工作">准备工作</h2>
+<ul>
+<li>新功能和数据库表结构的设计都要通过评审。</li>
+<li>搞清楚业务场景和业务逻辑再动手。</li>
+<li>把数据量估计好，以免产生正式环境运行过慢、页面展示爆炸等特效。</li>
+</ul>
+<h2 id="书写新代码">书写新代码</h2>
+<ul>
+<li>避免直接copy-paste。就算抄也要自己写一遍，过一下脑子。</li>
+<li>如果一段代码重复了两三遍甚至更多，那么应当改写成公共代码。
+<ul>
+<li>接上条，造新轮子之前，查一下有没有可以拿来用的现成的东西。</li>
+</ul></li>
+<li>将Web（请求处理）、BO（业务逻辑）、DAO（数据持久）等层次与PO（持久对象）、VO（值对象）等领域区分好，例如不要在Web层或JSP页面写业务逻辑。</li>
+<li>代码和页面风格都要规范统一。</li>
+</ul>
+<h2 id="修改既有代码">修改既有代码</h2>
+<ul>
+<li>修改函数签名、函数实现、应用配置、接口签名等内容之前必须先检查引用情况。
+<ul>
+<li>修改公共方法和公共配置之前应仔细评估影响并加强测试。如果不清楚影响，那么要先咨询老员工再修改。</li>
+<li>设计和修改公共组件（包括公共函数、标签、模板、Filter等），除了正确实现功能，还必须更加关注运行效率、资源占用、线程安全性等问题。</li>
+</ul></li>
+<li>如果发现待修改的代码比较诡异，修改之前建议先问问老员工有没有什么历史原因或者坑。</li>
+<li>即使是简单的修改也要进行测试，因为再有经验也有可能改出问题。</li>
+<li>及时清理出于备份目的留下的注释，以免造成混淆。如果后续有可能恢复，那么应当用注释说清情况。</li>
+</ul>
+<h2 id="提交">提交</h2>
+<ul>
+<li>提交代码之前完成功能自测。</li>
+<li>提交之前对代码进行一下美化，例如自动缩进、移除无用import等（需要事先统一标准）。</li>
+<li>提交之前必须检查待提交的Diff（差异）：
+<ul>
+<li>提交务必完整，不能出现编译错误，不能导致程序无法正常运行。</li>
+<li>不能完整提交就不要提交。</li>
+<li>不要有错别字、笔误和语病。</li>
+<li>不要把本地调试代码（例如alert(val)、屏蔽校验规则、写死测试数据之类的）提交上去。</li>
+</ul></li>
+<li>提交时书写提交说明，例如实现了什么功能或解决了什么问题。</li>
+<li>注意提交频率，按活动一次性提交齐全，不要长期不提交，也不要改一个文件就提交一下。</li>
+</ul>
+<h1 id="代码细节">代码细节</h1>
+<h2 id="命名">命名</h2>
+<ul>
+<li>除了循环ijk那种一望而知的情况，要用有意义的英文名，而且不要用拼音简写，更不要拼音英语混写。</li>
+<li>保持命名一致，例如不要前面还在用“state”表示“状态”，后面就变成了用“status”表示状态。如果不知道如何一致，那么就看代码规范以及别人怎么写的。</li>
+<li>如果确实需要借用名称或借用字段，要把情况写清楚，以免造成混淆。</li>
+</ul>
+<h2 id="sql">SQL</h2>
+<ul>
+<li>书写SQL要实地执行一下。</li>
+<li>要估计投入到生产环境之后会产生多少数据，以免效率过低甚至系统瘫痪。</li>
+<li>查询和关联时要留意是否一定能查到数据。不确定的话要与熟悉业务的人或DBA交流。</li>
+<li>书写复杂SQL要看执行计划，估算执行效率，必要时与DBA交流，以便在数据库层面进行优化调整。
+<ul>
+<li>如果顺便发现没有主键或索引，那么也要告诉DBA。</li>
+</ul></li>
+<li>尽量以绑定变量形式书写SQL而非直接拼接，以提高语句解析效率。</li>
+<li>对于改造升级类的系统，注意要兼容历史数据。</li>
+</ul>
+<h2 id="注释">注释</h2>
+<ul>
+<li>在业务代码处简单地解释业务规则。</li>
+<li>复杂逻辑、边界情况、HACK操作以及“装逼操作”要写注释说明。</li>
+<li>需求变更、业务逻辑修改等情况务必在相关代码中写注释说明，而且要标出在什么时间、因什么原因而修改，以便事后追溯。
+<ul>
+<li>接上条，如果预计以后还会发生变动，建议各关联代码都用唯一且相同的代码进行标记（例如CHANGE20190101），这样以后再改代码的时候容易搜索。</li>
+</ul></li>
+<li>TODO的事情写上TODO四个字母并进行跟踪，已经完成以及不是TODO的事情不要写TODO。</li>
+</ul>
+<h2 id="其他">其他</h2>
+<ul>
+<li>关于报错：给用户展示正常人类能看懂的文字，而且让用户和开发者都能知道大概是哪方面错误以及如何处理。</li>
+<li>及时清理无效引用与变更。</li>
+<li>及时维护文档。如果不能及时维护，建议强迫自己改完文档再编码。</li>
+</ul>
+<h1 id="本系列目录">本系列目录</h1>
+<ol type="1">
+<li><a href="/2019/01/02/java-code-review-1">代码审查问题</a></li>
+<li><a href="/2019/01/03/java-code-review-2">应用安全问题</a></li>
+<li><strong>关于编程习惯的要求</strong></li>
+<li><a
+href="/2019/02/06/java-code-review-4">使用Phabricator进行人工代码审查</a></li>
+<li>使用FindBugs和SonarQube等工具进行扫描</li>
+<li>……</li>
+</ol>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -2688,299 +2460,6 @@ href="/img/2019-01-11-oracle-novel/eromanga.jpg">插画</a>的话），而且领
       </tags>
   </entry>
   <entry>
-    <title>从Eclipse切换到IDEA（二）：传统Web项目的Project Structure</title>
-    <url>/2019/01/27/switch-to-idea-2/</url>
-    <content><![CDATA[<p>本文主要介绍如何将传统Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA。主要内容为传统项目的Project
-Structure配置。 <span id="more"></span></p>
-<h1
-id="关于idea中的project-structure和run-configuration">关于IDEA中的Project
-Structure和Run Configuration</h1>
-<p>Project Structure即项目结构。配置Project
-Structure大体上就是在告诉IDEA以下几件事：</p>
-<ol type="1">
-<li>项目用哪个JDK开发？</li>
-<li>项目由哪些模块组成？这些模块之间有什么关系？</li>
-<li>模块依赖哪些jar包？</li>
-<li>模块有哪些特征？（例如是Web项目）</li>
-<li>编译完成之后如何打包？</li>
-</ol>
-<p>Project Structure配置好之后就可以进行编译。</p>
-<p>Run
-Configuration则是启动配置。它在告诉IDEA编译完成之后如何运行那些代码，所以在编译时不是必需的，但运行时是必需的。</p>
-<h1 id="简单工程的project-structure">简单工程的Project Structure</h1>
-<p>以一个Helloworld级的SpringMVC项目为例。</p>
-<pre class="line-numbers language-none"><code class="language-none">&gt; HelloSpringMVC
-    &gt; src                       ----&gt; Java源代码
-    .   &gt; com
-    .       &gt; example
-    .           &gt; hello
-    .               &gt; controller
-    .                   HelloController.java
-    .               ...
-    &gt; config                    ----&gt; 公共配置文件
-    .   SpringMVC-servlet.xml
-    .   ...
-    &gt; WebContent                ----&gt; Web文件目录
-        &gt; components
-        .   &gt; jquery
-        .   ...
-        &gt; WEB-INF
-        .   &gt; lib
-        .   .   commons-logging-1.2.jar
-        .   .   ...
-        .   &gt; page
-        .   .   init.jsp
-        .   .   ...
-        .   web.xml
-        ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>直接用IDEA打开项目所在目录（HelloSpringMVC），它会尝试将Eclipse项目转化为IDEA项目（两IDE的配置文件可以同时存在，不会相互冲突），但是自动识别的文件结构并不正确，所以我们仍然需要通过“File”下面的“Project
-Structure”菜单重新配置项目。</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/project-structure-0.png"
-alt="Project Structure对话框" />
-<figcaption aria-hidden="true">Project Structure对话框</figcaption>
-</figure>
-<p>下面介绍每个页签的设置。注意，我们并不需要把每个参数都设置一遍，也不会严格按照页面选项的顺序进行操作。</p>
-<h2 id="project">Project</h2>
-<p>这一页内容比较简单，需要设置项目名称、JDK路径、支持的Java版本以及编译输出文件路径。其中Project
-compiler
-output放在哪里都行，只是不要不小心把编译出来的垃圾提交到代码库中。</p>
-<h2 id="libraries">Libraries</h2>
-<p>本页管理的是“应用使用了哪些jar包”。这里相当于把应用所需jar包“打了个捆”来管理，以便后面配置工程依赖项。</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/idea-libraries.png"
-alt="Libraries" />
-<figcaption aria-hidden="true">Libraries</figcaption>
-</figure>
-<p>没有特殊需求的话，将装jar包的目录（WebContent/WEB-INF/lib）添加成lib即可。</p>
-<h2 id="modules">Modules</h2>
-<p>IDEA没有Workspace的概念。和Eclipse中Project差不多的东西叫“Module”。一堆Module组成了一个Project。因为两边都有Project这个词语，所以小心不要把自己绕进去。</p>
-<p>本页的作用是指出“项目由哪些模块构成”，有点像Eclipse里头的Build
-Path设置。另外Sources、Dependencies两个子页面也需要关注。</p>
-<h3 id="sources">Sources</h3>
-<p>Sources子页面的作用是指出“哪些是Java代码，哪些是资源文件，哪些是垃圾”。</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/idea-modules-1.png"
-alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/eclipse-modules-1.png"
-alt="2" />
-<figcaption aria-hidden="true">2</figcaption>
-</figure>
-<p>IDEA将目录分成五类（Mark
-as后面五个）。其中Sources表示需要正常编译的Java代码，Resources表示打包时需要附到一起的文件，而Excluded表示将目录排除。</p>
-<p>稍微提一下上图Eclipse里面的config，根据前面提到的文件结构，它并不是Java代码，在Eclipse里标记成Source
-Folder纯粹是为了便于查找。</p>
-<p>对于传统Web项目，Resources怎么标记都无所谓了，后面Artifacts配置正确就行。</p>
-<h3 id="dependencies">Dependencies</h3>
-<p>Dependencies子页面的作用是指出依赖关系（例如需要哪些jar包）。在依赖项管理上，IDEA和Eclipse也是既有相同之处也有不同之处。IDEA这边相当于把Eclipse的Projects、Libraries和Order
-and Export三个页签合并到一起了。</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/idea-modules-2.png"
-alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/eclipse-modules-2.png"
-alt="2" />
-<figcaption aria-hidden="true">2</figcaption>
-</figure>
-<p>这里面应当至少包含JDK（IDEA自动添加）、源代码中专门放jar包的目录和依赖的其他工程。如果使用了Tomcat和某些类，例如javax.servlet.ServletContext，我们还需要加入Tomcat。</p>
-<p>第一次设置时可能找不到所有依赖项，例如Library中没有Tomcat。我们可以先只配置一部分，等到后面设置Library甚至到编译运行出现编译错误时再回来继续配置依赖项。</p>
-<p>Scope表示依赖程度：</p>
-<ul>
-<li>默认是Compile，也就是编译和打包时都要跟着放进去。</li>
-<li>Runtime表示编译时不用编译，但后续运行时要跟着放在一起。</li>
-<li>Provided表示打包时候不用跟着打，Tomcat等Web容器会提供。</li>
-<li>Test表示只有测试时才参与。</li>
-</ul>
-<h2 id="facets">Facets</h2>
-<p>本页面表示模块“有哪些特征”（例如Web、Spring等）。正确设置“特征”之后IDEA便可识别相应的配置文件。</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/idea-facets.png" alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<p>本项目是个简单的Web项目，其“特征”只有Web。添加特征可以从Facets或Modules两个页面进行操作。</p>
-<p>对于Web项目，我们需要关注上面的“Web Module Deployment
-Descriptor”和下面的“Web Resources
-Directories”两个设置，前者表示web.xml所在位置，后者表示WebContent（即JSP等页面）的目录。</p>
-<p>如果中间件有特殊设置，例如通过Tomcat的context.xml设置了数据源，那么可以点击“Add
-Application Server specific
-descriptor”按钮添加自定义配置文件，这样启动Tomcat时会加载你配置的context.xml的内容。</p>
-<h2 id="artifacts">Artifacts</h2>
-<p>本页面表示“编译完成之后如何打包”。</p>
-<p>Eclipse中，类似功能是“Deployment Assembly”：</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/eclipse-artifacts.png"
-alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<p>回到IDEA。点加号可以看到多种打包方法。对于这个Web项目而言，建议选择“Web
-Application: Exploded”（散装，不打成war包）或“Web Application:
-Archive”（打成war包）。下面选择了散装：</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/idea-artifacts.png"
-alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<p>上图是已经配置好的结构。其中：</p>
-<ul>
-<li>'HelloSpringMVC' compile output表示编译好的class文件。</li>
-<li>lib表示项目所依赖的jar包。</li>
-<li>'HelloSpringMVC' module: 'Web' facet
-resources表示JSP等文件。需要在前面把Facets配置好才会出现。</li>
-<li>'config' directory contents通过加号里的“Directory
-Content”配置，表示把某个目录里的文件直接拷过来。</li>
-</ul>
-<p>生成的文件就在Output
-directory中。如果不考虑数据源等配置，你可以在启动之后把这个目录里的东西拷走然后直接部署。</p>
-<p>点击加号，可以看到以下几个菜单：</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/idea-artifacts-2.png"
-alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<p>这分别表示“要把哪种文件拷过来”：</p>
-<ul>
-<li>Library
-Files表示把jar包拷过来，前提是Libraries页面已经正确配置。</li>
-<li>Module
-Output表示把编译好的class文件拷过来，前提是Modules页面已经正确配置。</li>
-<li>Module Sources表示把源代码拷过来。</li>
-<li>File、Directory
-Content分别表示把单个文件和整个目录的文件拷过来。</li>
-<li>Extracted
-Directory表示把压缩包（例如zip、jar）内容解压之后拷过来。</li>
-<li>JavaEE Facet Resources表示把Web项目的JSP等文件拷过来。</li>
-</ul>
-<p>如不熟悉配置，建议参照Eclipse的Deployment
-Assembly配置，并对比两个IDE生成出来的文件的结构。另外建议仔细检查和测试WEB-INF下面的配置，以免遗漏文件或者文件不更新（即第一次启动时复制过来了，后续这些文件即使修改过也未同步）。</p>
-<p>截至这里，Project
-Structure就大体上配置好了。可以检查项目结构是否正确识别，然后准备配置Run
-Configuration并启动项目。</p>
-<h1 id="稍微复杂一点">稍微复杂一点</h1>
-<p>以上是单模块的简单项目。下面让我们把项目结构弄复杂一点，使用两个Web项目和一个公共代码项目：</p>
-<pre class="line-numbers language-none"><code class="language-none">&gt; WebProj1                      ----&gt; Web项目1
-    &gt; src                       ----&gt; Java源代码1
-    .   ...
-    &gt; config                    ----&gt; 项目配置文件1
-    .   SpringMVC-servlet.xml
-    .   ...
-    &gt; WebContent                ----&gt; Web文件目录
-        &gt; WEB-INF
-        .   &gt; lib
-        .       ...
-        .   web.xml
-        .   ...
-        ...
-
-&gt; WebProj2                      ----&gt; Web项目2
-    &gt; src                       ----&gt; Java源代码2
-    .   ...
-    &gt; config                    ----&gt; 项目配置文件2
-    .   SpringMVC-servlet.xml
-    .   ...
-    &gt; WebContent                ----&gt; Web文件目录
-        &gt; WEB-INF
-        .   &gt; lib
-        .       ...
-        .   web.xml
-        .   ...
-        ...
-
-&gt; CommonProj                    ----&gt; 公共代码
-    &gt; src                       ----&gt; Java源代码
-    .   ...
-    &gt; commonConfig              ----&gt; 全局配置文件
-        ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>因为原理实际上是一样的，下面直接给出参考配置。</p>
-<h2 id="project-1">Project</h2>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/example2-1.png" alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<h2 id="libraries-1">Libraries</h2>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/example2-6.png" alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<h2 id="modules-1">Modules</h2>
-<p>一开始给出的Project可能是错误的，可以将其删除，然后重新添加。添加时点Import菜单来导入现有模块。由于WebProj1和WebProj2结构类似，下面只展示WebProj1的配置。</p>
-<p><img src="/img/2019-01-27-switch-to-idea-2/example2-2.png" alt="1" />
-<img src="/img/2019-01-27-switch-to-idea-2/example2-3.png" alt="2" />
-<img src="/img/2019-01-27-switch-to-idea-2/example2-4.png"
-alt="3" /></p>
-<p>如果启动时CommonProj提示缺少类，可能是CommonProj的Dependencies需要补jar包。如果WebProj缺少javax的类，那么它们两个的Dependencies需要补Tomcat。</p>
-<h2 id="facets-1">Facets</h2>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/example2-5.png" alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<h2 id="artifacts-1">Artifacts</h2>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/example2-7.png" alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<p>由图可见，因为CommonProj不是Web项目，无法单独启动，所以它没有单独的应用。全局配置文件则以“Directory
-Content”添加了过来。</p>
-<h1 id="run-configuration">Run Configuration</h1>
-<p>Project Structure配置好之后，就可以准备启动。点击IDEA界面右上角的“Add
-Configuration...”，或者“Run”菜单下面的“Edit
-Configurations”即可编辑启动设置。</p>
-<p>启动配置界面如下。我们需要先在左侧添加Tomcat（菜单需要翻页才能找到），然后在右面进行设置。</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/idea-run-1.png" alt="1" />
-<figcaption aria-hidden="true">1</figcaption>
-</figure>
-<p>如果Application
-server中没有应用服务器，或者版本与需求不一致，需要点击右边的Configure按钮配置应用服务器路径。其他设置按提示进行设置即可。</p>
-<p>“On frame
-deactivation”的行为有点类似Eclipse在保存代码时进行热部署。不过IDEA里面不需要点保存按钮，触发条件就变成了窗口失去焦点，例如在运行期间修改一段代码之后点一下Dock（Windows系统是点任务栏）或者切换到浏览器，IDEA就会自动编译和热部署。</p>
-<p>对话框下面是项目的构建步骤。构建至少要有两步，一个是编译Java代码（Build），另一个是打包（Build
-artifacts）。点击对话框上面的“Deployment”即可设置部署哪些应用：</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/idea-run-2.png" alt="2" />
-<figcaption aria-hidden="true">2</figcaption>
-</figure>
-<p>可部署应用与Project
-Structure的Artifacts关联，具体设置则和Eclipse类似：</p>
-<figure>
-<img src="/img/2019-01-27-switch-to-idea-2/eclipse-run.png" alt="2" />
-<figcaption aria-hidden="true">2</figcaption>
-</figure>
-<p>配置好之后即可点击运行按钮，确认项目能否启动。</p>
-<p>如果启动时候报错，提示找不到类，说明Project
-Structure里的Dependencies配置不完整，例如缺少某个jar包，或者项目间依赖关系配置不全，这种情况下需要回到Project
-Structure配置，检查并补充遗漏项。</p>
-<p>另外，如果缺少的是“javax.servlet.ServletContext”等类，则需要在Dependencies中添加“Library”，然后在弹出的对话框中选择Tomcat（或类似中间件）。</p>
-<h1 id="提交到版本控制">提交到版本控制</h1>
-<p>当Project
-Structure和启动设置配置完成，验证启动也没有问题，就可以将当前项目配置文件提交到版本控制，以便团队其他成员配置，也方便大家统一编辑器设置。</p>
-<h2 id="检查系统设置">检查系统设置</h2>
-<p>有些系统设置和具体项目有关，会随着项目文件一同保存，例如文件编码、代码风格、编译器设置等。在正式投入开发之前建议统一标准，挨个检查一下，将这些参数设置好，然后借助版本控制与大家分享。</p>
-<h2 id="提交配置文件">提交配置文件</h2>
-<p>如果项目使用Git，直接从GitHub上面取<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGh1Yi9naXRpZ25vcmUvYmxvYi9tYXN0ZXIvR2xvYmFsL0pldEJyYWlucy5naXRpZ25vcmU=">JetBrains.gitignore<i class="fa fa-external-link-alt"></i></span>，维护成.gitignore即可得知哪些文件应当提交。</p>
-<p>对于SVN项目，有一种比较快捷的方式是进入IDEA的Version
-Control窗口，检查其中未加入版本控制的文件。IDEA会自动隐藏.idea目录中不应当列入版本控制的文件，我们只需要根据实际需要提交展示出来的文件。</p>
-<h1 id="本系列目录">本系列目录</h1>
-<ul>
-<li><a href="/2018/12/12/switch-to-idea-0/">为什么进行切换</a></li>
-<li><a href="/2018/12/13/switch-to-idea-1/">切换的基本操作</a></li>
-<li><strong>传统Web项目在IDEA的Project Structure</strong></li>
-<li><a
-href="/2019/08/03/switch-to-idea-3/">传统Web项目转为Gradle项目</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>IDEA</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>作为非计算机专业的学生，如果只想考试及格以及过二级，如何学习C语言</title>
     <url>/2019/01/13/how-to-learn-c/</url>
     <content><![CDATA[<p>在学校上学的时候，曾经就这个问题专门给学弟们做过讲座，并且总结成了一篇文章。为了造福后辈，帮助后辈争取早日脱单，这里把以前写的内容修改一下发表出来，毕竟C语言课通常大一开，而且大一是提升妹子好感度，<span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL2Jhbmd1bWkvbWVkaWEvbWQ0MTg4Lw==">与其约会，使其娇羞<i class="fa fa-external-link-alt"></i></span>的关键时期。</p>
@@ -3333,6 +2812,299 @@ Store的门槛有点高。</li>
       </categories>
       <tags>
         <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从Eclipse切换到IDEA（二）：传统Web项目的Project Structure</title>
+    <url>/2019/01/27/switch-to-idea-2/</url>
+    <content><![CDATA[<p>本文主要介绍如何将传统Web项目（不使用Maven、Gradle等构建工具，jar包等全部手工配置）从Eclipse转换到IDEA。主要内容为传统项目的Project
+Structure配置。 <span id="more"></span></p>
+<h1
+id="关于idea中的project-structure和run-configuration">关于IDEA中的Project
+Structure和Run Configuration</h1>
+<p>Project Structure即项目结构。配置Project
+Structure大体上就是在告诉IDEA以下几件事：</p>
+<ol type="1">
+<li>项目用哪个JDK开发？</li>
+<li>项目由哪些模块组成？这些模块之间有什么关系？</li>
+<li>模块依赖哪些jar包？</li>
+<li>模块有哪些特征？（例如是Web项目）</li>
+<li>编译完成之后如何打包？</li>
+</ol>
+<p>Project Structure配置好之后就可以进行编译。</p>
+<p>Run
+Configuration则是启动配置。它在告诉IDEA编译完成之后如何运行那些代码，所以在编译时不是必需的，但运行时是必需的。</p>
+<h1 id="简单工程的project-structure">简单工程的Project Structure</h1>
+<p>以一个Helloworld级的SpringMVC项目为例。</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt; HelloSpringMVC
+    &gt; src                       ----&gt; Java源代码
+    .   &gt; com
+    .       &gt; example
+    .           &gt; hello
+    .               &gt; controller
+    .                   HelloController.java
+    .               ...
+    &gt; config                    ----&gt; 公共配置文件
+    .   SpringMVC-servlet.xml
+    .   ...
+    &gt; WebContent                ----&gt; Web文件目录
+        &gt; components
+        .   &gt; jquery
+        .   ...
+        &gt; WEB-INF
+        .   &gt; lib
+        .   .   commons-logging-1.2.jar
+        .   .   ...
+        .   &gt; page
+        .   .   init.jsp
+        .   .   ...
+        .   web.xml
+        ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>直接用IDEA打开项目所在目录（HelloSpringMVC），它会尝试将Eclipse项目转化为IDEA项目（两IDE的配置文件可以同时存在，不会相互冲突），但是自动识别的文件结构并不正确，所以我们仍然需要通过“File”下面的“Project
+Structure”菜单重新配置项目。</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/project-structure-0.png"
+alt="Project Structure对话框" />
+<figcaption aria-hidden="true">Project Structure对话框</figcaption>
+</figure>
+<p>下面介绍每个页签的设置。注意，我们并不需要把每个参数都设置一遍，也不会严格按照页面选项的顺序进行操作。</p>
+<h2 id="project">Project</h2>
+<p>这一页内容比较简单，需要设置项目名称、JDK路径、支持的Java版本以及编译输出文件路径。其中Project
+compiler
+output放在哪里都行，只是不要不小心把编译出来的垃圾提交到代码库中。</p>
+<h2 id="libraries">Libraries</h2>
+<p>本页管理的是“应用使用了哪些jar包”。这里相当于把应用所需jar包“打了个捆”来管理，以便后面配置工程依赖项。</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/idea-libraries.png"
+alt="Libraries" />
+<figcaption aria-hidden="true">Libraries</figcaption>
+</figure>
+<p>没有特殊需求的话，将装jar包的目录（WebContent/WEB-INF/lib）添加成lib即可。</p>
+<h2 id="modules">Modules</h2>
+<p>IDEA没有Workspace的概念。和Eclipse中Project差不多的东西叫“Module”。一堆Module组成了一个Project。因为两边都有Project这个词语，所以小心不要把自己绕进去。</p>
+<p>本页的作用是指出“项目由哪些模块构成”，有点像Eclipse里头的Build
+Path设置。另外Sources、Dependencies两个子页面也需要关注。</p>
+<h3 id="sources">Sources</h3>
+<p>Sources子页面的作用是指出“哪些是Java代码，哪些是资源文件，哪些是垃圾”。</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/idea-modules-1.png"
+alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/eclipse-modules-1.png"
+alt="2" />
+<figcaption aria-hidden="true">2</figcaption>
+</figure>
+<p>IDEA将目录分成五类（Mark
+as后面五个）。其中Sources表示需要正常编译的Java代码，Resources表示打包时需要附到一起的文件，而Excluded表示将目录排除。</p>
+<p>稍微提一下上图Eclipse里面的config，根据前面提到的文件结构，它并不是Java代码，在Eclipse里标记成Source
+Folder纯粹是为了便于查找。</p>
+<p>对于传统Web项目，Resources怎么标记都无所谓了，后面Artifacts配置正确就行。</p>
+<h3 id="dependencies">Dependencies</h3>
+<p>Dependencies子页面的作用是指出依赖关系（例如需要哪些jar包）。在依赖项管理上，IDEA和Eclipse也是既有相同之处也有不同之处。IDEA这边相当于把Eclipse的Projects、Libraries和Order
+and Export三个页签合并到一起了。</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/idea-modules-2.png"
+alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/eclipse-modules-2.png"
+alt="2" />
+<figcaption aria-hidden="true">2</figcaption>
+</figure>
+<p>这里面应当至少包含JDK（IDEA自动添加）、源代码中专门放jar包的目录和依赖的其他工程。如果使用了Tomcat和某些类，例如javax.servlet.ServletContext，我们还需要加入Tomcat。</p>
+<p>第一次设置时可能找不到所有依赖项，例如Library中没有Tomcat。我们可以先只配置一部分，等到后面设置Library甚至到编译运行出现编译错误时再回来继续配置依赖项。</p>
+<p>Scope表示依赖程度：</p>
+<ul>
+<li>默认是Compile，也就是编译和打包时都要跟着放进去。</li>
+<li>Runtime表示编译时不用编译，但后续运行时要跟着放在一起。</li>
+<li>Provided表示打包时候不用跟着打，Tomcat等Web容器会提供。</li>
+<li>Test表示只有测试时才参与。</li>
+</ul>
+<h2 id="facets">Facets</h2>
+<p>本页面表示模块“有哪些特征”（例如Web、Spring等）。正确设置“特征”之后IDEA便可识别相应的配置文件。</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/idea-facets.png" alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<p>本项目是个简单的Web项目，其“特征”只有Web。添加特征可以从Facets或Modules两个页面进行操作。</p>
+<p>对于Web项目，我们需要关注上面的“Web Module Deployment
+Descriptor”和下面的“Web Resources
+Directories”两个设置，前者表示web.xml所在位置，后者表示WebContent（即JSP等页面）的目录。</p>
+<p>如果中间件有特殊设置，例如通过Tomcat的context.xml设置了数据源，那么可以点击“Add
+Application Server specific
+descriptor”按钮添加自定义配置文件，这样启动Tomcat时会加载你配置的context.xml的内容。</p>
+<h2 id="artifacts">Artifacts</h2>
+<p>本页面表示“编译完成之后如何打包”。</p>
+<p>Eclipse中，类似功能是“Deployment Assembly”：</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/eclipse-artifacts.png"
+alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<p>回到IDEA。点加号可以看到多种打包方法。对于这个Web项目而言，建议选择“Web
+Application: Exploded”（散装，不打成war包）或“Web Application:
+Archive”（打成war包）。下面选择了散装：</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/idea-artifacts.png"
+alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<p>上图是已经配置好的结构。其中：</p>
+<ul>
+<li>'HelloSpringMVC' compile output表示编译好的class文件。</li>
+<li>lib表示项目所依赖的jar包。</li>
+<li>'HelloSpringMVC' module: 'Web' facet
+resources表示JSP等文件。需要在前面把Facets配置好才会出现。</li>
+<li>'config' directory contents通过加号里的“Directory
+Content”配置，表示把某个目录里的文件直接拷过来。</li>
+</ul>
+<p>生成的文件就在Output
+directory中。如果不考虑数据源等配置，你可以在启动之后把这个目录里的东西拷走然后直接部署。</p>
+<p>点击加号，可以看到以下几个菜单：</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/idea-artifacts-2.png"
+alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<p>这分别表示“要把哪种文件拷过来”：</p>
+<ul>
+<li>Library
+Files表示把jar包拷过来，前提是Libraries页面已经正确配置。</li>
+<li>Module
+Output表示把编译好的class文件拷过来，前提是Modules页面已经正确配置。</li>
+<li>Module Sources表示把源代码拷过来。</li>
+<li>File、Directory
+Content分别表示把单个文件和整个目录的文件拷过来。</li>
+<li>Extracted
+Directory表示把压缩包（例如zip、jar）内容解压之后拷过来。</li>
+<li>JavaEE Facet Resources表示把Web项目的JSP等文件拷过来。</li>
+</ul>
+<p>如不熟悉配置，建议参照Eclipse的Deployment
+Assembly配置，并对比两个IDE生成出来的文件的结构。另外建议仔细检查和测试WEB-INF下面的配置，以免遗漏文件或者文件不更新（即第一次启动时复制过来了，后续这些文件即使修改过也未同步）。</p>
+<p>截至这里，Project
+Structure就大体上配置好了。可以检查项目结构是否正确识别，然后准备配置Run
+Configuration并启动项目。</p>
+<h1 id="稍微复杂一点">稍微复杂一点</h1>
+<p>以上是单模块的简单项目。下面让我们把项目结构弄复杂一点，使用两个Web项目和一个公共代码项目：</p>
+<pre class="line-numbers language-none"><code class="language-none">&gt; WebProj1                      ----&gt; Web项目1
+    &gt; src                       ----&gt; Java源代码1
+    .   ...
+    &gt; config                    ----&gt; 项目配置文件1
+    .   SpringMVC-servlet.xml
+    .   ...
+    &gt; WebContent                ----&gt; Web文件目录
+        &gt; WEB-INF
+        .   &gt; lib
+        .       ...
+        .   web.xml
+        .   ...
+        ...
+
+&gt; WebProj2                      ----&gt; Web项目2
+    &gt; src                       ----&gt; Java源代码2
+    .   ...
+    &gt; config                    ----&gt; 项目配置文件2
+    .   SpringMVC-servlet.xml
+    .   ...
+    &gt; WebContent                ----&gt; Web文件目录
+        &gt; WEB-INF
+        .   &gt; lib
+        .       ...
+        .   web.xml
+        .   ...
+        ...
+
+&gt; CommonProj                    ----&gt; 公共代码
+    &gt; src                       ----&gt; Java源代码
+    .   ...
+    &gt; commonConfig              ----&gt; 全局配置文件
+        ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>因为原理实际上是一样的，下面直接给出参考配置。</p>
+<h2 id="project-1">Project</h2>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/example2-1.png" alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<h2 id="libraries-1">Libraries</h2>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/example2-6.png" alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<h2 id="modules-1">Modules</h2>
+<p>一开始给出的Project可能是错误的，可以将其删除，然后重新添加。添加时点Import菜单来导入现有模块。由于WebProj1和WebProj2结构类似，下面只展示WebProj1的配置。</p>
+<p><img src="/img/2019-01-27-switch-to-idea-2/example2-2.png" alt="1" />
+<img src="/img/2019-01-27-switch-to-idea-2/example2-3.png" alt="2" />
+<img src="/img/2019-01-27-switch-to-idea-2/example2-4.png"
+alt="3" /></p>
+<p>如果启动时CommonProj提示缺少类，可能是CommonProj的Dependencies需要补jar包。如果WebProj缺少javax的类，那么它们两个的Dependencies需要补Tomcat。</p>
+<h2 id="facets-1">Facets</h2>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/example2-5.png" alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<h2 id="artifacts-1">Artifacts</h2>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/example2-7.png" alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<p>由图可见，因为CommonProj不是Web项目，无法单独启动，所以它没有单独的应用。全局配置文件则以“Directory
+Content”添加了过来。</p>
+<h1 id="run-configuration">Run Configuration</h1>
+<p>Project Structure配置好之后，就可以准备启动。点击IDEA界面右上角的“Add
+Configuration...”，或者“Run”菜单下面的“Edit
+Configurations”即可编辑启动设置。</p>
+<p>启动配置界面如下。我们需要先在左侧添加Tomcat（菜单需要翻页才能找到），然后在右面进行设置。</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/idea-run-1.png" alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<p>如果Application
+server中没有应用服务器，或者版本与需求不一致，需要点击右边的Configure按钮配置应用服务器路径。其他设置按提示进行设置即可。</p>
+<p>“On frame
+deactivation”的行为有点类似Eclipse在保存代码时进行热部署。不过IDEA里面不需要点保存按钮，触发条件就变成了窗口失去焦点，例如在运行期间修改一段代码之后点一下Dock（Windows系统是点任务栏）或者切换到浏览器，IDEA就会自动编译和热部署。</p>
+<p>对话框下面是项目的构建步骤。构建至少要有两步，一个是编译Java代码（Build），另一个是打包（Build
+artifacts）。点击对话框上面的“Deployment”即可设置部署哪些应用：</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/idea-run-2.png" alt="2" />
+<figcaption aria-hidden="true">2</figcaption>
+</figure>
+<p>可部署应用与Project
+Structure的Artifacts关联，具体设置则和Eclipse类似：</p>
+<figure>
+<img src="/img/2019-01-27-switch-to-idea-2/eclipse-run.png" alt="2" />
+<figcaption aria-hidden="true">2</figcaption>
+</figure>
+<p>配置好之后即可点击运行按钮，确认项目能否启动。</p>
+<p>如果启动时候报错，提示找不到类，说明Project
+Structure里的Dependencies配置不完整，例如缺少某个jar包，或者项目间依赖关系配置不全，这种情况下需要回到Project
+Structure配置，检查并补充遗漏项。</p>
+<p>另外，如果缺少的是“javax.servlet.ServletContext”等类，则需要在Dependencies中添加“Library”，然后在弹出的对话框中选择Tomcat（或类似中间件）。</p>
+<h1 id="提交到版本控制">提交到版本控制</h1>
+<p>当Project
+Structure和启动设置配置完成，验证启动也没有问题，就可以将当前项目配置文件提交到版本控制，以便团队其他成员配置，也方便大家统一编辑器设置。</p>
+<h2 id="检查系统设置">检查系统设置</h2>
+<p>有些系统设置和具体项目有关，会随着项目文件一同保存，例如文件编码、代码风格、编译器设置等。在正式投入开发之前建议统一标准，挨个检查一下，将这些参数设置好，然后借助版本控制与大家分享。</p>
+<h2 id="提交配置文件">提交配置文件</h2>
+<p>如果项目使用Git，直接从GitHub上面取<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGh1Yi9naXRpZ25vcmUvYmxvYi9tYXN0ZXIvR2xvYmFsL0pldEJyYWlucy5naXRpZ25vcmU=">JetBrains.gitignore<i class="fa fa-external-link-alt"></i></span>，维护成.gitignore即可得知哪些文件应当提交。</p>
+<p>对于SVN项目，有一种比较快捷的方式是进入IDEA的Version
+Control窗口，检查其中未加入版本控制的文件。IDEA会自动隐藏.idea目录中不应当列入版本控制的文件，我们只需要根据实际需要提交展示出来的文件。</p>
+<h1 id="本系列目录">本系列目录</h1>
+<ul>
+<li><a href="/2018/12/12/switch-to-idea-0/">为什么进行切换</a></li>
+<li><a href="/2018/12/13/switch-to-idea-1/">切换的基本操作</a></li>
+<li><strong>传统Web项目在IDEA的Project Structure</strong></li>
+<li><a
+href="/2019/08/03/switch-to-idea-3/">传统Web项目转为Gradle项目</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+      <tags>
+        <tag>IDEA</tag>
       </tags>
   </entry>
   <entry>
@@ -3822,206 +3594,231 @@ id="更致命的问题有必要全部自己开发吗">更致命的问题——�
       </tags>
   </entry>
   <entry>
-    <title>并不简单的基础开发工作（二）：信息展示列表</title>
-    <url>/2019/02/09/list-page/</url>
-    <content><![CDATA[<p>本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。
+    <title>从Eclipse切换到IDEA（一）：切换操作</title>
+    <url>/2018/12/13/switch-to-idea-1/</url>
+    <content><![CDATA[<p>本文主要介绍IDEA的操作方法。为了避免出现复杂问题，本文假设项目已经事先配置好，而且配置文件加到了版本控制中，其他人只要下载代码就可以直接用IDEA打开。
 <span id="more"></span></p>
-<h1 id="需求">需求</h1>
-<p>本文只讨论一个页面：学生信息管理系统中的学生列表页面，大体上样式如下（PC浏览器）</p>
-<p>身份证号码：<input type="text"> 姓名：<input type="text">
-学号：<input type="text">
-<button type="button">查找</button><button type="button">重置</button></p>
-<button type="button">
-添加学生
-</button>
+<h1 id="初始化配置">初始化配置</h1>
+<p>下面只讲Windows的操作方法（尽管截图是macOS）。对于Linux或苹果用户而言，我觉得既然能使用这两种系统，就说明不太需要这种详细教程吧。</p>
+<h2 id="安装idea">安装IDEA</h2>
+<p>IDEA可以从<span class="exturl" data-url="aHR0cHM6Ly93d3cuamV0YnJhaW5zLmNvbS9pZGVhL2Rvd25sb2FkLw==">官网<i class="fa fa-external-link-alt"></i></span>下载，下载完成之后只要下一步下一步地操作就行。如果没钱买正版，请从<span class="exturl" data-url="aHR0cHM6Ly93d3cuamV0YnJhaW5zLmNvbS9pZGVhL2Rvd25sb2FkL3ByZXZpb3VzLmh0bWw=">这里<i class="fa fa-external-link-alt"></i></span>找个稍微旧一点的版本，因为太新的版本可能没有破解工具或激活码。</p>
+<p>安装结束后，如果没给JetBrains公司掏过钱，那么还需要从网上搜一下激活工具进行激活。</p>
+<h2 id="安装svn客户端">安装SVN客户端</h2>
+<p>SVN客户端推荐使用<span class="exturl" data-url="aHR0cHM6Ly90b3J0b2lzZXN2bi5uZXQvZG93bmxvYWRzLmh0bWw=">TortoiseSVN<i class="fa fa-external-link-alt"></i></span>，因为和系统整合得比较好。安装时注意把“Command
+Line Tool”也安装上，否则后面IDEA和SVN配置会比较麻烦。</p>
+<h1 id="项目配置">项目配置</h1>
+<p>下面假设项目代码库内已经有统一配置，后续会专门解释如何从头开始配置。</p>
+<p>第一次打开项目时，系统需要花一段时间去建立索引，而第一次启动时系统也要花时间去编译和复制文件，但是这两项工作完成以后响应就比较快了。</p>
+<p>在开始工作之前，需要检查和调整系统与项目的设置，例如SVN、JDK和Tomcat的路径。如果项目使用GBK等编码，还需要检查字符编码设置：</p>
+<h2 id="svn路径">SVN路径</h2>
+<p>点击File下面的Settings菜单，进入系统设置界面，选择“Version
+Control”下面的“Subversion”，在右侧设置中进行SVN路径的设置。找到SVN的安装目录，然后去里面找bin和svn.exe。如果没有发现svn.exe，说明你在安装TortoiseSVN时未安装命令行工具，需要重新安装。</p>
+<figure>
+<img src="/img/2018-12-01-switch-to-idea-1/svnconfig.png"
+alt="SVN设置" />
+<figcaption aria-hidden="true">SVN设置</figcaption>
+</figure>
+<h2 id="jdk路径">JDK路径</h2>
+<p>点击File下面的Project
+Structure菜单，在弹出的对话框中选择左面的“Project”，可以看到类似下面的图：</p>
+<figure>
+<img src="/img/2018-12-01-switch-to-idea-1/structure.png"
+alt="Project Structure" />
+<figcaption aria-hidden="true">Project Structure</figcaption>
+</figure>
+<p>图中Project SDK为空，所以需要添加项目所使用的JDK，而且Project
+language level选择项目所用的JDK版本。下面Project compiler
+output则是项目编译之后文件的存放位置，只要别提交到SVN上面，放在哪里其实都无所谓，不过一定要设置，否则无法启动。</p>
+<h2 id="tomcat路径">Tomcat路径</h2>
+<p>点击Run下面的Edit
+Configuration菜单，进入启动设置界面，如下图所示：</p>
+<figure>
+<img src="/img/2018-12-01-switch-to-idea-1/tomcat-1.png"
+alt="缺少Tomcat" />
+<figcaption aria-hidden="true">缺少Tomcat</figcaption>
+</figure>
+<p>点击Tomcat右边的Configure按钮，选择Tomcat安装路径：</p>
+<figure>
+<img src="/img/2018-12-01-switch-to-idea-1/tomcat-2.png"
+alt="Tomcat设置" />
+<figcaption aria-hidden="true">Tomcat设置</figcaption>
+</figure>
+<p>如果路径正确，IDEA会给出Tomcat的版本。</p>
+<p>若有自定义的context.xml并在其中指定了数据源，那么还要在Tomcat的lib目录中加入相应的数据库驱动，例如<span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS90ZWNobmV0d29yay9hcHBzLXRlY2gvamRiYy0xMTIwMTAtMDkwNzY5Lmh0bWw=">ojdbc6.jar<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="字符编码">字符编码</h2>
+<p>默认字符编码是UTF-8。如果项目使用GB2312、GBK、GB18030这种编码，需要在系统设置“Editor”里的“File
+Encodings”设置默认编码。</p>
+<h1 id="日常工作">日常工作</h1>
+<h2 id="保存">保存</h2>
+<p>默认情况下IDEA会自动保存文件修改，所以在IDEA里面不需要按Ctrl+S，也找不到保存按钮。如果不希望自动保存的话，可以在系统设置里面把它关掉。</p>
+<h2 id="快捷键">快捷键</h2>
+<p>快捷键可以从菜单上面查看，下面列举几个默认而且最常用的按键设置：</p>
 <table>
 <colgroup>
-<col style="width: 12%" />
-<col style="width: 8%" />
-<col style="width: 7%" />
-<col style="width: 7%" />
-<col style="width: 9%" />
-<col style="width: 6%" />
-<col style="width: 8%" />
-<col style="width: 9%" />
-<col style="width: 6%" />
-<col style="width: 6%" />
-<col style="width: 7%" />
-<col style="width: 9%" />
-<col style="width: 5%" />
+<col style="width: 49%" />
+<col style="width: 26%" />
+<col style="width: 23%" />
 </colgroup>
 <thead>
-<tr class="header">
-<th>序号</th>
-<th>身份证号码</th>
-<th>姓名</th>
-<th>性别</th>
-<th>民族</th>
-<th>户籍省份</th>
-<th>市</th>
-<th>区县</th>
-<th>出生日期</th>
-<th>学院</th>
-<th>班级</th>
-<th>学号</th>
-<th>联系电话</th>
+<tr>
+<th>功能</th>
+<th>Eclipse按键</th>
+<th>IDEA按键</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td>1</td>
-<td>1234...78</td>
-<td>一花</td>
-<td>女</td>
-<td>汉族</td>
-<td>北京市</td>
-<td>西城区</td>
+<tr>
+<td>全局搜索字符串</td>
+<td>Ctrl+H</td>
+<td>Ctrl+Shift+F</td>
+</tr>
+<tr>
+<td>全局替换字符串</td>
 <td></td>
-<td>19XX年X月X日</td>
-<td>计算机与软件工程学院</td>
-<td>软件1901</td>
-<td>201901010101</td>
-<td>13012345678</td>
+<td>Ctrl+Shift+R</td>
 </tr>
-<tr class="even">
-<td>2</td>
-<td>1234...79</td>
-<td>二乃</td>
-<td>女</td>
-<td>汉族</td>
-<td>上海市</td>
-<td>黄浦区</td>
-<td></td>
-<td>19XX年X月X日</td>
-<td>计算机与软件工程学院</td>
-<td>软件1901</td>
-<td>201901010102</td>
-<td>13012345679</td>
+<tr>
+<td>快速修复（设置Getter和Setter、设置import等）</td>
+<td>Ctrl+1</td>
+<td>Alt+Enter</td>
 </tr>
-<tr class="odd">
-<td>3</td>
-<td>1234...80</td>
-<td>三玖</td>
-<td>女</td>
-<td>汉族</td>
-<td>广东省</td>
-<td>广州市</td>
-<td>越秀区</td>
-<td>19XX年X月X日</td>
-<td>计算机与软件工程学院</td>
-<td>软件1901</td>
-<td>201901010103</td>
-<td>13012345680</td>
+<tr>
+<td>清理多余import</td>
+<td>Ctrl+Shift+O</td>
+<td>Ctrl+Alt+O</td>
 </tr>
-<tr class="even">
-<td>4</td>
-<td>1234...81</td>
-<td>四叶</td>
-<td>女</td>
-<td>汉族</td>
-<td>浙江省</td>
-<td>杭州市</td>
-<td>西湖区</td>
-<td>19XX年X月X日</td>
-<td>计算机与软件工程学院</td>
-<td>软件1901</td>
-<td>201901010104</td>
-<td>13012345681</td>
+<tr>
+<td>根据文件名找文件</td>
+<td>Ctrl+Shift+R</td>
+<td>按两下Shift</td>
 </tr>
-<tr class="odd">
-<td>5</td>
-<td>1234...82</td>
-<td>五月</td>
-<td>女</td>
-<td>汉族</td>
-<td>江苏省</td>
-<td>南京市</td>
-<td>鼓楼区</td>
-<td>19XX年X月X日</td>
-<td>计算机与软件工程学院</td>
-<td>软件1901</td>
-<td>201901010105</td>
-<td>13012345682</td>
+<tr>
+<td>查看变量定义/函数使用情况</td>
+<td>Ctrl+点击</td>
+<td>Ctrl+点击</td>
+</tr>
+<tr>
+<td>查看实现</td>
+<td>Ctrl+点击，或者在函数上面按住Ctrl，在弹出菜单中选择“Open
+Implementation”</td>
+<td>Ctrl+Alt+点击</td>
+</tr>
+<tr>
+<td>格式化</td>
+<td>Ctrl+Shift+F</td>
+<td>Ctrl+Alt+L</td>
+</tr>
+<tr>
+<td>单步执行，碰到函数就进到函数内部</td>
+<td>F5</td>
+<td>F7</td>
+</tr>
+<tr>
+<td>单步执行，碰到函数直接返回结果</td>
+<td>F6</td>
+<td>F8</td>
+</tr>
+<tr>
+<td>运行到当前函数的return部分</td>
+<td>F7</td>
+<td>Shift+F8</td>
+</tr>
+<tr>
+<td>暂停之后继续运行程序</td>
+<td>F8</td>
+<td>F9</td>
 </tr>
 </tbody>
 </table>
-<p>每页显示<select><option>10</option><option>20</option><option>50</option><option>100</option></select>条，共49条
-<button type="button">首页</button>
-<button type="button">上一页</button>
-<select><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>/5页
-<button type="button">下一页</button>
-<button type="button">尾页</button></p>
-<h1 id="原理">原理</h1>
-<p>列表页面的原理比较简单，不考虑分页的话，<code>SELECT idcard, name, gender, ... FROM students WHERE 一些条件</code>，然后将查出来的结果全部展示到页面即可。但是加上分页之后逻辑会复杂很多，因此建议事先将分页功能封装成公共函数或组件（本文不再讨论分页的实现方式）。</p>
-<p>对于有固定取值的数据（性别、省市县、学院等），建议准备专门的字典表或配置文件，展示时从字典中取值。建议将读取字典数据也维护成公共函数或组件。</p>
-<h1 id="设计方面的问题">设计方面的问题</h1>
-<h2 id="屏幕分辨率">屏幕分辨率</h2>
-<p>开发人员经常使用大显示器，分辨率比较高，而用户的显示器五花八门，有大有小，甚至在当今这个满街液晶显示屏的时代仍然使用大脑袋瓜子的1024x768
-CRT显示器。因此，设计页面时要考虑多种显示器宽度和高度，例如采用响应式布局，或者去除不必要的东西，或者加水平滚动条，总之要避免让窄屏用户看到像本博客上面那样“东西装不下”的页面效果。</p>
-<p>如果你的显示器分辨率比较高，建议把一些常用的宽度和高度测量好，贴在你的显示器上，并且在调试的时候测试不同尺寸的浏览器窗口。</p>
-<h2 id="不清楚实际数据规模">不清楚实际数据规模</h2>
-<p>一个班级大约有二三十人，而一个年级会有几十至几百人，一个学校可能超过上万人。如果不考虑实际数据规模，设计和实现出来的东西有可能会使用户困扰，例如没有分页（然后把全校上万人全部展示出来）、缺少导入功能（上万人信息需要一个一个地录入）和批量操作功能（上万工作单需要一个一个地提交）。</p>
-<p>即使故意要求给用户增加障碍，例如审核工作单时必须一个一个地操作，我们其实也可以设法在不违反原则的前提下给用户提供一些便利，例如审核完成后自动跳转到下一工作单，并提醒还有多少工作单未处理，而用户不想处理的单子也可以轻松跳过。</p>
-<h2 id="没有搜索搜索条件不足">没有搜索/搜索条件不足</h2>
-<p>数据很多的时候，应当给用户提供搜索功能，便于很快从大量数据中找到需要的内容。另外设计查询条件时要了解用户希望如何定位数据，避免漏掉常用条件或提供很多多余条件，例如去营业厅查电话费，以身份证或手机号中的前几位或后几位作为查询条件比较靠谱，而用姓名和性别作为条件就不靠谱。</p>
-<p>对于上面的表单来说，查询条件里便缺少学院、班级和学号，并且身份证号和学号最好是模糊查询，因为除了学生本人以外很少有人能把这些号码记得一个数字都不差，而且就算拿着本人身份证或学生证，敲数字也挺麻烦的。</p>
-<h2 id="排序">排序</h2>
-<p>展示数据最好排个顺序（默认排序顺序应当取决于用户经常做什么事情），而且要让用户能选择给哪一列排序，例如拿学生名单核对数据时会希望按学号排序，找人的时候会希望按姓名拼音排序，统计生源地时会希望按出生地排序……数据库里面什么顺序就展示什么顺序的话，没准会让用户头大。</p>
-<h2 id="个人隐私">个人隐私</h2>
-<p>身份证号、手机号等数据属于个人隐私，没有必要的话不要随意展示给用户。如果确实需要展示，建议考虑脱敏处理（即使本人录入的也是，谁敢说不会盗号呢），例如130****5678。</p>
-<h2 id="展示逻辑删除的数据">展示逻辑删除的数据</h2>
-<p>对于删除的数据，无论是物理删除还是逻辑删除，只要删除就没必要再展示给用户了（除非另外设计“回收站”功能）。例如上面表单中有一个“状态”，如果“删除”的操作只是把这个“状态”由有效变成无效，那么建议直接去掉本列，而且使“无效”的数据不再呈现。</p>
-<h1 id="实现方面的问题">实现方面的问题</h1>
-<h2 id="跨站脚本攻击">跨站脚本攻击</h2>
-<p>举个例子，在数据库里维护一个名字叫<code>张三&lt;script&gt;alert('xss');&lt;/script&gt;</code>的学生，若加载页面时弹出个窗口，说明页面有跨站脚本攻击的风险。</p>
-<p>跨站脚本攻击对策有多种，建议用比较彻底的一种：将页面上的动态输出设置为默认转义。换句话讲，用<code>&lt;%= name %&gt;</code>这类模板输出内容时，让模板引擎默认自动将其中的HTML代码转义，这样在页面上展示的就是<code>张三&lt;script&gt;alert('xss');&lt;/script&gt;</code>而非张三和一个弹框。（不过前提是模板引擎支持。如果不支持，那么建议做一个统一的转义标记，并要求输出用那个统一标记）</p>
-<h2 id="性能">性能</h2>
-<p>查询要注意性能问题。例如</p>
-<h3 id="数据库索引">数据库索引</h3>
-<p>如果该建索引的地方没建索引，或者SQL写得很糟糕，根本没走索引，那么查询速度自然会变慢。</p>
-<h3 id="分页">分页</h3>
-<p>以Oracle为例</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token punctuation">(</span>
-    <span class="token keyword">SELECT</span> s<span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span>ROWNUM rn <span class="token keyword">FROM</span> <span class="token punctuation">(</span>
-        <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> students <span class="token keyword">where</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">)</span> s <span class="token keyword">WHERE</span> rownum<span class="token operator">&lt;=</span><span class="token number">10000000</span><span class="token operator">+</span><span class="token number">10</span>
-<span class="token punctuation">)</span> <span class="token keyword">WHERE</span> rn<span class="token operator">>=</span><span class="token number">10000000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>的效率要比</p>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> students <span class="token keyword">WHERE</span> ROWID <span class="token operator">IN</span> <span class="token punctuation">(</span>
-    <span class="token keyword">SELECT</span> id <span class="token keyword">FROM</span> <span class="token punctuation">(</span>
-        <span class="token keyword">SELECT</span> s<span class="token punctuation">.</span>ROWID id<span class="token punctuation">,</span> s<span class="token punctuation">.</span>ROWNUM n <span class="token keyword">FROM</span> <span class="token punctuation">(</span>
-            <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> students <span class="token keyword">WHERE</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-        <span class="token punctuation">)</span> s <span class="token keyword">WHERE</span> rownum<span class="token operator">&lt;=</span><span class="token number">10000000</span><span class="token operator">+</span><span class="token number">10</span>
-    <span class="token punctuation">)</span> <span class="token keyword">WHERE</span> n<span class="token operator">>=</span><span class="token number">10000000</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>低一些，因此建议按后者查询。</p>
-<h3 id="反复查数据库">反复查数据库</h3>
-<p>出生地、民族等字典数据可能也存放在数据库中。如果每次获取取值都查一遍数据库（特别是循环里面查数据库）会非常影响性能。由于字典数据变化并不频繁，建议将此类数据做成缓存，一次性从数据库查好并缓存之后就直接从缓存里面取值。</p>
-<p>缓存会有缓存时效以及线程安全等问题，这里不再展开讨论。</p>
-<h3 id="模糊查询">模糊查询</h3>
-<p>模糊查询，特别是双“%”（<code>LIKE '%字符%'</code>）会影响性能，如果不能去掉模糊查询功能，那么要控制好条件，避免大幅度的表扫描。</p>
-<h2 id="越权访问">越权访问</h2>
-<p>假如查看的链接是“/students/view.do?id=10001”，那么将id=10001改成不属于你的10002，你能否看到数据呢？如果能，说明存在漏洞，应当在查数据时附上身份验证（例如在SQL加上是创建者本人的查询条件），确保用户只能看到自己的数据。</p>
-<h2 id="拒绝服务">拒绝服务</h2>
-<p>假如查询查出总共10000条数据（当然是把分页之后的数据合到一起），你能否通过修改请求的方式让每页展示10000条数据？如果能展示，而且性能开销还不小，那么别人也可以用类似的方法使系统变慢甚至瘫痪。</p>
-<p>你的查询耗时长吗？如果耗时比较长，而且SQL层面的优化已经做得很到位，无法再进一步提高效率，那么建议增加按钮变灰（点一下查询按钮之后就无法再点击，直到查询完成）、动画反馈（Loading...）和限制操作频率（例如禁止频繁操作，或要求先输入验证码再查询）等措施，以免用户频繁提交影响系统整体性能。</p>
-<h2 id="sql注入">SQL注入</h2>
-<p>老生常谈的问题，不再详细讨论。假如你在某个查询条件框输入<code>' or '1'='1</code>却能查出很多数据，那么你要赶紧补漏洞了。</p>
-<h2 id="未防止误操作">未防止误操作</h2>
-<p>删除是一个“有危险性”的操作，如果删除之后重建比较麻烦，那么当用户点击“删除”按钮时，系统最好不要直接执行删除，而是弹出一个提示框，让用户确认无误之后再删，以免用户误操作。提交工作单（提交成功之后就不能再修改内容了）之类的“重大”操作也是如此。</p>
+<p>如果习惯了Eclipse的按键，也可以将快捷键调成Eclipse模式。具体方法是找到系统设置中的“Keymap”，然后在右面的设置中选择“Eclipse”方案，这样各功能快捷键就和Eclipse一致了。</p>
+<h2 id="调试">调试</h2>
+<p>在第一次调试时，建议检查一下启动配置是否符合自己需要。</p>
+<figure>
+<img src="/img/2018-12-01-switch-to-idea-1/debug-1.png"
+alt="启动配置" />
+<figcaption aria-hidden="true">启动配置</figcaption>
+</figure>
+<p>和Eclipse一样，如果想使用断点调试等功能，需要用虫子按钮而非普通的启动按钮来启动应用。点击启动之后，IDEA会进行编译并生成Web相关文件（见上图下侧Before
+launch部分，实际上IDEA之所以做这两件事是因为你在启动设置里面设置了Build和Build
+artifacts这两步操作），准备完成之后便会自动启动Tomcat。</p>
+<p>另外也可以直接启动某一个类。启动之前那个类需要有一个静态的main函数，而且相关的配置文件要放对地方（例如src下面）。</p>
+<h2 id="版本控制">版本控制</h2>
+<p>版本控制通常在IDEA的Version
+Control窗口中进行。如果未发现这个窗口，可点击“View”菜单下面“Tool
+Buttons”，然后检查窗口下面的工具栏按钮。</p>
+<p>除了在Version
+Control窗口以外，也可以对着文件或代码点鼠标右键，在弹出的版本管理相关菜单上面进行操作。</p>
+<h3 id="changelist">Changelist</h3>
+<p>IDEA的Version
+Control窗口可以很直观地列出你所进行的修改。如果发现修改未同步到列表中，可以点击左面的刷新按钮刷新一下（如果是新增文件，需要检查一下有没有将其加入到版本控制中）。</p>
+<p>代码修改会以“Changelist”的形式组织。举个例子，假如修改了10个文件，有4个文件是为了处理问题A，有3个文件是为了处理问题B，而剩下3个文件是临时修改，不打算提交，这样可以建立三个Changelist（右击然后点击New
+changelist菜单），将三组文件分别拖拽到三个Changelist中，这样检查和提交的时候可以按Changelist分组进行。</p>
+<figure>
+<img src="/img/2018-12-01-switch-to-idea-1/changelist-1.png"
+alt="Changelist可以直观地列出你的代码改动，并根据实际需要分组管理。如果未及时刷新状态，可点击左面的刷新按钮。" />
+<figcaption
+aria-hidden="true">Changelist可以直观地列出你的代码改动，并根据实际需要分组管理。如果未及时刷新状态，可点击左面的刷新按钮。</figcaption>
+</figure>
+<h3 id="提交代码与回退">提交代码与回退</h3>
+<p>当准备进行提交时，只要在Version
+Control窗口对着Changelist或待提交文件（按Ctrl键多选）点右键，选择Commit，就会看到提交代码的窗口。</p>
+<p>相反地，如果需要撤销更改，选择Revert菜单即可。</p>
+<figure>
+<img src="/img/2018-12-01-switch-to-idea-1/changelist-2.png"
+alt="检查待提交文件列表和内容，输入摘要，点击Commit提交。" />
+<figcaption
+aria-hidden="true">检查待提交文件列表和内容，输入摘要，点击Commit提交。</figcaption>
+</figure>
+<h4 id="针对新开发者的提醒">针对新开发者的提醒</h4>
+<p>以下内容转载自<span class="exturl" data-url="aHR0cHM6Ly9wcm9ncmFtLXRoaW5rLmJsb2dzcG90LmNvbS8yMDA5LzAyLzYuaHRtbA==">编程随想的博客<i class="fa fa-external-link-alt"></i></span>：</p>
+<pre class="line-numbers language-none"><code class="language-none">据俺多年的观察，发觉 RCS（备注：版本管理软件）主要有如下几种误用的情况：
+
+◇不正确的提交频度
+　　有很多新手不习惯使用 RCS，很少进行代码的提交。有些人甚至到项目快结束时还没有提交过一行代码。结果导致整个 RCS 形同虚设。
+　　还有一些人则走向另一个极端，频繁提交代码。有些人每改完一个文件就提交一次，还有些人甚至把修改一半，尚【不能】编译通过的代码也提交到 RCS。
+　　俺个人认为，正确的提交频度应该分两种情况：在编写功能代码时，每完成一个功能点，并且自己经过了自测之后，提交一次；在调试的时候，每修复一个 bug，提交一次。这样能够保证提交到 RCS 的代码都是【能编译通过】的（详见[每日构建系列](https:&#x2F;&#x2F;program-think.blogspot.com&#x2F;2009&#x2F;02&#x2F;daily-build-0-overview.html)），并且业务逻辑上也是相对完整的（对于每日构建后的测试很重要）。
+
+◇提交时不写注释
+　　很多人提交代码时不写注释，将来再想到版本历史里面找代码就犹如大海捞针般困难。
+　　比如在俺经手的代码中，有些源代码文件历时3年，提交次数上百次，如果提交时不写注释，日后根本没法找。
+
+◇不做代码基线（Baseline）、不做代码分支（Branch）
+　　在正规的开发团队，每当有一个版本发布（Release）并交付给用户使用时，都需要在 RCS 中制作一个基线，以便于进行相应的 bug 跟踪和补丁制作。因此，诸如【做基线】之类的事情，属于整个团队的集体行为，需要由 Team Leader 牵头来搞。
+　　假如一个开发团队从来不做代码基线或者代码分支，仅仅是把 RCS 当成一个源文件的备份工具来用，那至少说明这个团队的 Team Leader 在软件工程管理方面非常失败。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="查看文件提交历史">查看文件提交历史</h3>
+<p>对着文件点击右键，选择“Subversion”里面的“Show
+History”，即可在下面的Version
+Control窗口看到文件的提交历史。对着版本点击右键，选择“Show
+Diff”，即可看到某个版本是哪个人进行了哪些修改。</p>
+<p>除SVN提交历史外，也可以查看文件的本地编辑历史。假如不慎错误地修改了某些内容，又不方便直接回退文件，可对着文件点右键，找到“Local
+History”，查看本地的历史记录以便恢复。</p>
+<h3 id="查看代码库版本变更记录">查看代码库版本变更记录</h3>
+<p>Version
+Control第一个页签是你的待提交修改，第二个页签就是其他人已经提交的修改。如果没有看到提交记录，点击刷新按钮即可。</p>
+<p>在变更记录窗口中，你可以选择提交记录，查看某一次提交涉及的修改内容。如果需要多版本审查，可以按Ctrl多选，右侧变更记录会将多条提交合并在一起。</p>
+<!--## 数据库操作
+IDEA Ultimate版内置了DataGrip插件。
+-->
+<h1 id="参见">参见</h1>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuamV0YnJhaW5zLmNvbS9oZWxwL2lkZWEvbWlncmF0aW5nLWZyb20tZWNsaXBzZS10by1pbnRlbGxpai1pZGVhLmh0bWw=">Migrating
+From Eclipse to IntelliJ IDEA<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
 <h1 id="本系列目录">本系列目录</h1>
-<ol type="1">
-<li><a href="/2019/02/08/login-page/">登录页面</a></li>
-<li><strong>信息展示列表</strong></li>
-<li><a href="/2019/09/21/edit-page/">信息录入表单</a></li>
-<li>业务申办-审批流程</li>
-</ol>
+<ul>
+<li><a href="/2018/12/12/switch-to-idea-0/">为什么进行切换</a></li>
+<li><strong>切换的基本操作</strong></li>
+<li><a href="/2019/01/27/switch-to-idea-2">传统Web项目在IDEA的Project
+Structure</a></li>
+<li><a
+href="/2019/08/03/switch-to-idea-3/">传统Web项目转为Gradle项目</a></li>
+</ul>
 ]]></content>
       <categories>
-        <category>项目管理</category>
+        <category>教程</category>
       </categories>
       <tags>
-        <tag>功能设计</tag>
+        <tag>IDEA</tag>
       </tags>
   </entry>
   <entry>
@@ -4315,6 +4112,209 @@ href="tw.manhuagui.com">https://tw.manhuagui.com</a>网站扒漫画。
       <tags>
         <tag>爬虫</tag>
         <tag>Puppeteer</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>并不简单的基础开发工作（二）：信息展示列表</title>
+    <url>/2019/02/09/list-page/</url>
+    <content><![CDATA[<p>本文以被各大学校学生做滥了的“学生信息管理系统”为例，讲述信息展示列表开发中的一些问题。
+<span id="more"></span></p>
+<h1 id="需求">需求</h1>
+<p>本文只讨论一个页面：学生信息管理系统中的学生列表页面，大体上样式如下（PC浏览器）</p>
+<p>身份证号码：<input type="text"> 姓名：<input type="text">
+学号：<input type="text">
+<button type="button">查找</button><button type="button">重置</button></p>
+<button type="button">
+添加学生
+</button>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 8%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 9%" />
+<col style="width: 6%" />
+<col style="width: 8%" />
+<col style="width: 9%" />
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 7%" />
+<col style="width: 9%" />
+<col style="width: 5%" />
+</colgroup>
+<thead>
+<tr>
+<th>序号</th>
+<th>身份证号码</th>
+<th>姓名</th>
+<th>性别</th>
+<th>民族</th>
+<th>户籍省份</th>
+<th>市</th>
+<th>区县</th>
+<th>出生日期</th>
+<th>学院</th>
+<th>班级</th>
+<th>学号</th>
+<th>联系电话</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1234...78</td>
+<td>一花</td>
+<td>女</td>
+<td>汉族</td>
+<td>北京市</td>
+<td>西城区</td>
+<td></td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010101</td>
+<td>13012345678</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1234...79</td>
+<td>二乃</td>
+<td>女</td>
+<td>汉族</td>
+<td>上海市</td>
+<td>黄浦区</td>
+<td></td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010102</td>
+<td>13012345679</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1234...80</td>
+<td>三玖</td>
+<td>女</td>
+<td>汉族</td>
+<td>广东省</td>
+<td>广州市</td>
+<td>越秀区</td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010103</td>
+<td>13012345680</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1234...81</td>
+<td>四叶</td>
+<td>女</td>
+<td>汉族</td>
+<td>浙江省</td>
+<td>杭州市</td>
+<td>西湖区</td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010104</td>
+<td>13012345681</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1234...82</td>
+<td>五月</td>
+<td>女</td>
+<td>汉族</td>
+<td>江苏省</td>
+<td>南京市</td>
+<td>鼓楼区</td>
+<td>19XX年X月X日</td>
+<td>计算机与软件工程学院</td>
+<td>软件1901</td>
+<td>201901010105</td>
+<td>13012345682</td>
+</tr>
+</tbody>
+</table>
+<p>每页显示<select><option>10</option><option>20</option><option>50</option><option>100</option></select>条，共49条
+<button type="button">首页</button>
+<button type="button">上一页</button>
+<select><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>/5页
+<button type="button">下一页</button>
+<button type="button">尾页</button></p>
+<h1 id="原理">原理</h1>
+<p>列表页面的原理比较简单，不考虑分页的话，<code>SELECT idcard, name, gender, ... FROM students WHERE 一些条件</code>，然后将查出来的结果全部展示到页面即可。但是加上分页之后逻辑会复杂很多，因此建议事先将分页功能封装成公共函数或组件（本文不再讨论分页的实现方式）。</p>
+<p>对于有固定取值的数据（性别、省市县、学院等），建议准备专门的字典表或配置文件，展示时从字典中取值。建议将读取字典数据也维护成公共函数或组件。</p>
+<h1 id="设计方面的问题">设计方面的问题</h1>
+<h2 id="屏幕分辨率">屏幕分辨率</h2>
+<p>开发人员经常使用大显示器，分辨率比较高，而用户的显示器五花八门，有大有小，甚至在当今这个满街液晶显示屏的时代仍然使用大脑袋瓜子的1024x768
+CRT显示器。因此，设计页面时要考虑多种显示器宽度和高度，例如采用响应式布局，或者去除不必要的东西，或者加水平滚动条，总之要避免让窄屏用户看到像本博客上面那样“东西装不下”的页面效果。</p>
+<p>如果你的显示器分辨率比较高，建议把一些常用的宽度和高度测量好，贴在你的显示器上，并且在调试的时候测试不同尺寸的浏览器窗口。</p>
+<h2 id="不清楚实际数据规模">不清楚实际数据规模</h2>
+<p>一个班级大约有二三十人，而一个年级会有几十至几百人，一个学校可能超过上万人。如果不考虑实际数据规模，设计和实现出来的东西有可能会使用户困扰，例如没有分页（然后把全校上万人全部展示出来）、缺少导入功能（上万人信息需要一个一个地录入）和批量操作功能（上万工作单需要一个一个地提交）。</p>
+<p>即使故意要求给用户增加障碍，例如审核工作单时必须一个一个地操作，我们其实也可以设法在不违反原则的前提下给用户提供一些便利，例如审核完成后自动跳转到下一工作单，并提醒还有多少工作单未处理，而用户不想处理的单子也可以轻松跳过。</p>
+<h2 id="没有搜索搜索条件不足">没有搜索/搜索条件不足</h2>
+<p>数据很多的时候，应当给用户提供搜索功能，便于很快从大量数据中找到需要的内容。另外设计查询条件时要了解用户希望如何定位数据，避免漏掉常用条件或提供很多多余条件，例如去营业厅查电话费，以身份证或手机号中的前几位或后几位作为查询条件比较靠谱，而用姓名和性别作为条件就不靠谱。</p>
+<p>对于上面的表单来说，查询条件里便缺少学院、班级和学号，并且身份证号和学号最好是模糊查询，因为除了学生本人以外很少有人能把这些号码记得一个数字都不差，而且就算拿着本人身份证或学生证，敲数字也挺麻烦的。</p>
+<h2 id="排序">排序</h2>
+<p>展示数据最好排个顺序（默认排序顺序应当取决于用户经常做什么事情），而且要让用户能选择给哪一列排序，例如拿学生名单核对数据时会希望按学号排序，找人的时候会希望按姓名拼音排序，统计生源地时会希望按出生地排序……数据库里面什么顺序就展示什么顺序的话，没准会让用户头大。</p>
+<h2 id="个人隐私">个人隐私</h2>
+<p>身份证号、手机号等数据属于个人隐私，没有必要的话不要随意展示给用户。如果确实需要展示，建议考虑脱敏处理（即使本人录入的也是，谁敢说不会盗号呢），例如130****5678。</p>
+<h2 id="展示逻辑删除的数据">展示逻辑删除的数据</h2>
+<p>对于删除的数据，无论是物理删除还是逻辑删除，只要删除就没必要再展示给用户了（除非另外设计“回收站”功能）。例如上面表单中有一个“状态”，如果“删除”的操作只是把这个“状态”由有效变成无效，那么建议直接去掉本列，而且使“无效”的数据不再呈现。</p>
+<h1 id="实现方面的问题">实现方面的问题</h1>
+<h2 id="跨站脚本攻击">跨站脚本攻击</h2>
+<p>举个例子，在数据库里维护一个名字叫<code>张三&lt;script&gt;alert('xss');&lt;/script&gt;</code>的学生，若加载页面时弹出个窗口，说明页面有跨站脚本攻击的风险。</p>
+<p>跨站脚本攻击对策有多种，建议用比较彻底的一种：将页面上的动态输出设置为默认转义。换句话讲，用<code>&lt;%= name %&gt;</code>这类模板输出内容时，让模板引擎默认自动将其中的HTML代码转义，这样在页面上展示的就是<code>张三&lt;script&gt;alert('xss');&lt;/script&gt;</code>而非张三和一个弹框。（不过前提是模板引擎支持。如果不支持，那么建议做一个统一的转义标记，并要求输出用那个统一标记）</p>
+<h2 id="性能">性能</h2>
+<p>查询要注意性能问题。例如</p>
+<h3 id="数据库索引">数据库索引</h3>
+<p>如果该建索引的地方没建索引，或者SQL写得很糟糕，根本没走索引，那么查询速度自然会变慢。</p>
+<h3 id="分页">分页</h3>
+<p>以Oracle为例</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token punctuation">(</span>
+    <span class="token keyword">SELECT</span> s<span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">,</span> s<span class="token punctuation">.</span>ROWNUM rn <span class="token keyword">FROM</span> <span class="token punctuation">(</span>
+        <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> students <span class="token keyword">where</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">)</span> s <span class="token keyword">WHERE</span> rownum<span class="token operator">&lt;=</span><span class="token number">10000000</span><span class="token operator">+</span><span class="token number">10</span>
+<span class="token punctuation">)</span> <span class="token keyword">WHERE</span> rn<span class="token operator">>=</span><span class="token number">10000000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>的效率要比</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> students <span class="token keyword">WHERE</span> ROWID <span class="token operator">IN</span> <span class="token punctuation">(</span>
+    <span class="token keyword">SELECT</span> id <span class="token keyword">FROM</span> <span class="token punctuation">(</span>
+        <span class="token keyword">SELECT</span> s<span class="token punctuation">.</span>ROWID id<span class="token punctuation">,</span> s<span class="token punctuation">.</span>ROWNUM n <span class="token keyword">FROM</span> <span class="token punctuation">(</span>
+            <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> students <span class="token keyword">WHERE</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+        <span class="token punctuation">)</span> s <span class="token keyword">WHERE</span> rownum<span class="token operator">&lt;=</span><span class="token number">10000000</span><span class="token operator">+</span><span class="token number">10</span>
+    <span class="token punctuation">)</span> <span class="token keyword">WHERE</span> n<span class="token operator">>=</span><span class="token number">10000000</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>低一些，因此建议按后者查询。</p>
+<h3 id="反复查数据库">反复查数据库</h3>
+<p>出生地、民族等字典数据可能也存放在数据库中。如果每次获取取值都查一遍数据库（特别是循环里面查数据库）会非常影响性能。由于字典数据变化并不频繁，建议将此类数据做成缓存，一次性从数据库查好并缓存之后就直接从缓存里面取值。</p>
+<p>缓存会有缓存时效以及线程安全等问题，这里不再展开讨论。</p>
+<h3 id="模糊查询">模糊查询</h3>
+<p>模糊查询，特别是双“%”（<code>LIKE '%字符%'</code>）会影响性能，如果不能去掉模糊查询功能，那么要控制好条件，避免大幅度的表扫描。</p>
+<h2 id="越权访问">越权访问</h2>
+<p>假如查看的链接是“/students/view.do?id=10001”，那么将id=10001改成不属于你的10002，你能否看到数据呢？如果能，说明存在漏洞，应当在查数据时附上身份验证（例如在SQL加上是创建者本人的查询条件），确保用户只能看到自己的数据。</p>
+<h2 id="拒绝服务">拒绝服务</h2>
+<p>假如查询查出总共10000条数据（当然是把分页之后的数据合到一起），你能否通过修改请求的方式让每页展示10000条数据？如果能展示，而且性能开销还不小，那么别人也可以用类似的方法使系统变慢甚至瘫痪。</p>
+<p>你的查询耗时长吗？如果耗时比较长，而且SQL层面的优化已经做得很到位，无法再进一步提高效率，那么建议增加按钮变灰（点一下查询按钮之后就无法再点击，直到查询完成）、动画反馈（Loading...）和限制操作频率（例如禁止频繁操作，或要求先输入验证码再查询）等措施，以免用户频繁提交影响系统整体性能。</p>
+<h2 id="sql注入">SQL注入</h2>
+<p>老生常谈的问题，不再详细讨论。假如你在某个查询条件框输入<code>' or '1'='1</code>却能查出很多数据，那么你要赶紧补漏洞了。</p>
+<h2 id="未防止误操作">未防止误操作</h2>
+<p>删除是一个“有危险性”的操作，如果删除之后重建比较麻烦，那么当用户点击“删除”按钮时，系统最好不要直接执行删除，而是弹出一个提示框，让用户确认无误之后再删，以免用户误操作。提交工作单（提交成功之后就不能再修改内容了）之类的“重大”操作也是如此。</p>
+<h1 id="本系列目录">本系列目录</h1>
+<ol type="1">
+<li><a href="/2019/02/08/login-page/">登录页面</a></li>
+<li><strong>信息展示列表</strong></li>
+<li><a href="/2019/09/21/edit-page/">信息录入表单</a></li>
+<li>业务申办-审批流程</li>
+</ol>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>功能设计</tag>
       </tags>
   </entry>
   <entry>
@@ -5288,353 +5288,6 @@ id="在中国没遭到迫害出国之后却吃了牢饭">在中国没遭到迫�
       </categories>
   </entry>
   <entry>
-    <title>并不简单的基础开发工作（三）：信息录入表单</title>
-    <url>/2019/09/21/edit-page/</url>
-    <content><![CDATA[<p>本文继续以“学生信息管理系统”为例，讲述信息录入表单设计与开发中的一些问题。
-<span id="more"></span></p>
-<h1 id="需求">需求</h1>
-<p>在<a
-href="/2019/02/09/list-page/">前一篇文章所需功能</a>的基础上，实现学生信息录入页面：</p>
-<table>
-<tbody>
-<tr>
-<td>
-身份证号码：
-</td>
-<td>
-<input type="text">
-</td>
-<td rowspan="5" style="text-align: center;">
-<img width="150" src="/img/2019-09-21-edit-page/photo.png">
-<a class="btn" href="#"><i class="fa fa-arrow-circle-up fa-fw"></i> 上传照片</a>
-</td>
-</tr>
-<tr>
-<td>
-姓名：
-</td>
-<td>
-<input type="text">
-</td>
-</tr>
-<tr>
-<td>
-性别：
-</td>
-<td>
-<input type="radio" name="gender" id="male">
-<label for="male">男</label>
-<input type="radio" name="gender" id="female">
-<label for="female">女</label>
-</td>
-</tr>
-<tr>
-<td>
-民族：
-</td>
-<td>
-<select><option>请选择</option></select>
-</td>
-</tr>
-<tr>
-<td>
-户籍地址：
-</td>
-<td>
-<select><option>请选择</option></select><select><option>--</option></select><select><option>--</option></select>
-</td>
-</tr>
-<tr>
-<td>
-出生日期：
-</td>
-<td colspan="2">
-<input type="text">年<input type="text">月<input type="text">日
-</td>
-</tr>
-<tr>
-<td>
-学院：
-</td>
-<td colspan="2">
-<select><option>请选择</option></select>
-</td>
-</tr>
-<tr>
-<td>
-班级：
-</td>
-<td colspan="2">
-<input type="text">
-</td>
-</tr>
-<tr>
-<td>
-学号：
-</td>
-<td colspan="2">
-<input type="text">
-</td>
-</tr>
-<tr>
-<td>
-联系电话：
-</td>
-<td colspan="2">
-<input type="text">
-</td>
-</tr>
-<tr>
-<td>
-未来意向：
-</td>
-<td colspan="2">
-<select><option>请选择</option></select>
-</td>
-</tr>
-<tr>
-<td>
-荣誉或奖励：
-</td>
-<td colspan="2">
-<textarea></textarea>
-</td>
-</tr>
-<tr>
-<td>
-所受处分：
-</td>
-<td colspan="2">
-<textarea></textarea>
-</td>
-</tr>
-</tbody>
-</table>
-<button type="button">
-保存
-</button>
-<h1 id="原理">原理</h1>
-<p>当用户点击“保存”按钮时，浏览器会将表单输入内容发送给后台，后台接收到数据（通常由框架实现）之后，需要进行一些校验，校验通过后，将输入内容INSERT到数据库中。</p>
-<p>除了新增内容，用户有时需要对现有内容进行修改。这时候需要由列表页面向表单页面传入现有内容的id。表单页面加载之前，需根据此id去数据库读取记录，并将数据库内容展示到用户页面中。当用户点击保存时，除了页面输入内容，此id也要传到后台，这样后台才能得知用户是修改已有记录并执行UPDATE操作，而不是增加新记录。</p>
-<h1 id="设计方面的问题">设计方面的问题</h1>
-<h2 id="自由输入">自由输入</h2>
-<p>能做成选择题的地方就不要做成填空题！</p>
-<p>如果把可以做成选择题的地方做成填空题，让用户自由输入，会难以规范输入内容，给后续统计、分析等工作带来麻烦。例如填写地址，同样是山东莱芜（莱芜已并入山东省会济南），用户可以填成：</p>
-<ul>
-<li>莱芜</li>
-<li>莱芜市</li>
-<li>山东莱芜</li>
-<li>山东省莱芜市</li>
-<li>山东莱芜市</li>
-<li>山东省莱芜</li>
-<li>山东省济南市莱芜区</li>
-<li>山东省济南市来无区（不小心打错字了）</li>
-<li>山东省济南市莱城区（写成了旧地名，还写错了）</li>
-<li>济南市莱芜区</li>
-<li>山东 莱芜</li>
-<li>山東省濟南市萊蕪區（忘把繁体字开关关掉了）</li>
-<li>……</li>
-</ul>
-<h2 id="页面布局">页面布局</h2>
-<p>录入表单是一件令人不爽的事情，操作时间长了，很容易陷入疲劳。</p>
-<p>如果页面摆放凌乱，该对齐的地方不对齐，字体、字号、间距不一致，用户肯定感到不爽。就算有对齐，各页面风格不一致（甚至同一页面内部风格就不一致）也会让人迷惑。</p>
-<p>如果需要录入的字段很多，页面应适当分组，让用户有“喘气”的时间，例如：</p>
-<table>
-<tbody>
-<tr>
-<th colspan="2">
-基本信息
-</th>
-</tr>
-<tr>
-<td>
-身份证号码：
-</td>
-<td>
-<input type="text">
-</td>
-</tr>
-<tr>
-<td>
-姓名：
-</td>
-<td>
-<input type="text">
-</td>
-</tr>
-<tr>
-<td>
-性别：
-</td>
-<td>
-<input type="radio" name="gender" id="male">
-<label for="male">男</label>
-<input type="radio" name="gender" id="female">
-<label for="female">女</label>
-</td>
-</tr>
-<tr>
-<td colspan="2">
-...
-</td>
-</tr>
-<tr>
-<th colspan="2">
-学籍信息
-</th>
-</tr>
-<tr>
-<td>
-学院：
-</td>
-<td>
-<input type="text">
-</td>
-</tr>
-<tr>
-<td>
-班级：
-</td>
-<td>
-<input type="text">
-</td>
-</tr>
-<tr>
-<td>
-学号：
-</td>
-<td>
-<input type="text">
-</td>
-</tr>
-<tr>
-<td colspan="2">
-...
-</td>
-</tr>
-<tr>
-<th colspan="2">
-学生个人发展信息
-</th>
-</tr>
-<tr>
-<td>
-未来意向：
-</td>
-<td>
-<input type="text">
-</td>
-</tr>
-<tr>
-<td colspan="2">
-...
-</td>
-</tr>
-</tbody>
-</table>
-<p>或者</p>
-<table>
-<tbody>
-<tr>
-<td colspan="2" style="text-align: center;">
-<span
-style="border: 1px solid black; border-radius: 50px; width: 30px; height: 30px; display: inline-block; color: white; background-color: black;">1</span>
-基本信息 → <span
-style="border: 1px solid black; border-radius: 50px; width: 30px; height: 30px; display: inline-block;;">2</span>
-学籍信息 → <span
-style="border: 1px solid black; border-radius: 50px; width: 30px; height: 30px; display: inline-block;">3</span>
-学生发展情况
-</td>
-</tr>
-<tr>
-<td>
-身份证号码：
-</td>
-<td>
-<input type="text">
-</td>
-</tr>
-<tr>
-<td>
-姓名：
-</td>
-<td>
-<input type="text">
-</td>
-</tr>
-<tr>
-<td colspan="2">
-...
-</td>
-</tr>
-<tr>
-<th colspan="2" style="text-align: right;">
-<a class="btn" href="#"><i class="fa fa-arrow-circle-right fa-fw"></i> 下一步</a>
-</th>
-</tr>
-</tbody>
-</table>
-<h2 id="选填与必填">选填与必填</h2>
-<p>如果页面既有必填项，也有选填项，应明确告知用户，这样用户就能及时把必填项填好。如果用户点提交按钮的时候才知道页面开头有个东西是必填项，而且需要自己翻到页面开头把东西填好，心情一定会非常差。</p>
-<p>区分必填和选填也有一些技巧，例如：</p>
-<ul>
-<li>全部为必填项时，不需要特意告知用户字段必填。可以用校验代替。</li>
-<li>必填项比选填项多时，选填项提示<code>（选填）</code>。</li>
-<li>选填项比必填项多时，必填项提示<code>(*)</code>。</li>
-<li>全部是选填项时，需要在业务层面考虑一下必要性。如果确实需要，在页面顶部显眼位置给出提示。</li>
-</ul>
-<p>排布字段时，尽量把必填项放前面，选填项放后面。</p>
-<h2 id="不必要的字段">不必要的字段</h2>
-<p>尽量减少字段数量。如果字段在业务上没有意义，而技术上又是必需的（例如id、数据有效性等），那么不要暴露给用户，放到后台处理。</p>
-<p>常用字段可以提供默认值，例如“民族”默认值可以设置成“汉族”（通常是汉族人多——如果不是民族学校的话）。能自动填写的字段也尽量做成自动填写，例如自动带出历史数据，或者在填好“身份证号”之后，由系统自动填写“生日”和“性别”。</p>
-<h2 id="提示信息">提示信息</h2>
-<p>提示信息应该简单、明确，并且措辞要考虑实际业务场景，避免产生歧义。举一些不好的例子：</p>
-<ul>
-<li><code>请输入姓名（必填）：[    ]</code>（啰嗦，<code>姓名(*)：</code>就够了）</li>
-<li><code>电话号（格式：xxx-xxxxxxx）：[     ]</code>（应当用input标签的placeholder代替）</li>
-<li><code>类型：[     ]</code>（“类型”、“情况”等词语语意含糊，容易产生歧义，除非业务本身就这么叫）</li>
-</ul>
-<p>对于用户容易犯错误的地方：</p>
-<ul>
-<li>如果能由程序“消化”，例如输入数据包含空格，那么默默地“消化”即可。</li>
-<li>否则给加个显眼的提示，例如提示“2019级”和“2019届”的区别。</li>
-</ul>
-<p>“表单填写注意事项”要放在醒目位置，用醒目的样式书写，以便引起用户重视。许多人经常不在乎注意事项，所以行文更要挑重点，避免占篇幅。值得注意但能让用户在填写时顺便留意的事情可以交给校验处理。</p>
-<h2 id="下一个">“下一个”</h2>
-<p>需要考虑一下业务场景：在实际操作时，用户需要录入的数据多吗？</p>
-<p>如果数据量比较多，那么建议给用户加个“下一个”按钮，录完一个就直接进下一个（当然别忘了把数据给保存好），节约时间。数量越多，节约效果越好。</p>
-<h1 id="实现方面的问题">实现方面的问题</h1>
-<h2 id="权限问题">权限问题</h2>
-<p>在读取数据和保存数据时应对用户权限进行验证，防止读取或修改无权操作的记录。</p>
-<p>假如编辑的URL是<code>http://127.0.0.1:8080/student/edit/3</code>，而数据库id=2的记录是其他人录入的，我们无权操作，那么在浏览器输入<code>http://127.0.0.1:8080/student/edit/2</code>之后就不应该把数据库里的数据查出来，否则就是一个严重的安全漏洞。</p>
-<h2 id="重复提交问题">重复提交问题</h2>
-<p>开发环境的网络往往非常好，点完按钮就能跳转到操作成功的页面。但是，用户的网络不一定非常好，他们可能急于操作，担心系统保存不上而反复点击提交按钮，这样会产生多条提交的请求，系统可能也会产生多条相同记录。</p>
-<p>这类问题有两种解决方法：</p>
-<p>一种是在表单中设置隐藏的token，每次进入表单都生成不同的token。一旦重复提交，系统会发现token已经无效而拒绝进一步操作。有一种常见的Web攻击方式是跨站请求伪造攻击（CSRF），Web框架通常会提供基于token的解决方案，顺便就把重复提交问题给解决了。</p>
-<p>还有一种简单粗暴却很有效果的方法：点击提交按钮之后，相关按钮立刻变灰，不允许用户点击，并且由页面给出“正在保存”的反馈信息，使用户能够耐心等待表单提交。当然，一旦保存失败，不要忘记让按钮变回原来可以点击的状态。</p>
-<h2 id="校验问题">校验问题</h2>
-<p>前台校验是不可信任的：如果只在前台进行校验，未在后台进行校验，那么用户就可以先进入浏览器控制台，再输入<code>document.forms[0].submit()</code>来绕过各类校验。出于安全考虑，即使赶工或偷懒，也要先把后台校验给做好。</p>
-<p>校验失败的错误提示不要含糊不清，不要只告诉用户“输入内容有误”，而是要告诉用户“手机号格式错误、学号格式错误”。除此之外，报错要避免像挤牙膏一样一次只提示一种错误，尽量一口气把所有错误都告诉用户，否则用户改了好几遍还提交不上去，心情就是崩溃的了。</p>
-<p>另外，各表单校验风格应当统一：A页面将所有错误用一个弹窗提示出来，而B页面将每个错误字段的提示信息都放在对应字段右边，这样也会让用户困扰。</p>
-<p>为了规避这些问题，建议使用（或自行实现专门的）校验框架来实现校验，既能统一行为，又能简化代码，让后续调整也变得方便些。</p>
-<h2 id="没有反馈">没有反馈</h2>
-<p>用户提交完成后，系统不要什么反馈都没有，否则用户容易认为系统有故障。系统要给用户一个明显的信号，例如提示“提交成功”，或者直接进入下一步操作页面。即使又回到了输入页面，也不要让用户输入数据发生变化甚至消失。</p>
-<h1 id="本系列目录">本系列目录</h1>
-<ol type="1">
-<li><a href="/2019/02/08/login-page/">登录页面</a></li>
-<li><a href="/2019/02/09/list-page/">信息展示列表</a></li>
-<li><strong>信息录入表单</strong></li>
-<li>业务申办-审批流程</li>
-</ol>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-      <tags>
-        <tag>功能设计</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>实现一个简单粗暴的Java Web安全过滤器</title>
     <url>/2019/08/25/security-filter/</url>
     <content><![CDATA[<p>对于行业系统来说，如果开发人员水平一般，而且又忙于赶工期，Web安全问题就很容易抛到脑后。然而，在这类系统中，用户输入内容往往是业务相关的，范围可以预测，不会特意输入敏感词语，因此又可以用简单粗暴的方法挡住大部分常见攻击。</p>
@@ -6411,6 +6064,470 @@ logger<span class="token punctuation">.</span><span class="token function">debug
       </tags>
   </entry>
   <entry>
+    <title>并不简单的基础开发工作（三）：信息录入表单</title>
+    <url>/2019/09/21/edit-page/</url>
+    <content><![CDATA[<p>本文继续以“学生信息管理系统”为例，讲述信息录入表单设计与开发中的一些问题。
+<span id="more"></span></p>
+<h1 id="需求">需求</h1>
+<p>在<a
+href="/2019/02/09/list-page/">前一篇文章所需功能</a>的基础上，实现学生信息录入页面：</p>
+<table>
+<tbody>
+<tr>
+<td>
+身份证号码：
+</td>
+<td>
+<input type="text">
+</td>
+<td rowspan="5" style="text-align: center;">
+<img width="150" src="/img/2019-09-21-edit-page/photo.png">
+<a class="btn" href="#"><i class="fa fa-arrow-circle-up fa-fw"></i> 上传照片</a>
+</td>
+</tr>
+<tr>
+<td>
+姓名：
+</td>
+<td>
+<input type="text">
+</td>
+</tr>
+<tr>
+<td>
+性别：
+</td>
+<td>
+<input type="radio" name="gender" id="male">
+<label for="male">男</label>
+<input type="radio" name="gender" id="female">
+<label for="female">女</label>
+</td>
+</tr>
+<tr>
+<td>
+民族：
+</td>
+<td>
+<select><option>请选择</option></select>
+</td>
+</tr>
+<tr>
+<td>
+户籍地址：
+</td>
+<td>
+<select><option>请选择</option></select><select><option>--</option></select><select><option>--</option></select>
+</td>
+</tr>
+<tr>
+<td>
+出生日期：
+</td>
+<td colspan="2">
+<input type="text">年<input type="text">月<input type="text">日
+</td>
+</tr>
+<tr>
+<td>
+学院：
+</td>
+<td colspan="2">
+<select><option>请选择</option></select>
+</td>
+</tr>
+<tr>
+<td>
+班级：
+</td>
+<td colspan="2">
+<input type="text">
+</td>
+</tr>
+<tr>
+<td>
+学号：
+</td>
+<td colspan="2">
+<input type="text">
+</td>
+</tr>
+<tr>
+<td>
+联系电话：
+</td>
+<td colspan="2">
+<input type="text">
+</td>
+</tr>
+<tr>
+<td>
+未来意向：
+</td>
+<td colspan="2">
+<select><option>请选择</option></select>
+</td>
+</tr>
+<tr>
+<td>
+荣誉或奖励：
+</td>
+<td colspan="2">
+<textarea></textarea>
+</td>
+</tr>
+<tr>
+<td>
+所受处分：
+</td>
+<td colspan="2">
+<textarea></textarea>
+</td>
+</tr>
+</tbody>
+</table>
+<button type="button">
+保存
+</button>
+<h1 id="原理">原理</h1>
+<p>当用户点击“保存”按钮时，浏览器会将表单输入内容发送给后台，后台接收到数据（通常由框架实现）之后，需要进行一些校验，校验通过后，将输入内容INSERT到数据库中。</p>
+<p>除了新增内容，用户有时需要对现有内容进行修改。这时候需要由列表页面向表单页面传入现有内容的id。表单页面加载之前，需根据此id去数据库读取记录，并将数据库内容展示到用户页面中。当用户点击保存时，除了页面输入内容，此id也要传到后台，这样后台才能得知用户是修改已有记录并执行UPDATE操作，而不是增加新记录。</p>
+<h1 id="设计方面的问题">设计方面的问题</h1>
+<h2 id="自由输入">自由输入</h2>
+<p>能做成选择题的地方就不要做成填空题！</p>
+<p>如果把可以做成选择题的地方做成填空题，让用户自由输入，会难以规范输入内容，给后续统计、分析等工作带来麻烦。例如填写地址，同样是山东莱芜（莱芜已并入山东省会济南），用户可以填成：</p>
+<ul>
+<li>莱芜</li>
+<li>莱芜市</li>
+<li>山东莱芜</li>
+<li>山东省莱芜市</li>
+<li>山东莱芜市</li>
+<li>山东省莱芜</li>
+<li>山东省济南市莱芜区</li>
+<li>山东省济南市来无区（不小心打错字了）</li>
+<li>山东省济南市莱城区（写成了旧地名，还写错了）</li>
+<li>济南市莱芜区</li>
+<li>山东 莱芜</li>
+<li>山東省濟南市萊蕪區（忘把繁体字开关关掉了）</li>
+<li>……</li>
+</ul>
+<h2 id="页面布局">页面布局</h2>
+<p>录入表单是一件令人不爽的事情，操作时间长了，很容易陷入疲劳。</p>
+<p>如果页面摆放凌乱，该对齐的地方不对齐，字体、字号、间距不一致，用户肯定感到不爽。就算有对齐，各页面风格不一致（甚至同一页面内部风格就不一致）也会让人迷惑。</p>
+<p>如果需要录入的字段很多，页面应适当分组，让用户有“喘气”的时间，例如：</p>
+<table>
+<tbody>
+<tr>
+<th colspan="2">
+基本信息
+</th>
+</tr>
+<tr>
+<td>
+身份证号码：
+</td>
+<td>
+<input type="text">
+</td>
+</tr>
+<tr>
+<td>
+姓名：
+</td>
+<td>
+<input type="text">
+</td>
+</tr>
+<tr>
+<td>
+性别：
+</td>
+<td>
+<input type="radio" name="gender" id="male">
+<label for="male">男</label>
+<input type="radio" name="gender" id="female">
+<label for="female">女</label>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+...
+</td>
+</tr>
+<tr>
+<th colspan="2">
+学籍信息
+</th>
+</tr>
+<tr>
+<td>
+学院：
+</td>
+<td>
+<input type="text">
+</td>
+</tr>
+<tr>
+<td>
+班级：
+</td>
+<td>
+<input type="text">
+</td>
+</tr>
+<tr>
+<td>
+学号：
+</td>
+<td>
+<input type="text">
+</td>
+</tr>
+<tr>
+<td colspan="2">
+...
+</td>
+</tr>
+<tr>
+<th colspan="2">
+学生个人发展信息
+</th>
+</tr>
+<tr>
+<td>
+未来意向：
+</td>
+<td>
+<input type="text">
+</td>
+</tr>
+<tr>
+<td colspan="2">
+...
+</td>
+</tr>
+</tbody>
+</table>
+<p>或者</p>
+<table>
+<tbody>
+<tr>
+<td colspan="2" style="text-align: center;">
+<span
+style="border: 1px solid black; border-radius: 50px; width: 30px; height: 30px; display: inline-block; color: white; background-color: black;">1</span>
+基本信息 → <span
+style="border: 1px solid black; border-radius: 50px; width: 30px; height: 30px; display: inline-block;;">2</span>
+学籍信息 → <span
+style="border: 1px solid black; border-radius: 50px; width: 30px; height: 30px; display: inline-block;">3</span>
+学生发展情况
+</td>
+</tr>
+<tr>
+<td>
+身份证号码：
+</td>
+<td>
+<input type="text">
+</td>
+</tr>
+<tr>
+<td>
+姓名：
+</td>
+<td>
+<input type="text">
+</td>
+</tr>
+<tr>
+<td colspan="2">
+...
+</td>
+</tr>
+<tr>
+<th colspan="2" style="text-align: right;">
+<a class="btn" href="#"><i class="fa fa-arrow-circle-right fa-fw"></i> 下一步</a>
+</th>
+</tr>
+</tbody>
+</table>
+<h2 id="选填与必填">选填与必填</h2>
+<p>如果页面既有必填项，也有选填项，应明确告知用户，这样用户就能及时把必填项填好。如果用户点提交按钮的时候才知道页面开头有个东西是必填项，而且需要自己翻到页面开头把东西填好，心情一定会非常差。</p>
+<p>区分必填和选填也有一些技巧，例如：</p>
+<ul>
+<li>全部为必填项时，不需要特意告知用户字段必填。可以用校验代替。</li>
+<li>必填项比选填项多时，选填项提示<code>（选填）</code>。</li>
+<li>选填项比必填项多时，必填项提示<code>(*)</code>。</li>
+<li>全部是选填项时，需要在业务层面考虑一下必要性。如果确实需要，在页面顶部显眼位置给出提示。</li>
+</ul>
+<p>排布字段时，尽量把必填项放前面，选填项放后面。</p>
+<h2 id="不必要的字段">不必要的字段</h2>
+<p>尽量减少字段数量。如果字段在业务上没有意义，而技术上又是必需的（例如id、数据有效性等），那么不要暴露给用户，放到后台处理。</p>
+<p>常用字段可以提供默认值，例如“民族”默认值可以设置成“汉族”（通常是汉族人多——如果不是民族学校的话）。能自动填写的字段也尽量做成自动填写，例如自动带出历史数据，或者在填好“身份证号”之后，由系统自动填写“生日”和“性别”。</p>
+<h2 id="提示信息">提示信息</h2>
+<p>提示信息应该简单、明确，并且措辞要考虑实际业务场景，避免产生歧义。举一些不好的例子：</p>
+<ul>
+<li><code>请输入姓名（必填）：[    ]</code>（啰嗦，<code>姓名(*)：</code>就够了）</li>
+<li><code>电话号（格式：xxx-xxxxxxx）：[     ]</code>（应当用input标签的placeholder代替）</li>
+<li><code>类型：[     ]</code>（“类型”、“情况”等词语语意含糊，容易产生歧义，除非业务本身就这么叫）</li>
+</ul>
+<p>对于用户容易犯错误的地方：</p>
+<ul>
+<li>如果能由程序“消化”，例如输入数据包含空格，那么默默地“消化”即可。</li>
+<li>否则给加个显眼的提示，例如提示“2019级”和“2019届”的区别。</li>
+</ul>
+<p>“表单填写注意事项”要放在醒目位置，用醒目的样式书写，以便引起用户重视。许多人经常不在乎注意事项，所以行文更要挑重点，避免占篇幅。值得注意但能让用户在填写时顺便留意的事情可以交给校验处理。</p>
+<h2 id="下一个">“下一个”</h2>
+<p>需要考虑一下业务场景：在实际操作时，用户需要录入的数据多吗？</p>
+<p>如果数据量比较多，那么建议给用户加个“下一个”按钮，录完一个就直接进下一个（当然别忘了把数据给保存好），节约时间。数量越多，节约效果越好。</p>
+<h1 id="实现方面的问题">实现方面的问题</h1>
+<h2 id="权限问题">权限问题</h2>
+<p>在读取数据和保存数据时应对用户权限进行验证，防止读取或修改无权操作的记录。</p>
+<p>假如编辑的URL是<code>http://127.0.0.1:8080/student/edit/3</code>，而数据库id=2的记录是其他人录入的，我们无权操作，那么在浏览器输入<code>http://127.0.0.1:8080/student/edit/2</code>之后就不应该把数据库里的数据查出来，否则就是一个严重的安全漏洞。</p>
+<h2 id="重复提交问题">重复提交问题</h2>
+<p>开发环境的网络往往非常好，点完按钮就能跳转到操作成功的页面。但是，用户的网络不一定非常好，他们可能急于操作，担心系统保存不上而反复点击提交按钮，这样会产生多条提交的请求，系统可能也会产生多条相同记录。</p>
+<p>这类问题有两种解决方法：</p>
+<p>一种是在表单中设置隐藏的token，每次进入表单都生成不同的token。一旦重复提交，系统会发现token已经无效而拒绝进一步操作。有一种常见的Web攻击方式是跨站请求伪造攻击（CSRF），Web框架通常会提供基于token的解决方案，顺便就把重复提交问题给解决了。</p>
+<p>还有一种简单粗暴却很有效果的方法：点击提交按钮之后，相关按钮立刻变灰，不允许用户点击，并且由页面给出“正在保存”的反馈信息，使用户能够耐心等待表单提交。当然，一旦保存失败，不要忘记让按钮变回原来可以点击的状态。</p>
+<h2 id="校验问题">校验问题</h2>
+<p>前台校验是不可信任的：如果只在前台进行校验，未在后台进行校验，那么用户就可以先进入浏览器控制台，再输入<code>document.forms[0].submit()</code>来绕过各类校验。出于安全考虑，即使赶工或偷懒，也要先把后台校验给做好。</p>
+<p>校验失败的错误提示不要含糊不清，不要只告诉用户“输入内容有误”，而是要告诉用户“手机号格式错误、学号格式错误”。除此之外，报错要避免像挤牙膏一样一次只提示一种错误，尽量一口气把所有错误都告诉用户，否则用户改了好几遍还提交不上去，心情就是崩溃的了。</p>
+<p>另外，各表单校验风格应当统一：A页面将所有错误用一个弹窗提示出来，而B页面将每个错误字段的提示信息都放在对应字段右边，这样也会让用户困扰。</p>
+<p>为了规避这些问题，建议使用（或自行实现专门的）校验框架来实现校验，既能统一行为，又能简化代码，让后续调整也变得方便些。</p>
+<h2 id="没有反馈">没有反馈</h2>
+<p>用户提交完成后，系统不要什么反馈都没有，否则用户容易认为系统有故障。系统要给用户一个明显的信号，例如提示“提交成功”，或者直接进入下一步操作页面。即使又回到了输入页面，也不要让用户输入数据发生变化甚至消失。</p>
+<h1 id="本系列目录">本系列目录</h1>
+<ol type="1">
+<li><a href="/2019/02/08/login-page/">登录页面</a></li>
+<li><a href="/2019/02/09/list-page/">信息展示列表</a></li>
+<li><strong>信息录入表单</strong></li>
+<li>业务申办-审批流程</li>
+</ol>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>功能设计</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何正确地打日志</title>
+    <url>/2020/01/22/logger/</url>
+    <content><![CDATA[<p>在程序中打日志很简单，<code>logger.debug("Hello, Happy World!")</code>，OK。可是，正确地打日志并不简单，需要注意以下几个问题。</p>
+<span id="more"></span>
+<h1 id="日志的目的">日志的目的</h1>
+<p><strong>备注：本文中的“日志”专指程序内部日志。</strong></p>
+<p>打日志是为了记录程序的运行情况，这样可以：</p>
+<ul>
+<li>确认事件发生顺序、时间节点</li>
+<li>记录问题，便于在系统发生异常时定位问题、解决问题。</li>
+<li>在多线程、集群等复杂环境中，利用日志分析时序</li>
+<li>监控某些程序的状态</li>
+<li>……</li>
+</ul>
+<p>因此，日志要记好有助于解决问题的各类信息，不要堆积无助于解决问题的垃圾，而且要遵循一定的规范，便于查找、定位。</p>
+<p>在这里向没有开发经验的人强调一下：生产系统的日志量非常大，而且出于性能考虑不会展示调试日志。在海量日志中找信息是件很麻烦的事情，请不要给维护人员挖坑。</p>
+<h1 id="日志的内容">日志的内容</h1>
+<p>通过日志，应该能快速地了解“什么时间在哪里大概发生了什么事”，猜到“大概是什么原因导致了问题”，然后进一步定位程序代码，确认问题、解决问题。例如：</p>
+<pre class="line-numbers language-none"><code class="language-none">2020-01-02 12:34:56 [UserService] WARN 查询用户不存在，uid &#x3D; 1234567890
+2020-01-03 12:45:06 [AuthService] INFO 实名核验成功，uid &#x3D; 1234567899，身份证号 &#x3D; 110101123412341234，耗时 &#x3D; 12ms
+2020-01-04 12:56:01 [InfoService] ERROR 用户保存个人信息时发生异常
+java.sql.SQLException: ORA-12899: value too large for column &quot;XXXXX&quot;.&quot;YYYYY&quot;.&quot;ZZZZZ&quot; (actual: 60, maximum: 30)
+        at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:445)
+        at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:396)
+        ......<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>一条日志应该包含以下内容：</p>
+<ul>
+<li><strong>时间（“何时”）</strong>：日志要记录事件的发生时间。
+<ul>
+<li>日志组件记录的实际上是“打日志的时间”，而非“事件发生时间”。不过，通常事件执行时间很短，这个差异可以忽略不计。</li>
+<li>如果事件执行时间比较长，“时间”就要区分为“发生时间”、“结束时间”和“持续时间”。</li>
+</ul></li>
+<li><strong>具体位置（“何地”）</strong>：记录事件于哪个模块、文件、函数等产生。建议至少把模块名打上，以便翻代码。</li>
+<li><strong>事件简要描述（“什么事情”）</strong>：看到日志之后大概能猜到发生了什么事情。语言要简洁。
+<ul>
+<li>不好的例子：“发生错误”、“数据库异常”、“数据不存在”</li>
+<li>好的例子：“查询用户信息时产生异常”、“执行用户信息保存时数据库异常”、“用户id不存在”</li>
+<li>建议描述文字不要完全相同。比方说，都是“数据查询失败”，其中一处可以写成“数据查询失败了”，而另一处写成“数据查询的失败”，这样便于直接使用全文搜索功能查代码。</li>
+</ul></li>
+<li><strong>日志等级</strong>：把日志等级写好，出问题时就可以根据问题的严重性来找日志。</li>
+<li><strong>上下文</strong>：例如
+<ul>
+<li>异常的堆栈</li>
+<li>重要参数：有时需要复现问题，可以记录某些重要参数（例如uid）以便还原现场</li>
+<li>重要状态变化：例如线程启动/中断、特殊进程进入/退出等</li>
+</ul></li>
+</ul>
+<p>在开发时要用团队封装好的框架，不要自己造轮子。</p>
+<h1 id="日志的等级">日志的等级</h1>
+<p>以Java为例，Java日志通常分为ERROR、WARN、INFO、DEBUG和TRACE。其他语言和框架情况类似。</p>
+<p>这几个级别用法通常如下：</p>
+<ul>
+<li>ERROR：记录影响系统与业务的严重问题，例如系统异常、数据库故障等。</li>
+<li>WARN：记录“确实是问题，不过不耽误使用”的问题，以便后续跟踪检查。</li>
+<li>INFO：比较重要的信息，例如系统参数、线程启动/结束、特殊任务等。</li>
+<li>DEBUG、TRACE：记录开发调试过程中的细节。这类信息只要能方便开发人员调试即可。在生产环境中，这类信息应该被屏蔽掉，不往日志里头打，或者仅在跟踪问题时临时启用，用完之后立刻关掉。</li>
+</ul>
+<h1 id="打日志的位置">打日志的位置</h1>
+<p>假设信息查询的堆栈如下： <pre class="line-numbers language-none"><code class="language-none">QueryController.queryInfo()
+    UserService.getUserInfo()
+        UserDAO.getUser()
+        RoleDAO.getRole()
+    InfoService.getInformation()
+        InfoDAO.getInfo()
+    InfoCommonMethod.generateOutput()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
+<p>捕获异常、输出异常日志的操作尽量都交给最外层的调用方，即上面的<code>QueryController.queryInfo()</code>。</p>
+<p>里层的函数（<code>UserService.getUserInfo()</code>、<code>UserDAO.getUser()</code>等）在抛出异常时不要打日志。否则里面打一遍，外面打一遍，日志就重复了。</p>
+<p>像下面这样写函数就是在坑人：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token class-name">String</span> param <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 业务逻辑</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        logger<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"错误"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 清理</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>以上代码存在三个问题： 1.
+发生异常时，异常直接catch掉，未往上抛（<code>throw e;</code>），导致调用者无法捕获异常。
+2. 在此处打日志，调用者捕获异常之后还要打日志，日志信息就重复了。 3.
+如使用数据库事务（例如Spring的@Transactional），那么将无法正确回滚，导致状态错误。</p>
+<h1 id="日志文件">日志文件</h1>
+<p>不要假设日志全部都会输出到屏幕上，或者全部输出到特定的日志文件中！</p>
+<p>日志输出目标是可以调整的，例如直接输出到stdout/stderr（生产环境不会这样干）、输出到特定日志文件、输出到数据库，或输出到特定的日志服务器中。日志不仅可以输出到单个文件，也可以根据子系统、日志级别、日志目的、日期时间等条件将日志拆分成多个文件。</p>
+<p>因此要杜绝用<code>System.out.println()</code>、<code>System.error.println()</code>与<code>e.printStackTrace()</code>打日志！这样打出来的日志，不仅缺乏信息，而且有可能会打错地方，让人找不到。</p>
+<p>第三方接口务必要打日志，而且不仅要记一些关键参数，还要便于查询（例如放入专门的XX公司接口日志文件中），以免出问题时互相踢皮球。</p>
+<h1 id="其他的坑">其他的坑</h1>
+<ul>
+<li><code>catch</code>里面不要空着。遇到异常时，如果不处理，不上抛，也不打日志，一旦出现问题，就把大家全都坑了。</li>
+<li>不要只输出<code>e.getMesssage()</code>，要输出整个堆栈，否则难以定位。</li>
+<li>不要把详细信息（特别是堆栈）暴露给用户。</li>
+<li>再强调一遍，不要<code>System.out.println()</code>、<code>System.error.println()</code>与<code>e.printStackTrace()</code>。这样打，不仅缺乏信息，而且有可能会打错地方，让人找不到。</li>
+<li>生产环境不要打DEBUG日志，否则影响性能。生产系统部署时，应通过配置文件或开关调整日志等级，把DEBUG日志屏蔽掉。
+<ul>
+<li><em>系统刚上线时，为了便于调整，可能也会把DEBUG日志打出来。此时要留意服务器磁盘空间，别让日志把磁盘撑爆。</em></li>
+</ul></li>
+<li>日志是各线程公用的。需要换行的话，要先使用<code>\n</code>拼接字符串，拼好之后一口气打出来。多次执行打日志语句，日志内容可能会被其他业务打断。</li>
+<li>频繁执行的代码、数据量大的数据要尽量避免打调试日志，同样影响性能。</li>
+</ul>
+<h1 id="补充一种便于诊断的方案">补充：一种便于诊断的方案</h1>
+<p>仅在后台打日志，实际上不便于问题定位诊断，而直接把细节打到前台，虽然方便定位了，但不仅对用户不友好，还会引发安全风险。所以可以稍微变通一下：</p>
+<ul>
+<li>设计一套错误编码，例如：<code>I-1A2B-7F-03</code>，I指IOException，1A2B是class名字经过hash之后取前四位，7F是行号转为十六进制，03是个随机数。</li>
+<li>在系统发生异常时，除了错误信息，把这个编码打到前台页面与后台日志中，并要求用户反馈异常时提供这个代号。</li>
+<li>因为这个编码是很独特的，所以翻日志的时候直接搜这个编号就能比较容易地定位。即使不找日志，通过“1A2B”和“7F”两个代码也可以反查到是哪个class与哪一行代码了。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术思考</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>在Web开发中，如果无法回避ActiveX控件——一种让用户在非IE浏览器调用控件的思路</title>
     <url>/2019/11/25/activex-helper/</url>
     <content><![CDATA[<p>如果Web系统需要调用特定ActiveX控件才能操作，像身份证阅读器、读卡器、获取电脑网卡MAC地址等，而且预计控件厂商在一段时间内无法解决浏览器兼容性问题，那我们能不能想法让用户在非IE浏览器中也能调用控件呢？</p>
@@ -6751,123 +6868,6 @@ message），以便日后追查。受影响的程序代码也要用注释和提�
       </categories>
       <tags>
         <tag>文档</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何正确地打日志</title>
-    <url>/2020/01/22/logger/</url>
-    <content><![CDATA[<p>在程序中打日志很简单，<code>logger.debug("Hello, Happy World!")</code>，OK。可是，正确地打日志并不简单，需要注意以下几个问题。</p>
-<span id="more"></span>
-<h1 id="日志的目的">日志的目的</h1>
-<p><strong>备注：本文中的“日志”专指程序内部日志。</strong></p>
-<p>打日志是为了记录程序的运行情况，这样可以：</p>
-<ul>
-<li>确认事件发生顺序、时间节点</li>
-<li>记录问题，便于在系统发生异常时定位问题、解决问题。</li>
-<li>在多线程、集群等复杂环境中，利用日志分析时序</li>
-<li>监控某些程序的状态</li>
-<li>……</li>
-</ul>
-<p>因此，日志要记好有助于解决问题的各类信息，不要堆积无助于解决问题的垃圾，而且要遵循一定的规范，便于查找、定位。</p>
-<p>在这里向没有开发经验的人强调一下：生产系统的日志量非常大，而且出于性能考虑不会展示调试日志。在海量日志中找信息是件很麻烦的事情，请不要给维护人员挖坑。</p>
-<h1 id="日志的内容">日志的内容</h1>
-<p>通过日志，应该能快速地了解“什么时间在哪里大概发生了什么事”，猜到“大概是什么原因导致了问题”，然后进一步定位程序代码，确认问题、解决问题。例如：</p>
-<pre class="line-numbers language-none"><code class="language-none">2020-01-02 12:34:56 [UserService] WARN 查询用户不存在，uid &#x3D; 1234567890
-2020-01-03 12:45:06 [AuthService] INFO 实名核验成功，uid &#x3D; 1234567899，身份证号 &#x3D; 110101123412341234，耗时 &#x3D; 12ms
-2020-01-04 12:56:01 [InfoService] ERROR 用户保存个人信息时发生异常
-java.sql.SQLException: ORA-12899: value too large for column &quot;XXXXX&quot;.&quot;YYYYY&quot;.&quot;ZZZZZ&quot; (actual: 60, maximum: 30)
-        at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:445)
-        at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:396)
-        ......<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>一条日志应该包含以下内容：</p>
-<ul>
-<li><strong>时间（“何时”）</strong>：日志要记录事件的发生时间。
-<ul>
-<li>日志组件记录的实际上是“打日志的时间”，而非“事件发生时间”。不过，通常事件执行时间很短，这个差异可以忽略不计。</li>
-<li>如果事件执行时间比较长，“时间”就要区分为“发生时间”、“结束时间”和“持续时间”。</li>
-</ul></li>
-<li><strong>具体位置（“何地”）</strong>：记录事件于哪个模块、文件、函数等产生。建议至少把模块名打上，以便翻代码。</li>
-<li><strong>事件简要描述（“什么事情”）</strong>：看到日志之后大概能猜到发生了什么事情。语言要简洁。
-<ul>
-<li>不好的例子：“发生错误”、“数据库异常”、“数据不存在”</li>
-<li>好的例子：“查询用户信息时产生异常”、“执行用户信息保存时数据库异常”、“用户id不存在”</li>
-<li>建议描述文字不要完全相同。比方说，都是“数据查询失败”，其中一处可以写成“数据查询失败了”，而另一处写成“数据查询的失败”，这样便于直接使用全文搜索功能查代码。</li>
-</ul></li>
-<li><strong>日志等级</strong>：把日志等级写好，出问题时就可以根据问题的严重性来找日志。</li>
-<li><strong>上下文</strong>：例如
-<ul>
-<li>异常的堆栈</li>
-<li>重要参数：有时需要复现问题，可以记录某些重要参数（例如uid）以便还原现场</li>
-<li>重要状态变化：例如线程启动/中断、特殊进程进入/退出等</li>
-</ul></li>
-</ul>
-<p>在开发时要用团队封装好的框架，不要自己造轮子。</p>
-<h1 id="日志的等级">日志的等级</h1>
-<p>以Java为例，Java日志通常分为ERROR、WARN、INFO、DEBUG和TRACE。其他语言和框架情况类似。</p>
-<p>这几个级别用法通常如下：</p>
-<ul>
-<li>ERROR：记录影响系统与业务的严重问题，例如系统异常、数据库故障等。</li>
-<li>WARN：记录“确实是问题，不过不耽误使用”的问题，以便后续跟踪检查。</li>
-<li>INFO：比较重要的信息，例如系统参数、线程启动/结束、特殊任务等。</li>
-<li>DEBUG、TRACE：记录开发调试过程中的细节。这类信息只要能方便开发人员调试即可。在生产环境中，这类信息应该被屏蔽掉，不往日志里头打，或者仅在跟踪问题时临时启用，用完之后立刻关掉。</li>
-</ul>
-<h1 id="打日志的位置">打日志的位置</h1>
-<p>假设信息查询的堆栈如下： <pre class="line-numbers language-none"><code class="language-none">QueryController.queryInfo()
-    UserService.getUserInfo()
-        UserDAO.getUser()
-        RoleDAO.getRole()
-    InfoService.getInformation()
-        InfoDAO.getInfo()
-    InfoCommonMethod.generateOutput()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></p>
-<p>捕获异常、输出异常日志的操作尽量都交给最外层的调用方，即上面的<code>QueryController.queryInfo()</code>。</p>
-<p>里层的函数（<code>UserService.getUserInfo()</code>、<code>UserDAO.getUser()</code>等）在抛出异常时不要打日志。否则里面打一遍，外面打一遍，日志就重复了。</p>
-<p>像下面这样写函数就是在坑人：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getUser</span><span class="token punctuation">(</span><span class="token class-name">String</span> param <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// 业务逻辑</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        logger<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"错误"</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span> <span class="token keyword">finally</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// 清理</span>
-        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>以上代码存在三个问题： 1.
-发生异常时，异常直接catch掉，未往上抛（<code>throw e;</code>），导致调用者无法捕获异常。
-2. 在此处打日志，调用者捕获异常之后还要打日志，日志信息就重复了。 3.
-如使用数据库事务（例如Spring的@Transactional），那么将无法正确回滚，导致状态错误。</p>
-<h1 id="日志文件">日志文件</h1>
-<p>不要假设日志全部都会输出到屏幕上，或者全部输出到特定的日志文件中！</p>
-<p>日志输出目标是可以调整的，例如直接输出到stdout/stderr（生产环境不会这样干）、输出到特定日志文件、输出到数据库，或输出到特定的日志服务器中。日志不仅可以输出到单个文件，也可以根据子系统、日志级别、日志目的、日期时间等条件将日志拆分成多个文件。</p>
-<p>因此要杜绝用<code>System.out.println()</code>、<code>System.error.println()</code>与<code>e.printStackTrace()</code>打日志！这样打出来的日志，不仅缺乏信息，而且有可能会打错地方，让人找不到。</p>
-<p>第三方接口务必要打日志，而且不仅要记一些关键参数，还要便于查询（例如放入专门的XX公司接口日志文件中），以免出问题时互相踢皮球。</p>
-<h1 id="其他的坑">其他的坑</h1>
-<ul>
-<li><code>catch</code>里面不要空着。遇到异常时，如果不处理，不上抛，也不打日志，一旦出现问题，就把大家全都坑了。</li>
-<li>不要只输出<code>e.getMesssage()</code>，要输出整个堆栈，否则难以定位。</li>
-<li>不要把详细信息（特别是堆栈）暴露给用户。</li>
-<li>再强调一遍，不要<code>System.out.println()</code>、<code>System.error.println()</code>与<code>e.printStackTrace()</code>。这样打，不仅缺乏信息，而且有可能会打错地方，让人找不到。</li>
-<li>生产环境不要打DEBUG日志，否则影响性能。生产系统部署时，应通过配置文件或开关调整日志等级，把DEBUG日志屏蔽掉。
-<ul>
-<li><em>系统刚上线时，为了便于调整，可能也会把DEBUG日志打出来。此时要留意服务器磁盘空间，别让日志把磁盘撑爆。</em></li>
-</ul></li>
-<li>日志是各线程公用的。需要换行的话，要先使用<code>\n</code>拼接字符串，拼好之后一口气打出来。多次执行打日志语句，日志内容可能会被其他业务打断。</li>
-<li>频繁执行的代码、数据量大的数据要尽量避免打调试日志，同样影响性能。</li>
-</ul>
-<h1 id="补充一种便于诊断的方案">补充：一种便于诊断的方案</h1>
-<p>仅在后台打日志，实际上不便于问题定位诊断，而直接把细节打到前台，虽然方便定位了，但不仅对用户不友好，还会引发安全风险。所以可以稍微变通一下：</p>
-<ul>
-<li>设计一套错误编码，例如：<code>I-1A2B-7F-03</code>，I指IOException，1A2B是class名字经过hash之后取前四位，7F是行号转为十六进制，03是个随机数。</li>
-<li>在系统发生异常时，除了错误信息，把这个编码打到前台页面与后台日志中，并要求用户反馈异常时提供这个代号。</li>
-<li>因为这个编码是很独特的，所以翻日志的时候直接搜这个编号就能比较容易地定位。即使不找日志，通过“1A2B”和“7F”两个代码也可以反查到是哪个class与哪一行代码了。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技术思考</category>
-      </categories>
-      <tags>
-        <tag>日志</tag>
       </tags>
   </entry>
   <entry>
@@ -8284,41 +8284,41 @@ id="有标准规范的图不要自己发明格式">有标准规范的图，不�
 <p>有些图表的目的与格式都是比较固定的，绘制时需要遵循一定的规范，包括但不限于：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>图表</th>
 <th>目的</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>流程图</td>
 <td>系统运行流程</td>
 </tr>
-<tr class="even">
+<tr>
 <td>数据流图</td>
 <td>描述系统输入、输出与数据处理</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>实体-关系图（E-R图）</td>
 <td>描述实体类型、属性和联系</td>
 </tr>
-<tr class="even">
+<tr>
 <td>用例图</td>
 <td>描述“用户需要什么”</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>活动图</td>
 <td>描述一个过程中的活动发生顺序</td>
 </tr>
-<tr class="even">
+<tr>
 <td>顺序图（时序图）、通信图</td>
 <td>描述一段时间内的一连串交互</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>类图</td>
 <td>描述面向对象分析中各类之间的关系</td>
 </tr>
-<tr class="even">
+<tr>
 <td>状态图</td>
 <td>分析一个对象的不同状态及状态转移</td>
 </tr>
@@ -8375,7 +8375,7 @@ NULL。如确实需要NULL，应在模型设计与SQL建表脚本中明确指明
 </ol>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>字段</th>
 <th>字段英文名</th>
 <th>类型（仅供参考）</th>
@@ -8383,31 +8383,31 @@ NULL。如确实需要NULL，应在模型设计与SQL建表脚本中明确指明
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>版本</td>
 <td>version</td>
 <td>INT</td>
 <td>用于解决并发问题</td>
 </tr>
-<tr class="even">
+<tr>
 <td>创建时间</td>
 <td>created_at</td>
 <td>TIMESTAMP</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>创建人</td>
 <td>created_by</td>
 <td>INT</td>
 <td>类型与用户ID保持一致</td>
 </tr>
-<tr class="even">
+<tr>
 <td>创建时间</td>
 <td>updated_at</td>
 <td>TIMESTAMP</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>创建人</td>
 <td>updated_by</td>
 <td>INT</td>
@@ -8484,7 +8484,7 @@ NULL。</li>
 <col style="width: 13%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>字段</th>
 <th>字段英文名</th>
 <th>类型</th>
@@ -8494,7 +8494,7 @@ NULL。</li>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>序号</td>
 <td>id</td>
 <td>INT</td>
@@ -8502,7 +8502,7 @@ NULL。</li>
 <td>√</td>
 <td>AUTO_INCREMENT</td>
 </tr>
-<tr class="even">
+<tr>
 <td>版本号</td>
 <td>version</td>
 <td>VARCHAR(50)</td>
@@ -8510,7 +8510,7 @@ NULL。</li>
 <td>√</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>操作时间</td>
 <td>operate_time</td>
 <td>TIMESTAMP</td>
@@ -8518,7 +8518,7 @@ NULL。</li>
 <td>√</td>
 <td>DEFAULT CURRENT_TIMESTAMP</td>
 </tr>
-<tr class="even">
+<tr>
 <td>责任人</td>
 <td>operate_name</td>
 <td>VARCHAR(50)</td>
@@ -8592,6 +8592,124 @@ href="/2020/11/10/db-specification-3/">MySQL数据库设计规范（三）：PDM
       <tags>
         <tag>MySQL</tag>
         <tag>规范</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL数据库设计规范（二）：SQL语句</title>
+    <url>/2020/11/07/db-specification-2/</url>
+    <content><![CDATA[<p>本文为我们项目中所采用的MySQL数据库设计规范。</p>
+<p>计划分为三篇文章，<a
+href="/2020/11/01/db-specification/">前一篇</a>为数据库的表结构设计，本篇为SQL语句的书写，<a
+href="/2020/11/10/db-specification-3/">第三篇</a>为PDM文档规范。
+<span id="more"></span></p>
+<h1 id="sql书写规则">SQL书写规则</h1>
+<h2 id="语法与格式">语法与格式</h2>
+<ul>
+<li>SQL关键字使用大写字母</li>
+<li>表名、字段名等使用小写字母</li>
+<li>每个单词之间只有一个空格</li>
+<li>避免复杂语句。如为复杂语句，应拆分成多行，并合理控制缩进，保持可读性。</li>
+<li>对于不直观的条件，应使用注释解释含义。</li>
+</ul>
+<h2 id="避免性能问题">避免性能问题</h2>
+<ul>
+<li>SQL语句应尽可能简单，减小响应时间。</li>
+<li>使用查询条件时，值与字段数据类型必须保持一致，例如<code>id</code>为<code>INT</code>类型，查询条件则不应该写成<code>id='1'</code>。</li>
+<li>需要<code>JOIN</code>时，关联的字段的数据类型必须保持一致。</li>
+<li>避免使用<code>NOT IN</code>。该语句会将NULL值查出来。</li>
+<li>避免使用<code>NOT IN</code>、<code>NOT LIKE</code>、<code>&lt;&gt;</code>、<code>!=</code>，否则查询时不走索引，影响性能。</li>
+<li>避免使用<code>OR</code>，尽量改写成<code>IN</code>或<code>UNION ALL</code>。</li>
+<li><code>IN</code>条件的数据项要控制在1000以内。如可以，建议用<code>EXISTS</code>代替<code>IN</code>。</li>
+<li>禁止列运算，例如<code>WHERE age+1&gt;20</code>会导致表扫描，使索引失效，应改写为<code>WHERE age&gt;19</code>。</li>
+<li>禁止使用左模糊与全模糊（即<code>LIKE '%TEXT'</code>、<code>LIKE '%TEXT%'</code>）。如有需要，使用搜索引擎处理。</li>
+<li>禁止<code>SELECT *</code>，必须指明具体字段。<code>SELECT COUNT(*)</code>除外。</li>
+<li>尽量使用<code>LIMIT</code>限定查询结果数量。</li>
+<li>尽量不要在SQL语句中进行计算，而是放入调用参数中，以利用查询缓存，例如<code>WHERE date&lt;CURDATE()</code>改为<code>WHERE date&lt;?</code>然后在Java层传入当前时间。</li>
+<li>书写查询语句后，应采用EXPLAIN等方式进行性能分析。</li>
+</ul>
+<h2 id="避免sql的坑">避免SQL的坑</h2>
+<ul>
+<li>注意：<code>COUNT(列名)</code>不会统计NULL值，而<code>COUNT(1)</code>与<code>COUNT(*)</code>会统计NULL值。</li>
+<li>注意：如果表中没有数据，或者全部为NULL，<code>SUM(列名)</code>、<code>AVG(列名)</code>、<code>MIN(列名)</code>、<code>MAX(列名)</code>等统计函数会返回NULL，而<code>COUNT(列名)</code>只会返回0，不会返回NULL。</li>
+<li>如字段可空，应使用<code>ISNULL()</code>判断是否为NULL，且不能用<code>&lt;&gt;</code>、<code>NOT IN</code>判断取值。</li>
+<li>必须使用<code>#&#123;&#125;</code>、<code>#param#</code>配置参数，禁止使用<code>$&#123;&#125;</code>配置参数，以避免SQL注入。</li>
+<li>严禁人工拼接SQL查询参数，一是容易拼接不全导致语法错误，二是容易产生SQL注入，三是无法利用查询缓存。</li>
+<li>字符计数使用<code>CHARACTER_LENGTH</code>。注意一个汉字不是2字节，不一定是3字节。</li>
+<li>在多表关联查询时，每个字段应总是指定表的名称。也可使用<code>t1</code>、<code>t2</code>等别名简化书写。</li>
+</ul>
+<h2 id="其他">其他</h2>
+<ul>
+<li>在Java代码中，类中的boolean型变量不要加is前缀，is前缀不要使用boolean类型。</li>
+<li>禁止使用函数、存储过程和触发器，在应用程序实现。</li>
+<li>禁止使用外键。约束应在程序中实现。</li>
+<li>禁止在程序代码中使用<code>TRUNCATE TABLE</code>语句清空表。该语句为DDL语句。</li>
+</ul>
+<h1 id="参考资料">参考资料</h1>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsaWJhYmEvcDNjL2Jsb2IvbWFzdGVyL0phdmHlvIDlj5HmiYvlhozvvIjltanlsbHniYjvvIkucGRm">阿里巴巴《Java
+开发手册》（V1.7）<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h1 id="扩展阅读">扩展阅读</h1>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3Fsc3R5bGUuZ3VpZGUvemg=">SQL样式指南<i class="fa fa-external-link-alt"></i></span></li>
+</ul>
+<h1 id="本系列文章">本系列文章</h1>
+<ul>
+<li><a
+href="/2020/11/01/db-specification/">MySQL数据库设计规范（一）：表结构设计</a></li>
+<li><strong>MySQL数据库设计规范（二）：SQL语句</strong></li>
+<li><a
+href="/2020/11/10/db-specification-3/">MySQL数据库设计规范（三）：PDM文档</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+        <tag>规范</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>买房避坑指南：总述</title>
+    <url>/2020/11/22/buy-house-0/</url>
+    <content><![CDATA[<p>现在普通的年轻人已经很难通过个人奋斗来攒一套房了，不仅要掏光四个甚至六个钱包，还要背负巨额贷款。不光如此，由于各种原因，购房者草率地决定买房，之后遭遇了各种问题，“交房即维权”，甚至因自己一时头脑发热而懊悔不已。</p>
+<p>为了避免不必要的损失，我们有必要了解买房过程中的各种坑。即便预算不足，无法完全避免这些坑，至少也不能因为本来可以避免的损失而稀里糊涂地把三代人辛辛苦苦挣到的钱随便交给开发商。</p>
+<p>本系列文章内容较多，但是，面临着几百万甚至几千万的交易，多花一些时间来冷静分析，这完全是有必要而且是有益的。
+<span id="more"></span></p>
+<h1 id="本系列文章的假设">本系列文章的假设</h1>
+<p>为了不让讨论太发散，本系列文章假设：</p>
+<ul>
+<li>你不是土豪：大部分人不得不掏光几个钱包还要背负贷款才能勉强凑出一个房子。</li>
+<li>你要买新房：新房有新房的坑，二手房有二手房的坑，虽然个人更推荐考虑一下二手房，但这不在本文讨论范围内。</li>
+<li>你要买普通住宅，也就是房产证为70年产权，性质为“住宅”或“居住公寓”的房子：<a
+href="/2020/12/28/buy-house-6/">公寓的坑</a>比住宅多，而且坑的性质也很恶劣，所以很多人都强烈建议公寓不能买，只能租。</li>
+<li>你买房是为了居住，不是为了投资：投资有投资的坑，二者不能一概而论。</li>
+</ul>
+<h1 id="总行动方针">总行动方针</h1>
+<p>不要追求完美，有那种房子肯定也买不起，只求少被开发商忽悠。为此需要提前收集情报，获取足够的信息，并识别出各种坑，然后再分析利弊。只要没有无法接受的硬伤，就可以考虑放到候选名单了。</p>
+<p>一般人没有那么多钱，能作出的选择有限，而且每个楼盘都有硬伤，那么你需要对这些硬伤排序，排除掉最不能忍的事情。例如楼盘挨着墓地，但你是无神论者，虽然看墓地感觉不舒服，但并不害怕，但你对噪音比较介意，稍微过个火车就睡不着觉，那么在挨着铁路和挨着墓地的楼盘中，就可以优先选择挨着墓地的楼盘。</p>
+<p>在产生买房想法之前，应当先熟悉自己所在城市和片区，因为城市东西南北发展情况不同，在熟悉自己所处片区的发展情况之前不要轻易买房。如果考虑跨片区买房（例如城西工作城东居住），或者考虑双城生活（例如上海工作昆山居住），那么应当找些时间请假，在早晚高峰时间实地体验通勤，确认有稳定的通勤方式之后再继续决策。</p>
+<p>在考虑新房的同时，也要考虑一下二手房！对于新房来说，一方面近两年房价暴涨，开发商却讲究高周转，所以新房质量越来越差，暴雷的案例也实在太多，而二手房的质量是看得见摸得着的；另一方面，如果房市下行，新房卖不动，那么二手房肯定更难卖（学区房除外）。你要是擅长讲价，砍个几十万大概不是问题。本系列文章针对新房，就不再详细讲二手房了。</p>
+<p>最后，绝对不要轻信置业顾问，他们的话只能当做参考，实际情况还要你自己亲自核实。在没有100%决定买房之前，不要给开发商付任何钱，否则，付钱之前他们像大爷一样伺候你，付钱之后你可以像孙子一样被他们欺负！</p>
+<h1 id="本系列目录">本系列目录</h1>
+<ul>
+<li><strong>总述</strong></li>
+<li><a href="/2020/11/29/buy-house-1/">购房资格</a></li>
+<li><a href="/2020/12/05/buy-house-2/">地产项目情况</a></li>
+<li><a href="/2020/12/12/buy-house-3/">项目周围环境</a></li>
+<li><a href="/2020/12/19/buy-house-4/">售楼处里的套路</a></li>
+<li><a href="/2020/12/26/buy-house-5">关于合同</a></li>
+<li><a href="/2020/12/28/buy-house-6/">不要买公寓！</a></li>
+<li><a href="/2021/07/12/buy-house-7/">房贷贷多少合适</a></li>
+<li><a href="/2021/08/15/buy-house-8/">要不要买车位</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>楼市</category>
+      </categories>
+      <tags>
+        <tag>买房</tag>
       </tags>
   </entry>
   <entry>
@@ -8676,48 +8794,6 @@ href="/2020/11/07/db-specification-2/">MySQL数据库设计规范（二）：SQL
       <tags>
         <tag>MySQL</tag>
         <tag>规范</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>买房避坑指南：总述</title>
-    <url>/2020/11/22/buy-house-0/</url>
-    <content><![CDATA[<p>现在普通的年轻人已经很难通过个人奋斗来攒一套房了，不仅要掏光四个甚至六个钱包，还要背负巨额贷款。不光如此，由于各种原因，购房者草率地决定买房，之后遭遇了各种问题，“交房即维权”，甚至因自己一时头脑发热而懊悔不已。</p>
-<p>为了避免不必要的损失，我们有必要了解买房过程中的各种坑。即便预算不足，无法完全避免这些坑，至少也不能因为本来可以避免的损失而稀里糊涂地把三代人辛辛苦苦挣到的钱随便交给开发商。</p>
-<p>本系列文章内容较多，但是，面临着几百万甚至几千万的交易，多花一些时间来冷静分析，这完全是有必要而且是有益的。
-<span id="more"></span></p>
-<h1 id="本系列文章的假设">本系列文章的假设</h1>
-<p>为了不让讨论太发散，本系列文章假设：</p>
-<ul>
-<li>你不是土豪：大部分人不得不掏光几个钱包还要背负贷款才能勉强凑出一个房子。</li>
-<li>你要买新房：新房有新房的坑，二手房有二手房的坑，虽然个人更推荐考虑一下二手房，但这不在本文讨论范围内。</li>
-<li>你要买普通住宅，也就是房产证为70年产权，性质为“住宅”或“居住公寓”的房子：<a
-href="/2020/12/28/buy-house-6/">公寓的坑</a>比住宅多，而且坑的性质也很恶劣，所以很多人都强烈建议公寓不能买，只能租。</li>
-<li>你买房是为了居住，不是为了投资：投资有投资的坑，二者不能一概而论。</li>
-</ul>
-<h1 id="总行动方针">总行动方针</h1>
-<p>不要追求完美，有那种房子肯定也买不起，只求少被开发商忽悠。为此需要提前收集情报，获取足够的信息，并识别出各种坑，然后再分析利弊。只要没有无法接受的硬伤，就可以考虑放到候选名单了。</p>
-<p>一般人没有那么多钱，能作出的选择有限，而且每个楼盘都有硬伤，那么你需要对这些硬伤排序，排除掉最不能忍的事情。例如楼盘挨着墓地，但你是无神论者，虽然看墓地感觉不舒服，但并不害怕，但你对噪音比较介意，稍微过个火车就睡不着觉，那么在挨着铁路和挨着墓地的楼盘中，就可以优先选择挨着墓地的楼盘。</p>
-<p>在产生买房想法之前，应当先熟悉自己所在城市和片区，因为城市东西南北发展情况不同，在熟悉自己所处片区的发展情况之前不要轻易买房。如果考虑跨片区买房（例如城西工作城东居住），或者考虑双城生活（例如上海工作昆山居住），那么应当找些时间请假，在早晚高峰时间实地体验通勤，确认有稳定的通勤方式之后再继续决策。</p>
-<p>在考虑新房的同时，也要考虑一下二手房！对于新房来说，一方面近两年房价暴涨，开发商却讲究高周转，所以新房质量越来越差，暴雷的案例也实在太多，而二手房的质量是看得见摸得着的；另一方面，如果房市下行，新房卖不动，那么二手房肯定更难卖（学区房除外）。你要是擅长讲价，砍个几十万大概不是问题。本系列文章针对新房，就不再详细讲二手房了。</p>
-<p>最后，绝对不要轻信置业顾问，他们的话只能当做参考，实际情况还要你自己亲自核实。在没有100%决定买房之前，不要给开发商付任何钱，否则，付钱之前他们像大爷一样伺候你，付钱之后你可以像孙子一样被他们欺负！</p>
-<h1 id="本系列目录">本系列目录</h1>
-<ul>
-<li><strong>总述</strong></li>
-<li><a href="/2020/11/29/buy-house-1/">购房资格</a></li>
-<li><a href="/2020/12/05/buy-house-2/">地产项目情况</a></li>
-<li><a href="/2020/12/12/buy-house-3/">项目周围环境</a></li>
-<li><a href="/2020/12/19/buy-house-4/">售楼处里的套路</a></li>
-<li><a href="/2020/12/26/buy-house-5">关于合同</a></li>
-<li><a href="/2020/12/28/buy-house-6/">不要买公寓！</a></li>
-<li><a href="/2021/07/12/buy-house-7/">房贷贷多少合适</a></li>
-<li><a href="/2021/08/15/buy-house-8/">要不要买车位</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>楼市</category>
-      </categories>
-      <tags>
-        <tag>买房</tag>
       </tags>
   </entry>
   <entry>
@@ -8970,6 +9046,159 @@ href="/2020/12/28/buy-house-6/">公寓的坑</a>比住宅多，而且坑的性�
       </tags>
   </entry>
   <entry>
+    <title>买房避坑指南（四）：售楼处里的套路</title>
+    <url>/2020/12/19/buy-house-4/</url>
+    <content><![CDATA[<p>确认买房之后，就要前往售楼处详细了解楼盘情况并付钱购买。但售楼处充满了经过精心布置的陷阱，本文则会讲述如何练就一副火眼金睛。</p>
+<span id="more"></span>
+<h1 id="务必先做好准备再去售楼处">务必先做好准备再去售楼处</h1>
+<h2 id="查一下网签">查一下网签</h2>
+<p>本节不适用新开盘的情况，因为刚开盘的话网签量肯定是零。网签与销售之间有较长的时间延迟，开过几波以后才能查到之前开盘时的网签情况。</p>
+<p>有些城市提供了住宅项目信息公示网站（由所在城市的住房和城乡建设局提供），可通过此类网站查询网签情况。对于已经开盘一段时间的，或者分期开发的，就可以相应网站查网签情况，虽然有延迟，但其数量级仍然可以反映小区卖得好不好。在相同地段之内比较，卖得好可能是炒的，但卖得不好肯定有硬伤。</p>
+<h2 id="了解建筑许可">了解建筑许可</h2>
+<p>项目必须在取得许可后方可动工，而许可是需要公示的。因此，可以前往工地门口查看公示的建筑许可和平面图，也可以提前在网上搜索建筑许可（所在城市的自然资源和规划局官方网站上面有，但可能需要借助搜索引擎搜索），名称可能是“建设工程规划许可”、“建设项目批前公示”等。</p>
+<p>因为官方网站会提供超清版本文件下载，建议去官方网站搜索下载，但因为工程名与小区名可能不一致，可能你还是需要用其他途径来了解工程项目叫什么名字。</p>
+<p>例如：</p>
+<p><img src="/img/2020-12-19-buy-house-4/public1.jpg" /></p>
+<p><img src="/img/2020-12-19-buy-house-4/public2.jpg" /></p>
+<p><img src="/img/2020-12-19-buy-house-4/public3.jpg" /></p>
+<p>不要把它们当成形式主义展板。仔细看这组图，你就可以清晰地了解到土地用途、占地面积、容积率、楼盘分布、小区内物业设施、光照情况等信息，而且还能少被置业顾问忽悠。</p>
+<h2 id="带把卷尺">带把卷尺</h2>
+<p>后文会详细讲到样板间的各种套路。预防样板间套路，你需要准备一副卷尺，而且卷尺也就几块钱，买了不会吃亏。</p>
+<p>买完之后，拿卷尺好好测量一下你现在居住的房间的尺寸，以及主要家具的尺寸，对距离有个印象，这样到时候置业顾问跟你说两米五的时候你就知道是宽还是窄了。</p>
+<h2 id="带上平板电脑">带上平板电脑</h2>
+<p>如果你手头有一个平板电脑，建议你把平板电脑带上。现场会有各类文字公示内容，特别是那种不想让你看但又不得不展示的，拿平板看会比拿手机看着舒服，也有利于深入地思考。</p>
+<h2 id="装一个地图app">装一个地图APP</h2>
+<p>区位图的尺寸是骗人的，有些不利配套也会刻意隐瞒，所以要用规范的地图APP来查看周围配套与实际距离。</p>
+<p>当然地图APP也不是全面的，例如建设中的工地以及公墓、看守所、监狱、军事基地都不会在地图上表示，所以仍然要实地现场查看。</p>
+<h2 id="小心车牌识别">小心车牌识别</h2>
+<p>你的车开进售楼处之时，也是骚扰电话登记之时：有些售楼处会安装车牌识别系统，默默地记下你的车牌号和联系方式，还会与其他开发商共享。因车辆识别这件事情难以取证，即便投诉也不太可能解决（除非你愿意耗费大量时间精力与金钱跟开发商死磕），所以建议开车来的人把车放稍微远一点的地方，别放售楼处附近，也别让售楼处保安看到你上下车。</p>
+<p>个人建议，如果距离在接受范围之内的话，可以考虑骑车去楼盘与售楼处。与开车相比，骑车的时候，对小区位置、距离与周围环境会感受得更加直观。</p>
+<h2 id="小心人脸识别">小心人脸识别</h2>
+<p>去售楼处通常要先登记，确认渠道并判断应该给你什么样的优惠。为了防止你作弊，有些开发商还会用些科技手段，在售楼处偷偷地安装人脸识别系统，然后根据人脸识别结果来确定优惠多少，而消费者对人脸识别毫不知情，即使带上口罩系统也能进行识别，只能靠戴头盔预防——</p>
+<figure>
+<img src="/img/2020-12-19-buy-house-4/face.jpg" alt="人脸识别" />
+<figcaption aria-hidden="true">人脸识别</figcaption>
+</figure>
+<p>这同样是你投诉或起诉也难以自行解决的行业乱象。对此只能建议，如果想通过中介等渠道途径购房，那么不要自己前往售楼处，甚至不要靠近售楼处，否则就拿不到优惠了。</p>
+<h2 id="提前去工地附近转一圈">提前去工地附近转一圈</h2>
+<p>准备进入售楼处之前，应当找到楼盘所在工地，在工地周围转一圈，并且扩大到周围2～3km范围看一下，了解周围环境如何。详细关注点可<a
+href="/2020/12/12/buy-house-3/">参见前文</a>。</p>
+<p>有些售楼处和实际工地并不在一起，因此要把工地实际位置找出来。售楼处位于车水马龙的好地段，而实际的楼盘可能在一两千米之外的一片荒地之中。</p>
+<h2 id="吃饱喝足">吃饱喝足</h2>
+<p>在售楼处核实信息是一场硬仗，所以先吃饱喝足之后再过去，以免体力不足而主动偷懒。当然不用喝太多水，只要不是去维权的，售楼处会主动给你端茶送水。</p>
+<h2 id="稍微做点功课">稍微做点功课</h2>
+<p>售楼处销售都是“见人说人话，见鬼说鬼话”，如果你房产方面事情懂的不多，对片区也不熟悉，他们就会使劲地忽悠你。如果你做足了功课再过去，他们至少就不敢太离谱地忽悠你了。</p>
+<h1 id="区位图与沙盘的套路">区位图与沙盘的套路</h1>
+<h2 id="区位图">区位图</h2>
+<p>区位图可以直观地展示小区所处位置，以及小区周围的配套及城市功能区域。为了外表美观、突出重点，区位图会做出一些变形调整。</p>
+<p>但是，区位图经常是严重变形，甚至变得非常夸张。有多夸张呢？举个例子，将区位图代入到真实地图中，标记相应距离，可以得到：</p>
+<figure>
+<img src="/img/2020-12-19-buy-house-4/map.jpg" alt="区位图" />
+<figcaption aria-hidden="true">区位图</figcaption>
+</figure>
+<p>小区距离北面的主干道看起来不远，画起来比小区宽度窄，实际上要800米，是小区宽度的2倍。向西前往“唐冶生活区”其他位置还需要至少再走2km（因为中间有山）。而“唐冶生活区”与“中央商务区”看似不远，还能互相辐射，两地实际上却相距6km以上。“中央商务区”的高新万达广场看似位于二环东路与岔路口中间，其实它距离岔路口只有1km，距离二环东路路口却有5km。所以在“唐冶生活区”或“高新东区”工作的通勤距离都不一定很近，在“中央商务区”或“龙奥政务区”工作则要仔细考虑一下通勤距离到底能不能接受了。</p>
+<p>当然区位图的骗局也好识别，就像上面的楼盘，只要你找辆自行车从西边的二环东路沿着主干道骑到东边的售楼处，你就能深刻地感受到区位图变形得有多么夸张了。</p>
+<h2 id="沙盘">沙盘</h2>
+<p>区位图主要用来描述小区周围的环境，而沙盘主要用来描述小区内部的环境。</p>
+<p>为了营造一种高级小区的感觉，沙盘也会经过精心美化，例如：</p>
+<ul>
+<li>沙盘整体搞得郁郁葱葱，就好像进入了花园城市新加坡。实际上交付的时候只有光秃秃的六棵树。</li>
+<li>沙盘上看各楼排布稀疏，实际上小区密密麻麻，颇有香港九龙城寨遗风。</li>
+<li>沙盘上看周围视野开阔，实际上南边是严重挡光的高层写字楼。仔细查看，在沙盘上那栋楼只是矮矮的水晶块。</li>
+<li>沙盘上看不到地上停车位，实际上小区内部有地上停车位，人车不分流。</li>
+<li>你所要买的楼挨着变电站、垃圾回收站等设施，沙盘上没有体现。</li>
+<li>跟区位图一样，沙盘的比例尺也是变形的。</li>
+</ul>
+<p>看沙盘时，如果小区内部或小区南部有水晶块，务必较真地问一下那是什么楼，到底是什么用途，到底有多少层。</p>
+<p>就算沙盘所有坑都识别出来了，你可能还会碰到这种无法预防的情况——</p>
+<figure>
+<img src="/img/2020-12-19-buy-house-4/lake.jpg" alt="人工湖" />
+<figcaption aria-hidden="true">人工湖</figcaption>
+</figure>
+<h2 id="周围环境">周围环境</h2>
+<p>区位图和沙盘还有一类套路：虚假的周围配套。</p>
+<p>虚假主要体现在三方面。</p>
+<p>第一方面是距离作假：以地铁站为例，从区位图或沙盘来看好像在附近，实际距离2km，而且还不能走直线，需要稍微绕点路，早上上班光是走到地铁站就要花半小时。所以要用你的地图APP来核实实际距离。</p>
+<p>第二方面是把政府规划当成既成事实：既然是规划，说明还可以“根据实际情况”调整甚至取消，而这种调整或取消不是开发商能够决定的事情。</p>
+<p>第三方面是隐瞒不利因素，例如将南部已经建设或即将建设的大高层标记成矮矮的水晶块。</p>
+<p>仍然以地铁为例。买不起楼的人，通常会被挤到郊区去买楼，而身重要处郊区，地铁就会变得极其重要。实际上，地铁从规划到审批再到落地可能要长达十年时间，如果国家政策收紧，地铁规划可能还会延迟或取消。因此，除非有政府正式发布的官方消息，或者亲眼看到已经开始施工或正式运营，不要相信周围一定会有地铁。否则的话，如果地铁真的改道或取消了，你就算去砸售楼处也起不到任何作用。</p>
+<p>此外有些配套的意义是不大的，例如火车站、机场，你不会天天去坐火车飞机，但是你可以天天感受到它们的噪音；例如离市政府近，你不会天天去政府办事，但你可以感受到周围配套缺乏，毕竟市政府周围经常很空旷；例如离大学近，离得再近你也得靠高考考进去才行。这里还要点名融创文旅城（原万达文旅城），配套游乐园、商业街、酒店群，这些都是城市级的配套，旅游景点的设定，你作为小区业主，这辈子能去享受几回呢？</p>
+<p>所以在售楼处就要意识这些问题，不要等到回家之后才想起来配套“其实并没有什么卵用”。</p>
+<h1 id="户型图的套路">户型图的套路</h1>
+<p>户型的内容比较复杂，本文不展开讨论了，只讲几个坑。</p>
+<p>北方人一般都讲究“南北通透”，可是你得检查一下是不是真的南北通透，例如：</p>
+<ul>
+<li>北边是厨房、厕所：平时不会天天开着厨房窗户或厕所窗户通风吧？</li>
+<li>北边是连廊：中间户北边通常有连廊，而且连廊属于消防设施，建楼时候不能取消。平时楼房肯定不会天天起火，但可以有变态天天到连廊偷窥你家生活，而且连廊可能会挡光，所以打算买中间户的话要留意这个问题。</li>
+<li>流线不畅：从南到北需要拐弯才能到达。如果住宅楼南北遮挡严重，这样通风也会不顺畅，不能算是南北通透了。</li>
+</ul>
+<p>户型图通常只画了单个房间情况，没有标示整体楼层的情况。所以要结合工地现场确认一下是几梯几户，户型是中间户还是边户，东西两侧是否有其他住户，中间户向外突出多少，遮挡如何。有些高层还会有腰线，腰线太长的话会稍微有些挡光，介意的话要仔细问一下腰线的问题。</p>
+<p>户型图还经常存在一个严重问题：上面没标尺寸。对吧？看到户型图没尺寸，当然要较真地问一下尺寸。那为什么说要“较真地”问呢？别忘了墙也占尺寸。另外要留意公摊的问题，100平的房子，去掉公摊，实际上只剩70多平，如果户型设计不好，三室每个屋子会变得很挤。</p>
+<p>有硬伤的奇葩户型（例如南北太深、房间不是长方形而是有尖角形状）就别买了，住起来不舒服的。虽然经过精心设计以后奇葩户型也可以变得精致，但改造所需的设计费和装修费一定会让你后悔当初为什么不稍微多花点钱买个好点户型的房子。</p>
+<p>当置业顾问说长三米的时候，你说到底是宽了，还是窄了？这个无法回答，不同人感受不一样，而且跟你后续的装修风格、后续要布置的家具甚至灯光颜色都有关系，所以前文会让你提前拿尺子在自己家感受一下。</p>
+<h1 id="样板间的套路">样板间的套路</h1>
+<p>样板间主要是用来展示房间内部情况。</p>
+<h2 id="装修">装修</h2>
+<p>为了吸引你买房子，开发商通常会花个几十万到几百万来做装修，房间的效果变得非常高端大气上档次、低调奢华有内涵。可是，既然买不起房子，那装修肯定也要省钱，最终当然达不到样板间的效果。</p>
+<p>参观样板间时，别拿样板间的样子想象自己未来的家，而且需要特别留意“非交付标准”五个字，毕竟去掉非交付标准设施之后剩下的样子也不见得是未来实际交付的样子。</p>
+<p>当然你还是可以给样板间拍个照，把房间的每个方面、每个角落都拍到，虽然将来不能用于维权，但是可以在你自己装修时稍微参考参考。</p>
+<h2 id="尺寸">尺寸</h2>
+<p>人们都喜欢大房子，为了吸引你买，样板间当然要显得宽敞。房间去掉公摊之后实际面积就那么点，想显得宽敞，那当然要在尺寸方面造假。</p>
+<p>有些开发商比较有诚意，直接用实体样板间（样板间设置在正在修建的楼内），这样房间尺寸自然是真实的。但是，房间尺寸不造假，那家具呢？比方说，双人床尺寸是1.8x2m，开发商做成1.6x1.8m，房间长宽两个方向不就都宽出20cm了吗？</p>
+<p>一般开发商没那么有诚意，样板间是另外订做的，那样板间的房间尺寸就经常比实际尺寸宽，例如宽20厘米，墙再比实际尺寸薄一点，床窄20厘米，床头柜窄10厘米，这样总共就多出了50厘米。不光如此，屋门拆掉，屋内再放一面镜子，你看，豪宅的效果出来了！</p>
+<p>所以本文一开始就提醒，前往售楼处之前务必带把卷尺。虽然<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29odS5jb20vYS80NDMzNDAwNTRfNzE5MTU5">卷尺也有造假版<i class="fa fa-external-link-alt"></i></span>，但你自己买的尺子肯定比做样板间时候用的尺子靠谱吧？</p>
+<h1 id="公示栏的套路">公示栏的套路</h1>
+<p>按照有关部门规定，有些信息是要公示的，开发商他们不得不遵守这个规定。但是，开发商可以把这些公示信息放到角落里挂着，让你不特意找就找不到，找到了也得站着看，根本没有耐心看下去。</p>
+<p>既然放到不起眼的地方，我们当然更要认真地看，拿手机拍下来，然后靠在舒服的沙发慢慢看，任凭置业顾问如何怂恿，先把文字看明白再说。</p>
+<h2 id="不利因素">不利因素</h2>
+<p><a
+href="/2020/12/12/buy-house-3/">前文</a>已详细介绍不利因素，此处不再赘述。</p>
+<h2 id="居住公寓">居住公寓</h2>
+<p>居住公寓指光照不足的房间。有些房子挡光严重，光照常年不足，甚至到了十多楼还是严重挡光，因此选较低楼层时要特别留意这个问题，介意采光的话慎买。</p>
+<h2 id="安置房">安置房</h2>
+<p>有些小区会按照政府要求配建一些安置房。如果介意原住民回迁或外来租户，务必留意公示中是否有“安置房”、“保障房”、“人才公寓”等字样。</p>
+<h2 id="合同条文">合同条文</h2>
+<p>合同通常是按政府标准制定的，并且需要在售楼处进行公示，所以一般都比较公平。但是，除了合同，开发商还会让你签订补充协议，而补充协议内容可以随意制定，要多不公平就可以有多不公平，而且这两类文件会放到让人没有兴趣留意观看的地方，让你没有心思较真。<a
+href="/2020/12/26/buy-house-5/">后一篇文章</a>梳理了合同条文中的坑。</p>
+<h1
+id="售楼处现场与置业顾问营造气氛的套路">售楼处现场与置业顾问营造气氛的套路</h1>
+<p>置业顾问会催你，不买就快没了，平时在朋友圈也会发朋友圈，说XX政策调整，XX区域发展，不赶紧上车就要涨价。到了售楼处，也是敲锣打鼓地宣布成交多少多少。</p>
+<p>现在是2020年，大城市的楼市基本上都凉了，国家也在重点维稳，不少城市政策都在收紧，就算稍微想放松一点，也会很快上演政策“一日游”。小城市或许还红火但用不了多久也会跟着大城市变凉，所以这些只是吓唬人的促销套路。现在真的不用着急——如果房子好卖，他们还需要促销吗？什么事情都不做房子也不愁卖吧！正是因为卖不动，才会靠各种手段忽悠人买嘛！</p>
+<h1 id="特价房的套路">特价房的套路</h1>
+<p>特价房，不仅便宜，还会给人“正好能捡漏”的感觉。</p>
+<p>难道真的是让你捡漏吗？当然不是了！</p>
+<p>既然是特价房，说明肯定有便宜的原因，例如采光很差（差到15层还是居住公寓），或者挨着设备层，或者紧邻铁路线、高架桥、垃圾场等不利因素，或者跟安置居民混住，反正绝不是开发商良心发现或者简单地进行促销。</p>
+<p>就算手里没钱，想靠捡漏省些钱，也要打听清楚便宜的原因之后再考虑入手。</p>
+<h1
+id="关于展示宣传资料与置业顾问介绍">关于展示、宣传资料与置业顾问介绍</h1>
+<p>展示、宣传资料与置业顾问介绍都不具备法律效力，拿去打官司也不能当作证据。但是，你仍然可以尽量收集宣传资料，给置业顾问偷偷录音，给售楼处展板、区位图和样板间拍照，作为日后控诉虚假宣传众多证据中的一部分呈现。</p>
+<p>当然，你也完全可以假定置业顾问所有的话都是放屁，这样在交房的时候你就不会比其他被忽悠的业主失望了。</p>
+<h2 id="如何了解楼盘的问题">如何了解楼盘的问题</h2>
+<p>其实你是可以问到到房子或开发商的负面评论的。如何操作呢？假如同一片区有A、B两家开发商的盘，你对A有意愿，那么你可以去B的售楼处，假装对B房子感兴趣，顺便跟那个B的销售说，“我朋友最近对A比较感兴趣，推荐我买A”，B的销售就会很自然地把A的问题告诉你。无论是客观事实还是恶意中伤，先记下来，然后回家再慢慢分析。</p>
+<h1 id="不要急着交定金">不要急着交定金！</h1>
+<p>交定金之前，开发商会想办法伺候你，让你舒舒服服地交出那笔钱。一旦交了定金，你就从爷爷变成了孙子。讨钱浪费精力，放弃又浪费金钱，只能硬着头皮继续买，很多人就这样，明知道要被坑，结果还是被坑了，所以不要急着交定金。</p>
+<p>什么时候交定金呢？当你摸清楚所有情报，了解各种坑之后还能下定决心购买，你就可以交定金了。</p>
+<h1 id="本系列目录">本系列目录</h1>
+<ul>
+<li><a href="/2020/11/22/buy-house-0/">总述</a></li>
+<li><a href="/2020/11/29/buy-house-1/">购房资格</a></li>
+<li><a href="/2020/12/05/buy-house-2/">地产项目情况</a></li>
+<li><a href="/2020/12/12/buy-house-3/">项目周围环境</a></li>
+<li><strong>售楼处里的套路</strong></li>
+<li><a href="/2020/12/26/buy-house-5">关于合同</a></li>
+<li><a href="/2020/12/28/buy-house-6/">不要买公寓！</a></li>
+<li><a href="/2021/07/12/buy-house-7/">房贷贷多少合适</a></li>
+<li><a href="/2021/08/15/buy-house-8/">要不要买车位</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>楼市</category>
+      </categories>
+      <tags>
+        <tag>买房</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>买房避坑指南（五）：关于合同</title>
     <url>/2020/12/26/buy-house-5/</url>
     <content><![CDATA[<p>本文主要列举合同中一些坑。虽然一般情况下购买者很难在短时间内把整个合同条文都理解清楚，而且即便知道合同内容不合理，也无法与开发商就合同内容进行谈判，但我们仍然有必要清楚我们将来会如何被开发商坑骗。
@@ -9051,79 +9280,74 @@ href="/2020/12/28/buy-house-6/">公寓的坑</a>比住宅多，而且坑的性�
       </tags>
   </entry>
   <entry>
-    <title>MySQL数据库设计规范（二）：SQL语句</title>
-    <url>/2020/11/07/db-specification-2/</url>
-    <content><![CDATA[<p>本文为我们项目中所采用的MySQL数据库设计规范。</p>
-<p>计划分为三篇文章，<a
-href="/2020/11/01/db-specification/">前一篇</a>为数据库的表结构设计，本篇为SQL语句的书写，<a
-href="/2020/11/10/db-specification-3/">第三篇</a>为PDM文档规范。
-<span id="more"></span></p>
-<h1 id="sql书写规则">SQL书写规则</h1>
-<h2 id="语法与格式">语法与格式</h2>
+    <title>买房避坑指南（六）：不要买公寓！</title>
+    <url>/2020/12/28/buy-house-6/</url>
+    <content><![CDATA[<p>有些人实在没钱，凑住宅钱费劲，看到公寓价格相对便宜，想买套公寓过渡。有些女性因为属于不婚族，或者害怕被男方抛弃，也想出于防御目的买一套公寓备用。虽然想法很好，但是本文仍然要提醒，除非你真的是地产行家或投资行家，十分清楚自己要做什么事情，否则无论如何也不要买公寓！</p>
+<span id="more"></span>
+<h1 id="说明">说明</h1>
+<p>本文所提“公寓”，指用地性质为“商务用地”、产权通常为四十年、房产证上明确为“公寓”二字的商务住宅。</p>
+<p>另外还有一种“公寓”叫做“居住公寓”，那并不是本文所提到的“公寓”，只是采光很差的普通住宅，除此之外都一样。这种房子不在本文讨论范围内。</p>
+<h1 id="公寓的坑">公寓的坑</h1>
+<p>公寓有很多坑，每一个坑都是性质恶劣的坑，所以无论置业顾问说得再动听，你也不要头脑一热就去买公寓。</p>
+<h2 id="产权问题">产权问题</h2>
+<p>土地有产权期限。虽然到期之后政府不会直接把你轰出去，但是该办的手续还是要办的。住宅可以自动续期，但公寓作为商业用地，理论上讲需要重新交齐土地出让金，到时候这笔费用可能要由业主来承担。而且，产权期限从开发商拿地之后开始起算，不是从交房后开始起算，有些开发商拿到地之后捂着不开发，这样四十年产权已经白白用掉很多年了。</p>
+<p>房产证上写着“公寓”二字是无法落户的（备注：有些城市能落）。独居的话无所谓，但是如果有孩子，孩子会因为没有户口而不能上学！有人说能上学？那应该是有人通过各种合法与非法手段争取来的，不像普通住宅一样有了户口就能轻松办理。</p>
+<h2 id="贷款困难">贷款困难</h2>
+<p>公寓的性质是商业，因此贷款要比普通住宅困难。例如：</p>
 <ul>
-<li>SQL关键字使用大写字母</li>
-<li>表名、字段名等使用小写字母</li>
-<li>每个单词之间只有一个空格</li>
-<li>避免复杂语句。如为复杂语句，应拆分成多行，并合理控制缩进，保持可读性。</li>
-<li>对于不直观的条件，应使用注释解释含义。</li>
+<li>不能使用公积金贷款。</li>
+<li>首付比例比普通住宅高，撑死也只能贷到五成房款。</li>
+<li>贷款需要在10年内还清。</li>
 </ul>
-<h2 id="避免性能问题">避免性能问题</h2>
+<p>尽管公寓总价比住宅小得多，但是背上了贷款，会对你再次买住宅贷款造成不利影响。如果愿意全款买倒是无所谓。</p>
+<h2 id="法律风险">法律风险</h2>
+<p>不要小瞧法律风险！如果没有合法的手续，一旦发生纠纷，打官司很难打赢，找政府他们也不会替你说话，弄不好还会把你当成维稳对象。</p>
+<p>商住公寓毕竟还是一个合法的东西，虽然有各种坑，至少还能办得出房产证。如果是“商改住”，即商业用地改为住宅（或者按商业住宅建设，等政府验收完成后再偷偷改成公寓），这本身就有很大法律风险，容易连房产证都办不出来。</p>
+<p>有些城市的限购限贷政策中，商住公寓也会被计入限购限贷数量当中。有置换需求的务必要留意有关政策，而且建议靠租房而非买房来过渡。</p>
+<h2 id="被套牢">被套牢</h2>
+<p>随便上网上搜索一下，就可以发现投资公寓的收益实在不好。</p>
+<p>公寓收益方式主要分为出租和转卖两种。</p>
+<p>先说出租。如果公寓位于商业繁华的地带，交通便利，居住需求极高，你还能靠收租金来维持。如果公寓位于郊区，交通不便，周围荒无人烟，或者周围住宅密集，甚至藏着一个城中村，你会发现连出租都租不出去。一边要及时还房贷，另一边却收不到租金，这种感觉会非常痛苦。</p>
+<p>即便公寓能勉强租出去，你也不能指望租客的素质有多高。租公寓的租客平均素质更低，如果经常损坏房屋设施的话，每次转手就容易产生额外维修费用。</p>
+<p>再说转卖。如果想靠低买高卖来赚差价，会面临两个严重的问题：</p>
 <ul>
-<li>SQL语句应尽可能简单，减小响应时间。</li>
-<li>使用查询条件时，值与字段数据类型必须保持一致，例如<code>id</code>为<code>INT</code>类型，查询条件则不应该写成<code>id='1'</code>。</li>
-<li>需要<code>JOIN</code>时，关联的字段的数据类型必须保持一致。</li>
-<li>避免使用<code>NOT IN</code>。该语句会将NULL值查出来。</li>
-<li>避免使用<code>NOT IN</code>、<code>NOT LIKE</code>、<code>&lt;&gt;</code>、<code>!=</code>，否则查询时不走索引，影响性能。</li>
-<li>避免使用<code>OR</code>，尽量改写成<code>IN</code>或<code>UNION ALL</code>。</li>
-<li><code>IN</code>条件的数据项要控制在1000以内。如可以，建议用<code>EXISTS</code>代替<code>IN</code>。</li>
-<li>禁止列运算，例如<code>WHERE age+1&gt;20</code>会导致表扫描，使索引失效，应改写为<code>WHERE age&gt;19</code>。</li>
-<li>禁止使用左模糊与全模糊（即<code>LIKE '%TEXT'</code>、<code>LIKE '%TEXT%'</code>）。如有需要，使用搜索引擎处理。</li>
-<li>禁止<code>SELECT *</code>，必须指明具体字段。<code>SELECT COUNT(*)</code>除外。</li>
-<li>尽量使用<code>LIMIT</code>限定查询结果数量。</li>
-<li>尽量不要在SQL语句中进行计算，而是放入调用参数中，以利用查询缓存，例如<code>WHERE date&lt;CURDATE()</code>改为<code>WHERE date&lt;?</code>然后在Java层传入当前时间。</li>
-<li>书写查询语句后，应采用EXPLAIN等方式进行性能分析。</li>
+<li>卖不掉：假如差不多攒够钱，急需把公寓换成现金时，你会发现你这套公寓换不出钱。要知道有些城市二手住宅都不一定好卖，甚至得赔钱卖，缺点更多的公寓也不太有理由比普通住宅好卖。</li>
+<li>转手费用高：即便能找到接盘侠，因为公寓是商业性质，转手时要产生较高的交易税。通过中介买卖，你还要额外再付中介费。就算房子涨价，收益很容易就被这些费用给冲没了，更何况公寓是要持续贬值的。</li>
 </ul>
-<h2 id="避免sql的坑">避免SQL的坑</h2>
+<p>所以把钱放到银行存定期也比直接扔给公寓靠谱，虽然放着会贬值，需要取钱的时候也会损失些利息，但至少能随时取出来，不像公寓把钱扔进去就套牢了。</p>
+<h2 id="其他问题">其他问题</h2>
+<p>相比于以上各项，下面都是些小问题了：</p>
 <ul>
-<li>注意：<code>COUNT(列名)</code>不会统计NULL值，而<code>COUNT(1)</code>与<code>COUNT(*)</code>会统计NULL值。</li>
-<li>注意：如果表中没有数据，或者全部为NULL，<code>SUM(列名)</code>、<code>AVG(列名)</code>、<code>MIN(列名)</code>、<code>MAX(列名)</code>等统计函数会返回NULL，而<code>COUNT(列名)</code>只会返回0，不会返回NULL。</li>
-<li>如字段可空，应使用<code>ISNULL()</code>判断是否为NULL，且不能用<code>&lt;&gt;</code>、<code>NOT IN</code>判断取值。</li>
-<li>必须使用<code>#&#123;&#125;</code>、<code>#param#</code>配置参数，禁止使用<code>$&#123;&#125;</code>配置参数，以避免SQL注入。</li>
-<li>严禁人工拼接SQL查询参数，一是容易拼接不全导致语法错误，二是容易产生SQL注入，三是无法利用查询缓存。</li>
-<li>字符计数使用<code>CHARACTER_LENGTH</code>。注意一个汉字不是2字节，不一定是3字节。</li>
-<li>在多表关联查询时，每个字段应总是指定表的名称。也可使用<code>t1</code>、<code>t2</code>等别名简化书写。</li>
+<li>户型问题：不通透。</li>
+<li>房屋质量问题：例如装修质量不好，Loft高度不够等。住宅有的维权，公寓也可以有。</li>
+<li>挤：当你早上上班的时候，你就会感受到，你不光要在公司的写字楼挤电梯，刚出家门就要跟着一大群人挤电梯，一万人挤那三四部电梯，你甚至可能会感觉爬楼梯（就是趴在地上那个爬）都比坐电梯快。</li>
+<li>贵：公寓水电费按商业水电收费，价格是普通水电的两三倍。</li>
+<li>没有燃气：有燃气？那应该用不正当手段装上去的，给消防部门打电话举报一下就会被拆了。</li>
+<li>如果物业管理差劲，你还会发现，碰上个扰民的邻居更让人痛苦。如果是美容美发还好，要是KTV、会所、酒店，或者是XXOO的场所……</li>
 </ul>
-<h2 id="其他">其他</h2>
+<h1 id="如果还是想买一套">如果还是想买一套？</h1>
+<p>关于公寓的坑，本文只是简单总结，写得很粗，如果还是想购买，请找一些写得更深入的分析文章来决策。</p>
+<p>对于缺钱的人来说，公寓不能买，但是可以租别人的公寓。这样不仅少了大量损失，还能帮房东少赔点钱（注意租公寓往往比合租住宅贵），一举两得。不过租房之前还是建议多跑一跑，也许找合租或者老破小整租更省钱。</p>
+<p>对于可能会进入长期单身状态的人来说，如果你还没到被轰走的时候，请把买公寓的钱放到银行里，实在到了被赶出家门的时候可以先临时找个地方租，然后再好好规划一下人生，仔细了解公寓的坑之后再掏钱出来买公寓。</p>
+<p>对于不差钱的人来说，公寓可以买来出租，但需要仔细选择地段、产品，精细地计算房租，否则很容易得不偿失。另外也可以找一套好一点的公寓拿来当落脚点，只不过这种公寓价格通常是按一套几千万来算，普通人根本玩不起。</p>
+<h1 id="本系列目录">本系列目录</h1>
 <ul>
-<li>在Java代码中，类中的boolean型变量不要加is前缀，is前缀不要使用boolean类型。</li>
-<li>禁止使用函数、存储过程和触发器，在应用程序实现。</li>
-<li>禁止使用外键。约束应在程序中实现。</li>
-<li>禁止在程序代码中使用<code>TRUNCATE TABLE</code>语句清空表。该语句为DDL语句。</li>
-</ul>
-<h1 id="参考资料">参考资料</h1>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsaWJhYmEvcDNjL2Jsb2IvbWFzdGVyL0phdmHlvIDlj5HmiYvlhozvvIjltanlsbHniYjvvIkucGRm">阿里巴巴《Java
-开发手册》（V1.7）<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<h1 id="扩展阅读">扩展阅读</h1>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3Fsc3R5bGUuZ3VpZGUvemg=">SQL样式指南<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-<h1 id="本系列文章">本系列文章</h1>
-<ul>
-<li><a
-href="/2020/11/01/db-specification/">MySQL数据库设计规范（一）：表结构设计</a></li>
-<li><strong>MySQL数据库设计规范（二）：SQL语句</strong></li>
-<li><a
-href="/2020/11/10/db-specification-3/">MySQL数据库设计规范（三）：PDM文档</a></li>
+<li><a href="/2020/11/22/buy-house-0/">总述</a></li>
+<li><a href="/2020/11/29/buy-house-1/">购房资格</a></li>
+<li><a href="/2020/12/05/buy-house-2/">地产项目情况</a></li>
+<li><a href="/2020/12/12/buy-house-3/">项目周围环境</a></li>
+<li><a href="/2020/12/19/buy-house-4/">售楼处里的套路</a></li>
+<li><a href="/2020/12/26/buy-house-5">关于合同</a></li>
+<li><strong>不要买公寓！</strong></li>
+<li><a href="/2021/07/12/buy-house-7/">房贷贷多少合适</a></li>
+<li><a href="/2021/08/15/buy-house-8/">要不要买车位</a></li>
 </ul>
 ]]></content>
       <categories>
-        <category>项目管理</category>
+        <category>楼市</category>
       </categories>
       <tags>
-        <tag>MySQL</tag>
-        <tag>规范</tag>
+        <tag>买房</tag>
       </tags>
   </entry>
   <entry>
@@ -9289,77 +9513,6 @@ npx npm i cpr@3<span aria-hidden="true" class="line-numbers-rows"><span></span><
       <tags>
         <tag>GitLab</tag>
         <tag>GitBook</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>买房避坑指南（六）：不要买公寓！</title>
-    <url>/2020/12/28/buy-house-6/</url>
-    <content><![CDATA[<p>有些人实在没钱，凑住宅钱费劲，看到公寓价格相对便宜，想买套公寓过渡。有些女性因为属于不婚族，或者害怕被男方抛弃，也想出于防御目的买一套公寓备用。虽然想法很好，但是本文仍然要提醒，除非你真的是地产行家或投资行家，十分清楚自己要做什么事情，否则无论如何也不要买公寓！</p>
-<span id="more"></span>
-<h1 id="说明">说明</h1>
-<p>本文所提“公寓”，指用地性质为“商务用地”、产权通常为四十年、房产证上明确为“公寓”二字的商务住宅。</p>
-<p>另外还有一种“公寓”叫做“居住公寓”，那并不是本文所提到的“公寓”，只是采光很差的普通住宅，除此之外都一样。这种房子不在本文讨论范围内。</p>
-<h1 id="公寓的坑">公寓的坑</h1>
-<p>公寓有很多坑，每一个坑都是性质恶劣的坑，所以无论置业顾问说得再动听，你也不要头脑一热就去买公寓。</p>
-<h2 id="产权问题">产权问题</h2>
-<p>土地有产权期限。虽然到期之后政府不会直接把你轰出去，但是该办的手续还是要办的。住宅可以自动续期，但公寓作为商业用地，理论上讲需要重新交齐土地出让金，到时候这笔费用可能要由业主来承担。而且，产权期限从开发商拿地之后开始起算，不是从交房后开始起算，有些开发商拿到地之后捂着不开发，这样四十年产权已经白白用掉很多年了。</p>
-<p>房产证上写着“公寓”二字是无法落户的（备注：有些城市能落）。独居的话无所谓，但是如果有孩子，孩子会因为没有户口而不能上学！有人说能上学？那应该是有人通过各种合法与非法手段争取来的，不像普通住宅一样有了户口就能轻松办理。</p>
-<h2 id="贷款困难">贷款困难</h2>
-<p>公寓的性质是商业，因此贷款要比普通住宅困难。例如：</p>
-<ul>
-<li>不能使用公积金贷款。</li>
-<li>首付比例比普通住宅高，撑死也只能贷到五成房款。</li>
-<li>贷款需要在10年内还清。</li>
-</ul>
-<p>尽管公寓总价比住宅小得多，但是背上了贷款，会对你再次买住宅贷款造成不利影响。如果愿意全款买倒是无所谓。</p>
-<h2 id="法律风险">法律风险</h2>
-<p>不要小瞧法律风险！如果没有合法的手续，一旦发生纠纷，打官司很难打赢，找政府他们也不会替你说话，弄不好还会把你当成维稳对象。</p>
-<p>商住公寓毕竟还是一个合法的东西，虽然有各种坑，至少还能办得出房产证。如果是“商改住”，即商业用地改为住宅（或者按商业住宅建设，等政府验收完成后再偷偷改成公寓），这本身就有很大法律风险，容易连房产证都办不出来。</p>
-<p>有些城市的限购限贷政策中，商住公寓也会被计入限购限贷数量当中。有置换需求的务必要留意有关政策，而且建议靠租房而非买房来过渡。</p>
-<h2 id="被套牢">被套牢</h2>
-<p>随便上网上搜索一下，就可以发现投资公寓的收益实在不好。</p>
-<p>公寓收益方式主要分为出租和转卖两种。</p>
-<p>先说出租。如果公寓位于商业繁华的地带，交通便利，居住需求极高，你还能靠收租金来维持。如果公寓位于郊区，交通不便，周围荒无人烟，或者周围住宅密集，甚至藏着一个城中村，你会发现连出租都租不出去。一边要及时还房贷，另一边却收不到租金，这种感觉会非常痛苦。</p>
-<p>即便公寓能勉强租出去，你也不能指望租客的素质有多高。租公寓的租客平均素质更低，如果经常损坏房屋设施的话，每次转手就容易产生额外维修费用。</p>
-<p>再说转卖。如果想靠低买高卖来赚差价，会面临两个严重的问题：</p>
-<ul>
-<li>卖不掉：假如差不多攒够钱，急需把公寓换成现金时，你会发现你这套公寓换不出钱。要知道有些城市二手住宅都不一定好卖，甚至得赔钱卖，缺点更多的公寓也不太有理由比普通住宅好卖。</li>
-<li>转手费用高：即便能找到接盘侠，因为公寓是商业性质，转手时要产生较高的交易税。通过中介买卖，你还要额外再付中介费。就算房子涨价，收益很容易就被这些费用给冲没了，更何况公寓是要持续贬值的。</li>
-</ul>
-<p>所以把钱放到银行存定期也比直接扔给公寓靠谱，虽然放着会贬值，需要取钱的时候也会损失些利息，但至少能随时取出来，不像公寓把钱扔进去就套牢了。</p>
-<h2 id="其他问题">其他问题</h2>
-<p>相比于以上各项，下面都是些小问题了：</p>
-<ul>
-<li>户型问题：不通透。</li>
-<li>房屋质量问题：例如装修质量不好，Loft高度不够等。住宅有的维权，公寓也可以有。</li>
-<li>挤：当你早上上班的时候，你就会感受到，你不光要在公司的写字楼挤电梯，刚出家门就要跟着一大群人挤电梯，一万人挤那三四部电梯，你甚至可能会感觉爬楼梯（就是趴在地上那个爬）都比坐电梯快。</li>
-<li>贵：公寓水电费按商业水电收费，价格是普通水电的两三倍。</li>
-<li>没有燃气：有燃气？那应该用不正当手段装上去的，给消防部门打电话举报一下就会被拆了。</li>
-<li>如果物业管理差劲，你还会发现，碰上个扰民的邻居更让人痛苦。如果是美容美发还好，要是KTV、会所、酒店，或者是XXOO的场所……</li>
-</ul>
-<h1 id="如果还是想买一套">如果还是想买一套？</h1>
-<p>关于公寓的坑，本文只是简单总结，写得很粗，如果还是想购买，请找一些写得更深入的分析文章来决策。</p>
-<p>对于缺钱的人来说，公寓不能买，但是可以租别人的公寓。这样不仅少了大量损失，还能帮房东少赔点钱（注意租公寓往往比合租住宅贵），一举两得。不过租房之前还是建议多跑一跑，也许找合租或者老破小整租更省钱。</p>
-<p>对于可能会进入长期单身状态的人来说，如果你还没到被轰走的时候，请把买公寓的钱放到银行里，实在到了被赶出家门的时候可以先临时找个地方租，然后再好好规划一下人生，仔细了解公寓的坑之后再掏钱出来买公寓。</p>
-<p>对于不差钱的人来说，公寓可以买来出租，但需要仔细选择地段、产品，精细地计算房租，否则很容易得不偿失。另外也可以找一套好一点的公寓拿来当落脚点，只不过这种公寓价格通常是按一套几千万来算，普通人根本玩不起。</p>
-<h1 id="本系列目录">本系列目录</h1>
-<ul>
-<li><a href="/2020/11/22/buy-house-0/">总述</a></li>
-<li><a href="/2020/11/29/buy-house-1/">购房资格</a></li>
-<li><a href="/2020/12/05/buy-house-2/">地产项目情况</a></li>
-<li><a href="/2020/12/12/buy-house-3/">项目周围环境</a></li>
-<li><a href="/2020/12/19/buy-house-4/">售楼处里的套路</a></li>
-<li><a href="/2020/12/26/buy-house-5">关于合同</a></li>
-<li><strong>不要买公寓！</strong></li>
-<li><a href="/2021/07/12/buy-house-7/">房贷贷多少合适</a></li>
-<li><a href="/2021/08/15/buy-house-8/">要不要买车位</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>楼市</category>
-      </categories>
-      <tags>
-        <tag>买房</tag>
       </tags>
   </entry>
   <entry>
@@ -9561,156 +9714,53 @@ href="/2020/08/20/resume-improvement/">来自招聘者的建议——如何优�
       </tags>
   </entry>
   <entry>
-    <title>买房避坑指南（四）：售楼处里的套路</title>
-    <url>/2020/12/19/buy-house-4/</url>
-    <content><![CDATA[<p>确认买房之后，就要前往售楼处详细了解楼盘情况并付钱购买。但售楼处充满了经过精心布置的陷阱，本文则会讲述如何练就一副火眼金睛。</p>
+    <title>疫情囤货指南</title>
+    <url>/2021/06/16/supplies/</url>
+    <content><![CDATA[<p>近些月来，虽然国内的武汉肺炎疫情得到了基本控制，但是这种控制是通过强硬封城实现的。在封城期间，正常的生活会被打断，而且封城时间不可预测，恢复时间也无法确定，因此平时在家就需要适当做一些准备，以免遇到困难。</p>
 <span id="more"></span>
-<h1 id="务必先做好准备再去售楼处">务必先做好准备再去售楼处</h1>
-<h2 id="查一下网签">查一下网签</h2>
-<p>本节不适用新开盘的情况，因为刚开盘的话网签量肯定是零。网签与销售之间有较长的时间延迟，开过几波以后才能查到之前开盘时的网签情况。</p>
-<p>有些城市提供了住宅项目信息公示网站（由所在城市的住房和城乡建设局提供），可通过此类网站查询网签情况。对于已经开盘一段时间的，或者分期开发的，就可以相应网站查网签情况，虽然有延迟，但其数量级仍然可以反映小区卖得好不好。在相同地段之内比较，卖得好可能是炒的，但卖得不好肯定有硬伤。</p>
-<h2 id="了解建筑许可">了解建筑许可</h2>
-<p>项目必须在取得许可后方可动工，而许可是需要公示的。因此，可以前往工地门口查看公示的建筑许可和平面图，也可以提前在网上搜索建筑许可（所在城市的自然资源和规划局官方网站上面有，但可能需要借助搜索引擎搜索），名称可能是“建设工程规划许可”、“建设项目批前公示”等。</p>
-<p>因为官方网站会提供超清版本文件下载，建议去官方网站搜索下载，但因为工程名与小区名可能不一致，可能你还是需要用其他途径来了解工程项目叫什么名字。</p>
-<p>例如：</p>
-<p><img src="/img/2020-12-19-buy-house-4/public1.jpg" /></p>
-<p><img src="/img/2020-12-19-buy-house-4/public2.jpg" /></p>
-<p><img src="/img/2020-12-19-buy-house-4/public3.jpg" /></p>
-<p>不要把它们当成形式主义展板。仔细看这组图，你就可以清晰地了解到土地用途、占地面积、容积率、楼盘分布、小区内物业设施、光照情况等信息，而且还能少被置业顾问忽悠。</p>
-<h2 id="带把卷尺">带把卷尺</h2>
-<p>后文会详细讲到样板间的各种套路。预防样板间套路，你需要准备一副卷尺，而且卷尺也就几块钱，买了不会吃亏。</p>
-<p>买完之后，拿卷尺好好测量一下你现在居住的房间的尺寸，以及主要家具的尺寸，对距离有个印象，这样到时候置业顾问跟你说两米五的时候你就知道是宽还是窄了。</p>
-<h2 id="带上平板电脑">带上平板电脑</h2>
-<p>如果你手头有一个平板电脑，建议你把平板电脑带上。现场会有各类文字公示内容，特别是那种不想让你看但又不得不展示的，拿平板看会比拿手机看着舒服，也有利于深入地思考。</p>
-<h2 id="装一个地图app">装一个地图APP</h2>
-<p>区位图的尺寸是骗人的，有些不利配套也会刻意隐瞒，所以要用规范的地图APP来查看周围配套与实际距离。</p>
-<p>当然地图APP也不是全面的，例如建设中的工地以及公墓、看守所、监狱、军事基地都不会在地图上表示，所以仍然要实地现场查看。</p>
-<h2 id="小心车牌识别">小心车牌识别</h2>
-<p>你的车开进售楼处之时，也是骚扰电话登记之时：有些售楼处会安装车牌识别系统，默默地记下你的车牌号和联系方式，还会与其他开发商共享。因车辆识别这件事情难以取证，即便投诉也不太可能解决（除非你愿意耗费大量时间精力与金钱跟开发商死磕），所以建议开车来的人把车放稍微远一点的地方，别放售楼处附近，也别让售楼处保安看到你上下车。</p>
-<p>个人建议，如果距离在接受范围之内的话，可以考虑骑车去楼盘与售楼处。与开车相比，骑车的时候，对小区位置、距离与周围环境会感受得更加直观。</p>
-<h2 id="小心人脸识别">小心人脸识别</h2>
-<p>去售楼处通常要先登记，确认渠道并判断应该给你什么样的优惠。为了防止你作弊，有些开发商还会用些科技手段，在售楼处偷偷地安装人脸识别系统，然后根据人脸识别结果来确定优惠多少，而消费者对人脸识别毫不知情，即使带上口罩系统也能进行识别，只能靠戴头盔预防——</p>
-<figure>
-<img src="/img/2020-12-19-buy-house-4/face.jpg" alt="人脸识别" />
-<figcaption aria-hidden="true">人脸识别</figcaption>
-</figure>
-<p>这同样是你投诉或起诉也难以自行解决的行业乱象。对此只能建议，如果想通过中介等渠道途径购房，那么不要自己前往售楼处，甚至不要靠近售楼处，否则就拿不到优惠了。</p>
-<h2 id="提前去工地附近转一圈">提前去工地附近转一圈</h2>
-<p>准备进入售楼处之前，应当找到楼盘所在工地，在工地周围转一圈，并且扩大到周围2～3km范围看一下，了解周围环境如何。详细关注点可<a
-href="/2020/12/12/buy-house-3/">参见前文</a>。</p>
-<p>有些售楼处和实际工地并不在一起，因此要把工地实际位置找出来。售楼处位于车水马龙的好地段，而实际的楼盘可能在一两千米之外的一片荒地之中。</p>
-<h2 id="吃饱喝足">吃饱喝足</h2>
-<p>在售楼处核实信息是一场硬仗，所以先吃饱喝足之后再过去，以免体力不足而主动偷懒。当然不用喝太多水，只要不是去维权的，售楼处会主动给你端茶送水。</p>
-<h2 id="稍微做点功课">稍微做点功课</h2>
-<p>售楼处销售都是“见人说人话，见鬼说鬼话”，如果你房产方面事情懂的不多，对片区也不熟悉，他们就会使劲地忽悠你。如果你做足了功课再过去，他们至少就不敢太离谱地忽悠你了。</p>
-<h1 id="区位图与沙盘的套路">区位图与沙盘的套路</h1>
-<h2 id="区位图">区位图</h2>
-<p>区位图可以直观地展示小区所处位置，以及小区周围的配套及城市功能区域。为了外表美观、突出重点，区位图会做出一些变形调整。</p>
-<p>但是，区位图经常是严重变形，甚至变得非常夸张。有多夸张呢？举个例子，将区位图代入到真实地图中，标记相应距离，可以得到：</p>
-<figure>
-<img src="/img/2020-12-19-buy-house-4/map.jpg" alt="区位图" />
-<figcaption aria-hidden="true">区位图</figcaption>
-</figure>
-<p>小区距离北面的主干道看起来不远，画起来比小区宽度窄，实际上要800米，是小区宽度的2倍。向西前往“唐冶生活区”其他位置还需要至少再走2km（因为中间有山）。而“唐冶生活区”与“中央商务区”看似不远，还能互相辐射，两地实际上却相距6km以上。“中央商务区”的高新万达广场看似位于二环东路与岔路口中间，其实它距离岔路口只有1km，距离二环东路路口却有5km。所以在“唐冶生活区”或“高新东区”工作的通勤距离都不一定很近，在“中央商务区”或“龙奥政务区”工作则要仔细考虑一下通勤距离到底能不能接受了。</p>
-<p>当然区位图的骗局也好识别，就像上面的楼盘，只要你找辆自行车从西边的二环东路沿着主干道骑到东边的售楼处，你就能深刻地感受到区位图变形得有多么夸张了。</p>
-<h2 id="沙盘">沙盘</h2>
-<p>区位图主要用来描述小区周围的环境，而沙盘主要用来描述小区内部的环境。</p>
-<p>为了营造一种高级小区的感觉，沙盘也会经过精心美化，例如：</p>
+<h2 id="物资准备">物资准备</h2>
+<h3 id="食品">食品</h3>
+<p>食品是最关键的事情。一旦封城，家中没有食品，你基本上会饿肚子，严重的话甚至可能会饿死，而且对于外面执行封城的人来说，你死了，只是少了个病原体而已，对他们只有好处，没有坏处，所以根本不会去关心你的死活。</p>
+<p>尽管如此，大量囤积食品也是不科学的，因为食品会过期变质。所以要考虑合理配置食品，既能保证封城时不会缺少食物，又不会造成浪费。</p>
+<p>家中准备食品时，可以进行“三级储备”，具体为以下三种：</p>
 <ul>
-<li>沙盘整体搞得郁郁葱葱，就好像进入了花园城市新加坡。实际上交付的时候只有光秃秃的六棵树。</li>
-<li>沙盘上看各楼排布稀疏，实际上小区密密麻麻，颇有香港九龙城寨遗风。</li>
-<li>沙盘上看周围视野开阔，实际上南边是严重挡光的高层写字楼。仔细查看，在沙盘上那栋楼只是矮矮的水晶块。</li>
-<li>沙盘上看不到地上停车位，实际上小区内部有地上停车位，人车不分流。</li>
-<li>你所要买的楼挨着变电站、垃圾回收站等设施，沙盘上没有体现。</li>
-<li>跟区位图一样，沙盘的比例尺也是变形的。</li>
+<li>层级一：保质期短的食物，例如各种蔬菜。因为这类食物保质期不长，所以不要大量购买，只保持一个星期左右的量即可。</li>
+<li>层级二：保质期稍长的食物，例如肉类、鸡蛋，以及土豆、白菜等蔬菜，可保持两星期至一个月的量。</li>
+<li>层级三：保质期很长的食物，例如方便面、罐头、压缩饼干、脱水蔬菜、自热食品，以及大米、白面等。这些食物也要至少保持半个月到一个月左右的量。</li>
 </ul>
-<p>看沙盘时，如果小区内部或小区南部有水晶块，务必较真地问一下那是什么楼，到底是什么用途，到底有多少层。</p>
-<p>就算沙盘所有坑都识别出来了，你可能还会碰到这种无法预防的情况——</p>
-<figure>
-<img src="/img/2020-12-19-buy-house-4/lake.jpg" alt="人工湖" />
-<figcaption aria-hidden="true">人工湖</figcaption>
-</figure>
-<h2 id="周围环境">周围环境</h2>
-<p>区位图和沙盘还有一类套路：虚假的周围配套。</p>
-<p>虚假主要体现在三方面。</p>
-<p>第一方面是距离作假：以地铁站为例，从区位图或沙盘来看好像在附近，实际距离2km，而且还不能走直线，需要稍微绕点路，早上上班光是走到地铁站就要花半小时。所以要用你的地图APP来核实实际距离。</p>
-<p>第二方面是把政府规划当成既成事实：既然是规划，说明还可以“根据实际情况”调整甚至取消，而这种调整或取消不是开发商能够决定的事情。</p>
-<p>第三方面是隐瞒不利因素，例如将南部已经建设或即将建设的大高层标记成矮矮的水晶块。</p>
-<p>仍然以地铁为例。买不起楼的人，通常会被挤到郊区去买楼，而身重要处郊区，地铁就会变得极其重要。实际上，地铁从规划到审批再到落地可能要长达十年时间，如果国家政策收紧，地铁规划可能还会延迟或取消。因此，除非有政府正式发布的官方消息，或者亲眼看到已经开始施工或正式运营，不要相信周围一定会有地铁。否则的话，如果地铁真的改道或取消了，你就算去砸售楼处也起不到任何作用。</p>
-<p>此外有些配套的意义是不大的，例如火车站、机场，你不会天天去坐火车飞机，但是你可以天天感受到它们的噪音；例如离市政府近，你不会天天去政府办事，但你可以感受到周围配套缺乏，毕竟市政府周围经常很空旷；例如离大学近，离得再近你也得靠高考考进去才行。这里还要点名融创文旅城（原万达文旅城），配套游乐园、商业街、酒店群，这些都是城市级的配套，旅游景点的设定，你作为小区业主，这辈子能去享受几回呢？</p>
-<p>所以在售楼处就要意识这些问题，不要等到回家之后才想起来配套“其实并没有什么卵用”。</p>
-<h1 id="户型图的套路">户型图的套路</h1>
-<p>户型的内容比较复杂，本文不展开讨论了，只讲几个坑。</p>
-<p>北方人一般都讲究“南北通透”，可是你得检查一下是不是真的南北通透，例如：</p>
-<ul>
-<li>北边是厨房、厕所：平时不会天天开着厨房窗户或厕所窗户通风吧？</li>
-<li>北边是连廊：中间户北边通常有连廊，而且连廊属于消防设施，建楼时候不能取消。平时楼房肯定不会天天起火，但可以有变态天天到连廊偷窥你家生活，而且连廊可能会挡光，所以打算买中间户的话要留意这个问题。</li>
-<li>流线不畅：从南到北需要拐弯才能到达。如果住宅楼南北遮挡严重，这样通风也会不顺畅，不能算是南北通透了。</li>
-</ul>
-<p>户型图通常只画了单个房间情况，没有标示整体楼层的情况。所以要结合工地现场确认一下是几梯几户，户型是中间户还是边户，东西两侧是否有其他住户，中间户向外突出多少，遮挡如何。有些高层还会有腰线，腰线太长的话会稍微有些挡光，介意的话要仔细问一下腰线的问题。</p>
-<p>户型图还经常存在一个严重问题：上面没标尺寸。对吧？看到户型图没尺寸，当然要较真地问一下尺寸。那为什么说要“较真地”问呢？别忘了墙也占尺寸。另外要留意公摊的问题，100平的房子，去掉公摊，实际上只剩70多平，如果户型设计不好，三室每个屋子会变得很挤。</p>
-<p>有硬伤的奇葩户型（例如南北太深、房间不是长方形而是有尖角形状）就别买了，住起来不舒服的。虽然经过精心设计以后奇葩户型也可以变得精致，但改造所需的设计费和装修费一定会让你后悔当初为什么不稍微多花点钱买个好点户型的房子。</p>
-<p>当置业顾问说长三米的时候，你说到底是宽了，还是窄了？这个无法回答，不同人感受不一样，而且跟你后续的装修风格、后续要布置的家具甚至灯光颜色都有关系，所以前文会让你提前拿尺子在自己家感受一下。</p>
-<h1 id="样板间的套路">样板间的套路</h1>
-<p>样板间主要是用来展示房间内部情况。</p>
-<h2 id="装修">装修</h2>
-<p>为了吸引你买房子，开发商通常会花个几十万到几百万来做装修，房间的效果变得非常高端大气上档次、低调奢华有内涵。可是，既然买不起房子，那装修肯定也要省钱，最终当然达不到样板间的效果。</p>
-<p>参观样板间时，别拿样板间的样子想象自己未来的家，而且需要特别留意“非交付标准”五个字，毕竟去掉非交付标准设施之后剩下的样子也不见得是未来实际交付的样子。</p>
-<p>当然你还是可以给样板间拍个照，把房间的每个方面、每个角落都拍到，虽然将来不能用于维权，但是可以在你自己装修时稍微参考参考。</p>
-<h2 id="尺寸">尺寸</h2>
-<p>人们都喜欢大房子，为了吸引你买，样板间当然要显得宽敞。房间去掉公摊之后实际面积就那么点，想显得宽敞，那当然要在尺寸方面造假。</p>
-<p>有些开发商比较有诚意，直接用实体样板间（样板间设置在正在修建的楼内），这样房间尺寸自然是真实的。但是，房间尺寸不造假，那家具呢？比方说，双人床尺寸是1.8x2m，开发商做成1.6x1.8m，房间长宽两个方向不就都宽出20cm了吗？</p>
-<p>一般开发商没那么有诚意，样板间是另外订做的，那样板间的房间尺寸就经常比实际尺寸宽，例如宽20厘米，墙再比实际尺寸薄一点，床窄20厘米，床头柜窄10厘米，这样总共就多出了50厘米。不光如此，屋门拆掉，屋内再放一面镜子，你看，豪宅的效果出来了！</p>
-<p>所以本文一开始就提醒，前往售楼处之前务必带把卷尺。虽然<span class="exturl" data-url="aHR0cHM6Ly93d3cuc29odS5jb20vYS80NDMzNDAwNTRfNzE5MTU5">卷尺也有造假版<i class="fa fa-external-link-alt"></i></span>，但你自己买的尺子肯定比做样板间时候用的尺子靠谱吧？</p>
-<h1 id="公示栏的套路">公示栏的套路</h1>
-<p>按照有关部门规定，有些信息是要公示的，开发商他们不得不遵守这个规定。但是，开发商可以把这些公示信息放到角落里挂着，让你不特意找就找不到，找到了也得站着看，根本没有耐心看下去。</p>
-<p>既然放到不起眼的地方，我们当然更要认真地看，拿手机拍下来，然后靠在舒服的沙发慢慢看，任凭置业顾问如何怂恿，先把文字看明白再说。</p>
-<h2 id="不利因素">不利因素</h2>
-<p><a
-href="/2020/12/12/buy-house-3/">前文</a>已详细介绍不利因素，此处不再赘述。</p>
-<h2 id="居住公寓">居住公寓</h2>
-<p>居住公寓指光照不足的房间。有些房子挡光严重，光照常年不足，甚至到了十多楼还是严重挡光，因此选较低楼层时要特别留意这个问题，介意采光的话慎买。</p>
-<h2 id="安置房">安置房</h2>
-<p>有些小区会按照政府要求配建一些安置房。如果介意原住民回迁或外来租户，务必留意公示中是否有“安置房”、“保障房”、“人才公寓”等字样。</p>
-<h2 id="合同条文">合同条文</h2>
-<p>合同通常是按政府标准制定的，并且需要在售楼处进行公示，所以一般都比较公平。但是，除了合同，开发商还会让你签订补充协议，而补充协议内容可以随意制定，要多不公平就可以有多不公平，而且这两类文件会放到让人没有兴趣留意观看的地方，让你没有心思较真。<a
-href="/2020/12/26/buy-house-5/">后一篇文章</a>梳理了合同条文中的坑。</p>
-<h1
-id="售楼处现场与置业顾问营造气氛的套路">售楼处现场与置业顾问营造气氛的套路</h1>
-<p>置业顾问会催你，不买就快没了，平时在朋友圈也会发朋友圈，说XX政策调整，XX区域发展，不赶紧上车就要涨价。到了售楼处，也是敲锣打鼓地宣布成交多少多少。</p>
-<p>现在是2020年，大城市的楼市基本上都凉了，国家也在重点维稳，不少城市政策都在收紧，就算稍微想放松一点，也会很快上演政策“一日游”。小城市或许还红火但用不了多久也会跟着大城市变凉，所以这些只是吓唬人的促销套路。现在真的不用着急——如果房子好卖，他们还需要促销吗？什么事情都不做房子也不愁卖吧！正是因为卖不动，才会靠各种手段忽悠人买嘛！</p>
-<h1 id="特价房的套路">特价房的套路</h1>
-<p>特价房，不仅便宜，还会给人“正好能捡漏”的感觉。</p>
-<p>难道真的是让你捡漏吗？当然不是了！</p>
-<p>既然是特价房，说明肯定有便宜的原因，例如采光很差（差到15层还是居住公寓），或者挨着设备层，或者紧邻铁路线、高架桥、垃圾场等不利因素，或者跟安置居民混住，反正绝不是开发商良心发现或者简单地进行促销。</p>
-<p>就算手里没钱，想靠捡漏省些钱，也要打听清楚便宜的原因之后再考虑入手。</p>
-<h1
-id="关于展示宣传资料与置业顾问介绍">关于展示、宣传资料与置业顾问介绍</h1>
-<p>展示、宣传资料与置业顾问介绍都不具备法律效力，拿去打官司也不能当作证据。但是，你仍然可以尽量收集宣传资料，给置业顾问偷偷录音，给售楼处展板、区位图和样板间拍照，作为日后控诉虚假宣传众多证据中的一部分呈现。</p>
-<p>当然，你也完全可以假定置业顾问所有的话都是放屁，这样在交房的时候你就不会比其他被忽悠的业主失望了。</p>
-<h2 id="如何了解楼盘的问题">如何了解楼盘的问题</h2>
-<p>其实你是可以问到到房子或开发商的负面评论的。如何操作呢？假如同一片区有A、B两家开发商的盘，你对A有意愿，那么你可以去B的售楼处，假装对B房子感兴趣，顺便跟那个B的销售说，“我朋友最近对A比较感兴趣，推荐我买A”，B的销售就会很自然地把A的问题告诉你。无论是客观事实还是恶意中伤，先记下来，然后回家再慢慢分析。</p>
-<h1 id="不要急着交定金">不要急着交定金！</h1>
-<p>交定金之前，开发商会想办法伺候你，让你舒舒服服地交出那笔钱。一旦交了定金，你就从爷爷变成了孙子。讨钱浪费精力，放弃又浪费金钱，只能硬着头皮继续买，很多人就这样，明知道要被坑，结果还是被坑了，所以不要急着交定金。</p>
-<p>什么时候交定金呢？当你摸清楚所有情报，了解各种坑之后还能下定决心购买，你就可以交定金了。</p>
-<h1 id="本系列目录">本系列目录</h1>
-<ul>
-<li><a href="/2020/11/22/buy-house-0/">总述</a></li>
-<li><a href="/2020/11/29/buy-house-1/">购房资格</a></li>
-<li><a href="/2020/12/05/buy-house-2/">地产项目情况</a></li>
-<li><a href="/2020/12/12/buy-house-3/">项目周围环境</a></li>
-<li><strong>售楼处里的套路</strong></li>
-<li><a href="/2020/12/26/buy-house-5">关于合同</a></li>
-<li><a href="/2020/12/28/buy-house-6/">不要买公寓！</a></li>
-<li><a href="/2021/07/12/buy-house-7/">房贷贷多少合适</a></li>
-<li><a href="/2021/08/15/buy-house-8/">要不要买车位</a></li>
-</ul>
+<p>至于饮用水，因为自来水烧开以后也是能喝的，所以能烧水的水壶当然是必需品。但如果自来水水质不好，应当适当准备瓶装水、桶装水。</p>
+<p>做三级储备还要注意三点：</p>
+<ol type="1">
+<li>要注意各种食品的保质期和储存方法，不要没开始吃，就给放坏了。</li>
+<li>要进行动态更新，也就是平时要主动吃掉一些放得比较长、保质期剩余时间不多的食品，然后再补充新的食品。</li>
+<li>要增加食品的多样性，例如方便面、罐头和自热食品准备不同的种类、口味。一旦真的封城了，连续吃几天方便面，会让你再也不想碰方便面。</li>
+</ol>
+<h3 id="药品">药品</h3>
+<p>家中应该预备一个应急药箱，其中包含感冒药、退烧药、拉肚子药、创可贴、红药水（或酒精）等药品，以及体温计等工具。</p>
+<p>如果没有退烧药，应该趁疫情管控比较松的时候，想办法去弄一些，以免因为得了普通感冒而被拉去隔离。</p>
+<p>如果有需要定期服用的药品，则要设法提前准备一个月的量，动态更新，以免封城时候买不到药。</p>
+<p>不要指望封城开始之后能买到药或打到120。西安封城的教训告诉我们，真正封城的时候，医院领导更在乎的是自己的乌纱帽，所以即使你马上要死了，医院也会因为你没做核酸检测而拒绝救命。</p>
+<h3 id="生活必需品">生活必需品</h3>
+<p>除了食品药品，生活必需品也应该有备用的份儿。建议每一种用品都多买一套，例如厕所的香皂、肥皂、洗发水、卫生纸，厨房的盐、酱油、醋、洗洁精等，女性的卫生巾，还有通用的塑料袋，等等。</p>
+<h2 id="注意事项">注意事项</h2>
+<h3 id="关于保供">关于“保供”</h3>
+<p>有些地方在封城时，会提供一些“保供通道”，说封城期间可以去这些商家购买生活物品。但是，一旦真正封城，我们不能指望真的从这些渠道买到东西，必须平时就做好准备。</p>
+<p>正常的状态下，多数人不需要集中地采购物资，需要时可以随时去楼下小卖店，可以随时叫外卖，可以随时网购等快递配送，不会产生集中的购物需求，但是一旦封城，这些分散的渠道都会被关闭，而且不少人要囤积物资，所以那几家保供单位会在极短时间内涌入来自整个城市的巨量需求，结果你会发现所有有用的物资都会被抢光，连下单的机会都没有，更别说及时配送了。</p>
+<p>基于同样的原因，封城期间，外卖、快递和各种配送也会被迫中断，因此不能指望外卖和网购来维持生活。</p>
+<h3 id="邻里互助">邻里互助</h3>
+<p>平时要留意所在的社区是否有物业群、业主群，如果有，要及时加入组织。封城之后，有些人可能会愿意交换多余物资，或者在业主群利用自己的渠道来售卖物资。尽管价格可能会贵些，总比没有强。</p>
+<h3 id="小道消息">小道消息</h3>
+<p>封城之前，业主群或各种地方会出现小道消息，甚至出现抢购潮，遇到这种情况要抓紧进行准备。</p>
+<p>注意官方“辟谣”的内容。实践证明，被官方认证的“谣言”经常是领先的预言，因此既不要轻信官方消息，也不要无视“谣言”和小道消息。</p>
+<h3 id="个人技能">个人技能</h3>
+<p>很明显，如果你到现在还不会做饭，应该尽快学会如何做饭。</p>
 ]]></content>
       <categories>
-        <category>楼市</category>
+        <category>一点人生的经验</category>
       </categories>
       <tags>
-        <tag>买房</tag>
+        <tag>疫情</tag>
+        <tag>应急储备</tag>
       </tags>
   </entry>
   <entry>
@@ -9806,53 +9856,59 @@ href="/2020/08/20/resume-improvement/">来自招聘者的建议——如何优�
       </tags>
   </entry>
   <entry>
-    <title>疫情囤货指南</title>
-    <url>/2021/06/16/supplies/</url>
-    <content><![CDATA[<p>近些月来，虽然国内的武汉肺炎疫情得到了基本控制，但是这种控制是通过强硬封城实现的。在封城期间，正常的生活会被打断，而且封城时间不可预测，恢复时间也无法确定，因此平时在家就需要适当做一些准备，以免遇到困难。</p>
+    <title>买房避坑指南（七）：房贷贷多少合适</title>
+    <url>/2021/07/12/buy-house-7/</url>
+    <content><![CDATA[<p>询问买房贷款问题，年纪稍大的人会建议多贷款，“跑赢通胀”，现在还是这样吗？</p>
 <span id="more"></span>
-<h2 id="物资准备">物资准备</h2>
-<h3 id="食品">食品</h3>
-<p>食品是最关键的事情。一旦封城，家中没有食品，你基本上会饿肚子，严重的话甚至可能会饿死，而且对于外面执行封城的人来说，你死了，只是少了个病原体而已，对他们只有好处，没有坏处，所以根本不会去关心你的死活。</p>
-<p>尽管如此，大量囤积食品也是不科学的，因为食品会过期变质。所以要考虑合理配置食品，既能保证封城时不会缺少食物，又不会造成浪费。</p>
-<p>家中准备食品时，可以进行“三级储备”，具体为以下三种：</p>
-<ul>
-<li>层级一：保质期短的食物，例如各种蔬菜。因为这类食物保质期不长，所以不要大量购买，只保持一个星期左右的量即可。</li>
-<li>层级二：保质期稍长的食物，例如肉类、鸡蛋，以及土豆、白菜等蔬菜，可保持两星期至一个月的量。</li>
-<li>层级三：保质期很长的食物，例如方便面、罐头、压缩饼干、脱水蔬菜、自热食品，以及大米、白面等。这些食物也要至少保持半个月到一个月左右的量。</li>
-</ul>
-<p>至于饮用水，因为自来水烧开以后也是能喝的，所以能烧水的水壶当然是必需品。但如果自来水水质不好，应当适当准备瓶装水、桶装水。</p>
-<p>做三级储备还要注意三点：</p>
+<h1 id="跑赢通胀的背景">“跑赢通胀”的背景</h1>
+<p>在过去那个年代：</p>
 <ol type="1">
-<li>要注意各种食品的保质期和储存方法，不要没开始吃，就给放坏了。</li>
-<li>要进行动态更新，也就是平时要主动吃掉一些放得比较长、保质期剩余时间不多的食品，然后再补充新的食品。</li>
-<li>要增加食品的多样性，例如方便面、罐头和自热食品准备不同的种类、口味。一旦真的封城了，连续吃几天方便面，会让你再也不想碰方便面。</li>
+<li>经济形势整体乐观，经济增长带动民众生活水平提高</li>
+<li>靠自己的工资，二三十年能比较容易还清贷款</li>
+<li>工作前景向好，收入水平逐步提高</li>
 </ol>
-<h3 id="药品">药品</h3>
-<p>家中应该预备一个应急药箱，其中包含感冒药、退烧药、拉肚子药、创可贴、红药水（或酒精）等药品，以及体温计等工具。</p>
-<p>如果没有退烧药，应该趁疫情管控比较松的时候，想办法去弄一些，以免因为得了普通感冒而被拉去隔离。</p>
-<p>如果有需要定期服用的药品，则要设法提前准备一个月的量，动态更新，以免封城时候买不到药。</p>
-<p>不要指望封城开始之后能买到药或打到120。西安封城的教训告诉我们，真正封城的时候，医院领导更在乎的是自己的乌纱帽，所以即使你马上要死了，医院也会因为你没做核酸检测而拒绝救命。</p>
-<h3 id="生活必需品">生活必需品</h3>
-<p>除了食品药品，生活必需品也应该有备用的份儿。建议每一种用品都多买一套，例如厕所的香皂、肥皂、洗发水、卫生纸，厨房的盐、酱油、醋、洗洁精等，女性的卫生巾，还有通用的塑料袋，等等。</p>
-<h2 id="注意事项">注意事项</h2>
-<h3 id="关于保供">关于“保供”</h3>
-<p>有些地方在封城时，会提供一些“保供通道”，说封城期间可以去这些商家购买生活物品。但是，一旦真正封城，我们不能指望真的从这些渠道买到东西，必须平时就做好准备。</p>
-<p>正常的状态下，多数人不需要集中地采购物资，需要时可以随时去楼下小卖店，可以随时叫外卖，可以随时网购等快递配送，不会产生集中的购物需求，但是一旦封城，这些分散的渠道都会被关闭，而且不少人要囤积物资，所以那几家保供单位会在极短时间内涌入来自整个城市的巨量需求，结果你会发现所有有用的物资都会被抢光，连下单的机会都没有，更别说及时配送了。</p>
-<p>基于同样的原因，封城期间，外卖、快递和各种配送也会被迫中断，因此不能指望外卖和网购来维持生活。</p>
-<h3 id="邻里互助">邻里互助</h3>
-<p>平时要留意所在的社区是否有物业群、业主群，如果有，要及时加入组织。封城之后，有些人可能会愿意交换多余物资，或者在业主群利用自己的渠道来售卖物资。尽管价格可能会贵些，总比没有强。</p>
-<h3 id="小道消息">小道消息</h3>
-<p>封城之前，业主群或各种地方会出现小道消息，甚至出现抢购潮，遇到这种情况要抓紧进行准备。</p>
-<p>注意官方“辟谣”的内容。实践证明，被官方认证的“谣言”经常是领先的预言，因此既不要轻信官方消息，也不要无视“谣言”和小道消息。</p>
-<h3 id="个人技能">个人技能</h3>
-<p>很明显，如果你到现在还不会做饭，应该尽快学会如何做饭。</p>
+<p>而现在呢</p>
+<ol type="1">
+<li>经济形势下行，加上疫情影响，形势不再像以前乐观</li>
+<li>靠“六个钱包”凑齐首付都困难</li>
+<li>工作996、007，收入却不见涨，而且还有随时被裁员的风险</li>
+</ol>
+<p>在这个背景下，你觉得现在的重点还是跑赢通胀吗？</p>
+<h1 id="所以这个时候要想什么">所以这个时候要想什么</h1>
+<h2 id="不要强行上车">不要强行上车</h2>
+<p>如果你家“六个钱包”真的连凑齐首付都困难，那么不要买房。</p>
+<p>一旦强行上车，这意味着你的家庭已经没有任何保险，而且你们全家必须至少维持现有收入水平不下降，甚至要继续上升，才能还得起后面的本金和利息。很明显，经济高速增长的时代已经结束，所以不要拿不确定的未来去赌。</p>
+<h2 id="尽量降低杠杆">尽量降低杠杆</h2>
+<p>尽量减少贷款的量。可以从两方面入手，一方面是提高首付比例，另一方面是降低预算。</p>
+<p>提高首付比例，也就是在家庭承受范围之内，尽可能多用现金，少贷款。而且目前利率也比较高，少贷款就能有效减少月供压力以及贷款总利息的支出。经济上行的时候，利息可以被增长的工资给稀释掉，但现在情况正好反过来，收入不仅有可能下降，而且会被利息给稀释掉，给自己带来更大压力。</p>
+<p>降低预算，也是降低杠杆的有效方法。假如你家里现在能掏出300万，并且你家庭年收入50万，那么你就不要加压买600万的房子，而是把预算控制在400万以内，或者进一步压低预算，只买300万甚至200万的房子。如果没有符合条件的新房，就考虑二手的老房子，或者继续租房。因为你的杠杆率不高，只要家里省吃俭用，两三年之内还能攒到一些钱，这样即便未来收入下降，甚至失业，你也不会有太大负担。</p>
+<p>在贷款方式上，可以考虑选择等额本金，而非等额本息。虽然前期还款压力会大一些，但是总利息相对较低，而且一旦家庭财务状况缓解，你就可以提前还贷，甚至直接还清，进一步减少利息支出。</p>
+<h2 id="考虑断供风险">考虑断供风险</h2>
+<p>即使经过计算，你发现你的压力还能接受，你也不要把家中存款全部花光。你需要尽量攒钱，保证一旦出现状况（失业、生病、发生事故等），你们家庭的存款还可以维持一两年时间。失业之后，既不会因为没钱而被迫断供，又能维持基本生活，这样在找新工作的时候就不会有那么大的压力了。</p>
+<h2 id="及时止损">及时止损</h2>
+<p>如果你家庭在三四线城市甚至更低线城市有多余房产，可以考虑及时抛售掉，增加家中的现金数量。</p>
+<p>由于未来人口会向大城市和省会城市集中，所以其他城市的房产总体上是要贬值的。像鹤岗这样的地方，如果不是网红帮忙，甚至连接盘侠都找不到，所以不要再考虑能多挣多少钱，而是考虑能少亏多少钱，及时抛售。亏得比别人少，从相对意义上讲，就是比别人挣得多了。</p>
+<h1 id="结论">结论</h1>
+<p>量力而行，而且要给未来留出足够的保险空间。</p>
+<h1 id="本系列目录">本系列目录</h1>
+<ul>
+<li><a href="/2020/11/22/buy-house-0/">总述</a></li>
+<li><a href="/2020/11/29/buy-house-1/">购房资格</a></li>
+<li><a href="/2020/12/05/buy-house-2/">地产项目情况</a></li>
+<li><a href="/2020/12/12/buy-house-3/">项目周围环境</a></li>
+<li><a href="/2020/12/19/buy-house-4/">售楼处里的套路</a></li>
+<li><a href="/2020/12/26/buy-house-5">关于合同</a></li>
+<li><a href="/2020/12/28/buy-house-6/">不要买公寓！</a></li>
+<li><strong>房贷贷多少合适</strong></li>
+<li><a href="/2021/08/15/buy-house-8/">要不要买车位</a></li>
+</ul>
 ]]></content>
       <categories>
-        <category>一点人生的经验</category>
+        <category>楼市</category>
       </categories>
       <tags>
-        <tag>疫情</tag>
-        <tag>应急储备</tag>
+        <tag>买房</tag>
+        <tag>房贷</tag>
       </tags>
   </entry>
   <entry>
@@ -9976,59 +10032,52 @@ id="离车库出入口拐弯处单元门太近">离车库出入口、拐弯处�
       </tags>
   </entry>
   <entry>
-    <title>买房避坑指南（七）：房贷贷多少合适</title>
-    <url>/2021/07/12/buy-house-7/</url>
-    <content><![CDATA[<p>询问买房贷款问题，年纪稍大的人会建议多贷款，“跑赢通胀”，现在还是这样吗？</p>
+    <title>用Docker快速为办公室搭建VPN</title>
+    <url>/2021/09/10/remote-vpn/</url>
+    <content><![CDATA[<p>由于武汉肺炎疫情原因，随时可能会封城，导致无法前往办公室办公。如果公司没有提供VPN，为了在居家办公时能有一个连接办公室资源的方法，可以考虑自己搭一个简易的VPN。</p>
 <span id="more"></span>
-<h1 id="跑赢通胀的背景">“跑赢通胀”的背景</h1>
-<p>在过去那个年代：</p>
-<ol type="1">
-<li>经济形势整体乐观，经济增长带动民众生活水平提高</li>
-<li>靠自己的工资，二三十年能比较容易还清贷款</li>
-<li>工作前景向好，收入水平逐步提高</li>
-</ol>
-<p>而现在呢</p>
-<ol type="1">
-<li>经济形势下行，加上疫情影响，形势不再像以前乐观</li>
-<li>靠“六个钱包”凑齐首付都困难</li>
-<li>工作996、007，收入却不见涨，而且还有随时被裁员的风险</li>
-</ol>
-<p>在这个背景下，你觉得现在的重点还是跑赢通胀吗？</p>
-<h1 id="所以这个时候要想什么">所以这个时候要想什么</h1>
-<h2 id="不要强行上车">不要强行上车</h2>
-<p>如果你家“六个钱包”真的连凑齐首付都困难，那么不要买房。</p>
-<p>一旦强行上车，这意味着你的家庭已经没有任何保险，而且你们全家必须至少维持现有收入水平不下降，甚至要继续上升，才能还得起后面的本金和利息。很明显，经济高速增长的时代已经结束，所以不要拿不确定的未来去赌。</p>
-<h2 id="尽量降低杠杆">尽量降低杠杆</h2>
-<p>尽量减少贷款的量。可以从两方面入手，一方面是提高首付比例，另一方面是降低预算。</p>
-<p>提高首付比例，也就是在家庭承受范围之内，尽可能多用现金，少贷款。而且目前利率也比较高，少贷款就能有效减少月供压力以及贷款总利息的支出。经济上行的时候，利息可以被增长的工资给稀释掉，但现在情况正好反过来，收入不仅有可能下降，而且会被利息给稀释掉，给自己带来更大压力。</p>
-<p>降低预算，也是降低杠杆的有效方法。假如你家里现在能掏出300万，并且你家庭年收入50万，那么你就不要加压买600万的房子，而是把预算控制在400万以内，或者进一步压低预算，只买300万甚至200万的房子。如果没有符合条件的新房，就考虑二手的老房子，或者继续租房。因为你的杠杆率不高，只要家里省吃俭用，两三年之内还能攒到一些钱，这样即便未来收入下降，甚至失业，你也不会有太大负担。</p>
-<p>在贷款方式上，可以考虑选择等额本金，而非等额本息。虽然前期还款压力会大一些，但是总利息相对较低，而且一旦家庭财务状况缓解，你就可以提前还贷，甚至直接还清，进一步减少利息支出。</p>
-<h2 id="考虑断供风险">考虑断供风险</h2>
-<p>即使经过计算，你发现你的压力还能接受，你也不要把家中存款全部花光。你需要尽量攒钱，保证一旦出现状况（失业、生病、发生事故等），你们家庭的存款还可以维持一两年时间。失业之后，既不会因为没钱而被迫断供，又能维持基本生活，这样在找新工作的时候就不会有那么大的压力了。</p>
-<h2 id="及时止损">及时止损</h2>
-<p>如果你家庭在三四线城市甚至更低线城市有多余房产，可以考虑及时抛售掉，增加家中的现金数量。</p>
-<p>由于未来人口会向大城市和省会城市集中，所以其他城市的房产总体上是要贬值的。像鹤岗这样的地方，如果不是网红帮忙，甚至连接盘侠都找不到，所以不要再考虑能多挣多少钱，而是考虑能少亏多少钱，及时抛售。亏得比别人少，从相对意义上讲，就是比别人挣得多了。</p>
-<h1 id="结论">结论</h1>
-<p>量力而行，而且要给未来留出足够的保险空间。</p>
-<h1 id="本系列目录">本系列目录</h1>
-<ul>
-<li><a href="/2020/11/22/buy-house-0/">总述</a></li>
-<li><a href="/2020/11/29/buy-house-1/">购房资格</a></li>
-<li><a href="/2020/12/05/buy-house-2/">地产项目情况</a></li>
-<li><a href="/2020/12/12/buy-house-3/">项目周围环境</a></li>
-<li><a href="/2020/12/19/buy-house-4/">售楼处里的套路</a></li>
-<li><a href="/2020/12/26/buy-house-5">关于合同</a></li>
-<li><a href="/2020/12/28/buy-house-6/">不要买公寓！</a></li>
-<li><strong>房贷贷多少合适</strong></li>
-<li><a href="/2021/08/15/buy-house-8/">要不要买车位</a></li>
-</ul>
+<h1 id="搭建vpn">搭建VPN</h1>
+<h2 id="服务器准备">服务器准备</h2>
+<p>准备一个服务器，能够访问公司办公室各资源，而且能连接互联网。配置好之后，安装Docker，并开放服务器443端口。</p>
+<h2 id="安装容器和vpn配置">安装容器和VPN配置</h2>
+<p>前往<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dwcHVya2luZy9vY3NlcnYtZG9ja2Vy">https://github.com/wppurking/ocserv-docker<i class="fa fa-external-link-alt"></i></span>，将内容全部下载。也可以直接输入命令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/wppurking/ocserv-docker.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>进入<code>ocserv-docker/ocserv</code>目录，清空<code>ocpasswd</code>文件内容，删除默认账号。</p>
+<p>再修改<code>ocserv.conf</code>，在结尾增加：</p>
+<pre class="line-numbers language-none"><code class="language-none">route &#x3D; 192.168.0.0&#x2F;255.255.255.0
+
+custom-header &#x3D; &quot;X-CSTP-Client-Bypass-Protocol: true&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>route后面的IP需要根据实际情况配置。例如公司内网采用192.168网段，那么就是<code>192.168.0.0/255.255.255.0</code>。如果不确定，也可以不增加route这行配置，这样连上VPN后所有流量都会通过VPN访问。</p>
+<h2 id="启动vpn">启动VPN</h2>
+<p>下载完成后，进入该目录并启动容器：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ocserv-docker
+<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--privileged</span> <span class="token parameter variable">--restart</span> unless-stopped <span class="token parameter variable">--name</span> ocserv-docker <span class="token parameter variable">-v</span> ~/ocserv-docker/ocserv:/etc/ocserv <span class="token parameter variable">-p</span> <span class="token number">443</span>:443/tcp wppurking/ocserv
+
+<span class="token comment"># 查看日志，检查是否正常运行</span>
+<span class="token function">docker</span> logs ocserv-docker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="分配账号密码">分配账号密码</h2>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> ocserv-docker ocpasswd 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>输入两遍密码，修改立即生效，无需重启VPN服务器。</p>
+<h1 id="公网映射">公网映射</h1>
+<p>VPN搭好之后，需要将该VPN服务器的443端口映射到公网上面。如果公司有公网IP，而且能够进行配置，可找相应部门把端口配置好。如果没有相应资源，可参考<a
+href="/2018/07/14/tunnel/">内网穿透教程</a>进行配置。</p>
+<h1 id="vpn客户端">VPN客户端</h1>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2lzY28uY29tL2MvZW4vdXMvc3VwcG9ydC9zZWN1cml0eS9hbnljb25uZWN0LXNlY3VyZS1tb2JpbGl0eS1jbGllbnQtdjQteC9tb2RlbC5odG1sI350YWItZG93bmxvYWRz">下载Cisco
+AnyConnect客户端<i class="fa fa-external-link-alt"></i></span>，下载完成后进行安装。</p>
+<p>第一次启动时，需要进入设置页面，将“Block connections to untrusted
+servers”前面的勾取消。</p>
+<p>输入VPN公网映射之后的地址和端口，点击Connect即可连接。启动后会出现安全提示，点击“Connect
+Anyway”连接，然后输入账号密码即可连接VPN。</p>
+<h1 id="扩展思考能不能用来翻墙">扩展思考：能不能用来翻墙？</h1>
+<p>当然可以，在国外服务器上用相同方式部署一套VPN软件即可，但是由于Cisco
+AnyConnect的流量特征太明显，所以建议用其他更可靠的方式翻墙。</p>
 ]]></content>
       <categories>
-        <category>楼市</category>
+        <category>教程</category>
       </categories>
       <tags>
-        <tag>买房</tag>
-        <tag>房贷</tag>
+        <tag>VPN</tag>
+        <tag>远程办公</tag>
       </tags>
   </entry>
   <entry>
@@ -10082,55 +10131,6 @@ systemctl restart sshd<span aria-hidden="true" class="line-numbers-rows"><span><
         <tag>安全</tag>
         <tag>CentOS</tag>
         <tag>等保</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>用Docker快速为办公室搭建VPN</title>
-    <url>/2021/09/10/remote-vpn/</url>
-    <content><![CDATA[<p>由于武汉肺炎疫情原因，随时可能会封城，导致无法前往办公室办公。如果公司没有提供VPN，为了在居家办公时能有一个连接办公室资源的方法，可以考虑自己搭一个简易的VPN。</p>
-<span id="more"></span>
-<h1 id="搭建vpn">搭建VPN</h1>
-<h2 id="服务器准备">服务器准备</h2>
-<p>准备一个服务器，能够访问公司办公室各资源，而且能连接互联网。配置好之后，安装Docker，并开放服务器443端口。</p>
-<h2 id="安装容器和vpn配置">安装容器和VPN配置</h2>
-<p>前往<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dwcHVya2luZy9vY3NlcnYtZG9ja2Vy">https://github.com/wppurking/ocserv-docker<i class="fa fa-external-link-alt"></i></span>，将内容全部下载。也可以直接输入命令：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/wppurking/ocserv-docker.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>进入<code>ocserv-docker/ocserv</code>目录，清空<code>ocpasswd</code>文件内容，删除默认账号。</p>
-<p>再修改<code>ocserv.conf</code>，在结尾增加：</p>
-<pre class="line-numbers language-none"><code class="language-none">route &#x3D; 192.168.0.0&#x2F;255.255.255.0
-
-custom-header &#x3D; &quot;X-CSTP-Client-Bypass-Protocol: true&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>route后面的IP需要根据实际情况配置。例如公司内网采用192.168网段，那么就是<code>192.168.0.0/255.255.255.0</code>。如果不确定，也可以不增加route这行配置，这样连上VPN后所有流量都会通过VPN访问。</p>
-<h2 id="启动vpn">启动VPN</h2>
-<p>下载完成后，进入该目录并启动容器：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ocserv-docker
-<span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--privileged</span> <span class="token parameter variable">--restart</span> unless-stopped <span class="token parameter variable">--name</span> ocserv-docker <span class="token parameter variable">-v</span> ~/ocserv-docker/ocserv:/etc/ocserv <span class="token parameter variable">-p</span> <span class="token number">443</span>:443/tcp wppurking/ocserv
-
-<span class="token comment"># 查看日志，检查是否正常运行</span>
-<span class="token function">docker</span> logs ocserv-docker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="分配账号密码">分配账号密码</h2>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> ocserv-docker ocpasswd 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>输入两遍密码，修改立即生效，无需重启VPN服务器。</p>
-<h1 id="公网映射">公网映射</h1>
-<p>VPN搭好之后，需要将该VPN服务器的443端口映射到公网上面。如果公司有公网IP，而且能够进行配置，可找相应部门把端口配置好。如果没有相应资源，可参考<a
-href="/2018/07/14/tunnel/">内网穿透教程</a>进行配置。</p>
-<h1 id="vpn客户端">VPN客户端</h1>
-<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2lzY28uY29tL2MvZW4vdXMvc3VwcG9ydC9zZWN1cml0eS9hbnljb25uZWN0LXNlY3VyZS1tb2JpbGl0eS1jbGllbnQtdjQteC9tb2RlbC5odG1sI350YWItZG93bmxvYWRz">下载Cisco
-AnyConnect客户端<i class="fa fa-external-link-alt"></i></span>，下载完成后进行安装。</p>
-<p>第一次启动时，需要进入设置页面，将“Block connections to untrusted
-servers”前面的勾取消。</p>
-<p>输入VPN公网映射之后的地址和端口，点击Connect即可连接。启动后会出现安全提示，点击“Connect
-Anyway”连接，然后输入账号密码即可连接VPN。</p>
-<h1 id="扩展思考能不能用来翻墙">扩展思考：能不能用来翻墙？</h1>
-<p>当然可以，在国外服务器上用相同方式部署一套VPN软件即可，但是由于Cisco
-AnyConnect的流量特征太明显，所以建议用其他更可靠的方式翻墙。</p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-      <tags>
-        <tag>VPN</tag>
-        <tag>远程办公</tag>
       </tags>
   </entry>
   <entry>
@@ -10322,112 +10322,6 @@ id="如果你要办信用卡那么要熟悉信用卡的一些概念">如果你�
       </categories>
       <tags>
         <tag>信用卡</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>小心你的数据库查询窗口，以免误操作</title>
-    <url>/2021/12/16/db-console/</url>
-    <content><![CDATA[<p>如果你的数据库查询窗口的第一行是<code>DROP DATABASE</code>，你又不小心点击了执行按钮……</p>
-<p>有些数据库软件能够智能地执行光标所在行的指令，但有些数据库软件没那么智能，或者需要配置才能变聪明，一不小心，就会把窗口里面的所有SQL都执行一遍，所以使用数据库软件时要注意防范误操作。</p>
-<span id="more"></span>
-<h1 id="先检查再操作">先检查再操作</h1>
-<ul>
-<li>执行UPDATE和DELETE之前，检查是否写了WHERE条件，并用同样条件执行一遍SELECT查询，检查条件是否正确。</li>
-<li>执行选择或光标处SQL语句时，检查SQL语句是否选择完整。</li>
-</ul>
-<h1 id="及时清理破坏性sql">及时清理破坏性SQL</h1>
-<p>在操作数据库时，如果需要执行有副作用的指令，例如DROP、DELETE、INSERT、UPDATE、TRUNCATE等，记得在执行完成后及时清理掉这些语句。可以用以下方式操作：</p>
-<ul>
-<li>每执行完一个SQL，就立刻把它删掉。</li>
-<li>为了方便查找或记录，不希望把SQL删掉，可以在执行完SQL之后立刻把它注释掉。</li>
-<li>在SQL窗口第一行放一个会报错的SQL，如果不小心点了执行，可以让数据库客户端在第一行就停下来。需要注意，有些数据库客户端在失败后会继续执行后面的指令，所以还要慎重。</li>
-</ul>
-<h1 id="连接生产系统不要图方便">连接生产系统，不要图方便</h1>
-<p>生产系统权限意味着巨大的责任，而连接生产系统的方式越容易，犯错误的几率就越大，所以不要为了图方便把自己置于危险境地。可以用以下方法来防范：</p>
-<ul>
-<li>不要在同一个系统、同一个数据库软件中同时连接开发系统和生产系统，避免弄错环境。</li>
-<li>连接生产系统之前总是手工输入账号密码，不要自动连接，使自己清晰地意识到自己在连接生产系统，同时防止无关人员盗用。</li>
-<li>批量执行语句，或导入SQL文件时，先检查SQL内容，确认是否有破坏性指令（例如有些软件生成的导入SQL会先删表），确认无误后再执行。</li>
-<li>把在生产系统执行的每条SQL都做好记录，包括执行时间、执行人、操作目的，以备事后追溯。</li>
-<li>及时清理生产系统的数据库操作界面里的SQL。</li>
-<li>操作完成后及时关闭数据库软件。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>一点人生的经验</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用nginx配置天地图缓存</title>
-    <url>/2022/05/06/tianditu-cache/</url>
-    <content><![CDATA[<p>由于天地图有时访问速度缓慢，加上接口访问数量限制，可借助nginx对天地图进行缓存，提高访问速度。</p>
-<span id="more"></span>
-<h1 id="配置文件内容">配置文件内容</h1>
-<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf"># ...
-
-http &#123;
-    # ...
-
-    resolver 114.114.114.114 ipv6&#x3D;off;
-
-    # 此处换成实际的缓存路径
-    proxy_temp_path &#x2F;var&#x2F;cache&#x2F;tianditu_temp;
-    proxy_cache_path &#x2F;var&#x2F;cache&#x2F;tianditu levels&#x3D;1:2 keys_zone&#x3D;cache_one:200m inactive&#x3D;1d max_size&#x3D;30g;
-
-    upstream tianditu_server &#123;
-        server t0.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
-        server t1.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
-        server t2.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
-        server t3.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
-        server t4.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
-        server t5.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
-        server t6.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
-    &#125;
-
-    server &#123;
-        # 此处需修改成实际端口
-        listen 5000 default_server;
-        server_name _;
-
-        location &#x2F; &#123;
-            add_header Access-Control-Allow-Origin *;
-            add_header Access-Control-Allow-Headers X-Requested-With;
-            add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
-
-            proxy_ssl_name t0.tianditu.gov.cn;
-            proxy_ssl_server_name on;
-            
-            proxy_cache cache_one;
-            proxy_cache_key $uri$is_args$args;
-            
-            proxy_pass https:&#x2F;&#x2F;tianditu_server;
-            proxy_set_header Host t0.tianditu.gov.cn;
-            proxy_set_header User-Agent &quot;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;103.0.0.0 Safari&#x2F;537.36&quot;;
-            proxy_ignore_headers Set-Cookie;
-            proxy_ignore_headers Cache-Control;
-            proxy_cache_valid 200 302 7d;
-            
-            expires 7d;
-        
-            add_header X-Proxy-Cache $upstream_cache_status;
-        &#125;
-    &#125;
-
-    # ...
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="使用">使用</h1>
-<p>将天地图域名换成服务器地址即可，例如将<code>https://t0.tianditu.gov.cn/img_w/wmts</code>替换成<code>http://172.16.0.100:5000/img_w/wmts</code>。</p>
-]]></content>
-      <categories>
-        <category>记录</category>
-      </categories>
-      <tags>
-        <tag>nginx</tag>
-        <tag>天地图</tag>
-        <tag>缓存</tag>
       </tags>
   </entry>
   <entry>
@@ -10836,6 +10730,76 @@ server &#123;
       </tags>
   </entry>
   <entry>
+    <title>使用nginx配置天地图缓存</title>
+    <url>/2022/05/06/tianditu-cache/</url>
+    <content><![CDATA[<p>由于天地图有时访问速度缓慢，加上接口访问数量限制，可借助nginx对天地图进行缓存，提高访问速度。</p>
+<span id="more"></span>
+<h1 id="配置文件内容">配置文件内容</h1>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf"># ...
+
+http &#123;
+    # ...
+
+    resolver 114.114.114.114 ipv6&#x3D;off;
+
+    # 此处换成实际的缓存路径
+    proxy_temp_path &#x2F;var&#x2F;cache&#x2F;tianditu_temp;
+    proxy_cache_path &#x2F;var&#x2F;cache&#x2F;tianditu levels&#x3D;1:2 keys_zone&#x3D;cache_one:200m inactive&#x3D;1d max_size&#x3D;30g;
+
+    upstream tianditu_server &#123;
+        server t0.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
+        server t1.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
+        server t2.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
+        server t3.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
+        server t4.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
+        server t5.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
+        server t6.tianditu.gov.cn:443 weight&#x3D;1 max_fails&#x3D;2 fail_timeout&#x3D;30s;
+    &#125;
+
+    server &#123;
+        # 此处需修改成实际端口
+        listen 5000 default_server;
+        server_name _;
+
+        location &#x2F; &#123;
+            add_header Access-Control-Allow-Origin *;
+            add_header Access-Control-Allow-Headers X-Requested-With;
+            add_header Access-Control-Allow-Methods GET,POST,OPTIONS;
+
+            proxy_ssl_name t0.tianditu.gov.cn;
+            proxy_ssl_server_name on;
+            
+            proxy_cache cache_one;
+            proxy_cache_key $uri$is_args$args;
+            
+            proxy_pass https:&#x2F;&#x2F;tianditu_server;
+            proxy_set_header Host t0.tianditu.gov.cn;
+            proxy_set_header User-Agent &quot;Mozilla&#x2F;5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;103.0.0.0 Safari&#x2F;537.36&quot;;
+            proxy_ignore_headers Set-Cookie;
+            proxy_ignore_headers Cache-Control;
+            proxy_cache_valid 200 302 7d;
+            
+            expires 7d;
+        
+            add_header X-Proxy-Cache $upstream_cache_status;
+        &#125;
+    &#125;
+
+    # ...
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="使用">使用</h1>
+<p>将天地图域名换成服务器地址即可，例如将<code>https://t0.tianditu.gov.cn/img_w/wmts</code>替换成<code>http://172.16.0.100:5000/img_w/wmts</code>。</p>
+]]></content>
+      <categories>
+        <category>记录</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+        <tag>天地图</tag>
+        <tag>缓存</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于Spring Boot和若依框架实现可灵活配置的动态接口</title>
     <url>/2022/06/08/dynamic-controller/</url>
     <content><![CDATA[<p>很多业务都是以增删改查为基础，利用若依框架，已经能够实现代码的快速生成，但需要在后端部署一些VO、Controller和Service，如需维护，依然要修改多个文件，而且要升级和重启后端系统。</p>
@@ -11129,9 +11093,9 @@ AppUtil<span class="token punctuation">.</span><span class="token function">exec
         <category>教程</category>
       </categories>
       <tags>
-        <tag>数据库</tag>
         <tag>Spring Boot</tag>
         <tag>接口</tag>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -11160,38 +11124,6 @@ AppUtil<span class="token punctuation">.</span><span class="token function">exec
 <h1 id="翻译成对方能理解的话">翻译成对方能理解的话</h1>
 <p>搞清楚问题之后，不要直接去解答问题，而是要把你的观点整理一下，翻译成他们能够理解的词语。特别是要否定对方时，要先顺着对方的思维说话，当对方接受以后再引出自己的观点。</p>
 <p>主任来了，他的经验丰富，知道对方只能理解“玄学”理论，因此用玄学理论与他们沟通。主任先提出“人的命格天注定”的论断，而且不说“没到预产期”，而是将其换成“你这瓜不熟，强行摘下，也就是说想逆天改命”，让对方很容易理解。在此基础上，主任稍微恐吓一下，“要不得，没那个道行，强行如此，会被反噬”，因为大师再厉害，也不可能超越天命，所以很容易就说服了对方。</p>
-]]></content>
-      <categories>
-        <category>项目管理</category>
-      </categories>
-      <tags>
-        <tag>沟通</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>外出开个小会，领导不会教你的事情</title>
-    <url>/2022/09/11/meeting/</url>
-    <content><![CDATA[<p>当你作为小工，跟着领导外出开个小会，或者你成为领导，带着一个小弟出去开会，那个当小弟的要注意什么事情呢？</p>
-<span id="more"></span>
-<h1 id="签到">签到</h1>
-<p>一般情况下，会务会组织签到工作。如果你不是会务，会议又有一定的重要意义（例如处于工程节点），可以尝试找负责人，并且给签到表拍个照，以便日后判断都有谁参会了。</p>
-<h1 id="拍照">拍照</h1>
-<p>领导通常会让小工给会议拍几张照片。然而，照片不要随便拍拍就完事，因为一方面要证明开过会议，另一方面要证明谁参加过，或者谁没有参加过这场会议。因此：</p>
-<ol type="1">
-<li>等大家都坐稳之后再拍照</li>
-<li>多换几个角度拍照</li>
-<li>力求能在照片中看清每个与会者，以便日后辨认</li>
-<li>有姓名牌子时，可适当抬高手机镜头，把他们的名字一同拍下来</li>
-</ol>
-<p>如果需要用于宣传，或者未来有可能用于宣传，可以拍几种正面角度的照片，包括从正面看会场、从正面看领导的照片，不过最好让领导要求单位派专业的人来做这件事。</p>
-<h1 id="录音">录音</h1>
-<p>会上要带一个录音设备，有条件的还可以上录音笔，甚至有转文字功能的那种。</p>
-<p>除了录音以外，建议同时记录时间，例如9:30开始录音，9:40领导讲话，9:50张三做汇报，10:10李四发言……这样回放录音时就容易定位。</p>
-<p>开会之前别忘了调试录音设备，以免什么都没录清楚。</p>
-<h1 id="记录">记录</h1>
-<p>会议要做记录，而且尽量每个人都做记录，这样的话，当有同事溜号的时候，就能通过其他同事的记录补充完善。</p>
-<p>开完会议要马上整理记录内容，并且提取要点，形成正式记录。不要以为有录音就没事，因为过几天你可能就会全部忘记，甚至都不记得对方领导是谢顶还是秃子了。</p>
-<p>不要过度依赖转文字功能，如果会上有人有地方口音，再来几句方言，那么你那里出来的可能就是“乱码”。</p>
 ]]></content>
       <categories>
         <category>项目管理</category>
@@ -11293,6 +11225,38 @@ AppUtil<span class="token punctuation">.</span><span class="token function">exec
       <categories>
         <category>一点人生的经验</category>
       </categories>
+  </entry>
+  <entry>
+    <title>外出开个小会，领导不会教你的事情</title>
+    <url>/2022/09/11/meeting/</url>
+    <content><![CDATA[<p>当你作为小工，跟着领导外出开个小会，或者你成为领导，带着一个小弟出去开会，那个当小弟的要注意什么事情呢？</p>
+<span id="more"></span>
+<h1 id="签到">签到</h1>
+<p>一般情况下，会务会组织签到工作。如果你不是会务，会议又有一定的重要意义（例如处于工程节点），可以尝试找负责人，并且给签到表拍个照，以便日后判断都有谁参会了。</p>
+<h1 id="拍照">拍照</h1>
+<p>领导通常会让小工给会议拍几张照片。然而，照片不要随便拍拍就完事，因为一方面要证明开过会议，另一方面要证明谁参加过，或者谁没有参加过这场会议。因此：</p>
+<ol type="1">
+<li>等大家都坐稳之后再拍照</li>
+<li>多换几个角度拍照</li>
+<li>力求能在照片中看清每个与会者，以便日后辨认</li>
+<li>有姓名牌子时，可适当抬高手机镜头，把他们的名字一同拍下来</li>
+</ol>
+<p>如果需要用于宣传，或者未来有可能用于宣传，可以拍几种正面角度的照片，包括从正面看会场、从正面看领导的照片，不过最好让领导要求单位派专业的人来做这件事。</p>
+<h1 id="录音">录音</h1>
+<p>会上要带一个录音设备，有条件的还可以上录音笔，甚至有转文字功能的那种。</p>
+<p>除了录音以外，建议同时记录时间，例如9:30开始录音，9:40领导讲话，9:50张三做汇报，10:10李四发言……这样回放录音时就容易定位。</p>
+<p>开会之前别忘了调试录音设备，以免什么都没录清楚。</p>
+<h1 id="记录">记录</h1>
+<p>会议要做记录，而且尽量每个人都做记录，这样的话，当有同事溜号的时候，就能通过其他同事的记录补充完善。</p>
+<p>开完会议要马上整理记录内容，并且提取要点，形成正式记录。不要以为有录音就没事，因为过几天你可能就会全部忘记，甚至都不记得对方领导是谢顶还是秃子了。</p>
+<p>不要过度依赖转文字功能，如果会上有人有地方口音，再来几句方言，那么你那里出来的可能就是“乱码”。</p>
+]]></content>
+      <categories>
+        <category>项目管理</category>
+      </categories>
+      <tags>
+        <tag>沟通</tag>
+      </tags>
   </entry>
   <entry>
     <title>养成随手存档的习惯！</title>
@@ -11664,6 +11628,42 @@ class="math inline">\(\frac{12200 - 10900}{10900} = 11.9\%\)</span>
       </categories>
       <tags>
         <tag>思考</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>小心你的数据库查询窗口，以免误操作</title>
+    <url>/2021/12/16/db-console/</url>
+    <content><![CDATA[<p>如果你的数据库查询窗口的第一行是<code>DROP DATABASE</code>，你又不小心点击了执行按钮……</p>
+<p>有些数据库软件能够智能地执行光标所在行的指令，但有些数据库软件没那么智能，或者需要配置才能变聪明，一不小心，就会把窗口里面的所有SQL都执行一遍，所以使用数据库软件时要注意防范误操作。</p>
+<span id="more"></span>
+<h1 id="先检查再操作">先检查再操作</h1>
+<ul>
+<li>执行UPDATE和DELETE之前，检查是否写了WHERE条件，并用同样条件执行一遍SELECT查询，检查条件是否正确。</li>
+<li>执行选择或光标处SQL语句时，检查SQL语句是否选择完整。</li>
+</ul>
+<h1 id="及时清理破坏性sql">及时清理破坏性SQL</h1>
+<p>在操作数据库时，如果需要执行有副作用的指令，例如DROP、DELETE、INSERT、UPDATE、TRUNCATE等，记得在执行完成后及时清理掉这些语句。可以用以下方式操作：</p>
+<ul>
+<li>每执行完一个SQL，就立刻把它删掉。</li>
+<li>为了方便查找或记录，不希望把SQL删掉，可以在执行完SQL之后立刻把它注释掉。</li>
+<li>在SQL窗口第一行放一个会报错的SQL，如果不小心点了执行，可以让数据库客户端在第一行就停下来。需要注意，有些数据库客户端在失败后会继续执行后面的指令，所以还要慎重。</li>
+</ul>
+<h1 id="连接生产系统不要图方便">连接生产系统，不要图方便</h1>
+<p>生产系统权限意味着巨大的责任，而连接生产系统的方式越容易，犯错误的几率就越大，所以不要为了图方便把自己置于危险境地。可以用以下方法来防范：</p>
+<ul>
+<li>不要在同一个系统、同一个数据库软件中同时连接开发系统和生产系统，避免弄错环境。</li>
+<li>连接生产系统之前总是手工输入账号密码，不要自动连接，使自己清晰地意识到自己在连接生产系统，同时防止无关人员盗用。</li>
+<li>批量执行语句，或导入SQL文件时，先检查SQL内容，确认是否有破坏性指令（例如有些软件生成的导入SQL会先删表），确认无误后再执行。</li>
+<li>把在生产系统执行的每条SQL都做好记录，包括执行时间、执行人、操作目的，以备事后追溯。</li>
+<li>及时清理生产系统的数据库操作界面里的SQL。</li>
+<li>操作完成后及时关闭数据库软件。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>一点人生的经验</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
       </tags>
   </entry>
   <entry>
@@ -12096,7 +12096,7 @@ Caused by: java.lang.UnsatisfiedLinkError: &#x2F;tmp&#x2F;javet&#x2F;1&#x2F;libj
 <col style="width: 12%" />
 </colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th>名称</th>
 <th>形式</th>
 <th>是否花钱</th>
@@ -12105,21 +12105,21 @@ Caused by: java.lang.UnsatisfiedLinkError: &#x2F;tmp&#x2F;javet&#x2F;1&#x2F;libj
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>MorseMania</td>
 <td>手机APP（Android/iOS）</td>
 <td>是</td>
 <td>入门/进阶</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td><span class="exturl" data-url="aHR0cHM6Ly9sY3dvLm5ldA==">lcwo<i class="fa fa-external-link-alt"></i></span></td>
 <td>电脑网站</td>
 <td>否</td>
 <td>入门/进阶</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td><span class="exturl" data-url="aHR0cDovL3d3dy5keGF0bGFzLmNvbS9Nb3JzZVJ1bm5lci8=">Morse Runner<i class="fa fa-external-link-alt"></i></span></td>
 <td>电脑应用</td>
 <td>否</td>
@@ -12342,60 +12342,6 @@ Server configuration for Windows Server and Windows<i class="fa fa-external-link
       </tags>
   </entry>
   <entry>
-    <title>如何理解业余电台执照的使用范围</title>
-    <url>/2024/01/16/radio-license-range/</url>
-    <content><![CDATA[<p>异地使用、通信范围，这些概念太弯弯绕了，加上不同省份小执照格式还不一样，怎样才容易理解呢？直接看案例！</p>
-<span id="more"></span>
-<h2 id="最新情况2024-3">最新情况（2024-3）</h2>
-<p>小执照要像大执照一样统一样式，所以就不存在这个问题了。</p>
-<h2 id="旧文">旧文</h2>
-<hr />
-<pre class="line-numbers language-none"><code class="language-none">使用范围：全国
-通信范围：省内
-台站地址：山东省济南市市中区经十一路45号1-4楼  鲁A14514<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>可以在全国使用，只能与山东省内通联</p>
-<hr />
-<pre class="line-numbers language-none"><code class="language-none">使用范围：全国
-通信范围：省际或涉外
-台站地址：山东省济南市市中区经十一路45号1-4楼  鲁A14514<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>无限制，可以全国使用，并且可全国通联</p>
-<hr />
-<pre class="line-numbers language-none"><code class="language-none">通信范围：省内
-台站地址：山东省济南市市中区经十一路45号1-4楼  鲁A14514<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>只能在台站地址（家内或车内）使用，并且只能与省内通联</p>
-<hr />
-<pre class="line-numbers language-none"><code class="language-none">通信范围：省际或涉外
-台站地址：山东省济南市市中区经十一路45号1-4楼  鲁A14514<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>只能在台站地址（家内或车内）使用，但是可全国通联</p>
-<hr />
-<pre class="line-numbers language-none"><code class="language-none">通信范围：省内
-台站地址：<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>可以全国使用，但只能与省内通联</p>
-<hr />
-<pre class="line-numbers language-none"><code class="language-none">通信范围：省际或涉外
-台站地址：<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>无限制，可以全国使用，并且可全国通联</p>
-<hr />
-<pre class="line-numbers language-none"><code class="language-none">通信范围：省内
-台站地址：山东省<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>可以在山东省使用，并且只能与省内通联</p>
-<hr />
-<pre class="line-numbers language-none"><code class="language-none">通信范围：省际或涉外
-台站地址：全国<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>无限制，可以全国使用，并且可全国通联</p>
-<h2 id="参见">参见</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9mb3J1bS5oYW1jcS5jbi9kLzk1OA==">https://forum.hamcq.cn/d/958<i class="fa fa-external-link-alt"></i></span></li>
-</ul>
-]]></content>
-      <categories>
-        <category>业余无线电</category>
-      </categories>
-      <tags>
-        <tag>执照</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>如何有效地找客服反馈问题</title>
     <url>/2023/12/21/report-issues-from-users/</url>
     <content><![CDATA[<p>用正确的方法反馈问题，才能让客服更好地帮你解决问题。我们以打软件系统的客服为例，讲一讲打电话的注意事项。</p>
@@ -12549,40 +12495,57 @@ inspect查看容器信息，如果其中的<code>GlobalIPv6Address</code>出现I
       </tags>
   </entry>
   <entry>
-    <title>海能达避坑指南</title>
-    <url>/2024/03/15/hytera/</url>
-    <content><![CDATA[<p>海能达是高端的国产对讲机，质量上乘但价格昂贵，和摩托罗拉、八重洲一样都适合装逼，所以某些有财力的台友会考虑入坑。今天正好3·15，为保障消费者权益，所以请海能达消费者注意以下事项……</p>
+    <title>如何理解业余电台执照的使用范围</title>
+    <url>/2024/01/16/radio-license-range/</url>
+    <content><![CDATA[<p>异地使用、通信范围，这些概念太弯弯绕了，加上不同省份小执照格式还不一样，怎样才容易理解呢？直接看案例！</p>
 <span id="more"></span>
-<figure>
-<img src="ptc760.png"
-alt="这个手机比iPhone还贵，所以哪位土豪能帮忙测一下，这机器玩原神卡不卡" />
-<figcaption
-aria-hidden="true">这个手机比iPhone还贵，所以哪位土豪能帮忙测一下，这机器玩原神卡不卡</figcaption>
-</figure>
-<h2 id="注意核准问题">注意核准问题</h2>
-<p>海能达的目标客户不是普通玩家，也不是专业的业余无线电爱好者，其设备大部分为专业用途，例如公安、地铁之类的，因此很多设备并没有业余核准，而工信部在<span class="exturl" data-url="aHR0cHM6Ly93d3cubWlpdC5nb3YuY24vamdzai93Z2ova3B6cy9hcnQvMjAyMi9hcnRfYzFmZmQzYzQ3ZTNmNDU1ZGFkMzgyNDY1NzkwOTIxMzYuaHRtbA==">关于申请设置、使用业余无线电台所用无线电发射设备相关事宜的说明<i class="fa fa-external-link-alt"></i></span>中已经明确，不得使用不含业余频率核准的设备申请执照，也不能通过改频段的形式来走自制、改装流程，因此海能达的很多设备是无法合法（业余）使用的。</p>
-<p>例如，HP780
-U1的核准码是2019FP5045，虽然机器能收发U段业余频率，而且设备有核准码，也有核准频率，但核准范围不含业余频率，所以不能通过验机，办不了业余执照。</p>
-<h2 id="注意版本">注意版本</h2>
-<p>海能达的设备有很多版本，例如HP780有U1、U3等版本，U1的频率范围包含业余频率，但是U3是350M的，不含业余频率，买了也无法当业余机使用。</p>
-<p>即使是HP780
-U1，也有很多版本，硬件版本、固件版本，都是不一样的，例如有的不支持蓝牙写频。这导致这些设备功能不同，配套软件也不通用，而且海能达很难从网上找到写频软件，即使找到了，也可能无法适配你的设备。</p>
-<p>因此在购买之前需要了解一下设备型号和版本，买之前向商家问清楚，并确认是否提供配套的软件。</p>
-<h2 id="去正规渠道购买">去正规渠道购买</h2>
-<p>海能达的设备并不像其他机器那样卖得广泛，需要去专门的经销商买，然后经销商进行授权，你才能获得售后服务支持。就像最重要的写频，其他手台完全可以手置频，而海能达的设备通常需要用写频软件才能完整地把参数设置好，并且这东西只有经销商有，网上搜索不到，买的时候一定记得索要。</p>
-<p>海能达的某些机器太贵了，贵到会让人想去找一个性价比更高的方式购买，例如价格更低的商家，或者咸鱼。所以换个地方买呢？</p>
-<p>换地方买当然可以，我们分两种情况：</p>
+<h2 id="最新情况2024-3">最新情况（2024-3）</h2>
+<p>小执照要像大执照一样统一样式，所以就不存在这个问题了。</p>
+<h2 id="旧文">旧文</h2>
+<hr />
+<pre class="line-numbers language-none"><code class="language-none">使用范围：全国
+通信范围：省内
+台站地址：山东省济南市市中区经十一路45号1-4楼  鲁A14514<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>可以在全国使用，只能与山东省内通联</p>
+<hr />
+<pre class="line-numbers language-none"><code class="language-none">使用范围：全国
+通信范围：省际或涉外
+台站地址：山东省济南市市中区经十一路45号1-4楼  鲁A14514<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>无限制，可以全国使用，并且可全国通联</p>
+<hr />
+<pre class="line-numbers language-none"><code class="language-none">通信范围：省内
+台站地址：山东省济南市市中区经十一路45号1-4楼  鲁A14514<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>只能在台站地址（家内或车内）使用，并且只能与省内通联</p>
+<hr />
+<pre class="line-numbers language-none"><code class="language-none">通信范围：省际或涉外
+台站地址：山东省济南市市中区经十一路45号1-4楼  鲁A14514<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>只能在台站地址（家内或车内）使用，但是可全国通联</p>
+<hr />
+<pre class="line-numbers language-none"><code class="language-none">通信范围：省内
+台站地址：<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>可以全国使用，但只能与省内通联</p>
+<hr />
+<pre class="line-numbers language-none"><code class="language-none">通信范围：省际或涉外
+台站地址：<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>无限制，可以全国使用，并且可全国通联</p>
+<hr />
+<pre class="line-numbers language-none"><code class="language-none">通信范围：省内
+台站地址：山东省<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>可以在山东省使用，并且只能与省内通联</p>
+<hr />
+<pre class="line-numbers language-none"><code class="language-none">通信范围：省际或涉外
+台站地址：全国<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>无限制，可以全国使用，并且可全国通联</p>
+<h2 id="参见">参见</h2>
 <ul>
-<li>去店铺买新机：记得多找几家，看一下平均水平，而且要注意店铺信誉。如果比平均价低太多，要打听清楚原因，例如他们卖的是旧版本机器，功能有缺失，不能升级了。如果价格低于平均值，但是功能还多，那可能是改装的假货了。</li>
-<li>去咸鱼买二手：不推荐去咸鱼买二手，因为不光海能达，其他东西也容易买到假货。而且就算是真货，如果卖家没有写频软件，你怎么要呢？打客服吗？要知道客服其实也只是帮你去找到原机主购买时的那个经销商而已。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9mb3J1bS5oYW1jcS5jbi9kLzk1OA==">https://forum.hamcq.cn/d/958<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
-<p>买二手还要注意个问题，海能达机器可以设置开机密码，也可以设置读写频密码，所以买之前要问清是否给机器上密码了，有密码的先把密码去掉。</p>
 ]]></content>
       <categories>
         <category>业余无线电</category>
       </categories>
       <tags>
-        <tag>海能达</tag>
+        <tag>执照</tag>
       </tags>
   </entry>
   <entry>
@@ -12615,6 +12578,52 @@ Serial”，重新安装写频软件和串口驱动仍然不能解决问题。</
       </tags>
   </entry>
   <entry>
+    <title>如何低成本入短波坑</title>
+    <url>/2024/05/30/cheap-hf-radio/</url>
+    <content><![CDATA[<p>（选自HamCQ：<span class="exturl" data-url="aHR0cHM6Ly9mb3J1bS5oYW1jcS5jbi9kLzE3NzQ=">初玩短波，想低成本入门，求推荐设备组合<i class="fa fa-external-link-alt"></i></span>，有改动）</p>
+<p>初玩短波，想先低成本尝试一下，如何选用设备？</p>
+<p>想像的使用场景：一部电台，在家里和车上都能用。家里就在阳台临时架设天线，不扰民。车上也不需要固定安装为车台，只是外出游玩等时候简单架设一下。</p>
+<span id="more"></span>
+<h2 id="一确定大方向">一、确定大方向</h2>
+<p>如果有条件，尽量买100W的大功率电台，小功率电台容易因喊不出去而劝退。但考虑到现实政策，为了合法使用电台，有时不得不做出一些妥协，具体来说：</p>
+<ul>
+<li>如果是老B证操作者，或者当地允许大功率短波台按15W办理小执照：直接提高预算，上大功率台（例如经典的IC-7300或FT-891），以免后悔。</li>
+<li>如果是新B证操作者，当地不允许办理小执照：
+<ul>
+<li>单纯为了办执照，考完C以后再上短波：协谷G106C，1500左右，买完放一边不使用的话就没有其他花销了。</li>
+<li>想在考C之前玩短波：协谷G90N或X6100</li>
+</ul></li>
+</ul>
+<p>如果买二手机，除了评估卖家和货物靠不靠谱以外，还要督促卖家把执照上的相应设备注销掉，以免买完无法上执照。</p>
+<h2 id="二协谷g90n方案">二、协谷G90N方案</h2>
+<p>如果预算有限，当地又不能大功率台按15W上执照，可以考虑买G90N，先上证再说：</p>
+<ul>
+<li>机器：协谷G90N，大约2500</li>
+<li>天馈：
+<ul>
+<li>车用或家用：成都M哥MA-01车载天线+地网+馈线+夹边</li>
+<li>MA-01天线可在淘宝搜索“成都M哥”，该天线可车载使用，或者当鱼竿放在家中使用，价格大约260。</li>
+<li>地网、馈线、夹边，大约150</li>
+</ul></li>
+<li>电源：
+<ul>
+<li>车用：可自己做一个点烟器电源放车上</li>
+<li>家用：可买专门的12V电源（250），也可以买服务器电源改装</li>
+<li>野架用：5～10Ah磷酸铁锂电池</li>
+</ul></li>
+<li>其他配件：FT8数据线（50）、M哥家的网分（250，协谷带天调，可以不买）</li>
+<li>费用：3500左右</li>
+</ul>
+<p>需要注意的是，该方案一般只能玩FT8，如果想更多玩法，那么需要换大功率台，并且使用效率更高的天线。</p>
+]]></content>
+      <categories>
+        <category>业余无线电</category>
+      </categories>
+      <tags>
+        <tag>短波</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CentOS 7.x迁移至openEuler 22.03 SP3</title>
     <url>/2024/04/24/centos7-to-openeuler/</url>
     <content><![CDATA[<p>CentOS
@@ -12629,7 +12638,7 @@ Serial”，重新安装写频软件和串口驱动仍然不能解决问题。</
 <h3 id="一centos-7-升-openeuler-20.03">一、CentOS 7 升 openEuler
 20.03</h3>
 <p>原始来源：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC82NDg0NzAzNzk=">从Centos-7迁移到(华为欧拉系统)openEuler-20.03-LTS-SP3的教程<i class="fa fa-external-link-alt"></i></span>，有改动。</p>
-<p><strong>生产环境先进行备份，如升级失败，有可能需要重装系统！</strong></p>
+<p><strong>生产环境先进行备份，如升级失败，或者中途意外中断，你很可能需要重装系统！</strong></p>
 <p>检查本机是否安装了桌面环境，例如GNOME，如果有，需要先将其卸载。</p>
 <p>检查本机是否能访问网络，如果没有网，需要先开策略联网：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ping</span> repo.huaweicloud.com<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -12809,6 +12818,43 @@ systemctl status sshd<span aria-hidden="true" class="line-numbers-rows"><span></
         <tag>CentOS</tag>
         <tag>openEuler</tag>
         <tag>信创</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>海能达避坑指南</title>
+    <url>/2024/03/15/hytera/</url>
+    <content><![CDATA[<p>海能达是高端的国产对讲机，质量上乘但价格昂贵，和摩托罗拉、八重洲一样都适合装逼，所以某些有财力的台友会考虑入坑。今天正好3·15，为保障消费者权益，所以请海能达消费者注意以下事项……</p>
+<span id="more"></span>
+<figure>
+<img src="ptc760.png"
+alt="这个手机比iPhone还贵，所以哪位土豪能帮忙测一下，这机器玩原神卡不卡" />
+<figcaption
+aria-hidden="true">这个手机比iPhone还贵，所以哪位土豪能帮忙测一下，这机器玩原神卡不卡</figcaption>
+</figure>
+<h2 id="注意核准问题">注意核准问题</h2>
+<p>海能达的目标客户不是普通玩家，也不是专业的业余无线电爱好者，其设备大部分为专业用途，例如公安、地铁之类的，因此很多设备并没有业余核准，而工信部在<span class="exturl" data-url="aHR0cHM6Ly93d3cubWlpdC5nb3YuY24vamdzai93Z2ova3B6cy9hcnQvMjAyMi9hcnRfYzFmZmQzYzQ3ZTNmNDU1ZGFkMzgyNDY1NzkwOTIxMzYuaHRtbA==">关于申请设置、使用业余无线电台所用无线电发射设备相关事宜的说明<i class="fa fa-external-link-alt"></i></span>中已经明确，不得使用不含业余频率核准的设备申请执照，也不能通过改频段的形式来走自制、改装流程，因此海能达的很多设备是无法合法（业余）使用的。</p>
+<p>例如，HP780
+U1的核准码是2019FP5045，虽然机器能收发U段业余频率，而且设备有核准码，也有核准频率，但核准范围不含业余频率，所以不能通过验机，办不了业余执照。</p>
+<h2 id="注意版本">注意版本</h2>
+<p>海能达的设备有很多版本，例如HP780有U1、U3等版本，U1的频率范围包含业余频率，但是U3是350M的，不含业余频率，买了也无法当业余机使用。</p>
+<p>即使是HP780
+U1，也有很多版本，硬件版本、固件版本，都是不一样的，例如有的不支持蓝牙写频。这导致这些设备功能不同，配套软件也不通用，而且海能达很难从网上找到写频软件，即使找到了，也可能无法适配你的设备。</p>
+<p>因此在购买之前需要了解一下设备型号和版本，买之前向商家问清楚，并确认是否提供配套的软件。</p>
+<h2 id="去正规渠道购买">去正规渠道购买</h2>
+<p>海能达的设备并不像其他机器那样卖得广泛，需要去专门的经销商买，然后经销商进行授权，你才能获得售后服务支持。就像最重要的写频，其他手台完全可以手置频，而海能达的设备通常需要用写频软件才能完整地把参数设置好，并且这东西只有经销商有，网上搜索不到，买的时候一定记得索要。</p>
+<p>海能达的某些机器太贵了，贵到会让人想去找一个性价比更高的方式购买，例如价格更低的商家，或者咸鱼。所以换个地方买呢？</p>
+<p>换地方买当然可以，我们分两种情况：</p>
+<ul>
+<li>去店铺买新机：记得多找几家，看一下平均水平，而且要注意店铺信誉。如果比平均价低太多，要打听清楚原因，例如他们卖的是旧版本机器，功能有缺失，不能升级了。如果价格低于平均值，但是功能还多，那可能是改装的假货了。</li>
+<li>去咸鱼买二手：不推荐去咸鱼买二手，因为不光海能达，其他东西也容易买到假货。而且就算是真货，如果卖家没有写频软件，你怎么要呢？打客服吗？要知道客服其实也只是帮你去找到原机主购买时的那个经销商而已。</li>
+</ul>
+<p>买二手还要注意个问题，海能达机器可以设置开机密码，也可以设置读写频密码，所以买之前要问清是否给机器上密码了，有密码的先把密码去掉。</p>
+]]></content>
+      <categories>
+        <category>业余无线电</category>
+      </categories>
+      <tags>
+        <tag>海能达</tag>
       </tags>
   </entry>
 </search>
