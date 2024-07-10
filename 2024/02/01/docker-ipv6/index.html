@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%95%99%E7%A8%8B%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">本教程前置条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9F%A5%E8%AF%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84IP%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">一、查询服务器的IP段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AEDocker%E5%BC%80%E5%90%AFIPv6"><span class="nav-number">3.</span> <span class="nav-text">二、配置Docker开启IPv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BD%BF%E5%AE%B9%E5%99%A8%E5%90%AF%E7%94%A8IPv6"><span class="nav-number">4.</span> <span class="nav-text">三、使容器启用IPv6</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-run%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">docker run模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">docker-compose模式</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%95%99%E7%A8%8B%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">本教程前置条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%9F%A5%E8%AF%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84ip%E6%AE%B5"><span class="nav-number">2.</span> <span class="nav-text">一、查询服务器的IP段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E9%85%8D%E7%BD%AEdocker%E5%BC%80%E5%90%AFipv6"><span class="nav-number">3.</span> <span class="nav-text">二、配置Docker开启IPv6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E4%BD%BF%E5%AE%B9%E5%99%A8%E5%90%AF%E7%94%A8ipv6"><span class="nav-number">4.</span> <span class="nav-text">三、使容器启用IPv6</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-run%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.1.</span> <span class="nav-text">docker run模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-compose%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">docker-compose模式</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -266,12 +266,14 @@
     
     <div class="post-body" itemprop="articleBody"><p>鉴于网上的教程太多，而且很多是旧资料，并且官网的资料也是既不清晰又不准确，因此这里记录一个简单可行（2024年2月）的操作步骤。</p>
 <span id="more"></span>
-<h2 id="本教程前置条件"><a href="#本教程前置条件" class="headerlink" title="本教程前置条件"></a>本教程前置条件</h2><ol>
+<h2 id="本教程前置条件">本教程前置条件</h2>
+<ol type="1">
 <li>Linux系统</li>
 <li>服务器有固定IPv6地址，而且进行了正确配置。</li>
 <li>单节点</li>
 </ol>
-<h2 id="一、查询服务器的IP段"><a href="#一、查询服务器的IP段" class="headerlink" title="一、查询服务器的IP段"></a>一、查询服务器的IP段</h2><p>使用<code>ip addr</code>或<code>ifconfig</code>命令查询一下服务器的IPv6地址段：</p>
+<h2 id="一查询服务器的ip段">一、查询服务器的IP段</h2>
+<p>使用<code>ip addr</code>或<code>ifconfig</code>命令查询一下服务器的IPv6地址段：</p>
 <pre class="line-numbers language-none"><code class="language-none"># ip addr 
 ...
 2:  eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc mq state UP group default qlen 1000
@@ -284,7 +286,8 @@
        valid_lft forever preferred_lft forever
 ...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>从上面可知，服务器的IP地址是<code>2400:1234::bbbb:cccc:dddd:eeee:ffff</code>，掩码64位，所以IP段就应该是<code>2400:1234:0:bbbb::/64</code></p>
-<h2 id="二、配置Docker开启IPv6"><a href="#二、配置Docker开启IPv6" class="headerlink" title="二、配置Docker开启IPv6"></a>二、配置Docker开启IPv6</h2><p>编辑<code>/etc/docker/deamon.json</code>文件：</p>
+<h2 id="二配置docker开启ipv6">二、配置Docker开启IPv6</h2>
+<p>编辑<code>/etc/docker/deamon.json</code>文件：</p>
 <pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
     <span class="token property">"ipv6"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
     <span class="token property">"fixed-cidr-v6"</span><span class="token operator">:</span> <span class="token string">"2400:1234:0:bbbb::/64"</span><span class="token punctuation">,</span>
@@ -293,13 +296,17 @@
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><code>fixed-cidr-v6</code>部分替换成你的服务器的IP段。</p>
 <p>重启Docker，重启完成后输入<code>docker network inspect bridge</code>，在输出内容中找到<code>EnableIPv6</code>，如果它的值是true，说明Docker已开启IPv6。</p>
-<h2 id="三、使容器启用IPv6"><a href="#三、使容器启用IPv6" class="headerlink" title="三、使容器启用IPv6"></a>三、使容器启用IPv6</h2><h3 id="docker-run模式"><a href="#docker-run模式" class="headerlink" title="docker run模式"></a>docker run模式</h3><p>创建一个支持IPv6的网络：</p>
+<h2 id="三使容器启用ipv6">三、使容器启用IPv6</h2>
+<h3 id="docker-run模式">docker run模式</h3>
+<p>创建一个支持IPv6的网络：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> network create <span class="token parameter variable">--ipv6</span> <span class="token parameter variable">--subnet</span><span class="token operator">=</span><span class="token string">"fc00:0:0:1::/64"</span> mynet<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>其中<code>fc00:0:0:1::/64</code>也可以换成其他内网网段。</p>
 <p>删掉现有容器，然后重新创建容器，并使用<code>--network</code>参数指定网络，例如</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">-v</span> xxxx <span class="token parameter variable">-p</span> xxxx <span class="token parameter variable">--network</span> mynet xxxx/xxxx<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>容器启动成功后，使用docker inspect查看容器信息，如果其中的<code>GlobalIPv6Address</code>出现IPv6地址说明启用成功。</p>
-<h3 id="docker-compose模式"><a href="#docker-compose模式" class="headerlink" title="docker-compose模式"></a>docker-compose模式</h3><p>修改docker-compose.yaml配置文件，在最后面增加（如果已有类似内容，请根据实际情况调整）：</p>
+<p>容器启动成功后，使用docker
+inspect查看容器信息，如果其中的<code>GlobalIPv6Address</code>出现IPv6地址说明启用成功。</p>
+<h3 id="docker-compose模式">docker-compose模式</h3>
+<p>修改docker-compose.yaml配置文件，在最后面增加（如果已有类似内容，请根据实际情况调整）：</p>
 <pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">networks</span><span class="token punctuation">:</span>
   <span class="token key atrule">default</span><span class="token punctuation">:</span>
     <span class="token key atrule">enable_ipv6</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
@@ -308,7 +315,8 @@
         <span class="token punctuation">-</span> <span class="token key atrule">subnet</span><span class="token punctuation">:</span> fc00<span class="token punctuation">:</span>0<span class="token punctuation">:</span>0<span class="token punctuation">:</span>1<span class="token punctuation">:</span><span class="token punctuation">:</span>/64<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>删除现有容器，然后使用<code>docker network ls</code>和<code>docker network rm xxx</code>删除compose创建的网络。容器和网络删除完成后，使用<code>docker compose up -d</code>来重新创建容器。</p>
 <p>如果在<code>docker compose up -d</code>时报错，提示<code>pool overlaps with other one on this address space</code>，说明你忘记删除network了，手工删掉即可。</p>
-<p>容器启动成功后，使用docker inspect查看容器信息，如果其中的<code>GlobalIPv6Address</code>出现IPv6地址说明启用成功。</p>
+<p>容器启动成功后，使用docker
+inspect查看容器信息，如果其中的<code>GlobalIPv6Address</code>出现IPv6地址说明启用成功。</p>
 
     </div>
 

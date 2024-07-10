@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAVPN"><span class="nav-number">1.</span> <span class="nav-text">搭建VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">服务器准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AE%B9%E5%99%A8%E5%92%8CVPN%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">安装容器和VPN配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8VPN"><span class="nav-number">1.3.</span> <span class="nav-text">启动VPN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%85%8D%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81"><span class="nav-number">1.4.</span> <span class="nav-text">分配账号密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AC%E7%BD%91%E6%98%A0%E5%B0%84"><span class="nav-number">2.</span> <span class="nav-text">公网映射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VPN%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">3.</span> <span class="nav-text">VPN客户端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%80%9D%E8%80%83%EF%BC%9A%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%E6%9D%A5%E7%BF%BB%E5%A2%99%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">扩展思考：能不能用来翻墙？</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAvpn"><span class="nav-number">1.</span> <span class="nav-text">搭建VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%87%86%E5%A4%87"><span class="nav-number">1.1.</span> <span class="nav-text">服务器准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AE%B9%E5%99%A8%E5%92%8Cvpn%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.</span> <span class="nav-text">安装容器和VPN配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8vpn"><span class="nav-number">1.3.</span> <span class="nav-text">启动VPN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%85%8D%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81"><span class="nav-number">1.4.</span> <span class="nav-text">分配账号密码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AC%E7%BD%91%E6%98%A0%E5%B0%84"><span class="nav-number">2.</span> <span class="nav-text">公网映射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vpn%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">3.</span> <span class="nav-text">VPN客户端</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%80%9D%E8%80%83%E8%83%BD%E4%B8%8D%E8%83%BD%E7%94%A8%E6%9D%A5%E7%BF%BB%E5%A2%99"><span class="nav-number">4.</span> <span class="nav-text">扩展思考：能不能用来翻墙？</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -266,8 +266,11 @@
     
     <div class="post-body" itemprop="articleBody"><p>由于武汉肺炎疫情原因，随时可能会封城，导致无法前往办公室办公。如果公司没有提供VPN，为了在居家办公时能有一个连接办公室资源的方法，可以考虑自己搭一个简易的VPN。</p>
 <span id="more"></span>
-<h1 id="搭建VPN"><a href="#搭建VPN" class="headerlink" title="搭建VPN"></a>搭建VPN</h1><h2 id="服务器准备"><a href="#服务器准备" class="headerlink" title="服务器准备"></a>服务器准备</h2><p>准备一个服务器，能够访问公司办公室各资源，而且能连接互联网。配置好之后，安装Docker，并开放服务器443端口。</p>
-<h2 id="安装容器和VPN配置"><a href="#安装容器和VPN配置" class="headerlink" title="安装容器和VPN配置"></a>安装容器和VPN配置</h2><p>前往<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dwcHVya2luZy9vY3NlcnYtZG9ja2Vy">https://github.com/wppurking/ocserv-docker<i class="fa fa-external-link-alt"></i></span>，将内容全部下载。也可以直接输入命令：</p>
+<h1 id="搭建vpn">搭建VPN</h1>
+<h2 id="服务器准备">服务器准备</h2>
+<p>准备一个服务器，能够访问公司办公室各资源，而且能连接互联网。配置好之后，安装Docker，并开放服务器443端口。</p>
+<h2 id="安装容器和vpn配置">安装容器和VPN配置</h2>
+<p>前往<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3dwcHVya2luZy9vY3NlcnYtZG9ja2Vy">https://github.com/wppurking/ocserv-docker<i class="fa fa-external-link-alt"></i></span>，将内容全部下载。也可以直接输入命令：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/wppurking/ocserv-docker.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>进入<code>ocserv-docker/ocserv</code>目录，清空<code>ocpasswd</code>文件内容，删除默认账号。</p>
 <p>再修改<code>ocserv.conf</code>，在结尾增加：</p>
@@ -275,19 +278,29 @@
 
 custom-header &#x3D; &quot;X-CSTP-Client-Bypass-Protocol: true&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>route后面的IP需要根据实际情况配置。例如公司内网采用192.168网段，那么就是<code>192.168.0.0/255.255.255.0</code>。如果不确定，也可以不增加route这行配置，这样连上VPN后所有流量都会通过VPN访问。</p>
-<h2 id="启动VPN"><a href="#启动VPN" class="headerlink" title="启动VPN"></a>启动VPN</h2><p>下载完成后，进入该目录并启动容器：</p>
+<h2 id="启动vpn">启动VPN</h2>
+<p>下载完成后，进入该目录并启动容器：</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> ocserv-docker
 <span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--privileged</span> <span class="token parameter variable">--restart</span> unless-stopped <span class="token parameter variable">--name</span> ocserv-docker <span class="token parameter variable">-v</span> ~/ocserv-docker/ocserv:/etc/ocserv <span class="token parameter variable">-p</span> <span class="token number">443</span>:443/tcp wppurking/ocserv
 
 <span class="token comment"># 查看日志，检查是否正常运行</span>
 <span class="token function">docker</span> logs ocserv-docker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="分配账号密码"><a href="#分配账号密码" class="headerlink" title="分配账号密码"></a>分配账号密码</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> ocserv-docker ocpasswd 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="分配账号密码">分配账号密码</h2>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> ocserv-docker ocpasswd 用户名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>输入两遍密码，修改立即生效，无需重启VPN服务器。</p>
-<h1 id="公网映射"><a href="#公网映射" class="headerlink" title="公网映射"></a>公网映射</h1><p>VPN搭好之后，需要将该VPN服务器的443端口映射到公网上面。如果公司有公网IP，而且能够进行配置，可找相应部门把端口配置好。如果没有相应资源，可参考<a href="/2018/07/14/tunnel/">内网穿透教程</a>进行配置。</p>
-<h1 id="VPN客户端"><a href="#VPN客户端" class="headerlink" title="VPN客户端"></a>VPN客户端</h1><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2lzY28uY29tL2MvZW4vdXMvc3VwcG9ydC9zZWN1cml0eS9hbnljb25uZWN0LXNlY3VyZS1tb2JpbGl0eS1jbGllbnQtdjQteC9tb2RlbC5odG1sI350YWItZG93bmxvYWRz">下载Cisco AnyConnect客户端<i class="fa fa-external-link-alt"></i></span>，下载完成后进行安装。</p>
-<p>第一次启动时，需要进入设置页面，将“Block connections to untrusted servers”前面的勾取消。</p>
-<p>输入VPN公网映射之后的地址和端口，点击Connect即可连接。启动后会出现安全提示，点击“Connect Anyway”连接，然后输入账号密码即可连接VPN。</p>
-<h1 id="扩展思考：能不能用来翻墙？"><a href="#扩展思考：能不能用来翻墙？" class="headerlink" title="扩展思考：能不能用来翻墙？"></a>扩展思考：能不能用来翻墙？</h1><p>当然可以，在国外服务器上用相同方式部署一套VPN软件即可，但是由于Cisco AnyConnect的流量特征太明显，所以建议用其他更可靠的方式翻墙。</p>
+<h1 id="公网映射">公网映射</h1>
+<p>VPN搭好之后，需要将该VPN服务器的443端口映射到公网上面。如果公司有公网IP，而且能够进行配置，可找相应部门把端口配置好。如果没有相应资源，可参考<a
+href="/2018/07/14/tunnel/">内网穿透教程</a>进行配置。</p>
+<h1 id="vpn客户端">VPN客户端</h1>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2lzY28uY29tL2MvZW4vdXMvc3VwcG9ydC9zZWN1cml0eS9hbnljb25uZWN0LXNlY3VyZS1tb2JpbGl0eS1jbGllbnQtdjQteC9tb2RlbC5odG1sI350YWItZG93bmxvYWRz">下载Cisco
+AnyConnect客户端<i class="fa fa-external-link-alt"></i></span>，下载完成后进行安装。</p>
+<p>第一次启动时，需要进入设置页面，将“Block connections to untrusted
+servers”前面的勾取消。</p>
+<p>输入VPN公网映射之后的地址和端口，点击Connect即可连接。启动后会出现安全提示，点击“Connect
+Anyway”连接，然后输入账号密码即可连接VPN。</p>
+<h1 id="扩展思考能不能用来翻墙">扩展思考：能不能用来翻墙？</h1>
+<p>当然可以，在国外服务器上用相同方式部署一套VPN软件即可，但是由于Cisco
+AnyConnect的流量特征太明显，所以建议用其他更可靠的方式翻墙。</p>
 
     </div>
 
