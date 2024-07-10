@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#up.java"><span class="nav-number">1.1.</span> <span class="nav-text">Up.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#down.java"><span class="nav-number">1.2.</span> <span class="nav-text">Down.java</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">部署方式</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Up-java"><span class="nav-number">1.1.</span> <span class="nav-text">Up.java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Down-java"><span class="nav-number">1.2.</span> <span class="nav-text">Down.java</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">部署方式</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -263,12 +263,9 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>为甲方升级系统时，堡垒机应用服务器正常，唯独FTP出现故障，无法上传程序包（堡垒机软件不支持直接向Linux服务器传文件）。在为无法完成部署任务发愁时，我们发现借助专用VPN可以直连甲方的Oracle数据库，并以DBA身份登录，于是我们临时编写了一款“基于Oracle的文件传输工具”。
-<span id="more"></span></p>
-<h2 id="代码">代码</h2>
-<p>由于VPN网络不太稳定，我们在上传和下载时实现了文件分块，这样一旦发生网络问题我们可以“断点续传”。至于服务器那边，网络肯定是稳定的，否则应用系统早就让用户喷下线了。</p>
-<h3 id="up.java">Up.java</h3>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">ByteArrayOutputStream</span></span><span class="token punctuation">;</span>
+    <div class="post-body" itemprop="articleBody"><p>为甲方升级系统时，堡垒机应用服务器正常，唯独FTP出现故障，无法上传程序包（堡垒机软件不支持直接向Linux服务器传文件）。在为无法完成部署任务发愁时，我们发现借助专用VPN可以直连甲方的Oracle数据库，并以DBA身份登录，于是我们临时编写了一款“基于Oracle的文件传输工具”。<br><span id="more"></span></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>由于VPN网络不太稳定，我们在上传和下载时实现了文件分块，这样一旦发生网络问题我们可以“断点续传”。至于服务器那边，网络肯定是稳定的，否则应用系统早就让用户喷下线了。</p>
+<h3 id="Up-java"><a href="#Up-java" class="headerlink" title="Up.java"></a>Up.java</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">ByteArrayOutputStream</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">FileInputStream</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
@@ -371,8 +368,7 @@
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="down.java">Down.java</h3>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span></span><span class="token punctuation">;</span>
+<h3 id="Down-java"><a href="#Down-java" class="headerlink" title="Down.java"></a>Down.java</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">FileOutputStream</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">IOException</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">InputStream</span></span><span class="token punctuation">;</span>
@@ -484,9 +480,8 @@
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="部署方式">部署方式</h2>
-<ol type="1">
-<li>连接VPN，登录数据库，初始化表结构： <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> TMP_FTP <span class="token punctuation">(</span>
+<h2 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h2><ol>
+<li>连接VPN，登录数据库，初始化表结构：<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> TMP_FTP <span class="token punctuation">(</span>
     ID NUMBER <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
     NAME VARCHAR2<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     GROUPID VARCHAR2<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -495,16 +490,15 @@
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">CREATE</span> SEQUENCE SEQ_TMP_FTP <span class="token keyword">START</span> <span class="token keyword">WITH</span> <span class="token number">1000000</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 <li>修改Up.java和Down.java的数据源配置。</li>
-<li>上传文件（下面假设自己电脑也是Linux/Mac，并且假设ojdbc6.jar放在了家目录）
-<pre class="line-numbers language-none"><code class="language-none">javac Up.java
+<li>上传文件（下面假设自己电脑也是Linux/Mac，并且假设ojdbc6.jar放在了家目录）<pre class="line-numbers language-none"><code class="language-none">javac Up.java
 CLASSPATH&#x3D;.:~&#x2F;ojdbc6.jar java Up 文件名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 <li>如果出现网络错误，记录屏幕上提示的数字，用<code>CLASSPATH=.:~/ojdbc6.jar java Up 文件名 数字</code>的方式“断点续传”。</li>
-<li>登录堡垒机，进入应用服务器，将Down.java内容粘贴到服务器中，并且（假设ojdbc6.jar放在了/opt中）
-<pre class="line-numbers language-none"><code class="language-none">javac Down.java
+<li>登录堡垒机，进入应用服务器，将Down.java内容粘贴到服务器中，并且（假设ojdbc6.jar放在了/opt中）<pre class="line-numbers language-none"><code class="language-none">javac Down.java
 CLASSPATH&#x3D;.:&#x2F;opt&#x2F;ojdbc6.jar java Down 文件名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
 <li>确认文件下载好了，而且内容没有错误，继续升级操作。</li>
-<li>操作完成后进行清理： <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> TMP_FTP<span class="token punctuation">;</span>
-<span class="token keyword">DROP</span> SEQUENCE SEQ_TMP_FTP<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li>操作完成后进行清理：<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> TMP_FTP<span class="token punctuation">;</span>
+<span class="token keyword">DROP</span> SEQUENCE SEQ_TMP_FTP<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
 </ol>
 
     </div>

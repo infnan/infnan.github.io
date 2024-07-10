@@ -33,9 +33,9 @@
 <meta property="article:published_time" content="2022-06-07T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-03-01T09:16:57.581Z">
 <meta property="article:author" content="plusNaN">
+<meta property="article:tag" content="数据库">
 <meta property="article:tag" content="Spring Boot">
 <meta property="article:tag" content="接口">
-<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://plusnan.me/img/2022-06-08-dynamic-controller/1.png">
 
@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">功能设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">数据库设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">核心代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E5%8A%A8%E6%80%81sql"><span class="nav-number">4.1.</span> <span class="nav-text">解析动态SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96sql%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E4%B8%AD%E7%9A%84%E5%AD%97%E6%AE%B5%E5%90%8D"><span class="nav-number">4.2.</span> <span class="nav-text">获取SQL执行结果中的字段名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%BF%90%E8%A1%8Cjavascript%E4%BB%A3%E7%A0%81"><span class="nav-number">4.3.</span> <span class="nav-text">动态运行JavaScript代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E5%92%8C%E6%9D%83%E9%99%90%E6%A0%A1%E9%AA%8C"><span class="nav-number">4.4.</span> <span class="nav-text">身份和权限校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%A4%9A%E7%A7%8D%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="nav-number">4.5.</span> <span class="nav-text">支持多种请求方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="nav-number">4.6.</span> <span class="nav-text">切换数据源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">4.7.</span> <span class="nav-text">JavaScript工具类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">接口设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sql%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.</span> <span class="nav-text">SQL配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript%E9%85%8D%E7%BD%AE"><span class="nav-number">5.3.</span> <span class="nav-text">JavaScript配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">进一步思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#todo"><span class="nav-number">7.</span> <span class="nav-text">TODO</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">功能设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">数据库设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E4%BB%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text">核心代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E5%8A%A8%E6%80%81SQL"><span class="nav-number">4.1.</span> <span class="nav-text">解析动态SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96SQL%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C%E4%B8%AD%E7%9A%84%E5%AD%97%E6%AE%B5%E5%90%8D"><span class="nav-number">4.2.</span> <span class="nav-text">获取SQL执行结果中的字段名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%BF%90%E8%A1%8CJavaScript%E4%BB%A3%E7%A0%81"><span class="nav-number">4.3.</span> <span class="nav-text">动态运行JavaScript代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E5%92%8C%E6%9D%83%E9%99%90%E6%A0%A1%E9%AA%8C"><span class="nav-number">4.4.</span> <span class="nav-text">身份和权限校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%AF%E6%8C%81%E5%A4%9A%E7%A7%8D%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="nav-number">4.5.</span> <span class="nav-text">支持多种请求方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="nav-number">4.6.</span> <span class="nav-text">切换数据源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="nav-number">4.7.</span> <span class="nav-text">JavaScript工具类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">使用说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E8%AE%BE%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">接口设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.</span> <span class="nav-text">SQL配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript%E9%85%8D%E7%BD%AE"><span class="nav-number">5.3.</span> <span class="nav-text">JavaScript配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%80%9D%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">进一步思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TODO"><span class="nav-number">7.</span> <span class="nav-text">TODO</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -271,16 +271,14 @@
     <div class="post-body" itemprop="articleBody"><p>很多业务都是以增删改查为基础，利用若依框架，已经能够实现代码的快速生成，但需要在后端部署一些VO、Controller和Service，如需维护，依然要修改多个文件，而且要升级和重启后端系统。</p>
 <p>如果业务只是简单的SQL或脚本，我们能否进一步简化，实现接口动态维护，不停机就能快速配置好系统接口呢？</p>
 <span id="more"></span>
-<h1 id="说明">说明</h1>
-<p>如在生产系统中使用，可直接使用更为成熟的产品，例如<span class="exturl" data-url="aHR0cHM6Ly93d3cuc3Nzc3Nzc3Mub3JnLw==">magic-api<i class="fa fa-external-link-alt"></i></span>（<span class="exturl" data-url="aHR0cHM6Ly9tYWdpYy1hcGkuc3Nzc3Nzc3Mub3JnLmNuL21hZ2ljL3dlYi9pbmRleC5odG1s">在线预览<i class="fa fa-external-link-alt"></i></span>）。</p>
-<h1 id="功能设计">功能设计</h1>
-<p>系统主要实现以下功能：</p>
-<ol type="1">
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>如在生产系统中使用，可直接使用更为成熟的产品，例如<span class="exturl" data-url="aHR0cHM6Ly93d3cuc3Nzc3Nzc3Mub3JnLw==">magic-api<i class="fa fa-external-link-alt"></i></span>（<span class="exturl" data-url="aHR0cHM6Ly9tYWdpYy1hcGkuc3Nzc3Nzc3Mub3JnLmNuL21hZ2ljL3dlYi9pbmRleC5odG1s">在线预览<i class="fa fa-external-link-alt"></i></span>）。</p>
+<h1 id="功能设计"><a href="#功能设计" class="headerlink" title="功能设计"></a>功能设计</h1><p>系统主要实现以下功能：</p>
+<ol>
 <li>接口管理：向开发者提供接口信息管理功能，能够创建和维护接口，动态管理接口名称、接口URL、接口类型、输入参数、代码等信息。当接口数量较多时，可通过整理分组来保持可维护性。</li>
 <li>接口调用：在接口管理功能设置好接口后，开发者无需重启后端应用，即可调用相应接口。调用时，系统后台对调用者身份和权限进行校验，校验通过后执行相应代码，返回运行结果。</li>
 </ol>
 <p>接口支持以下技术特性：</p>
-<ol type="1">
+<ol>
 <li>快速配置，保存即更新，无需停机维护。</li>
 <li>可根据需要设置或更改接口URL。</li>
 <li>可设置或限制接口的访问方式，如GET、POST。</li>
@@ -289,8 +287,7 @@
 <li>支持授权和权限验证。</li>
 <li>支持切换数据源。</li>
 </ol>
-<h1 id="数据库设计">数据库设计</h1>
-<p>设计两张表，一个为接口内容（interface_item），存储所有接口的代码；另一个为接口分组（interface_group），便于归类管理所有接口。</p>
+<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><p>设计两张表，一个为接口内容（interface_item），存储所有接口的代码；另一个为接口分组（interface_group），便于归类管理所有接口。</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> interface_item
 <span class="token punctuation">(</span>
     id          <span class="token keyword">BIGINT</span> <span class="token keyword">AUTO_INCREMENT</span> <span class="token keyword">COMMENT</span> <span class="token string">'主键'</span>
@@ -329,10 +326,8 @@
     update_time <span class="token keyword">DATETIME</span>                           <span class="token boolean">NULL</span> <span class="token keyword">ON</span> <span class="token keyword">UPDATE</span> <span class="token keyword">CURRENT_TIMESTAMP</span> <span class="token keyword">COMMENT</span> <span class="token string">'更新时间'</span>
 <span class="token punctuation">)</span> <span class="token keyword">COMMENT</span> <span class="token string">'接口分组'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>设计完成后，可使用平台的“代码生成”功能生成相应的VO、Vue等文件，并将菜单权限导入到数据库中。</p>
-<h1 id="核心代码">核心代码</h1>
-<p>以若依的<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20veV9wcm9qZWN0L1J1b1lpLVZ1ZQ==">前后分离版本<i class="fa fa-external-link-alt"></i></span>为例来实现这个功能。下面介绍核心部分代码，完整代码参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9keW5hbWljLWNvbnRyb2xsZXItZGVtbw==">GitHub<i class="fa fa-external-link-alt"></i></span>。</p>
-<h2 id="解析动态sql">解析动态SQL</h2>
-<p>利用MyBatis的相应方法，可解析MyBatis标签：</p>
+<h1 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h1><p>以若依的<span class="exturl" data-url="aHR0cHM6Ly9naXRlZS5jb20veV9wcm9qZWN0L1J1b1lpLVZ1ZQ==">前后分离版本<i class="fa fa-external-link-alt"></i></span>为例来实现这个功能。下面介绍核心部分代码，完整代码参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9keW5hbWljLWNvbnRyb2xsZXItZGVtbw==">GitHub<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="解析动态SQL"><a href="#解析动态SQL" class="headerlink" title="解析动态SQL"></a>解析动态SQL</h2><p>利用MyBatis的相应方法，可解析MyBatis标签：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 将SQL中的绑定参数传入到该paramMap中</span>
 <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> paramMap<span class="token punctuation">;</span>
 
@@ -368,8 +363,7 @@ ptst <span class="token operator">=</span> conn<span class="token punctuation">.
 <span class="token class-name">ResultSet</span> result <span class="token operator">=</span> ptst<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token comment">// ...</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="获取sql执行结果中的字段名">获取SQL执行结果中的字段名</h2>
-<p>ResultSet中有一个getMetaData函数，通过该函数可获取到查询结果中的各字段名：</p>
+<h2 id="获取SQL执行结果中的字段名"><a href="#获取SQL执行结果中的字段名" class="headerlink" title="获取SQL执行结果中的字段名"></a>获取SQL执行结果中的字段名</h2><p>ResultSet中有一个getMetaData函数，通过该函数可获取到查询结果中的各字段名：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">ResultSet</span> result <span class="token operator">=</span> ptst<span class="token punctuation">.</span><span class="token function">executeQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token class-name">ResultSetMetaData</span> md <span class="token operator">=</span> result<span class="token punctuation">.</span><span class="token function">getMetaData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> columnCount <span class="token operator">=</span> md<span class="token punctuation">.</span><span class="token function">getColumnCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -381,9 +375,7 @@ ptst <span class="token operator">=</span> conn<span class="token punctuation">.
     <span class="token punctuation">&#125;</span>
     list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>rowData<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="动态运行javascript代码">动态运行JavaScript代码</h2>
-<p>Java自带一个名为Nashorn的JavaScript引擎（备注：从Java
-15开始已经移除），可通过以下代码运行：</p>
+<h2 id="动态运行JavaScript代码"><a href="#动态运行JavaScript代码" class="headerlink" title="动态运行JavaScript代码"></a>动态运行JavaScript代码</h2><p>Java自带一个名为Nashorn的JavaScript引擎（备注：从Java 15开始已经移除），可通过以下代码运行：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> code<span class="token punctuation">;</span>                        <span class="token comment">// 代码</span>
 <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> paramMap<span class="token punctuation">;</span>       <span class="token comment">// 用户传入的参数</span>
 
@@ -409,8 +401,7 @@ script<span class="token punctuation">.</span><span class="token function">eval<
 <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NoSuchMethodException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ScriptException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="身份和权限校验">身份和权限校验</h2>
-<p>若依已经将身份和权限校验封装为两个Service，引用即可：</p>
+<h2 id="身份和权限校验"><a href="#身份和权限校验" class="headerlink" title="身份和权限校验"></a>身份和权限校验</h2><p>若依已经将身份和权限校验封装为两个Service，引用即可：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 定义部分</span>
 <span class="token annotation punctuation">@Resource</span>
 <span class="token keyword">private</span> <span class="token class-name">TokenService</span> tokenService<span class="token punctuation">;</span>
@@ -440,8 +431,7 @@ script<span class="token punctuation">.</span><span class="token function">eval<
 <span class="token punctuation">&#125;</span>
 
 <span class="token comment">// 未抛出异常则校验成功</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="支持多种请求方式">支持多种请求方式</h2>
-<p>很简单，在Controller中把各种请求方式都写上即可。如果限定了请求方式，可以在调用invoke之后再进行校验：</p>
+<h2 id="支持多种请求方式"><a href="#支持多种请求方式" class="headerlink" title="支持多种请求方式"></a>支持多种请求方式</h2><p>很简单，在Controller中把各种请求方式都写上即可。如果限定了请求方式，可以在调用invoke之后再进行校验：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span><span class="token string">"/&#123;code&#125;"</span><span class="token punctuation">)</span>
 <span class="token annotation punctuation">@ResponseBody</span>
 <span class="token keyword">public</span> <span class="token class-name">AjaxResult</span> <span class="token function">processGet</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span><span class="token punctuation">(</span><span class="token string">"code"</span><span class="token punctuation">)</span> <span class="token class-name">String</span> code<span class="token punctuation">,</span> <span class="token annotation punctuation">@RequestParam</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> paramMap<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -477,25 +467,15 @@ script<span class="token punctuation">.</span><span class="token function">eval<
     <span class="token class-name">Object</span> result <span class="token operator">=</span> interfaceService<span class="token punctuation">.</span><span class="token function">invokeInterface</span><span class="token punctuation">(</span>group<span class="token punctuation">,</span> subgroup<span class="token punctuation">,</span> code<span class="token punctuation">,</span> params<span class="token punctuation">,</span> method<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token function">success</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="切换数据源">切换数据源</h2>
-<p>一句话：</p>
+<h2 id="切换数据源"><a href="#切换数据源" class="headerlink" title="切换数据源"></a>切换数据源</h2><p>一句话：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 数据源名称参见 application.yaml 配置</span>
 <span class="token class-name">DynamicDataSourceContextHolder</span><span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token string">"数据源名称"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h2 id="javascript工具类">JavaScript工具类</h2>
-<p>为使JavaScript代码能够操作数据库或其他目标，需将常用函数封装到一个工具类中，并暴露给JavaScript运行环境。具体代码参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9keW5hbWljLWNvbnRyb2xsZXItZGVtby9ibG9iL21hc3Rlci9ydW95aS1zeXN0ZW0vc3JjL21haW4vamF2YS9jb20vcnVveWkvc3lzdGVtL3NlcnZpY2UvaW1wbC9JbnRlcmZhY2VVdGlsSW1wbC5qYXZh">InterfaceUtilImpl<i class="fa fa-external-link-alt"></i></span>。</p>
-<h1 id="使用说明">使用说明</h1>
-<h2 id="接口设置">接口设置</h2>
-<p>接口设置界面如下：</p>
-<figure>
-<img src="/img/2022-06-08-dynamic-controller/1.png" alt="接口列表" />
-<figcaption aria-hidden="true">接口列表</figcaption>
-</figure>
+<h2 id="JavaScript工具类"><a href="#JavaScript工具类" class="headerlink" title="JavaScript工具类"></a>JavaScript工具类</h2><p>为使JavaScript代码能够操作数据库或其他目标，需将常用函数封装到一个工具类中，并暴露给JavaScript运行环境。具体代码参见<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2luZm5hbi9keW5hbWljLWNvbnRyb2xsZXItZGVtby9ibG9iL21hc3Rlci9ydW95aS1zeXN0ZW0vc3JjL21haW4vamF2YS9jb20vcnVveWkvc3lzdGVtL3NlcnZpY2UvaW1wbC9JbnRlcmZhY2VVdGlsSW1wbC5qYXZh">InterfaceUtilImpl<i class="fa fa-external-link-alt"></i></span>。</p>
+<h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><h2 id="接口设置"><a href="#接口设置" class="headerlink" title="接口设置"></a>接口设置</h2><p>接口设置界面如下：</p>
+<p><img src="/img/2022-06-08-dynamic-controller/1.png" alt="接口列表"></p>
 <p>当接口数量较多时，为便于维护，可先设置分组，将不同业务的接口组织到不同分组中。</p>
 <p>选择分组，点击添加按钮，录入接口信息：</p>
-<figure>
-<img src="/img/2022-06-08-dynamic-controller/2.png" alt="接口信息" />
-<figcaption aria-hidden="true">接口信息</figcaption>
-</figure>
+<p><img src="/img/2022-06-08-dynamic-controller/2.png" alt="接口信息"></p>
 <p>主要参数说明：</p>
 <ul>
 <li>接口分组、接口代号：决定接口的URL</li>
@@ -515,16 +495,14 @@ script<span class="token punctuation">.</span><span class="token function">eval<
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">]</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="sql配置">SQL配置</h2>
-<p>像MyBatis一样配置即可。纯SQL可直接输入，带逻辑的SQL则需要用<code>&lt;script&gt;</code>包围，例如：</p>
+<h2 id="SQL配置"><a href="#SQL配置" class="headerlink" title="SQL配置"></a>SQL配置</h2><p>像MyBatis一样配置即可。纯SQL可直接输入，带逻辑的SQL则需要用<code>&lt;script&gt;</code>包围，例如：</p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token operator">&lt;</span>script<span class="token operator">></span>
 <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> <span class="token number">1</span><span class="token operator">=</span><span class="token number">1</span>
 <span class="token operator">&lt;</span><span class="token keyword">if</span> test<span class="token operator">=</span><span class="token string">'name != ""'</span><span class="token operator">></span>
 <span class="token operator">AND</span> name <span class="token operator">LIKE</span> CONCAT<span class="token punctuation">(</span><span class="token comment">#&#123;name&#125;, '%')</span>
 <span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">if</span><span class="token operator">></span>
 <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="javascript配置">JavaScript配置</h2>
-<p>Nashorn引擎支持ES5的大部分特性，可通过ES5语法编程。其代码差异之处，以及Java代码调用方法，可参见<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vZW4vamF2YS9qYXZhc2UvMTQvc2NyaXB0aW5nL2luZGV4Lmh0bWw=">Oracle手册<i class="fa fa-external-link-alt"></i></span>。</p>
+<h2 id="JavaScript配置"><a href="#JavaScript配置" class="headerlink" title="JavaScript配置"></a>JavaScript配置</h2><p>Nashorn引擎支持ES5的大部分特性，可通过ES5语法编程。其代码差异之处，以及Java代码调用方法，可参见<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLm9yYWNsZS5jb20vZW4vamF2YS9qYXZhc2UvMTQvc2NyaXB0aW5nL2luZGV4Lmh0bWw=">Oracle手册<i class="fa fa-external-link-alt"></i></span>。</p>
 <p>Java的包和类可用JS代码直接导入并调用，例如：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 导入包</span>
 <span class="token function">importPackage</span><span class="token punctuation">(</span>com<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>service<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -543,12 +521,10 @@ AppUtil<span class="token punctuation">.</span><span class="token function">exec
 <span class="token comment">// 获取Spring Bean并调用</span>
 <span class="token keyword">var</span> tabService <span class="token operator">=</span> AppUtil<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">'tabService'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> list <span class="token operator">=</span> tabService<span class="token punctuation">.</span><span class="token function">getList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="进一步思考">进一步思考</h1>
-<p>由于接口配置功能可以输入任意代码，因此当然不能向一般用户开放，否则系统会被恶意代码损毁。</p>
+<h1 id="进一步思考"><a href="#进一步思考" class="headerlink" title="进一步思考"></a>进一步思考</h1><p>由于接口配置功能可以输入任意代码，因此当然不能向一般用户开放，否则系统会被恶意代码损毁。</p>
 <p>输入参数往往是由用户提供的，因此应当假定每个输入参数都带有恶意，例如SQL注入、超出长度范围、超出权限范围（例如将URL中的<code>?id=3</code>改为<code>?id=4</code>）等等，。SQL或JavaScript代码也应注意限制执行时间和查询结果数量，以免数据溢出或造成阻塞。</p>
 <p>动态的接口维护功能主要目的是便利开发人员，降低维护成本，但是本代码缺少对高并发的优化，因此不建议在高并发情况下使用。</p>
-<h1 id="todo">TODO</h1>
-<ol type="1">
+<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1><ol>
 <li>查阅接口调用日志</li>
 <li>Swagger接口文档</li>
 <li>Kotlin语言支持</li>
@@ -580,9 +556,9 @@ AppUtil<span class="token punctuation">.</span><span class="token function">exec
 </div>
 
           <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
               <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
               <a href="/tags/%E6%8E%A5%E5%8F%A3/" rel="tag"># 接口</a>
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
           </div>
 
         
