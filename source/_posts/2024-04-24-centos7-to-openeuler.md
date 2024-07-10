@@ -21,7 +21,7 @@ CentOS 7即将停止支持，如果系统同时又有信创要求，可考虑升
 
 原始来源：[从Centos-7迁移到(华为欧拉系统)openEuler-20.03-LTS-SP3的教程](https://zhuanlan.zhihu.com/p/648470379)，有改动。
 
-**生产环境先进行备份，如升级失败，有可能需要重装系统！**
+**生产环境先进行备份，如升级失败，或者中途意外中断，你很可能需要重装系统！**
 
 检查本机是否安装了桌面环境，例如GNOME，如果有，需要先将其卸载。
 
@@ -86,10 +86,7 @@ dnf group install "Minimal Install" -y
 
 ```shell
 export grubcfg=$(find /boot/ -name openEuler)
-sed -i 's/crashkernel=auto/crashkernel=512M/g' /etc/default/grub 
 grub2-mkconfig -o $grubcfg/grub.cfg
-sed -i 's/crashkernel=auto/crashkernel=512M/g' $grubcfg/grub.cfg
-rm -rf `find /boot/ -name centos`
 ```
 
 执行完成后，确认是否报错。
