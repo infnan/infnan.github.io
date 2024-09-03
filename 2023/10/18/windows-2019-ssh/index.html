@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AE%89%E8%A3%85openssh"><span class="nav-number">1.</span> <span class="nav-text">为什么要安装OpenSSH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E5%B0%9D%E8%AF%95%E5%AE%89%E8%A3%85%E8%87%AA%E5%B8%A6%E7%9A%84openssh%E4%B8%8D%E6%8E%A8%E8%8D%90"><span class="nav-number">2.</span> <span class="nav-text">先尝试安装自带的OpenSSH（不推荐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E4%BA%86%E6%8E%A8%E8%8D%90"><span class="nav-number">3.</span> <span class="nav-text">如果安装失败了（推荐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">其他配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E8%A7%84%E5%88%99"><span class="nav-number">4.1.</span> <span class="nav-text">防火墙规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%81%E8%AE%B8%E5%85%8D%E5%AF%86%E5%85%AC%E9%92%A5%E7%99%BB%E5%BD%95"><span class="nav-number">4.2.</span> <span class="nav-text">允许免密（公钥）登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%90%AF%E5%8A%A8powershell"><span class="nav-number">4.3.</span> <span class="nav-text">默认启动PowerShell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%A7%81"><span class="nav-number">5.</span> <span class="nav-text">参见</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AE%89%E8%A3%85OpenSSH"><span class="nav-number">1.</span> <span class="nav-text">为什么要安装OpenSSH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E5%B0%9D%E8%AF%95%E5%AE%89%E8%A3%85%E8%87%AA%E5%B8%A6%E7%9A%84OpenSSH%EF%BC%88%E4%B8%8D%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">先尝试安装自带的OpenSSH（不推荐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5%E4%BA%86%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">如果安装失败了（推荐）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">其他配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E8%A7%84%E5%88%99"><span class="nav-number">4.1.</span> <span class="nav-text">防火墙规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%81%E8%AE%B8%E5%85%8D%E5%AF%86%EF%BC%88%E5%85%AC%E9%92%A5%EF%BC%89%E7%99%BB%E5%BD%95"><span class="nav-number">4.2.</span> <span class="nav-text">允许免密（公钥）登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%90%AF%E5%8A%A8PowerShell"><span class="nav-number">4.3.</span> <span class="nav-text">默认启动PowerShell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%A7%81"><span class="nav-number">5.</span> <span class="nav-text">参见</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -265,16 +265,13 @@
     
     <div class="post-body" itemprop="articleBody"><p>由于有些情况下会安装失败，这里记录一个可用（2023年10月）的操作教程。</p>
 <span id="more"></span>
-<h2 id="为什么要安装openssh">为什么要安装OpenSSH</h2>
-<p>远程登到Windows敲命令吗？当然不是了，这不Windows啊！</p>
+<h2 id="为什么要安装OpenSSH"><a href="#为什么要安装OpenSSH" class="headerlink" title="为什么要安装OpenSSH"></a>为什么要安装OpenSSH</h2><p>远程登到Windows敲命令吗？当然不是了，这不Windows啊！</p>
 <p>然而ssh除了可以敲命令，还可以传文件、建隧道。这样就可以靠ssh来补充一些不足了：</p>
 <ul>
 <li>Windows远程桌面上传下载文件速度很慢，而且连接不稳定。FTP需要安装和配置IIS，操作比较麻烦，而且不安全。而SSH容易安装，传文件既快又稳定，而且默认情况下需要本机用户认证才能登录，保证了安全性。</li>
 <li>如果你熟悉ssh隧道的用法，可以利用ssh来处理Windows的部分端口映射问题，例如将Windows服务器里的端口映射到本地。</li>
 </ul>
-<h2
-id="先尝试安装自带的openssh不推荐">先尝试安装自带的OpenSSH（不推荐）</h2>
-<p>打开PowerShell，输入（大小写无所谓，下同）：</p>
+<h2 id="先尝试安装自带的OpenSSH（不推荐）"><a href="#先尝试安装自带的OpenSSH（不推荐）" class="headerlink" title="先尝试安装自带的OpenSSH（不推荐）"></a>先尝试安装自带的OpenSSH（不推荐）</h2><p>打开PowerShell，输入（大小写无所谓，下同）：</p>
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Add-WindowsCapability</span> <span class="token operator">-</span>Online <span class="token operator">-</span>Name OpenSSH<span class="token punctuation">.</span>Server~~~~0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1<span class="token punctuation">.</span>0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>如果报错，直接看本文最后面的内容。如果没报错，继续执行：</p>
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">Set-Service</span> sshd <span class="token operator">-</span>StartupType Automatic
@@ -287,30 +284,22 @@ id="先尝试安装自带的openssh不推荐">先尝试安装自带的OpenSSH（
 <span class="token function">Get-Service</span> <span class="token operator">-</span>Name <span class="token operator">*</span>ssh* <span class="token punctuation">|</span> <span class="token function">select</span> DisplayName<span class="token punctuation">,</span> Status<span class="token punctuation">,</span> StartType
 <span class="token comment"># 检查防火墙规则，如果未放行，需要到“高级安全Windows防火墙”中放行22端口</span>
 <span class="token function">Get-NetFirewallRule</span> <span class="token operator">-</span>Name <span class="token operator">*</span>SSH*<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="如果安装失败了推荐">如果安装失败了（推荐）</h2>
-<p>有时候Windows
-2019安装OpenSSH会出错，而且无论如何都会失败。遇到这种情况，不要气馁，也没必要浪费时间去排查原因，直接去GitHub上下载个新版本就可以了。</p>
+<h2 id="如果安装失败了（推荐）"><a href="#如果安装失败了（推荐）" class="headerlink" title="如果安装失败了（推荐）"></a>如果安装失败了（推荐）</h2><p>有时候Windows 2019安装OpenSSH会出错，而且无论如何都会失败。遇到这种情况，不要气馁，也没必要浪费时间去排查原因，直接去GitHub上下载个新版本就可以了。</p>
 <p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1Bvd2VyU2hlbGwvV2luMzItT3BlblNTSC9yZWxlYXNlcw==">https://github.com/PowerShell/Win32-OpenSSH/releases<i class="fa fa-external-link-alt"></i></span></p>
 <p>安装完成后记得在“服务”中将SSH设置为自动启动，并且在“高级安全Windows防火墙”的“入站规则”中开放服务器的22端口。</p>
-<h2 id="其他配置">其他配置</h2>
-<h3 id="防火墙规则">防火墙规则</h3>
-<p>除了在“高级安全Windows防火墙”配置，也可以使用以下PowerShell命令来添加规则：</p>
+<h2 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h2><h3 id="防火墙规则"><a href="#防火墙规则" class="headerlink" title="防火墙规则"></a>防火墙规则</h3><p>除了在“高级安全Windows防火墙”配置，也可以使用以下PowerShell命令来添加规则：</p>
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">New-NetFirewallRule</span> <span class="token operator">-</span>Name <span class="token string">'OpenSSH-Server-In-TCP'</span> <span class="token operator">-</span>DisplayName <span class="token string">'OpenSSH Server (sshd)'</span> <span class="token operator">-</span>Enabled True <span class="token operator">-</span>Direction Inbound <span class="token operator">-</span>Protocol TCP <span class="token operator">-</span>Action Allow <span class="token operator">-</span>LocalPort 22<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="允许免密公钥登录">允许免密（公钥）登录</h3>
-<p>修改<code>C:\ProgramData\ssh\sshd_config</code>文件，找到下面两行内容</p>
+<h3 id="允许免密（公钥）登录"><a href="#允许免密（公钥）登录" class="headerlink" title="允许免密（公钥）登录"></a>允许免密（公钥）登录</h3><p>修改<code>C:\ProgramData\ssh\sshd_config</code>文件，找到下面两行内容</p>
 <pre class="line-numbers language-none"><code class="language-none">Match Group administrators
        AuthorizedKeysFile __PROGRAMDATA__&#x2F;ssh&#x2F;administrators_authorized_keys<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>把这两行删掉，或者用<code>#</code>注释掉。</p>
 <p>再创建<code>C:\Users\你的用户名\.ssh\authorized_keys</code>文件，将你的电脑的公钥写到里面，例如：</p>
 <pre class="line-numbers language-none"><code class="language-none">ssh-rsa AAAAB3...... 你的名字<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>保存，之后就可以直接用key登录服务器了。</p>
-<h3 id="默认启动powershell">默认启动PowerShell</h3>
-<p>登录进入服务器后，默认启动的是cmd。如果想换成PowerShell，可以修改注册表，或在PowerShell中输入以下命令：</p>
+<h3 id="默认启动PowerShell"><a href="#默认启动PowerShell" class="headerlink" title="默认启动PowerShell"></a>默认启动PowerShell</h3><p>登录进入服务器后，默认启动的是cmd。如果想换成PowerShell，可以修改注册表，或在PowerShell中输入以下命令：</p>
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">New-ItemProperty</span> <span class="token operator">-</span>Path <span class="token string">"HKLM:\SOFTWARE\OpenSSH"</span> <span class="token operator">-</span>Name DefaultShell <span class="token operator">-</span>Value <span class="token string">"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"</span> <span class="token operator">-</span>PropertyType String <span class="token operator">-</span>Force<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="参见">参见</h2>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3dpbmRvd3Mtc2VydmVyL2FkbWluaXN0cmF0aW9uL29wZW5zc2gvb3BlbnNzaF9zZXJ2ZXJfY29uZmlndXJhdGlvbg==">OpenSSH
-Server configuration for Windows Server and Windows<i class="fa fa-external-link-alt"></i></span></li>
+<h2 id="参见"><a href="#参见" class="headerlink" title="参见"></a>参见</h2><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3dpbmRvd3Mtc2VydmVyL2FkbWluaXN0cmF0aW9uL29wZW5zc2gvb3BlbnNzaF9zZXJ2ZXJfY29uZmlndXJhdGlvbg==">OpenSSH Server configuration for Windows Server and Windows<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
 
     </div>

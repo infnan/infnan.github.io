@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sql%E4%B9%A6%E5%86%99%E8%A7%84%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">SQL书写规则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">语法与格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">避免性能问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%85%8Dsql%E7%9A%84%E5%9D%91"><span class="nav-number">1.3.</span> <span class="nav-text">避免SQL的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">1.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB"><span class="nav-number">3.</span> <span class="nav-text">扩展阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="nav-number">4.</span> <span class="nav-text">本系列文章</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL%E4%B9%A6%E5%86%99%E8%A7%84%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">SQL书写规则</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E4%B8%8E%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">语法与格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">避免性能问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%BF%E5%85%8DSQL%E7%9A%84%E5%9D%91"><span class="nav-number">1.3.</span> <span class="nav-text">避免SQL的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">1.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB"><span class="nav-number">3.</span> <span class="nav-text">扩展阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%AC%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="nav-number">4.</span> <span class="nav-text">本系列文章</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -265,37 +265,30 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>本文为我们项目中所采用的MySQL数据库设计规范。</p>
-<p>计划分为三篇文章，<a
-href="/2020/11/01/db-specification/">前一篇</a>为数据库的表结构设计，本篇为SQL语句的书写，<a
-href="/2020/11/10/db-specification-3/">第三篇</a>为PDM文档规范。
-<span id="more"></span></p>
-<h1 id="sql书写规则">SQL书写规则</h1>
-<h2 id="语法与格式">语法与格式</h2>
-<ul>
+<p>计划分为三篇文章，<a href="/2020/11/01/db-specification/">前一篇</a>为数据库的表结构设计，本篇为SQL语句的书写，<a href="/2020/11/10/db-specification-3/">第三篇</a>为PDM文档规范。<br><span id="more"></span></p>
+<h1 id="SQL书写规则"><a href="#SQL书写规则" class="headerlink" title="SQL书写规则"></a>SQL书写规则</h1><h2 id="语法与格式"><a href="#语法与格式" class="headerlink" title="语法与格式"></a>语法与格式</h2><ul>
 <li>SQL关键字使用大写字母</li>
 <li>表名、字段名等使用小写字母</li>
 <li>每个单词之间只有一个空格</li>
 <li>避免复杂语句。如为复杂语句，应拆分成多行，并合理控制缩进，保持可读性。</li>
 <li>对于不直观的条件，应使用注释解释含义。</li>
 </ul>
-<h2 id="避免性能问题">避免性能问题</h2>
-<ul>
+<h2 id="避免性能问题"><a href="#避免性能问题" class="headerlink" title="避免性能问题"></a>避免性能问题</h2><ul>
 <li>SQL语句应尽可能简单，减小响应时间。</li>
-<li>使用查询条件时，值与字段数据类型必须保持一致，例如<code>id</code>为<code>INT</code>类型，查询条件则不应该写成<code>id='1'</code>。</li>
+<li>使用查询条件时，值与字段数据类型必须保持一致，例如<code>id</code>为<code>INT</code>类型，查询条件则不应该写成<code>id=&#39;1&#39;</code>。</li>
 <li>需要<code>JOIN</code>时，关联的字段的数据类型必须保持一致。</li>
 <li>避免使用<code>NOT IN</code>。该语句会将NULL值查出来。</li>
 <li>避免使用<code>NOT IN</code>、<code>NOT LIKE</code>、<code>&lt;&gt;</code>、<code>!=</code>，否则查询时不走索引，影响性能。</li>
 <li>避免使用<code>OR</code>，尽量改写成<code>IN</code>或<code>UNION ALL</code>。</li>
 <li><code>IN</code>条件的数据项要控制在1000以内。如可以，建议用<code>EXISTS</code>代替<code>IN</code>。</li>
 <li>禁止列运算，例如<code>WHERE age+1&gt;20</code>会导致表扫描，使索引失效，应改写为<code>WHERE age&gt;19</code>。</li>
-<li>禁止使用左模糊与全模糊（即<code>LIKE '%TEXT'</code>、<code>LIKE '%TEXT%'</code>）。如有需要，使用搜索引擎处理。</li>
+<li>禁止使用左模糊与全模糊（即<code>LIKE &#39;%TEXT&#39;</code>、<code>LIKE &#39;%TEXT%&#39;</code>）。如有需要，使用搜索引擎处理。</li>
 <li>禁止<code>SELECT *</code>，必须指明具体字段。<code>SELECT COUNT(*)</code>除外。</li>
 <li>尽量使用<code>LIMIT</code>限定查询结果数量。</li>
 <li>尽量不要在SQL语句中进行计算，而是放入调用参数中，以利用查询缓存，例如<code>WHERE date&lt;CURDATE()</code>改为<code>WHERE date&lt;?</code>然后在Java层传入当前时间。</li>
 <li>书写查询语句后，应采用EXPLAIN等方式进行性能分析。</li>
 </ul>
-<h2 id="避免sql的坑">避免SQL的坑</h2>
-<ul>
+<h2 id="避免SQL的坑"><a href="#避免SQL的坑" class="headerlink" title="避免SQL的坑"></a>避免SQL的坑</h2><ul>
 <li>注意：<code>COUNT(列名)</code>不会统计NULL值，而<code>COUNT(1)</code>与<code>COUNT(*)</code>会统计NULL值。</li>
 <li>注意：如果表中没有数据，或者全部为NULL，<code>SUM(列名)</code>、<code>AVG(列名)</code>、<code>MIN(列名)</code>、<code>MAX(列名)</code>等统计函数会返回NULL，而<code>COUNT(列名)</code>只会返回0，不会返回NULL。</li>
 <li>如字段可空，应使用<code>ISNULL()</code>判断是否为NULL，且不能用<code>&lt;&gt;</code>、<code>NOT IN</code>判断取值。</li>
@@ -304,29 +297,22 @@ href="/2020/11/10/db-specification-3/">第三篇</a>为PDM文档规范。
 <li>字符计数使用<code>CHARACTER_LENGTH</code>。注意一个汉字不是2字节，不一定是3字节。</li>
 <li>在多表关联查询时，每个字段应总是指定表的名称。也可使用<code>t1</code>、<code>t2</code>等别名简化书写。</li>
 </ul>
-<h2 id="其他">其他</h2>
-<ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
 <li>在Java代码中，类中的boolean型变量不要加is前缀，is前缀不要使用boolean类型。</li>
 <li>禁止使用函数、存储过程和触发器，在应用程序实现。</li>
 <li>禁止使用外键。约束应在程序中实现。</li>
 <li>禁止在程序代码中使用<code>TRUNCATE TABLE</code>语句清空表。该语句为DDL语句。</li>
 </ul>
-<h1 id="参考资料">参考资料</h1>
-<ul>
-<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsaWJhYmEvcDNjL2Jsb2IvbWFzdGVyL0phdmHlvIDlj5HmiYvlhozvvIjltanlsbHniYjvvIkucGRm">阿里巴巴《Java
-开发手册》（V1.7）<i class="fa fa-external-link-alt"></i></span></li>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FsaWJhYmEvcDNjL2Jsb2IvbWFzdGVyL0phdmHlvIDlj5HmiYvlhozvvIjltanlsbHniYjvvIkucGRm">阿里巴巴《Java 开发手册》（V1.7）<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
-<h1 id="扩展阅读">扩展阅读</h1>
-<ul>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><ul>
 <li><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3Fsc3R5bGUuZ3VpZGUvemg=">SQL样式指南<i class="fa fa-external-link-alt"></i></span></li>
 </ul>
-<h1 id="本系列文章">本系列文章</h1>
-<ul>
-<li><a
-href="/2020/11/01/db-specification/">MySQL数据库设计规范（一）：表结构设计</a></li>
+<h1 id="本系列文章"><a href="#本系列文章" class="headerlink" title="本系列文章"></a>本系列文章</h1><ul>
+<li><a href="/2020/11/01/db-specification/">MySQL数据库设计规范（一）：表结构设计</a></li>
 <li><strong>MySQL数据库设计规范（二）：SQL语句</strong></li>
-<li><a
-href="/2020/11/10/db-specification-3/">MySQL数据库设计规范（三）：PDM文档</a></li>
+<li><a href="/2020/11/10/db-specification-3/">MySQL数据库设计规范（三）：PDM文档</a></li>
 </ul>
 
     </div>
